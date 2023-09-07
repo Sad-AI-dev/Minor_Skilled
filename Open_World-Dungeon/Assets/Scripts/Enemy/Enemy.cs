@@ -16,6 +16,12 @@ public class Enemy : MonoBehaviour
 
     public Slider HealthBar;
 
+    public float AttackRange = 2;
+    public float AttackSpeed = 2;
+    public int Damage = 1;
+
+    bool inRange;
+
     private void Start()
     {
         agent.speed = Speed;
@@ -24,7 +30,11 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        agent.SetDestination(target.position);
+        if(!inRange) agent.SetDestination(target.position);
+        else { 
+            agent.SetDestination(transform.position);
+            transform.LookAt(target);
+        }
 
         HealthBar.value = CurrentHealth;
         if(CurrentHealth <= 0)
@@ -38,4 +48,35 @@ public class Enemy : MonoBehaviour
         CurrentHealth -= damage;
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, AttackRange);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player" && !inRange)
+        {
+
+            inRange = true;
+            StartCoroutine(DoDamage());
+            Debug.Log("DOing damage");
+        }
+    }
+
+    IEnumerator DoDamage()
+    {
+        PlayerData.instance.TakeDamage(Damage);
+        yield return new WaitForSeconds(AttackSpeed);
+        Vector3 pp, ep;
+        pp = new Vector3(PlayerData.instance.transform.position.x, 0, PlayerData.instance.transform.position.z);
+        ep = new Vector3(transform.position.x, 0, transform.position.z);
+        Debug.Log(Vector3.Distance(pp, ep));
+        if (Vector3.Distance(pp, ep) <= AttackRange + 0.2)
+        {
+            StartCoroutine(DoDamage());
+        }
+        else inRange = false;
+    }
 }
