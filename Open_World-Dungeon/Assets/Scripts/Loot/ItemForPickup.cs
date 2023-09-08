@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class ItemForPickup : MonoBehaviour
 {
+    public int ID;
     public Loot_SO item;
+
+    private void Start()
+    {
+        ID = item.ID;
+    }
 }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Loot_SO : ScriptableObject
 {
     public string Name;
+    public int ID;
     public float Value;
     public string Description;
     public Sprite UISprite;

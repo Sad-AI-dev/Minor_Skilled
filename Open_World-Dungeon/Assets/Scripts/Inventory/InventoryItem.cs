@@ -7,11 +7,15 @@ using TMPro;
 public class InventoryItem : MonoBehaviour
 {
     Inventory inv;
+    public int ObjectID;
 
     public Image UIImage;
     public TextMeshProUGUI Name;
     public TextMeshProUGUI Value;
     public Button UIButton;
+
+    public int Quantitiy;
+    public TextMeshProUGUI QuantityUI;
 
     public Loot_SO item;
 
@@ -22,10 +26,19 @@ public class InventoryItem : MonoBehaviour
         UIButton.onClick.AddListener(ButtonClick);
     }
 
+    private void Update()
+    {
+        QuantityUI.text = Quantitiy.ToString();
+    }
+
     void ButtonClick()
     {
-        inv.RemoveItem(gameObject);
-        Destroy(gameObject);
+        if (Quantitiy > 1) RemoveOne();
+        else
+        {
+            inv.RemoveItem(this);
+            Destroy(gameObject);
+        }
     }
 
     public void ItemSet(Loot_SO newItem, Inventory pInv)
@@ -35,5 +48,16 @@ public class InventoryItem : MonoBehaviour
         UIImage.sprite = item.UISprite;
         Name.text = item.Name;
         Name.text = item.Value.ToString();
+        ObjectID = newItem.ID;
+        Quantitiy = 1;
+    }
+
+    public void AddOne()
+    {
+        Quantitiy++;
+    }
+    public void RemoveOne()
+    {
+        Quantitiy--;
     }
 }

@@ -8,6 +8,7 @@ public class BasicGunBehaviour : MonoBehaviour
 {
     public Camera Cam;
     public GameObject GunPoint;
+    public LayerMask ignoreLayer;
 
     [Header("Gun stats")]
     public int Damage;
@@ -36,7 +37,7 @@ public class BasicGunBehaviour : MonoBehaviour
         if (reloadning) { AmmoText.text = "Reloading"; }
         else { AmmoText.text = $"{Ammo}/{MaxAmmo}"; }
 
-        if(canShoot && Input.GetMouseButtonDown(0) && !reloadning)
+        if(canShoot && Input.GetMouseButtonDown(0) && !reloadning && !Game.instance.Pause)
         {
             canShoot = false;
             StartCoroutine(Shoot());
@@ -44,7 +45,7 @@ public class BasicGunBehaviour : MonoBehaviour
 
         if(Ammo <= 0 || Input.GetKeyDown(KeyCode.R))
         {
-            if (!reloadning)
+            if (!reloadning && !Game.instance.Pause)
             {
                 reloadning = true;
                 StartCoroutine(Reload());
@@ -64,18 +65,15 @@ public class BasicGunBehaviour : MonoBehaviour
     }
     void ShootLogic()
     {
+        Ray rc = Cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
-        if (Physics.Raycast(Cam.transform.position, Camera.main.transform.forward, out hit, Range))
+        if (Physics.Raycast(rc, out hit, Range, ~ignoreLayer))
         {
-            Debug.DrawRay(Cam.transform.position, Camera.main.transform.forward, Color.red, 100);
-            Debug.Log(hit.transform);
             if (hit.transform.tag == "Enemy")
             {
                 hit.transform.GetComponent<Enemy>().TakeDamage(Damage);
             }
         }
-
-        if(Cam.)
     }
 
     IEnumerator Reload()
