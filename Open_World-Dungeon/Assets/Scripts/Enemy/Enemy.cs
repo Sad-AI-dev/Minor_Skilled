@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform target;
+    public GameObject dropItem;
 
     public int MaxHealth;
     public int CurrentHealth;
@@ -39,6 +40,7 @@ public class Enemy : MonoBehaviour
         HealthBar.value = CurrentHealth;
         if(CurrentHealth <= 0)
         {
+            Instantiate(dropItem, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }
@@ -46,12 +48,6 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         CurrentHealth -= damage;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, AttackRange);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -73,7 +69,7 @@ public class Enemy : MonoBehaviour
         pp = new Vector3(PlayerData.instance.transform.position.x, 0, PlayerData.instance.transform.position.z);
         ep = new Vector3(transform.position.x, 0, transform.position.z);
         Debug.Log(Vector3.Distance(pp, ep));
-        if (Vector3.Distance(pp, ep) <= AttackRange + 0.2)
+        if (Vector3.Distance(pp, ep) <= AttackRange + 0.5)
         {
             StartCoroutine(DoDamage());
         }
