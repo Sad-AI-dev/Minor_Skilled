@@ -78,6 +78,11 @@ public class ChaseEnemy : MonoBehaviour
         canAttack = true;
     }
 
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
     //============ Update States ==================
     private void OnTriggerEnter(Collider other)
     {
