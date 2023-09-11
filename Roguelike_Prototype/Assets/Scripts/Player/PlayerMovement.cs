@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Technical Settings")]
     //external components
     public ObjectDetector groundDetector;
+    public Transform visuals;
     private Rigidbody rb;
     private Transform cam;
 
@@ -67,8 +68,8 @@ public class PlayerMovement : MonoBehaviour
     private void Rotate(Vector3 moveDir)
     {
         float targetAngle = Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref rotateVelocity, 1 / rotateSpeed);
-        transform.rotation = Quaternion.Euler(0, angle, 0);
+        float angle = Mathf.SmoothDampAngle(visuals.eulerAngles.y, targetAngle, ref rotateVelocity, 1 / rotateSpeed);
+        visuals.rotation = Quaternion.Euler(0, angle, 0);
     }
 
     private Vector3 InputToCamSpace(Vector2 input)

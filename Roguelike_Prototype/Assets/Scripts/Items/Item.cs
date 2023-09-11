@@ -7,17 +7,23 @@ public abstract class Item
 {
     public string name;
     public string description;
+    public ItemSlot.SlotSize size;
 
-    public GameObject prefab;
+    [Space(10f)]
+    public GameObject pickupPrefab;
     public Sprite inventoryVisuals;
 
-    [HideInInspector] public int stacks = 1;
-
     //============== Add Effect =============
-    public abstract void AddNewEffect(Player player);
     public abstract void AddStack(Player player);
 
     //============== Remove Effect ================
     public abstract void RemoveStack(Player player);
-    public abstract void RemoveEffect(Player player);
+
+    //============= Drop Item ==============
+    public void DropItem(Player player)
+    {
+        Transform t = Object.Instantiate(pickupPrefab).transform;
+        t.position = player.transform.position;
+        t.GetComponent<ItemPickup>().item = this;
+    }
 }
