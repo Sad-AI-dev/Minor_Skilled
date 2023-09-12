@@ -13,6 +13,8 @@ public abstract class Item
     public GameObject pickupPrefab;
     public Sprite inventoryVisuals;
 
+    [HideInInspector] public ItemSlot holder;
+
     //============== Add Effect =============
     public abstract void AddStack(Player player);
 

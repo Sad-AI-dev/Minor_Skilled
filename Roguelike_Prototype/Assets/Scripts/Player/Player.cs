@@ -27,15 +27,17 @@ public class Player : MonoBehaviour
             abilities.Shoot();
         }
 
-        //TEMP
-        if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            for (int i = 0; i < inventory.slots.Count; i++) {
-                if (inventory.slots[i].State == ItemSlot.SlotState.filled) {
-                    inventory.DropItem(inventory.slots[i].contents[0]);
-                    break;
-                }
-            }
+        //========= Inventory ==========
+        if (Input.GetKeyDown(KeyCode.Tab)) {
+            Cursor.lockState = CursorLockMode.None;
+            inventory.inventoryUI.SetActive(true);
         }
+        else if (Input.GetKeyUp(KeyCode.Tab)) {
+            Cursor.lockState = CursorLockMode.Locked;
+            inventory.inventoryUI.SetActive(false);
+        }
+
+        //TEMP
         if (Input.GetKeyDown(KeyCode.I)) { inventory.DebugSlotState(); }
     }
 }

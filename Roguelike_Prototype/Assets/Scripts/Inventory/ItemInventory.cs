@@ -14,11 +14,14 @@ public class ItemInventory : MonoBehaviour
     public Player player;
     private InventoryUI ui;
 
+    [HideInInspector] public GameObject inventoryUI;
+
     private void Start()
     {
         player.inventory = this;
         ui = GetComponent<InventoryUI>();
         ui.inventory = this;
+        inventoryUI = transform.GetChild(0).gameObject;
 
         for (int i = 0; i < smallSlots; i++) {
             AddSlot(ItemSlot.SlotSize.small);
@@ -26,12 +29,16 @@ public class ItemInventory : MonoBehaviour
         for (int i = 0; i < mediumSlots; i++) {
             AddSlot(ItemSlot.SlotSize.medium);
         }
+
+        //generate UI
+        ui.GenerateVisuals();
     }
 
     //=========== Manage Slots =============
     public void AddSlot(ItemSlot.SlotSize size)
     {
         slots.Add(new ItemSlot(size));
+        ui.GenerateVisuals(); // update UI
     }
 
     //========== Manage Items ==============
@@ -43,6 +50,8 @@ public class ItemInventory : MonoBehaviour
                 slots[i].AssignItem(item);
                 //add stack
                 item.AddStack(player);
+                //update visuals
+                ui.GenerateVisuals();
                 break;
             }
         }
@@ -51,11 +60,13 @@ public class ItemInventory : MonoBehaviour
     public void RemoveItem(Item item)
     {
         for (int i = 0; i < slots.Count; i++) {
-            for (int j = 0; j < slots[i].contents.Count; j++) {
+            for (int j = slots[i].contents.Count - 1; j >= 0; j++) {
                 if (slots[i].contents[j].name.Equals(item.name)) {
                     slots[i].UnassignItem(j);
                     //remove stack
                     item.RemoveStack(player);
+                    //update UI
+                    ui.GenerateVisuals();
                     return;
                 }
             }
@@ -66,6 +77,18 @@ public class ItemInventory : MonoBehaviour
     {
         RemoveItem(item);
         item.DropItem(player);
+        ReOrderInventory();
+    }
+
+    private void ReOrderInventory()
+    {
+        for (int i = 0; i < slots.Count; i++) {
+            for (int j = 0; j < slots[i].contents.Count; j++) {
+                Item item = slots[i].contents[j];
+                RemoveItem(item);
+                AddItem(item);
+            }
+        }
     }
 
     //============ Has Empty Slot Check ==============

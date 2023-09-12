@@ -41,6 +41,7 @@ public class ItemSlot
     {
         budget -= (int)item.size;
         contents.Add(item);
+        item.holder = this;
     }
 
     //========== Unassign Item ============
