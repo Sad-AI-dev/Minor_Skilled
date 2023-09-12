@@ -12,10 +12,13 @@ public class ItemInventory : MonoBehaviour
     [HideInInspector] public List<ItemSlot> slots;
     [Header("External Components")]
     public Player player;
+    private InventoryUI ui;
 
     private void Start()
     {
         player.inventory = this;
+        ui = GetComponent<InventoryUI>();
+        ui.inventory = this;
 
         for (int i = 0; i < smallSlots; i++) {
             AddSlot(ItemSlot.SlotSize.small);
