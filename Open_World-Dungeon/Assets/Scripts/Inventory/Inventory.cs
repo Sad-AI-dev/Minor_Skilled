@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && !Game.instance.InShop)
         {
             if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
             else if (Cursor.lockState == CursorLockMode.None) Cursor.lockState = CursorLockMode.Locked;
@@ -46,5 +46,15 @@ public class Inventory : MonoBehaviour
     public void RemoveItem(InventoryItem item)
     {
         items.Remove(item.item);
+    }
+
+    public void RemoveAmount(UpgradeCost UpgradeCost)
+    {
+        foreach (var item in UpgradeCost.cost)
+        {
+            InventoryItem invItem = items[item.loot].GetComponent<InventoryItem>();
+            invItem.RemoveAmount(item.amount);
+        }
+
     }
 }

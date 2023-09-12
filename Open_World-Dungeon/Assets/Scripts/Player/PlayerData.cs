@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerData : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerData : MonoBehaviour
 
     public TextMeshProUGUI healthText;
 
+    public Vector3 TownSpawnLocation, DungeonSpawnLocation;
+
     private void Start()
     {
         if(instance != null)
@@ -22,6 +25,22 @@ public class PlayerData : MonoBehaviour
         else
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
+
+        }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(scene.name == "Town")
+        {
+            this.gameObject.transform.position = TownSpawnLocation;
+        }
+        if(scene.name == "Dungeon")
+        {
+            this.gameObject.transform.position = DungeonSpawnLocation;
         }
     }
 
@@ -42,4 +61,6 @@ public class PlayerData : MonoBehaviour
     {
         CurrentHealth += heal;
     }
+
+    
 }

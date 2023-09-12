@@ -15,7 +15,7 @@ public class BasicGunBehaviour : MonoBehaviour
     public float FireRate;
     public int MaxAmmo;
     public int Ammo;
-    public int ReloadTime;
+    public float ReloadTime;
     public int Range;
 
     //Logic
@@ -23,6 +23,9 @@ public class BasicGunBehaviour : MonoBehaviour
 
     [Header("UI")]
     public TextMeshProUGUI AmmoText;
+
+    [Header("Upgrade Cost")]
+    public List<UpgradeCost> DamageUpgrade, FireRateUpgrade, MaxAmmoUpgrade, ReloadTimeUpgrade, RangeUpgrade;
 
 
     // Start is called before the first frame update

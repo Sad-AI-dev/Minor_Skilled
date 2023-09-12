@@ -60,4 +60,14 @@ public class InventoryItem : MonoBehaviour
     {
         Quantitiy--;
     }
+
+    public void RemoveAmount(int amount)
+    {
+        Quantitiy -= amount;
+        if(Quantitiy <= 0)
+        {
+            inv.RemoveItem(this);
+            Destroy(gameObject);
+        }
+    }
 }
