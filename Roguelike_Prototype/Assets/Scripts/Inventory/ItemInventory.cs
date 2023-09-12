@@ -34,6 +34,7 @@ public class ItemInventory : MonoBehaviour
     //========== Manage Items ==============
     public void AddItem(Item item)
     {
+        if (!HasSpace(item.size)) { return; } //only assign when space available
         for (int i = 0; i < slots.Count; i++) {
             if (slots[i].CanItemFit(item.size)) {
                 slots[i].AssignItem(item);
@@ -71,5 +72,20 @@ public class ItemInventory : MonoBehaviour
             if (slots[i].CanItemFit(size)) { return true; }
         }
         return false;
+    }
+
+    //===== DEBUG =======
+    public void DebugSlotState()
+    {
+        string msg = "==Inventory Contents==\n\n";
+        for (int i = 0; i < slots.Count; i++) {
+            msg += $"Slot {i}: size {slots[i].size}\nContents:\n";
+            for (int j = 0; j < slots[i].contents.Count; j++) {
+                msg += $" Item {j}:\n  Size: {slots[i].contents[j].size} || Name: {slots[i].contents[j].name}\n";
+            }
+            msg += "\n";
+        }
+        msg += "==========================";
+        Debug.Log(msg);
     }
 }

@@ -36,5 +36,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
+        if (Input.GetKeyDown(KeyCode.I)) { inventory.DebugSlotState(); }
     }
 }
