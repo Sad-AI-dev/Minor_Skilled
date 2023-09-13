@@ -1,56 +1,101 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float movementSpeed;
-    [SerializeField] private float camRotationSpeed;
-    [SerializeField] private Camera cam;
-    private Vector3 inputDir;
-    private float forwardAngle;
     private Rigidbody rb;
+    private PlayerSpells spells;
 
+    [SerializeField] private GameObject model;
+        
+
+    [Header("Movement")]
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float runSpeed;
+    [SerializeField] private float jumpForce;
+
+    [Header("Physics")]
+    [SerializeField] private float gravity;
+
+    [Header("Camera")]
+    [SerializeField] private float smoothTime = 0.1f;
+
+
+    private float currentSpeed;
+
+    private float smoothVelocity;
+    
+    Vector3 dir;
     Vector3 moveDir;
 
-    private float turnSmoothVelocity;
+    private Camera cam;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        cam = Camera.main;
+        spells = GetComponent<PlayerSpells>();
+
         Cursor.lockState = CursorLockMode.Locked;
+
+        cam = Camera.main;
+    }
+    
+    void Update()
+    {
+        Walk();
+        Sprint();
+        Jump();
     }
 
-    private void Update()
+    private void Walk()
     {
-        Move();
-    }
-    private void Move()
-    {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        dir = new Vector3(horizontal, 0f, vertical).normalized;
 
-        inputDir = new Vector3(horizontalInput, 0, verticalInput);
-        inputDir.Normalize();
-
-        if (inputDir.magnitude >= 0.1f)
+        if (dir.magnitude >= 0.1f)
         {
-            forwardAngle = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg;
-            Debug.Log(forwardAngle);
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, forwardAngle, ref turnSmoothVelocity, 0.1f);
-            transform.rotation = Quaternion.Euler(0, forwardAngle, 0);
-
-            moveDir = Quaternion.Euler(0, angle, 0) * Vector3.forward;
+            float dirAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, dirAngle, ref smoothVelocity, smoothTime);
+            transform.rotation = Quaternion.Euler(0, angle, 0);
+            moveDir = Quaternion.Euler(0, dirAngle, 0) * Vector3.forward;
         }
+    }
+
+    void Sprint()
+    {
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            currentSpeed = runSpeed;
+        }
+        else
+        {
+            currentSpeed = walkSpeed;
+        }
+    }
+
+    void Jump()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+    }
+
+    void ApplyGravity()
+    {
+        rb.AddForce(new Vector3(0, -gravity, 0), ForceMode.Force);
     }
 
     private void FixedUpdate()
     {
-        rb.velocity =  moveDir.normalized * movementSpeed;
+        if(dir.magnitude >= 0.1f)
+        {
+            moveDir *= currentSpeed;
+            rb.velocity = new Vector3(moveDir.x, rb.velocity.y, moveDir.z);
+        }
+
+        ApplyGravity();
     }
-
-
 }
