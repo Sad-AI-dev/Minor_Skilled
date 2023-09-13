@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ChaseEnemy : MonoBehaviour
+public class ChaseEnemy : Enemy
 {
     private enum State { chase, hurt }
 
@@ -18,7 +18,6 @@ public class ChaseEnemy : MonoBehaviour
 
     //external components
     private NavMeshAgent agent;
-    private Player player;
     //vars
     private State state;
     private bool canAttack;
@@ -26,7 +25,6 @@ public class ChaseEnemy : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        player = GameManager.instance.player;
         canAttack = true;
 
         Act();

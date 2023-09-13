@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
         health = GetComponent<HealthManager>();
         interactor = GetComponent<Interactor>();
         abilities = GetComponent<PlayerAbilities>();
+
+        transform.SetParent(null);
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()

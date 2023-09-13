@@ -32,6 +32,8 @@ public class ItemInventory : MonoBehaviour
 
         //generate UI
         ui.GenerateVisuals();
+        //dont destroy on load
+        DontDestroyOnLoad(transform.parent);
     }
 
     //=========== Manage Slots =============
@@ -60,7 +62,7 @@ public class ItemInventory : MonoBehaviour
     public void RemoveItem(Item item)
     {
         for (int i = 0; i < slots.Count; i++) {
-            for (int j = slots[i].contents.Count - 1; j >= 0; j++) {
+            for (int j = 0; j < slots[i].contents.Count; j++) {
                 if (slots[i].contents[j].name.Equals(item.name)) {
                     slots[i].UnassignItem(j);
                     //remove stack
@@ -82,12 +84,17 @@ public class ItemInventory : MonoBehaviour
 
     private void ReOrderInventory()
     {
+        List<Item> items = new List<Item>();
         for (int i = 0; i < slots.Count; i++) {
             for (int j = 0; j < slots[i].contents.Count; j++) {
                 Item item = slots[i].contents[j];
+                items.Add(item);
                 RemoveItem(item);
-                AddItem(item);
             }
+        }
+        //add items back to inventory
+        for (int i = 0; i < items.Count; i++) {
+            AddItem(items[i]);
         }
     }
 
