@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private RawImage healthBar;
     private float healthBarWidth;
     private float healthBarChunk;
+
+    private NavMeshAgent agent;
+    private GameObject player;
 
     private int maxHealth = 100;
     private int health;
@@ -17,10 +22,21 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        agent = GetComponent<NavMeshAgent>();
+
         healthBarWidth = healthBar.transform.localScale.x;
         healthBarChunk = healthBarWidth / maxHealth;
 
         health = maxHealth;
+
+        
+    }
+
+    private void Update()
+    {
+        agent.SetDestination(player.transform.position);
     }
 
     public void TakeDamage(int damageTaken)

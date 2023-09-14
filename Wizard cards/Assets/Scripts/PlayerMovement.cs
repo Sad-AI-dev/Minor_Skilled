@@ -53,13 +53,14 @@ public class PlayerMovement : MonoBehaviour
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        dir = new Vector3(horizontal, 0f, vertical).normalized;
+        dir = cam.transform.right * horizontal + cam.transform.forward * vertical;
+        dir.Normalize();
 
         if (dir.magnitude >= 0.1f)
         {
-            float dirAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, dirAngle, ref smoothVelocity, smoothTime);
-            transform.rotation = Quaternion.Euler(0, angle, 0);
+            float dirAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg/* + cam.transform.eulerAngles.y*/;
+            float angle = Mathf.SmoothDampAngle(model.transform.eulerAngles.y, dirAngle, ref smoothVelocity, smoothTime);
+            model.transform.rotation = Quaternion.Euler(0, angle, 0);
             moveDir = Quaternion.Euler(0, dirAngle, 0) * Vector3.forward;
         }
     }
@@ -93,8 +94,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if(dir.magnitude >= 0.1f)
         {
-            moveDir *= currentSpeed;
-            rb.velocity = new Vector3(moveDir.x, rb.velocity.y, moveDir.z);
+            dir *= currentSpeed;
+            rb.velocity = new Vector3(dir.x, rb.velocity.y, dir.z);
         }
 
         ApplyGravity();

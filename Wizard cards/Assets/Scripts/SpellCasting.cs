@@ -6,8 +6,9 @@ using UnityEngine.Serialization;
 
 public class SpellCasting : MonoBehaviour
 {
-    [SerializeField] PlayerMana manaManager;
-
+    [SerializeField] private PlayerMana manaManager;
+    [SerializeField] private GameObject model;
+    
     [Header("Magic Punch")]
     [SerializeField] private GameObject magicFist;
     [SerializeField] private Spell punchSpell;
@@ -27,25 +28,35 @@ public class SpellCasting : MonoBehaviour
     private float angle = 0;
     private bool canCast = true;
 
+    private Camera cam;
+
     Vector3 localForward;
+
+    private void Start()
+    {
+        cam = Camera.main;
+    }
 
     public void Update()
     {
-        localForward = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * Vector3.forward;
+        //localForward = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * Vector3.forward;
 
 
         if (canCast)
         {
             if (Input.GetKeyDown(KeyCode.Q) && manaManager.getMana() >= icicleSpell.manaCost)
             {
+                //RotatePlayer();
                 CastIcicleBurst();
             }
             if (Input.GetKeyDown(KeyCode.F) && manaManager.getMana() >= punchSpell.manaCost)
             {
+                //RotatePlayer();
                 StartCoroutine(CastMagicPunch());
             }
             if(Input.GetKeyDown(KeyCode.E) && manaManager.getMana() >= arrowSpell.manaCost)
             {
+                //RotatePlayer();
                 StartCoroutine(CastMagicArrow());
             }
         }
@@ -63,7 +74,9 @@ public class SpellCasting : MonoBehaviour
     IEnumerator CastMagicPunch()
     {
         canCast = false;
-        GameObject fistObject = Instantiate(magicFist, transform.position + localForward, transform.rotation);
+        RotatePlayer();
+        localForward = Quaternion.Euler(0, model.transform.rotation.eulerAngles.y, 0) * Vector3.forward;
+        GameObject fistObject = Instantiate(magicFist, transform.position + localForward, model.transform.rotation);
         fistObject.GetComponent<SpellScript>().damage = punchSpell.damage;
         manaManager.UseMana(punchSpell.manaCost);
         yield return new WaitForSeconds(0.5f);
@@ -74,7 +87,8 @@ public class SpellCasting : MonoBehaviour
     {
         canCast = false;
         yield return new WaitForSeconds(icicleCooldown);
-        Quaternion icicleAngle = Quaternion.Euler(0, transform.rotation.eulerAngles.y + angle, 0);
+        RotatePlayer();
+        Quaternion icicleAngle = Quaternion.Euler(0, model.transform.rotation.eulerAngles.y + angle, 0);
         Vector3 spawnPos = transform.position + (icicleAngle * Vector3.forward);
         GameObject icicleObject = Instantiate(icicle, spawnPos, icicleAngle);
         icicleObject.GetComponent<SpellScript>().damage = icicleSpell.damage;
@@ -95,10 +109,17 @@ public class SpellCasting : MonoBehaviour
     IEnumerator CastMagicArrow()
     {
         canCast = false;
-        GameObject arrowObject = Instantiate(arrow, transform.position + localForward * 2f, transform.rotation);
+        RotatePlayer();
+        localForward = Quaternion.Euler(0, model.transform.rotation.eulerAngles.y, 0) * Vector3.forward;
+        GameObject arrowObject = Instantiate(arrow, transform.position + localForward * 2f, model.transform.rotation);
         arrowObject.GetComponent<SpellScript>().damage = arrowSpell.damage;
         manaManager.UseMana(arrowSpell.manaCost);
         yield return new WaitForSeconds(0.5f);
         canCast = true;
+    }
+
+    private void RotatePlayer()
+    {
+        model.transform.rotation = Quaternion.Euler(model.transform.eulerAngles.x, cam.transform.eulerAngles.y, model.transform.eulerAngles.z); 
     }
 }
