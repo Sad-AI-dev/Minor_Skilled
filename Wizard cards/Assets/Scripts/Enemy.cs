@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     private int maxHealth = 100;
     private int health;
 
+    private bool canTakeDmg = true;
+
     private void Start()
     {
         healthBarWidth = healthBar.transform.localScale.x;
@@ -23,14 +25,25 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damageTaken)
     {
+        if (!canTakeDmg) return;
+
         health -= damageTaken;
+
+        StartCoroutine(TakeDamageCooldown());
 
         healthBar.transform.localScale = new Vector3(healthBar.transform.localScale.x - healthBarChunk * damageTaken, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
 
-        if (health < 0)
+        if (health <= 0)
         {
             health = 0;
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator TakeDamageCooldown()
+    {
+        canTakeDmg = false;
+        yield return new WaitForSeconds(0.1f);
+        canTakeDmg = true;
     }
 }

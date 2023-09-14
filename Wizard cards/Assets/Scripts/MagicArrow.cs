@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagicArrow : MonoBehaviour
+public class MagicArrow : SpellScript
 {
-    public void DestroySelf()
+
+    Vector3 startPos;
+    
+    private void Start()
     {
-        Destroy(gameObject);
+        startPos = transform.position;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public override void DamageMultiplier()
     {
-        if (other.CompareTag("Enemy"))
-        {
-            Debug.Log("Arrow hit Enemy");
+        float distance = (transform.GetChild(0).position - startPos).magnitude;
 
-            
+        if(distance >= 1)
+        {
+            damage = Mathf.RoundToInt(damage * distance / 2f);
         }
+        
     }
 }

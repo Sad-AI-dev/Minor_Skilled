@@ -7,8 +7,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private PlayerSpells spells;
 
+
     [SerializeField] private GameObject model;
-        
+    [SerializeField] private LayerMask mask;    
 
     [Header("Movement")]
     [SerializeField] private float walkSpeed;
@@ -77,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && Grounded())
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
@@ -97,5 +98,18 @@ public class PlayerMovement : MonoBehaviour
         }
 
         ApplyGravity();
+    }
+
+    private bool Grounded()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, Vector3.up * -1, out hit, 1.1f, mask))
+        {
+            return true;
+        }
+
+        Debug.DrawRay(transform.position, Vector3.up * -0.6f);
+        return false;
     }
 }
