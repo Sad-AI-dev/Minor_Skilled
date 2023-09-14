@@ -8,21 +8,22 @@ public class ItemInventory : MonoBehaviour
     public int smallSlots = 4;
     public int mediumSlots = 1;
 
-    //[Header("Contents")]
     [HideInInspector] public List<ItemSlot> slots;
-    [Header("External Components")]
-    public Player player;
+
+    private Player player;
     private InventoryUI ui;
 
     [HideInInspector] public GameObject inventoryUI;
 
     private void Start()
     {
+        player = GameManager.instance.player;
         player.inventory = this;
         ui = GetComponent<InventoryUI>();
         ui.inventory = this;
         inventoryUI = transform.GetChild(0).gameObject;
 
+        slots = new List<ItemSlot>();
         for (int i = 0; i < smallSlots; i++) {
             AddSlot(ItemSlot.SlotSize.small);
         }
@@ -33,7 +34,7 @@ public class ItemInventory : MonoBehaviour
         //generate UI
         ui.GenerateVisuals();
         //dont destroy on load
-        DontDestroyOnLoad(transform.parent);
+        DontDestroyRegister.instance.RegisterObject(transform.parent.parent.gameObject);
     }
 
     //=========== Manage Slots =============

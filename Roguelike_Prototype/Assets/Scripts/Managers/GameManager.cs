@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
         else {
             instance = this;
             transform.SetParent(null);
-            DontDestroyOnLoad(gameObject); //mark as don't destroy on load
         }
     }
     public static GameManager instance;
@@ -23,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     [Header("External Components")]
     public Player player;
+    public CameraInputManager camInputManager;
 
     //enemy spawning vars
     [HideInInspector] public ObjectSpawner enemySpawner;
@@ -30,6 +30,12 @@ public class GameManager : MonoBehaviour
 
     //money UI vars
     public Action<int> onMoneyChanged;
+
+    private void Start()
+    {
+        //mark as dont destroy on load
+        DontDestroyRegister.instance.RegisterObject(gameObject);
+    }
 
     //============== Enemy Spawning =================
     public void SpawnEnemy(GameObject prefab)

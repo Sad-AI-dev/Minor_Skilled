@@ -12,6 +12,7 @@ public class PlayerAbilities : MonoBehaviour
     public LineRenderer line;
     public float lineShowTime = 0.2f;
     public Transform shootPoint;
+    public LayerMask enemyMask;
 
     //external components
     private Camera cam;
@@ -38,7 +39,7 @@ public class PlayerAbilities : MonoBehaviour
     private void TryHurt() 
     {
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f)); //shoot ray from center of screen
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) {
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, enemyMask, QueryTriggerInteraction.Ignore)) {
             StartCoroutine(ShowShootVisuals(hit.point));
             //attempt deal damage
             if (hit.transform.TryGetComponent(out HealthManager health)) {

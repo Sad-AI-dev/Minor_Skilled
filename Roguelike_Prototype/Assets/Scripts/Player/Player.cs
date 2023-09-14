@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
         abilities = GetComponent<PlayerAbilities>();
 
         transform.SetParent(null);
-        DontDestroyOnLoad(gameObject);
+        DontDestroyRegister.instance.RegisterObject(gameObject);
     }
 
     private void Update()
@@ -33,10 +33,12 @@ public class Player : MonoBehaviour
         //========= Inventory ==========
         if (Input.GetKeyDown(KeyCode.Tab)) {
             Cursor.lockState = CursorLockMode.None;
+            GameManager.instance.camInputManager.LockCamera();
             inventory.inventoryUI.SetActive(true);
         }
         else if (Input.GetKeyUp(KeyCode.Tab)) {
             Cursor.lockState = CursorLockMode.Locked;
+            GameManager.instance.camInputManager.UnLockCamera();
             inventory.inventoryUI.SetActive(false);
         }
 
