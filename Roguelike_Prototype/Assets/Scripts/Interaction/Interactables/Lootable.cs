@@ -29,6 +29,6 @@ public class Lootable : MonoBehaviour
     private void DropLoot()
     {
         GameObject obj = Instantiate(loot.GetRandomEntry());
-        obj.transform.position = new Vector3(transform.position.x, 1.5f, transform.position.z);
+        obj.transform.position = transform.position + new Vector3(0, 1.5f, 0);
     }
 }

@@ -9506,7 +9506,7 @@ MonoBehaviour:
   activateMode: 0
   activateIntervalTime: 0
   activateOnStart: 1
-  budget: 5
+  budget: 15
   budgetGain: 0
   gainRampup: 0
   gainRampupFrequency: 0
@@ -9538,6 +9538,24 @@ MonoBehaviour:
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 3774175247498104125, guid: 6fa3347a3347a4342a65b05e31a1ad28, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    initialized: 1
+  - name: Slot chest
+    price: 4
+    onSelect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1770586074}
+          m_TargetAssemblyTypeName: ObjectSpawner, Assembly-CSharp
+          m_MethodName: SpawnObject
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 6556125654368470186, guid: 1c9b24b6151ccef4ca41e166bd3cc33b, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0

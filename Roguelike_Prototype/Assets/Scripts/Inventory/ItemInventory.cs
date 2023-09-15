@@ -42,6 +42,7 @@ public class ItemInventory : MonoBehaviour
     {
         slots.Add(new ItemSlot(size));
         SortSlots();
+        ReOrderInventory();
         ui.GenerateVisuals(); // update UI
     }
 
