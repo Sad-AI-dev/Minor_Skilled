@@ -62,7 +62,7 @@ public class PlayerAbilities : MonoBehaviour
     private IEnumerator ShootCooldownCo()
     {
         canShoot = false;
-        yield return new WaitForSeconds(attackSpeed / 60f);
+        yield return new WaitForSeconds(60f / attackSpeed);
         canShoot = true;
     }
 }

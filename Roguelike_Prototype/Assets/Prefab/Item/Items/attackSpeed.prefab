@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8161512266404491970
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7039036622960566852, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039036622960566852, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039036622960566852, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039036622960566852, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039036622960566852, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039036622960566852, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039036622960566852, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039036622960566852, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039036622960566852, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039036622960566852, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885833259277285446, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+      propertyPath: m_Name
+      value: attackSpeed
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6705824174715272115, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7885833259277285446, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1931602948571933565}
+  m_SourcePrefab: {fileID: 100100000, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+--- !u!1 &2032143485270133380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7885833259277285446, guid: 45ee89f6bf0132741bda47ce00f96296, type: 3}
+  m_PrefabInstance: {fileID: 8161512266404491970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1931602948571933565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032143485270133380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f953f00b443c3c14a95d4693ae7ba641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item:
+    name: Needle
+    description: Shoot faster
+    size: 1
+    pickupPrefab: {fileID: 4539249948260875896, guid: 3b54cbfa78bd42c4096321e46bbb28ca, type: 3}
+    inventoryVisuals: {fileID: 21300000, guid: 283409fa45d2a184291ea492dc64597e, type: 3}
+    holder:
+      size: 0
+    stackAttackSpeed: 50
