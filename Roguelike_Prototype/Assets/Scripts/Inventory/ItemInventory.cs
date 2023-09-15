@@ -41,7 +41,13 @@ public class ItemInventory : MonoBehaviour
     public void AddSlot(ItemSlot.SlotSize size)
     {
         slots.Add(new ItemSlot(size));
+        SortSlots();
         ui.GenerateVisuals(); // update UI
+    }
+
+    private void SortSlots()
+    {
+        slots.Sort((ItemSlot a, ItemSlot b) => a.size.CompareTo(b.size));
     }
 
     //========== Manage Items ==============

@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         ApplyGravity();
+        if (transform.position.y < -50) { Respawn(); }
     }
 
     //================== Movement =======================
@@ -127,5 +128,12 @@ public class PlayerMovement : MonoBehaviour
             Input.GetAxisRaw("Horizontal"),
             Input.GetAxisRaw("Vertical")
         ).normalized;
+    }
+
+    //=============== Respawn ==============
+    private void Respawn()
+    {
+        rb.velocity = Vector3.zero;
+        transform.position = GameManager.instance.spawnPoint.position;
     }
 }

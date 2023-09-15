@@ -61,8 +61,11 @@ public class Interactable : MonoBehaviour
 
     private void RemoveFromAllInteractors()
     {
-        foreach (Interactor interactor in interactors) {
-            interactor.RemoveInteractable(this);
+        if (interactors != null) {
+            foreach (Interactor interactor in interactors)
+            {
+                interactor.RemoveInteractable(this);
+            }
         }
     }
 }

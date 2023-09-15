@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public ObjectSpawner enemySpawner;
     private bool isSpawning = true;
 
+    //respawn var
+    [HideInInspector] public Transform spawnPoint;
+
     //money UI vars
     public Action<int> onMoneyChanged;
 

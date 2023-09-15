@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
+    public bool spawnOnStart;
+    [HideIf(nameof(notSpawnOnStart))]
+    public GameObject objectToSpawnOnStart;
+
     public List<Transform> spawnPoints;
+
+    //hide condition
+    public bool notSpawnOnStart => !spawnOnStart;
 
     private void Awake()
     {
@@ -14,6 +21,11 @@ public class ObjectSpawner : MonoBehaviour
                 spawnPoints.Add(child);
             }
         }
+    }
+
+    private void Start()
+    {
+        if (spawnOnStart) { SpawnObject(objectToSpawnOnStart); }
     }
 
     public void SpawnObject(GameObject prefab)

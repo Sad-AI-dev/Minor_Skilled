@@ -3007,14 +3007,14 @@ MonoBehaviour:
   budget: 2
   budgetGain: 2
   gainRampup: 1
-  gainRampupFrequency: 2
+  gainRampupFrequency: 5
   enableExponentialScaling: 1
   exponentialRampup: 1
-  exponentialRampupFrequency: 4
+  exponentialRampupFrequency: 10
   budgetSpikeMode: 3
   budgetSpikeMultiplier: 1.2
   budgetSpikeActivationChance: 0
-  budgetSpikeInterval: 8
+  budgetSpikeInterval: 7
   budgetSpikeIntervalMin: 5
   budgetSpikeIntervalMax: 10
   saveMode: 1
@@ -3181,6 +3181,7 @@ MonoBehaviour:
   player: {fileID: 1677215484}
   camInputManager: {fileID: 1400659498}
   enemySpawner: {fileID: 0}
+  spawnPoint: {fileID: 0}
 --- !u!4 &1254450480
 Transform:
   m_ObjectHideFlags: 0
