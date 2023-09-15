@@ -45,8 +45,6 @@ public class PlayerMana : MonoBehaviour
         text.text = $"{mana} / {totalMana}";
 
         manaBar.transform.localScale = new Vector3(manaBar.transform.localScale.x - (manaBarChunk * manaUsed), manaBar.transform.localScale.y, manaBar.transform.localScale.z);
-
-
     }
 
     IEnumerator RegenerateMana()
