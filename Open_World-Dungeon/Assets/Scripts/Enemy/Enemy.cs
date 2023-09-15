@@ -21,26 +21,20 @@ public class Enemy : MonoBehaviour
     public float AttackSpeed = 2;
     public int Damage = 1;
 
-    bool inRange;
+    protected bool inRange;
 
-    private void Start()
+    public virtual void Start()
     {
-        agent.speed = Speed;
+        if(agent) agent.speed = Speed;
         HealthBar.maxValue = MaxHealth;
     }
 
-    private void Update()
+    public virtual void Update()
     {
-        if(!inRange) agent.SetDestination(target.position);
-        else { 
-            agent.SetDestination(transform.position);
-            transform.LookAt(target);
-        }
-
         HealthBar.value = CurrentHealth;
         if(CurrentHealth <= 0)
         {
-            Instantiate(dropItem, transform.position, Quaternion.identity);
+            if(dropItem) Instantiate(dropItem, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }
@@ -49,30 +43,5 @@ public class Enemy : MonoBehaviour
     {
         CurrentHealth -= damage;
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Player" && !inRange)
-        {
-
-            inRange = true;
-            StartCoroutine(DoDamage());
-            Debug.Log("DOing damage");
-        }
-    }
-
-    IEnumerator DoDamage()
-    {
-        PlayerData.instance.TakeDamage(Damage);
-        yield return new WaitForSeconds(AttackSpeed);
-        Vector3 pp, ep;
-        pp = new Vector3(PlayerData.instance.transform.position.x, 0, PlayerData.instance.transform.position.z);
-        ep = new Vector3(transform.position.x, 0, transform.position.z);
-        Debug.Log(Vector3.Distance(pp, ep));
-        if (Vector3.Distance(pp, ep) <= AttackRange + 0.5)
-        {
-            StartCoroutine(DoDamage());
-        }
-        else inRange = false;
-    }
+    
 }

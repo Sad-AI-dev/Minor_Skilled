@@ -62,6 +62,7 @@ public class UpgradeSystem : MonoBehaviour
         if (CompareInventory(currentGun.FireRateUpgrade[0]))
         {
             currentGun.FireRate -= currentGun.FireRateUpgrade[0].Amount;
+            inv.RemoveAmount(currentGun.FireRateUpgrade[0]);
             currentGun.FireRateUpgrade.RemoveAt(0);
             SetStatsDisplay(currentGun);
         }
@@ -71,6 +72,7 @@ public class UpgradeSystem : MonoBehaviour
         if (CompareInventory(currentGun.MaxAmmoUpgrade[0]))
         {
             currentGun.MaxAmmo += (int)currentGun.MaxAmmoUpgrade[0].Amount;
+            inv.RemoveAmount(currentGun.MaxAmmoUpgrade[0]);
             currentGun.MaxAmmoUpgrade.RemoveAt(0);
             SetStatsDisplay(currentGun);
         }
@@ -80,6 +82,7 @@ public class UpgradeSystem : MonoBehaviour
         if (CompareInventory(currentGun.ReloadTimeUpgrade[0]))
         {
             currentGun.ReloadTime -= currentGun.ReloadTimeUpgrade[0].Amount;
+            inv.RemoveAmount(currentGun.ReloadTimeUpgrade[0]);
             currentGun.ReloadTimeUpgrade.RemoveAt(0);
             SetStatsDisplay(currentGun);
         }
@@ -89,6 +92,7 @@ public class UpgradeSystem : MonoBehaviour
         if (CompareInventory(currentGun.RangeUpgrade[0]))
         {
             currentGun.Range += (int)currentGun.RangeUpgrade[0].Amount;
+            inv.RemoveAmount(currentGun.RangeUpgrade[0]);
             currentGun.RangeUpgrade.RemoveAt(0);
             SetStatsDisplay(currentGun);
         }
@@ -103,14 +107,12 @@ public class UpgradeSystem : MonoBehaviour
                 if (inv.items[item.loot].GetComponent<InventoryItem>().Quantitiy >= item.amount) { }
                 else
                 {
-                    Debug.Log("Not enough of the item in inventory");
                     return false;
 
                 }
             }
             else
             {
-                Debug.Log("Item Not in inventory");
                 return false;
             }
         }

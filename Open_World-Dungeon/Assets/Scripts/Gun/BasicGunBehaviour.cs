@@ -74,7 +74,9 @@ public class BasicGunBehaviour : MonoBehaviour
         {
             if (hit.transform.tag == "Enemy")
             {
-                hit.transform.GetComponent<Enemy>().TakeDamage(Damage);
+                if (hit.transform.TryGetComponent<Enemy>(out Enemy enemy)) enemy.TakeDamage(Damage);
+                else if (hit.transform.TryGetComponent<MeleeEnemy>(out MeleeEnemy eMelee)) eMelee.TakeDamage(Damage);
+                else if (hit.transform.TryGetComponent<RangedEnemy>(out RangedEnemy eRanged)) eRanged.TakeDamage(Damage);
             }
         }
     }

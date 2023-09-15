@@ -5,8 +5,16 @@ using UnityEngine;
 public class Canvas : MonoBehaviour
 {
     // Start is called before the first frame update
+    public static Canvas instance;
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if(!instance) {
+            DontDestroyOnLoad(this.gameObject);
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
