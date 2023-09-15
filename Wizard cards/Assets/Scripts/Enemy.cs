@@ -14,15 +14,24 @@ public class Enemy : MonoBehaviour
 
     private NavMeshAgent agent;
     private GameObject player;
+    private PlayerHealth playerHealthManager;
 
     private int maxHealth = 100;
     private int health;
 
     private bool canTakeDmg = true;
+    private bool canDealDmg = true;
+
+    private float aggroRange = 25;
+
+    private int damage = 10;
+
+    float distanceToPlayer;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerHealthManager = player.GetComponent<PlayerHealth>();
 
         agent = GetComponent<NavMeshAgent>();
 
@@ -30,13 +39,25 @@ public class Enemy : MonoBehaviour
         healthBarChunk = healthBarWidth / maxHealth;
 
         health = maxHealth;
-
-        
     }
 
     private void Update()
     {
-        agent.SetDestination(player.transform.position);
+        distanceToPlayer = (player.transform.position - transform.position).magnitude;
+
+        if (distanceToPlayer < aggroRange)
+        {
+            agent.SetDestination(player.transform.position);
+        }
+
+        if(distanceToPlayer <= 2f)
+        {
+            if(canDealDmg)
+            {
+                StartCoroutine(DamagePlayer());
+                //Debug.Log("In range");
+            }
+        }
     }
 
     public void TakeDamage(int damageTaken)
@@ -61,5 +82,14 @@ public class Enemy : MonoBehaviour
         canTakeDmg = false;
         yield return new WaitForSeconds(0.1f);
         canTakeDmg = true;
+    }
+
+    IEnumerator DamagePlayer()
+    {
+        canDealDmg = false;
+        Debug.Log("Dealt Damage");
+        playerHealthManager.TakeDamage(damage);
+        yield return new WaitForSeconds(5f);
+        canDealDmg = true;
     }
 }

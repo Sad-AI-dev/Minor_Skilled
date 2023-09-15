@@ -42,7 +42,7 @@ public class PlayerMana : MonoBehaviour
 
         if (mana <= 0) mana = 0;
 
-        text.text = $"{mana} / 100";
+        text.text = $"{mana} / {totalMana}";
 
         manaBar.transform.localScale = new Vector3(manaBar.transform.localScale.x - (manaBarChunk * manaUsed), manaBar.transform.localScale.y, manaBar.transform.localScale.z);
 
@@ -54,7 +54,7 @@ public class PlayerMana : MonoBehaviour
         canRegen = false;
         mana += regenAmount;
         if (mana >= totalMana) mana = totalMana;
-        text.text = $"{mana} / 100";
+        text.text = $"{mana} / {totalMana}";
         manaBar.transform.localScale = new Vector3(manaBar.transform.localScale.x + (manaBarChunk * regenAmount), manaBar.transform.localScale.y, manaBar.transform.localScale.z);
         yield return new WaitForSeconds(regenInterval);
         canRegen = true;

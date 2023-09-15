@@ -112,6 +112,7 @@ public class SpellCasting : MonoBehaviour
         RotatePlayer();
         localForward = Quaternion.Euler(0, model.transform.rotation.eulerAngles.y, 0) * Vector3.forward;
         GameObject arrowObject = Instantiate(arrow, transform.position + localForward * 2f, model.transform.rotation);
+        arrowObject.transform.LookAt(GetAimLocation(40));
         arrowObject.GetComponent<SpellScript>().damage = arrowSpell.damage;
         manaManager.UseMana(arrowSpell.manaCost);
         yield return new WaitForSeconds(0.5f);
@@ -121,5 +122,16 @@ public class SpellCasting : MonoBehaviour
     private void RotatePlayer()
     {
         model.transform.rotation = Quaternion.Euler(model.transform.eulerAngles.x, cam.transform.eulerAngles.y, model.transform.eulerAngles.z); 
+    }
+
+    private Vector3 GetAimLocation(float maxDistance)
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit, maxDistance))
+        {
+            return hit.point;
+        }
+
+        return cam.transform.position + cam.transform.forward * maxDistance;
     }
 }
