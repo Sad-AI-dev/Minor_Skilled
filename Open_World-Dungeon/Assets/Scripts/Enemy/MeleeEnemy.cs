@@ -9,18 +9,21 @@ public class MeleeEnemy : Enemy
     {
         base.Start();
 
-        if (!target) target = PlayerData.instance.gameObject.transform;
+        
     }
 
     // Update is called once per frame
     public override void Update()
     {
         base.Update();
-        if (!inRange) agent.SetDestination(target.position);
-        else
+        if (target)
         {
-            agent.SetDestination(transform.position);
-            transform.LookAt(target);
+            if (!inRange) agent.SetDestination(target.position);
+            else
+            {
+                agent.SetDestination(transform.position);
+                transform.LookAt(target);
+            }
         }
     }
 
