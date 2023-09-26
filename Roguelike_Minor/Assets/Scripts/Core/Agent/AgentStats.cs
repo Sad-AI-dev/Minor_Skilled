@@ -1,10 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Game.Core {
-    public class AgentStats : MonoBehaviour
+    [System.Serializable]
+    public class AgentStats
     {
-        
+        public float maxHealth = 10f;
+        public float baseDamage = 1;
+
+        //cooldowns
+        public float attackSpeed = 1;
+        public float coolDownMultiplier = 1;
     }
 }
