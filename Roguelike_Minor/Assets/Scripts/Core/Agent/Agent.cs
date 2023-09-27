@@ -15,7 +15,7 @@ namespace Game.Core {
         [HideInInspector] public StatusEffectHandler effectHandler;
         [HideInInspector] public AgentHealthManager health;
 
-        private void Start()
+        private void Awake()
         {
             //setup abilities
             abilities = GetComponent<AgentAbilities>();

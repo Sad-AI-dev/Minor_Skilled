@@ -36,5 +36,15 @@ namespace Game {
                 agent.stats.attackSpeed -= attackSpeedBonus;
             }
         }
+
+        //============== Process Hit / Heal Events ================
+        public override void ProcessHitEvent(ref HitEvent hitEvent, int stacks)
+        {
+            hitEvent.damageReduction += stacks;
+        }
+        public override void ProcessHealEvent(ref HealEvent healEvent, int stacks)
+        {
+            healEvent.healMultiplier += stacks;
+        }
     }
 }

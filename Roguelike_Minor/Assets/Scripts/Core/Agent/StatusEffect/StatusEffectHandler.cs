@@ -63,5 +63,22 @@ namespace Game.Core {
             }
             statusEffects.Clear();
         }
+
+        //================ Process Heal / Hurt Event ==================
+        public void ProcessHitEvent(ref HitEvent hitEvent)
+        {
+            foreach (var kvp in statusEffects)
+            {
+                kvp.Key.ProcessHitEvent(ref hitEvent, kvp.Value);
+            }
+        }
+
+        public void ProcessHealEvent(ref HealEvent healEvent)
+        {
+            foreach (var kvp in statusEffects)
+            {
+                kvp.Key.ProcessHealEvent(ref healEvent, kvp.Value);
+            }
+        }
     }
 }

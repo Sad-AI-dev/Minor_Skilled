@@ -8,13 +8,13 @@ namespace Game.Core {
     {
         //source data
         public bool hasAgentSource;
-        public Ability source;
+        public Agent source;
 
         //target
         public AgentHealthManager target;
 
         //damage values
-        public readonly float baseDamage;
+        public float baseDamage;
         public float damageMultiplier;
         public float damageReduction;
 
@@ -22,20 +22,41 @@ namespace Game.Core {
         public UnityEvent<Agent> onDeath;
 
         //ctor
-        public HitEvent(Ability source)
+        public HitEvent(Ability source = null)
         {
-            this.source = source;
             hasAgentSource = source != null;
 
             if (hasAgentSource)
             {
+                this.source = source.agent;
                 //setup base damage
-                baseDamage = source.agent.stats.baseDamage + source.abilityData.damageMultiplier;
+                SetupBaseDamage(source);
             }
 
-            //initialize other vars
+            InitializeVars();
+        }
+        //alternate ctor (for additional projectiles from items for example)
+        public HitEvent(Agent source)
+        {
+            this.source = source;
+            hasAgentSource = source != null;
+            InitializeVars();
+        }
+
+        private void SetupBaseDamage(Ability source)
+        {
+            baseDamage = source.agent.stats.baseDamage + source.abilityData.damageMultiplier;
+        }
+        private void InitializeVars()
+        {
             damageMultiplier = 1f;
             onDeath = new UnityEvent<Agent>();
+        }
+
+        //============== Get Total Damage ===============
+        public float GetTotalDamage()
+        {
+            return (baseDamage * damageMultiplier) - damageReduction;
         }
     }
 }

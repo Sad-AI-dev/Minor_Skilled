@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game.Core {
     public interface IHittable
     {
-        public void Hurt();
-        public void Heal();
+        public void Hurt(HitEvent hitEvent);
+        public void Heal(HealEvent healEvent);
     }
 }

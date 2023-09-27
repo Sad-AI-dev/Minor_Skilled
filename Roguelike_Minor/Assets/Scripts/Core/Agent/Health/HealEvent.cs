@@ -7,25 +7,28 @@ namespace Game.Core {
     {
         //source data
         public bool hasAgentSource;
-        public Ability source;
+        public Agent source;
 
         //target
         public AgentHealthManager target;
 
         //heal values
-        public float baseHeal;
+        public readonly float baseHeal;
         public float healMultiplier;
 
         //ctor
-        public HealEvent(Ability source)
+        public HealEvent(float baseHeal, Agent source = null)
         {
             this.source = source;
             hasAgentSource = source != null;
+            this.baseHeal = baseHeal;
+            //initialize base vars
+            healMultiplier = 1;
+        }
 
-            if (hasAgentSource)
-            {
-                //TODO figure out how to set baseHeal here lol
-            }
+        public float GetTotalHeal()
+        {
+            return baseHeal * healMultiplier;
         }
     }
 }
