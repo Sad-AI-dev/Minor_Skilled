@@ -38,9 +38,13 @@ namespace Game {
         }
 
         //============== Process Hit / Heal Events ================
-        public override void ProcessHitEvent(ref HitEvent hitEvent, int stacks)
+        public override void ProcessTakeDamage(ref HitEvent hitEvent, int stacks)
         {
             hitEvent.damageReduction += stacks;
+        }
+        public override void ProcessDealDamage(ref HitEvent hitEvent, int stacks = 1)
+        {
+            
         }
         public override void ProcessHealEvent(ref HealEvent healEvent, int stacks)
         {

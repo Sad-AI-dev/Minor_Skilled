@@ -52,7 +52,11 @@ namespace Game.Core {
         //=============== Take Damage ================
         private void ProcessHitEvent(ref HitEvent hitEvent)
         {
-            agent.effectHandler.ProcessHitEvent(ref hitEvent);
+            if (hitEvent.hasAgentSource)
+            {
+                hitEvent.source.effectHandler.ProcessHitEvent(ref hitEvent);
+            }
+            hitEvent.target.agent.effectHandler.ProcessHitEvent(ref hitEvent);
             //TODO: allow items to effect hitEvent
         }
 
