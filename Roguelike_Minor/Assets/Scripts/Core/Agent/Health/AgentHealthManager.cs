@@ -30,6 +30,7 @@ namespace Game.Core {
         //============ IHittable ===============
         public void Hurt(HitEvent hitEvent)
         {
+            hitEvent.target = this;
             ProcessHitEvent(ref hitEvent);
             //take damage
             health -= hitEvent.GetTotalDamage();
@@ -41,6 +42,7 @@ namespace Game.Core {
 
         public void Heal(HealEvent healEvent)
         {
+            healEvent.target = this;
             ProcessHealEvent(ref healEvent);
             //heal
             health += healEvent.GetTotalHeal();
@@ -55,9 +57,10 @@ namespace Game.Core {
             if (hitEvent.hasAgentSource)
             {
                 hitEvent.source.effectHandler.ProcessHitEvent(ref hitEvent);
+                hitEvent.source.inventory.ProcessHitEvent(ref hitEvent);
             }
-            hitEvent.target.agent.effectHandler.ProcessHitEvent(ref hitEvent);
-            //TODO: allow items to effect hitEvent
+            agent.effectHandler.ProcessHitEvent(ref hitEvent);
+            agent.inventory.ProcessHitEvent(ref hitEvent);
         }
 
         private void HandleDeath(ref HitEvent hitEvent)
@@ -71,7 +74,7 @@ namespace Game.Core {
         private void ProcessHealEvent(ref HealEvent healEvent)
         {
             agent.effectHandler.ProcessHealEvent(ref healEvent);
-            //TODO: allow items to effect healEvent
+            agent.inventory.ProcessHealEvent(ref healEvent);
         }
 
         //=============== Generic Health Change ==============

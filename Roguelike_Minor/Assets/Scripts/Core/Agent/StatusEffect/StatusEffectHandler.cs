@@ -67,7 +67,7 @@ namespace Game.Core {
         //================ Process Heal / Hurt Event ==================
         public void ProcessHitEvent(ref HitEvent hitEvent)
         {
-            if (hitEvent.source.Equals(agent)) //is source of hitEvent
+            if (hitEvent.hasAgentSource && hitEvent.source.Equals(agent)) //is source of hitEvent
             {
                 foreach (var kvp in statusEffects)
                 {

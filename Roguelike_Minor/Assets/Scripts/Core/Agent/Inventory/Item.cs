@@ -7,15 +7,16 @@ namespace Game.Core {
     public class Item
     {
         [HideInInspector] public Agent agent;
-        public ItemData data;
+        public ItemDataSO data;
         public int stacks;
 
         //ctor
-        public Item(ItemData data, Inventory holder)
+        public Item(ItemDataSO data, Inventory holder)
         {
             agent = holder.agent;
             this.data = data;
-            stacks = 1;
+            //initialize first stack
+            AddStack();
         }
 
         //=========== Manage Stacks ============
@@ -29,6 +30,14 @@ namespace Game.Core {
         {
             stacks--;
             data.RemoveStack(this);
+        }
+
+        public void DropItem()
+        {
+            //TEMP solution, iterate later based on pickup system
+
+            GameObject obj = Object.Instantiate(data.pickupPrefab);
+            obj.transform.position = agent.transform.position;
         }
     }
 }

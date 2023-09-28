@@ -9,9 +9,13 @@ namespace Game.Core {
         //source data
         public bool hasAgentSource;
         public Agent source;
+        public Item itemSource; //set if hitEvent is caused by item
 
         //target
         public AgentHealthManager target;
+
+        //proc coef
+        public float procCoef = 1f;
 
         //damage values
         public float baseDamage;
@@ -29,6 +33,7 @@ namespace Game.Core {
             if (hasAgentSource)
             {
                 this.source = source.agent;
+                procCoef = source.abilityData.procCoef;
                 //setup base damage
                 SetupBaseDamage(source);
             }
@@ -56,7 +61,7 @@ namespace Game.Core {
         //============== Get Total Damage ===============
         public float GetTotalDamage()
         {
-            return (baseDamage * damageMultiplier) - damageReduction;
+            return Mathf.Min((baseDamage * damageMultiplier) - damageReduction, 1); //never allow take 0 damage
         }
     }
 }
