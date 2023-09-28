@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BehaviourTree
+namespace Game.Enemy.Core
 {
     public class Selector : BT_Node
     {

@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BehaviourTree {
+namespace Game.Enemy.Core
+{
     public abstract class Tree : MonoBehaviour
     {
         private BT_Node root = null;
