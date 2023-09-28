@@ -105,6 +105,7 @@ namespace Game.Core {
         public void AddSlot(SlotSizeSO size)
         {
             slots.Add(new ItemSlot(size));
+            SortSlots();
             onContentsChanged?.Invoke();
         }
 
@@ -112,14 +113,22 @@ namespace Game.Core {
         {
             if (slots.Contains(slot))
             {
-                foreach (Item item in slot.heldItems)
+                //foreach (Item item in slot.heldItems)
+                for (int i = slot.heldItems.Count - 1; i >= 0; i--)
                 {
-                    RemoveItemStack(item);
-                    slot.RemoveItem(item);
+                    items[i].DropItem(); //drop expelled items
+                    RemoveItemStack(items[i]);
                 }
                 slots.Remove(slot);
+                slot = null; //destroy removed slot
+                SortSlots();
                 onContentsChanged?.Invoke();
             }
+        }
+
+        private void SortSlots()
+        {
+            slots.Sort((ItemSlot a, ItemSlot b) => a.size.capacity.CompareTo(b.size.capacity));
         }
     }
 }

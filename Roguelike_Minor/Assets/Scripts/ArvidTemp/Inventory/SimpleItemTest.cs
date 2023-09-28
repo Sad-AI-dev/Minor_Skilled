@@ -32,6 +32,8 @@ namespace Game {
         {
             if (Input.GetKeyDown(KeyCode.UpArrow)) { AddItem(); }
             if (Input.GetKeyDown(KeyCode.DownArrow)) { RemoveItem(); }
+            if (Input.GetKeyDown(KeyCode.W)) { AddSlot(); }
+            if (Input.GetKeyDown(KeyCode.S)) { RemoveSlot(); }
         }
 
         private void AddItem()
@@ -42,6 +44,17 @@ namespace Game {
         private void RemoveItem()
         {
             agent.inventory.RemoveItem(itemData);
+        }
+
+        private void AddSlot()
+        {
+            (agent.inventory as SlotInventory).AddSlot(smallSize);
+        }
+        private void RemoveSlot()
+        {
+            SlotInventory inventory = agent.inventory as SlotInventory;
+            if (inventory.slots.Count == 0) { return; }
+            inventory.RemoveSlot(inventory.slots[0]); //remove last slot
         }
     }
 }
