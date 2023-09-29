@@ -54,7 +54,7 @@ namespace Game {
         {
             SlotInventory inventory = agent.inventory as SlotInventory;
             if (inventory.slots.Count == 0) { return; }
-            inventory.RemoveSlot(inventory.slots[0]); //remove last slot
+            inventory.RemoveSlot(inventory.slots[0]); //remove first slot
         }
     }
 }

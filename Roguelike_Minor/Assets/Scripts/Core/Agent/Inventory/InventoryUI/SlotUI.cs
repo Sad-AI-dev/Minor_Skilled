@@ -1,22 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Core.Data;
 
 namespace Game.Core {
     public class SlotUI : MonoBehaviour
     {
-        public List<ItemUI> itemVisuals;
+        public UnityDictionary<SlotSizeSO, List<ItemUI>> itemVisuals;
 
         public void GenerateVisuals(ItemSlot slot, SlotInventory inventory)
         {
             ResetVisuals();
+            //generate item visuals
+            for (int i = 0; i < slot.heldItems.Count; i++)
+            {
+                ItemUI targetUI = itemVisuals[slot.heldItems[i].data.size][i];
+                targetUI.inventory = inventory; //pass inventory reference
+                targetUI.GenerateVisuals(slot.heldItems[i]);
+            }
         }
 
+        //======== Reset =========
         private void ResetVisuals()
         {
-            foreach (ItemUI itemUI in itemVisuals)
+            foreach (var kvp in itemVisuals)
             {
-                itemUI.img.sprite = null;
+                foreach (ItemUI itemUI in kvp.Value)
+                {
+                    itemUI.img.color = new Color(1, 1, 1, 0); //hide element
+                }
             }
         }
     }

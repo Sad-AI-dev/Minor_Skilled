@@ -6,7 +6,7 @@ namespace Game.Core.Data {
     [System.Serializable]
     public class BehaviourPool<T> where T : MonoBehaviour
     {
-        private readonly List<T> pool;
+        private readonly List<T> pool = new List<T>();
         public GameObject behaviourTemplate;
 
         //ctor
@@ -20,7 +20,7 @@ namespace Game.Core.Data {
         {
             foreach (T behaviour in pool)
             {
-                if (behaviour.gameObject.activeSelf)
+                if (!behaviour.gameObject.activeSelf)
                 {
                     behaviour.gameObject.SetActive(true);
                     return behaviour;

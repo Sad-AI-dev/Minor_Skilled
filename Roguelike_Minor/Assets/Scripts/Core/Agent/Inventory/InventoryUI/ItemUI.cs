@@ -15,6 +15,7 @@ namespace Game.Core {
         public void GenerateVisuals(Item item)
         {
             this.item = item;
+            img.color = Color.white;
             img.sprite = item.data.UISprite;
         }
     }

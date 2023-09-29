@@ -6,15 +6,46 @@ using Game.Core.Data;
 namespace Game.Core {
     public class InventoryUI : MonoBehaviour
     {
+        [System.Serializable]
+        public class VisualData
+        {
+            public BehaviourPool<SlotUI> slotPool;
+            public RectTransform slotHolder;
+        }
+
         public SlotInventory inventory;
-        public BehaviourPool<SlotUI> smallItemVisuals;
-        public BehaviourPool<SlotUI> mediumItemViuals;
+        public UnityDictionary<SlotSizeSO, VisualData> slotVisuals;
         private ItemUI hoveredItem;
 
-        //========= Create Visuals ===========
-        public void GenerateVisuals()
+        private void Awake()
         {
+            inventory.onContentsChanged += GenerateVisuals;
+        }
 
+        //========= Create Visuals ===========
+        private void GenerateVisuals()
+        {
+            ResetVisuals();
+            GenerateSlotVisuals();
+        }
+
+        private void ResetVisuals()
+        {
+            foreach (var kvp in slotVisuals)
+            {
+                kvp.Value.slotPool.Reset();
+            }
+        }
+
+        private void GenerateSlotVisuals()
+        {
+            for (int i = 0; i < inventory.slots.Count; i++)
+            {
+                ItemSlot targetSlot = inventory.slots[i];
+                SlotUI slotUI = slotVisuals[targetSlot.size].slotPool.GetBehaviour();
+                slotUI.transform.SetParent(slotVisuals[targetSlot.size].slotHolder);
+                slotUI.GenerateVisuals(targetSlot, inventory);
+            }
         }
 
         //============== Drop Item ==============
@@ -24,7 +55,7 @@ namespace Game.Core {
             {
                 inventory.DropItem(hoveredItem.item);
             }
-            //reset visuals
+            //redraw visuals
             GenerateVisuals();
         }
 
@@ -32,6 +63,12 @@ namespace Game.Core {
         public void SetHoveredItem(ItemUI hoveredItem)
         {
             this.hoveredItem = hoveredItem;
+        }
+
+        //============= OnDestroy =============
+        private void OnDestroy()
+        {
+            inventory.onContentsChanged -= GenerateVisuals;
         }
     }
 }

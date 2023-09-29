@@ -89,6 +89,7 @@ namespace Game.Core {
                 if (slots[i].HasItemOfType(item.data))
                 {
                     slots[i].RemoveItem(item);
+                    SortInventory();
                     i = -1; //end loop
                 }
             }
@@ -122,6 +123,7 @@ namespace Game.Core {
                 slots.Remove(slot);
                 slot = null; //destroy removed slot
                 SortSlots();
+                SortInventory();
                 onContentsChanged?.Invoke();
             }
         }
@@ -132,10 +134,24 @@ namespace Game.Core {
             slots.Sort((ItemSlot a, ItemSlot b) => a.size.capacity.CompareTo(b.size.capacity));
         }
 
-        //============ Sort Contents =============
         private void SortInventory()
         {
-            Queue<Item> slotItems = new Queue<Item>();
+            Stack<Item> slotItems = new Stack<Item>();
+            //empty slots
+            for (int i = slots.Count - 1; i >= 0; i--)
+            {
+                for (int j = slots[i].heldItems.Count - 1; j >= 0; j--)
+                {
+                    slotItems.Push(slots[i].heldItems[j]);
+                    slots[i].RemoveItem(slots[i].heldItems[j]);
+                }
+            }
+            //re-fill slots
+            while (slotItems.Count > 0)
+            {
+                GetSlotWithSpace(slotItems.Peek().data.size).AssignItem(slotItems.Peek());
+                slotItems.Pop();
+            }
         }
     }
 }
