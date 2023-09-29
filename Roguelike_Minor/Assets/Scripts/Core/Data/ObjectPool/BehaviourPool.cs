@@ -15,6 +15,7 @@ namespace Game.Core.Data {
             pool = new List<T>();
         }
 
+        //============= Get Behaviour =================
         public T GetBehaviour()
         {
             foreach (T behaviour in pool)
@@ -33,6 +34,15 @@ namespace Game.Core.Data {
             T behaviour = Object.Instantiate(behaviourTemplate).GetComponent<T>();
             pool.Add(behaviour);
             return behaviour;
+        }
+
+        //============== Reset Pool ==================
+        public void Reset()
+        {
+            for (int i = 0; i < pool.Count; i++)
+            {
+                pool[i].gameObject.SetActive(false);
+            }
         }
     }
 }

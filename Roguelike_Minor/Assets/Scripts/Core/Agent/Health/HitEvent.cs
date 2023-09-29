@@ -15,6 +15,7 @@ namespace Game.Core {
         public AgentHealthManager target;
 
         //proc coef
+        //procCoef = Proc Coefficient, this is a multiplier applied to the likelyhood of a hitEvent proccing items.
         public float procCoef = 1f;
 
         //damage values

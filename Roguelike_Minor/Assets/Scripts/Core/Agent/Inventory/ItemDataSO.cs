@@ -6,7 +6,10 @@ namespace Game.Core {
     public abstract class ItemDataSO : ScriptableObject
     {
         public SlotSizeSO size;
+
+        [Header("Visuals")]
         public GameObject pickupPrefab;
+        public Sprite UISprite;
 
         //============ Manage Stacks ===============
         public abstract void AddStack(Item item);
