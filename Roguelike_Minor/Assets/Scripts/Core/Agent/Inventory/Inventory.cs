@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,18 +8,35 @@ namespace Game.Core {
     {
         [HideInInspector] public Agent agent;
         public List<Item> items;
+        public Action onContentsChanged;
 
         //=========== Manage Items ===============
-        public abstract bool TryAssignItem(Item item);
-        public abstract void RemoveItem(Item item);
+        //adds a single item stack to inventory
+        public abstract bool TryAssignItem(ItemDataSO itemData);
+        //removes a single item stack from inventory
+        public abstract void RemoveItem(ItemDataSO itemData);
 
         //=========== Drop Item ===========
+        //drops a single item stack from inventory
         public abstract void DropItem(Item item);
+
+        //=============== Util Funcs ==============
+        protected int GetItemIndex(ItemDataSO itemData)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].data.Equals(itemData))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
 
         //=========== Process Hit / Heal Events =============
         public void ProcessHitEvent(ref HitEvent hitEvent)
         {
-            if (hitEvent.source.Equals(agent))
+            if (hitEvent.hasAgentSource && hitEvent.source.Equals(agent))
             {
                 for (int i = 0; i < items.Count; i++)
                 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Core {
+    [System.Serializable]
     public class ItemSlot
     {
         public SlotSizeSO size;
@@ -22,6 +23,17 @@ namespace Game.Core {
         {
             return capacity >= size.capacity;
         }
+        public bool HasItemOfType(ItemDataSO data)
+        {
+            for (int i = 0; i < heldItems.Count; i++)
+            {
+                if (heldItems[i].data.Equals(data))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         //============= Manage Items =============
         public void AssignItem(Item item)
@@ -34,11 +46,6 @@ namespace Game.Core {
         {
             heldItems.Remove(item);
             capacity += item.data.size.capacity;
-        }
-
-        public void DropItem(Item item)
-        {
-            //TODO implement drop item
         }
     }
 }

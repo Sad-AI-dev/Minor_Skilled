@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Core {
-    public abstract class ItemData : ScriptableObject
+    public abstract class ItemDataSO : ScriptableObject
     {
         public SlotSizeSO size;
+        public GameObject pickupPrefab;
 
         //============ Manage Stacks ===============
         public abstract void AddStack(Item item);
