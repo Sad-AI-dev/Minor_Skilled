@@ -13,10 +13,10 @@ namespace Game.Player
 
         [Header("walk")]
         [SerializeField] private float walkSpeed;
-        [SerializeField] private float runSpeed;
+        [SerializeField] private float sprintSpeed;
         [SerializeField] private float deceleration;
         private float speed;
-        private bool isRunning = false;
+        private bool isSprinting = false;
 
         private Vector3 moveDirection;
         private Vector3 velocity;
@@ -41,17 +41,19 @@ namespace Game.Player
             Cursor.lockState = CursorLockMode.Locked;
             cam = Camera.main;
             cc = GetComponent<CharacterController>();
+
+            
         }
 
         private void FixedUpdate()
         {
             UpdateSpeed();
-            if (cc.isGrounded)
-                OnTouchGround();
-            else
-                ApplyGravity();
             
-            cc.Move((moveDirection * speed) + new Vector3(0, yVelocity / 100, 0));
+            ApplyGravity();
+            
+            cc.Move((moveDirection * speed) + new Vector3(0, yVelocity, 0));
+
+            CheckGrounded();
         }
 
         public void SetMoveDirection(Vector2 moveInput)
@@ -70,13 +72,27 @@ namespace Game.Player
             }
         }
 
+        public void Sprint(bool sprinting)
+        {
+            if(sprinting)
+            {
+                isSprinting = true;
+                speed = sprintSpeed;
+            }
+            else
+            {
+                isSprinting = false;
+                speed = walkSpeed;
+            }
+        }
+
         private void UpdateSpeed()
         {
             
             if(moveDirection.magnitude > 0.1f)
             {
-                if (!isRunning) speed = walkSpeed;
-                if (isRunning) speed = runSpeed;
+                if (!isSprinting) speed = walkSpeed;
+                if (isSprinting) speed = walkSpeed * sprintSpeed;
             }
             else
             {
@@ -86,25 +102,41 @@ namespace Game.Player
             speed /= 100;
         }
 
-        private void ApplyGravity()
-        {
-            activeGravity += gravity;
-            yVelocity -= activeGravity;
-        }
-
         public void Jump()
         {
-            if (!cc.isGrounded) return;
-            grounded = false;
-            yVelocity += JumpForce;
-            Debug.Log(yVelocity);
+            if (!grounded) return;
+            yVelocity += JumpForce / 100;
+            //Debug.Log(yVelocity);
+        }
+
+        private void ApplyGravity()
+        {
+            if(!grounded)
+            {
+                activeGravity += gravity / 100;
+                yVelocity -= activeGravity;
+            }
+        }
+
+
+        private void CheckGrounded()
+        {
+            if (!grounded && cc.isGrounded)
+                OnTouchGround();
+            if (grounded && !cc.isGrounded)
+                OnLeaveGround();
         }
 
         private void OnTouchGround()
         {
-            yVelocity = 0;
+            yVelocity = -0.1f;
             gravity = 0;
             grounded = true;
+        }
+
+        private void OnLeaveGround()
+        {
+            grounded = false;
         }
     }
 }
