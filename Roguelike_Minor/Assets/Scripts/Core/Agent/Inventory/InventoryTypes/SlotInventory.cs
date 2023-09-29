@@ -126,9 +126,16 @@ namespace Game.Core {
             }
         }
 
+        //============ Sort Contents ===========
         private void SortSlots()
         {
             slots.Sort((ItemSlot a, ItemSlot b) => a.size.capacity.CompareTo(b.size.capacity));
+        }
+
+        //============ Sort Contents =============
+        private void SortInventory()
+        {
+            Queue<Item> slotItems = new Queue<Item>();
         }
     }
 }
