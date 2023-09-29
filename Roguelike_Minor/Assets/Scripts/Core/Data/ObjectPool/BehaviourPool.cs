@@ -22,6 +22,7 @@ namespace Game.Core.Data {
             {
                 if (behaviour.gameObject.activeSelf)
                 {
+                    behaviour.gameObject.SetActive(true);
                     return behaviour;
                 }
             }
