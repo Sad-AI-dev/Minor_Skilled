@@ -22,6 +22,15 @@ namespace Game.Core {
             inventory.onContentsChanged += GenerateVisuals;
         }
 
+        //============== TEMP =============
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                TryDropItem();
+            }
+        }
+
         //========= Create Visuals ===========
         private void GenerateVisuals()
         {
@@ -44,7 +53,7 @@ namespace Game.Core {
                 ItemSlot targetSlot = inventory.slots[i];
                 SlotUI slotUI = slotVisuals[targetSlot.size].slotPool.GetBehaviour();
                 slotUI.transform.SetParent(slotVisuals[targetSlot.size].slotHolder);
-                slotUI.GenerateVisuals(targetSlot, inventory);
+                slotUI.GenerateVisuals(targetSlot, this);
             }
         }
 
@@ -54,9 +63,11 @@ namespace Game.Core {
             if (hoveredItem != null)
             {
                 inventory.DropItem(hoveredItem.item);
+                //redraw visuals
+                GenerateVisuals();
+                //reset hoveredItem
+                hoveredItem = null;
             }
-            //redraw visuals
-            GenerateVisuals();
         }
 
         //============== Set Hover Item =============

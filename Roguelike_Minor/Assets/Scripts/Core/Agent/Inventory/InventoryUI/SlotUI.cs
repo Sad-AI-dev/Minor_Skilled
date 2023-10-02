@@ -8,14 +8,14 @@ namespace Game.Core {
     {
         public UnityDictionary<SlotSizeSO, List<ItemUI>> itemVisuals;
 
-        public void GenerateVisuals(ItemSlot slot, SlotInventory inventory)
+        public void GenerateVisuals(ItemSlot slot, InventoryUI inventoryUI)
         {
             ResetVisuals();
             //generate item visuals
             for (int i = 0; i < slot.heldItems.Count; i++)
             {
                 ItemUI targetUI = itemVisuals[slot.heldItems[i].data.size][i];
-                targetUI.inventory = inventory; //pass inventory reference
+                targetUI.inventoryUI = inventoryUI; //pass inventoryUI reference
                 targetUI.GenerateVisuals(slot.heldItems[i]);
             }
         }
@@ -28,6 +28,7 @@ namespace Game.Core {
                 foreach (ItemUI itemUI in kvp.Value)
                 {
                     itemUI.img.color = new Color(1, 1, 1, 0); //hide element
+                    itemUI.item = null;
                 }
             }
         }
