@@ -9,7 +9,7 @@ namespace Game.Core {
         //source data
         public bool hasAgentSource;
         public Agent source;
-        public Item itemSource; //set if hitEvent is caused by item
+        public List<Item> itemSources; //set if hitEvent is caused by item, prevents infinite procChaining
 
         //target
         public AgentHealthManager target;
