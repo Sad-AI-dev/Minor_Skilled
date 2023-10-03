@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Core {
     [System.Serializable]
@@ -20,6 +21,12 @@ namespace Game.Core {
         public float coolDown;
         public CoolDownMode coolDownMode;
         [HideInInspector] public bool isCoolingDown = false;
+
+        [Header("Origin")]
+        public Transform originPoint;
+
+        [Header("Events")]
+        public UnityEvent onUse;
 
         //vars
         private float coolDownTimer;
@@ -42,6 +49,7 @@ namespace Game.Core {
         private void Use()
         {
             uses--;
+            onUse?.Invoke();
             abilityData.Use(this);
         }
 

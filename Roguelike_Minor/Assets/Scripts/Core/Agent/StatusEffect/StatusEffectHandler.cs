@@ -6,34 +6,89 @@ namespace Game.Core {
     public class StatusEffectHandler : MonoBehaviour
     {
         [HideInInspector] public Agent agent;
-        public Dictionary<StatusEffectSO, int> statusEffects;
+        public Dictionary<StatusEffectSO, int> statusEffects = new();
 
-        //========== Manage Effects =========
+        //============== Manage Effect Adding =====================
         public void AddEffect(StatusEffectSO effect, int stacks = 1)
         {
             if (!statusEffects.ContainsKey(effect)) 
             {
-                //create new effect
-                statusEffects.Add(effect, 0);
-                effect.AddEffect(agent);
+                AddNewEffect(effect);
             }
-            for (int i = 0; i < stacks; i++)
+            AddStacks(effect, stacks);
+        }
+
+        private void AddNewEffect(StatusEffectSO effect)
+        {
+            statusEffects.Add(effect, 0);
+            effect.AddEffect(agent);
+        }
+        private void AddStacks(StatusEffectSO effect, int stacks)
+        {
+            effect.AddStacks(agent, stacks);
+            statusEffects[effect] += stacks;
+        }
+
+        //==================== Manage Effect Removal ===================
+        public void RemoveEffect(StatusEffectSO effect, int stacks = 1)
+        {
+            if (statusEffects.ContainsKey(effect))
             {
-                //add stacks
-                effect.AddStacks(agent);
-                statusEffects[effect]++;
+                RemoveStacks(effect, Mathf.Min(stacks, statusEffects[effect]));
+                //remove effect check
+                if (statusEffects[effect] == 0)
+                {
+                    RemoveEffect(effect);
+                }
             }
         }
 
-        public void RemoveEffect(StatusEffectSO effect, int stacks = 1)
+        private void RemoveStacks(StatusEffectSO effect, int stacksToRemove)
         {
-
+            effect.RemoveStacks(agent, stacksToRemove);
+            statusEffects[effect] -= stacksToRemove;
+        }
+        private void RemoveEffect(StatusEffectSO effect)
+        {
+            effect.RemoveEffect(agent);
+            statusEffects.Remove(effect);
         }
 
         //========== Clear ==========
         public void Clear()
         {
+            foreach (var kvp in statusEffects)
+            {
+                RemoveEffect(kvp.Key, kvp.Value);
+            }
+            statusEffects.Clear();
+        }
 
+        //================ Process Heal / Hurt Event ==================
+        public void ProcessHitEvent(ref HitEvent hitEvent)
+        {
+            if (hitEvent.hasAgentSource && hitEvent.source.Equals(agent)) //is source of hitEvent
+            {
+                foreach (var kvp in statusEffects)
+                {
+                    kvp.Key.ProcessDealDamage(ref hitEvent, kvp.Value);
+                }
+            }
+            else
+            {
+                foreach (var kvp in statusEffects)
+                {
+                    kvp.Key.ProcessTakeDamage(ref hitEvent, kvp.Value);
+                }
+            }
+        }
+
+        public void ProcessHealEvent(ref HealEvent healEvent)
+        {
+            foreach (var kvp in statusEffects)
+            {
+                kvp.Key.ProcessHealEvent(ref healEvent, kvp.Value);
+            }
         }
     }
 }
