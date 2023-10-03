@@ -1,3 +1,4 @@
+using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace Game.Player
     public class PlayerInput : MonoBehaviour
     {
         [SerializeField] private PlayerController playerController;
+        [SerializeField] private Agent agent;
 
         bool sprinting = false;
         
@@ -15,8 +17,9 @@ namespace Game.Player
             WalkInput();
             SprintInput();
             JumpInput();
+            AbilitiesInput();
         }
-
+        
         private void WalkInput()
         {
             Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -43,6 +46,14 @@ namespace Game.Player
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 playerController.Jump();
+            }
+        }
+
+        private void AbilitiesInput()
+        {
+            if(Input.GetMouseButton(0))
+            {
+                agent.abilities.primary.TryUse();
             }
         }
     }
