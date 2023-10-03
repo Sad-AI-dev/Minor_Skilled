@@ -22,6 +22,9 @@ namespace Game.Core {
         public CoolDownMode coolDownMode;
         [HideInInspector] public bool isCoolingDown = false;
 
+        [Header("Origin")]
+        public Transform originPoint;
+
         [Header("Events")]
         public UnityEvent onUse;
 
