@@ -65,9 +65,20 @@ namespace Game.Core {
 
         private void HandleDeath(ref HitEvent hitEvent)
         {
+            //reward money
+            RewardMoney(ref hitEvent);
             //invoke death events
             hitEvent.onDeath?.Invoke(agent);
             onDeath?.Invoke(hitEvent);
+        }
+
+        //=============== Money ====================
+        private void RewardMoney(ref HitEvent hitEvent)
+        {
+            if (hitEvent.hasAgentSource)
+            {
+                hitEvent.source.stats.Money += agent.stats.Money;
+            }
         }
 
         //=================== Heal ===================

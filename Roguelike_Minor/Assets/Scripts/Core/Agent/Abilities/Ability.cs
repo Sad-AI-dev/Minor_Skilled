@@ -22,12 +22,18 @@ namespace Game.Core {
         public CoolDownMode coolDownMode;
         [HideInInspector] public bool isCoolingDown = false;
 
+        [Header("Origin")]
+        public Transform originPoint;
+
         [Header("Events")]
         public UnityEvent onUse;
 
         //vars
         private float coolDownTimer;
         private Coroutine coolDownRoutine;
+
+        //runtime vars support
+        public Dictionary<string, object> vars = new();
 
         //============ Use Ability ================
         public void TryUse()
