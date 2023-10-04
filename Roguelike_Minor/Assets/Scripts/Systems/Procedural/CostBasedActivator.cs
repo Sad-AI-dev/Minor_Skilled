@@ -142,6 +142,9 @@ namespace Game.Systems {
         private int saveCounter;
         private bool stopReq;
 
+        //external multiplier var
+        [HideInInspector] public float externalMultiplier = 1f;
+
         //option decision vars
         private int minPrice;
 
@@ -191,6 +194,8 @@ namespace Game.Systems {
             budget += budgetGain;
             //spike feature
             HandleSpike();
+            //external multiplier
+            budget = Mathf.RoundToInt(budget * externalMultiplier);
             //save feature
             HandleSavedBudget();
             //scaling

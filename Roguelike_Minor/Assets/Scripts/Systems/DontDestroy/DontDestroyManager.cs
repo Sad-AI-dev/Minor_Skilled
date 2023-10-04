@@ -15,8 +15,7 @@ namespace Game.Systems {
             else
             {
                 instance = this;
-                //initialize list
-                dontDestroyObjects = new List<GameObject>();
+                Initialize();
             }
         }
 
@@ -25,6 +24,15 @@ namespace Game.Systems {
         //vars
         private List<GameObject> dontDestroyObjects;
 
+        private void Initialize()
+        {
+            //initialize list
+            dontDestroyObjects = new List<GameObject>();
+            //set as dont destroy on load
+            transform.SetParent(null);
+            DontDestroyOnLoad(gameObject);
+        }
+
         public void Register(GameObject obj)
         {
             dontDestroyObjects.Add(obj);
@@ -32,7 +40,7 @@ namespace Game.Systems {
             DontDestroyOnLoad(obj);
         }
 
-        public void Reset()
+        public void Destroy()
         {
             //destroy all objects in dont destroy on load
             for (int i = dontDestroyObjects.Count - 1; i >= 0; i--)
