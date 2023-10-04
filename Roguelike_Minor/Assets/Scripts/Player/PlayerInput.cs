@@ -11,7 +11,15 @@ namespace Game.Player
         [SerializeField] private Agent agent;
 
         bool sprinting = false;
-        
+        float inaccuracy;
+        float accuracy;
+
+        private void Start()
+        {
+            agent.abilities.primary.vars.Add("inaccuracy", 0);
+            agent.abilities.primary.vars.Add("accuracy", 0);
+        }
+
         void Update()
         {
             WalkInput();
@@ -54,6 +62,18 @@ namespace Game.Player
             if(Input.GetMouseButton(0))
             {
                 agent.abilities.primary.TryUse();
+                inaccuracy += Time.deltaTime;
+ 
+                agent.abilities.primary.vars["inaccuracy"] = inaccuracy;
+            }
+            else
+            {
+                if (inaccuracy > 0)
+                {
+                    inaccuracy -= Time.deltaTime;
+                    agent.abilities.primary.vars["inaccuracy"] = inaccuracy;
+                }
+
             }
         }
     }
