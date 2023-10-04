@@ -32,6 +32,9 @@ namespace Game.Core {
         private float coolDownTimer;
         private Coroutine coolDownRoutine;
 
+        //runtime vars support
+        public Dictionary<string, object> vars = new();
+
         //============ Use Ability ================
         public void TryUse()
         {
