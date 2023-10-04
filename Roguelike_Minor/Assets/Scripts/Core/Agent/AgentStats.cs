@@ -1,9 +1,23 @@
+using System;
+using UnityEngine;
+
 namespace Game.Core {
     [System.Serializable]
     public class AgentStats
     {
         public float maxHealth = 10f;
         public float baseDamage = 1;
+
+        //money
+        [SerializeField] private int heldMoney;
+        public int Money { 
+            get { return heldMoney; } 
+            set {
+                heldMoney = value;
+                onMoneyChanged?.Invoke(heldMoney);
+            }
+        }
+        public Action<int> onMoneyChanged;
 
         //cooldowns
         public float attackSpeed = 1;

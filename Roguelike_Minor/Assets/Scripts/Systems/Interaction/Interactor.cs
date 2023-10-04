@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Game.Core;
 
 namespace Game.Systems {
     public class Interactor : MonoBehaviour
@@ -13,10 +14,12 @@ namespace Game.Systems {
         public UnityEvent onStopCanInteract;
         //vars
         private List<Interactable> interactables;
+        [HideInInspector] public Agent agent;
 
         private void Start()
         {
             interactables = new List<Interactable>();
+            agent = GetComponent<Agent>();
         }
 
         //=============== interactables management ===============
