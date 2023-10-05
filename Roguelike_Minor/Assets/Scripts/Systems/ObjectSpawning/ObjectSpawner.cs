@@ -1,3 +1,4 @@
+using Game.Core.Data;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,7 @@ namespace Game.Systems {
     public class ObjectSpawner : MonoBehaviour
     {
         public List<Transform> spawnPoints;
+        private EntropyRandom<Transform> randomizer;
 
         private void Awake()
         {
@@ -14,6 +16,7 @@ namespace Game.Systems {
                     spawnPoints.Add(child);
                 }
             }
+            randomizer = new EntropyRandom<Transform>(spawnPoints);
         }
 
         //============ Spawn Object ==============
@@ -25,7 +28,7 @@ namespace Game.Systems {
 
         private Vector3 GetRandomSpawnPoint()
         {
-            return spawnPoints[Random.Range(0, spawnPoints.Count)].position;
+            return randomizer.Next().position;
         }
         private Quaternion GetRandomYRotation()
         {

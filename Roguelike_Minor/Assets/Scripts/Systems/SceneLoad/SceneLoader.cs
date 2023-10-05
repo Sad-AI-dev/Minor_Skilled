@@ -50,5 +50,11 @@ namespace Game.Systems {
                 yield return null;
             }
         }
+
+        //========== Quit ===========
+        public void Quit()
+        {
+            Application.Quit();
+        }
     }
 }
