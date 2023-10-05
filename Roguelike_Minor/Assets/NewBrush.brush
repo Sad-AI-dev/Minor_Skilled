@@ -9,26 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3195deda96e3ce44bb4aa98b61aac7ad, type: 3}
-  m_Name: SoldierPrimary
+  m_Script: {fileID: 12146, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: NewBrush
   m_EditorClassIdentifier: 
-  title: Primary
-  procCoef: 1
-  damageMultiplier: 1
-  bullet: {fileID: 4999970908319164100, guid: 404ad2e6cf8c3e14a826677e3f019515, type: 3}
-  marker: {fileID: 659331264967026304, guid: ce2513020b7da7d4d86e5665e7aaf76f, type: 3}
-  bulletSpeed: 2
-  spreadMultiplier: 0.5
-  spreadBuildupSpeed: 0.5
-  spreadResetSpeed: 1
-  spreadBuildup:
+  m_Mask: {fileID: 2800000, guid: e4f0c32307e6eb146b84a45567580edb, type: 3}
+  m_Falloff:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
       inSlope: 0
-      outSlope: 0
+      outSlope: 1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -36,8 +28,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 1
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -45,3 +37,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  m_RadiusScale: 1.4849247
+  m_BlackWhiteRemapMin: 0
+  m_BlackWhiteRemapMax: 1
+  m_InvertRemapRange: 0

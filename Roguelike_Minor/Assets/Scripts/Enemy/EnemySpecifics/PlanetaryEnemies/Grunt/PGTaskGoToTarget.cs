@@ -56,9 +56,21 @@ namespace Game.Enemy
             //else if ranged in range && meleecounter > 3, success
             else if(colRanged.Length > 0 && PGTree.EnemiesInRangeOfPlayer >= 3)
             {
-                agent.SetDestination(transform.position);
-                transform.LookAt(target);
-                state = NodeState.SUCCESS;
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, target.position - transform.position, out hit, Mathf.Infinity))
+                {
+                    Debug.Log(hit.transform.name);
+                    if (hit.transform.tag == "Player")
+                    {
+                        agent.SetDestination(transform.position);
+                        transform.LookAt(target);
+                        state = NodeState.SUCCESS;
+                    }
+                    else
+                    {
+                        state = NodeState.RUNNING;
+                    }
+                }
             }
             //else go to target
             else

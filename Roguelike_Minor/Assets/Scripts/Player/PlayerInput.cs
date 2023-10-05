@@ -16,8 +16,7 @@ namespace Game.Player
 
         private void Start()
         {
-            agent.abilities.primary.vars.Add("inaccuracy", 0);
-            agent.abilities.primary.vars.Add("accuracy", 0);
+            
         }
 
         void Update()
@@ -64,16 +63,7 @@ namespace Game.Player
                 agent.abilities.primary.TryUse();
                 inaccuracy += Time.deltaTime;
  
-                agent.abilities.primary.vars["inaccuracy"] = inaccuracy;
-            }
-            else
-            {
-                if (inaccuracy > 0)
-                {
-                    inaccuracy -= Time.deltaTime;
-                    agent.abilities.primary.vars["inaccuracy"] = inaccuracy;
-                }
-
+                //agent.abilities.primary.vars["inaccuracy"] = inaccuracy;
             }
         }
     }
