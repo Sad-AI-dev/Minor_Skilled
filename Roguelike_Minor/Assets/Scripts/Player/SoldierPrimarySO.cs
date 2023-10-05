@@ -36,13 +36,9 @@ namespace Game.Player
 
             RaycastHit hit;
             if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500))
-            {
                 target = hit.point;
-            }
             else
-            {
                 target = cam.transform.forward * 1000;
-            }
            
             //add inaccuracy
             float inaccuracy = Convert.ToSingle(source.vars["inaccuracy"]);

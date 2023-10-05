@@ -48,10 +48,14 @@ namespace Game.Player
             UpdateSpeed();
             
             ApplyGravity();
-            
-            cc.Move((moveDirection * speed) + new Vector3(0, yVelocity, 0));
+
+            ResetVelocity();
+
+            cc.Move((moveDirection * speed) + new Vector3(0, yVelocity / 100, 0));
 
             CheckGrounded();
+
+            
         }
 
         public void SetMoveDirection(Vector2 moveInput)
@@ -112,7 +116,7 @@ namespace Game.Player
             if(!grounded)
             {
                 activeGravity += gravity;
-                yVelocity -= activeGravity / 100;
+                yVelocity -= activeGravity;
             }
         }
 
@@ -135,6 +139,12 @@ namespace Game.Player
         private void OnLeaveGround()
         {
             grounded = false;
+        }
+
+        public void ResetVelocity()
+        {
+            speed = 0;
+            yVelocity = 0;
         }
     }
 }

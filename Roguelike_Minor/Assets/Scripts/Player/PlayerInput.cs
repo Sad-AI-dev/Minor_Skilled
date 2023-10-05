@@ -65,6 +65,10 @@ namespace Game.Player
  
                 //agent.abilities.primary.vars["inaccuracy"] = inaccuracy;
             }
+            if(Input.GetMouseButton(1))
+            {
+                //agent.abilities.
+            }
         }
     }
 }
