@@ -41,8 +41,6 @@ namespace Game.Player
             Cursor.lockState = CursorLockMode.Locked;
             cam = Camera.main;
             cc = GetComponent<CharacterController>();
-
-            
         }
 
         private void FixedUpdate()
@@ -113,8 +111,8 @@ namespace Game.Player
         {
             if(!grounded)
             {
-                activeGravity += gravity / 100;
-                yVelocity -= activeGravity;
+                activeGravity += gravity;
+                yVelocity -= activeGravity / 100;
             }
         }
 
