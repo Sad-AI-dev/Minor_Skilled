@@ -22,7 +22,7 @@ namespace Game.Core.Data {
             List<T> inputCopy = new List<T>(input);
             while (inputCopy.Count > 0)
             {
-                int randIndex = Random.Range(0, randomQueue.Count);
+                int randIndex = Random.Range(0, inputCopy.Count);
                 randomQueue.Enqueue(inputCopy[randIndex]);
                 inputCopy.RemoveAt(randIndex);
             }
@@ -31,7 +31,7 @@ namespace Game.Core.Data {
         //============== Get Random =============
         public T Next()
         {
-            T next = randomQueue.Peek();
+            T next = randomQueue.Dequeue();
             if (randomQueue.Count <= 0) { Shuffle(); }
             return next;
         }
