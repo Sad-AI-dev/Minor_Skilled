@@ -32,7 +32,6 @@ namespace Game.Enemy
 
             if (target == null)
             {
-                //if (enemyAgent.transform.gameObject.name == "MainTestGrunt") Debug.Log("Target is not found: " + (Transform)GetData("Target"));
                 state = NodeState.FAILURE;
             }
             else if (PGTree.EnemiesInRangeOfPlayer < 3 || colMelee.Length > 0)
@@ -43,7 +42,7 @@ namespace Game.Enemy
             {
                 Debug.Log("attacking Ranged");
                 enemyAgent.abilities.secondary.TryUse();
-                state = NodeState.RUNNING;
+                state = NodeState.RUNNING;   
             }
 
             return state;
