@@ -7,6 +7,7 @@ namespace Game.Systems {
     {
         private void Start()
         {
+            transform.SetParent(null);
             DontDestroyManager.instance.Register(gameObject);
         }
     }
