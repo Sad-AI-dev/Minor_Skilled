@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Enemy.Core;
+using UnityEngine.AI;
 
 namespace Game.Enemy
 {
     public class CheckForTargetInRange : BT_Node
     {
-        Transform transform;
+        private Transform transform;
         private LayerMask playerLayerMask;
 
         public CheckForTargetInRange(Transform transform, LayerMask layermask)
@@ -28,6 +29,7 @@ namespace Game.Enemy
                 if (col.Length > 0)
                 {
                     parent.parent.SetData("Target", col[0].transform);
+                    Debug.Log("Target Found");
                     state = NodeState.SUCCESS;
                     return state;
                 }

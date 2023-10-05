@@ -28,12 +28,14 @@ namespace Game.Enemy
 
         public override NodeState Evaluate()
         {
+            // Waiting for patrol
             if (waiting)
             {
                 currentTime += Time.deltaTime;
 
                 if (currentTime >= waitTime)
                 {
+                    //Get new random position to move to
                     moveToPosition = RandomNavmeshLocation(RandomPatrolRange);
 
                     if (moveToPosition != null)
@@ -44,8 +46,10 @@ namespace Game.Enemy
             }
             else
             {
-                agent.SetDestination(moveToPosition);
+                //Move to new position;
+                if(GetData("Target") == null) agent.SetDestination(moveToPosition);
 
+                //Check if arived at target
                 if (!agent.pathPending)
                 {
                     if (agent.remainingDistance <= agent.stoppingDistance)
