@@ -17,6 +17,8 @@ namespace Game.Player.Soldier
 
         private bool canTick;
 
+        private List<GameObject> entitiesInRange;
+
         private void Start()
         {
             sphere.transform.localScale *= areaRadius;
@@ -41,6 +43,18 @@ namespace Game.Player.Soldier
         {
             yield return new WaitForSeconds(tickDelay);
             canTick = true;
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if(other.CompareTag("Enemy"))
+            {
+                entitiesInRange.Add(other.gameObject);
+            }
+            if(other.CompareTag("Player"))
+            {
+                entitiesInRange.Add(other.gameObject);
+            }
         }
     }
 }
