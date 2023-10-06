@@ -4,6 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
+    [CreateAssetMenu(fileName = "SpecialReduceOnKill", menuName = "ScriptableObjects/Items/T3/SpecialReduceOnKill")]
     public class SpecialReduceOnKillSO : ItemDataSO
     {
         private static readonly string reduction = "reduction";
