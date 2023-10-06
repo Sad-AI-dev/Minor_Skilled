@@ -41,8 +41,6 @@ namespace Game.Player
             Cursor.lockState = CursorLockMode.Locked;
             cam = Camera.main;
             cc = GetComponent<CharacterController>();
-
-            
         }
 
         private void FixedUpdate()
@@ -50,10 +48,12 @@ namespace Game.Player
             UpdateSpeed();
             
             ApplyGravity();
-            
-            cc.Move((moveDirection * speed) + new Vector3(0, yVelocity, 0));
+
+            cc.Move((moveDirection * speed) + new Vector3(0, yVelocity / 100, 0));
 
             CheckGrounded();
+
+            
         }
 
         public void SetMoveDirection(Vector2 moveInput)
@@ -113,7 +113,7 @@ namespace Game.Player
         {
             if(!grounded)
             {
-                activeGravity += gravity / 100;
+                activeGravity += gravity;
                 yVelocity -= activeGravity;
             }
         }
@@ -137,6 +137,12 @@ namespace Game.Player
         private void OnLeaveGround()
         {
             grounded = false;
+        }
+
+        public void ResetVelocity()
+        {
+            speed = 0;
+            yVelocity = 0;
         }
     }
 }

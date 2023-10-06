@@ -21,5 +21,11 @@ namespace Game.Systems {
 
         //static ref to player
         public Agent player;
+
+        //========== Manage Stage State ==============
+        public void HandleCompleteStageObject()
+        {
+
+        }
     }
 }
