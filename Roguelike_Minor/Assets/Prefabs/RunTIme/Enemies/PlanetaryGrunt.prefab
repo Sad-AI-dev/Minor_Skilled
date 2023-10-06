@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8889901935268120617}
   - component: {fileID: 6374113225487779390}
   - component: {fileID: 160443000976078305}
+  - component: {fileID: -4257652729404347927}
   m_Layer: 6
   m_Name: PlanetaryGrunt
   m_TagString: Enemy
@@ -180,6 +181,7 @@ MonoBehaviour:
     onUse:
       m_PersistentCalls:
         m_Calls: []
+    coolDownTimer: 0
   secondary:
     agent: {fileID: 0}
     abilityData: {fileID: 11400000, guid: d08b3c43157e8b940b40eb2faf33bf43, type: 2}
@@ -192,6 +194,7 @@ MonoBehaviour:
     onUse:
       m_PersistentCalls:
         m_Calls: []
+    coolDownTimer: 0
   special:
     agent: {fileID: 0}
     abilityData: {fileID: 0}
@@ -204,6 +207,7 @@ MonoBehaviour:
     onUse:
       m_PersistentCalls:
         m_Calls: []
+    coolDownTimer: 0
   utility:
     agent: {fileID: 0}
     abilityData: {fileID: 0}
@@ -216,6 +220,7 @@ MonoBehaviour:
     onUse:
       m_PersistentCalls:
         m_Calls: []
+    coolDownTimer: 0
 --- !u!114 &3687891568047103121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +257,19 @@ MonoBehaviour:
       m_Calls: []
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -4257652729404347927}
+        m_TargetAssemblyTypeName: Game.Systems.Destroyer, Game.Systems
+        m_MethodName: DestroyObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6374113225487779390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +285,7 @@ MonoBehaviour:
   stats:
     maxHealth: 10
     baseDamage: 1
-    heldMoney: 0
+    heldMoney: 1
     attackSpeed: 1
     coolDownMultiplier: 1
   abilities: {fileID: 0}
@@ -289,6 +306,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   items: []
+--- !u!114 &-4257652729404347927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5640572280961470500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825208299186b9748b1a15845b0e9810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6654062841617250084
 GameObject:
   m_ObjectHideFlags: 0

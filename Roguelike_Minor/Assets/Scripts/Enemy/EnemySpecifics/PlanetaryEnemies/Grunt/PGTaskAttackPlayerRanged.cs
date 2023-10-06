@@ -40,7 +40,7 @@ namespace Game.Enemy
             }
             else
             {
-                Debug.Log("attacking Ranged");
+
                 enemyAgent.abilities.secondary.TryUse();
                 state = NodeState.RUNNING;   
             }
