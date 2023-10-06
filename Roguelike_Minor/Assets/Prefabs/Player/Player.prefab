@@ -363,6 +363,7 @@ MonoBehaviour:
   playerController: {fileID: 7374867739153013466}
   agent: {fileID: 8530711646383118276}
   interactor: {fileID: 6612914900796368241}
+  inventory: {fileID: 0}
 --- !u!114 &7374867739153013466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,7 +579,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotsToInitialize:
-    dictionary: []
+    dictionary:
+    - key: {fileID: 11400000, guid: aaa7839693155fe46a5ce1c6da18f970, type: 2}
+      value: 4
+    - key: {fileID: 11400000, guid: dfaeea43fb7497947801a52fae9ad6eb, type: 2}
+      value: 1
 --- !u!114 &2595134782193159625
 MonoBehaviour:
   m_ObjectHideFlags: 0

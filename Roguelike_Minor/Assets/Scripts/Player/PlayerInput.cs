@@ -15,6 +15,12 @@ namespace Game.Player
 
         bool sprinting = false;
 
+        private void Start()
+        {
+            //hide inventory by default
+            inventory.SetActive(false);
+        }
+
         void Update()
         {
             WalkInput();
@@ -79,10 +85,12 @@ namespace Game.Player
             if(Input.GetKeyDown(KeyCode.Tab))
             {
                 inventory.SetActive(true);
+                Cursor.lockState = CursorLockMode.Confined;
             }
             if (Input.GetKeyUp(KeyCode.Tab))
             {
                 inventory.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
             }
         }
     }
