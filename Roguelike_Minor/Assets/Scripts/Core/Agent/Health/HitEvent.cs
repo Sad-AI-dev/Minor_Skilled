@@ -24,7 +24,7 @@ namespace Game.Core {
         public float damageReduction;
 
         //death event
-        public UnityEvent<Agent> onDeath;
+        public UnityEvent<HitEvent> onDeath;
 
         //ctor
         public HitEvent(Ability source = null)
@@ -56,7 +56,7 @@ namespace Game.Core {
         private void InitializeVars()
         {
             damageMultiplier = 1f;
-            onDeath = new UnityEvent<Agent>();
+            onDeath = new UnityEvent<HitEvent>();
         }
 
         //============== Get Total Damage ===============

@@ -33,6 +33,18 @@ namespace Game.Core {
             return -1;
         }
 
+        public Item GetItemOfType(ItemDataSO type)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].data.Equals(type))
+                {
+                    return items[i];
+                }
+            }
+            return null;
+        }
+
         //=========== Process Hit / Heal Events =============
         public void ProcessHitEvent(ref HitEvent hitEvent)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Game.Core;
 
-namespace Game.Systems {
+namespace Game.Core {
     public class Interactor : MonoBehaviour
     {
         [Header("Events")]
