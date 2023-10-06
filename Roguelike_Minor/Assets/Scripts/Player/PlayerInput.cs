@@ -11,6 +11,7 @@ namespace Game.Player
         [SerializeField] private PlayerController playerController;
         [SerializeField] private Agent agent;
         [SerializeField] private Interactor interactor;
+        [SerializeField] private GameObject inventory;
 
         bool sprinting = false;
 
@@ -21,6 +22,7 @@ namespace Game.Player
             JumpInput();
             AbilitiesInput();
             InteractInput();
+            InventoryInput();
         }
         
         private void WalkInput()
@@ -69,6 +71,18 @@ namespace Game.Player
             if (Input.GetKeyDown(KeyCode.E))
             {
                 interactor.TryInteract();
+            }
+        }
+
+        private void InventoryInput()
+        {
+            if(Input.GetKeyDown(KeyCode.Tab))
+            {
+                inventory.SetActive(true);
+            }
+            if (Input.GetKeyUp(KeyCode.Tab))
+            {
+                inventory.SetActive(false);
             }
         }
     }

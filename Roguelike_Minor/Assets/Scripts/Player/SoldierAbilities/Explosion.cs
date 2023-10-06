@@ -8,5 +8,6 @@ namespace Game.Player.Soldier
     {
         public float damage;
         public float time;
+        public float areaSize;
     }
 }
