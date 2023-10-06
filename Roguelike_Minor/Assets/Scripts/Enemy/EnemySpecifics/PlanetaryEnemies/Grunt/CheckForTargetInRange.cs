@@ -29,7 +29,6 @@ namespace Game.Enemy
                 if (col.Length > 0)
                 {
                     parent.parent.SetData("Target", col[0].transform);
-                    Debug.Log("Target Found");
                     state = NodeState.SUCCESS;
                     return state;
                 }

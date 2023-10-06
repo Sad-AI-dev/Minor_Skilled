@@ -13,7 +13,7 @@ namespace Game.Enemy
         {
             if (other.tag == "Player")
             {
-                Debug.Log("Hit player");
+
                 other.GetComponent<Agent>().health.Hurt(new HitEvent(source));
                 gameObject.SetActive(false);
             }

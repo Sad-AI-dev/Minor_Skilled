@@ -26,7 +26,7 @@ namespace Game.Enemy
 
             if(col.Length > 0) 
             {
-                Debug.Log("attacking Melee");
+
                 enemyAgent.abilities.primary.TryUse();
                 state = NodeState.RUNNING;
             }

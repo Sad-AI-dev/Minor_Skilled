@@ -59,7 +59,7 @@ namespace Game.Enemy
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, target.position - transform.position, out hit, Mathf.Infinity))
                 {
-                    Debug.Log(hit.transform.name);
+
                     if (hit.transform.tag == "Player")
                     {
                         agent.SetDestination(transform.position);
