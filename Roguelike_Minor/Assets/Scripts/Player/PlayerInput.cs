@@ -60,7 +60,7 @@ namespace Game.Player
             {
                 agent.abilities.primary.TryUse();
             }
-            if(Input.GetMouseButton(1))
+            if(Input.GetKeyDown(KeyCode.Q))
             {
                 agent.abilities.special.TryUse();
             }
