@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Game.Player;
+using Game.Systems;
 
-namespace Game.Systems {
+namespace Game.Player {
     public class PlayerSpawner : MonoBehaviour
     {
         private void Start()
