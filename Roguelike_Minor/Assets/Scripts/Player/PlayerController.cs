@@ -34,7 +34,7 @@ namespace Game.Player
         private float smoothVelocity;
         private float smoothTime = 0.1f;
 
-        
+        Vector3 warpPosition = Vector3.zero;
 
         private void Start()
         {
@@ -49,11 +49,11 @@ namespace Game.Player
             
             ApplyGravity();
 
-            cc.Move((moveDirection * speed) + new Vector3(0, yVelocity / 100, 0));
+            cc.Move((moveDirection * speed) + new Vector3(0, yVelocity, 0));
 
             CheckGrounded();
 
-            
+            //Debug.Log("gravity: " + activeGravity);
         }
 
         public void SetMoveDirection(Vector2 moveInput)
@@ -114,7 +114,8 @@ namespace Game.Player
             if(!grounded)
             {
                 activeGravity += gravity;
-                yVelocity -= activeGravity;
+                Debug.Log("activeGravity: " +  activeGravity);
+                yVelocity -= activeGravity / 100;
             }
         }
 
@@ -143,6 +144,20 @@ namespace Game.Player
         {
             speed = 0;
             yVelocity = 0;
+        }
+        
+        public void WarpToPosition(Vector3 newPosition)
+        {
+            warpPosition = newPosition;
+        }
+
+        private void LateUpdate()
+        {
+            if(warpPosition != Vector3.zero)
+            {
+                transform.position = warpPosition;
+                warpPosition = Vector3.zero;
+            }
         }
     }
 }
