@@ -91,6 +91,16 @@ namespace Game.Core {
             coolDownRoutine = isCoolingDown ? agent.StartCoroutine(CoolDownCo()) : null;
         }
 
+        //========= Force Reduce Cooldown ==========
+        public void ReduceCoolDown(float seconds)
+        {
+            if (isCoolingDown)
+            {
+                coolDownTimer -= seconds;
+                if (coolDownTimer < 0) { coolDownTimer = 0f; }
+            }
+        }
+
         //============= Reset Ability ===============
         public void Reset()
         {
