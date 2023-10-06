@@ -29,7 +29,7 @@ namespace Game.Core {
         public UnityEvent onUse;
 
         //vars
-        private float coolDownTimer;
+        [HideInInspector] public float coolDownTimer;
         private Coroutine coolDownRoutine;
 
         //runtime vars support
