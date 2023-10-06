@@ -1,4 +1,5 @@
 using Game.Core;
+using Game.Systems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,15 +10,9 @@ namespace Game.Player
     {
         [SerializeField] private PlayerController playerController;
         [SerializeField] private Agent agent;
+        [SerializeField] private Interactor interactor;
 
         bool sprinting = false;
-        float inaccuracy;
-        float accuracy;
-
-        private void Start()
-        {
-            
-        }
 
         void Update()
         {
@@ -25,6 +20,7 @@ namespace Game.Player
             SprintInput();
             JumpInput();
             AbilitiesInput();
+            InteractInput();
         }
         
         private void WalkInput()
@@ -61,13 +57,18 @@ namespace Game.Player
             if(Input.GetMouseButton(0))
             {
                 agent.abilities.primary.TryUse();
-                inaccuracy += Time.deltaTime;
- 
-                //agent.abilities.primary.vars["inaccuracy"] = inaccuracy;
             }
             if(Input.GetMouseButton(1))
             {
-                //agent.abilities.
+                agent.abilities.special.TryUse();
+            }
+        }
+
+        private void InteractInput()
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                interactor.TryInteract();
             }
         }
     }
