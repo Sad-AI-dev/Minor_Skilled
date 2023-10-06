@@ -14,11 +14,6 @@ namespace Game.Player
 
         bool sprinting = false;
 
-        private void Start()
-        {
-            
-        }
-
         void Update()
         {
             WalkInput();
