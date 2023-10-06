@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Game.Core.Data;
 
@@ -11,6 +10,12 @@ namespace Game.Core {
 
         private void Start()
         {
+            StartCoroutine(InitializeCo());
+        }
+
+        private IEnumerator InitializeCo()
+        {
+            yield return null; //wait 1 frame
             SlotInventory inventory = GetComponent<SlotInventory>();
 
             foreach (var kvp in slotsToInitialize)
