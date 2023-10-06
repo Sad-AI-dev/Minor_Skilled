@@ -52,8 +52,6 @@ namespace Game.Player
             cc.Move((moveDirection * speed) + new Vector3(0, yVelocity / 100, 0));
 
             CheckGrounded();
-
-            
         }
 
         public void SetMoveDirection(Vector2 moveInput)
