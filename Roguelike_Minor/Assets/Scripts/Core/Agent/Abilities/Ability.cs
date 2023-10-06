@@ -12,11 +12,13 @@ namespace Game.Core {
         [HideInInspector] public Agent agent;
 
         public AbilitySO abilityData;
+        
 
         [Header("Uses")]
         public int uses;
         public int maxUses = 1;
-
+       
+        
         [Header("Timings")]
         public float coolDown;
         public CoolDownMode coolDownMode;
@@ -27,6 +29,7 @@ namespace Game.Core {
 
         [Header("Events")]
         public UnityEvent onUse;
+        public AK.Wwise.Event SFX;
 
         //vars
         [HideInInspector] public float coolDownTimer;
@@ -53,6 +56,7 @@ namespace Game.Core {
         {
             uses--;
             onUse?.Invoke();
+            SFX.Post(agent.gameObject);
             abilityData.Use(this);
         }
 

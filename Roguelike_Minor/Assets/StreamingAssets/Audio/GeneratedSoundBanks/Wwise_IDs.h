@@ -13,7 +13,9 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID PLAY_ROGUELIKE_CONCEPT = 1090532240U;
+        static const AkUniqueID PLAY_PICKUP_ITEM = 3128913152U;
+        static const AkUniqueID PLAY_PRIMARY_FIRE = 3563057235U;
+        static const AkUniqueID PLAY_SPECIAL_FIRE = 1149417670U;
     } // namespace EVENTS
 
     namespace GAME_PARAMETERS
@@ -33,13 +35,19 @@ namespace AK
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
-        static const AkUniqueID MAIN_SOUNDBANK = 2228651116U;
+        static const AkUniqueID MAIN = 3161908922U;
     } // namespace BANKS
 
     namespace BUSSES
     {
+        static const AkUniqueID AUXILIARY_BUSSES = 3174030640U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
     } // namespace BUSSES
+
+    namespace AUX_BUSSES
+    {
+        static const AkUniqueID DEFAULT_VERB = 3018232304U;
+    } // namespace AUX_BUSSES
 
     namespace AUDIO_DEVICES
     {
