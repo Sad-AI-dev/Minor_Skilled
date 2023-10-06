@@ -432,6 +432,7 @@ MonoBehaviour:
     onUse:
       m_PersistentCalls:
         m_Calls: []
+    coolDownTimer: 0
   secondary:
     agent: {fileID: 0}
     abilityData: {fileID: 0}
@@ -444,18 +445,20 @@ MonoBehaviour:
     onUse:
       m_PersistentCalls:
         m_Calls: []
+    coolDownTimer: 0
   special:
     agent: {fileID: 0}
-    abilityData: {fileID: 0}
-    uses: 0
+    abilityData: {fileID: 11400000, guid: 246ee83cf6db190478d1f1ab63556b27, type: 2}
+    uses: 1
     maxUses: 1
-    coolDown: 0
+    coolDown: 1
     coolDownMode: 0
     isCoolingDown: 0
-    originPoint: {fileID: 0}
+    originPoint: {fileID: 2437245198168656956}
     onUse:
       m_PersistentCalls:
         m_Calls: []
+    coolDownTimer: 0
   utility:
     agent: {fileID: 0}
     abilityData: {fileID: 0}
@@ -468,6 +471,7 @@ MonoBehaviour:
     onUse:
       m_PersistentCalls:
         m_Calls: []
+    coolDownTimer: 0
 --- !u!114 &8856083573202198069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,7 +939,6 @@ GameObject:
   - component: {fileID: 313612077624018144}
   - component: {fileID: 3528142225145012334}
   - component: {fileID: 8914909778985909990}
-  - component: {fileID: 8555838593646198583}
   m_Layer: 3
   m_Name: Capsule
   m_TagString: Player
@@ -1008,29 +1011,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8555838593646198583
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6701679249256257470}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6864455008240666830
 GameObject:
   m_ObjectHideFlags: 0

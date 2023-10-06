@@ -114,7 +114,7 @@ namespace Game.Player
             if(!grounded)
             {
                 activeGravity += gravity;
-                Debug.Log("activeGravity: " +  activeGravity);
+                //Debug.Log("activeGravity: " +  activeGravity);
                 yVelocity -= activeGravity / 100;
             }
         }

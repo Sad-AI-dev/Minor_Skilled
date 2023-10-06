@@ -6,7 +6,7 @@ using System.Numerics;
 using UnityEditor;
 using UnityEngine;
 
-namespace Game.Player
+namespace Game.Player.Soldier
 {
     [CreateAssetMenu(fileName = "SoldierPrimary", menuName = "ScriptableObjects/Agent/Ability/Soldier/SoldierPrimary")]
     public class SoldierPrimarySO : AbilitySO
@@ -45,7 +45,7 @@ namespace Game.Player
             inaccuracy += source.coolDown * spreadBuildupSpeed;
             inaccuracy = Mathf.Clamp(inaccuracy, 0, 1);
             source.vars["inaccuracy"] = inaccuracy;
-            Debug.Log("Increased: " + inaccuracy);
+            //Debug.Log("Increased: " + inaccuracy);
 
             //calculate spread amount
             float spread = spreadBuildup.Evaluate(inaccuracy) * spreadMultiplier;
@@ -65,6 +65,7 @@ namespace Game.Player
             //spawn bullet and set its velocity
             GameObject projectile = Instantiate(bullet, source.originPoint.position, UnityEngine.Quaternion.identity);
             projectile.GetComponent<PlayerBullet>().moveDir = bulletDir * bulletSpeed;
+            projectile.GetComponent<PlayerBullet>().ability = source;
 
             bool buildingDownSpread = Convert.ToBoolean(source.vars["buildingDownSpread"]);
 
@@ -80,7 +81,7 @@ namespace Game.Player
             {
                 shootRoutine = source.agent.StartCoroutine(IsShootingCo(source));
                 source.vars["stopShootingCo"] = shootRoutine;
-                Debug.Log("Started counting down");
+                //Debug.Log("Started counting down");
             }
         }
 
@@ -96,7 +97,7 @@ namespace Game.Player
                 timeElapsed += Time.deltaTime;
             }
             //stopped shooting
-            Debug.Log("Stopped shooting");
+            //Debug.Log("Stopped shooting");
             bool isShooting = Convert.ToBoolean(source.vars["isShooting"]);
             isShooting = false;
             source.vars["isShooting"] = isShooting;
