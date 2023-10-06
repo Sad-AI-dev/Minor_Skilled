@@ -68,7 +68,7 @@ namespace Game.Core {
             //reward money
             RewardMoney(ref hitEvent);
             //invoke death events
-            hitEvent.onDeath?.Invoke(agent);
+            hitEvent.onDeath?.Invoke(hitEvent);
             onDeath?.Invoke(hitEvent);
         }
 

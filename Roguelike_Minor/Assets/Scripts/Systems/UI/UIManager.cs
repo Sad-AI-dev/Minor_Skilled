@@ -9,5 +9,7 @@ namespace Game.Systems
     {
         [Header("Refferences")]
         public Agent agent;
+
+        public bool ObjectiveComplete = false;
     }
 }

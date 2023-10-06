@@ -9,6 +9,8 @@ namespace Game.Core {
         [HideInInspector] public Agent agent;
         public ItemDataSO data;
         public int stacks;
+        //vars
+        public Dictionary<string, object> vars;
 
         //ctor
         public Item(ItemDataSO data, Inventory holder)

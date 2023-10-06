@@ -11,8 +11,15 @@ namespace Game.Player
         [SerializeField] private PlayerController playerController;
         [SerializeField] private Agent agent;
         [SerializeField] private Interactor interactor;
+        [SerializeField] private GameObject inventory;
 
         bool sprinting = false;
+
+        private void Start()
+        {
+            //hide inventory by default
+            inventory.SetActive(false);
+        }
 
         void Update()
         {
@@ -21,6 +28,7 @@ namespace Game.Player
             JumpInput();
             AbilitiesInput();
             InteractInput();
+            InventoryInput();
         }
         
         private void WalkInput()
@@ -58,7 +66,7 @@ namespace Game.Player
             {
                 agent.abilities.primary.TryUse();
             }
-            if(Input.GetMouseButton(1))
+            if(Input.GetKeyDown(KeyCode.Q))
             {
                 agent.abilities.special.TryUse();
             }
@@ -69,6 +77,20 @@ namespace Game.Player
             if (Input.GetKeyDown(KeyCode.E))
             {
                 interactor.TryInteract();
+            }
+        }
+
+        private void InventoryInput()
+        {
+            if(Input.GetKeyDown(KeyCode.Tab))
+            {
+                inventory.SetActive(true);
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+            if (Input.GetKeyUp(KeyCode.Tab))
+            {
+                inventory.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
             }
         }
     }
