@@ -7,22 +7,13 @@ namespace Game {
     [CreateAssetMenu(fileName = "SpecialReduceOnKill", menuName = "ScriptableObjects/Items/T3/SpecialReduceOnKill")]
     public class SpecialReduceOnKillSO : ItemDataSO
     {
-        private const string reduction = "reduction";
-        
         public float cooldownReduction = 1f;
         public float stackBonusReduction = 1f;
 
         //========= Manage Stacks ===========
-        public override void AddStack(Item item) 
-        {
-            if (!item.vars.ContainsKey(reduction)) { InitializeVars(item); }
-            SetReduction(cooldownReduction + (stackBonusReduction * (item.stacks - 1)), item);
-        }
+        public override void AddStack(Item item) { }
 
-        public override void RemoveStack(Item item) 
-        {
-            SetReduction(cooldownReduction + (stackBonusReduction * (item.stacks - 1)), item);
-        }
+        public override void RemoveStack(Item item) { }
 
         //========= Process Hit Events ===========
         public override void ProcessDealDamage(ref HitEvent hitEvent) 
@@ -44,18 +35,9 @@ namespace Game {
         }
 
         //====== Util =======
-        private void InitializeVars(Item item)
-        {
-            item.vars.Add(reduction, 0.0f);
-        }
-
         private float GetReduction(Item item)
         {
-            return (float)item.vars[reduction];
-        }
-        private void SetReduction(float toSet, Item item)
-        {
-            item.vars[reduction] = toSet;
+            return cooldownReduction + (stackBonusReduction * (item.stacks - 1));
         }
     }
 }
