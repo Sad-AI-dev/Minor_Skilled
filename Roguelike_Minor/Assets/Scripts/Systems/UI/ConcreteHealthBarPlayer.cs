@@ -26,19 +26,19 @@ namespace Game.Systems
             healthBarStates[1].SetActive(false);
             healthBarStates[0].SetActive(false);
 
-            if (percentage > 80)
+            if (percentage > 0.8f)
             {
                 healthBarStates[5].SetActive(true);
             }
-            else if (percentage > 60)
+            else if (percentage > 0.6f)
             {
                 healthBarStates[4].SetActive(true);
             }
-            else if (percentage > 40)
+            else if (percentage > 0.4f)
             {
                 healthBarStates[3].SetActive(true);
             }
-            else if (percentage > 20)
+            else if (percentage > 0.2f)
             {
                 healthBarStates[2].SetActive(true);
             }

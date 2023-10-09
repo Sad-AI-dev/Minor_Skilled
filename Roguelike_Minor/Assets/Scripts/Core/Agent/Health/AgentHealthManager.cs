@@ -30,6 +30,8 @@ namespace Game.Core {
         //============ IHittable ===============
         public void Hurt(HitEvent hitEvent)
         {
+            if (health <= 0f) { return; } //ignore if dead
+
             hitEvent.target = this;
             ProcessHitEvent(ref hitEvent);
             //take damage

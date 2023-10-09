@@ -20,13 +20,14 @@ namespace Game.Enemy
                 gameObject.SetActive(false);
                 currentTime = 0;
             }
-        }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if(other.tag == "Player")
+            RaycastHit hit;
+            if(Physics.Raycast(transform.position, transform.forward, out hit, bulletSpeed * Time.deltaTime))
             {
-                other.GetComponent<Agent>().health.Hurt(new HitEvent(source));
+                if (hit.transform.CompareTag("Player"))
+                {
+                    hit.transform.GetComponent<Agent>().health.Hurt(new HitEvent(source));
+                }
                 gameObject.SetActive(false);
             }
         }

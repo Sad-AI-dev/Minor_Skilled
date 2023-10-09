@@ -15,6 +15,9 @@ namespace Game {
         [SerializeField] private float dechargeDelay;
         [SerializeField] private float dechargeSpeed;
 
+        [Header("Visuals")]
+        [SerializeField] private GameObject rangeIndicator;
+
         [Header("UI Settings")]
         [SerializeField] private TMP_Text progressLabel;
         //[SerializeField] private Slider progressSlider;
@@ -27,6 +30,12 @@ namespace Game {
         private Coroutine dechargeDelayRoutine;
         private bool canDecharge;
 
+        private void Start()
+        {
+            rangeIndicator.SetActive(false);
+            enabled = false;
+        }
+
         private void Update()
         {
             if (isCharging) { Charge(); }
@@ -34,7 +43,7 @@ namespace Game {
             progress = Mathf.Clamp(progress, 0, 100f);
             UpdateUI();
             //done check
-            if (progress >= 100) { GameStateManager.instance.HandleCompleteStageObject(); }
+            if (progress >= 100) { StopCharge(); }
         }
         
         //=============== Charge ===============
@@ -62,13 +71,22 @@ namespace Game {
             //progressSlider.value = progress / 100.0f;
         }
 
+        //============== Stop Charge ==========
+        private void StopCharge()
+        {
+            GameStateManager.instance.HandleCompleteStageObject();
+            Destroy(gameObject);
+        }
+
         //============== Manage Triggers ==================
         private void OnTriggerEnter(Collider other)
         {
+            if (!other.CompareTag("Player")) { return; } //only activate on player
             if (!enabled) 
             {
                 enabled = true;
                 progress = 0;
+                rangeIndicator.SetActive(true);
             }
             isCharging = true;
             canDecharge = false;
@@ -77,6 +95,7 @@ namespace Game {
 
         private void OnTriggerExit(Collider other)
         {
+            if (!other.CompareTag("Player")) { return; } //only activate on player
             isCharging = false;
             dechargeDelayRoutine = StartCoroutine(DechargeDelayCo());
         }

@@ -46,7 +46,6 @@ namespace Game.Systems {
         {
             while (!asyncOperation.isDone)
             {
-                Debug.Log(asyncOperation.progress);
                 yield return null;
             }
         }

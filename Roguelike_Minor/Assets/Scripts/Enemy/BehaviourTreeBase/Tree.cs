@@ -8,7 +8,7 @@ namespace Game.Enemy.Core
     {
         private BT_Node root = null;
 
-        protected void Start()
+        protected virtual void Start()
         {
             root = SetupTree();
         }
