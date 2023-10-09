@@ -15,6 +15,9 @@ namespace Game {
         [SerializeField] private float dechargeDelay;
         [SerializeField] private float dechargeSpeed;
 
+        [Header("Visuals")]
+        [SerializeField] private GameObject rangeIndicator;
+
         [Header("UI Settings")]
         [SerializeField] private TMP_Text progressLabel;
         //[SerializeField] private Slider progressSlider;
@@ -22,11 +25,16 @@ namespace Game {
         //vars
         private float progress;
         private bool isCharging;
-        private bool done = false;
 
         //decharge vars
         private Coroutine dechargeDelayRoutine;
         private bool canDecharge;
+
+        private void Start()
+        {
+            rangeIndicator.SetActive(false);
+            enabled = false;
+        }
 
         private void Update()
         {
@@ -73,10 +81,12 @@ namespace Game {
         //============== Manage Triggers ==================
         private void OnTriggerEnter(Collider other)
         {
+            if (!other.CompareTag("Player")) { return; } //only activate on player
             if (!enabled) 
             {
                 enabled = true;
                 progress = 0;
+                rangeIndicator.SetActive(true);
             }
             isCharging = true;
             canDecharge = false;
@@ -85,6 +95,7 @@ namespace Game {
 
         private void OnTriggerExit(Collider other)
         {
+            if (!other.CompareTag("Player")) { return; } //only activate on player
             isCharging = false;
             dechargeDelayRoutine = StartCoroutine(DechargeDelayCo());
         }

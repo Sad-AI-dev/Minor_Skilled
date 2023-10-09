@@ -8,12 +8,13 @@ namespace Game.Player {
     {
         private void Start()
         {
-            //set player to random child position
-            GameStateManager.instance.player.GetComponent<PlayerController>().WarpToPosition(
-                transform.GetChild(Random.Range(0, transform.childCount)).position
-            );
-            //reset player velocity
-            GameStateManager.instance.player.GetComponent<PlayerController>().ResetVelocity();
+            //get player
+            PlayerController player = GameStateManager.instance.player.GetComponent<PlayerController>();
+            //choose destination
+            Vector3 destination = transform.GetChild(Random.Range(0, transform.childCount)).position;
+            //warp
+            player.transform.position = destination;
+            player.ResetVelocity();
         }
     }
 }
