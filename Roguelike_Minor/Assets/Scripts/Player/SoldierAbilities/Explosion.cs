@@ -61,7 +61,7 @@ namespace Game.Player.Soldier
             else Destroy(gameObject);
         }
 
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if(other.CompareTag("Enemy"))
             {
