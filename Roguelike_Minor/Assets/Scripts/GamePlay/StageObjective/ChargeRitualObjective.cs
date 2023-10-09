@@ -22,6 +22,7 @@ namespace Game {
         //vars
         private float progress;
         private bool isCharging;
+        private bool done = false;
 
         //decharge vars
         private Coroutine dechargeDelayRoutine;
@@ -34,7 +35,7 @@ namespace Game {
             progress = Mathf.Clamp(progress, 0, 100f);
             UpdateUI();
             //done check
-            if (progress >= 100) { GameStateManager.instance.HandleCompleteStageObject(); }
+            if (progress >= 100) { StopCharge(); }
         }
         
         //=============== Charge ===============
@@ -60,6 +61,13 @@ namespace Game {
         {
             progressLabel.text = Mathf.FloorToInt(progress) + "%";
             //progressSlider.value = progress / 100.0f;
+        }
+
+        //============== Stop Charge ==========
+        private void StopCharge()
+        {
+            GameStateManager.instance.HandleCompleteStageObject();
+            Destroy(gameObject);
         }
 
         //============== Manage Triggers ==================
