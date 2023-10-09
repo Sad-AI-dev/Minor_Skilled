@@ -21,6 +21,11 @@ namespace Game.Enemy
         public LayerMask layerMask;
         public LayerMask enemyLayerMask;
         public Agent enemyAgent;
+        protected override void Start()
+        {
+            base.Start();
+            agent.enabled = true;
+        }
 
         protected override BT_Node SetupTree()
         {
