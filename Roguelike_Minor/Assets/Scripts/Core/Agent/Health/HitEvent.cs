@@ -51,11 +51,12 @@ namespace Game.Core {
 
         private void SetupBaseDamage(Ability source)
         {
-            baseDamage = source.agent.stats.baseDamage + source.abilityData.damageMultiplier;
+            baseDamage = source.agent.stats.baseDamage * source.abilityData.damageMultiplier;
         }
         private void InitializeVars()
         {
             damageMultiplier = 1f;
+            itemSources = new List<Item>();
             onDeath = new UnityEvent<HitEvent>();
         }
 

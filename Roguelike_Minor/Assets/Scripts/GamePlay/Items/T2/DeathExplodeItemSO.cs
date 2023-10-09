@@ -4,11 +4,13 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
+    [CreateAssetMenu(fileName = "Death Explode Item", menuName = "ScriptableObjects/Items/T2/DeathExplode")]
     public class DeathExplodeItemSO : ItemDataSO
     {
         [Header("Damage Settings")]
-        public float explosionDamageMult = 0.9f;
-        public float minBaseDamageMult = 2f;
+        public float explosionDamageMult = 3f;
+        //used when target gets hit by another death explode item effect 
+        public float cascadeMult = 0.9f;
 
         [Header("Range Settings")]
         public float explosionRadius = 5f;
@@ -41,10 +43,14 @@ namespace Game {
 
         private float CalcDamage(HitEvent hitEvent)
         {
-            return Mathf.Max(
-                hitEvent.GetTotalDamage() * explosionDamageMult,
-                hitEvent.source.stats.baseDamage * minBaseDamageMult
-            );
+            foreach (Item item in hitEvent.itemSources)
+            {
+                if (item.data == this)
+                {
+                    return hitEvent.baseDamage * cascadeMult;
+                }
+            }
+            return hitEvent.GetTotalDamage() * explosionDamageMult;
         }
 
         //========= Spawn Explosion ===========
@@ -54,11 +60,9 @@ namespace Game {
             //obj.transform.position = hitEvent.target.transform.position;
 
             //sphere cast to deal damage
-            Collider[] results = new Collider[0];
-            Physics.OverlapSphereNonAlloc(
+            Collider[] results = Physics.OverlapSphere(
                 hitEvent.target.transform.position,
-                GetExplodeRadius(hitEvent.source.inventory.GetItemOfType(this)), 
-                results
+                GetExplodeRadius(hitEvent.source.inventory.GetItemOfType(this))
             );
             if (results.Length > 0)
             {
