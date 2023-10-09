@@ -25,7 +25,7 @@ namespace Game.Systems {
         public float spawnDelay = 1f;
 
         //vars
-        [HideInInspector] public ObjectSpawner spawner;
+        [HideInInspector] public EnemyPlacer placer;
         private CostBasedActivator activator;
         private bool paused = false;
 
@@ -69,9 +69,9 @@ namespace Game.Systems {
         //========= Spawn Enemy Wrapper ===========
         public void SpawnEnemy(GameObject prefab)
         {
-            if (spawner)
+            if (placer)
             {
-                spawner.SpawnObject(prefab);
+                placer.SpawnEnemy(prefab);
             }
         }
 
