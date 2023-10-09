@@ -9,6 +9,7 @@ namespace Game.Player
     {
         [HideInInspector] public Vector3 moveDir;
         public Ability ability;
+        public Agent source;
 
         protected virtual void FixedUpdate()
         {

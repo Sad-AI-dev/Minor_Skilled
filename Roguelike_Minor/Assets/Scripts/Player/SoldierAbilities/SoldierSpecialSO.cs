@@ -28,8 +28,10 @@ namespace Game.Player.Soldier
 
             GameObject projectile = Instantiate(bullet, source.originPoint.position, Quaternion.identity);
             projectile.transform.LookAt(target);
-            projectile.GetComponent<RailgunBullet>().moveDir = bulletDir * bulletSpeed;
-            projectile.GetComponent<RailgunBullet>().ability = source;
+            RailgunBullet rgBullet = projectile.GetComponent<RailgunBullet>();
+            rgBullet.moveDir = bulletDir * bulletSpeed;
+            rgBullet.ability = source;
+            rgBullet.source = source.agent;
         }
     }
 }

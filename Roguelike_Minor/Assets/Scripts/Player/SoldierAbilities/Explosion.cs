@@ -1,3 +1,4 @@
+using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,15 +10,17 @@ namespace Game.Player.Soldier
     {
         [SerializeField] private GameObject sphere;
 
+        public Agent source;
+
         public float damage;
         public float areaRadius;
 
         public int ticks;
         public float tickDelay;
 
-        private bool canTick;
+        private bool canTick = true;
 
-        private List<GameObject> entitiesInRange;
+        private List<Agent> agentsInRange;
 
         private void Start()
         {
@@ -36,24 +39,35 @@ namespace Game.Player.Soldier
         {
             canTick = false;
 
+            HitEvent hitEvent = new HitEvent(source);
+            hitEvent.baseDamage = damage;
+
+            foreach(Agent agent in agentsInRange)
+            {
+                agent.health.Hurt(hitEvent);
+            }
+
             StartCoroutine(WaitForNextTickCo());
         }
 
         IEnumerator WaitForNextTickCo()
         {
             yield return new WaitForSeconds(tickDelay);
-            canTick = true;
+            ticks--;
+            if (ticks > 0) canTick = true;
+            else Destroy(gameObject);
         }
 
         private void OnTriggerStay(Collider other)
         {
             if(other.CompareTag("Enemy"))
             {
-                entitiesInRange.Add(other.gameObject);
+                if(other.TryGetComponent(out Agent enemy))
+                agentsInRange.Add(enemy);
             }
-            if(other.CompareTag("Player"))
+            if(other.TryGetComponent(out Agent player))
             {
-                entitiesInRange.Add(other.gameObject);
+                agentsInRange.Add(player);
             }
         }
     }
