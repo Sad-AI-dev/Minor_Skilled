@@ -18,7 +18,7 @@ namespace Game.Player.Soldier
         public int ticks;
         public float tickDelay;
 
-        private bool canTick = true;
+        private bool canTick = false;
 
         private List<Agent> agentsInRange;
 
@@ -27,9 +27,9 @@ namespace Game.Player.Soldier
             sphere.transform.localScale *= areaRadius;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
-            if(canTick)
+            if (canTick)
             {
                 executeTick();
             }
@@ -42,9 +42,12 @@ namespace Game.Player.Soldier
             HitEvent hitEvent = new HitEvent(source);
             hitEvent.baseDamage = damage;
 
-            foreach(Agent agent in agentsInRange)
+            if(agentsInRange.Count > 0 )
             {
-                agent.health.Hurt(hitEvent);
+                foreach (Agent agent in agentsInRange)
+                {
+                    agent.health.Hurt(hitEvent);
+                }
             }
 
             StartCoroutine(WaitForNextTickCo());
@@ -54,7 +57,7 @@ namespace Game.Player.Soldier
         {
             yield return new WaitForSeconds(tickDelay);
             ticks--;
-            if (ticks > 0) canTick = true;
+            if (ticks >= 0) canTick = true;
             else Destroy(gameObject);
         }
 
