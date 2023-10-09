@@ -426,13 +426,17 @@ MonoBehaviour:
     abilityData: {fileID: 11400000, guid: 7daa4d3027b2c814da98767928008ee6, type: 2}
     uses: 1
     maxUses: 1
-    coolDown: 0.1
+    coolDown: 0.15
     coolDownMode: 1
     isCoolingDown: 0
     originPoint: {fileID: 2437245198168656956}
     onUse:
       m_PersistentCalls:
         m_Calls: []
+    SFX:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
     coolDownTimer: 0
   secondary:
     agent: {fileID: 0}
@@ -446,19 +450,27 @@ MonoBehaviour:
     onUse:
       m_PersistentCalls:
         m_Calls: []
+    SFX:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
     coolDownTimer: 0
   special:
     agent: {fileID: 0}
     abilityData: {fileID: 11400000, guid: 246ee83cf6db190478d1f1ab63556b27, type: 2}
     uses: 1
     maxUses: 1
-    coolDown: 1
+    coolDown: 8
     coolDownMode: 0
     isCoolingDown: 0
     originPoint: {fileID: 2437245198168656956}
     onUse:
       m_PersistentCalls:
         m_Calls: []
+    SFX:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
     coolDownTimer: 0
   utility:
     agent: {fileID: 0}
@@ -472,6 +484,10 @@ MonoBehaviour:
     onUse:
       m_PersistentCalls:
         m_Calls: []
+    SFX:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
     coolDownTimer: 0
 --- !u!114 &8856083573202198069
 MonoBehaviour:
