@@ -54,7 +54,7 @@ namespace Game.Player
 
             CheckGrounded();
 
-            Debug.Log("gravity: " + activeGravity);
+            //Debug.Log("gravity: " + activeGravity);
         }
 
         public void SetMoveDirection(Vector2 moveInput)
@@ -115,7 +115,7 @@ namespace Game.Player
             if(!grounded)
             {
                 activeGravity += gravity / 100;
-                Debug.Log("activeGravity: " +  gravity);
+                //Debug.Log("activeGravity: " +  gravity);
                 yVelocity -= activeGravity;
             }
         }
@@ -135,7 +135,7 @@ namespace Game.Player
             activeGravity = 0;
             grounded = true;
 
-            Debug.Log("Ground touched");
+            //Debug.Log("Ground touched");
         }
 
         private void OnLeaveGround()
