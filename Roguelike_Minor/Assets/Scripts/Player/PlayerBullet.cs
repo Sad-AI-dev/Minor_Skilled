@@ -11,25 +11,35 @@ namespace Game.Player
         public Ability ability;
         public Agent source;
 
+        public GameObject marker;
+
         protected virtual void FixedUpdate()
         {
             transform.position += moveDir;
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void Update()
         {
-            if(collision.gameObject.CompareTag("Enemy"))
+            CheckHitObject();
+        }
+
+        private void CheckHitObject()
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(transform.position, transform.forward, out hit, moveDir.magnitude))
             {
-                if(collision.gameObject.TryGetComponent(out Agent enemy))
+                if(hit.transform.CompareTag("Enemy"))
                 {
-                    enemy.health.Hurt(new HitEvent(ability));
+                    if(hit.transform.TryGetComponent(out Agent enemy))
+                    {
+                        enemy.health.Hurt(new HitEvent(ability));
+                    }
                 }
+                CustomOnCollide();
+
+                if (!CompareTag("Player"))
+                    Destroy(gameObject);
             }
-
-            CustomOnCollide();
-
-            if(!CompareTag("Player"))
-                Destroy(gameObject);
         }
 
         protected virtual void CustomOnCollide()
