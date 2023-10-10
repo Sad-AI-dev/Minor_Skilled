@@ -13,8 +13,11 @@ namespace Game.Player
         [SerializeField] private Agent agent;
         [SerializeField] private Interactor interactor;
         [SerializeField] private GameObject inventory;
+        [SerializeField] private AK.Wwise.Event Footsteps;
+        
 
         bool sprinting = false;
+        private bool canPlayFootstep = true;
 
         private void Start()
         {
@@ -37,6 +40,11 @@ namespace Game.Player
         {
             Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             playerController.SetMoveDirection(moveInput);
+            if (canPlayFootstep && moveInput.magnitude >= 0.1f)
+            {
+                StartCoroutine(FootstepCo());
+            }
+            
         }
 
         private void SprintInput()
@@ -95,5 +103,14 @@ namespace Game.Player
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
+
+        private IEnumerator FootstepCo()
+        {
+            canPlayFootstep = false;
+            yield return new WaitForSeconds(0.5f);
+            Footsteps.Post(agent.gameObject);
+            canPlayFootstep = true;
+        }
+        
     }
 }
