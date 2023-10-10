@@ -49,11 +49,12 @@ namespace Game.Player
             
             ApplyGravity();
 
+            Physics.SyncTransforms();
             cc.Move((moveDirection * speed) + new Vector3(0, yVelocity, 0));
 
             CheckGrounded();
 
-            //Debug.Log("gravity: " + activeGravity);
+            Debug.Log("gravity: " + activeGravity);
         }
 
         public void SetMoveDirection(Vector2 moveInput)
@@ -113,9 +114,9 @@ namespace Game.Player
         {
             if(!grounded)
             {
-                activeGravity += gravity;
-                //Debug.Log("activeGravity: " +  activeGravity);
-                yVelocity -= activeGravity / 100;
+                activeGravity += gravity / 100;
+                Debug.Log("activeGravity: " +  gravity);
+                yVelocity -= activeGravity;
             }
         }
 
@@ -131,8 +132,10 @@ namespace Game.Player
         private void OnTouchGround()
         {
             yVelocity = -0.1f;
-            gravity = 0;
+            activeGravity = 0;
             grounded = true;
+
+            Debug.Log("Ground touched");
         }
 
         private void OnLeaveGround()

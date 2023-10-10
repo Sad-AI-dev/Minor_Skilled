@@ -6,9 +6,10 @@ using UnityEngine;
 
 namespace Game.Player
 {
+    [RequireComponent(typeof(PlayerController))]
     public class PlayerInput : MonoBehaviour
     {
-        [SerializeField] private PlayerController playerController;
+        private PlayerController playerController;
         [SerializeField] private Agent agent;
         [SerializeField] private Interactor interactor;
         [SerializeField] private GameObject inventory;
@@ -18,6 +19,7 @@ namespace Game.Player
         private void Start()
         {
             //hide inventory by default
+            playerController = GetComponent<PlayerController>();
             inventory.SetActive(false);
         }
 
