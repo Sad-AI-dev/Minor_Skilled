@@ -1367,6 +1367,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1799390473}
+  uiManager: {fileID: 0}
+  onStageComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  advanceObjectSpawner: {fileID: 0}
 --- !u!1 &1340704399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,6 +2695,10 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1340704399}
+    - target: {fileID: 7374867739153013466, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: gravity
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 7641492428396719861, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
