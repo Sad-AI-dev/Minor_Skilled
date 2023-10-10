@@ -28,7 +28,8 @@ namespace Game.Player
         private float activeGravity;
         private bool grounded;
 
-        private Camera cam;
+        [Header("External Components")]
+        [SerializeField] private Camera cam;
         private CharacterController cc;
 
         private float smoothVelocity;
@@ -39,7 +40,7 @@ namespace Game.Player
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            cam = Camera.main;
+            //cam = Camera.main;
             cc = GetComponent<CharacterController>();
         }
 
