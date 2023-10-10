@@ -13,6 +13,9 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID PLAY_AMBIENCE = 278617630U;
+        static const AkUniqueID PLAY_ENEMY_HIT = 2045007312U;
+        static const AkUniqueID PLAY_FOOTSTEPS = 3854155799U;
         static const AkUniqueID PLAY_PICKUP_ITEM = 3128913152U;
         static const AkUniqueID PLAY_PRIMARY_FIRE = 3563057235U;
         static const AkUniqueID PLAY_SPECIAL_FIRE = 1149417670U;
@@ -40,8 +43,11 @@ namespace AK
 
     namespace BUSSES
     {
+        static const AkUniqueID AMBIENCE = 85412153U;
         static const AkUniqueID AUXILIARY_BUSSES = 3174030640U;
+        static const AkUniqueID ENEMY = 2299321487U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
+        static const AkUniqueID PLAYER = 1069431850U;
     } // namespace BUSSES
 
     namespace AUX_BUSSES

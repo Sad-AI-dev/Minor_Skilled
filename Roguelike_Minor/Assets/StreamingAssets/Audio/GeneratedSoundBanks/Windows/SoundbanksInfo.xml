@@ -9,7 +9,7 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{05A6CC7D-0A99-11C3-765C-80098978D3A4}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{2296208C-3AA2-681F-9A8D-BFEF044B37BF}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
@@ -22,6 +22,9 @@
 				</AudioDevices>
 			</Plugins>
 			<Busses>
+				<Bus Id="85412153" Name="Ambience"/>
+				<Bus Id="1069431850" Name="Player"/>
+				<Bus Id="2299321487" Name="Enemy"/>
 				<Bus Id="3174030640" Name="Auxiliary busses"/>
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
@@ -161,28 +164,105 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{BE0B9A3D-EB48-60A7-1197-F79F6F0B1AA1}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{61DEACCD-96BC-242E-E202-E50459D605E7}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
+				<File Id="110500809" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 5.wav</ShortName>
+					<CachePath>SFX/169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 5_10C4C929.wem</CachePath>
+				</File>
+				<File Id="114167700" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 4.wav</ShortName>
+					<CachePath>SFX/169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 4_10C4C929.wem</CachePath>
+				</File>
+				<File Id="121030824" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations 2.wav</ShortName>
+					<CachePath>SFX/Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations 2_10C4C929.wem</CachePath>
+				</File>
+				<File Id="134680864" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Ambience, Underground, Cave, Magic, Deep, Wind, Howling 01 SND46571 1.wav</ShortName>
+					<CachePath>SFX/Ambience, Underground, Cave, Magic, Deep, Wind, Howling 01 SND46571 1_D79FB2B7.wem</CachePath>
+				</File>
+				<File Id="152143633" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>New-Zealand-Auckland-City-02.wav</ShortName>
+					<CachePath>SFX/New-Zealand-Auckland-City-02_D79FB2B7.wem</CachePath>
+				</File>
 				<File Id="239838964" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Special_fire_tail.wav</ShortName>
 					<CachePath>SFX/Special_fire_tail_10C4C929.wem</CachePath>
+				</File>
+				<File Id="271074604" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 2.wav</ShortName>
+					<CachePath>SFX/169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 2_10C4C929.wem</CachePath>
+				</File>
+				<File Id="366976699" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations 3.wav</ShortName>
+					<CachePath>SFX/Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations 3_10C4C929.wem</CachePath>
+				</File>
+				<File Id="369054095" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>large gear 03 metal slow 8040.wav</ShortName>
+					<CachePath>SFX/large gear 03 metal slow 8040_364BE23B.wem</CachePath>
 				</File>
 				<File Id="371601698" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Pickup_item_unison.wav</ShortName>
 					<CachePath>SFX/Pickup_item_unison_10C4C929.wem</CachePath>
 				</File>
+				<File Id="519582251" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations.wav</ShortName>
+					<CachePath>SFX/Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations_10C4C929.wem</CachePath>
+				</File>
+				<File Id="742923068" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 1.wav</ShortName>
+					<CachePath>SFX/169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 1_10C4C929.wem</CachePath>
+				</File>
 				<File Id="781659621" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Primary_Fire.wav</ShortName>
 					<CachePath>SFX/Primary_Fire_10C4C929.wem</CachePath>
+				</File>
+				<File Id="783614672" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations 7.wav</ShortName>
+					<CachePath>SFX/Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations 7_10C4C929.wem</CachePath>
+				</File>
+				<File Id="827923736" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close.wav</ShortName>
+					<CachePath>SFX/169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close_10C4C929.wem</CachePath>
 				</File>
 				<File Id="924415776" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Special_fire.wav</ShortName>
 					<CachePath>SFX/Special_fire_10C4C929.wem</CachePath>
 				</File>
+				<File Id="1064136553" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 3.wav</ShortName>
+					<CachePath>SFX/169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 3_10C4C929.wem</CachePath>
+				</File>
 			</Media>
 			<Events>
+				<Event Id="278617630" Name="Play_Ambience" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="134680864"/>
+						<MediaRef Id="152143633"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2045007312" Name="Play_Enemy_hit" DurationType="OneShot" DurationMin="0.1908458" DurationMax="0.9683333">
+					<MediaRefs>
+						<MediaRef Id="121030824"/>
+						<MediaRef Id="366976699"/>
+						<MediaRef Id="519582251"/>
+						<MediaRef Id="783614672"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3854155799" Name="Play_footsteps" DurationType="OneShot" DurationMin="0.21762408" DurationMax="0.30342445">
+					<MediaRefs>
+						<MediaRef Id="110500809"/>
+						<MediaRef Id="114167700"/>
+						<MediaRef Id="271074604"/>
+						<MediaRef Id="369054095"/>
+						<MediaRef Id="742923068"/>
+						<MediaRef Id="827923736"/>
+						<MediaRef Id="1064136553"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="3128913152" Name="Play_Pickup_item" DurationType="OneShot" DurationMin="1.0993161" DurationMax="1.1250113">
 					<MediaRefs>
 						<MediaRef Id="371601698"/>
@@ -202,5 +282,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{90F248F8-E36A-2D19-F96E-293ED11E802C}</FileHash>
+	<FileHash>{29D02B6A-CE6E-49BA-D956-38A52A4DE160}</FileHash>
 </SoundBanksInfo>
