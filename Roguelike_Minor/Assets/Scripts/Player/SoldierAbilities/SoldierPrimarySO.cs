@@ -65,8 +65,8 @@ namespace Game.Player.Soldier
             //spawn bullet and set its velocity
             GameObject projectile = Instantiate(bullet, source.originPoint.position, UnityEngine.Quaternion.identity);
             projectile.transform.LookAt(target);
-            projectile.GetComponent<PlayerBullet>().moveDir = bulletDir * bulletSpeed;
-            projectile.GetComponent<PlayerBullet>().ability = source;
+            projectile.GetComponent<RifleBullet>().moveDir = bulletDir * bulletSpeed;
+            projectile.GetComponent<RifleBullet>().ability = source;
 
             bool buildingDownSpread = Convert.ToBoolean(source.vars["buildingDownSpread"]);
 

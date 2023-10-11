@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.Player
 {
-    public class RailgunBullet : Projectile
+    public class RifleBullet : Projectile
     {
         protected override void OnCollide(RaycastHit hit)
         {
@@ -13,6 +13,11 @@ namespace Game.Player
             {
                 enemy.health.Hurt(new HitEvent(ability));
             }
+        }
+
+        protected override void UpdateMoveDir()
+        {
+            base.UpdateMoveDir();
         }
     }
 }

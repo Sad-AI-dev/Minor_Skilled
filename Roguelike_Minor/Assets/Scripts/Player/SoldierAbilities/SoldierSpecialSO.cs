@@ -31,7 +31,6 @@ namespace Game.Player.Soldier
             RailgunBullet rgBullet = projectile.GetComponent<RailgunBullet>();
             rgBullet.moveDir = bulletDir * bulletSpeed;
             rgBullet.ability = source;
-            rgBullet.source = source.agent;
         }
     }
 }
