@@ -8,7 +8,7 @@ namespace Game.Core
         [SerializeField] private float lifeTime;
         [SerializeField] private LayerMask layermask;
 
-        [HideInInspector] public Vector3 moveDir;
+        [HideInInspector] public Vector3 velocity;
         [HideInInspector] public Ability ability;
         protected Agent source;
 
@@ -24,7 +24,7 @@ namespace Game.Core
         private void FixedUpdate()
         {
             UpdateMoveDir();
-            transform.position += moveDir;
+            transform.position += velocity;
         }
 
         private void Update()
@@ -35,7 +35,7 @@ namespace Game.Core
         private void CheckHitObject()
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, moveDir.magnitude, layermask))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, velocity.magnitude, layermask))
             {
                 if (!hit.transform.CompareTag(source.tag))
                 {

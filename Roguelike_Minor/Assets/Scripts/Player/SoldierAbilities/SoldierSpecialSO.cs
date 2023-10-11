@@ -29,7 +29,7 @@ namespace Game.Player.Soldier
             GameObject projectile = Instantiate(bullet, source.originPoint.position, Quaternion.identity);
             projectile.transform.LookAt(target);
             RailgunBullet rgBullet = projectile.GetComponent<RailgunBullet>();
-            rgBullet.moveDir = bulletDir * bulletSpeed;
+            rgBullet.velocity = bulletDir * bulletSpeed;
             rgBullet.ability = source;
         }
     }

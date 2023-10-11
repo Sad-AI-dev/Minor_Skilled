@@ -1,4 +1,5 @@
 using Game.Core;
+using Game.Core.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,13 +27,8 @@ namespace Game.Player.Soldier
             UnityEngine.Vector3 bulletDir;
 
             if(!source.vars.ContainsKey("inaccuracy"))
-                source.vars.Add("inaccuracy", 0);
-            if (!source.vars.ContainsKey("buildingDownSpread"))
-                source.vars.Add("buildingDownSpread", false);
-            if (!source.vars.ContainsKey("isShooting"))
-                source.vars.Add("isShooting", false);
-            if (!source.vars.ContainsKey("stopShootingCo"))
-                source.vars.Add("stopShootingCo", null);
+                Initialize(source);
+
 
             RaycastHit hit;
             if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500))
@@ -63,9 +59,13 @@ namespace Game.Player.Soldier
 
 
             //spawn bullet and set its velocity
-            GameObject projectile = Instantiate(bullet, source.originPoint.position, UnityEngine.Quaternion.identity);
+            BehaviourPool<Projectile> bulletPool = (BehaviourPool<Projectile>)source.vars["bulletPool"];
+
+            Projectile projectile = bulletPool.GetBehaviour();
+            //Instantiate(bullet, source.originPoint.position, UnityEngine.Quaternion.identity);
+            projectile.transform.position = source.originPoint.position;
             projectile.transform.LookAt(target);
-            projectile.GetComponent<RifleBullet>().moveDir = bulletDir * bulletSpeed;
+            projectile.GetComponent<RifleBullet>().velocity = bulletDir * bulletSpeed;
             projectile.GetComponent<RifleBullet>().ability = source;
 
             bool buildingDownSpread = Convert.ToBoolean(source.vars["buildingDownSpread"]);
@@ -124,6 +124,17 @@ namespace Game.Player.Soldier
             //done cooling down
             if(!isShooting)
                 source.vars["inaccuracy"] = 0f;
+        }
+
+        private void Initialize(Ability source)
+        {
+            source.vars.Add("inaccuracy", 0);
+            source.vars.Add("buildingDownSpread", false);
+            source.vars.Add("isShooting", false);
+            source.vars.Add("stopShootingCo", null);
+            BehaviourPool<Projectile> bulletPool = new BehaviourPool<Projectile>();
+            bulletPool.behaviourTemplate = bullet;
+            source.vars.Add("bulletPool", bulletPool);
         }
     }
 }
