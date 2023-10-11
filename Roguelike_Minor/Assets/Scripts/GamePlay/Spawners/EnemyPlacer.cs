@@ -1,9 +1,9 @@
-using Game.Core.Data;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Game.Core.Data;
 
-namespace Game.Core.GameSystems {
+namespace Game {
     public class EnemyPlacer : MonoBehaviour
     {
         //vars

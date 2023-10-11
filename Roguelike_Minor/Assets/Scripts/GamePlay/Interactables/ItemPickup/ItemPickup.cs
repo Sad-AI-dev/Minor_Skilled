@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Core;
+using Game.Core.GameSystems;
 
-namespace Game.Core.GameSystems {
+namespace Game {
     public class ItemPickup : MonoBehaviour
     {
         [SerializeField] private ItemDataSO item;

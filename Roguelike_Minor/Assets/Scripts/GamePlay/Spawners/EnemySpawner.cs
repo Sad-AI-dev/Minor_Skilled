@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Game.Core.GameSystems;
 
-namespace Game.Core.GameSystems {
+namespace Game {
     public class EnemySpawner : MonoBehaviour
     {
         //======= Singleton ========

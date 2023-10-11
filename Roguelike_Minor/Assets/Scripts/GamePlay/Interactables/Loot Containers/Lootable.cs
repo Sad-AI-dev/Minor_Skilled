@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Core.GameSystems {
+namespace Game {
     public class Lootable : MonoBehaviour
     {
         [SerializeField] private LootTableSO lootTable;

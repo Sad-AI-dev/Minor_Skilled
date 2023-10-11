@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Core.Data;
 
-namespace Game.Core.GameSystems {
+namespace Game {
     [CreateAssetMenu(fileName = "lootTable", menuName = "ScriptableObjects/Loot Table")]
     public class LootTableSO : ScriptableObject
     {

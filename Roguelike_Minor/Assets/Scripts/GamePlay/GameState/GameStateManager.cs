@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Game.Core;
 
-namespace Game.Core.GameSystems {
+namespace Game {
     public class GameStateManager : MonoBehaviour
     {
         private void Awake()
@@ -29,13 +30,13 @@ namespace Game.Core.GameSystems {
         [Header("Events")]
         public UnityEvent onStageComplete;
 
-        //ref to advane object spawner
-        [HideInInspector] public AdvanceObjectSpawner advanceObjectSpawner;
+        //ref to advance object spawner
+        //[HideInInspector] public AdvanceObjectSpawner advanceObjectSpawner;
 
         //========== Manage Stage State ==============
         public void HandleCompleteStageObject()
         {
-            advanceObjectSpawner.SpawnAdvanceObject();
+            //advanceObjectSpawner.SpawnAdvanceObject();
             onStageComplete?.Invoke();
             //update UI manager
             uiManager.ObjectiveComplete = true;

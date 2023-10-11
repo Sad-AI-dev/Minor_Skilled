@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace Game.Core.GameSystems {
+namespace Game {
     public class HealthManager : MonoBehaviour
     {
         public UIManager uiManager;

@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Game.Core;
 using TMPro;
 
-namespace Game.Core.GameSystems {
+namespace Game {
     public class UIAbilityManager : MonoBehaviour
     {
         [SerializeField] UIManager uiManager;

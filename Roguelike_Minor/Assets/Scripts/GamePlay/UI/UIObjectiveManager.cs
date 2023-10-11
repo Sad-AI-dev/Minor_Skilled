@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 
-namespace Game.Core.GameSystems {
+namespace Game {
     public class UIObjectiveManager : MonoBehaviour
     {
         [SerializeField] UIManager uiManager;

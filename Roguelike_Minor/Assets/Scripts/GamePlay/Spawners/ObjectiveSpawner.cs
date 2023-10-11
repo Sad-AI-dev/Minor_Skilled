@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Core.GameSystems;
 
-namespace Game.Core.GameSystems {
+namespace Game {
     [RequireComponent(typeof(ObjectSpawner))]
     public class ObjectiveSpawner : MonoBehaviour
     {

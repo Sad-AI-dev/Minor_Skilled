@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Core;
 
-namespace Game.Core.GameSystems {
+namespace Game {
     public class UIManager : MonoBehaviour
     {
         [Header("Refferences")]
