@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Enemy.Core;
 using UnityEngine.AI;
-using Game.Systems;
+using Game.Core.GameSystems;
 
 namespace Game.Enemy
 {
