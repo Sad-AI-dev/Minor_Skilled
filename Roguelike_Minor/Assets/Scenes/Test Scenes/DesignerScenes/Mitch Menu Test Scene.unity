@@ -299,14 +299,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 17853982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bce39fc9508d8a41a9a575570220eee, type: 3}
+  m_Script: {fileID: 11500000, guid: 10b4913de5b3fd441a2c37a424f6ef92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraForce: 5
   yPositionCamera: 2.07
-  ButtonPressedA: {fileID: 122277551}
-  ButtonPressedB: {fileID: 379292964}
-  ButtonPressedC: {fileID: 185147588}
 --- !u!1 &122277549
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,8 +387,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 17853989}
-        m_TargetAssemblyTypeName: CameraForce, Assembly-CSharp
-        m_MethodName: ButtonPressed
+        m_TargetAssemblyTypeName: MainMenuCamera, Assembly-CSharp
+        m_MethodName: ButtonPressed1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -522,8 +519,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 17853989}
-        m_TargetAssemblyTypeName: CameraForce, Assembly-CSharp
-        m_MethodName: ButtonPressed
+        m_TargetAssemblyTypeName: MainMenuCamera, Assembly-CSharp
+        m_MethodName: ButtonPressed3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -654,8 +651,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 17853989}
-        m_TargetAssemblyTypeName: CameraForce, Assembly-CSharp
-        m_MethodName: ButtonPressed
+        m_TargetAssemblyTypeName: MainMenuCamera, Assembly-CSharp
+        m_MethodName: ButtonPressed2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
