@@ -15,8 +15,6 @@ namespace Game.Player
         [SerializeField] private GameObject inventory;
         [SerializeField] private AK.Wwise.Event Footsteps;
         
-
-        bool sprinting = false;
         private bool canPlayFootstep = true;
 
         private void Start()
@@ -40,6 +38,10 @@ namespace Game.Player
         {
             Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             playerController.SetMoveDirection(moveInput);
+
+            if (playerController.GetIsSprinting() && moveInput.y <= 0)
+                playerController.Sprint(false);
+
             if (canPlayFootstep && moveInput.magnitude >= 0.1f)
             {
                 StartCoroutine(FootstepCo());
@@ -49,16 +51,14 @@ namespace Game.Player
 
         private void SprintInput()
         {
-            if(Input.GetKeyDown(KeyCode.LeftShift) && !sprinting)
+            if(Input.GetKeyDown(KeyCode.LeftShift) && !playerController.GetIsSprinting())
             {
                 playerController.Sprint(true);
-                sprinting = true;
                 return;
             }
-            if (Input.GetKeyDown(KeyCode.LeftShift) && sprinting)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && playerController.GetIsSprinting())
             {
                 playerController.Sprint(false);
-                sprinting = false;
             }
         }
 

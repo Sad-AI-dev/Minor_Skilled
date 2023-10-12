@@ -20,15 +20,20 @@ namespace Game.Player.Soldier
         public float spreadResetSpeed;
         public AnimationCurve spreadBuildup;
 
+        PlayerController controller;
+
         public override void Use(Ability source)
         {
             Camera cam = Camera.main;
             UnityEngine.Vector3 target;
             UnityEngine.Vector3 bulletDir;
 
+            //Initialize variables
             if(!source.vars.ContainsKey("inaccuracy"))
                 Initialize(source);
 
+            if (controller.GetIsSprinting())
+                controller.Sprint(false);
 
             RaycastHit hit;
             if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500))
@@ -135,6 +140,8 @@ namespace Game.Player.Soldier
             BehaviourPool<Projectile> bulletPool = new BehaviourPool<Projectile>();
             bulletPool.behaviourTemplate = bullet;
             source.vars.Add("bulletPool", bulletPool);
+
+            controller = source.agent.gameObject.GetComponent<PlayerController>();
         }
     }
 }

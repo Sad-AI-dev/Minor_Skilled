@@ -52,6 +52,7 @@ namespace Game.Player
 
             Physics.SyncTransforms();
             cc.Move((moveDirection * speed) + new Vector3(0, yVelocity, 0));
+            Debug.Log(cc.velocity);
 
             CheckGrounded();
 
@@ -79,18 +80,15 @@ namespace Game.Player
             if(sprinting)
             {
                 isSprinting = true;
-                speed = sprintSpeed;
             }
             else
             {
                 isSprinting = false;
-                speed = walkSpeed;
             }
         }
 
         private void UpdateSpeed()
         {
-            
             if(moveDirection.magnitude > 0.1f)
             {
                 if (!isSprinting) speed = walkSpeed;
@@ -162,6 +160,11 @@ namespace Game.Player
                 transform.position = warpPosition;
                 warpPosition = Vector3.zero;
             }
+        }
+
+        public bool GetIsSprinting()
+        {
+            return isSprinting;
         }
     }
 }
