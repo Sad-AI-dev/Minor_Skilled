@@ -46,6 +46,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   ObjectiveComplete: 0
+--- !u!1 &4750709742145104940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 814621497895006510}
+  - component: {fileID: 3910307241457889035}
+  m_Layer: 0
+  m_Name: SceneLoadNotifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &814621497895006510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4750709742145104940}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5187508906776603956}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3910307241457889035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4750709742145104940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23656df1da26f0241bae04050ab91e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5706813191946861257
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,6 +123,7 @@ Transform:
   - {fileID: 5734221256385217703}
   - {fileID: 8768485515106146458}
   - {fileID: 7986092976093484892}
+  - {fileID: 814621497895006510}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7138810243219148686
@@ -138,6 +183,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  uiManager: {fileID: 0}
+  onStageComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8355906013974447864
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnDelay: 5
-  spawner: {fileID: 0}
+  placer: {fileID: 0}
 --- !u!114 &8021601860483365532
 MonoBehaviour:
   m_ObjectHideFlags: 0
