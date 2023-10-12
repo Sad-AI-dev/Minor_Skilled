@@ -73,11 +73,13 @@ namespace Game {
             //GameObject obj = Instantiate(explosionPrefab);
             //obj.transform.position = hitEvent.target.transform.position;
 
+            Item sourceItem = hitEvent.source.inventory.GetItemOfType(this);
             //sphere cast to deal damage
             Collider[] results = Physics.OverlapSphere(
                 pos,
-                GetExplodeRadius(hitEvent.source.inventory.GetItemOfType(this))
+                GetExplodeRadius(sourceItem)
             );
+
             if (results.Length > 0)
             {
                 for (int i = 0; i < results.Length; i++)
@@ -87,6 +89,8 @@ namespace Game {
                         Agent enemy = results[i].gameObject.GetComponent<Agent>();
                         HitEvent hit = new HitEvent(hitEvent.source);
                         hit.baseDamage = CalcDamage(hitEvent);
+                        hit.itemSources = new List<Item>(hitEvent.itemSources);
+                        hit.itemSources.Add(sourceItem);
                         enemy.health.Hurt(hit);
                     }
                 }
