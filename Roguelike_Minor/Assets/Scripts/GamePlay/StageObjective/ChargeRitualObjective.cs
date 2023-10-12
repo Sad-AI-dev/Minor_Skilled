@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
-using Game.Systems;
+using Game.Core.GameSystems;
 
 namespace Game {
     public class ChargeRitualObjective : MonoBehaviour

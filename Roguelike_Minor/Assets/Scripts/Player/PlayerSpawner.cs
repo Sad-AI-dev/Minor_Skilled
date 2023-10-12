@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Game.Systems;
+using Game.Core.GameSystems;
 
 namespace Game.Player {
     public class PlayerSpawner : MonoBehaviour
@@ -13,7 +13,7 @@ namespace Game.Player {
             //choose destination
             Vector3 destination = transform.GetChild(Random.Range(0, transform.childCount)).position;
             //warp
-            player.transform.position = new Vector3(75, 1, 55);
+            player.transform.position = destination;
             player.ResetVelocity();
         }
     }

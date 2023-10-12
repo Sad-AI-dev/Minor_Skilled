@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEditor;
-using Game.Systems;
+using Game.Core.GameSystems;
 
 [CustomEditor(typeof(CostBasedActivator))]
 public class CostBasedActivatorEditor : Editor

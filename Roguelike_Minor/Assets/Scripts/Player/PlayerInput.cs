@@ -1,11 +1,10 @@
 using Game.Core;
-using Game.Systems;
+using Game.Core.GameSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Player
-{
+namespace Game.Player {
     [RequireComponent(typeof(PlayerController))]
     public class PlayerInput : MonoBehaviour
     {
@@ -19,8 +18,8 @@ namespace Game.Player
 
         private void Start()
         {
-            //hide inventory by default
             playerController = GetComponent<PlayerController>();
+            //hide inventory by default
             inventory.SetActive(false);
         }
 
