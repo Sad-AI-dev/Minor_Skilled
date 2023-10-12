@@ -15,5 +15,10 @@ namespace Game.Core.GameSystems {
         {
             EventBus<SceneLoadedEvent>.Invoke(new SceneLoadedEvent());
         }
+
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= InvokeSceneLoaded;
+        }
     }
 }

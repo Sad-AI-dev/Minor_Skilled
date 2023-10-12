@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Game.Core;
 using Game.Core.GameSystems;
 
 namespace Game {
@@ -41,7 +41,7 @@ namespace Game {
             activator = GetComponent<CostBasedActivator>();
             DontDestroyManager.instance.Register(gameObject); //mark for dont destroy on load
             SpawnEnemies();
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            EventBus<SceneLoadedEvent>.AddListener(OnSceneLoaded);
         }
 
         //=========== Spawn Enemy Cycle ==========
@@ -83,7 +83,7 @@ namespace Game {
         }
 
         //=========== Handle Scene Loaded ===============
-        private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
+        private void OnSceneLoaded(SceneLoadedEvent data)
         {
             paused = false;
         }
@@ -91,7 +91,7 @@ namespace Game {
         //============ Handle Destroy ===============
         private void OnDestroy()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            EventBus<SceneLoadedEvent>.RemoveListener(OnSceneLoaded);
         }
     }
 }
