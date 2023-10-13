@@ -4,37 +4,39 @@ using UnityEngine;
 using Game.Enemy.Core;
 using UnityEngine.AI;
 using Game.Core.GameSystems;
+using Game.Core;
+using System.Threading.Tasks;
 
-namespace Game.Enemy
-{
+namespace Game.Enemy {
     public class PGTaskGoToTarget : BT_Node
     {
-        Transform transform;
-        NavMeshAgent agent;
-        LayerMask playerLayerMask, enemyLayerMask;
-        bool attackingMelee = false;
-        Transform target;
+        private Transform transform;
+        private NavMeshAgent agent;
+        private LayerMask LOSLayerMask;
+        private bool attackingMelee = false;
+        private Transform target;
+        float distanceToTarget;
 
-        public PGTaskGoToTarget(Transform transform, NavMeshAgent agent, LayerMask playerLayerMask, LayerMask enemyLayerMask)
+        public PGTaskGoToTarget(Transform transform, NavMeshAgent agent, LayerMask enemyLayerMask, Agent enemyAgent)
         {
             this.transform = transform;
             this.agent = agent;
-            this.playerLayerMask = playerLayerMask;
-            this.enemyLayerMask = enemyLayerMask;
+            this.LOSLayerMask = enemyLayerMask;
+
+            enemyAgent.health.onDeath.AddListener(CheckRangeOnDeath);
         }
 
         public override NodeState Evaluate()
         {
             //Check if target already was found. otherwise add it
+            if (GetData("DistanceToTarget") == null) CheckDistance();
             if ((Transform)GetData("Target") == null) parent.SetData("Target", GameStateManager.instance.player.transform);
             target = (Transform)GetData("Target");
-
-
-            Collider[] colMelee = Physics.OverlapSphere(
-                    transform.position, PGTree.meleeAttackRange, playerLayerMask);
-
-            Collider[] colRanged = Physics.OverlapSphere(
-                    transform.position, PGTree.rangedAttackRange, playerLayerMask);
+            
+            if (GetData("DistanceToTarget") != null) 
+            {
+                distanceToTarget = (float)GetData("DistanceToTarget");
+            }
 
             //If no target, fail
             if(target == null)
@@ -42,44 +44,80 @@ namespace Game.Enemy
                 state = NodeState.FAILURE;
             }
             //else if mellee in ranged, success
-            else if (colMelee.Length > 0)
+            else if (distanceToTarget <= PGTree.meleeAttackRange)
             {
-                agent.SetDestination(transform.position);
-                transform.LookAt(target);
-                if (!attackingMelee)
-                {
-                    attackingMelee = true;
-                    PGTree.EnemiesInRangeOfPlayer++;
-                }
+                HandleMelee();
                 state = NodeState.SUCCESS;
             }
             //else if ranged in range && meleecounter > 3, success
-            else if(colRanged.Length > 0 && PGTree.EnemiesInRangeOfPlayer >= 3)
+            else if(distanceToTarget <= PGTree.rangedAttackRange && PGTree.EnemiesInRangeOfPlayer >= 3)
             {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, target.position - transform.position, out hit, Mathf.Infinity))
-                {
-
-                    if (hit.transform.tag == "Player")
-                    {
-                        agent.SetDestination(transform.position);
-                        transform.LookAt(target);
-                        state = NodeState.SUCCESS;
-                    }
-                    else
-                    {
-                        state = NodeState.RUNNING;
-                    }
-                }
+                HandleRanged();
             }
             //else go to target
             else
             {
+                if (distanceToTarget > PGTree.meleeAttackRange && attackingMelee)
+                {
+                    attackingMelee = false;
+                    PGTree.EnemiesInRangeOfPlayer--;
+                }
                 agent.SetDestination(target.position);
                 state = NodeState.RUNNING;
             }
 
             return state;
+        }
+        private void HandleMelee()
+        {
+            agent.SetDestination(transform.position);
+            Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
+            transform.LookAt(targetPostition);
+            
+
+            if (!attackingMelee)
+            {
+                attackingMelee = true;
+                PGTree.EnemiesInRangeOfPlayer++;
+            }
+        }
+        private void HandleRanged()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, target.position + Vector3.up - transform.position, out hit, Mathf.Infinity, LOSLayerMask))
+            {
+                if (hit.transform.tag == "Player")
+                {
+                    agent.SetDestination(transform.position);
+                    Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
+                    transform.LookAt(targetPostition);
+                    state = NodeState.SUCCESS;
+                }
+                else
+                {
+                    state = NodeState.RUNNING;
+                }
+            }
+        }
+        void CheckRangeOnDeath(HitEvent hit)
+        {
+            if (attackingMelee)
+            {
+                attackingMelee = false;
+                PGTree.EnemiesInRangeOfPlayer--;
+            }
+        }
+    
+        private async void CheckDistance()
+        {
+            while (transform != null)
+            {
+                await Task.Delay(2);
+                if (target != null && transform != null) 
+                {
+                    parent.SetData("DistanceToTarget", Vector3.Distance(transform.position, target.position));
+                }
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Game.Enemy.Pathfinding
 {
     public enum NodeType { ground, air }
+    [System.Serializable]
     public class GNode
     {
         public int x;
@@ -25,7 +26,7 @@ namespace Game.Enemy.Pathfinding
         public GNode parent;
         public bool walkable;
 
-        public GameObject worldObject;
+        public Vector3 worldPosition;
         public NodeType nodeType;
     }
 }

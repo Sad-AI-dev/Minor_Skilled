@@ -18,9 +18,9 @@ namespace Game.Enemy
         {
             if (!source.vars.ContainsKey("poolSecondary")) InitializeVars(source);
             secondary = ((BehaviourPool<PGSecondaryBehaviour>)source.vars["poolSecondary"]).GetBehaviour();
-            secondary.source = source;
+            secondary.abil = source;
             secondary.bulletSpeed = bulletSpeed;
-            secondary.gameObject.transform.localRotation = source.agent.transform.rotation;
+            secondary.target = GameStateManager.instance.player.transform;
             secondary.gameObject.transform.position = source.agent.gameObject.transform.position + source.agent.gameObject.transform.forward;
         }
 
