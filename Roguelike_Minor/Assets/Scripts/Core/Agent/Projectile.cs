@@ -35,7 +35,7 @@ namespace Game.Core
         private void CheckHitObject()
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, velocity.magnitude, layermask))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, velocity.magnitude, layermask, QueryTriggerInteraction.Ignore))
             {
                 if (!hit.transform.CompareTag(source.tag))
                 {

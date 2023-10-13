@@ -1,8 +1,10 @@
+using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+using Cinemachine;
 
 namespace Game.Player
 {
@@ -10,16 +12,16 @@ namespace Game.Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private GameObject visuals;
+        private Agent agent;
 
         [Header("walk")]
-        [SerializeField] private float walkSpeed;
-        [SerializeField] private float sprintSpeed;
-        [SerializeField] private float deceleration;
         private float speed;
-        private bool isSprinting = false;
+        private float walkSpeed;
+        private float sprintSpeed;
+        [SerializeField] private float deceleration;
+        private bool isSlowed = false;
 
         private Vector3 moveDirection;
-        private Vector3 velocity;
 
         [Header("Jump")]
         [SerializeField] private float JumpForce;
@@ -30,18 +32,23 @@ namespace Game.Player
 
         [Header("External Components")]
         [SerializeField] private Camera cam;
+        [SerializeField] private CinemachineFreeLook freeLookCam;
         private CharacterController cc;
 
         private float smoothVelocity;
         private float smoothTime = 0.1f;
 
         Vector3 warpPosition = Vector3.zero;
+        private Coroutine slowCo;
 
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
             //cam = Camera.main;
             cc = GetComponent<CharacterController>();
+            agent = GetComponent<Agent>();
+            walkSpeed = agent.stats.walkSpeed;
+            sprintSpeed = agent.stats.sprintSpeed;
         }
 
         private void FixedUpdate()
@@ -50,13 +57,12 @@ namespace Game.Player
             
             ApplyGravity();
 
+            //allows to directly set position of player
             Physics.SyncTransforms();
+
             cc.Move((moveDirection * speed) + new Vector3(0, yVelocity, 0));
-            Debug.Log(cc.velocity);
 
             CheckGrounded();
-
-            //Debug.Log("gravity: " + activeGravity);
         }
 
         public void SetMoveDirection(Vector2 moveInput)
@@ -75,15 +81,15 @@ namespace Game.Player
             }
         }
 
-        public void Sprint(bool sprinting)
+        public void ToggleSlow(bool slowed)
         {
-            if(sprinting)
+            if(slowed)
             {
-                isSprinting = true;
+                isSlowed = true;
             }
             else
             {
-                isSprinting = false;
+                isSlowed = false;
             }
         }
 
@@ -91,12 +97,8 @@ namespace Game.Player
         {
             if(moveDirection.magnitude > 0.1f)
             {
-                if (!isSprinting) speed = walkSpeed;
-                if (isSprinting) speed = walkSpeed * sprintSpeed;
-            }
-            else
-            {
-                speed -= deceleration;
+                if (!isSlowed) speed = walkSpeed * sprintSpeed;
+                if (isSlowed) speed = walkSpeed;
             }
 
             speed /= 100;
@@ -118,7 +120,6 @@ namespace Game.Player
                 yVelocity -= activeGravity;
             }
         }
-
 
         private void CheckGrounded()
         {
@@ -147,24 +148,25 @@ namespace Game.Player
             speed = 0;
             yVelocity = 0;
         }
-        
-        public void WarpToPosition(Vector3 newPosition)
+
+        public void StartSlowCoroutine(float duration)
         {
-            warpPosition = newPosition;
+            if(slowCo != null)
+                StopCoroutine(slowCo);
+            slowCo = StartCoroutine(SlowPlayerCo(duration));
         }
 
-        private void LateUpdate()
+        private IEnumerator SlowPlayerCo(float duration)
         {
-            if(warpPosition != Vector3.zero)
-            {
-                transform.position = warpPosition;
-                warpPosition = Vector3.zero;
-            }
+            isSlowed = true;
+            yield return new WaitForSeconds(duration);
+            isSlowed = false;
         }
 
-        public bool GetIsSprinting()
+        public void LockCamera()
         {
-            return isSprinting;
+            freeLookCam.m_YAxis.m_MaxSpeed = 0;
+            freeLookCam.m_XAxis.m_MaxSpeed = 0;
         }
     }
 }

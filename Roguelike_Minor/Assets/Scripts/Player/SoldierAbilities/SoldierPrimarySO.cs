@@ -32,8 +32,8 @@ namespace Game.Player.Soldier
             if(!source.vars.ContainsKey("inaccuracy"))
                 Initialize(source);
 
-            if (controller.GetIsSprinting())
-                controller.Sprint(false);
+
+            controller.StartSlowCoroutine(source.coolDown * 1.1f);
 
             RaycastHit hit;
             if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500))
@@ -141,7 +141,7 @@ namespace Game.Player.Soldier
             bulletPool.behaviourTemplate = bullet;
             source.vars.Add("bulletPool", bulletPool);
 
-            controller = source.agent.gameObject.GetComponent<PlayerController>();
+            controller = source.agent.GetComponent<PlayerController>();
         }
     }
 }
