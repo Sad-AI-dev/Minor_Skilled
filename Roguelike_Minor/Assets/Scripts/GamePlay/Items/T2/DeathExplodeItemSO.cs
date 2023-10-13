@@ -16,6 +16,9 @@ namespace Game {
         public float explosionRadius = 5f;
         public float bonusExplosionRadius = 2.5f;
 
+        [Header("Timings")]
+        public float explodeDelay = 0.1f;
+
         [Header("Technical Settings")]
         public GameObject explosionPrefab;
         
@@ -27,7 +30,7 @@ namespace Game {
         //========= Process Hit Events ===========
         public override void ProcessDealDamage(ref HitEvent hitEvent) 
         {
-            hitEvent.onDeath.AddListener(SpawnExplosion);
+            hitEvent.onDeath.AddListener(Explode);
         }
 
         public override void ProcessTakeDamage(ref HitEvent hitEvent) { }
@@ -54,16 +57,29 @@ namespace Game {
         }
 
         //========= Spawn Explosion ===========
-        private void SpawnExplosion(HitEvent hitEvent)
+        private void Explode(HitEvent hitEvent) //instigating func
+        {
+            hitEvent.source.StartCoroutine(SpawnExplosionCo(hitEvent, hitEvent.target.transform.position));
+        }
+        
+        private IEnumerator SpawnExplosionCo(HitEvent hitEvent, Vector3 pos)
+        {
+            yield return new WaitForSeconds(explodeDelay);
+            SpawnExplosion(hitEvent, pos);
+        }
+
+        private void SpawnExplosion(HitEvent hitEvent, Vector3 pos) //create explosion in scene
         {
             //GameObject obj = Instantiate(explosionPrefab);
             //obj.transform.position = hitEvent.target.transform.position;
 
+            Item sourceItem = hitEvent.source.inventory.GetItemOfType(this);
             //sphere cast to deal damage
             Collider[] results = Physics.OverlapSphere(
-                hitEvent.target.transform.position,
-                GetExplodeRadius(hitEvent.source.inventory.GetItemOfType(this))
+                pos,
+                GetExplodeRadius(sourceItem)
             );
+
             if (results.Length > 0)
             {
                 for (int i = 0; i < results.Length; i++)
@@ -73,6 +89,8 @@ namespace Game {
                         Agent enemy = results[i].gameObject.GetComponent<Agent>();
                         HitEvent hit = new HitEvent(hitEvent.source);
                         hit.baseDamage = CalcDamage(hitEvent);
+                        hit.itemSources = new List<Item>(hitEvent.itemSources);
+                        hit.itemSources.Add(sourceItem);
                         enemy.health.Hurt(hit);
                     }
                 }

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using Game.Core;
 
 namespace Game {
@@ -17,7 +16,7 @@ namespace Game {
             else
             {
                 instance = this;
-                SceneManager.sceneLoaded += HandleSceneLoad;
+                EventBus<SceneLoadedEvent>.AddListener(HandleSceneLoaded);
             }
         }
         public static GameStateManager instance;
@@ -43,7 +42,7 @@ namespace Game {
         }
 
         //========= Handle Scene Load ========
-        private void HandleSceneLoad(Scene scene, LoadSceneMode loadMode)
+        private void HandleSceneLoaded(SceneLoadedEvent data)
         {
             uiManager.ObjectiveComplete = false;
         }
@@ -51,7 +50,7 @@ namespace Game {
         //========= Handle Destroy ==========
         private void OnDestroy()
         {
-            SceneManager.sceneLoaded -= HandleSceneLoad;
+            EventBus<SceneLoadedEvent>.RemoveListener(HandleSceneLoaded);
         }
     }
 }

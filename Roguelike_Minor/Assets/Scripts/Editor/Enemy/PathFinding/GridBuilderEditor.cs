@@ -12,9 +12,21 @@ public class GridBuilderEditor : Editor
     {
         GridBuilder script = (GridBuilder)target;
         DrawDefaultInspector();
-        if (GUILayout.Button("BuildGrid"))
+        if (GUILayout.Button("Build Grid"))
         {
             script.BuildGrid();
+        }
+        if (GUILayout.Button("Get Grid"))
+        {
+            script.GetGrid();
+        }
+        if (GUILayout.Button("Clear Grid"))
+        {
+            script.ClearGrid();
+        }
+        if(GUILayout.Button("Get specific Node"))
+        {
+            script.GetSpecificNode();
         }
     }
 }

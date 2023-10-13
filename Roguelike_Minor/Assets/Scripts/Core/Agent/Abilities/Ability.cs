@@ -71,7 +71,7 @@ namespace Game.Core {
         {
             coolDownTimer = coolDownMode switch
             {
-                CoolDownMode.coolDown => coolDown * agent.stats.coolDownMultiplier,
+                CoolDownMode.coolDown => coolDown / agent.stats.coolDownMultiplier,
                 CoolDownMode.attackSpeed => coolDown / agent.stats.attackSpeed,
                 _ => coolDown
             };

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2339308422686092076}
   - component: {fileID: 7232606880384279023}
   - component: {fileID: 210265841041001221}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SecondaryPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5878cc69e4dee4aaf3207fe5bf5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source:
+  lifeTime: 5
+  layermask:
+    serializedVersion: 2
+    m_Bits: 127
+  moveDir: {x: 0, y: 0, z: 0}
+  ability:
+    agent: {fileID: 0}
+    abilityData: {fileID: 0}
+    uses: 0
+    maxUses: 1
+    coolDown: 0
+    coolDownMode: 0
+    isCoolingDown: 0
+    originPoint: {fileID: 0}
+    onUse:
+      m_PersistentCalls:
+        m_Calls: []
+    SFX:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 0}
+    coolDownTimer: 0
+  abil:
     agent: {fileID: 0}
     abilityData: {fileID: 0}
     uses: 0

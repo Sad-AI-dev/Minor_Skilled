@@ -35,18 +35,18 @@ public class MainMenuCamera : MonoBehaviour
     void cameraState1(){
 
         transform.position += new Vector3(0, 0, cameraForce) * Time.deltaTime; 
-
+     
         Debug.Log (cameraForce + " " + transform.position);
         
-        if (transform.position.z >= -3f && cameraForce > 0f){
-           cameraForce -= 0.01f; 
-        }
-            else if(cameraForce <= 0f)
-            {
-                cameraForce = 0f;
-            }
+        // if (transform.position.z >= -3f && cameraForce > 0f){
+        //    cameraForce -= 0.01f; 
+        // }
+        //     else if(cameraForce <= 0f)
+        //     {
+        //         cameraForce = 0f;
+        //     }
      
-            Debug.Log (cameraForce);
+        //     Debug.Log (cameraForce);
 
     }
     

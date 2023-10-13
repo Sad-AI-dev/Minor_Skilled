@@ -48,20 +48,21 @@ namespace Game.Core {
         //=========== Process Hit / Heal Events =============
         public void ProcessHitEvent(ref HitEvent hitEvent)
         {
-            if (hitEvent.hasAgentSource && hitEvent.source.Equals(agent))
+            bool dealDamage = hitEvent.hasAgentSource && hitEvent.source.Equals(agent);
+
+            for (int i = 0; i < items.Count; i++)
             {
-                for (int i = 0; i < items.Count; i++)
+                if (CanTriggerItem(ref hitEvent, items[i])) 
                 {
-                    items[i].data.ProcessDealDamage(ref hitEvent);
+                    if (dealDamage) items[i].data.ProcessDealDamage(ref hitEvent);
+                    else items[i].data.ProcessTakeDamage(ref hitEvent);
                 }
             }
-            else
-            {
-                for (int i = 0; i < items.Count; i++)
-                {
-                    items[i].data.ProcessTakeDamage(ref hitEvent);
-                }
-            }
+        }
+
+        private bool CanTriggerItem(ref HitEvent hitEvent, Item item)
+        {
+            return !hitEvent.itemSources.Contains(item) || item.data.canProcSelf;
         }
 
         public void ProcessHealEvent(ref HealEvent healEvent)

@@ -13,7 +13,7 @@ namespace Game.Enemy.Core
             root = SetupTree();
         }
 
-        protected void Update()
+        protected virtual void Update()
         {
             if(root != null)
             {

@@ -63,7 +63,7 @@ namespace Game.Core {
         //============== Get Total Damage ===============
         public float GetTotalDamage()
         {
-            return Mathf.Min((baseDamage * damageMultiplier) - damageReduction, 1); //never allow take 0 damage
+            return Mathf.Max((baseDamage * damageMultiplier) - damageReduction, 1); //never allow take 0 damage
         }
     }
 }

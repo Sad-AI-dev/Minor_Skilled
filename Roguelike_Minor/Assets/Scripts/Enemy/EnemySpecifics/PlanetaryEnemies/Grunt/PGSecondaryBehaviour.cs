@@ -5,30 +5,25 @@ using Game.Core;
 
 namespace Game.Enemy
 {
-    public class PGSecondaryBehaviour : MonoBehaviour
+    public class PGSecondaryBehaviour : Projectile
     {
-        public Ability source;
-        public float bulletSpeed;
-        float currentTime = 0;
+        [HideInInspector] public Transform target;
+        [HideInInspector] public float bulletSpeed;
+        [HideInInspector] public Ability abil;
 
-        private void Update()
+        private void Start()
         {
-            transform.position += transform.forward * bulletSpeed * Time.deltaTime;
-            currentTime += Time.deltaTime;
-            if(currentTime > 10)
-            {
-                gameObject.SetActive(false);
-                currentTime = 0;
-            }
+            transform.LookAt(target.position + Vector3.up);
+            velocity = transform.forward * bulletSpeed * Time.deltaTime;
+            ability = this.abil;
+            this.source = abil.agent;
+        }
 
-            RaycastHit hit;
-            if(Physics.Raycast(transform.position, transform.forward, out hit, bulletSpeed * Time.deltaTime))
+        protected override void OnCollide(RaycastHit hit)
+        {
+            if (hit.transform.CompareTag("Player"))
             {
-                if (hit.transform.CompareTag("Player"))
-                {
-                    hit.transform.GetComponent<Agent>().health.Hurt(new HitEvent(source));
-                }
-                gameObject.SetActive(false);
+                hit.transform.GetComponent<Agent>().health.Hurt(new HitEvent(source));
             }
         }
     }
