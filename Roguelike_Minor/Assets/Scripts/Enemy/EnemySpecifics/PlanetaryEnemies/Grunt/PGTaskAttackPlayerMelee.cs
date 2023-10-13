@@ -8,29 +8,35 @@ namespace Game.Enemy
 {
     public class PGTaskAttackPlayerMelee : BT_Node
     {
-        Transform transform;
-        Agent enemyAgent;
-        LayerMask playerLayerMask;
+        private Transform transform;
+        private Agent enemyAgent;
+        private float distanceToTarget;
 
-        public PGTaskAttackPlayerMelee(Transform transform, Agent enemyAgent, LayerMask playerLayerMask)
+        public PGTaskAttackPlayerMelee(Transform transform, Agent enemyAgent)
         {
             this.transform = transform;
             this.enemyAgent = enemyAgent;
-            this.playerLayerMask = playerLayerMask;
         }
 
         public override NodeState Evaluate()
         {
-            Collider[] col = Physics.OverlapSphere(
-                    transform.position, PGTree.meleeAttackRange, playerLayerMask);
-
-            if(col.Length > 0) 
+            //Get data
+            Transform target = (Transform)GetData("Target");
+            if (GetData("DistanceToTarget") != null) 
             {
+                distanceToTarget = (float)GetData("DistanceToTarget");
+            }
 
+            //Check if there is a target;
+            if(target == null)
+            {
+                state = NodeState.FAILURE;
+            } else if (distanceToTarget <= PGTree.meleeAttackRange) //Check if we are close enough for melee attack
+            {
                 enemyAgent.abilities.primary.TryUse();
                 state = NodeState.RUNNING;
             }
-            else
+            else //fail if nothing applies.
             {
                 state = NodeState.FAILURE;
             }

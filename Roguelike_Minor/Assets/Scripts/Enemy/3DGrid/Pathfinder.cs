@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Enemy.Pathfinding
-{
+namespace Game.Enemy.Pathfinding{
     public class Pathfinder
     {
         GridBuilder gridBase;
@@ -13,11 +12,10 @@ namespace Game.Enemy.Pathfinding
         public List<GNode> FindPath()
         {
             gridBase = GridBuilder.GetInstance();
-            Debug.Log($"Finding path from {startNode.worldObject.name} to {endNode.worldObject.name}");
+            //Debug.Log($"Finding path from {startNode.worldPosition} to {endNode.worldPosition}");
 
             return FindPathActual(startNode, endNode);
         }
-
         private List<GNode> FindPathActual(GNode start, GNode target)
         {
             List<GNode> foundPath = new List<GNode>();
@@ -74,7 +72,6 @@ namespace Game.Enemy.Pathfinding
             }
             return foundPath;
         }
-
         public float GetDistance(GNode posA, GNode posB)
         {
             int distX = Mathf.Abs(posA.x - posB.x);
@@ -88,7 +85,6 @@ namespace Game.Enemy.Pathfinding
 
             return 14 * distX + 10 * (distZ - distX) + 10 * distY;
         }
-
         public List<GNode> GetNeighbours(GNode currentNode, bool getVerticalNeighbors = false)
         {
             List<GNode> retList = new List<GNode>();
@@ -129,7 +125,6 @@ namespace Game.Enemy.Pathfinding
             }
             return retList;
         }
-
         private GNode GetNeighbourNode(GNode adjPos, bool searchTopDown, GNode currentNodePos)
         {
             GNode retVal = null;
@@ -187,7 +182,6 @@ namespace Game.Enemy.Pathfinding
 
             return retVal;
         }
-
         private List<GNode> RetracePath(GNode Start, GNode End)
         {
             List<GNode> path = new List<GNode>();
