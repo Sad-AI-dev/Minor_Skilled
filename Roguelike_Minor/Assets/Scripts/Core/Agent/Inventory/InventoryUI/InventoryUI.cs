@@ -6,15 +6,13 @@ using Game.Core.Data;
 namespace Game.Core {
     public class InventoryUI : MonoBehaviour
     {
-        [System.Serializable]
-        public class VisualData
-        {
-            public BehaviourPool<SlotUI> slotPool;
-            public RectTransform slotHolder;
-        }
-
         public SlotInventory inventory;
-        public UnityDictionary<SlotSizeSO, VisualData> slotVisuals;
+
+        [Header("Slot Visual Settings")]
+        public BehaviourPool<SlotUI> slotPool;
+        public RectTransform slotHolder;
+
+        //hover item
         private ItemUI hoveredItem;
 
         private void Awake()
@@ -40,10 +38,7 @@ namespace Game.Core {
 
         private void ResetVisuals()
         {
-            foreach (var kvp in slotVisuals)
-            {
-                kvp.Value.slotPool.Reset();
-            }
+            slotPool.Reset();
         }
 
         private void GenerateSlotVisuals()
@@ -51,8 +46,8 @@ namespace Game.Core {
             for (int i = 0; i < inventory.slots.Count; i++)
             {
                 ItemSlot targetSlot = inventory.slots[i];
-                SlotUI slotUI = slotVisuals[targetSlot.size].slotPool.GetBehaviour();
-                slotUI.transform.SetParent(slotVisuals[targetSlot.size].slotHolder);
+                SlotUI slotUI = slotPool.GetBehaviour();
+                slotUI.transform.SetParent(slotHolder);
                 slotUI.GenerateVisuals(targetSlot, this);
             }
         }

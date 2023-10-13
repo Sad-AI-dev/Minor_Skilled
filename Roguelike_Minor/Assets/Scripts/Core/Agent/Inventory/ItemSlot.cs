@@ -6,14 +6,15 @@ namespace Game.Core {
     [System.Serializable]
     public class ItemSlot
     {
-        public SlotSizeSO size;
+        private const int maxSize = 4;
+        public int size;
         public List<Item> heldItems;
 
         private int capacity;
 
         public ItemSlot(SlotSizeSO size)
         {
-            this.size = size;
+            this.size = size.capacity;
             capacity = size.capacity;
             heldItems = new List<Item>();
         }
@@ -46,6 +47,52 @@ namespace Game.Core {
         {
             heldItems.Remove(item);
             capacity += item.data.size.capacity;
+        }
+
+        //============ Manage Size ===========
+        public bool CanAddSize(int sizeToAdd)
+        {
+            return size + sizeToAdd <= maxSize;
+        }
+
+        public void AddSize(int size)
+        {
+            this.size += size;
+            capacity += size;
+        }
+
+        public bool CanRemoveSize(int sizeToRemove)
+        {
+            return size >= sizeToRemove;
+        }
+
+        public List<Item> RemoveSize(int size)
+        {
+            List<Item> itemsToRemove = new List<Item>();
+            this.size -= size;
+            capacity -= size;
+            //remove items that no longer fit in slot
+            if (capacity < 0)
+            {
+                int itemSizeToRemove = capacity * -1;
+                while (itemSizeToRemove > 0)
+                {
+                    itemSizeToRemove -= heldItems[^1].data.size.capacity;
+                    itemsToRemove.Add(heldItems[^1]);
+                }
+            }
+            return itemsToRemove;
+        }
+
+        //============ Util ===========
+        private int GetTotalItemSize()
+        {
+            int totalSize = 0;
+            foreach (Item item in heldItems)
+            {
+                totalSize += item.data.size.capacity;
+            }
+            return totalSize;
         }
     }
 }

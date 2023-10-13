@@ -14,6 +14,7 @@ namespace Game.Core {
             if (targetSlot != null)
             {
                 AddItemStack(itemData, targetSlot);
+                SortInventory();
                 onContentsChanged?.Invoke();
                 return true;
             }
@@ -105,52 +106,77 @@ namespace Game.Core {
         //============= Slot Management ============
         public void AddSlot(SlotSizeSO size)
         {
-            slots.Add(new ItemSlot(size));
+            if (!TryAddSizeToExistingSlot(size.capacity))
+            {
+                slots.Add(new ItemSlot(size));
+            }
             SortSlots();
             onContentsChanged?.Invoke();
         }
-
-        public void RemoveSlot(ItemSlot slot)
+        private bool TryAddSizeToExistingSlot(int sizeToAdd)
         {
-            if (slots.Contains(slot))
+            foreach (ItemSlot slot in slots)
             {
-                //foreach (Item item in slot.heldItems)
-                for (int i = slot.heldItems.Count - 1; i >= 0; i--)
+                if (slot.CanAddSize(sizeToAdd))
                 {
-                    items[i].DropItem(); //drop expelled items
-                    RemoveItemStack(items[i]);
+                    slot.AddSize(sizeToAdd);
+                    return true;
                 }
-                slots.Remove(slot);
-                slot = null; //destroy removed slot
-                SortSlots();
-                SortInventory();
-                onContentsChanged?.Invoke();
+            }
+            return false;
+        }
+
+        public void RemoveSlot(SlotSizeSO size)
+        {
+            for (int i = slots.Count - 1; i >= 0; i--)
+            {
+                if (slots[i].CanRemoveSize(size.capacity))
+                {
+                    List<Item> itemsToRemove = slots[i].RemoveSize(size.capacity);
+                    foreach (Item item in itemsToRemove)
+                    {
+                        item.DropItem();
+                        RemoveItemStack(item);
+                    }
+                    //remove slot check
+                    if (slots[i].size <= 0)
+                    {
+                        slots[i] = null;
+                        slots.RemoveAt(i);
+                    }
+                    SortSlots();
+                    SortInventory();
+                    onContentsChanged?.Invoke();
+                    return; //stop loop
+                }
             }
         }
 
         //============ Sort Contents ===========
         private void SortSlots()
         {
-            slots.Sort((ItemSlot a, ItemSlot b) => a.size.capacity.CompareTo(b.size.capacity));
+            slots.Sort((ItemSlot a, ItemSlot b) => -a.size.CompareTo(b.size));
         }
 
         private void SortInventory()
         {
-            Stack<Item> slotItems = new Stack<Item>();
+            List<Item> slotItems = new List<Item>();
             //empty slots
             for (int i = slots.Count - 1; i >= 0; i--)
             {
                 for (int j = slots[i].heldItems.Count - 1; j >= 0; j--)
                 {
-                    slotItems.Push(slots[i].heldItems[j]);
+                    slotItems.Add(slots[i].heldItems[j]);
                     slots[i].RemoveItem(slots[i].heldItems[j]);
                 }
             }
+            //sort items based on size
+            slotItems.Sort((Item a, Item b) => -a.data.size.capacity.CompareTo(b.data.size.capacity));
             //re-fill slots
             while (slotItems.Count > 0)
             {
-                GetSlotWithSpace(slotItems.Peek().data.size).AssignItem(slotItems.Peek());
-                slotItems.Pop();
+                GetSlotWithSpace(slotItems[0].data.size).AssignItem(slotItems[0]);
+                slotItems.RemoveAt(0);
             }
         }
     }
