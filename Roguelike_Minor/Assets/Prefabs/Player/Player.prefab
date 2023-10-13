@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67414044404434119}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10251728, y: -0, z: -0, w: 0.99473125}
+  m_LocalRotation: {x: 0.041558642, y: -0, z: -0, w: 0.9991361}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 6396768416043665583}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 52
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -90,7 +90,8 @@ GameObject:
   - component: {fileID: 1077326375474579614}
   - component: {fileID: 2997127524678411321}
   - component: {fileID: 4184777671369750650}
-  - component: {fileID: 5982808218945741653}
+  - component: {fileID: 2021588659767511941}
+  - component: {fileID: 2535664640213813839}
   m_Layer: 3
   m_Name: cm
   m_TagString: Untagged
@@ -138,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 5, z: -12}
+  m_FollowOffset: {x: 0, y: 3, z: -6}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -179,7 +180,19 @@ MonoBehaviour:
   m_LegacyHeightOffset: 3.4028235e+38
   m_LegacyHeadingBias: 3.4028235e+38
   m_HeadingIsSlave: 1
---- !u!114 &5982808218945741653
+--- !u!114 &2021588659767511941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583641685820129118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2535664640213813839
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,7 +215,8 @@ GameObject:
   - component: {fileID: 6463077454765107379}
   - component: {fileID: 7614398286400565465}
   - component: {fileID: 6731011600906893773}
-  - component: {fileID: 5493789834406659225}
+  - component: {fileID: 6292913461304453114}
+  - component: {fileID: 5318300093373864457}
   m_Layer: 3
   m_Name: cm
   m_TagString: Untagged
@@ -250,7 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 5, z: -12}
+  m_FollowOffset: {x: 0, y: 3, z: -6}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -291,7 +305,19 @@ MonoBehaviour:
   m_LegacyHeightOffset: 3.4028235e+38
   m_LegacyHeadingBias: 3.4028235e+38
   m_HeadingIsSlave: 1
---- !u!114 &5493789834406659225
+--- !u!114 &6292913461304453114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416285159127941395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5318300093373864457
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -380,12 +406,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visuals: {fileID: 7107147114416228610}
-  walkSpeed: 15
-  sprintSpeed: 2
   deceleration: 1
   JumpForce: 50
   gravity: 0.25
   cam: {fileID: 0}
+  freeLookCam: {fileID: 5844694640700254909}
 --- !u!143 &1389778117787781048
 CharacterController:
   m_ObjectHideFlags: 0
@@ -440,7 +465,7 @@ MonoBehaviour:
     SFX:
       idInternal: 0
       valueGuidInternal: 
-      WwiseObjectReference: {fileID: 0}
+      WwiseObjectReference: {fileID: 11400000, guid: ea1cf51972c945548875310f56fb4ee3, type: 2}
     coolDownTimer: 0
   secondary:
     agent: {fileID: 0}
@@ -474,7 +499,7 @@ MonoBehaviour:
     SFX:
       idInternal: 0
       valueGuidInternal: 
-      WwiseObjectReference: {fileID: 0}
+      WwiseObjectReference: {fileID: 11400000, guid: a8146e6a6122b724bbc21591026d5584, type: 2}
     coolDownTimer: 0
   utility:
     agent: {fileID: 0}
@@ -548,6 +573,8 @@ MonoBehaviour:
     heldMoney: 0
     attackSpeed: 1
     coolDownMultiplier: 1
+    walkSpeed: 20
+    sprintSpeed: 2
   abilities: {fileID: 0}
   effectHandler: {fileID: 0}
   health: {fileID: 0}
@@ -665,7 +692,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3014019172444536401}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10251728, y: -0, z: -0, w: 0.99473125}
+  m_LocalRotation: {x: 0.041558642, y: -0, z: -0, w: 0.9991361}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -701,7 +728,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 6396768416043665583}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 52
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -813,7 +840,8 @@ GameObject:
   - component: {fileID: 5078679996818067839}
   - component: {fileID: 2083308414221046816}
   - component: {fileID: 2097432451834174342}
-  - component: {fileID: 1180743900116550954}
+  - component: {fileID: 7785313672667496239}
+  - component: {fileID: 9140033435224208244}
   m_Layer: 3
   m_Name: cm
   m_TagString: Untagged
@@ -861,7 +889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 5, z: -12}
+  m_FollowOffset: {x: 0, y: 3, z: -6}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -902,7 +930,19 @@ MonoBehaviour:
   m_LegacyHeightOffset: 3.4028235e+38
   m_LegacyHeadingBias: 3.4028235e+38
   m_HeadingIsSlave: 1
---- !u!114 &1180743900116550954
+--- !u!114 &7785313672667496239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4780994281353076404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9140033435224208244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1151,7 +1191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7114456423401257476}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10251728, y: -0, z: -0, w: 0.99473125}
+  m_LocalRotation: {x: 0.041558642, y: -0, z: -0, w: 0.9991361}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1187,7 +1227,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 6396768416043665583}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 52
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -1298,7 +1338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 735364575021598262}
   - component: {fileID: 5844694640700254909}
-  - component: {fileID: 674125501167861433}
+  - component: {fileID: 5831263079154865686}
   m_Layer: 3
   m_Name: FreeLook Camera
   m_TagString: Untagged
@@ -1315,7 +1355,7 @@ Transform:
   m_GameObject: {fileID: 8966662666157391180}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: -12}
+  m_LocalPosition: {x: 0, y: 0.5, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1346,7 +1386,7 @@ MonoBehaviour:
   m_Follow: {fileID: 7641492428396719861}
   m_CommonLens: 1
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 52
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -1365,9 +1405,9 @@ MonoBehaviour:
   m_LegacyBlendHint: 0
   m_YAxis:
     Value: 0.5
-    m_SpeedMode: 0
-    m_MaxSpeed: 4
-    m_AccelTime: 0.1
+    m_SpeedMode: 1
+    m_MaxSpeed: 0.06
+    m_AccelTime: 0.01
     m_DecelTime: 0.05
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
@@ -1389,8 +1429,8 @@ MonoBehaviour:
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
     Value: 0
-    m_SpeedMode: 0
-    m_MaxSpeed: 350
+    m_SpeedMode: 1
+    m_MaxSpeed: 7
     m_AccelTime: 0.01
     m_DecelTime: 0.01
     m_InputAxisName: Mouse X
@@ -1416,20 +1456,20 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_BindingMode: 4
-  m_SplineCurvature: 0.2
+  m_SplineCurvature: 0.5
   m_Orbits:
-  - m_Height: 10
+  - m_Height: 6
+    m_Radius: 2
+  - m_Height: 3
     m_Radius: 6
-  - m_Height: 5
-    m_Radius: 12
   - m_Height: 0
-    m_Radius: 6
+    m_Radius: 2
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 6573317096601276331}
   - {fileID: 2461535222328850112}
   - {fileID: 9013281208509580548}
---- !u!114 &674125501167861433
+--- !u!114 &5831263079154865686
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1443,11 +1483,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 127
   m_IgnoreTag: Player
   m_TransparentLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_MinimumDistanceFromTarget: 0.1
   m_AvoidObstacles: 1
   m_DistanceLimit: 0
@@ -1456,6 +1496,6 @@ MonoBehaviour:
   m_Strategy: 0
   m_MaximumEffort: 4
   m_SmoothingTime: 0
-  m_Damping: 2
-  m_DampingWhenOccluded: 0.1
+  m_Damping: 0
+  m_DampingWhenOccluded: 0
   m_OptimalTargetDistance: 0

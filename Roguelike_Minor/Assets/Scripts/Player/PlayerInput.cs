@@ -38,9 +38,6 @@ namespace Game.Player {
             Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             playerController.SetMoveDirection(moveInput);
 
-            if (playerController.GetIsSprinting() && moveInput.y <= 0)
-                playerController.Sprint(false);
-
             if (canPlayFootstep && moveInput.magnitude >= 0.1f)
             {
                 StartCoroutine(FootstepCo());
@@ -50,15 +47,15 @@ namespace Game.Player {
 
         private void SprintInput()
         {
-            if(Input.GetKeyDown(KeyCode.LeftShift) && !playerController.GetIsSprinting())
+/*            if(Input.GetKeyDown(KeyCode.LeftShift) && !playerController.GetIsSlowed())
             {
-                playerController.Sprint(true);
+                playerController.ToggleSlow(true);
                 return;
             }
-            if (Input.GetKeyDown(KeyCode.LeftShift) && playerController.GetIsSprinting())
+            if (Input.GetKeyDown(KeyCode.LeftShift) && playerController.GetIsSlowed())
             {
-                playerController.Sprint(false);
-            }
+                playerController.ToggleSlow(false);
+            }*/
         }
 
         private void JumpInput()
