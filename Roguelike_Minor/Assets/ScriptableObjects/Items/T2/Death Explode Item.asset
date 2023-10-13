@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Death Explode Item
   m_EditorClassIdentifier: 
   size: {fileID: 11400000, guid: aaa7839693155fe46a5ce1c6da18f970, type: 2}
+  canProcSelf: 1
   pickupPrefab: {fileID: 1950396541563328600, guid: cda126eae4f672249a0f2e599fe1dc41, type: 3}
   UISprite: {fileID: 21300000, guid: 49f57c0591189ed4f821fdd68e8e4d34, type: 3}
   explosionDamageMult: 3
   cascadeMult: 0.9
   explosionRadius: 5
   bonusExplosionRadius: 2.5
+  explodeDelay: 0.1
   explosionPrefab: {fileID: 0}

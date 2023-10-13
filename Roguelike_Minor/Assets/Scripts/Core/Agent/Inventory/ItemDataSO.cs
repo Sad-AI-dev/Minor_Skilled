@@ -6,6 +6,7 @@ namespace Game.Core {
     public abstract class ItemDataSO : ScriptableObject
     {
         public SlotSizeSO size;
+        public bool canProcSelf;
 
         [Header("Visuals")]
         public GameObject pickupPrefab;
