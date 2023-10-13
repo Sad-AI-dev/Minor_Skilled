@@ -10,13 +10,20 @@ namespace Game.Player.Soldier
     public class SoldierSpecialSO : AbilitySO
     {
         [SerializeField] private GameObject bullet; 
-        [SerializeField] private float bulletSpeed; 
+        [SerializeField] private float bulletSpeed;
+
+        PlayerController controller;
 
         public override void Use(Ability source)
         {
             Camera cam = Camera.main;
             Vector3 target;
             Vector3 bulletDir;
+
+            if (!source.vars.ContainsKey("varsInitialized"))
+                InitializeVars(source);
+
+            controller.StartSlowCoroutine(.2f);
 
             RaycastHit hit;
             if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500))
@@ -31,6 +38,12 @@ namespace Game.Player.Soldier
             RailgunBullet rgBullet = projectile.GetComponent<RailgunBullet>();
             rgBullet.velocity = bulletDir * bulletSpeed;
             rgBullet.ability = source;
+        }
+
+        private void InitializeVars(Ability source)
+        {
+            source.vars.Add("varsInitialized", false);
+            controller = source.agent.GetComponent<PlayerController>();
         }
     }
 }

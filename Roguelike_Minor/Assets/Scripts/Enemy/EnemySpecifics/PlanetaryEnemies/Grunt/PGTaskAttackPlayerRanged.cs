@@ -4,43 +4,43 @@ using UnityEngine;
 using Game.Enemy.Core;
 using Game.Core;
 
-namespace Game.Enemy
-{
+namespace Game.Enemy {
     public class PGTaskAttackPlayerRanged : BT_Node
     {
         Transform transform;
         Agent enemyAgent;
-        LayerMask playerLayerMask, enemyLayerMask;
+        LayerMask enemyLayerMask;
+        private float distanceToTarget;
 
-        public PGTaskAttackPlayerRanged(Transform transform, Agent enemyAgent, LayerMask playerLayerMask, LayerMask enemyLayerMask)
+        public PGTaskAttackPlayerRanged(Transform transform, Agent enemyAgent, LayerMask enemyLayerMask)
         {
             this.transform = transform;
             this.enemyAgent = enemyAgent;
-            this.playerLayerMask = playerLayerMask;
             this.enemyLayerMask = enemyLayerMask;
         }
 
         public override NodeState Evaluate()
         {
             Transform target = (Transform)GetData("Target");
-            Collider[] colMelee = Physics.OverlapSphere(
-                    transform.position, PGTree.meleeAttackRange, playerLayerMask);
+            if (GetData("DistanceToTarget") != null)
+            {
+                distanceToTarget = (float)GetData("DistanceToTarget");
+            }
 
             //If target null: Fail
-            //If in melee ranged: Fail
-            //else Running
-
             if (target == null)
             {
                 state = NodeState.FAILURE;
             }
-            else if (PGTree.EnemiesInRangeOfPlayer < 3 || colMelee.Length > 0)
+            //If in melee ranged: Fail
+            else if (PGTree.EnemiesInRangeOfPlayer < 3 || distanceToTarget <= PGTree.meleeAttackRange)
             {
                 state = NodeState.FAILURE;
             }
-            else
+            //else Running
+            else if(distanceToTarget <= PGTree.rangedAttackRange)
             {
-
+                Debug.Log("shooting");
                 enemyAgent.abilities.secondary.TryUse();
                 state = NodeState.RUNNING;   
             }
