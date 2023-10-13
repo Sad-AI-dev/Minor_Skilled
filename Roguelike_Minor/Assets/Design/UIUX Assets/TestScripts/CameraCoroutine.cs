@@ -13,7 +13,7 @@ public class CameraCoroutine : MonoBehaviour
     {
         StartCoroutine(MoveCameraCo(target));
     }
-
+    
     public void OnButtonClick2()
     {
         StartCoroutine(MoveCameraCo2(Character1));
