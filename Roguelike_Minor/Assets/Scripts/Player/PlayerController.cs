@@ -19,9 +19,12 @@ namespace Game.Player
         private float walkSpeed;
         private float sprintSpeed;
         [SerializeField] private float deceleration;
+        [SerializeField] private float acceleration;
+        private float speedMultiplier;
         private bool isSlowed = false;
 
         private Vector3 moveDirection;
+        private Vector3 lastMoveDir;
 
         [Header("Jump")]
         [SerializeField] private float JumpForce;
@@ -32,7 +35,6 @@ namespace Game.Player
 
         [Header("External Components")]
         [SerializeField] private Camera cam;
-        [SerializeField] private CinemachineFreeLook freeLookCam;
         private CharacterController cc;
 
         private float smoothVelocity;
@@ -74,11 +76,27 @@ namespace Game.Player
                 visuals.transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
                 moveDirection = Quaternion.Euler(0, dirAngle, 0) * Vector3.forward;
                 moveDirection.Normalize();
+                lastMoveDir = moveDirection;
+                Accelerate(acceleration);
             }
-            else
+            else if (lastMoveDir != Vector3.zero && speed > 0)
             {
-                moveDirection = Vector3.zero;
+                moveDirection = lastMoveDir;
+                Decelerate(deceleration);
             }
+        }
+
+        public void Accelerate(float acceleration)
+        {
+            speedMultiplier += acceleration * Time.deltaTime;
+            speedMultiplier = Mathf.Clamp(speedMultiplier, 0, 1);
+
+        }
+
+        public void Decelerate(float deceleration)
+        {
+            speedMultiplier -= deceleration * Time.deltaTime;
+            speedMultiplier = Mathf.Clamp(speedMultiplier, 0, 1);
         }
 
         public void ToggleSlow(bool slowed)
@@ -99,8 +117,10 @@ namespace Game.Player
             {
                 if (!isSlowed) speed = walkSpeed * sprintSpeed;
                 if (isSlowed) speed = walkSpeed;
-            }
 
+                speed *= speedMultiplier;
+            }
+            
             speed /= 100;
         }
 
@@ -161,12 +181,6 @@ namespace Game.Player
             isSlowed = true;
             yield return new WaitForSeconds(duration);
             isSlowed = false;
-        }
-
-        public void LockCamera()
-        {
-            freeLookCam.m_YAxis.m_MaxSpeed = 0;
-            freeLookCam.m_XAxis.m_MaxSpeed = 0;
         }
     }
 }
