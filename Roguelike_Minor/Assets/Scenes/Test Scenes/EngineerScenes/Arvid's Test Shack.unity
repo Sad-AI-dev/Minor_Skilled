@@ -350,7 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   items: []
-  slots: []
+  slots: 0
 --- !u!114 &512064687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +369,8 @@ MonoBehaviour:
     heldMoney: 0
     attackSpeed: 1
     coolDownMultiplier: 1
+    walkSpeed: 0
+    sprintSpeed: 0
   abilities: {fileID: 0}
   effectHandler: {fileID: 0}
   health: {fileID: 0}

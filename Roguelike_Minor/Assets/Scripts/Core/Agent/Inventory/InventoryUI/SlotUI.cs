@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,33 +9,27 @@ namespace Game.Core {
     public class SlotUI : MonoBehaviour
     {
         public UnityDictionary<SlotSizeSO, List<ItemUI>> itemVisuals;
-        public List<Image> bgImages;
 
-        public void GenerateVisuals(ItemSlot slot, InventoryUI inventoryUI)
+        public void GenerateVisuals(InventoryUI inventoryUI, Item[] items, int slotsToShow)
         {
             ResetVisuals();
-            //generate gbImages
-            for (int i = 0; i < slot.size; i++)
-            {
-                bgImages[i].enabled = true;
-            }
             //generate item visuals
-            for (int i = 0; i < slot.heldItems.Count; i++)
+            for (int i = 0; i < slotsToShow; i++)
             {
-                ItemUI targetUI = itemVisuals[slot.heldItems[i].data.size][i];
+                //configure item UI
+                ItemUI targetUI = itemVisuals[GetTargetSize(items[i])][i];
                 targetUI.inventoryUI = inventoryUI; //pass inventoryUI reference
-                targetUI.GenerateVisuals(slot.heldItems[i]);
+                targetUI.GenerateVisuals(items[i]);
             }
+        }
+        private SlotSizeSO GetTargetSize(Item item)
+        {
+            return item != null ? item.data.size : itemVisuals.Keys.First();
         }
 
         //======== Reset =========
         public void ResetVisuals()
         {
-            //reset bg images
-            foreach (Image img in bgImages)
-            {
-                img.enabled = false;
-            }
             //reset item visuals
             foreach (var kvp in itemVisuals)
             {

@@ -9,6 +9,7 @@ namespace Game.Core {
     {
         [Header("External Components")]
         public Image img;
+        public Image bgImage;
         public CanvasGroup group;
 
         //vars
@@ -17,10 +18,19 @@ namespace Game.Core {
 
         public void GenerateVisuals(Item item)
         {
-            this.item = item;
-            img.color = Color.white;
-            img.sprite = item.data.UISprite;
-            group.blocksRaycasts = true;
+            if (item != null) 
+            { 
+                this.item = item;
+                img.color = Color.white;
+                img.sprite = item.data.UISprite;
+                group.blocksRaycasts = true;
+            }
+            ShowBGImage();
+        }
+
+        private void ShowBGImage()
+        {
+            bgImage.color = Color.white;
         }
 
         public void ResetVisuals()
@@ -28,6 +38,7 @@ namespace Game.Core {
             item = null;
             img.color = new Color(1, 1, 1, 0);
             group.blocksRaycasts = false;
+            bgImage.color = new Color(1, 1, 1, 0);
         }
 
         //=========== Pointer Event Handling =================

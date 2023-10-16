@@ -88,13 +88,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0442563a7907317488a36c8ddd865a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 0}
-  item:
-    agent: {fileID: 0}
-    data: {fileID: 0}
-    stacks: 0
   img: {fileID: 6553377304492927503}
+  bgImage: {fileID: 4675693874683407133}
   group: {fileID: 1575725613010723332}
+  inventoryUI: {fileID: 0}
 --- !u!1 &1701992751256042980
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +157,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4b4aa88a8e17f354cb6feed800663050, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -322,13 +319,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0442563a7907317488a36c8ddd865a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 0}
-  item:
-    agent: {fileID: 0}
-    data: {fileID: 0}
-    stacks: 0
   img: {fileID: 5315884381232446880}
+  bgImage: {fileID: 7967532828510955451}
   group: {fileID: 1575725613010723332}
+  inventoryUI: {fileID: 0}
 --- !u!1 &4171583769103595033
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +402,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7992643011254934334}
   - {fileID: 6791248673824785424}
   m_Father: {fileID: 5109788376270441742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -493,7 +488,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4b4aa88a8e17f354cb6feed800663050, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -632,7 +627,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4b4aa88a8e17f354cb6feed800663050, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -730,13 +725,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0442563a7907317488a36c8ddd865a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 0}
-  item:
-    agent: {fileID: 0}
-    data: {fileID: 0}
-    stacks: 0
   img: {fileID: 7750263337068209620}
+  bgImage: {fileID: 6803254917180466837}
   group: {fileID: 1797725490940780881}
+  inventoryUI: {fileID: 0}
 --- !u!1 &7389604981776961748
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,13 +817,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0442563a7907317488a36c8ddd865a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 0}
-  item:
-    agent: {fileID: 0}
-    data: {fileID: 0}
-    stacks: 0
   img: {fileID: 7487376233310940917}
+  bgImage: {fileID: 2497291800896714559}
   group: {fileID: 1575725613010723332}
+  inventoryUI: {fileID: 0}
 --- !u!1 &7412700604597295858
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,11 +882,81 @@ MonoBehaviour:
     - key: {fileID: 11400000, guid: dfaeea43fb7497947801a52fae9ad6eb, type: 2}
       value:
       - {fileID: 8113030405229906077}
-  bgImages:
-  - {fileID: 8604866545739551656}
-  - {fileID: 2497291800896714559}
-  - {fileID: 4675693874683407133}
-  - {fileID: 7967532828510955451}
+--- !u!1 &8441858598656041330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7992643011254934334}
+  - component: {fileID: 520220214665683939}
+  - component: {fileID: 6803254917180466837}
+  m_Layer: 5
+  m_Name: MediumBG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7992643011254934334
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441858598656041330}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4621170542312909568}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &520220214665683939
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441858598656041330}
+  m_CullTransparentMesh: 1
+--- !u!114 &6803254917180466837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441858598656041330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.30980393, g: 0.30980393, b: 0.30980393, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a9ec57a21d01c8c40a603ebbe1c3f075, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8559393019487110948
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,13 +1045,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0442563a7907317488a36c8ddd865a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 0}
-  item:
-    agent: {fileID: 0}
-    data: {fileID: 0}
-    stacks: 0
   img: {fileID: 3094639210439849348}
+  bgImage: {fileID: 8604866545739551656}
   group: {fileID: 1575725613010723332}
+  inventoryUI: {fileID: 0}
 --- !u!1 &8924731420691758486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,7 +1114,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4b4aa88a8e17f354cb6feed800663050, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
