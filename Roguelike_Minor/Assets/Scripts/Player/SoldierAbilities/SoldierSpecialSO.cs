@@ -9,7 +9,7 @@ namespace Game.Player.Soldier
     [CreateAssetMenu(fileName = "SoldierSpecial", menuName = "ScriptableObjects/Agent/Ability/Soldier/Special")]
     public class SoldierSpecialSO : AbilitySO
     {
-        [SerializeField] private GameObject bullet; 
+        [SerializeField] private GameObject bullet;
         [SerializeField] private float bulletSpeed;
 
         PlayerController controller;

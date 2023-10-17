@@ -366,6 +366,7 @@ GameObject:
   - component: {fileID: 7641492428396719861}
   - component: {fileID: 6042182213848110425}
   - component: {fileID: 7374867739153013466}
+  - component: {fileID: 6425007794457280646}
   - component: {fileID: 1389778117787781048}
   - component: {fileID: 1439967887705530693}
   - component: {fileID: 8856083573202198069}
@@ -432,11 +433,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visuals: {fileID: 7107147114416228610}
-  deceleration: 1
+  deceleration: 3
+  acceleration: 3
   JumpForce: 50
   gravity: 0.25
   cam: {fileID: 0}
-  freeLookCam: {fileID: 5844694640700254909}
+--- !u!114 &6425007794457280646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421599695142573888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db499deb1e0fd794abff6d3e93c16ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 5844694640700254909}
 --- !u!143 &1389778117787781048
 CharacterController:
   m_ObjectHideFlags: 0
@@ -599,12 +613,15 @@ MonoBehaviour:
     heldMoney: 0
     attackSpeed: 1
     coolDownMultiplier: 1
-    walkSpeed: 12
+    walkSpeed: 15
     sprintSpeed: 2
   abilities: {fileID: 0}
   effectHandler: {fileID: 0}
   health: {fileID: 0}
   inventory: {fileID: 0}
+  OnKnockbackReceived:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4822304574826469235
 MonoBehaviour:
   m_ObjectHideFlags: 0

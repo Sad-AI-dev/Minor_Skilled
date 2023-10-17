@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Game.Core
 {
@@ -12,36 +13,48 @@ namespace Game.Core
         [HideInInspector] public Ability ability;
         protected Agent source;
 
-        
+
 
         private void Start()
         {
             source = ability.agent;
 
             StartCoroutine(LifeTimeCo());
+
+            //Time.timeScale = 0;
         }
 
         private void FixedUpdate()
         {
+            CheckHitObject();
             UpdateMoveDir();
             transform.position += velocity;
         }
 
         private void Update()
         {
-            CheckHitObject();
+            if(Input.GetKeyDown(KeyCode.Period))
+            {
+                Time.timeScale += 0.001f;
+            }
+            if(Input.GetKeyDown(KeyCode.Comma))
+            {
+                Time.timeScale -= 0.01f;
+            }
         }
 
         private void CheckHitObject()
         {
+            Vector3 transformPos = transform.position - new Vector3(0, 0, transform.localScale.z / 2);
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, velocity.magnitude, layermask, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(transformPos, transform.forward, out hit, velocity.magnitude, layermask, QueryTriggerInteraction.Ignore))
             {
                 if (!hit.transform.CompareTag(source.tag))
                 {
+                    
                     OnCollide(hit);
                     gameObject.SetActive(false);
-                }  
+                }
             }
         }
 
@@ -64,6 +77,11 @@ namespace Game.Core
         private void OnDisable()
         {
             StopAllCoroutines();
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawLine(transform.localPosition - new Vector3(0, 0, transform.localScale.z / 2), transform.position + velocity);
         }
     }
 }

@@ -18,20 +18,28 @@ namespace Game.Player.Soldier
         public int ticks;
         public float tickDelay;
 
-        private bool canTick = false;
+        public float knockbackForce;
 
-        private List<Agent> agentsInRange;
+
+        // ========= PRIVATE VARIABLES ===========
+        private bool canTick = true;
+
+        public List<Agent> agentsInRange;
+
+        private Vector3 knockbackVelocity;
 
         private void Start()
         {
-            sphere.transform.localScale *= areaRadius;
+            agentsInRange = new List<Agent>();
+            transform.localScale *= areaRadius;
         }
 
-        private void LateUpdate()
+        private void FixedUpdate()
         {
             if (canTick)
             {
                 executeTick();
+                Debug.Log("Tick " + Time.frameCount);
             }
         }
 
@@ -46,7 +54,18 @@ namespace Game.Player.Soldier
             {
                 foreach (Agent agent in agentsInRange)
                 {
-                    agent.health.Hurt(hitEvent);
+                    Debug.Log("Hit agent: " + agent.transform.name);
+
+                    if(damage > 0)
+                        agent.health.Hurt(hitEvent);
+
+                    if (knockbackForce > 0)
+                    {
+                        Vector3 agentPos = agent.transform.position + new Vector3(0, agent.transform.localScale.y / 2, 0);
+                        knockbackVelocity = (agentPos - transform.position).normalized;
+                        knockbackVelocity *= knockbackForce;
+                        agent.OnKnockbackReceived.Invoke(knockbackVelocity);
+                    }
                 }
             }
 
@@ -57,7 +76,7 @@ namespace Game.Player.Soldier
         {
             yield return new WaitForSeconds(tickDelay);
             ticks--;
-            if (ticks >= 0) canTick = true;
+            if (ticks > 0) canTick = true;
             else Destroy(gameObject);
         }
 
@@ -65,12 +84,31 @@ namespace Game.Player.Soldier
         {
             if(other.CompareTag("Enemy"))
             {
-                if(other.TryGetComponent(out Agent enemy))
-                agentsInRange.Add(enemy);
+                if (other.TryGetComponent(out Agent enemy))
+                    agentsInRange.Add(enemy);
             }
-            if(other.TryGetComponent(out Agent player))
+            if(other.CompareTag("Player"))
             {
-                agentsInRange.Add(player);
+                if(other.TryGetComponent(out Agent player))
+                {
+                    Debug.Log("Player added " + Time.frameCount);
+                    agentsInRange.Add(player);
+                }
+
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                if (other.TryGetComponent(out Agent enemy))
+                    agentsInRange.Remove(enemy);
+            }
+            if (other.CompareTag("Player"))
+            {
+                if (other.TryGetComponent(out Agent player))
+                    agentsInRange.Remove(player);
             }
         }
     }

@@ -25,6 +25,7 @@ namespace Game.Player
 
         private Vector3 moveDirection;
         private Vector3 lastMoveDir;
+        private Vector3 knockbackVelocity;
 
         [Header("Jump")]
         [SerializeField] private float JumpForce;
@@ -42,6 +43,7 @@ namespace Game.Player
 
         Vector3 warpPosition = Vector3.zero;
         private Coroutine slowCo;
+        private Coroutine kbReset;
 
         private void Start()
         {
@@ -51,6 +53,8 @@ namespace Game.Player
             agent = GetComponent<Agent>();
             walkSpeed = agent.stats.walkSpeed;
             sprintSpeed = agent.stats.sprintSpeed;
+
+            agent.OnKnockbackReceived.AddListener(ReceiveKnockback);
         }
 
         private void FixedUpdate()
@@ -62,7 +66,7 @@ namespace Game.Player
             //allows to directly set position of player
             Physics.SyncTransforms();
 
-            cc.Move((moveDirection * speed) + new Vector3(0, yVelocity, 0));
+            cc.Move((moveDirection * speed) + knockbackVelocity + new Vector3(0, yVelocity, 0));
 
             CheckGrounded();
         }
@@ -181,6 +185,28 @@ namespace Game.Player
             isSlowed = true;
             yield return new WaitForSeconds(duration);
             isSlowed = false;
+        }
+
+        private void ReceiveKnockback(Vector3 kbForce)
+        {
+            knockbackVelocity = kbForce;
+
+            //start coroutine to reduce knockback over time
+            if (kbReset != null)
+                StopCoroutine(kbReset);
+            kbReset = StartCoroutine(ResetKnockbackCo());
+        }
+
+        IEnumerator ResetKnockbackCo()
+        {
+            while(knockbackVelocity.magnitude >= 0)
+            {
+                yield return null;
+                //Debug.Log(knockbackVelocity);
+                knockbackVelocity -= knockbackVelocity * deceleration * Time.deltaTime;
+            }
+            //done resetting knockback
+            knockbackVelocity = Vector3.zero;
         }
     }
 }
