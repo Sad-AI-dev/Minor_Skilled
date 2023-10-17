@@ -30,12 +30,12 @@ namespace Game {
         public UnityEvent onStageComplete;
 
         //ref to advance object spawner
-        //[HideInInspector] public AdvanceObjectSpawner advanceObjectSpawner;
+        [HideInInspector] public AdvanceObjectSpawner advanceObjectSpawner;
 
         //========== Manage Stage State ==============
         public void HandleCompleteStageObject()
         {
-            //advanceObjectSpawner.SpawnAdvanceObject();
+            advanceObjectSpawner.SpawnAdvanceObject();
             onStageComplete?.Invoke();
             //update UI manager
             uiManager.ObjectiveComplete = true;

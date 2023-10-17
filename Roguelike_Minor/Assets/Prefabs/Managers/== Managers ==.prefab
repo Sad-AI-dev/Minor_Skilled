@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  uiManager: {fileID: 0}
+  uiManager: {fileID: 789141063057159887}
   onStageComplete:
     m_PersistentCalls:
       m_Calls: []
@@ -232,7 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537db1a22ab3c85439f3f90c1ff96283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDelay: 5
+  spawnDelay: 10
+  prewarmMultiplier: 3
   placer: {fileID: 0}
 --- !u!114 &8021601860483365532
 MonoBehaviour:
@@ -250,9 +251,9 @@ MonoBehaviour:
   activateIntervalTime: 0
   activateOnStart: 0
   budget: 0
-  budgetGain: 1
+  budgetGain: 5
   gainRampup: 1
-  gainRampupFrequency: 4
+  gainRampupFrequency: 5
   enableExponentialScaling: 0
   exponentialRampup: 0
   exponentialRampupFrequency: 0
@@ -270,7 +271,7 @@ MonoBehaviour:
   minRandInterval: 0
   maxRandInterval: 0
   options:
-  - name: enemy test
+  - name: PlanetaryGrunt
     price: 1
     onSelect:
       m_PersistentCalls:
@@ -288,5 +289,5 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     initialized: 1
-  cyclesToSimulate: 10
+  cyclesToSimulate: 100
   externalMultiplier: 1
