@@ -25,6 +25,9 @@ namespace Game {
         [Header("Spawn Settings")]
         public float spawnDelay = 1f;
 
+        [Header("Prewarm Settings")]
+        public float prewarmMultiplier = 2f;
+
         //vars
         [HideInInspector] public EnemyPlacer placer;
         private CostBasedActivator activator;
@@ -39,7 +42,6 @@ namespace Game {
         private void Initialize()
         {
             activator = GetComponent<CostBasedActivator>();
-            DontDestroyManager.instance.Register(gameObject); //mark for dont destroy on load
             SpawnEnemies();
             EventBus<SceneLoadedEvent>.AddListener(OnSceneLoaded);
         }
@@ -67,6 +69,15 @@ namespace Game {
             SpawnEnemies(); //loop
         }
 
+        //========= Prewarm Stage ======
+        private void Prewarm()
+        {
+            activator.externalMultiplier += prewarmMultiplier;
+            activator.Activate(); //activate twice (activator gains budget after puchasing)
+            activator.externalMultiplier -= prewarmMultiplier;
+            activator.Activate();
+        }
+
         //========= Spawn Enemy Wrapper ===========
         public void SpawnEnemy(GameObject prefab)
         {
@@ -86,6 +97,8 @@ namespace Game {
         private void OnSceneLoaded(SceneLoadedEvent data)
         {
             paused = false;
+            Prewarm();
+            Debug.Log("prewarmed stage");
         }
 
         //============ Handle Destroy ===============
