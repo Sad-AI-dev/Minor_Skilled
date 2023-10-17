@@ -70,12 +70,15 @@ namespace Game {
         }
 
         //========= Prewarm Stage ======
-        private void Prewarm()
+        private IEnumerator PrewarmCo()
         {
+            yield return null; //wait a frame
+            placer.ignoreRings = true;
             activator.externalMultiplier += prewarmMultiplier;
             activator.Activate(); //activate twice (activator gains budget after puchasing)
             activator.externalMultiplier -= prewarmMultiplier;
             activator.Activate();
+            placer.ignoreRings = false;
         }
 
         //========= Spawn Enemy Wrapper ===========
@@ -97,8 +100,7 @@ namespace Game {
         private void OnSceneLoaded(SceneLoadedEvent data)
         {
             paused = false;
-            Prewarm();
-            Debug.Log("prewarmed stage");
+            StartCoroutine(PrewarmCo());
         }
 
         //============ Handle Destroy ===============

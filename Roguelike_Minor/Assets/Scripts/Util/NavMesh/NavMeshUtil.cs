@@ -7,10 +7,10 @@ namespace Game.Util
 {
     public class NavMeshUtil : MonoBehaviour
     {
-        public static Vector3 RandomNavmeshLocation(Transform transform, float radius)
+        public static Vector3 RandomNavmeshLocation(Vector3 center, float radius)
         {
             Vector3 randomDirection = Random.insideUnitSphere * radius;
-            randomDirection += transform.position;
+            randomDirection += center;
             NavMeshHit hit;
             Vector3 finalPosition = Vector3.zero;
             if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
