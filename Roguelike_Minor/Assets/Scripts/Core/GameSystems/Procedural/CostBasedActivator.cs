@@ -182,6 +182,15 @@ namespace Game.Core.GameSystems {
             else { stopReq = false; } //reset stopReq
         }
 
+        //=============== ForceActivate ===============
+        public void ForceActivate(float multiplier = 1f)
+        {
+            //gain budget
+            budget += Mathf.RoundToInt(budgetGain * multiplier);
+            //puchase options
+            PurchaseOptions();
+        }
+
         //================== stop ==================
         public void Stop()
         {

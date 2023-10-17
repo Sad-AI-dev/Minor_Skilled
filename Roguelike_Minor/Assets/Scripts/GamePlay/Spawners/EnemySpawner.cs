@@ -74,10 +74,7 @@ namespace Game {
         {
             yield return null; //wait a frame
             placer.ignoreRings = true;
-            activator.externalMultiplier += prewarmMultiplier;
-            activator.Activate(); //activate twice (activator gains budget after puchasing)
-            activator.externalMultiplier -= prewarmMultiplier;
-            activator.Activate();
+            activator.ForceActivate(prewarmMultiplier);
             placer.ignoreRings = false;
         }
 

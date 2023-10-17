@@ -34,7 +34,7 @@ namespace Game {
 
         private Vector3 GetSpawnPos()
         {
-            return NavMeshUtil.RandomNavmeshLocation(player.position, GetRandomRadius());
+            return NavMeshUtil.RandomNavmeshLocationAtDistance(player.position, GetRandomRadius());
         }
 
         private float GetRandomRadius()
