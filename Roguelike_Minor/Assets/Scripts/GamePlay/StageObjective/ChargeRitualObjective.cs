@@ -17,12 +17,15 @@ namespace Game {
 
         [Header("Visuals")]
         [SerializeField] private GameObject rangeIndicator;
+        [SerializeField] private PickupMovement pillarMovement;
+        [SerializeField] private AnimationCurve pillarSpeed;
+        [SerializeField] private float maxPillarSpeed = 300f;
 
         [Header("UI Settings")]
         [SerializeField] private TMP_Text progressLabel;
-        //[SerializeField] private Slider progressSlider;
 
         //vars
+        private bool activated;
         private float progress;
         private bool isCharging;
 
@@ -40,6 +43,7 @@ namespace Game {
         {
             if (isCharging) { Charge(); }
             else if (canDecharge) { Decharge(); }
+            UpdatePillarSpeed();
             //done check
             if (progress >= 100) { StopCharge(); }
             //update UI
@@ -47,6 +51,16 @@ namespace Game {
             UpdateUI();
         }
         
+        //=============== Start Charge ==============
+        public void StartCharge()
+        {
+            activated = true;
+            enabled = true;
+            isCharging = true;
+            progress = 0;
+            rangeIndicator.SetActive(true);
+        }
+
         //=============== Charge ===============
         private void Charge()
         {
@@ -63,6 +77,12 @@ namespace Game {
         private void Decharge()
         {
             progress -= dechargeSpeed * Time.deltaTime;
+        }
+
+        //============ Pillar Visuals ===========
+        private void UpdatePillarSpeed()
+        {
+            pillarMovement.rotateSpeed = pillarSpeed.Evaluate(progress / 100f) * maxPillarSpeed;
         }
 
         //=============== UI =============
@@ -82,13 +102,7 @@ namespace Game {
         //============== Manage Triggers ==================
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Player")) { return; } //only activate on player
-            if (!enabled) 
-            {
-                enabled = true;
-                progress = 0;
-                rangeIndicator.SetActive(true);
-            }
+            if (!activated || !other.CompareTag("Player")) { return; } //only activate on player
             isCharging = true;
             canDecharge = false;
             if (dechargeDelayRoutine != null) { StopCoroutine(dechargeDelayRoutine); }
@@ -96,7 +110,7 @@ namespace Game {
 
         private void OnTriggerExit(Collider other)
         {
-            if (!other.CompareTag("Player")) { return; } //only activate on player
+            if (!activated || !other.CompareTag("Player")) { return; } //only activate on player
             isCharging = false;
             dechargeDelayRoutine = StartCoroutine(DechargeDelayCo());
         }
