@@ -11,6 +11,8 @@ namespace Game.Player.Soldier
         {
             if(source.agent.TryGetComponent(out PlayerController playerController))
                 source.vars.Add("PlayerController", playerController);
+
+
         }
     }
 }

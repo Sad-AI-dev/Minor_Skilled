@@ -96,7 +96,7 @@ namespace Game.Player.Soldier
             {
                 if(other.TryGetComponent(out Agent player))
                 {
-                    Debug.Log("Player added " + Time.frameCount);
+                    //Debug.Log("Player added " + Time.frameCount);
                     agentsInRange.Add(player);
                 }
 
