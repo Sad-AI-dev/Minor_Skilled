@@ -15,6 +15,10 @@ namespace Game {
         [SerializeField] private float dechargeDelay;
         [SerializeField] private float dechargeSpeed;
 
+        [Header("Difficulty Settings")]
+        [SerializeField] private float prewarmMultiplier; //multiplier for enemies spawned on objective start
+        [SerializeField] private float spawnMultiplier; //multiplier for amount of enemies being spawned
+
         [Header("Visuals")]
         [SerializeField] private GameObject rangeIndicator;
         [SerializeField] private PickupMovement pillarMovement;
@@ -59,6 +63,9 @@ namespace Game {
             isCharging = true;
             progress = 0;
             rangeIndicator.SetActive(true);
+            //up enemy spawning
+            EnemySpawner.instance.ForceSpawn(prewarmMultiplier);
+            EnemySpawner.instance.SetExternalSpawnMultiplier(spawnMultiplier);
         }
 
         //=============== Charge ===============
@@ -89,12 +96,12 @@ namespace Game {
         private void UpdateUI()
         {
             progressLabel.text = Mathf.FloorToInt(progress) + "%";
-            //progressSlider.value = progress / 100.0f;
         }
 
         //============== Stop Charge ==========
         private void StopCharge()
         {
+            EnemySpawner.instance.SetExternalSpawnMultiplier(-spawnMultiplier);
             GameStateManager.instance.HandleCompleteStageObject();
             Destroy(gameObject);
         }
