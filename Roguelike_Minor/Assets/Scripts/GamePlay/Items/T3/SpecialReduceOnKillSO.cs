@@ -7,6 +7,7 @@ namespace Game {
     [CreateAssetMenu(fileName = "SpecialReduceOnKill", menuName = "ScriptableObjects/Items/T3/SpecialReduceOnKill")]
     public class SpecialReduceOnKillSO : ItemDataSO
     {
+        [Header("Cooldown settings")]
         public float cooldownReduction = 1f;
         public float stackBonusReduction = 1f;
 
@@ -38,6 +39,12 @@ namespace Game {
         private float GetReduction(Item item)
         {
             return cooldownReduction + (stackBonusReduction * (item.stacks - 1));
+        }
+
+        //============ Description ================
+        public override string GenerateLongDescription()
+        {
+            return $"Killing an enemy reduces special cooldown by {cooldownReduction} seconds (+{stackBonusReduction} seconds per stack)";
         }
     }
 }

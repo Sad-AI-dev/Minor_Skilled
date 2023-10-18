@@ -12,6 +12,9 @@ namespace Game.Core {
         public GameObject pickupPrefab;
         public Sprite UISprite;
 
+        [Header("Description")]
+        public string shortDescription;
+
         //============ Manage Stacks ===============
         public abstract void AddStack(Item item);
         public abstract void RemoveStack(Item item);
@@ -20,5 +23,8 @@ namespace Game.Core {
         public abstract void ProcessDealDamage(ref HitEvent hitEvent);
         public abstract void ProcessTakeDamage(ref HitEvent hitEvent);
         public abstract void ProcessHealEvent(ref HealEvent healEvent);
+
+        //============ Description ===========
+        public abstract string GenerateLongDescription();
     }
 }

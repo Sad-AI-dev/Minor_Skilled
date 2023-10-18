@@ -99,5 +99,12 @@ namespace Game {
                 }
             }
         }
+
+        //============== Description ===========
+        public override string GenerateLongDescription()
+        {
+            return $"enemies explode on death, dealing {explosionDamageMult * 100}% TOTAL damage\n" +
+                $"in a {explosionRadius}m radius (+{bonusExplosionRadius}m per stack)";
+        }
     }
 }
