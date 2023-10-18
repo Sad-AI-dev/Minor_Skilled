@@ -10,7 +10,7 @@ namespace Game {
         [SerializeField] private float moveHeight = 0.5f;
 
         [Header("Rotation Settings")]
-        [SerializeField] private float rotateSpeed = 10f;
+        public float rotateSpeed = 10f;
 
         //vars
         private float startHeight;

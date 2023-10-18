@@ -26,7 +26,6 @@ namespace Game.Player {
         void Update()
         {
             WalkInput();
-            SprintInput();
             JumpInput();
             AbilitiesInput();
             InteractInput();
@@ -43,19 +42,6 @@ namespace Game.Player {
                 StartCoroutine(FootstepCo());
             }
             
-        }
-
-        private void SprintInput()
-        {
-/*            if(Input.GetKeyDown(KeyCode.LeftShift) && !playerController.GetIsSlowed())
-            {
-                playerController.ToggleSlow(true);
-                return;
-            }
-            if (Input.GetKeyDown(KeyCode.LeftShift) && playerController.GetIsSlowed())
-            {
-                playerController.ToggleSlow(false);
-            }*/
         }
 
         private void JumpInput()
@@ -75,6 +61,10 @@ namespace Game.Player {
             if(Input.GetKeyDown(KeyCode.Q))
             {
                 agent.abilities.special.TryUse();
+            }
+            if(Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                agent.abilities.utility.TryUse();
             }
         }
 

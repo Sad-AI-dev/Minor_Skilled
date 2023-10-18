@@ -2,7 +2,6 @@ using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Game.Player.Soldier
 {
@@ -38,7 +37,7 @@ namespace Game.Player.Soldier
             projectile.transform.LookAt(target);
             RailgunBullet rgBullet = projectile.GetComponent<RailgunBullet>();
             rgBullet.velocity = bulletDir * bulletSpeed;
-            rgBullet.ability = source;
+            rgBullet.Initialize(source);
         }
 
         private void InitializeVars(Ability source)

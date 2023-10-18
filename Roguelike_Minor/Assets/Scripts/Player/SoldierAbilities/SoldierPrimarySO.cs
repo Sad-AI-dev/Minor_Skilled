@@ -71,8 +71,11 @@ namespace Game.Player.Soldier
             //Instantiate(bullet, source.originPoint.position, UnityEngine.Quaternion.identity);
             projectile.transform.position = source.originPoint.position;
             projectile.transform.LookAt(target);
-            projectile.GetComponent<RifleBullet>().velocity = bulletDir * bulletSpeed;
-            projectile.GetComponent<RifleBullet>().ability = source;
+
+            //initialize projectile
+            RifleBullet bullet = projectile.GetComponent<RifleBullet>();
+            bullet.velocity = bulletDir * bulletSpeed;
+            bullet.Initialize(source);
 
             bool buildingDownSpread = Convert.ToBoolean(source.vars["buildingDownSpread"]);
 

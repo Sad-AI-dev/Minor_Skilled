@@ -87,6 +87,17 @@ namespace Game {
             }
         }
 
+        //========= Enemy Spawn Rate Wrapper =========
+        public void SetExternalSpawnMultiplier(float toAdd)
+        {
+            activator.externalMultiplier += toAdd;
+        }
+
+        public void ForceSpawn(float multiplier)
+        {
+            activator.ForceActivate(multiplier);
+        }
+
         //=========== State Management ============
         public void SetSpawnState(bool state)
         {

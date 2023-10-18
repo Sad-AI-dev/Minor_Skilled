@@ -15,7 +15,8 @@ namespace Game.Core {
     [RequireComponent(typeof(AgentHealthManager))]
     public class Agent : MonoBehaviour
     {
-        public AgentStats stats;
+        [SerializeField] private AgentStatsSO baseStats;
+        [HideInInspector] public AgentStats stats;
         [HideInInspector] public AgentAbilities abilities;
         [HideInInspector] public StatusEffectHandler effectHandler;
         [HideInInspector] public AgentHealthManager health;
@@ -24,6 +25,8 @@ namespace Game.Core {
 
         private void Awake()
         {
+            //setup stats
+            stats.Copy(baseStats.baseStats);
             //setup abilities
             abilities = GetComponent<AgentAbilities>();
             abilities.Initialize(this);
