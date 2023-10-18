@@ -11,17 +11,16 @@ namespace Game.Enemy
     public class PGSecondaryAttackSO : AbilitySO
     {
         public GameObject prefab;
-        PGSecondaryBehaviour secondary;
         public float bulletSpeed;
 
         public override void Use(Ability source)
         {
             if (!source.vars.ContainsKey("poolSecondary")) InitializeVars(source);
-            secondary = ((BehaviourPool<PGSecondaryBehaviour>)source.vars["poolSecondary"]).GetBehaviour();
-            secondary.abil = source;
+            PGSecondaryBehaviour secondary = ((BehaviourPool<PGSecondaryBehaviour>)source.vars["poolSecondary"]).GetBehaviour();
             secondary.bulletSpeed = bulletSpeed;
             secondary.target = GameStateManager.instance.player.transform;
-            secondary.gameObject.transform.position = source.agent.gameObject.transform.position + source.agent.gameObject.transform.forward;
+            secondary.gameObject.transform.position = source.agent.transform.position + source.agent.transform.forward;
+            secondary.Initialize(source);
         }
 
         void InitializeVars(Ability source)

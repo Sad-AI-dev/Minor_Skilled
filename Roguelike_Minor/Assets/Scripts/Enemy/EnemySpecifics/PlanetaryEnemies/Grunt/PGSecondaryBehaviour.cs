@@ -9,21 +9,18 @@ namespace Game.Enemy
     {
         [HideInInspector] public Transform target;
         [HideInInspector] public float bulletSpeed;
-        [HideInInspector] public Ability abil;
 
-        private void Start()
+        protected override void InitializeVars()
         {
             transform.LookAt(target.position + Vector3.up);
-            velocity = transform.forward * bulletSpeed * Time.deltaTime;
-            ability = this.abil;
-            this.source = abil.agent;
+            velocity = transform.forward * (bulletSpeed * Time.deltaTime);
         }
 
         protected override void OnCollide(RaycastHit hit)
         {
             if (hit.transform.CompareTag("Player"))
             {
-                hit.transform.GetComponent<Agent>().health.Hurt(new HitEvent(source));
+                HurtAgent(hit.transform.GetComponent<Agent>());
             }
         }
     }

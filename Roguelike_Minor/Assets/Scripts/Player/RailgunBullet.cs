@@ -13,7 +13,7 @@ namespace Game.Player
         {
             if (hit.transform.TryGetComponent(out Agent enemy))
             {
-                enemy.health.Hurt(new HitEvent(ability));
+                HurtAgent(enemy);
             }
 
             Instantiate(explosion, hit.point, Quaternion.identity);
