@@ -40,10 +40,11 @@ namespace Game {
         {
             if (isCharging) { Charge(); }
             else if (canDecharge) { Decharge(); }
-            progress = Mathf.Clamp(progress, 0, 100f);
-            UpdateUI();
             //done check
             if (progress >= 100) { StopCharge(); }
+            //update UI
+            progress = Mathf.Clamp(progress, 0, 100f);
+            UpdateUI();
         }
         
         //=============== Charge ===============

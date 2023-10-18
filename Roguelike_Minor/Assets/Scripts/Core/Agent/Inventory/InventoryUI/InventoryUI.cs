@@ -6,15 +6,16 @@ using Game.Core.Data;
 namespace Game.Core {
     public class InventoryUI : MonoBehaviour
     {
-        [System.Serializable]
-        public class VisualData
-        {
-            public BehaviourPool<SlotUI> slotPool;
-            public RectTransform slotHolder;
-        }
-
         public SlotInventory inventory;
-        public UnityDictionary<SlotSizeSO, VisualData> slotVisuals;
+
+        [Header("Slot Visual Settings")]
+        public BehaviourPool<SlotUI> slotPool;
+        public RectTransform slotHolder;
+
+        [Header("Technical Settings")]
+        [SerializeField] private int slotSize = 4;
+
+        //hover item
         private ItemUI hoveredItem;
 
         private void Awake()
@@ -40,21 +41,63 @@ namespace Game.Core {
 
         private void ResetVisuals()
         {
-            foreach (var kvp in slotVisuals)
-            {
-                kvp.Value.slotPool.Reset();
-            }
+            slotPool.Reset();
         }
 
         private void GenerateSlotVisuals()
         {
-            for (int i = 0; i < inventory.slots.Count; i++)
-            {
-                ItemSlot targetSlot = inventory.slots[i];
-                SlotUI slotUI = slotVisuals[targetSlot.size].slotPool.GetBehaviour();
-                slotUI.transform.SetParent(slotVisuals[targetSlot.size].slotHolder);
-                slotUI.GenerateVisuals(targetSlot, this);
+            //create slots
+            int itemIndex = 0;
+            int stackIndex = 0;
+            for (int i = 1; i <= inventory.slots; i += slotSize)
+            { //each slot UI can hold up to 4, if there is atleast 1 slot for a set of 4, create a slot
+                //configure slot
+                SlotUI slotUI = slotPool.GetBehaviour();
+                slotUI.transform.SetParent(slotHolder);
+                slotUI.GenerateVisuals(this, GetSlotItems(ref itemIndex, ref stackIndex), GetSlotCount(i));
             }
+        }
+
+        //===== get all items for a slot =====
+        private Item[] GetSlotItems(ref int itemIndex, ref int stackIndex)
+        {
+            Item[] slotItems = new Item[slotSize];
+            int index = 0;
+            while (index < slotSize)
+            {
+                if (TryValidateIndex(ref itemIndex, ref stackIndex))
+                {
+                    slotItems[index] = inventory.items[itemIndex];
+                    index += inventory.items[itemIndex].data.size.capacity;
+                    stackIndex++;
+                }
+                else { break; } //no more items to loop over
+            }
+            return slotItems;
+        }
+
+        private bool TryValidateIndex(ref int itemIndex, ref int stackIndex)
+        {
+            if (!IsValidIndex(itemIndex, stackIndex)) 
+            {
+                if (itemIndex >= inventory.items.Count - 1) { return false; } //cannot validate index, already looped through all items
+                else //stackIndex is not valid
+                {
+                    itemIndex++;
+                    stackIndex = 0;
+                }
+            }
+            return true; //default; index is already valid
+        }
+        private bool IsValidIndex(int itemIndex, int stackIndex)
+        {
+            return itemIndex < inventory.items.Count && stackIndex < inventory.items[itemIndex].stacks;
+        }
+
+        //==== get slot count =====
+        private int GetSlotCount(int index)
+        {
+            return Mathf.Min(slotSize, inventory.slots - (index - 1));
         }
 
         //============== Drop Item ==============

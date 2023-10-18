@@ -13,13 +13,13 @@ namespace Game {
         //========= Manage Stacks ===========
         public override void AddStack(Item item)
         {
-            if (item.stacks == 0) { item.agent.stats.attackSpeed += baseAttackSpeedIncrease; }
+            if (item.stacks == 1) { item.agent.stats.attackSpeed += baseAttackSpeedIncrease; }
             else { item.agent.stats.attackSpeed += stackAttackSpeedIncrease; }
         }
 
         public override void RemoveStack(Item item)
         {
-            if (item.stacks == 1) { item.agent.stats.attackSpeed -= baseAttackSpeedIncrease; }
+            if (item.stacks == 0) { item.agent.stats.attackSpeed -= baseAttackSpeedIncrease; }
             else { item.agent.stats.attackSpeed -= stackAttackSpeedIncrease; }
         }
 

@@ -1,41 +1,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using Game.Core.Data;
+using Game.Util;
 
 namespace Game {
     public class EnemyPlacer : MonoBehaviour
     {
+        [Header("Spawn Ranges")]
+        public float innerRingMin = 10f;
+        public float innerRingSize = 5f;
+        public float outerRingSize = 30f;
+
+        [Header("Distribution Settings")]
+        [SerializeField] [Range(0f, 1f)] private float outerRingChance = 0.2f;
+
         //vars
-        private NavMeshTriangulation triangulation;
-        private EntropyRandom<int> vertexIndices;
+        [HideInInspector] public bool ignoreRings = false;
+        private Transform player;
 
         private void Start()
         {
-            triangulation = NavMesh.CalculateTriangulation();
-            //create entropy random
-            List<int> vertices = new List<int>();
-            for (int i = 0; i < triangulation.vertices.Length; i++) { vertices.Add(i); }
-            vertexIndices = new EntropyRandom<int>(vertices);
             //setup placer
             EnemySpawner.instance.placer = this;
+            player = GameStateManager.instance.player.transform;
         }
 
         //============== Spawn Enemy =============
         public void SpawnEnemy(GameObject prefab)
         {
-            //place enemy on navmesh
-            if (NavMesh.SamplePosition(GetRandomSpawnPoint(), out NavMeshHit hit, 2f, -1))
-            {
-                GameObject enemy = Instantiate(prefab);
-                enemy.GetComponent<NavMeshAgent>().Warp(hit.position);
-            }
+            GameObject enemy = Instantiate(prefab);
+            enemy.GetComponent<NavMeshAgent>().Warp(GetSpawnPos());
         }
 
-        //========== Util funcs ===============
-        private Vector3 GetRandomSpawnPoint()
+        private Vector3 GetSpawnPos()
         {
-            return triangulation.vertices[vertexIndices.Next()];
+            return NavMeshUtil.RandomNavmeshLocationAtDistance(player.position, GetRandomRadius());
+        }
+
+        private float GetRandomRadius()
+        {
+            float rand = Random.Range(0, 1);
+            if (rand < outerRingChance || ignoreRings) 
+            {
+                return Random.Range(
+                    innerRingMin + innerRingSize,
+                    innerRingMin + innerRingSize + outerRingSize
+                );
+            }
+            else { return Random.Range(innerRingMin, innerRingMin + innerRingSize); }
         }
     }
 }

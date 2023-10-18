@@ -1,6 +1,8 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Game.Core.Data;
 
 namespace Game.Core {
@@ -8,27 +10,32 @@ namespace Game.Core {
     {
         public UnityDictionary<SlotSizeSO, List<ItemUI>> itemVisuals;
 
-        public void GenerateVisuals(ItemSlot slot, InventoryUI inventoryUI)
+        public void GenerateVisuals(InventoryUI inventoryUI, Item[] items, int slotsToShow)
         {
             ResetVisuals();
             //generate item visuals
-            for (int i = 0; i < slot.heldItems.Count; i++)
+            for (int i = 0; i < slotsToShow; i++)
             {
-                ItemUI targetUI = itemVisuals[slot.heldItems[i].data.size][i];
+                //configure item UI
+                ItemUI targetUI = itemVisuals[GetTargetSize(items[i])][i];
                 targetUI.inventoryUI = inventoryUI; //pass inventoryUI reference
-                targetUI.GenerateVisuals(slot.heldItems[i]);
+                targetUI.GenerateVisuals(items[i]);
             }
+        }
+        private SlotSizeSO GetTargetSize(Item item)
+        {
+            return item != null ? item.data.size : itemVisuals.Keys.First();
         }
 
         //======== Reset =========
-        private void ResetVisuals()
+        public void ResetVisuals()
         {
+            //reset item visuals
             foreach (var kvp in itemVisuals)
             {
                 foreach (ItemUI itemUI in kvp.Value)
                 {
-                    itemUI.img.color = new Color(1, 1, 1, 0); //hide element
-                    itemUI.item = null;
+                    itemUI.ResetVisuals();
                 }
             }
         }

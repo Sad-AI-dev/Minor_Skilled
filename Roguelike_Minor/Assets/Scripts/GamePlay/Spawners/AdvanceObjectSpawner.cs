@@ -11,7 +11,7 @@ namespace Game {
 
         private void Start()
         {
-            //GameStateManager.instance.advanceObjectSpawner = this;
+            GameStateManager.instance.advanceObjectSpawner = this;
         }
 
         public void SpawnAdvanceObject()

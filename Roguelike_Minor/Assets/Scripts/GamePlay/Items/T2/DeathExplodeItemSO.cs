@@ -70,10 +70,13 @@ namespace Game {
 
         private void SpawnExplosion(HitEvent hitEvent, Vector3 pos) //create explosion in scene
         {
-            //GameObject obj = Instantiate(explosionPrefab);
-            //obj.transform.position = hitEvent.target.transform.position;
-
             Item sourceItem = hitEvent.source.inventory.GetItemOfType(this);
+
+            //create range visuals
+            GameObject obj = Instantiate(explosionPrefab);
+            obj.transform.position = pos;
+            obj.transform.localScale = new Vector3(2, 2, 2) * GetExplodeRadius(sourceItem);
+
             //sphere cast to deal damage
             Collider[] results = Physics.OverlapSphere(
                 pos,

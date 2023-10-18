@@ -45,5 +45,14 @@ namespace Game.Core.Data {
                 pool[i].gameObject.SetActive(false);
             }
         }
+
+        public void DestroyReset()
+        {
+            for (int i = 0; i < pool.Count; i++)
+            {
+                Object.Destroy(pool[i].gameObject);
+            }
+            pool.Clear();
+        }
     }
 }

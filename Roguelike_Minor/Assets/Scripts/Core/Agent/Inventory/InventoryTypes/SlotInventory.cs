@@ -5,59 +5,39 @@ using UnityEngine;
 namespace Game.Core {
     public class SlotInventory : Inventory
     {
-        public List<ItemSlot> slots;
+        public int slots;
+
+        //vars
+        private int totalItemSize = 0;
 
         //============ Add Item ===============
         public override bool TryAssignItem(ItemDataSO itemData)
         {
-            ItemSlot targetSlot = GetSlotWithSpace(itemData.size);
-            if (targetSlot != null)
+            if (slots - totalItemSize >= itemData.size.capacity)
             {
-                AddItemStack(itemData, targetSlot);
+                AddItemStack(itemData);
+                SortItems();
                 onContentsChanged?.Invoke();
                 return true;
             }
             return false;
         }
 
-        private ItemSlot GetSlotWithSpace(SlotSizeSO size)
-        {
-            foreach (ItemSlot slot in slots)
-            {
-                if (slot.HasSpace(size))
-                {
-                    return slot;
-                }
-            }
-            return null;
-        }
-
-        private void AddItemStack(ItemDataSO itemData, ItemSlot targetSlot)
+        private void AddItemStack(ItemDataSO itemData)
         {
             //add stack to duplicate
-            int dupIndex = FindDuplicateIndex(itemData);
+            int dupIndex = GetItemIndex(itemData);
             if (dupIndex >= 0)
             {
                 items[dupIndex].AddStack();
-                targetSlot.AssignItem(items[dupIndex]);
             }
             else //add new item
             {
                 Item item = new Item(itemData, this);
                 items.Add(item);
-                targetSlot.AssignItem(item);
             }
-        }
-        private int FindDuplicateIndex(ItemDataSO itemData)
-        {
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (items[i].data.Equals(itemData))
-                {
-                    return i;
-                }
-            }
-            return -1;
+            //increase total item size
+            totalItemSize += itemData.size.capacity;
         }
 
         //============ Remove Item =================
@@ -66,7 +46,7 @@ namespace Game.Core {
             int itemIndex = GetItemIndex(itemData);
             if (itemIndex >= 0)
             {
-                RemoveItemFromSlot(items[itemIndex]);
+                totalItemSize -= itemData.size.capacity;
                 RemoveItemStack(items[itemIndex]);
                 onContentsChanged?.Invoke();
             }
@@ -82,18 +62,6 @@ namespace Game.Core {
                 items.Remove(item);
             }
         }
-        private void RemoveItemFromSlot(Item item)
-        {
-            for (int i = slots.Count - 1; i >= 0; i--)
-            {
-                if (slots[i].HasItemOfType(item.data))
-                {
-                    slots[i].RemoveItem(item);
-                    SortInventory();
-                    i = -1; //end loop
-                }
-            }
-        }
 
         //============ Drop Item ================
         public override void DropItem(Item item)
@@ -105,53 +73,30 @@ namespace Game.Core {
         //============= Slot Management ============
         public void AddSlot(SlotSizeSO size)
         {
-            slots.Add(new ItemSlot(size));
-            SortSlots();
+            slots += size.capacity;
             onContentsChanged?.Invoke();
         }
 
-        public void RemoveSlot(ItemSlot slot)
+        public void RemoveSlot(SlotSizeSO size)
         {
-            if (slots.Contains(slot))
+            //drop items if needed
+            int itemsToRemove = (-slots + totalItemSize) + size.capacity;
+            while (itemsToRemove > 0)
             {
-                //foreach (Item item in slot.heldItems)
-                for (int i = slot.heldItems.Count - 1; i >= 0; i--)
-                {
-                    items[i].DropItem(); //drop expelled items
-                    RemoveItemStack(items[i]);
-                }
-                slots.Remove(slot);
-                slot = null; //destroy removed slot
-                SortSlots();
-                SortInventory();
-                onContentsChanged?.Invoke();
+                //remove items
+                itemsToRemove -= items[^1].data.size.capacity;
+                DropItem(items[^1]);
             }
+            //remove capacity
+            slots -= size.capacity;
+            //update UI
+            onContentsChanged?.Invoke();
         }
 
         //============ Sort Contents ===========
-        private void SortSlots()
+        private void SortItems()
         {
-            slots.Sort((ItemSlot a, ItemSlot b) => a.size.capacity.CompareTo(b.size.capacity));
-        }
-
-        private void SortInventory()
-        {
-            Stack<Item> slotItems = new Stack<Item>();
-            //empty slots
-            for (int i = slots.Count - 1; i >= 0; i--)
-            {
-                for (int j = slots[i].heldItems.Count - 1; j >= 0; j--)
-                {
-                    slotItems.Push(slots[i].heldItems[j]);
-                    slots[i].RemoveItem(slots[i].heldItems[j]);
-                }
-            }
-            //re-fill slots
-            while (slotItems.Count > 0)
-            {
-                GetSlotWithSpace(slotItems.Peek().data.size).AssignItem(slotItems.Peek());
-                slotItems.Pop();
-            }
+            items.Sort((Item a, Item b) => -a.data.size.capacity.CompareTo(b.data.size.capacity));
         }
     }
 }
