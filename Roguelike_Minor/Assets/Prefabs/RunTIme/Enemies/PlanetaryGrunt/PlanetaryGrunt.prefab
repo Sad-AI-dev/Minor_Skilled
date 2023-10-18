@@ -314,9 +314,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 7551747850665565148}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 8
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 63
@@ -463,16 +460,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d0c1a420a222041a45aa40e2925369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseStats: {fileID: 11400000, guid: b7260db6df9a4f24e9a49ad76cca2d10, type: 2}
   stats:
     maxHealth: 5
     baseDamage: 1
     heldMoney: 1
     attackSpeed: 1
     coolDownMultiplier: 1
+    walkSpeed: 0
+    sprintSpeed: 0
   abilities: {fileID: 0}
   effectHandler: {fileID: 0}
   health: {fileID: 0}
   inventory: {fileID: 0}
+  OnKnockbackReceived:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &160443000976078305
 MonoBehaviour:
   m_ObjectHideFlags: 0
