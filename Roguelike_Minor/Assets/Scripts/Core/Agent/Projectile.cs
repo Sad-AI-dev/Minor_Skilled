@@ -13,8 +13,6 @@ namespace Game.Core
         [HideInInspector] public Ability ability;
         protected Agent source;
 
-
-
         private void Start()
         {
             source = ability.agent;

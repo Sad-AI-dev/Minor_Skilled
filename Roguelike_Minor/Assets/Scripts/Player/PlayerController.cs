@@ -35,7 +35,7 @@ namespace Game.Player
         private bool grounded;
 
         [Header("External Components")]
-        [SerializeField] private Camera cam;
+        public Camera cam;
         private CharacterController cc;
 
         private float smoothVelocity;
@@ -141,7 +141,7 @@ namespace Game.Player
             {
                 activeGravity += gravity / 100;
                 //Debug.Log("activeGravity: " +  gravity);
-                yVelocity -= activeGravity;
+                yVelocity -= gravity / 100;
             }
         }
 
@@ -187,7 +187,7 @@ namespace Game.Player
             isSlowed = false;
         }
 
-        private void ReceiveKnockback(Vector3 kbForce)
+        public void ReceiveKnockback(Vector3 kbForce)
         {
             knockbackVelocity = kbForce;
 
