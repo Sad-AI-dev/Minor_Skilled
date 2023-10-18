@@ -38,7 +38,7 @@ namespace Game.Player.Soldier
         {
             if (canTick)
             {
-                executeTick();
+                StartCoroutine(ExecuteTickNextFrameCo());
                 Debug.Log("Tick " + Time.frameCount);
             }
         }
@@ -68,8 +68,6 @@ namespace Game.Player.Soldier
                     }
                 }
             }
-
-            StartCoroutine(WaitForNextTickCo());
         }
 
         IEnumerator WaitForNextTickCo()
@@ -78,6 +76,13 @@ namespace Game.Player.Soldier
             ticks--;
             if (ticks > 0) canTick = true;
             else Destroy(gameObject);
+        }
+
+        IEnumerator ExecuteTickNextFrameCo()
+        {
+            yield return null;
+            executeTick();
+            StartCoroutine(WaitForNextTickCo());
         }
 
         private void OnTriggerEnter(Collider other)

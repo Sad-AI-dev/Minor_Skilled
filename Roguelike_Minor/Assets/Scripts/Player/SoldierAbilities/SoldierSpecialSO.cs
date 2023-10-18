@@ -11,6 +11,7 @@ namespace Game.Player.Soldier
     {
         [SerializeField] private GameObject bullet;
         [SerializeField] private float bulletSpeed;
+        [SerializeField] private LayerMask layermask;
 
         PlayerController controller;
 
@@ -26,7 +27,7 @@ namespace Game.Player.Soldier
             controller.StartSlowCoroutine(.2f);
 
             RaycastHit hit;
-            if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500))
+            if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500, layermask))
                 target = hit.point;
             else
                 target = cam.transform.forward * 1000;
