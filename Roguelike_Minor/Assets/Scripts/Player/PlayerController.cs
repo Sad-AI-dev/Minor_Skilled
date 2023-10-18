@@ -19,9 +19,13 @@ namespace Game.Player
         private float walkSpeed;
         private float sprintSpeed;
         [SerializeField] private float deceleration;
+        [SerializeField] private float acceleration;
+        private float speedMultiplier;
         private bool isSlowed = false;
 
         private Vector3 moveDirection;
+        private Vector3 lastMoveDir;
+        private Vector3 knockbackVelocity;
 
         [Header("Jump")]
         [SerializeField] private float JumpForce;
@@ -32,7 +36,6 @@ namespace Game.Player
 
         [Header("External Components")]
         [SerializeField] private Camera cam;
-        [SerializeField] private CinemachineFreeLook freeLookCam;
         private CharacterController cc;
 
         private float smoothVelocity;
@@ -40,6 +43,7 @@ namespace Game.Player
 
         Vector3 warpPosition = Vector3.zero;
         private Coroutine slowCo;
+        private Coroutine kbReset;
 
         private void Start()
         {
@@ -49,6 +53,8 @@ namespace Game.Player
             agent = GetComponent<Agent>();
             walkSpeed = agent.stats.walkSpeed;
             sprintSpeed = agent.stats.sprintSpeed;
+
+            agent.OnKnockbackReceived.AddListener(ReceiveKnockback);
         }
 
         private void FixedUpdate()
@@ -60,7 +66,7 @@ namespace Game.Player
             //allows to directly set position of player
             Physics.SyncTransforms();
 
-            cc.Move((moveDirection * speed) + new Vector3(0, yVelocity, 0));
+            cc.Move((moveDirection * speed) + knockbackVelocity + new Vector3(0, yVelocity, 0));
 
             CheckGrounded();
         }
@@ -74,11 +80,27 @@ namespace Game.Player
                 visuals.transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
                 moveDirection = Quaternion.Euler(0, dirAngle, 0) * Vector3.forward;
                 moveDirection.Normalize();
+                lastMoveDir = moveDirection;
+                Accelerate(acceleration);
             }
-            else
+            else if (lastMoveDir != Vector3.zero && speed > 0)
             {
-                moveDirection = Vector3.zero;
+                moveDirection = lastMoveDir;
+                Decelerate(deceleration);
             }
+        }
+
+        public void Accelerate(float acceleration)
+        {
+            speedMultiplier += acceleration * Time.deltaTime;
+            speedMultiplier = Mathf.Clamp(speedMultiplier, 0, 1);
+
+        }
+
+        public void Decelerate(float deceleration)
+        {
+            speedMultiplier -= deceleration * Time.deltaTime;
+            speedMultiplier = Mathf.Clamp(speedMultiplier, 0, 1);
         }
 
         public void ToggleSlow(bool slowed)
@@ -99,8 +121,10 @@ namespace Game.Player
             {
                 if (!isSlowed) speed = walkSpeed * sprintSpeed;
                 if (isSlowed) speed = walkSpeed;
-            }
 
+                speed *= speedMultiplier;
+            }
+            
             speed /= 100;
         }
 
@@ -163,10 +187,26 @@ namespace Game.Player
             isSlowed = false;
         }
 
-        public void LockCamera()
+        private void ReceiveKnockback(Vector3 kbForce)
         {
-            freeLookCam.m_YAxis.m_MaxSpeed = 0;
-            freeLookCam.m_XAxis.m_MaxSpeed = 0;
+            knockbackVelocity = kbForce;
+
+            //start coroutine to reduce knockback over time
+            if (kbReset != null)
+                StopCoroutine(kbReset);
+            kbReset = StartCoroutine(ResetKnockbackCo());
+        }
+
+        IEnumerator ResetKnockbackCo()
+        {
+            while(knockbackVelocity.magnitude >= 0)
+            {
+                yield return null;
+                //Debug.Log(knockbackVelocity);
+                knockbackVelocity -= knockbackVelocity * deceleration * Time.deltaTime;
+            }
+            //done resetting knockback
+            knockbackVelocity = Vector3.zero;
         }
     }
 }
