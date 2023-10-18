@@ -30,5 +30,11 @@ namespace Game {
 
         //========= Process Heal Events ============
         public override void ProcessHealEvent(ref HealEvent healEvent) { }
+
+        //========== Description ===========
+        public override string GenerateLongDescription()
+        {
+            return $"Increase attack speed by {baseAttackSpeedIncrease * 100}% (+{stackAttackSpeedIncrease}% per stack)";
+        }
     }
 }
