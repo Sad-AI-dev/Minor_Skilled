@@ -39,7 +39,7 @@ namespace Game.Player.Soldier
             if (canTick)
             {
                 StartCoroutine(ExecuteTickNextFrameCo());
-                Debug.Log("Tick " + Time.frameCount);
+                //Debug.Log("Tick " + Time.frameCount);
             }
         }
 
@@ -54,7 +54,7 @@ namespace Game.Player.Soldier
             {
                 foreach (Agent agent in agentsInRange)
                 {
-                    Debug.Log("Hit agent: " + agent.transform.name);
+                    //Debug.Log("Hit agent: " + agent.transform.name);
 
                     if(damage > 0)
                         agent.health.Hurt(hitEvent);
