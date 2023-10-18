@@ -15,14 +15,21 @@ namespace Game {
         [SerializeField] private float dechargeDelay;
         [SerializeField] private float dechargeSpeed;
 
+        [Header("Difficulty Settings")]
+        [SerializeField] private float prewarmMultiplier; //multiplier for enemies spawned on objective start
+        [SerializeField] private float spawnMultiplier; //multiplier for amount of enemies being spawned
+
         [Header("Visuals")]
         [SerializeField] private GameObject rangeIndicator;
+        [SerializeField] private PickupMovement pillarMovement;
+        [SerializeField] private AnimationCurve pillarSpeed;
+        [SerializeField] private float maxPillarSpeed = 300f;
 
         [Header("UI Settings")]
         [SerializeField] private TMP_Text progressLabel;
-        //[SerializeField] private Slider progressSlider;
 
         //vars
+        private bool activated;
         private float progress;
         private bool isCharging;
 
@@ -40,6 +47,7 @@ namespace Game {
         {
             if (isCharging) { Charge(); }
             else if (canDecharge) { Decharge(); }
+            UpdatePillarSpeed();
             //done check
             if (progress >= 100) { StopCharge(); }
             //update UI
@@ -47,6 +55,19 @@ namespace Game {
             UpdateUI();
         }
         
+        //=============== Start Charge ==============
+        public void StartCharge()
+        {
+            activated = true;
+            enabled = true;
+            isCharging = true;
+            progress = 0;
+            rangeIndicator.SetActive(true);
+            //up enemy spawning
+            EnemySpawner.instance.ForceSpawn(prewarmMultiplier);
+            EnemySpawner.instance.SetExternalSpawnMultiplier(spawnMultiplier);
+        }
+
         //=============== Charge ===============
         private void Charge()
         {
@@ -65,16 +86,22 @@ namespace Game {
             progress -= dechargeSpeed * Time.deltaTime;
         }
 
+        //============ Pillar Visuals ===========
+        private void UpdatePillarSpeed()
+        {
+            pillarMovement.rotateSpeed = pillarSpeed.Evaluate(progress / 100f) * maxPillarSpeed;
+        }
+
         //=============== UI =============
         private void UpdateUI()
         {
             progressLabel.text = Mathf.FloorToInt(progress) + "%";
-            //progressSlider.value = progress / 100.0f;
         }
 
         //============== Stop Charge ==========
         private void StopCharge()
         {
+            EnemySpawner.instance.SetExternalSpawnMultiplier(-spawnMultiplier);
             GameStateManager.instance.HandleCompleteStageObject();
             Destroy(gameObject);
         }
@@ -82,13 +109,7 @@ namespace Game {
         //============== Manage Triggers ==================
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Player")) { return; } //only activate on player
-            if (!enabled) 
-            {
-                enabled = true;
-                progress = 0;
-                rangeIndicator.SetActive(true);
-            }
+            if (!activated || !other.CompareTag("Player")) { return; } //only activate on player
             isCharging = true;
             canDecharge = false;
             if (dechargeDelayRoutine != null) { StopCoroutine(dechargeDelayRoutine); }
@@ -96,7 +117,7 @@ namespace Game {
 
         private void OnTriggerExit(Collider other)
         {
-            if (!other.CompareTag("Player")) { return; } //only activate on player
+            if (!activated || !other.CompareTag("Player")) { return; } //only activate on player
             isCharging = false;
             dechargeDelayRoutine = StartCoroutine(DechargeDelayCo());
         }
