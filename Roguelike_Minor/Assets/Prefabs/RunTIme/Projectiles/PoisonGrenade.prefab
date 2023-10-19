@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6044588302236839696
+--- !u!1 &1776981072986339242
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8931937643191158993}
-  - component: {fileID: 5509532278780103323}
-  - component: {fileID: 7852213035550079145}
-  - component: {fileID: 3520911482225790676}
-  - component: {fileID: 7567520955074589800}
-  m_Layer: 7
-  m_Name: RailGunBullet
+  - component: {fileID: 5251524104597718941}
+  - component: {fileID: 4565910427969594161}
+  - component: {fileID: 1012026124516757526}
+  m_Layer: 0
+  m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8931937643191158993
+--- !u!4 &5251524104597718941
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6044588302236839696}
+  m_GameObject: {fileID: 1776981072986339242}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.38357353, y: 3.7158513, z: 3.6}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 7584729244502222116}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5509532278780103323
+--- !u!33 &4565910427969594161
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6044588302236839696}
+  m_GameObject: {fileID: 1776981072986339242}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7852213035550079145
+--- !u!23 &1012026124516757526
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6044588302236839696}
+  m_GameObject: {fileID: 1776981072986339242}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,22 +83,55 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3520911482225790676
+--- !u!1 &5180419599746193269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7584729244502222116}
+  - component: {fileID: 1437803798652820379}
+  m_Layer: 0
+  m_Name: PoisonGrenade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7584729244502222116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180419599746193269}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.0194101, y: 1.7902547, z: 0.60339695}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 5251524104597718941}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1437803798652820379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6044588302236839696}
+  m_GameObject: {fileID: 5180419599746193269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d44c1459a7b76545a5626664ac5584f, type: 3}
+  m_Script: {fileID: 11500000, guid: 642532cada771094fba3194c27a16463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 3
+  lifeTime: 10
   layermask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 503
   velocity: {x: 0, y: 0, z: 0}
   ability:
     agent: {fileID: 0}
@@ -119,16 +150,5 @@ MonoBehaviour:
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 0}
     coolDownTimer: 0
-  explosion: {fileID: 1071950442909444679, guid: 0c4e9d4c80a3c794c879234107e8863d, type: 3}
---- !u!114 &7567520955074589800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6044588302236839696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a08684d5be87bed4f87593a4e42d9103, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  gravity: 1
+  poisonCloud: {fileID: 1994042670244770660, guid: fc1635ef9ab4a8e45b12783db9b0179a, type: 3}

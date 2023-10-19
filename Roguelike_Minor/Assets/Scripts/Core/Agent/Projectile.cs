@@ -58,6 +58,7 @@ namespace Game.Core
             {
                 if (!hit.transform.CompareTag(sourceTag))
                 {
+                    Debug.Log(hit.transform.name);
                     OnCollide(hit);
                     gameObject.SetActive(false);
                 }

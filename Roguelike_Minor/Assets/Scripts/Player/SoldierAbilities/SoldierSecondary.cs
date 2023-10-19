@@ -31,7 +31,7 @@ namespace Game.Player.Soldier
             projectile.transform.LookAt(target);
             GrenadeProjectile grenadeProjectile = projectile.GetComponent<GrenadeProjectile>();
             grenadeProjectile.velocity = bulletDir * bulletSpeed;
-            grenadeProjectile.ability = source;
+            grenadeProjectile.Initialize(source);
         }
     }
 }

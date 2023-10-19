@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8828643640491751089}
-  - component: {fileID: 8174154645856087723}
   - component: {fileID: 5956735985547937547}
   m_Layer: 7
   m_Name: TestGrenade
@@ -34,27 +33,6 @@ Transform:
   - {fileID: 383648193870222593}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &8174154645856087723
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3127258870543087108}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5956735985547937547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,7 +67,13 @@ MonoBehaviour:
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 0}
     coolDownTimer: 0
-  gravity: 0.01
+  gravity: 1
+  explosion: {fileID: 2304554275700936720, guid: 3ffff26ebd52ed648b21cf29eadb6fb3, type: 3}
+  grenades:
+    behaviourTemplate: {fileID: 5180419599746193269, guid: 95dc641df33fb0a4c81de9dbd96fec11, type: 3}
+  poisonGrenadeSpeed: 0.5
+  poisonGrenadeAmount: 4
+  spreadMultiplier: 0.5
 --- !u!1 &7327287741176140361
 GameObject:
   m_ObjectHideFlags: 0
