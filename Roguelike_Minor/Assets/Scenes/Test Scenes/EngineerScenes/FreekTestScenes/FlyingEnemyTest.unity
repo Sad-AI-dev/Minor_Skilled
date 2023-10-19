@@ -123,37 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &191276373
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 191276374}
-  m_Layer: 0
-  m_Name: OCTREE
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &191276374
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191276373}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &195970387
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d0c1a420a222041a45aa40e2925369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseStats: {fileID: 11400000, guid: b7260db6df9a4f24e9a49ad76cca2d10, type: 2}
   stats:
     maxHealth: 10
     baseDamage: 1
@@ -620,6 +590,9 @@ MonoBehaviour:
   effectHandler: {fileID: 0}
   health: {fileID: 0}
   inventory: {fileID: 0}
+  OnKnockbackReceived:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1521468364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,7 +803,7 @@ Transform:
   m_GameObject: {fileID: 1521468361}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.7, y: 19.799356, z: 46.5}
+  m_LocalPosition: {x: -18.58, y: 27.19, z: 46.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -902,5 +875,4 @@ SceneRoots:
   - {fileID: 1689071971}
   - {fileID: 968965430}
   - {fileID: 771041090}
-  - {fileID: 191276374}
   - {fileID: 1521468371}

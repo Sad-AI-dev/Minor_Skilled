@@ -53,10 +53,14 @@ namespace Game.Enemy {
 
         void MoveOverPath()
         {
-            if(currentTarget != PFTree.path.Peek()) currentTarget = PFTree.path.Peek();
+            if (PFTree.path != null && currentTarget != PFTree.path.Peek())
+            {
+                Debug.Log("Getting target");
+                currentTarget = PFTree.path.Peek();
+            }
             if (PFTree.path.Count > 0)
             {
-                //Make move thru spine
+               //Make move thru spine
                transform.position = //move
                     Vector3.MoveTowards(
                         transform.position, //from
