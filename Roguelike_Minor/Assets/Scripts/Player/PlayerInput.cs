@@ -58,7 +58,11 @@ namespace Game.Player {
             {
                 agent.abilities.primary.TryUse();
             }
-            if(Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                agent.abilities.secondary.TryUse();
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 agent.abilities.special.TryUse();
             }

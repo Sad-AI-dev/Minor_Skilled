@@ -280,6 +280,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: secondary.uses
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: secondary.coolDown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: secondary.abilityData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5dbafad3a5945d643a2dbc8379c06249, type: 2}
+    - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: secondary.originPoint
+      value: 
+      objectReference: {fileID: 1705966378}
     - target: {fileID: 6042182213848110425, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: inventory
       value: 
@@ -902,6 +918,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1644168638}
   m_CullTransparentMesh: 1
+--- !u!4 &1705966378 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2437245198168656956, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+  m_PrefabInstance: {fileID: 684490300}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1797930650 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 43410078065110917, guid: 8f0d54591f7f8184c9f5334bcd79dfb2, type: 3}

@@ -94,7 +94,6 @@ namespace Game.Player
         {
             speedMultiplier += acceleration * Time.deltaTime;
             speedMultiplier = Mathf.Clamp(speedMultiplier, 0, 1);
-
         }
 
         public void Decelerate(float deceleration)

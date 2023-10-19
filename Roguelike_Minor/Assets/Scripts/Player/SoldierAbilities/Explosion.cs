@@ -90,7 +90,10 @@ namespace Game.Player.Soldier
             if(other.CompareTag("Enemy"))
             {
                 if (other.TryGetComponent(out Agent enemy))
+                {
                     agentsInRange.Add(enemy);
+                }
+                    
             }
             if(other.CompareTag("Player"))
             {

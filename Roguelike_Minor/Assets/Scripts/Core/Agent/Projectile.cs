@@ -54,7 +54,7 @@ namespace Game.Core
         {
             Vector3 transformPos = transform.position - new Vector3(0, 0, transform.localScale.z / 2);
             RaycastHit hit;
-            if (Physics.Raycast(transformPos, transform.forward, out hit, velocity.magnitude, layermask, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(transformPos, velocity, out hit, velocity.magnitude, layermask, QueryTriggerInteraction.Ignore))
             {
                 if (!hit.transform.CompareTag(sourceTag))
                 {
