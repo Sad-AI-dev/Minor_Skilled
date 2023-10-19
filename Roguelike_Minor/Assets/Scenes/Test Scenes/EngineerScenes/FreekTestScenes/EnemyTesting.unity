@@ -2346,7 +2346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1861624636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2405,7 +2405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &2074046777
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2506,6 +2506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d0c1a420a222041a45aa40e2925369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseStats: {fileID: 0}
   stats:
     maxHealth: 200
     baseDamage: 1
@@ -2812,16 +2813,16 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1861624637}
+  - {fileID: 1532787151}
+  - {fileID: 2074046780}
   - {fileID: 1453078522}
   - {fileID: 509950135}
   - {fileID: 234291322}
-  - {fileID: 1532787151}
   - {fileID: 1248090955}
   - {fileID: 954757458}
   - {fileID: 70844468}
   - {fileID: 505599096}
   - {fileID: 1793958318}
-  - {fileID: 2074046780}
   - {fileID: 295788627}
   - {fileID: 1547410485}
   - {fileID: 729002007}

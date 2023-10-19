@@ -16,8 +16,13 @@ namespace Game.Enemy {
 
         //PUBLIC VARIABLE
         public NavMeshAgent agent;
-        public LayerMask enemyLayerMask;
         public Agent enemyAgent;
+        public LayerMask enemyLayerMask;
+        public Rigidbody rb;
+
+        [Header("Enemy Knockback Multipliers")]
+        public float upMultiplier = 1;
+        public float directionMultiplier = 6;
 
         protected override void Start()
         {
@@ -31,6 +36,7 @@ namespace Game.Enemy {
             BT_Node root = new Selector(
                 new List<BT_Node>
                 {
+                    new TakeKnockback(transform, enemyAgent, agent, rb, upMultiplier, directionMultiplier),
                     new Sequence( new List<BT_Node>
                     {
                         new CheckEnemyRangedAttack(transform, enemyLayerMask), //check if in range for ranged attack + melee check
@@ -43,7 +49,7 @@ namespace Game.Enemy {
                     }), //Check for melee attack
                     new PGTaskGoToTarget(agent) // Go to target
                 }
-            ); ;
+            ) ;
             return root;
         }
 

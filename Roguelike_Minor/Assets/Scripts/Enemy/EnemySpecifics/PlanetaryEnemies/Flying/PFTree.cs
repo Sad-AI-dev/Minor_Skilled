@@ -8,7 +8,7 @@ namespace Game.Enemy {
     {
         public static float FlightSpeed = 5;
         public static float AttackRange = 20;
-        public static Queue<Vector3> path;
+        public static Queue<Vector3> path = new Queue<Vector3>();
 
         protected override BT_Node SetupTree()
         {

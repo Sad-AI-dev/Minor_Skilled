@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6dd78bdc958654cb0c3e93a0ef49c0, type: 3}
-  m_Name: AttackSpeedItem
+  m_Script: {fileID: 11500000, guid: 1f196f6e6e071394cbfb3b3befa7666d, type: 3}
+  m_Name: DeathHealItem
   m_EditorClassIdentifier: 
   size: {fileID: 11400000, guid: aaa7839693155fe46a5ce1c6da18f970, type: 2}
   canProcSelf: 0
-  pickupPrefab: {fileID: 2719697755862819254, guid: 62d24f4f5249a0340a9425f0294c9e14, type: 3}
-  UISprite: {fileID: 21300000, guid: 89184ecce95f394438eba3115b5b44c2, type: 3}
-  shortDescription: Shoot faster
-  baseAttackSpeedIncrease: 0.15
-  stackAttackSpeedIncrease: 0.1
+  pickupPrefab: {fileID: 2719697755862819254, guid: 39b0e8dc60684b348a29571ae9893e7d, type: 3}
+  UISprite: {fileID: 21300000, guid: 023e105b099d9e545a30b91113489bd7, type: 3}
+  shortDescription: Killing enemies heals you
+  baseHeal: 2
+  bonusHeal: 1
