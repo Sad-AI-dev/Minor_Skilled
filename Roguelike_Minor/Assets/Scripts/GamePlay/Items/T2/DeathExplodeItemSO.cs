@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "Death Explode Item", menuName = "ScriptableObjects/Items/T2/DeathExplode")]
+    [CreateAssetMenu(fileName = "Death Explode Item", menuName = "ScriptableObjects/Items/T2/DeathExplode", order = 20)]
     public class DeathExplodeItemSO : ItemDataSO
     {
         [Header("Damage Settings")]

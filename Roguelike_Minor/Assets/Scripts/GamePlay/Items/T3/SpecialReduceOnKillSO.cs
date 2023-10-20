@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "SpecialReduceOnKill", menuName = "ScriptableObjects/Items/T3/SpecialReduceOnKill")]
+    [CreateAssetMenu(fileName = "SpecialReduceOnKill", menuName = "ScriptableObjects/Items/T3/SpecialReduceOnKill", order = 30)]
     public class SpecialReduceOnKillSO : ItemDataSO
     {
         [Header("Cooldown settings")]

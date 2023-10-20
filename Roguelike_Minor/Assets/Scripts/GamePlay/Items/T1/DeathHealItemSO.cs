@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "DeathHealItem", menuName = "ScriptableObjects/Items/T1/Death Heal")]
+    [CreateAssetMenu(fileName = "DeathHealItem", menuName = "ScriptableObjects/Items/T1/Death Heal", order = 11)]
     public class DeathHealItemSO : ItemDataSO
     {
         [Header("Healing settings")]
