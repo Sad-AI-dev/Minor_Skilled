@@ -7,7 +7,7 @@ using Game.Core.GameSystems;
 namespace Game {
     public class ItemPickup : MonoBehaviour
     {
-        [SerializeField] private ItemDataSO item;
+        public ItemDataSO item;
 
         public void OnPickup(Interactor interactor)
         {

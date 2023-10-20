@@ -51,6 +51,8 @@ namespace Game.Core {
         private void ActivateHover(ItemUI itemUI)
         {
             gameObject.SetActive(true);
+            //set start position
+            Move();
             //set data
             titleLabel.text = itemUI.item.data.title;
             //tier label

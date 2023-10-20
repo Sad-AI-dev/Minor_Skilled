@@ -6,6 +6,12 @@ using UnityEngine.Events;
 namespace Game.Core.GameSystems {
     public class Interactable : MonoBehaviour
     {
+        [Header("UI Settings")]
+        [Tooltip("setting for what to display in the interaction label HUD element.\n" +
+            "default is \"[Keybind] to \". label will be pasted after the default string.")]
+        public string label = "interact";
+
+        [Header("On Interact Event")]
         public UnityEvent<Interactor> onInteract;
 
         private List<Interactor> interactors;

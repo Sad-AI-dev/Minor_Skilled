@@ -8,5 +8,8 @@ namespace Game.Core {
     {
         public string title;
         public Color titleColor;
+
+        [Header("Image Settings")]
+        public Sprite pickupBackground;
     }
 }
