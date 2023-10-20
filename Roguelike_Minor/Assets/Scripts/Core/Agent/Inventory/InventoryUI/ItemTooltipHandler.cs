@@ -53,7 +53,10 @@ namespace Game.Core {
             gameObject.SetActive(true);
             //set data
             titleLabel.text = itemUI.item.data.title;
+            //tier label
             tierLabel.text = itemUI.item.data.tier.title;
+            tierLabel.color = itemUI.item.data.tier.titleColor;
+            //description
             descriptionLabel.text = itemUI.item.data.GenerateLongDescription();
         }
 

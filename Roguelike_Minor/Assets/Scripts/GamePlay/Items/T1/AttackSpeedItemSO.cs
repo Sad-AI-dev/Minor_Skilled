@@ -35,7 +35,9 @@ namespace Game {
         //========== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Increase attack speed by {baseAttackSpeedIncrease * 100}% (+{stackAttackSpeedIncrease * 100}% per stack)";
+            return $"Increase <color=#{HighlightColor}>attack speed</color> by" +
+                $" <color=#{HighlightColor}>{baseAttackSpeedIncrease * 100}%</color> " +
+                $"<color=#{StackColor}>(+{stackAttackSpeedIncrease * 100}% per stack)</color>";
         }
     }
 }

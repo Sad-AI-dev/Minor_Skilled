@@ -44,7 +44,9 @@ namespace Game {
         //============ Description ================
         public override string GenerateLongDescription()
         {
-            return $"Killing an enemy reduces special cooldown by {cooldownReduction} seconds (+{stackBonusReduction} seconds per stack)";
+            return $"Killing an enemy <color=#{HighlightColor}>reduces special cooldown</color> " +
+                $"by <color=#{HighlightColor}>{cooldownReduction} seconds</color> " +
+                $"<color=#{StackColor}>(+{stackBonusReduction} seconds per stack)</color>";
         }
     }
 }
