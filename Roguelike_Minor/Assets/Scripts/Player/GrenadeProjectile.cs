@@ -16,6 +16,7 @@ namespace Game.Player
         [SerializeField] private float poisonGrenadeSpeed;
         [SerializeField] private int poisonGrenadeAmount;
         [SerializeField] private float spreadMultiplier;
+        [SerializeField] private AK.Wwise.Event SFX;
 
         private float minAngle = 0;
         private float maxAngle;
@@ -28,6 +29,8 @@ namespace Game.Player
         protected override void OnCollide(RaycastHit hit)
         {
             Instantiate(explosion, hit.point, Quaternion.identity);
+
+            SFX.Post(gameObject);
 
             for(int i = 0; i < poisonGrenadeAmount; i++)
             {
