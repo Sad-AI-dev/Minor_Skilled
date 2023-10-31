@@ -8,7 +8,7 @@ namespace Game.Core.GameSystems {
     {
         [Header("Events")]
         [Tooltip("triggers when the interactor comes in range of the first interactable")]
-        public UnityEvent onCanInteract;
+        public UnityEvent<Interactable> onCanInteract;
         [Tooltip("triggers when the interactor leaves the range of the last interactable")]
         public UnityEvent onStopCanInteract;
         //vars
@@ -26,7 +26,7 @@ namespace Game.Core.GameSystems {
         {
             interactables.Add(interactable);
             if (interactables.Count == 1) {
-                onCanInteract?.Invoke();
+                onCanInteract?.Invoke(interactable);
             }
         }
 

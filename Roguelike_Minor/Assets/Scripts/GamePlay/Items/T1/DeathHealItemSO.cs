@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "DeathHealItem", menuName = "ScriptableObjects/Items/T1/Death Heal")]
+    [CreateAssetMenu(fileName = "DeathHealItem", menuName = "ScriptableObjects/Items/T1/Death Heal", order = 11)]
     public class DeathHealItemSO : ItemDataSO
     {
         [Header("Healing settings")]
@@ -37,7 +37,9 @@ namespace Game {
         //============ Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Killing an enemy heals you for {baseHeal}hp (+{bonusHeal}hp per stack)";
+            return $"Killing an enemy <color=#{HighlightColor}>heals</color> you for " +
+                $"<color=#{HighlightColor}>{baseHeal}hp</color> " +
+                $"<color=#{StackColor}>(+{bonusHeal}hp per stack)</color>";
         }
     }
 }

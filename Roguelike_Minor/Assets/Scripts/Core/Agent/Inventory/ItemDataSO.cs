@@ -5,7 +5,11 @@ using UnityEngine;
 namespace Game.Core {
     public abstract class ItemDataSO : ScriptableObject
     {
+        [Header("General")]
         public SlotSizeSO size;
+        public ItemTierSO tier;
+
+        [Header("Technical")]
         public bool canProcSelf;
 
         [Header("Visuals")]
@@ -13,7 +17,15 @@ namespace Game.Core {
         public Sprite UISprite;
 
         [Header("Description")]
+        public string title;
         public string shortDescription;
+
+        [Header("Colors")]
+        [SerializeField] private Color highlightColor = new Color(1f, 0.9764706f, 0.8039216f, 1);
+        [SerializeField] private Color stackColor = new Color(0.8196079f, 0.8196079f, 0.8196079f, 1);
+        //color refs
+        protected string HighlightColor { get { return ColorUtility.ToHtmlStringRGB(highlightColor); } }
+        protected string StackColor { get { return ColorUtility.ToHtmlStringRGB(stackColor); } }
 
         //============ Manage Stacks ===============
         public abstract void AddStack(Item item);

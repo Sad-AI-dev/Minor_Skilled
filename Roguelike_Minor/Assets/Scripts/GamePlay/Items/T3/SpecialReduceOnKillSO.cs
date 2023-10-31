@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "SpecialReduceOnKill", menuName = "ScriptableObjects/Items/T3/SpecialReduceOnKill")]
+    [CreateAssetMenu(fileName = "SpecialReduceOnKill", menuName = "ScriptableObjects/Items/T3/SpecialReduceOnKill", order = 30)]
     public class SpecialReduceOnKillSO : ItemDataSO
     {
         [Header("Cooldown settings")]
@@ -44,7 +44,9 @@ namespace Game {
         //============ Description ================
         public override string GenerateLongDescription()
         {
-            return $"Killing an enemy reduces special cooldown by {cooldownReduction} seconds (+{stackBonusReduction} seconds per stack)";
+            return $"Killing an enemy <color=#{HighlightColor}>reduces special cooldown</color> " +
+                $"by <color=#{HighlightColor}>{cooldownReduction} seconds</color> " +
+                $"<color=#{StackColor}>(+{stackBonusReduction} seconds per stack)</color>";
         }
     }
 }

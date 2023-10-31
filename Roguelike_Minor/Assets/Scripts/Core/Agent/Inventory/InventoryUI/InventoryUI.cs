@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace Game.Core {
 
         //hover item
         private ItemUI hoveredItem;
+        public Action<ItemUI> onHoverItem;
 
         private void Awake()
         {
@@ -109,7 +111,7 @@ namespace Game.Core {
                 //redraw visuals
                 GenerateVisuals();
                 //reset hoveredItem
-                hoveredItem = null;
+                SetHoveredItem(null);
             }
         }
 
@@ -117,6 +119,12 @@ namespace Game.Core {
         public void SetHoveredItem(ItemUI hoveredItem)
         {
             this.hoveredItem = hoveredItem;
+            onHoverItem?.Invoke(hoveredItem);
+        }
+
+        private void OnDisable()
+        {
+            SetHoveredItem(null);
         }
 
         //============= OnDestroy =============
