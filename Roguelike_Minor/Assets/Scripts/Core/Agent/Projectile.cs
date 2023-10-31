@@ -99,7 +99,7 @@ namespace Game.Core
         //========== Debug =============
         private void OnDrawGizmos()
         {
-            Gizmos.DrawLine(transform.localPosition - new Vector3(0, 0, transform.localScale.z / 2), transform.position + velocity);
+            //Gizmos.DrawLine(transform.localPosition - new Vector3(0, 0, transform.localScale.z / 2), transform.position + velocity);
         }
     }
 }

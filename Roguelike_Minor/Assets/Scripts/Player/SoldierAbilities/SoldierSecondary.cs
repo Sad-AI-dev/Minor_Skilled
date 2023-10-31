@@ -13,11 +13,18 @@ namespace Game.Player.Soldier
         [SerializeField] private LayerMask layermask;
         [SerializeField] private float bulletSpeed;
 
+        PlayerController controller;
+
         public override void Use(Ability source)
         {
             Camera cam = Camera.main;
             Vector3 target;
             Vector3 bulletDir;
+
+            if (!source.vars.ContainsKey("varsInitialized"))
+                InitializeVars(source);
+
+            controller.StartSlowCoroutine(.2f);
 
             RaycastHit hit;
             if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500, layermask))
@@ -32,6 +39,12 @@ namespace Game.Player.Soldier
             GrenadeProjectile grenadeProjectile = projectile.GetComponent<GrenadeProjectile>();
             grenadeProjectile.velocity = bulletDir * bulletSpeed;
             grenadeProjectile.Initialize(source);
+        }
+
+        private void InitializeVars(Ability source)
+        {
+            source.vars.Add("varsInitialized", true);
+            controller = source.agent.GetComponent<PlayerController>();
         }
     }
 }

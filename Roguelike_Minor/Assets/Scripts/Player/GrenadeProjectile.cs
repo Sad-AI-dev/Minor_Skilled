@@ -17,6 +17,9 @@ namespace Game.Player
         [SerializeField] private int poisonGrenadeAmount;
         [SerializeField] private float spreadMultiplier;
 
+        private float minAngle = 0;
+        private float maxAngle;
+
         protected override void UpdateMoveDir()
         {
             velocity += new Vector3(0, -gravity * Time.deltaTime, 0);
@@ -35,6 +38,12 @@ namespace Game.Player
                 PoisonGrenade pGrenade = projectile.GetComponent<PoisonGrenade>();
 
                 Vector3 directionOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+
+
+
+                Quaternion direction = Quaternion.AngleAxis((360 / poisonGrenadeAmount) * i + 1, Vector3.up);
+                Vector3 angleVector = direction * Vector3.forward;
+
                 Vector3 grenadeVelocity = projectile.transform.up + (directionOffset * spreadMultiplier);
                 grenadeVelocity.Normalize();
 
