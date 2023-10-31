@@ -3,6 +3,7 @@ using Game.Core.GameSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEngine.UIElements;
 
 namespace Game.Player {
     [RequireComponent(typeof(PlayerController))]
@@ -58,7 +59,7 @@ namespace Game.Player {
             {
                 agent.abilities.primary.TryUse();
             }
-            if (Input.GetKeyDown(KeyCode.G))
+            if (Input.GetMouseButtonDown(1))
             {
                 agent.abilities.secondary.TryUse();
             }
