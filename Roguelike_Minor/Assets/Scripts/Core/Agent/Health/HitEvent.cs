@@ -22,6 +22,8 @@ namespace Game.Core {
         public float baseDamage;
         public float damageMultiplier;
         public float damageReduction;
+        //crit vars
+        public bool isCrit;
 
         //death event
         public UnityEvent<HitEvent> onDeath;
@@ -58,12 +60,36 @@ namespace Game.Core {
             damageMultiplier = 1f;
             itemSources = new List<Item>();
             onDeath = new UnityEvent<HitEvent>();
+            TryCrit();
+        }
+        private void TryCrit()
+        {
+            if (hasAgentSource)
+            {
+                //attempt to crit
+                isCrit = AgentRandom.TryProc(source.stats.critChance, source);
+            }
         }
 
         //============== Get Total Damage ===============
         public float GetTotalDamage()
         {
-            return Mathf.Max((baseDamage * damageMultiplier) - damageReduction, 1); //never allow take 0 damage
+            return Mathf.Max(CalcDamage(), 1); //never allow take 0 damage
+        }
+
+        private float CalcDamage()
+        {
+            return (baseDamage * CalcTotalDamageMult()) - damageReduction;
+        }
+        //apply crit damage
+        private float CalcTotalDamageMult()
+        {
+            float total = damageMultiplier;
+            if (isCrit && hasAgentSource)
+            {
+                total += source.stats.critMult;
+            }
+            return total;
         }
     }
 }

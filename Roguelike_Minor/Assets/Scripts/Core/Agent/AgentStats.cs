@@ -9,6 +9,9 @@ namespace Game.Core {
         [Header("Combat")]
         public float maxHealth = 10f;
         public float baseDamage = 1;
+        [Space(10f)]
+        public float critChance = 1f;
+        public float critMult = 2f;
 
         //money
         [Header("Money")]
@@ -31,6 +34,9 @@ namespace Game.Core {
         [Header("Movement")]
         public float walkSpeed;
         public float sprintSpeed;
+
+        [Header("Luck")]
+        public int luck;
 
         public void Copy(AgentStats other)
         {
