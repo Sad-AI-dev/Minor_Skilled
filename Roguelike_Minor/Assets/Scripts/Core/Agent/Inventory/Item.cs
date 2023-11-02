@@ -12,7 +12,6 @@ namespace Game.Core {
         public ItemDataSO data;
         public int stacks;
         //vars
-        //public Dictionary<string, object> vars;
         public ItemVars vars;
 
         //ctor
@@ -20,6 +19,7 @@ namespace Game.Core {
         {
             agent = holder.agent;
             this.data = data;
+            this.data.InitializeVars(this);
             //initialize first stack
             AddStack();
         }
