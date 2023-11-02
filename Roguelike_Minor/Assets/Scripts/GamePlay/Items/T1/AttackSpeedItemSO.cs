@@ -11,6 +11,9 @@ namespace Game {
         public float baseAttackSpeedIncrease = 1f;
         public float stackAttackSpeedIncrease = 0.5f;
 
+        //========= Initialize Vars ============
+        public override void InitializeVars(Item item) { }
+
         //========= Manage Stacks ===========
         public override void AddStack(Item item)
         {
@@ -25,12 +28,12 @@ namespace Game {
         }
 
         //========= Process Hit Events ===========
-        public override void ProcessDealDamage(ref HitEvent hitEvent) { }
+        public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem) { }
 
-        public override void ProcessTakeDamage(ref HitEvent hitEvent) { }
+        public override void ProcessTakeDamage(ref HitEvent hitEvent, Item sourceItem) { }
 
         //========= Process Heal Events ============
-        public override void ProcessHealEvent(ref HealEvent healEvent) { }
+        public override void ProcessHealEvent(ref HealEvent healEvent, Item sourceItem) { }
 
         //========== Description ===========
         public override string GenerateLongDescription()

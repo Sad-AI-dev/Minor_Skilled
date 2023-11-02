@@ -10,19 +10,22 @@ namespace Game {
         [Header("Healing settings")]
         public float baseHeal = 5f;
         public float bonusHeal = 2.5f;
+        
+        //========= Initialize Vars ============
+        public override void InitializeVars(Item item) { }
 
         //============ Manage Stacks ===============
         public override void AddStack(Item item) { }
         public override void RemoveStack(Item item) { }
 
         //============ Process hit / heal events ==============
-        public override void ProcessDealDamage(ref HitEvent hitEvent)
+        public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
         {
             hitEvent.onDeath.AddListener(OnEnemyDeath);
         }
 
-        public override void ProcessTakeDamage(ref HitEvent hitEvent) { }
-        public override void ProcessHealEvent(ref HealEvent healEvent) { }
+        public override void ProcessTakeDamage(ref HitEvent hitEvent, Item sourceItem) { }
+        public override void ProcessHealEvent(ref HealEvent healEvent, Item sourceItem) { }
 
         //============ Handle Enemy Kill ============
         private void OnEnemyDeath(HitEvent hitEvent)

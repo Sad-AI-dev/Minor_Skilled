@@ -7,6 +7,11 @@ namespace Game {
     [CreateAssetMenu(fileName = "Death Explode Item", menuName = "ScriptableObjects/Items/T2/DeathExplode", order = 20)]
     public class DeathExplodeItemSO : ItemDataSO
     {
+        public class DeathExplodeItemVars : Item.ItemVars
+        {
+            public float explodeRadius;
+        }
+
         [Header("Damage Settings")]
         public float explosionDamageMult = 3f;
         //used when target gets hit by another death explode item effect 
@@ -22,26 +27,40 @@ namespace Game {
         [Header("Technical Settings")]
         public GameObject explosionPrefab;
         
-        //========= Manage Stacks ===========
-        public override void AddStack(Item item) { }
+        //========= Initialize Vars ============
+        public override void InitializeVars(Item item)
+        {
+            item.vars = new DeathExplodeItemVars { explodeRadius = explosionRadius };
+        }
 
-        public override void RemoveStack(Item item) { }
+        //========= Manage Stacks ===========
+        public override void AddStack(Item item)
+        {
+            (item.vars as DeathExplodeItemVars).explodeRadius += bonusExplosionRadius;
+        }
+
+        public override void RemoveStack(Item item)
+        {
+            DeathExplodeItemVars vars = item.vars as DeathExplodeItemVars;
+            if (item.stacks == 0) { vars.explodeRadius -= explosionRadius; }
+            else { vars.explodeRadius -= bonusExplosionRadius; }
+        }
 
         //========= Process Hit Events ===========
-        public override void ProcessDealDamage(ref HitEvent hitEvent) 
+        public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem) 
         {
             hitEvent.onDeath.AddListener(Explode);
         }
 
-        public override void ProcessTakeDamage(ref HitEvent hitEvent) { }
+        public override void ProcessTakeDamage(ref HitEvent hitEvent, Item sourceItem) { }
 
         //========= Process Heal Events ============
-        public override void ProcessHealEvent(ref HealEvent healEvent) { }
+        public override void ProcessHealEvent(ref HealEvent healEvent, Item sourceItem) { }
 
         //========= Util Funcs ==========
         private float GetExplodeRadius(Item item)
         {
-            return explosionRadius + ((item.stacks - 1) * bonusExplosionRadius);
+            return (item.vars as DeathExplodeItemVars).explodeRadius;
         }
 
         private float CalcDamage(HitEvent hitEvent)
@@ -70,18 +89,17 @@ namespace Game {
 
         private void SpawnExplosion(HitEvent hitEvent, Vector3 pos) //create explosion in scene
         {
+            //cache data
             Item sourceItem = hitEvent.source.inventory.GetItemOfType(this);
+            float explodeRadius = GetExplodeRadius(sourceItem);
 
             //create range visuals
             GameObject obj = Instantiate(explosionPrefab);
             obj.transform.position = pos;
-            obj.transform.localScale = new Vector3(2, 2, 2) * GetExplodeRadius(sourceItem);
+            obj.transform.localScale = new Vector3(2, 2, 2) * explodeRadius;
 
             //sphere cast to deal damage
-            Collider[] results = Physics.OverlapSphere(
-                pos,
-                GetExplodeRadius(sourceItem)
-            );
+            Collider[] results = Physics.OverlapSphere(pos, explodeRadius);
 
             if (results.Length > 0)
             {
@@ -90,10 +108,14 @@ namespace Game {
                     if (results[i].CompareTag("Enemy"))
                     {
                         Agent enemy = results[i].gameObject.GetComponent<Agent>();
+                        //create new hitevent
                         HitEvent hit = new HitEvent(hitEvent.source);
+                        //setup damage
                         hit.baseDamage = CalcDamage(hitEvent);
+                        //manage item sources
                         hit.itemSources = new List<Item>(hitEvent.itemSources);
                         hit.itemSources.Add(sourceItem);
+                        //deal damage
                         enemy.health.Hurt(hit);
                     }
                 }

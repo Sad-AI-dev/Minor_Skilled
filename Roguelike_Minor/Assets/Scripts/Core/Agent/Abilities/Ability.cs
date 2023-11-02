@@ -7,17 +7,17 @@ namespace Game.Core {
     [System.Serializable]
     public class Ability
     {
+        public class AbilityVars { }
+
         public enum CoolDownMode { coolDown, attackSpeed }
 
         [HideInInspector] public Agent agent;
 
         public AbilitySO abilityData;
         
-
         [Header("Uses")]
         public int uses;
         public int maxUses = 1;
-       
         
         [Header("Timings")]
         public float coolDown;
@@ -36,7 +36,14 @@ namespace Game.Core {
         private Coroutine coolDownRoutine;
 
         //runtime vars support
-        public Dictionary<string, object> vars = new();
+        public AbilityVars vars;
+
+        //============ Initialize ============
+        public void Initialize(Agent agent)
+        {
+            this.agent = agent;
+            abilityData.InitializeVars(this);
+        }
 
         //============ Use Ability ================
         public void TryUse()

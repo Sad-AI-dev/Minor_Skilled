@@ -11,21 +11,25 @@ namespace Game {
         public float cooldownReduction = 1f;
         public float stackBonusReduction = 1f;
 
+        
+        //========= Initialize Vars ============
+        public override void InitializeVars(Item item) { }
+
         //========= Manage Stacks ===========
         public override void AddStack(Item item) { }
 
         public override void RemoveStack(Item item) { }
 
         //========= Process Hit Events ===========
-        public override void ProcessDealDamage(ref HitEvent hitEvent) 
+        public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem) 
         {
             hitEvent.onDeath.AddListener(ReduceSpecialCooldown);
         }
 
-        public override void ProcessTakeDamage(ref HitEvent hitEvent) { }
+        public override void ProcessTakeDamage(ref HitEvent hitEvent, Item sourceItem) { }
 
         //========= Process Heal Events ============
-        public override void ProcessHealEvent(ref HealEvent healEvent) { }
+        public override void ProcessHealEvent(ref HealEvent healEvent, Item sourceItem) { }
 
         //====== Handle Enemy Death =======
         private void ReduceSpecialCooldown(HitEvent hitEvent)
