@@ -505,6 +505,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlanetaryGrunt
       objectReference: {fileID: 0}
+    - target: {fileID: 6374113225487779390, guid: 0e090577aa25d4c449a69dc0c409d197, type: 3}
+      propertyPath: stats.walkSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8325521278143914386, guid: 0e090577aa25d4c449a69dc0c409d197, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.746404
@@ -1040,6 +1044,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlanetaryGrunt_04
       objectReference: {fileID: 0}
+    - target: {fileID: 6374113225487779390, guid: 0e090577aa25d4c449a69dc0c409d197, type: 3}
+      propertyPath: stats.walkSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8325521278143914386, guid: 0e090577aa25d4c449a69dc0c409d197, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.73
@@ -1315,6 +1323,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlanetaryGrunt_02
       objectReference: {fileID: 0}
+    - target: {fileID: 6374113225487779390, guid: 0e090577aa25d4c449a69dc0c409d197, type: 3}
+      propertyPath: stats.walkSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8325521278143914386, guid: 0e090577aa25d4c449a69dc0c409d197, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.12
@@ -1413,6 +1425,10 @@ PrefabInstance:
     - target: {fileID: 5640572280961470500, guid: 0e090577aa25d4c449a69dc0c409d197, type: 3}
       propertyPath: m_Name
       value: PlanetaryGrunt_03
+      objectReference: {fileID: 0}
+    - target: {fileID: 6374113225487779390, guid: 0e090577aa25d4c449a69dc0c409d197, type: 3}
+      propertyPath: stats.walkSpeed
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8325521278143914386, guid: 0e090577aa25d4c449a69dc0c409d197, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2125,6 +2141,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlanetaryGrunt_01
       objectReference: {fileID: 0}
+    - target: {fileID: 6374113225487779390, guid: 0e090577aa25d4c449a69dc0c409d197, type: 3}
+      propertyPath: stats.walkSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8325521278143914386, guid: 0e090577aa25d4c449a69dc0c409d197, type: 3}
       propertyPath: m_LocalPosition.x
       value: -25.46
@@ -2326,7 +2346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1861624636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2344,6 +2364,7 @@ MonoBehaviour:
   onStageComplete:
     m_PersistentCalls:
       m_Calls: []
+  advanceObjectSpawner: {fileID: 0}
 --- !u!4 &1861624637
 Transform:
   m_ObjectHideFlags: 0
@@ -2384,7 +2405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &2074046777
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2485,16 +2506,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d0c1a420a222041a45aa40e2925369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseStats: {fileID: 0}
   stats:
     maxHealth: 200
     baseDamage: 1
     heldMoney: 0
     attackSpeed: 1
     coolDownMultiplier: 1
+    walkSpeed: 0
+    sprintSpeed: 0
   abilities: {fileID: 0}
   effectHandler: {fileID: 0}
   health: {fileID: 0}
   inventory: {fileID: 0}
+  OnKnockbackReceived:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2074046782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2786,16 +2813,16 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1861624637}
+  - {fileID: 1532787151}
+  - {fileID: 2074046780}
   - {fileID: 1453078522}
   - {fileID: 509950135}
   - {fileID: 234291322}
-  - {fileID: 1532787151}
   - {fileID: 1248090955}
   - {fileID: 954757458}
   - {fileID: 70844468}
   - {fileID: 505599096}
   - {fileID: 1793958318}
-  - {fileID: 2074046780}
   - {fileID: 295788627}
   - {fileID: 1547410485}
   - {fileID: 729002007}

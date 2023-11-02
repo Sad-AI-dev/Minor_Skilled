@@ -4,9 +4,10 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "AttackSpeedItem", menuName = "ScriptableObjects/Items/T1/AttackSpeed")]
+    [CreateAssetMenu(fileName = "AttackSpeedItem", menuName = "ScriptableObjects/Items/T1/AttackSpeed", order = 10)]
     public class AttackSpeedItemSO : ItemDataSO
     {
+        [Header("AttackSpeed Settings")]
         public float baseAttackSpeedIncrease = 1f;
         public float stackAttackSpeedIncrease = 0.5f;
 
@@ -30,5 +31,13 @@ namespace Game {
 
         //========= Process Heal Events ============
         public override void ProcessHealEvent(ref HealEvent healEvent) { }
+
+        //========== Description ===========
+        public override string GenerateLongDescription()
+        {
+            return $"Increase <color=#{HighlightColor}>attack speed</color> by" +
+                $" <color=#{HighlightColor}>{baseAttackSpeedIncrease * 100}%</color> " +
+                $"<color=#{StackColor}>(+{stackAttackSpeedIncrease * 100}% per stack)</color>";
+        }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "Death Explode Item", menuName = "ScriptableObjects/Items/T2/DeathExplode")]
+    [CreateAssetMenu(fileName = "Death Explode Item", menuName = "ScriptableObjects/Items/T2/DeathExplode", order = 20)]
     public class DeathExplodeItemSO : ItemDataSO
     {
         [Header("Damage Settings")]
@@ -98,6 +98,15 @@ namespace Game {
                     }
                 }
             }
+        }
+
+        //============== Description ===========
+        public override string GenerateLongDescription()
+        {
+            return $"enemies explode on death, dealing " +
+                $"<color=#{HighlightColor}>{explosionDamageMult * 100}% TOTAL damage</color>\n" +
+                $"in a <color=#{HighlightColor}>{explosionRadius}m radius</color> " +
+                $"<color=#{StackColor}>(+{bonusExplosionRadius}m per stack)</color>";
         }
     }
 }

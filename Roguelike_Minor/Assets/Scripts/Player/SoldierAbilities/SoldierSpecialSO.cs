@@ -2,15 +2,15 @@ using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Game.Player.Soldier
 {
     [CreateAssetMenu(fileName = "SoldierSpecial", menuName = "ScriptableObjects/Agent/Ability/Soldier/Special")]
     public class SoldierSpecialSO : AbilitySO
     {
-        [SerializeField] private GameObject bullet; 
+        [SerializeField] private GameObject bullet;
         [SerializeField] private float bulletSpeed;
+        [SerializeField] private LayerMask layermask;
 
         PlayerController controller;
 
@@ -26,7 +26,7 @@ namespace Game.Player.Soldier
             controller.StartSlowCoroutine(.2f);
 
             RaycastHit hit;
-            if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500))
+            if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500, layermask))
                 target = hit.point;
             else
                 target = cam.transform.forward * 1000;
@@ -37,7 +37,7 @@ namespace Game.Player.Soldier
             projectile.transform.LookAt(target);
             RailgunBullet rgBullet = projectile.GetComponent<RailgunBullet>();
             rgBullet.velocity = bulletDir * bulletSpeed;
-            rgBullet.ability = source;
+            rgBullet.Initialize(source);
         }
 
         private void InitializeVars(Ability source)

@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 2021588659767511941}
   - component: {fileID: 2535664640213813839}
   - component: {fileID: 2785671876807020025}
+  - component: {fileID: 9142793889419811147}
   m_Layer: 3
   m_Name: cm
   m_TagString: Untagged
@@ -217,6 +218,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9142793889419811147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583641685820129118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1416285159127941395
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +244,7 @@ GameObject:
   - component: {fileID: 6292913461304453114}
   - component: {fileID: 5318300093373864457}
   - component: {fileID: 5411857025701378449}
+  - component: {fileID: 4490771355366452463}
   m_Layer: 3
   m_Name: cm
   m_TagString: Untagged
@@ -355,6 +369,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4490771355366452463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416285159127941395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1421599695142573888
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,6 +392,7 @@ GameObject:
   - component: {fileID: 7641492428396719861}
   - component: {fileID: 6042182213848110425}
   - component: {fileID: 7374867739153013466}
+  - component: {fileID: 6425007794457280646}
   - component: {fileID: 1389778117787781048}
   - component: {fileID: 1439967887705530693}
   - component: {fileID: 8856083573202198069}
@@ -432,11 +459,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visuals: {fileID: 7107147114416228610}
-  deceleration: 1
+  deceleration: 3
+  acceleration: 3
   JumpForce: 50
-  gravity: 0.25
+  gravity: 2.5
   cam: {fileID: 0}
-  freeLookCam: {fileID: 5844694640700254909}
+--- !u!114 &6425007794457280646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421599695142573888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db499deb1e0fd794abff6d3e93c16ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 5844694640700254909}
 --- !u!143 &1389778117787781048
 CharacterController:
   m_ObjectHideFlags: 0
@@ -495,13 +535,13 @@ MonoBehaviour:
     coolDownTimer: 0
   secondary:
     agent: {fileID: 0}
-    abilityData: {fileID: 0}
-    uses: 0
+    abilityData: {fileID: 11400000, guid: 5dbafad3a5945d643a2dbc8379c06249, type: 2}
+    uses: 1
     maxUses: 1
-    coolDown: 0
+    coolDown: 5
     coolDownMode: 0
     isCoolingDown: 0
-    originPoint: {fileID: 0}
+    originPoint: {fileID: 2437245198168656956}
     onUse:
       m_PersistentCalls:
         m_Calls: []
@@ -515,7 +555,7 @@ MonoBehaviour:
     abilityData: {fileID: 11400000, guid: 246ee83cf6db190478d1f1ab63556b27, type: 2}
     uses: 1
     maxUses: 1
-    coolDown: 8
+    coolDown: 1
     coolDownMode: 0
     isCoolingDown: 0
     originPoint: {fileID: 2437245198168656956}
@@ -529,10 +569,10 @@ MonoBehaviour:
     coolDownTimer: 0
   utility:
     agent: {fileID: 0}
-    abilityData: {fileID: 0}
-    uses: 0
+    abilityData: {fileID: 11400000, guid: 8e216291f235b244abb9c0ba3734e093, type: 2}
+    uses: 1
     maxUses: 1
-    coolDown: 0
+    coolDown: 1
     coolDownMode: 0
     isCoolingDown: 0
     originPoint: {fileID: 0}
@@ -593,18 +633,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d0c1a420a222041a45aa40e2925369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseStats: {fileID: 11400000, guid: 1001ae892b7b3304085c17be4d090557, type: 2}
   stats:
     maxHealth: 10
     baseDamage: 1
     heldMoney: 0
     attackSpeed: 1
     coolDownMultiplier: 1
-    walkSpeed: 20
+    walkSpeed: 15
     sprintSpeed: 2
   abilities: {fileID: 0}
   effectHandler: {fileID: 0}
   health: {fileID: 0}
   inventory: {fileID: 0}
+  OnKnockbackReceived:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4822304574826469235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,7 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   items: []
-  slots: []
+  slots: 0
 --- !u!114 &6612914900796368241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -869,6 +913,7 @@ GameObject:
   - component: {fileID: 7785313672667496239}
   - component: {fileID: 9140033435224208244}
   - component: {fileID: 1698739553774398319}
+  - component: {fileID: 7459831303449358485}
   m_Layer: 3
   m_Name: cm
   m_TagString: Untagged
@@ -982,6 +1027,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1698739553774398319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4780994281353076404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7459831303449358485
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1230,8 +1287,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7114456423401257476}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.60892284, y: -0.01980854, z: 0.015213572, w: 0.7928362}
-  m_LocalPosition: {x: 0, y: 7, z: 4}
+  m_LocalRotation: {x: 0.041558642, y: -0, z: -0, w: 0.9991361}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1498,11 +1555,11 @@ MonoBehaviour:
   m_SplineCurvature: 0.5
   m_Orbits:
   - m_Height: 6
-    m_Radius: 2
+    m_Radius: 1
   - m_Height: 3
     m_Radius: 6
   - m_Height: 0
-    m_Radius: 2
+    m_Radius: 1
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 6573317096601276331}

@@ -9,7 +9,6 @@ namespace Game.Enemy {
     public class PGTree : Core.Tree
     {
         //STATIC VARIABLES
-        public static float speed = 4;
         public static float FOVRange = 13;
         public static float meleeAttackRange = 1.6f;
         public static float rangedAttackRange = 7f;
@@ -17,26 +16,40 @@ namespace Game.Enemy {
 
         //PUBLIC VARIABLE
         public NavMeshAgent agent;
-        public LayerMask enemyLayerMask;
         public Agent enemyAgent;
+        public LayerMask enemyLayerMask;
+        public Rigidbody rb;
+
+        [Header("Enemy Knockback Multipliers")]
+        public float upMultiplier = 1;
+        public float directionMultiplier = 6;
+
         protected override void Start()
         {
             base.Start();
+            agent.speed = GetComponent<Agent>().stats.walkSpeed;
             agent.enabled = true;
         }
 
         protected override BT_Node SetupTree()
         {
-            BT_Node root = new Sequence(
+            BT_Node root = new Selector(
                 new List<BT_Node>
                 {
-                    new PGTaskGoToTarget(transform, agent, enemyLayerMask, enemyAgent), // If enemy in range, go to enemy
-                    new Selector( new List<BT_Node>{
-                        new PGTaskAttackPlayerRanged(transform, enemyAgent, enemyLayerMask), // Attack ranged if player already has multiple close by
-                        new PGTaskAttackPlayerMelee(transform, enemyAgent) // Attack the player untill its dead
-                    })
+                    new TakeKnockback(transform, enemyAgent, agent, rb, upMultiplier, directionMultiplier),
+                    new Sequence( new List<BT_Node>
+                    {
+                        new CheckEnemyRangedAttack(transform, enemyLayerMask), //check if in range for ranged attack + melee check
+                        new PGTaskAttackPlayerRanged(transform, enemyAgent, agent), // Attack ranged;
+                    }), //Check for ranged attack
+                    new Sequence( new List<BT_Node>
+                    {
+                        new CheckEnemyMeleeAttack(enemyAgent), // Check if in melee range
+                        new PGTaskAttackPlayerMelee(transform, enemyAgent, agent) // Attack Melee
+                    }), //Check for melee attack
+                    new PGTaskGoToTarget(agent) // Go to target
                 }
-            );
+            ) ;
             return root;
         }
 

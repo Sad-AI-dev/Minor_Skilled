@@ -19,6 +19,7 @@ namespace Game.Player.Soldier
         public float spreadBuildupSpeed;
         public float spreadResetSpeed;
         public AnimationCurve spreadBuildup;
+        public LayerMask layermask;
 
         PlayerController controller;
 
@@ -36,7 +37,7 @@ namespace Game.Player.Soldier
             controller.StartSlowCoroutine(source.coolDown * 1.1f);
 
             RaycastHit hit;
-            if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500))
+            if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500, layermask))
                 target = hit.point;
             else
                 target = cam.transform.forward * 1000;
@@ -70,8 +71,11 @@ namespace Game.Player.Soldier
             //Instantiate(bullet, source.originPoint.position, UnityEngine.Quaternion.identity);
             projectile.transform.position = source.originPoint.position;
             projectile.transform.LookAt(target);
-            projectile.GetComponent<RifleBullet>().velocity = bulletDir * bulletSpeed;
-            projectile.GetComponent<RifleBullet>().ability = source;
+
+            //initialize projectile
+            RifleBullet bullet = projectile.GetComponent<RifleBullet>();
+            bullet.velocity = bulletDir * bulletSpeed;
+            bullet.Initialize(source);
 
             bool buildingDownSpread = Convert.ToBoolean(source.vars["buildingDownSpread"]);
 

@@ -152,7 +152,7 @@ namespace Game.Enemy.Pathfinding {
                         RaycastHit hit;
                         if (Physics.Raycast(new Vector3(xpos, 60, zpos), -transform.up, out hit, Mathf.Infinity))
                         {
-                            if(hit.point.y > ypos)
+                            if(hit.point.y > ypos || Vector3.Distance(new Vector3(xpos, ypos, zpos), hit.point) < 10)
                             {
                                 node.walkable = false;
                             }
@@ -200,6 +200,33 @@ namespace Game.Enemy.Pathfinding {
 
             return retVal;
         }
+        public GNode GetNodeClosestToWorldPos(Vector3 worldPos)
+        {
+            //Get Origin Node
+            GNode OriginNode = GetNode(0, 0, 0);
+
+            //Convert world pos to grid
+            int worldPosX = Mathf.RoundToInt(worldPos.x);
+            int worldPosY = Mathf.RoundToInt(worldPos.y);
+            int worldPosZ = Mathf.RoundToInt(worldPos.z);
+
+            //Convert to offset
+            int xWithOffset = Mathf.RoundToInt(OriginNode.worldPosition.x - worldPosX);
+            int yWithOffset = Mathf.RoundToInt(OriginNode.worldPosition.y - worldPosY);
+            int zWithOffset = Mathf.RoundToInt(OriginNode.worldPosition.z - worldPosZ);
+
+            //Convert to grid pos
+            int x = Mathf.RoundToInt(xWithOffset / offsetX);
+            int y = Mathf.RoundToInt(yWithOffset / offsetY);
+            int z = Mathf.RoundToInt(zWithOffset / offsetZ);
+
+            //inverse if needed;
+            if (x < 0) x = -x;
+            if (y < 0) y = -y;
+            if (z < 0) z = -z;
+
+            return GetNode(x,y,z);
+        }
 
         /// <summary>
         /// UNITY METHODS
@@ -236,7 +263,23 @@ namespace Game.Enemy.Pathfinding {
                         Gizmos.color = Color.blue;
                         Gizmos.DrawSphere(item.worldPosition, 0.22f);
                     }
+
                 }
+                /*for (int x = 0; x < maxX; x++)
+                {
+                    for (int y = 0; y < maxY; y++)
+                    {
+                        for (int z = 0; z < maxZ; z++)
+                        {
+                            float xpos = x * offsetX + transform.position.x;
+                            float ypos = y * offsetY + transform.position.y;
+                            float zpos = z * offsetZ + transform.position.z;
+
+                            Gizmos.color = Color.green;
+                            Gizmos.DrawSphere(new Vector3(xpos, ypos, zpos), 0.3f);
+                        }
+                    }
+                }*/
             }
         }
     }

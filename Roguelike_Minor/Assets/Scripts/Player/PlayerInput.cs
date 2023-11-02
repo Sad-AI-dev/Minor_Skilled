@@ -3,6 +3,7 @@ using Game.Core.GameSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEngine.UIElements;
 
 namespace Game.Player {
     [RequireComponent(typeof(PlayerController))]
@@ -26,7 +27,6 @@ namespace Game.Player {
         void Update()
         {
             WalkInput();
-            SprintInput();
             JumpInput();
             AbilitiesInput();
             InteractInput();
@@ -45,19 +45,6 @@ namespace Game.Player {
             
         }
 
-        private void SprintInput()
-        {
-/*            if(Input.GetKeyDown(KeyCode.LeftShift) && !playerController.GetIsSlowed())
-            {
-                playerController.ToggleSlow(true);
-                return;
-            }
-            if (Input.GetKeyDown(KeyCode.LeftShift) && playerController.GetIsSlowed())
-            {
-                playerController.ToggleSlow(false);
-            }*/
-        }
-
         private void JumpInput()
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -72,9 +59,17 @@ namespace Game.Player {
             {
                 agent.abilities.primary.TryUse();
             }
-            if(Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetMouseButtonDown(1))
+            {
+                agent.abilities.secondary.TryUse();
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 agent.abilities.special.TryUse();
+            }
+            if(Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                agent.abilities.utility.TryUse();
             }
         }
 

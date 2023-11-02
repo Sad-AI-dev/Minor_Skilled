@@ -31,5 +31,23 @@ namespace Game.Core {
         [Header("Movement")]
         public float walkSpeed;
         public float sprintSpeed;
+
+        public void Copy(AgentStats other)
+        {
+            //combat
+            maxHealth = other.maxHealth;
+            baseDamage = other.baseDamage;
+
+            //money
+            Money = other.heldMoney;
+
+            //cooldowns
+            attackSpeed = other.attackSpeed;
+            coolDownMultiplier = other.coolDownMultiplier;
+
+            //movement
+            walkSpeed = other.walkSpeed;
+            sprintSpeed = other.sprintSpeed;
+        }
     }
 }
