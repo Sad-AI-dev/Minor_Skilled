@@ -10,7 +10,14 @@ namespace Game.Core {
         public float procCoef = 1f;
         public float damageMultiplier;
 
+        //======== Initialization ========
         public abstract void InitializeVars(Ability source);
+
+        //========= Use Ability ========
         public abstract void Use(Ability source);
+
+
+        //======== Upgrade Support ==========
+        public virtual void Upgrade(Ability source) { }
     }
 }
