@@ -5,8 +5,13 @@ using UnityEngine;
 namespace Game.Core {
     public class StatusEffectHandler : MonoBehaviour
     {
+        public class EffectVars
+        {
+            public int stacks;
+        }
+
         [HideInInspector] public Agent agent;
-        public Dictionary<StatusEffectSO, int> statusEffects = new();
+        public Dictionary<StatusEffectSO, EffectVars> statusEffects = new();
 
         //============== Manage Effect Adding =====================
         public void AddEffect(StatusEffectSO effect, int stacks = 1)
@@ -20,13 +25,13 @@ namespace Game.Core {
 
         private void AddNewEffect(StatusEffectSO effect)
         {
-            statusEffects.Add(effect, 0);
+            statusEffects.Add(effect, new EffectVars());
             effect.AddEffect(agent);
         }
         private void AddStacks(StatusEffectSO effect, int stacks)
         {
             effect.AddStacks(agent, stacks);
-            statusEffects[effect] += stacks;
+            statusEffects[effect].stacks += stacks;
         }
 
         //==================== Manage Effect Removal ===================
@@ -34,9 +39,9 @@ namespace Game.Core {
         {
             if (statusEffects.ContainsKey(effect))
             {
-                RemoveStacks(effect, Mathf.Min(stacks, statusEffects[effect]));
+                RemoveStacks(effect, Mathf.Min(stacks, statusEffects[effect].stacks));
                 //remove effect check
-                if (statusEffects[effect] == 0)
+                if (statusEffects[effect].stacks == 0)
                 {
                     RemoveEffect(effect);
                 }
@@ -46,7 +51,7 @@ namespace Game.Core {
         private void RemoveStacks(StatusEffectSO effect, int stacksToRemove)
         {
             effect.RemoveStacks(agent, stacksToRemove);
-            statusEffects[effect] -= stacksToRemove;
+            statusEffects[effect].stacks -= stacksToRemove;
         }
         private void RemoveEffect(StatusEffectSO effect)
         {
@@ -59,7 +64,7 @@ namespace Game.Core {
         {
             foreach (var kvp in statusEffects)
             {
-                RemoveEffect(kvp.Key, kvp.Value);
+                RemoveEffect(kvp.Key, kvp.Value.stacks);
             }
             statusEffects.Clear();
         }
