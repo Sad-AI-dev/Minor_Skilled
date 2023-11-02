@@ -12,22 +12,25 @@ namespace Game.Enemy
     {
         public GameObject prefab;
         public float bulletSpeed;
+        public class PGSecondaryAttackVars : Ability.AbilityVars
+        {
+            public BehaviourPool<PGSecondaryBehaviour> behaviourPool;
+        }
+
+        public override void InitializeVars(Ability source)
+        {
+            BehaviourPool<PGSecondaryBehaviour> pool = new BehaviourPool<PGSecondaryBehaviour>();
+            pool.behaviourTemplate = prefab;
+            source.vars = new PGSecondaryAttackVars { behaviourPool = pool };
+        }
 
         public override void Use(Ability source)
         {
-            if (!source.vars.ContainsKey("poolSecondary")) InitializeVars(source);
-            PGSecondaryBehaviour secondary = ((BehaviourPool<PGSecondaryBehaviour>)source.vars["poolSecondary"]).GetBehaviour();
+            PGSecondaryBehaviour secondary = (source.vars as PGSecondaryAttackVars).behaviourPool.GetBehaviour();
             secondary.bulletSpeed = bulletSpeed;
             secondary.target = GameStateManager.instance.player.transform;
             secondary.gameObject.transform.position = source.agent.transform.position + source.agent.transform.forward;
             secondary.Initialize(source);
-        }
-
-        void InitializeVars(Ability source)
-        {
-            BehaviourPool<PGSecondaryBehaviour> behaviourPool = new BehaviourPool<PGSecondaryBehaviour>();
-            behaviourPool.behaviourTemplate = prefab;
-            source.vars.Add("poolSecondary", behaviourPool);
         }
     }
 }
