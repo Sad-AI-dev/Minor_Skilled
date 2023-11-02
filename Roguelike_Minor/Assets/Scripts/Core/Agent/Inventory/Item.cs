@@ -6,11 +6,14 @@ namespace Game.Core {
     [System.Serializable]
     public class Item
     {
+        public class ItemVars { }
+
         [HideInInspector] public Agent agent;
         public ItemDataSO data;
         public int stacks;
         //vars
-        public Dictionary<string, object> vars;
+        //public Dictionary<string, object> vars;
+        public ItemVars vars;
 
         //ctor
         public Item(ItemDataSO data, Inventory holder)
