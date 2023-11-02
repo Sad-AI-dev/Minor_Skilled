@@ -10,16 +10,15 @@ namespace Game.Player.Soldier
     {
         [SerializeField] private float dashForce;
 
+        private PlayerController controller;
+
+        public override void InitializeVars(Ability source)
+        {
+            controller = source.agent.GetComponent<PlayerController>();
+        }
+
         public override void Use(Ability source)
         {
-            if(!source.vars.ContainsKey("PlayerController"))
-            {
-                if(source.agent.TryGetComponent(out PlayerController playerController))
-                    source.vars.Add("PlayerController", playerController);
-            }
-
-            PlayerController controller = (PlayerController)source.vars["PlayerController"];
-
             Vector3 velocity = controller.cam.transform.forward * dashForce;
             controller.ReceiveKnockback(velocity);
         }
