@@ -6,7 +6,7 @@ using UnityEngine.PlayerLoop;
 
 namespace Game.Player.Soldier
 {
-    public class Explosion : MonoBehaviour
+    public class DOT : MonoBehaviour
     {
         [SerializeField] private GameObject sphere;
 
@@ -20,6 +20,8 @@ namespace Game.Player.Soldier
 
         public float knockbackForce;
 
+        public bool canHitPlayer;
+        public int frameDelay;
 
         // ========= PRIVATE VARIABLES ===========
         private bool canTick = true;
@@ -27,6 +29,8 @@ namespace Game.Player.Soldier
         public List<Agent> agentsInRange;
 
         private Vector3 knockbackVelocity;
+
+        private int currentFrame;
 
         private void Start()
         {
@@ -46,6 +50,8 @@ namespace Game.Player.Soldier
         private void executeTick()
         {
             canTick = false;
+
+            Debug.Log("Executed tick");
 
             HitEvent hitEvent = new HitEvent(source);
             hitEvent.baseDamage = damage;
@@ -80,7 +86,12 @@ namespace Game.Player.Soldier
 
         IEnumerator ExecuteTickNextFrameCo()
         {
-            yield return null;
+            while(currentFrame < frameDelay)
+            {
+                currentFrame++;
+                yield return null;
+            }
+            
             executeTick();
             StartCoroutine(WaitForNextTickCo());
         }
@@ -92,10 +103,11 @@ namespace Game.Player.Soldier
                 if (other.TryGetComponent(out Agent enemy))
                 {
                     agentsInRange.Add(enemy);
+                    Debug.Log("Added enemy");
                 }
                     
             }
-            if(other.CompareTag("Player"))
+            if(other.CompareTag("Player") && canHitPlayer)
             {
                 if(other.TryGetComponent(out Agent player))
                 {
