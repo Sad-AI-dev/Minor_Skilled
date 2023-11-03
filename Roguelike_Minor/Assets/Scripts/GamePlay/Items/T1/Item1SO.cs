@@ -4,12 +4,12 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "DeathHealItem", menuName = "ScriptableObjects/Items/T1/Death Heal", order = 11)]
-    public class DeathHealItemSO : ItemDataSO
+    [CreateAssetMenu(fileName = "Necrotic_Module", menuName = "ScriptableObjects/Items/T1/1: -", order = 101)]
+    public class Item1SO : ItemDataSO
     {
         [Header("Healing settings")]
-        public float baseHeal = 5f;
-        public float bonusHeal = 2.5f;
+        public float baseHeal = 2f;
+        public float bonusHeal = 1f;
         
         //========= Initialize Vars ============
         public override void InitializeVars(Item item) { }

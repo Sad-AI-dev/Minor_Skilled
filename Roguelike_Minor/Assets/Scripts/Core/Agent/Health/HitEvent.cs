@@ -28,8 +28,18 @@ namespace Game.Core {
         //death event
         public UnityEvent<HitEvent> onDeath;
 
-        //ctor
-        public HitEvent(Ability source = null)
+        //============== Constructors =============
+        //=== Default Constructor ===
+        public HitEvent(Agent source = null)
+        {
+            this.source = source;
+            hasAgentSource = source != null;
+            if (hasAgentSource) { TryCrit(); }
+            InitializeVars();
+        }
+
+        //=== Constructor for abilities ===
+        public HitEvent(Ability source)
         {
             hasAgentSource = source != null;
 
@@ -39,36 +49,42 @@ namespace Game.Core {
                 procCoef = source.abilityData.procCoef;
                 //setup base damage
                 SetupBaseDamage(source);
+                TryCrit();
             }
 
             InitializeVars();
         }
-        //alternate ctor (for additional projectiles from items for example)
-        public HitEvent(Agent source)
-        {
-            this.source = source;
-            hasAgentSource = source != null;
-            InitializeVars();
-        }
-
         private void SetupBaseDamage(Ability source)
         {
             baseDamage = source.agent.stats.baseDamage * source.abilityData.damageMultiplier;
         }
+
+        //=== Constructor for proc chain ===
+        public HitEvent(HitEvent baseEvent, Item procItem)
+        {
+            source = baseEvent.source;
+            hasAgentSource = true; //proc chain cannot happen without agent source
+            //copy vars
+            procCoef = baseEvent.procCoef;
+            isCrit = baseEvent.isCrit;
+            //manage item
+            itemSources = new List<Item>(baseEvent.itemSources);
+            if (!itemSources.Contains(procItem)) { itemSources.Add(procItem); }
+            //initialize
+            InitializeVars();
+        }
+
+        //================= Initialize Vars ==================
         private void InitializeVars()
         {
             damageMultiplier = 1f;
-            itemSources = new List<Item>();
+            itemSources ??= new List<Item>();
             onDeath = new UnityEvent<HitEvent>();
-            TryCrit();
         }
+
         private void TryCrit()
         {
-            if (hasAgentSource)
-            {
-                //attempt to crit
-                isCrit = AgentRandom.TryProc(source.stats.critChance, source);
-            }
+            isCrit = AgentRandom.TryProc(source.stats.critChance, source);
         }
 
         //============== Get Total Damage ===============
@@ -81,13 +97,13 @@ namespace Game.Core {
         {
             return (baseDamage * CalcTotalDamageMult()) - damageReduction;
         }
-        //apply crit damage
+
         private float CalcTotalDamageMult()
         {
             float total = damageMultiplier;
             if (isCrit && hasAgentSource)
-            {
-                total += source.stats.critMult;
+            { //apply crit damage
+                total *= source.stats.critMult;
             }
             return total;
         }

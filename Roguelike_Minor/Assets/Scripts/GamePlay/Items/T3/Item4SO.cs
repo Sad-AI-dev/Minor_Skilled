@@ -4,13 +4,12 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "SpecialReduceOnKill", menuName = "ScriptableObjects/Items/T3/SpecialReduceOnKill", order = 30)]
-    public class SpecialReduceOnKillSO : ItemDataSO
+    [CreateAssetMenu(fileName = "Overclock", menuName = "ScriptableObjects/Items/T3/4: Overclock", order = 304)]
+    public class Item4SO : ItemDataSO
     {
         [Header("Cooldown settings")]
         public float cooldownReduction = 1f;
         public float stackBonusReduction = 1f;
-
         
         //========= Initialize Vars ============
         public override void InitializeVars(Item item) { }

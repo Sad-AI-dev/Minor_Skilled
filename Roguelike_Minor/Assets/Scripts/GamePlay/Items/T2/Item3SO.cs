@@ -4,8 +4,8 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "Death Explode Item", menuName = "ScriptableObjects/Items/T2/DeathExplode", order = 20)]
-    public class DeathExplodeItemSO : ItemDataSO
+    [CreateAssetMenu(fileName = "Exploding_Greens", menuName = "ScriptableObjects/Items/T2/3: Exploding Greens", order = 203)]
+    public class Item3SO : ItemDataSO
     {
         public class DeathExplodeItemVars : Item.ItemVars
         {
@@ -109,12 +109,9 @@ namespace Game {
                     {
                         Agent enemy = results[i].gameObject.GetComponent<Agent>();
                         //create new hitevent
-                        HitEvent hit = new HitEvent(hitEvent.source);
+                        HitEvent hit = new HitEvent(hitEvent, sourceItem);
                         //setup damage
                         hit.baseDamage = CalcDamage(hitEvent);
-                        //manage item sources
-                        hit.itemSources = new List<Item>(hitEvent.itemSources);
-                        hit.itemSources.Add(sourceItem);
                         //deal damage
                         enemy.health.Hurt(hit);
                     }

@@ -4,8 +4,8 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "AttackSpeedItem", menuName = "ScriptableObjects/Items/T1/AttackSpeed", order = 10)]
-    public class AttackSpeedItemSO : ItemDataSO
+    [CreateAssetMenu(fileName = "High_Speed_Connector", menuName = "ScriptableObjects/Items/T1/2: -", order = 102)]
+    public class Item2SO : ItemDataSO
     {
         [Header("AttackSpeed Settings")]
         public float baseAttackSpeedIncrease = 1f;

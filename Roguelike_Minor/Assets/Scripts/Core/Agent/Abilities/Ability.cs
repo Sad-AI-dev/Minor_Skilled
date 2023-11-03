@@ -42,7 +42,7 @@ namespace Game.Core {
         public void Initialize(Agent agent)
         {
             this.agent = agent;
-            abilityData.InitializeVars(this);
+            if (abilityData) { abilityData.InitializeVars(this); }
         }
 
         //============ Use Ability ================

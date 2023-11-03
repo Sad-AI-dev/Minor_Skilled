@@ -53,7 +53,7 @@ namespace Game {
 
         void HandleUI(Image icon, TextMeshProUGUI cooldownText, Ability ability)
         {
-            if (ability.isCoolingDown)
+            if (ability.isCoolingDown && ability.coolDownMode == Ability.CoolDownMode.coolDown)
             {
                 icon.color = cooldownColor;
                 cooldownText.text = Mathf.RoundToInt(ability.coolDownTimer).ToString();

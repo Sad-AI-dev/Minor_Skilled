@@ -43,6 +43,8 @@ namespace Game.Core {
             //combat
             maxHealth = other.maxHealth;
             baseDamage = other.baseDamage;
+            critChance = other.critChance;
+            critMult = other.critMult;
 
             //money
             Money = other.heldMoney;
@@ -54,6 +56,9 @@ namespace Game.Core {
             //movement
             walkSpeed = other.walkSpeed;
             sprintSpeed = other.sprintSpeed;
+
+            //luck
+            luck = other.luck;
         }
     }
 }
