@@ -29,13 +29,28 @@ namespace Game {
         public override void AddStacks(StatusEffectHandler handler, int stacks)
         {
             AttackSpeedEffectVars vars = handler.statusEffects[this] as AttackSpeedEffectVars;
-            vars.activeRoutines.Add(handler.agent.StartCoroutine(IncreaseAttackSpeedCo(handler.agent)));
+            for (int i = 0; i < stacks; i++)
+            {
+                vars.activeRoutines.Add(handler.agent.StartCoroutine(IncreaseAttackSpeedCo(handler.agent)));
+            }
         }
 
         public override void RemoveStacks(StatusEffectHandler handler, int stacks)
         {
-            handler.agent.stats.attackSpeed -= attackSpeedIncrease;
-            (handler.statusEffects[this] as AttackSpeedEffectVars).activeRoutines.RemoveAt(0);
+            handler.agent.stats.attackSpeed -= attackSpeedIncrease * stacks;
+            for (int i = 0; i < stacks; i++) 
+            { 
+                RemoveStack(handler, handler.statusEffects[this] as AttackSpeedEffectVars);
+            }
+        }
+        private void RemoveStack(StatusEffectHandler handler, AttackSpeedEffectVars vars)
+        {
+            //stop coroutine
+            if (vars.activeRoutines.Count > 0 && vars.activeRoutines[0] != null)
+            {
+                handler.agent.StopCoroutine(vars.activeRoutines[0]);
+            }
+            vars.activeRoutines.RemoveAt(0);
         }
 
         //======== Co Routine ==========

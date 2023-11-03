@@ -9,21 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25f760c994450d84dbda5202e179c861, type: 3}
-  m_Name: Exploding_Greens
+  m_Script: {fileID: 11500000, guid: f083262b05e23d248a42272f4d298dba, type: 3}
+  m_Name: 16Spiked_Bracers
   m_EditorClassIdentifier: 
   size: {fileID: 11400000, guid: aaa7839693155fe46a5ce1c6da18f970, type: 2}
-  tier: {fileID: 11400000, guid: 9e8f1b09a5f0e164382a3e6b6759f388, type: 2}
+  tier: {fileID: 11400000, guid: cfe545ec7681e3044a45b9dc5c30b409, type: 2}
   canProcSelf: 0
-  pickupPrefab: {fileID: 1950396541563328600, guid: cda126eae4f672249a0f2e599fe1dc41, type: 3}
+  pickupPrefab: {fileID: 5409771222440777968, guid: 5c0d28fb6761f5345a9f1d29c2132d21, type: 3}
   UISprite: {fileID: 21300000, guid: 49f57c0591189ed4f821fdd68e8e4d34, type: 3}
-  title: Exploding Greens
-  shortDescription: Enemies may explode on death
+  title: Spiked Bracers
+  shortDescription: chance to inflict bleed
   highlightColor: {r: 1, g: 0.9764706, b: 0.8039216, a: 1}
   stackColor: {r: 0.8196079, g: 0.8196079, b: 0.8196079, a: 1}
-  explosionDamageMult: 2.5
-  cascadeMult: 0.8
-  explosionRadius: 5
-  bonusExplosionRadius: 2.5
-  explodeDelay: 0.3
-  explosionPrefab: {fileID: 7025721763210319518, guid: 9e323f272809d9c40acb4a0951264e6b, type: 3}
+  baseChance: 100
+  bonusChance: 10
+  bleedEffect: {fileID: 11400000, guid: f33eba37278af8542ab8d5be5deb6a36, type: 2}
+  bleedDamage: 2

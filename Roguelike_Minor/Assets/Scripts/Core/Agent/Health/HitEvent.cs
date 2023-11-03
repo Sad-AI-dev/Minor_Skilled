@@ -84,7 +84,8 @@ namespace Game.Core {
 
         private void TryCrit()
         {
-            isCrit = AgentRandom.TryProc(source.stats.critChance, source);
+            isCrit = false; //default value
+            AgentRandom.TryProc(source.stats.critChance, source, () => isCrit = true);
         }
 
         //============== Get Total Damage ===============

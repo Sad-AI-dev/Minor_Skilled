@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Core {
     public static class AgentRandom
     {
         //============ Try Proc =============
-        public static bool TryProc(float chance, HitEvent hitEvent)
+        private static bool TryProc(float chance, HitEvent hitEvent)
         {
             bool result = CalcTotalChance(hitEvent) <= chance;
             if (hitEvent.hasAgentSource)
@@ -21,7 +19,7 @@ namespace Game.Core {
             return result;
         }
 
-        public static bool TryProc(float chance, Agent agent)
+        private static bool TryProc(float chance, Agent agent)
         {
             bool result = Random.Range(0f, 100f) <= chance;
             int luckPoints = agent.stats.luck;
@@ -32,6 +30,32 @@ namespace Game.Core {
             }
             return result;
         }
+
+        //========= Multi Proc ============
+        public static void TryProc<T>(float chance, Agent agent, System.Action<T> onProc, T vars = default)
+        {
+            //guarenteed procs
+            for (int i = 0; i < Mathf.FloorToInt(chance / 100f); i++) { onProc?.Invoke(vars); }
+            //try proc for left chance
+            if (TryProc(chance % 100, agent)) { onProc?.Invoke(vars); }
+        }
+        public static void TryProc(float chance, Agent agent, System.Action onProc)
+        {
+            TryProc(chance, agent, (int i) => onProc?.Invoke());
+        }
+
+        public static void TryProc<T>(float chance, HitEvent hitEvent, System.Action<T> onProc, T vars = default)
+        {
+            //guarenteed procs
+            for (int i = 0; i < Mathf.FloorToInt(chance / 100f); i++) { onProc?.Invoke(vars); }
+            //try proc for left chance
+            if (TryProc(chance % 100, hitEvent)) { onProc?.Invoke(vars); }
+        }
+        public static void TryProc(float chance, HitEvent hitEvent, System.Action onProc)
+        {
+            TryProc(chance, hitEvent, (int i) => onProc?.Invoke());
+        }
+
 
         //========= Chance Calc ==============
         private static float CalcTotalChance(HitEvent hitEvent)
