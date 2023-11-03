@@ -28,7 +28,7 @@ namespace Game.Core {
         public Transform originPoint;
 
         [Header("Events")]
-        public UnityEvent onUse;
+        public UnityEvent<Ability> onUse;
         public AK.Wwise.Event SFX;
 
         //vars
@@ -62,7 +62,7 @@ namespace Game.Core {
         private void Use()
         {
             uses--;
-            onUse?.Invoke();
+            onUse?.Invoke(this);
             SFX.Post(agent.gameObject);
             abilityData.Use(this);
         }

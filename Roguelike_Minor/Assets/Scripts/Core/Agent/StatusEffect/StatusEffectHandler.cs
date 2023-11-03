@@ -26,11 +26,11 @@ namespace Game.Core {
         private void AddNewEffect(StatusEffectSO effect)
         {
             statusEffects.Add(effect, new EffectVars());
-            effect.AddEffect(agent);
+            effect.AddEffect(this);
         }
         private void AddStacks(StatusEffectSO effect, int stacks)
         {
-            effect.AddStacks(agent, stacks);
+            effect.AddStacks(this, stacks);
             statusEffects[effect].stacks += stacks;
         }
 
@@ -50,12 +50,12 @@ namespace Game.Core {
 
         private void RemoveStacks(StatusEffectSO effect, int stacksToRemove)
         {
-            effect.RemoveStacks(agent, stacksToRemove);
+            effect.RemoveStacks(this, stacksToRemove);
             statusEffects[effect].stacks -= stacksToRemove;
         }
         private void RemoveEffect(StatusEffectSO effect)
         {
-            effect.RemoveEffect(agent);
+            effect.RemoveEffect(this);
             statusEffects.Remove(effect);
         }
 

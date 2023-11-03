@@ -52,11 +52,6 @@ namespace Game {
             hitEvent.onDeath.AddListener(Explode);
         }
 
-        public override void ProcessTakeDamage(ref HitEvent hitEvent, Item sourceItem) { }
-
-        //========= Process Heal Events ============
-        public override void ProcessHealEvent(ref HealEvent healEvent, Item sourceItem) { }
-
         //========= Util Funcs ==========
         private float GetExplodeRadius(Item item)
         {
