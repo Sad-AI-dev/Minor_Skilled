@@ -5,9 +5,12 @@ namespace Game.Core {
     [System.Serializable]
     public class AgentStats
     {
+        //health
+        [Header("Health")]
+        public float maxHealth = 10f;
+        public float maxHealthMult = 1f;
         //combat
         [Header("Combat")]
-        public float maxHealth = 10f;
         public float baseDamage = 1;
         [Space(10f)]
         public float critChance = 1f;
@@ -40,8 +43,11 @@ namespace Game.Core {
 
         public void Copy(AgentStats other)
         {
-            //combat
+            //health
             maxHealth = other.maxHealth;
+            maxHealthMult = other.maxHealthMult;
+
+            //combat
             baseDamage = other.baseDamage;
             critChance = other.critChance;
             critMult = other.critMult;
@@ -59,6 +65,12 @@ namespace Game.Core {
 
             //luck
             luck = other.luck;
+        }
+
+        //======== Health Getter ==========
+        public float GetMaxHealth()
+        {
+            return maxHealth * maxHealthMult;
         }
     }
 }

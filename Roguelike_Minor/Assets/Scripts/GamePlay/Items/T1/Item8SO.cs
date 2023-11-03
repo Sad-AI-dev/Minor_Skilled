@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "Strength", menuName = "ScriptableObjects/Items/T1/8: -", order = 108)]
+    [CreateAssetMenu(fileName = "DPS Drive", menuName = "ScriptableObjects/Items/T1/8: DPS Drive", order = 108)]
     public class Item8SO : ItemDataSO
     {
         [Header("Base Damage settings")]

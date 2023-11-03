@@ -10,10 +10,11 @@ namespace Game.Core {
 
         [Header("Health")]
         public float health;
-        private float MaxHealth { get { return agent.stats.maxHealth; } }
+        private float MaxHealth { get { return agent.stats.maxHealth * agent.stats.maxHealthMult; } }
         public HealthBar healthBar;
 
         [Header("Events")]
+        [HideInInspector] public UnityEvent onMaxHealthChanged;
         public UnityEvent<HealEvent> onHeal;
         public UnityEvent<HitEvent> onHurt;
         public UnityEvent<HitEvent> onDeath;
@@ -25,6 +26,8 @@ namespace Game.Core {
         {
             useHealthBar = healthBar != null;
             health = MaxHealth;
+            onMaxHealthChanged = new UnityEvent();
+            onMaxHealthChanged.AddListener(HandleHealthChange);
         }
 
         //============ IHittable ===============
