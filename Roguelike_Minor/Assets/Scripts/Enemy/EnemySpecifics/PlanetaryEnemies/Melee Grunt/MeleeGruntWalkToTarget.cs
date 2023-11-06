@@ -5,8 +5,7 @@ using Game.Enemy.Core;
 using Game.Core;
 using UnityEngine.AI;
 
-namespace Game.Enemy
-{
+namespace Game.Enemy {
     public class MeleeGruntWalkToTarget : BT_Node
     {
         Transform target;
@@ -21,11 +20,28 @@ namespace Game.Enemy
 
         public override NodeState Evaluate()
         {
-            state = NodeState.RUNNING;
+            if (GetData("Target") == null) { SetTarget(); }
+            target = (Transform)GetData("Target");
 
-            //navAgent.SetDestination()
+            if (target == null)
+            {
+                state = NodeState.FAILURE;
+            }
+            //else go to target
+            else
+            {
+                state = NodeState.RUNNING;
+                navAgent.speed = agent.stats.walkSpeed;
+                navAgent.SetDestination(target.position);
+            }
+
 
             return state;
+        }
+
+        void SetTarget()
+        {
+            parent.SetData("Target", GameStateManager.instance.player.transform);
         }
     }
 }

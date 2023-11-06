@@ -63,8 +63,8 @@ namespace Game.Core {
         {
             uses--;
             onUse?.Invoke();
-            SFX.Post(agent.gameObject);
             abilityData.Use(this);
+            SFX.Post(agent.gameObject);
         }
 
         //=============== CoolDown ================

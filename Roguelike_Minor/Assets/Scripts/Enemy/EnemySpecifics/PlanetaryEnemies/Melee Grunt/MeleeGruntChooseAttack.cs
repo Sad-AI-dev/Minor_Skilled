@@ -3,30 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Enemy.Core;
 
-namespace Game.Enemy
-{
+namespace Game.Enemy {
     public class MeleeGruntChooseAttack : BT_Node
     {
-        bool chosen;
-
+        bool chosen = false;
+        int RandomOneZero;
         public override NodeState Evaluate()
         {
-            int RandomOneZero = Random.Range(0, 2);
-
-            if(RandomOneZero == 0)
+            if (!chosen)
             {
-                parent.SetData("Ranged", true);
-                chosen = true;
-            }
-            if(RandomOneZero == 1)
-            {
-                parent.SetData("Ranged", false);
-                chosen = true;
+                RandomOneZero = Random.Range(0, 2);
+                RandomOneZero = 1;
+                if (RandomOneZero == 0)
+                {
+                    parent.SetData("Ranged", true);
+                    chosen = true;
+                }
+                if (RandomOneZero == 1)
+                {
+                    parent.SetData("Ranged", true);
+                    chosen = false;
+                }
+                parent.SetData("Target", GameStateManager.instance.player);
             }
 
             if (chosen)
             {
-                state = NodeState.SUCCESS;
+                state = NodeState.FAILURE;
+                Debug.Log("Chose attack " + RandomOneZero);
             }
 
             return state;
