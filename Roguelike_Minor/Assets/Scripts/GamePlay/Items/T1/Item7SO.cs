@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "Overcharge", menuName = "ScriptableObjects/Items/T1/7: -", order = 107)]
+    [CreateAssetMenu(fileName = "7Propeller_Hat", menuName = "ScriptableObjects/Items/T1/7: Propeller Hat", order = 107)]
     public class Item7SO : ItemDataSO
     {
         private class Item7Vars : Item.ItemVars

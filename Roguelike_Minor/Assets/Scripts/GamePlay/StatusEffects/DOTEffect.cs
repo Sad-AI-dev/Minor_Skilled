@@ -9,6 +9,7 @@ namespace Game {
     {
         public class DOTEffectVars : StatusEffectHandler.EffectVars
         {
+            public Agent source;
             public List<Coroutine> currentRoutines;
             public float dmg;
         }
@@ -58,7 +59,13 @@ namespace Game {
             for (int i = 0; i < tickRate * duration; i++)
             {
                 yield return new WaitForSeconds(1f / tickRate); //tick rate is in ticks / second
-                target.health.Hurt(new HitEvent() { baseDamage = vars.dmg });
+                //create hitEvent
+                HitEvent hitEvent = new HitEvent(vars.source)
+                {
+                    baseDamage = vars.dmg,
+                    procCoef = 0f
+                };
+                target.health.Hurt(hitEvent);
             }
             //remove stack
             target.effectHandler.RemoveEffect(this);

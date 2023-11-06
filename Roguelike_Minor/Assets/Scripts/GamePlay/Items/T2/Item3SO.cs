@@ -4,13 +4,16 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "Exploding_Greens", menuName = "ScriptableObjects/Items/T2/3: Exploding Greens", order = 203)]
+    [CreateAssetMenu(fileName = "3Exploding_Greens", menuName = "ScriptableObjects/Items/T2/3: Exploding Greens", order = 203)]
     public class Item3SO : ItemDataSO
     {
         public class DeathExplodeItemVars : Item.ItemVars
         {
             public float explodeRadius;
         }
+
+        [Header("Proc Chance Settings")]
+        public float procChance = 50f;
 
         [Header("Damage Settings")]
         public float explosionDamageMult = 3f;
@@ -49,7 +52,7 @@ namespace Game {
         //========= Process Hit Events ===========
         public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem) 
         {
-            hitEvent.onDeath.AddListener(Explode);
+            hitEvent.onDeath.AddListener(TryExplode);
         }
 
         //========= Util Funcs ==========
@@ -71,6 +74,11 @@ namespace Game {
         }
 
         //========= Spawn Explosion ===========
+        private void TryExplode(HitEvent hitEvent)
+        {
+            AgentRandom.TryProc(procChance, hitEvent, Explode, hitEvent);
+        }
+
         private void Explode(HitEvent hitEvent) //instigating func
         {
             hitEvent.source.StartCoroutine(SpawnExplosionCo(hitEvent, hitEvent.target.transform.position));
@@ -117,7 +125,9 @@ namespace Game {
         //============== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"enemies explode on death, dealing " +
+            return $"enemies have a " +
+                $"<color=#{HighlightColor}>{procChance}%</color> chance to " +
+                $"<color=#{HighlightColor}>explode</color> on death, dealing " +
                 $"<color=#{HighlightColor}>{explosionDamageMult * 100}% TOTAL damage</color>\n" +
                 $"in a <color=#{HighlightColor}>{explosionRadius}m radius</color> " +
                 $"<color=#{StackColor}>(+{bonusExplosionRadius}m per stack)</color>";

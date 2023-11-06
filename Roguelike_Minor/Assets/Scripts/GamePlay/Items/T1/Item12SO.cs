@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "HeartRoot", menuName = "ScriptableObjects/Items/T1/12: HeartRoot", order = 112)]
+    [CreateAssetMenu(fileName = "12HeartBeet", menuName = "ScriptableObjects/Items/T1/12: HeartBeet", order = 112)]
     public class Item12SO : ItemDataSO
     {
         [Header("Health settings")]

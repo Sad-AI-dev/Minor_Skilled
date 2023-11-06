@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "Hat_Of_Speed", menuName = "ScriptableObjects/Items/T1/6: Hat of Speed", order = 106)]
+    [CreateAssetMenu(fileName = "6Hat_Of_Speed", menuName = "ScriptableObjects/Items/T1/6: Hat of Speed", order = 106)]
     public class Item6SO : ItemDataSO
     {
         [Header("MoveSpeed settings")]

@@ -47,9 +47,10 @@ namespace Game.Core {
         public static void TryProc<T>(float chance, HitEvent hitEvent, System.Action<T> onProc, T vars = default)
         {
             //guarenteed procs
-            for (int i = 0; i < Mathf.FloorToInt(chance / 100f); i++) { onProc?.Invoke(vars); }
+            float guarenteedChance = 100f * hitEvent.procCoef; //100% is not always guarenteed due to proccoef
+            for (int i = 0; i < Mathf.FloorToInt(chance / guarenteedChance); i++) { onProc?.Invoke(vars); }
             //try proc for left chance
-            if (TryProc(chance % 100, hitEvent)) { onProc?.Invoke(vars); }
+            if (TryProc(chance % guarenteedChance, hitEvent)) { onProc?.Invoke(vars); }
         }
         public static void TryProc(float chance, HitEvent hitEvent, System.Action onProc)
         {

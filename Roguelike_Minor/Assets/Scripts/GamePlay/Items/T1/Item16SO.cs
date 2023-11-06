@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Core;
+using System;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "Spiked_Bracers", menuName = "ScriptableObjects/Items/T1/16: Spiked Bracers", order = 116)]
+    [CreateAssetMenu(fileName = "16Spiked_Bracers", menuName = "ScriptableObjects/Items/T1/16: Spiked Bracers", order = 116)]
     public class Item16SO : ItemDataSO
     {
         private class Item16Vars : Item.ItemVars
@@ -44,13 +45,16 @@ namespace Game {
         public override void ProcessDealDamage(ref HitEvent hitEvent, Item item)
         {
             Item16Vars vars = item.vars as Item16Vars;
-            AgentRandom.TryProc(vars.bleedChance, hitEvent.source, ApplyBleed, hitEvent.target.agent);
+            AgentRandom.TryProc(vars.bleedChance, hitEvent, ApplyBleed, hitEvent);
         }
 
-        private void ApplyBleed(Agent target)
+        private void ApplyBleed(HitEvent hitEvent)
         {
-            target.effectHandler.AddEffect(bleedEffect);
-            (target.effectHandler.statusEffects[bleedEffect] as DOTEffect.DOTEffectVars).dmg = bleedDamage;
+            hitEvent.target.agent.effectHandler.AddEffect(bleedEffect);
+            //initialize effect vars
+            DOTEffect.DOTEffectVars vars = hitEvent.target.agent.effectHandler.statusEffects[bleedEffect] as DOTEffect.DOTEffectVars;
+            vars.dmg = bleedDamage;
+            vars.source = hitEvent.source;
         }
 
         //========== Description ===========

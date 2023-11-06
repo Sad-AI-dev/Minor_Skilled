@@ -81,7 +81,7 @@ namespace Game.Core {
             itemSources ??= new List<Item>();
             onDeath = new UnityEvent<HitEvent>();
         }
-
+        
         private void TryCrit()
         {
             isCrit = false; //default value

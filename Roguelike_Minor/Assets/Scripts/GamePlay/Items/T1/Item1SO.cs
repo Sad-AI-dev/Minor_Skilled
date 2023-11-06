@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "Necrotic_Ammunition", menuName = "ScriptableObjects/Items/T1/1: Necrotic Ammunition", order = 101)]
+    [CreateAssetMenu(fileName = "1Necrotic_Ammunition", menuName = "ScriptableObjects/Items/T1/1: Necrotic Ammunition", order = 101)]
     public class Item1SO : ItemDataSO
     {
         [Header("Healing settings")]

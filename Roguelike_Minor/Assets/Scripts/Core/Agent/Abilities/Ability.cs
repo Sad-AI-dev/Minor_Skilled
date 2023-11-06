@@ -112,10 +112,33 @@ namespace Game.Core {
             }
         }
 
+        public void GainUses(int usesToGain)
+        {
+            uses += usesToGain;
+            if (uses >= maxUses)
+            {
+                Reset();
+            }
+        }
+
+        //========== Manage Max Uses ==========
+        public void GainMaxUses(int usesToGain)
+        {
+            maxUses += usesToGain;
+            GainUses(usesToGain);
+        }
+
+        public void RemoveMaxUses(int usesToGain)
+        {
+            maxUses -= usesToGain;
+            uses = Mathf.Clamp(uses, 0, maxUses);
+        }
+
         //============= Reset Ability ===============
         public void Reset()
         {
             uses = maxUses;
+            isCoolingDown = false;
             coolDownTimer = 0;
             if (coolDownRoutine != null) 
             { 

@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "Crit-shroom", menuName = "ScriptableObjects/Items/T1/9: Crit-shroom", order = 109)]
+    [CreateAssetMenu(fileName = "9Crit-shroom", menuName = "ScriptableObjects/Items/T1/9: Crit-shroom", order = 109)]
     public class Item9SO : ItemDataSO
     {
         [Header("Crit Chance settings")]
