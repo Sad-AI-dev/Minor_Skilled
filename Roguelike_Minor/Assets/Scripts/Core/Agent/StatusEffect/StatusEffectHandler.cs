@@ -13,6 +13,15 @@ namespace Game.Core {
         [HideInInspector] public Agent agent;
         public Dictionary<StatusEffectSO, EffectVars> statusEffects = new();
 
+        [Header("UI Settings")]
+        public StatusEffectBar effectBar;
+
+        //========= Initialize HUD elements ==========
+        private void Start()
+        {
+            if (effectBar) { effectBar.handler = this; }
+        }
+
         //============== Manage Effect Adding =====================
         public void AddEffect(StatusEffectSO effect, int stacks = 1)
         {
@@ -27,11 +36,13 @@ namespace Game.Core {
         {
             statusEffects.Add(effect, new EffectVars());
             effect.AddEffect(this);
+            if (effectBar) { effectBar.HandleAddEffect(effect); }
         }
         private void AddStacks(StatusEffectSO effect, int stacks)
         {
             effect.AddStacks(this, stacks);
             statusEffects[effect].stacks += stacks;
+            if (effectBar) { effectBar.HandleUpdateStacks(effect, statusEffects[effect].stacks); }
         }
 
         //==================== Manage Effect Removal ===================
@@ -48,15 +59,17 @@ namespace Game.Core {
             }
         }
 
-        private void RemoveStacks(StatusEffectSO effect, int stacksToRemove)
-        {
-            effect.RemoveStacks(this, stacksToRemove);
-            statusEffects[effect].stacks -= stacksToRemove;
-        }
         private void RemoveEffect(StatusEffectSO effect)
         {
             effect.RemoveEffect(this);
             statusEffects.Remove(effect);
+            if (effectBar) { effectBar.HandleRemoveEffect(effect); }
+        }
+        private void RemoveStacks(StatusEffectSO effect, int stacksToRemove)
+        {
+            effect.RemoveStacks(this, stacksToRemove);
+            statusEffects[effect].stacks -= stacksToRemove;
+            if (effectBar) { effectBar.HandleUpdateStacks(effect, statusEffects[effect].stacks); }
         }
 
         //========== Clear ==========

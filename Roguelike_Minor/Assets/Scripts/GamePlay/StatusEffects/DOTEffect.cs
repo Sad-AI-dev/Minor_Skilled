@@ -60,6 +60,8 @@ namespace Game {
                 yield return new WaitForSeconds(1f / tickRate); //tick rate is in ticks / second
                 target.health.Hurt(new HitEvent() { baseDamage = vars.dmg });
             }
+            //remove stack
+            target.effectHandler.RemoveEffect(this);
         }
     }
 }

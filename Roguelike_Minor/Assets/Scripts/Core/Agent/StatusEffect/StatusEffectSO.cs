@@ -5,6 +5,8 @@ using UnityEngine;
 namespace Game.Core {
     public abstract class StatusEffectSO : ScriptableObject
     {
+        public Sprite icon;
+
         //============== Manage Effect addition / subtraction ===============
         public abstract void AddEffect(StatusEffectHandler handler);
         public abstract void RemoveEffect(StatusEffectHandler handler);
