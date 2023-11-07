@@ -186,6 +186,66 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3804502618088567481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 504144376611805675}
+  - component: {fileID: 3504008239896851757}
+  m_Layer: 5
+  m_Name: EffectsHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &504144376611805675
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3804502618088567481}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4025997653883747703}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 50}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &3504008239896851757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3804502618088567481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 6
+  m_StartCorner: 2
+  m_StartAxis: 0
+  m_CellSize: {x: 30, y: 30}
+  m_Spacing: {x: 5, y: 5}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &4234619868675004480
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +259,7 @@ GameObject:
   - component: {fileID: 1164575156774666712}
   - component: {fileID: 8104357452433050565}
   - component: {fileID: 6218004978577523653}
+  - component: {fileID: 7331640904816547270}
   m_Layer: 5
   m_Name: HealthBarUI
   m_TagString: Untagged
@@ -219,12 +280,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2846099641961130186}
+  - {fileID: 504144376611805675}
   m_Father: {fileID: 2415936726675563580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2.5}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 2.7}
+  m_SizeDelta: {x: 150, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &267072095379546569
 Canvas:
@@ -244,7 +306,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -303,6 +365,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 1714652640150599290}
   slider: {fileID: 4863513673092861581}
+--- !u!114 &7331640904816547270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4234619868675004480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fdae28cd85f8544f8912d8f782def8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handler: {fileID: 0}
+  elementPool:
+    behaviourTemplate: {fileID: 7940856408618049482, guid: f8bfb22e5bb895449922e21d96af6624, type: 3}
+  effectHolder: {fileID: 504144376611805675}
 --- !u!1 &6071872911434651792
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,11 +414,11 @@ RectTransform:
   - {fileID: 7149321983778013485}
   m_Father: {fileID: 4025997653883747703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 0, y: 30}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &4863513673092861581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,15 +656,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d0c1a420a222041a45aa40e2925369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseStats: {fileID: 11400000, guid: b7260db6df9a4f24e9a49ad76cca2d10, type: 2}
+  baseStats: {fileID: 11400000, guid: 5b6d8b2b3502eef47894d0e863276e85, type: 2}
   stats:
     maxHealth: 10
+    maxHealthMult: 1
     baseDamage: 1
+    critChance: 1
+    critMult: 2
     heldMoney: 0
     attackSpeed: 1
     coolDownMultiplier: 1
     walkSpeed: 0
     sprintSpeed: 0
+    luck: 0
   abilities: {fileID: 0}
   effectHandler: {fileID: 0}
   health: {fileID: 0}
@@ -688,6 +770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
+  effectBar: {fileID: 7331640904816547270}
 --- !u!114 &1714652640150599290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -703,6 +786,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   health: 0
   healthBar: {fileID: 6218004978577523653}
+  onMaxHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
   onHeal:
     m_PersistentCalls:
       m_Calls: []

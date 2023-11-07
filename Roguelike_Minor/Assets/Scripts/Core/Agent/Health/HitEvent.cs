@@ -81,10 +81,11 @@ namespace Game.Core {
             itemSources ??= new List<Item>();
             onDeath = new UnityEvent<HitEvent>();
         }
-
+        
         private void TryCrit()
         {
-            isCrit = AgentRandom.TryProc(source.stats.critChance, source);
+            isCrit = false; //default value
+            AgentRandom.TryProc(source.stats.critChance, source, () => isCrit = true);
         }
 
         //============== Get Total Damage ===============

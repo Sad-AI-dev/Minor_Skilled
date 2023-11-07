@@ -4,15 +4,12 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "Hat_Of_Speed", menuName = "ScriptableObjects/Items/T1/6: Hat of Speed", order = 106)]
+    [CreateAssetMenu(fileName = "6Hat_Of_Speed", menuName = "ScriptableObjects/Items/T1/6: Hat of Speed", order = 106)]
     public class Item6SO : ItemDataSO
     {
         [Header("MoveSpeed settings")]
         public float baseSpeedIncrease = 3f;
         public float bonusSpeedIncrease = 3f;
-
-        //========= Initialize Vars ============
-        public override void InitializeVars(Item item) { }
 
         //========= Manage Stacks ===========
         public override void AddStack(Item item)
@@ -26,14 +23,6 @@ namespace Game {
             if (item.stacks == 0) { item.agent.stats.walkSpeed -= baseSpeedIncrease; }
             else { item.agent.stats.walkSpeed -= bonusSpeedIncrease; }
         }
-
-        //========= Process Hit Events ===========
-        public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem) { }
-
-        public override void ProcessTakeDamage(ref HitEvent hitEvent, Item sourceItem) { }
-
-        //========= Process Heal Events ============
-        public override void ProcessHealEvent(ref HealEvent healEvent, Item sourceItem) { }
 
         //========== Description ===========
         public override string GenerateLongDescription()

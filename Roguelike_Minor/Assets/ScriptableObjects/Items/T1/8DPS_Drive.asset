@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c05d5a264cc9354c8dffbc75a8b0fd6, type: 3}
-  m_Name: High_Speed_Connector
+  m_Script: {fileID: 11500000, guid: d0d814832ef463342b6759b3b763d37e, type: 3}
+  m_Name: 8DPS_Drive
   m_EditorClassIdentifier: 
   size: {fileID: 11400000, guid: aaa7839693155fe46a5ce1c6da18f970, type: 2}
   tier: {fileID: 11400000, guid: cfe545ec7681e3044a45b9dc5c30b409, type: 2}
   canProcSelf: 0
-  pickupPrefab: {fileID: 2719697755862819254, guid: 62d24f4f5249a0340a9425f0294c9e14, type: 3}
-  UISprite: {fileID: 21300000, guid: 89184ecce95f394438eba3115b5b44c2, type: 3}
-  title: High Speed Connector
-  shortDescription: Shoot Faster
+  pickupPrefab: {fileID: 1963759862628370572, guid: ac94d01ccf998454f940850e34499956, type: 3}
+  UISprite: {fileID: 21300000, guid: 907263cc642313347a6a5fd53d30a580, type: 3}
+  title: DPS drive
+  shortDescription: Deal more damage
   highlightColor: {r: 1, g: 0.9764706, b: 0.8039216, a: 1}
   stackColor: {r: 0.8196079, g: 0.8196079, b: 0.8196079, a: 1}
-  baseAttackSpeedIncrease: 0.15
-  stackAttackSpeedIncrease: 0.1
+  baseDamageIncrease: 4
+  bonusDamageIncrease: 2

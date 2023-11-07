@@ -4,28 +4,18 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "Necrotic_Module", menuName = "ScriptableObjects/Items/T1/1: -", order = 101)]
+    [CreateAssetMenu(fileName = "1Necrotic_Ammunition", menuName = "ScriptableObjects/Items/T1/1: Necrotic Ammunition", order = 101)]
     public class Item1SO : ItemDataSO
     {
         [Header("Healing settings")]
         public float baseHeal = 2f;
         public float bonusHeal = 1f;
-        
-        //========= Initialize Vars ============
-        public override void InitializeVars(Item item) { }
-
-        //============ Manage Stacks ===============
-        public override void AddStack(Item item) { }
-        public override void RemoveStack(Item item) { }
 
         //============ Process hit / heal events ==============
         public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
         {
             hitEvent.onDeath.AddListener(OnEnemyDeath);
         }
-
-        public override void ProcessTakeDamage(ref HitEvent hitEvent, Item sourceItem) { }
-        public override void ProcessHealEvent(ref HealEvent healEvent, Item sourceItem) { }
 
         //============ Handle Enemy Kill ============
         private void OnEnemyDeath(HitEvent hitEvent)

@@ -10,25 +10,16 @@ namespace Game {
     {
         [SerializeField] UIManager uiManager;
 
-        [Header("Primary")]
-        [SerializeField] Image primaryIcon;
-        [SerializeField] TextMeshProUGUI primaryCooldownTimer;
-        [SerializeField] TextMeshProUGUI primaryInput;
+        [System.Serializable]
+        private class UIAbilityVars
+        {
+            public Image icon;
+            public TMP_Text cooldownLabel;
+            public TMP_Text inputLabel;
+            public TMP_Text usesLabel;
+        }
 
-        [Header("Secondary")]
-        [SerializeField] Image secondaryIcon;
-        [SerializeField] TextMeshProUGUI secondaryCooldownTimer;
-        [SerializeField] TextMeshProUGUI secondaryInput;
-
-        [Header("Special")]
-        [SerializeField] Image specialIcon;
-        [SerializeField] TextMeshProUGUI specialCooldownTimer;
-        [SerializeField] TextMeshProUGUI specialInput;
-
-        [Header("Utility")]
-        [SerializeField] Image utilityIcon;
-        [SerializeField] TextMeshProUGUI utilityCooldownTimer;
-        [SerializeField] TextMeshProUGUI utilityInput;
+        [SerializeField] private UIAbilityVars primaryVars, secondaryVars, specialVars, utilityVars;
 
         [Header("Cooldown Settings")]
         [SerializeField] string colorCode = "#9C9C9C";
@@ -45,24 +36,31 @@ namespace Game {
         }
         private void Update()
         {
-            HandleUI(primaryIcon, primaryCooldownTimer, uiManager.agent.abilities.primary);
-            HandleUI(secondaryIcon, secondaryCooldownTimer, uiManager.agent.abilities.secondary);
-            HandleUI(specialIcon, specialCooldownTimer, uiManager.agent.abilities.special);
-            HandleUI(utilityIcon, utilityCooldownTimer, uiManager.agent.abilities.utility);
+            HandleUI(primaryVars, uiManager.agent.abilities.primary);
+            HandleUI(secondaryVars, uiManager.agent.abilities.secondary);
+            HandleUI(specialVars, uiManager.agent.abilities.special);
+            HandleUI(utilityVars, uiManager.agent.abilities.utility);
         }
 
-        void HandleUI(Image icon, TextMeshProUGUI cooldownText, Ability ability)
+        void HandleUI(UIAbilityVars vars, Ability ability)
         {
+            //uses
+            if (ability.uses > 1 || (ability.uses > 0 && ability.maxUses > 1))
+            {
+                vars.usesLabel.text = ability.uses.ToString();
+            }
+            else { vars.usesLabel.text = ""; } //hide label
+            //cooldown
             if (ability.isCoolingDown && ability.coolDownMode == Ability.CoolDownMode.coolDown)
             {
-                icon.color = cooldownColor;
-                cooldownText.text = Mathf.RoundToInt(ability.coolDownTimer).ToString();
-                cooldownText.gameObject.SetActive(true);
+                vars.icon.color = cooldownColor;
+                vars.cooldownLabel.text = Mathf.CeilToInt(ability.coolDownTimer).ToString();
+                vars.cooldownLabel.gameObject.SetActive(true);
             }
             else
             {
-                icon.color = baseColor;
-                cooldownText.gameObject.SetActive(false);
+                vars.icon.color = baseColor;
+                vars.cooldownLabel.gameObject.SetActive(false);
             }
         }
     }

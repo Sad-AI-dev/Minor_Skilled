@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25f760c994450d84dbda5202e179c861, type: 3}
-  m_Name: Exploding_Greens
+  m_Name: 3Exploding_Greens
   m_EditorClassIdentifier: 
   size: {fileID: 11400000, guid: aaa7839693155fe46a5ce1c6da18f970, type: 2}
   tier: {fileID: 11400000, guid: 9e8f1b09a5f0e164382a3e6b6759f388, type: 2}
-  canProcSelf: 0
+  canProcSelf: 1
   pickupPrefab: {fileID: 1950396541563328600, guid: cda126eae4f672249a0f2e599fe1dc41, type: 3}
   UISprite: {fileID: 21300000, guid: 49f57c0591189ed4f821fdd68e8e4d34, type: 3}
   title: Exploding Greens
   shortDescription: Enemies may explode on death
   highlightColor: {r: 1, g: 0.9764706, b: 0.8039216, a: 1}
   stackColor: {r: 0.8196079, g: 0.8196079, b: 0.8196079, a: 1}
+  procChance: 50
   explosionDamageMult: 2.5
   cascadeMult: 0.8
   explosionRadius: 5
