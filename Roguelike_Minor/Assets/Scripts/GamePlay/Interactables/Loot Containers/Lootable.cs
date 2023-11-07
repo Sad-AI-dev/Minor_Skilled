@@ -9,34 +9,17 @@ using TMPro;
 namespace Game {
     public class Lootable : MonoBehaviour
     {
-        [SerializeField] private int price;
         [SerializeField] private LootTableSO lootTable;
 
-        [Header("UI")]
-        [SerializeField] private TMP_Text priceLabel;
-
         [Header("Technical")]
-        public UnityEvent onPurchase;
+        [SerializeField] private GameObject itemTemplate;
 
-        private void Start()
+        public void DropLoot()
         {
-            if (priceLabel) { priceLabel.text = "$" + price; }
-        }
-
-        public void TryPurchase(Interactor interactor)
-        {
-            Agent agent = interactor.GetComponent<Agent>();
-            if (agent.stats.Money >= price)
-            {
-                agent.stats.Money -= price;
-                DropLoot();
-                Destroy(gameObject);
-            }
-        }
-
-        private void DropLoot()
-        {
-            GameObject obj = Instantiate(lootTable.GetLoot());
+            GameObject obj = Instantiate(itemTemplate);
+            //setup item data
+            obj.GetComponent<ItemPickup>().item = lootTable.GetLoot();
+            //set item pos
             obj.transform.SetPositionAndRotation(transform.position + transform.forward, GetRandomRotation());
         }
 
