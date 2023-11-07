@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Game.Core;
 using Game.Core.GameSystems;
 using TMPro;
@@ -11,12 +12,15 @@ namespace Game {
         [SerializeField] private int price;
         [SerializeField] private LootTableSO lootTable;
 
-        [Header("Technical")]
+        [Header("UI")]
         [SerializeField] private TMP_Text priceLabel;
+
+        [Header("Technical")]
+        public UnityEvent onPurchase;
 
         private void Start()
         {
-            priceLabel.text = "$" + price;
+            if (priceLabel) { priceLabel.text = "$" + price; }
         }
 
         public void TryPurchase(Interactor interactor)

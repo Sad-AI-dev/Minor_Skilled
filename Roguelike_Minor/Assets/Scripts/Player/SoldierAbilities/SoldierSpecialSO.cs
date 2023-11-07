@@ -14,14 +14,16 @@ namespace Game.Player.Soldier
 
         PlayerController controller;
 
+        public override void InitializeVars(Ability source)
+        {
+            controller = source.agent.GetComponent<PlayerController>();
+        }
+
         public override void Use(Ability source)
         {
             Camera cam = Camera.main;
             Vector3 target;
             Vector3 bulletDir;
-
-            if (!source.vars.ContainsKey("varsInitialized"))
-                InitializeVars(source);
 
             controller.StartSlowCoroutine(.2f);
 
@@ -38,12 +40,6 @@ namespace Game.Player.Soldier
             RailgunBullet rgBullet = projectile.GetComponent<RailgunBullet>();
             rgBullet.velocity = bulletDir * bulletSpeed;
             rgBullet.Initialize(source);
-        }
-
-        private void InitializeVars(Ability source)
-        {
-            source.vars.Add("varsInitialized", false);
-            controller = source.agent.GetComponent<PlayerController>();
         }
     }
 }

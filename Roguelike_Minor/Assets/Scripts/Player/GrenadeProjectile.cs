@@ -1,7 +1,5 @@
 using Game.Core;
 using Game.Core.Data;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Player
@@ -15,14 +13,23 @@ namespace Game.Player
         [SerializeField] private BehaviourPool<Projectile> grenades = new BehaviourPool<Projectile>();
         [SerializeField] private float poisonGrenadeSpeed;
         [SerializeField] private int poisonGrenadeAmount;
-        [SerializeField] private float spreadMultiplier;
+        [SerializeField] private float minDistance;
+        [SerializeField] private float maxDistance;
         [SerializeField] private AK.Wwise.Event SFX;
 
         private float minAngle = 0;
         private float maxAngle;
 
+        private bool addedVerticalVelocity = false;
+
         protected override void UpdateMoveDir()
         {
+            if(!addedVerticalVelocity)
+            {
+                velocity += Vector3.up * 0.2f;
+                addedVerticalVelocity = true;
+            }
+
             velocity += new Vector3(0, -gravity * Time.deltaTime, 0);
         }
 
@@ -32,7 +39,9 @@ namespace Game.Player
 
             SFX.Post(gameObject);
 
-            for(int i = 0; i < poisonGrenadeAmount; i++)
+            minAngle = 0;
+
+            /*for (int i = 0; i < poisonGrenadeAmount; i++)
             {
                 Projectile projectile = grenades.GetBehaviour();
                 projectile.transform.position = hit.point;
@@ -42,16 +51,24 @@ namespace Game.Player
 
                 Vector3 directionOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
 
+                maxAngle = (360 / poisonGrenadeAmount) * (i + 1);
 
+                float angle = Random.Range(minAngle, maxAngle);
 
-                Quaternion direction = Quaternion.AngleAxis((360 / poisonGrenadeAmount) * i + 1, Vector3.up);
-                Vector3 angleVector = direction * Vector3.forward;
+                Quaternion direction = Quaternion.AngleAxis(angle, Vector3.up);
+                Vector3 directionVector = direction * Vector3.forward;
+                directionVector.Normalize();
 
-                Vector3 grenadeVelocity = projectile.transform.up + (directionOffset * spreadMultiplier);
+                float directionDistance = Random.Range(minDistance, maxDistance);
+
+                Vector3 grenadeVelocity = projectile.transform.up + directionVector;
                 grenadeVelocity.Normalize();
+                grenadeVelocity *= directionDistance;
 
-                pGrenade.velocity = grenadeVelocity * poisonGrenadeSpeed;
-            }
+                pGrenade.velocity = grenadeVelocity;
+                minAngle = maxAngle;
+                maxAngle = 0;
+            }*/
         }
     }
 }

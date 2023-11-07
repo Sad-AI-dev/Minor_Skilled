@@ -12,6 +12,15 @@ namespace Game.Player.Soldier
     [CreateAssetMenu(fileName = "SoldierPrimary", menuName = "ScriptableObjects/Agent/Ability/Soldier/SoldierPrimary")]
     public class SoldierPrimarySO : AbilitySO
     {
+        public class PrimaryVars : Ability.AbilityVars
+        {
+            public float inaccuracy = 0;
+            public bool buildingDownSpread = false;
+            public bool isShooting = false;
+            public Coroutine stopShootingCo;
+            public BehaviourPool<Projectile> bulletPool = new BehaviourPool<Projectile>();
+        }
+
         public GameObject bullet;
         public GameObject marker;
         public float bulletSpeed;
@@ -23,16 +32,29 @@ namespace Game.Player.Soldier
 
         PlayerController controller;
 
+        public override void InitializeVars(Ability source)
+        {
+            source.vars = new PrimaryVars
+            {
+                inaccuracy = 0,
+                buildingDownSpread = false,
+                isShooting = false,
+                stopShootingCo = null,
+                bulletPool = new BehaviourPool<Projectile>()
+            };
+
+            PrimaryVars vars = source.vars as PrimaryVars;
+            vars.bulletPool.behaviourTemplate = bullet;
+            controller = source.agent.GetComponent<PlayerController>();
+        }
+
         public override void Use(Ability source)
         {
             Camera cam = Camera.main;
             UnityEngine.Vector3 target;
             UnityEngine.Vector3 bulletDir;
 
-            //Initialize variables
-            if(!source.vars.ContainsKey("inaccuracy"))
-                Initialize(source);
-
+            PrimaryVars vars = source.vars as PrimaryVars;
 
             controller.StartSlowCoroutine(source.coolDown * 1.1f);
 
@@ -43,14 +65,12 @@ namespace Game.Player.Soldier
                 target = cam.transform.forward * 1000;
            
             //add inaccuracy
-            float inaccuracy = Convert.ToSingle(source.vars["inaccuracy"]);
-            inaccuracy += source.coolDown * spreadBuildupSpeed;
-            inaccuracy = Mathf.Clamp(inaccuracy, 0, 1);
-            source.vars["inaccuracy"] = inaccuracy;
+            vars.inaccuracy += source.coolDown * spreadBuildupSpeed;
+            vars.inaccuracy = Mathf.Clamp(vars.inaccuracy, 0, 1);
             //Debug.Log("Increased: " + inaccuracy);
 
             //calculate spread amount
-            float spread = spreadBuildup.Evaluate(inaccuracy) * spreadMultiplier;
+            float spread = spreadBuildup.Evaluate(vars.inaccuracy) * spreadMultiplier;
 
             //set bullet move direction
             UnityEngine.Vector3 offset = new UnityEngine.Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
@@ -59,15 +79,12 @@ namespace Game.Player.Soldier
             bulletDir.Normalize();
 
             //set isShooting boolean
-            bool isShooting = Convert.ToBoolean(source.vars["isShooting"]);
-            isShooting = true;
-            source.vars["isShooting"] = isShooting;
+            vars.isShooting = true;
 
 
-            //spawn bullet and set its velocity
-            BehaviourPool<Projectile> bulletPool = (BehaviourPool<Projectile>)source.vars["bulletPool"];
+            //spawn bullet and set its velocit
 
-            Projectile projectile = bulletPool.GetBehaviour();
+            Projectile projectile = vars.bulletPool.GetBehaviour();
             //Instantiate(bullet, source.originPoint.position, UnityEngine.Quaternion.identity);
             projectile.transform.position = source.originPoint.position;
             projectile.transform.LookAt(target);
@@ -77,29 +94,25 @@ namespace Game.Player.Soldier
             bullet.velocity = bulletDir * bulletSpeed;
             bullet.Initialize(source);
 
-            bool buildingDownSpread = Convert.ToBoolean(source.vars["buildingDownSpread"]);
-
-            Coroutine shootRoutine = (Coroutine)source.vars["stopShootingCo"];
+            Coroutine shootRoutine = vars.stopShootingCo;
             if(shootRoutine != null)
             {
                 source.agent.StopCoroutine(shootRoutine);
-                buildingDownSpread = false;
+                vars.buildingDownSpread = false;
             }
-                
 
-            if (!buildingDownSpread)
+            if (!vars.buildingDownSpread)
             {
                 shootRoutine = source.agent.StartCoroutine(IsShootingCo(source));
-                source.vars["stopShootingCo"] = shootRoutine;
+                vars.stopShootingCo = shootRoutine;
                 //Debug.Log("Started counting down");
             }
         }
 
         private IEnumerator IsShootingCo(Ability source)
         {
-            bool buildingDownSpread = Convert.ToBoolean(source.vars["buildingDownSpread"]);
-            buildingDownSpread = true;
-            source.vars["buildingDownSpread"] = buildingDownSpread;
+            PrimaryVars vars = source.vars as PrimaryVars;
+            vars.buildingDownSpread = true;
             float timeElapsed = 0;
             while (timeElapsed < source.coolDown * 2)
             {
@@ -108,44 +121,25 @@ namespace Game.Player.Soldier
             }
             //stopped shooting
             //Debug.Log("Stopped shooting");
-            bool isShooting = Convert.ToBoolean(source.vars["isShooting"]);
-            isShooting = false;
-            source.vars["isShooting"] = isShooting;
-            buildingDownSpread = false;
-            source.vars["buildingDownSpread"] = buildingDownSpread;
+            vars.isShooting = false;
+            vars.buildingDownSpread = false;
 
             source.agent.StartCoroutine(ReduceSpreadCo(source));
         }
 
         private IEnumerator ReduceSpreadCo(Ability source)
         {
-            bool isShooting = Convert.ToBoolean(source.vars["isShooting"]);
-            float inaccuracy = Convert.ToSingle(source.vars["inaccuracy"]);
-            while (inaccuracy > 0f && !isShooting)
+            PrimaryVars vars = source.vars as PrimaryVars;
+
+            while (vars.inaccuracy > 0f && !vars.isShooting)
             {
                 yield return null;
-                isShooting = Convert.ToBoolean(source.vars["isShooting"]);
-                inaccuracy = Convert.ToSingle(source.vars["inaccuracy"]);
-                inaccuracy -= Time.deltaTime * spreadResetSpeed;
-                source.vars["inaccuracy"] = inaccuracy;
+                vars.inaccuracy -= Time.deltaTime * spreadResetSpeed;
                 //Debug.Log("reduced: " + inaccuracy);
             }
             //done cooling down
-            if(!isShooting)
-                source.vars["inaccuracy"] = 0f;
-        }
-
-        private void Initialize(Ability source)
-        {
-            source.vars.Add("inaccuracy", 0);
-            source.vars.Add("buildingDownSpread", false);
-            source.vars.Add("isShooting", false);
-            source.vars.Add("stopShootingCo", null);
-            BehaviourPool<Projectile> bulletPool = new BehaviourPool<Projectile>();
-            bulletPool.behaviourTemplate = bullet;
-            source.vars.Add("bulletPool", bulletPool);
-
-            controller = source.agent.GetComponent<PlayerController>();
+            if (!vars.isShooting)
+                vars.inaccuracy = 0;
         }
     }
 }

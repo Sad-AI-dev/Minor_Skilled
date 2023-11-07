@@ -9,20 +9,23 @@ namespace Game.Player.Soldier
     [CreateAssetMenu(fileName = "SoldierSecondary", menuName = "ScriptableObjects/Agent/Ability/Soldier/Secondary")]
     public class SoldierSecondary : AbilitySO
     {
+
         [SerializeField] private GameObject grenade;
         [SerializeField] private LayerMask layermask;
         [SerializeField] private float bulletSpeed;
 
         PlayerController controller;
 
+        public override void InitializeVars(Ability source)
+        {
+            controller = source.agent.GetComponent<PlayerController>();
+        }
+
         public override void Use(Ability source)
         {
             Camera cam = Camera.main;
             Vector3 target;
             Vector3 bulletDir;
-
-            if (!source.vars.ContainsKey("varsInitialized"))
-                InitializeVars(source);
 
             controller.StartSlowCoroutine(.2f);
 
@@ -39,12 +42,6 @@ namespace Game.Player.Soldier
             GrenadeProjectile grenadeProjectile = projectile.GetComponent<GrenadeProjectile>();
             grenadeProjectile.velocity = bulletDir * bulletSpeed;
             grenadeProjectile.Initialize(source);
-        }
-
-        private void InitializeVars(Ability source)
-        {
-            source.vars.Add("varsInitialized", true);
-            controller = source.agent.GetComponent<PlayerController>();
         }
     }
 }

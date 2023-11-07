@@ -5,8 +5,22 @@ using UnityEngine;
 namespace Game.Core {
     public class StatusEffectHandler : MonoBehaviour
     {
+        public class EffectVars
+        {
+            public int stacks;
+        }
+
         [HideInInspector] public Agent agent;
-        public Dictionary<StatusEffectSO, int> statusEffects = new();
+        public Dictionary<StatusEffectSO, EffectVars> statusEffects = new();
+
+        [Header("UI Settings")]
+        public StatusEffectBar effectBar;
+
+        //========= Initialize HUD elements ==========
+        private void Start()
+        {
+            if (effectBar) { effectBar.handler = this; }
+        }
 
         //============== Manage Effect Adding =====================
         public void AddEffect(StatusEffectSO effect, int stacks = 1)
@@ -20,13 +34,15 @@ namespace Game.Core {
 
         private void AddNewEffect(StatusEffectSO effect)
         {
-            statusEffects.Add(effect, 0);
-            effect.AddEffect(agent);
+            statusEffects.Add(effect, new EffectVars());
+            effect.AddEffect(this);
+            if (effectBar) { effectBar.HandleAddEffect(effect); }
         }
         private void AddStacks(StatusEffectSO effect, int stacks)
         {
-            effect.AddStacks(agent, stacks);
-            statusEffects[effect] += stacks;
+            effect.AddStacks(this, stacks);
+            statusEffects[effect].stacks += stacks;
+            if (effectBar) { effectBar.HandleUpdateStacks(effect, statusEffects[effect].stacks); }
         }
 
         //==================== Manage Effect Removal ===================
@@ -34,24 +50,26 @@ namespace Game.Core {
         {
             if (statusEffects.ContainsKey(effect))
             {
-                RemoveStacks(effect, Mathf.Min(stacks, statusEffects[effect]));
+                RemoveStacks(effect, Mathf.Min(stacks, statusEffects[effect].stacks));
                 //remove effect check
-                if (statusEffects[effect] == 0)
+                if (statusEffects[effect].stacks == 0)
                 {
                     RemoveEffect(effect);
                 }
             }
         }
 
-        private void RemoveStacks(StatusEffectSO effect, int stacksToRemove)
-        {
-            effect.RemoveStacks(agent, stacksToRemove);
-            statusEffects[effect] -= stacksToRemove;
-        }
         private void RemoveEffect(StatusEffectSO effect)
         {
-            effect.RemoveEffect(agent);
+            effect.RemoveEffect(this);
             statusEffects.Remove(effect);
+            if (effectBar) { effectBar.HandleRemoveEffect(effect); }
+        }
+        private void RemoveStacks(StatusEffectSO effect, int stacksToRemove)
+        {
+            effect.RemoveStacks(this, stacksToRemove);
+            statusEffects[effect].stacks -= stacksToRemove;
+            if (effectBar) { effectBar.HandleUpdateStacks(effect, statusEffects[effect].stacks); }
         }
 
         //========== Clear ==========
@@ -59,7 +77,7 @@ namespace Game.Core {
         {
             foreach (var kvp in statusEffects)
             {
-                RemoveEffect(kvp.Key, kvp.Value);
+                RemoveEffect(kvp.Key, kvp.Value.stacks);
             }
             statusEffects.Clear();
         }

@@ -14,17 +14,17 @@ namespace Game.Core {
 
         private void Start()
         {
+            Initialize();
             ResetAbilities(); //reset all cooldowns on level load
         }
 
-        public void Initialize(Agent agent)
+        public void Initialize()
         {
-            this.agent = agent;
             //initialize abilities
-            primary.agent = agent;
-            secondary.agent = agent;
-            special.agent = agent;
-            utility.agent = agent;
+            primary.Initialize(agent);
+            secondary.Initialize(agent);
+            special.Initialize(agent);
+            utility.Initialize(agent);
         }
 
         //============= Reset all abilities =================

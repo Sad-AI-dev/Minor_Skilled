@@ -7,17 +7,17 @@ namespace Game.Core {
     [System.Serializable]
     public class Ability
     {
+        public class AbilityVars { }
+
         public enum CoolDownMode { coolDown, attackSpeed }
 
         [HideInInspector] public Agent agent;
 
         public AbilitySO abilityData;
         
-
         [Header("Uses")]
         public int uses;
         public int maxUses = 1;
-       
         
         [Header("Timings")]
         public float coolDown;
@@ -28,7 +28,7 @@ namespace Game.Core {
         public Transform originPoint;
 
         [Header("Events")]
-        public UnityEvent onUse;
+        public UnityEvent<Ability> onUse;
         public AK.Wwise.Event SFX;
 
         //vars
@@ -36,7 +36,14 @@ namespace Game.Core {
         private Coroutine coolDownRoutine;
 
         //runtime vars support
-        public Dictionary<string, object> vars = new();
+        public AbilityVars vars;
+
+        //============ Initialize ============
+        public void Initialize(Agent agent)
+        {
+            this.agent = agent;
+            if (abilityData) { abilityData.InitializeVars(this); }
+        }
 
         //============ Use Ability ================
         public void TryUse()
@@ -55,7 +62,7 @@ namespace Game.Core {
         private void Use()
         {
             uses--;
-            onUse?.Invoke();
+            onUse?.Invoke(this);
             SFX.Post(agent.gameObject);
             abilityData.Use(this);
         }
@@ -105,10 +112,33 @@ namespace Game.Core {
             }
         }
 
+        public void GainUses(int usesToGain)
+        {
+            uses += usesToGain;
+            if (uses >= maxUses)
+            {
+                Reset();
+            }
+        }
+
+        //========== Manage Max Uses ==========
+        public void GainMaxUses(int usesToGain)
+        {
+            maxUses += usesToGain;
+            GainUses(usesToGain);
+        }
+
+        public void RemoveMaxUses(int usesToGain)
+        {
+            maxUses -= usesToGain;
+            uses = Mathf.Clamp(uses, 0, maxUses);
+        }
+
         //============= Reset Ability ===============
         public void Reset()
         {
             uses = maxUses;
+            isCoolingDown = false;
             coolDownTimer = 0;
             if (coolDownRoutine != null) 
             { 

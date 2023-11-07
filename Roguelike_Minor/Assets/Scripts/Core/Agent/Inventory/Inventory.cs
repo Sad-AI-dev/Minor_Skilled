@@ -54,8 +54,8 @@ namespace Game.Core {
             {
                 if (CanTriggerItem(ref hitEvent, items[i])) 
                 {
-                    if (dealDamage) items[i].data.ProcessDealDamage(ref hitEvent);
-                    else items[i].data.ProcessTakeDamage(ref hitEvent);
+                    if (dealDamage) items[i].data.ProcessDealDamage(ref hitEvent, items[i]);
+                    else items[i].data.ProcessTakeDamage(ref hitEvent, items[i]);
                 }
             }
         }
@@ -69,7 +69,7 @@ namespace Game.Core {
         {
             for (int i = 0; i < items.Count; i++)
             {
-                items[i].data.ProcessHealEvent(ref healEvent);
+                items[i].data.ProcessHealEvent(ref healEvent, items[i]);
             }
         }
     }

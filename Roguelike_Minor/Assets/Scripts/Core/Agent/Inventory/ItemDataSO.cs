@@ -27,14 +27,17 @@ namespace Game.Core {
         protected string HighlightColor { get { return ColorUtility.ToHtmlStringRGB(highlightColor); } }
         protected string StackColor { get { return ColorUtility.ToHtmlStringRGB(stackColor); } }
 
+        //============ Initialize Vars =============
+        public virtual void InitializeVars(Item item) { }
+
         //============ Manage Stacks ===============
-        public abstract void AddStack(Item item);
-        public abstract void RemoveStack(Item item);
+        public virtual void AddStack(Item item) { }
+        public virtual void RemoveStack(Item item) { }
 
         //============ Process hit / heal events ==============
-        public abstract void ProcessDealDamage(ref HitEvent hitEvent);
-        public abstract void ProcessTakeDamage(ref HitEvent hitEvent);
-        public abstract void ProcessHealEvent(ref HealEvent healEvent);
+        public virtual void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem) { }
+        public virtual void ProcessTakeDamage(ref HitEvent hitEvent, Item sourceItem) { }
+        public virtual void ProcessHealEvent(ref HealEvent healEvent, Item sourceItem) { }
 
         //============ Description ===========
         public abstract string GenerateLongDescription();
