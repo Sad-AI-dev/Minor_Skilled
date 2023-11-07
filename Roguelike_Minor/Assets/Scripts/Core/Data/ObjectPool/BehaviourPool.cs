@@ -6,7 +6,7 @@ namespace Game.Core.Data {
     [System.Serializable]
     public class BehaviourPool<T> where T : MonoBehaviour
     {
-        private readonly List<T> pool = new List<T>();
+        [SerializeField] private List<T> pool = new List<T>();
         public GameObject behaviourTemplate;
 
         //ctor

@@ -1,6 +1,6 @@
-using Game;
+using Game.Core;
 
-namespace Game.Core
+namespace Game
 {
     //========= Scene Loaded =========
     public class SceneLoadedEvent : Event { }
@@ -8,6 +8,9 @@ namespace Game.Core
     //========= Shop Loaded ============
     public class ShopLoadedEvent : Event
     {
-        
+        public Shop shop;
     }
+
+    //========== Game State =============
+    public class GameEndEvent : Event { }
 }

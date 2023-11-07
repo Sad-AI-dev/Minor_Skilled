@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "2InstantCoffee", menuName = "ScriptableObjects/Items/T1/2: Instant Coffee", order = 102)]
+    [CreateAssetMenu(fileName = "2VoidCoffee", menuName = "ScriptableObjects/Items/T1/2: Void Coffee", order = 102)]
     public class Item2SO : ItemDataSO
     {
         [Header("AttackSpeed Settings")]

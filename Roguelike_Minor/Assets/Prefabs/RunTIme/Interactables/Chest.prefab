@@ -43,7 +43,9 @@ GameObject:
   - component: {fileID: 2711284990265383080}
   - component: {fileID: 4630704566836104944}
   - component: {fileID: 7939578426864511357}
+  - component: {fileID: 647011553251981923}
   - component: {fileID: 5891022877450224656}
+  - component: {fileID: 7775972621422555360}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -60,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 3591282554343670712}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -105,10 +107,51 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5891022877450224656}
-        m_TargetAssemblyTypeName: Game.Lootable, Game
+      - m_Target: {fileID: 647011553251981923}
+        m_TargetAssemblyTypeName: Game.Purchasable, Game
         m_MethodName: TryPurchase
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &647011553251981923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3591282554343670712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d9f0bab31f9da1459dc81e97bfc88a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  price: 20
+  priceLabel: {fileID: 6552844919483129790}
+  onPurchase:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5891022877450224656}
+        m_TargetAssemblyTypeName: Game.Lootable, Game
+        m_MethodName: DropLoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7775972621422555360}
+        m_TargetAssemblyTypeName: Game.Core.GameSystems.Destroyer, Game.Core.GameSystems
+        m_MethodName: DestroyObject
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -129,9 +172,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94a7c6890fc8974289819ef69b2c2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 20
   lootTable: {fileID: 11400000, guid: d34d6b2c7ae19f045bc48adb1d76f7a1, type: 2}
-  priceLabel: {fileID: 6552844919483129790}
+  itemTemplate: {fileID: 2858984015360725450, guid: 798e7eb17231be4429ae57372b83f8fc, type: 3}
+--- !u!114 &7775972621422555360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3591282554343670712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825208299186b9748b1a15845b0e9810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6143068901467837308
 GameObject:
   m_ObjectHideFlags: 0
