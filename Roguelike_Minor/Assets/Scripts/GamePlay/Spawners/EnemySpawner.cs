@@ -31,7 +31,7 @@ namespace Game {
         //vars
         [HideInInspector] public EnemyPlacer placer;
         private CostBasedActivator activator;
-        private bool paused = false;
+        [HideInInspector] public bool paused = false;
 
         //=========== Initialize ===========
         private void Start()
@@ -73,9 +73,12 @@ namespace Game {
         private IEnumerator PrewarmCo()
         {
             yield return null; //wait a frame
-            placer.ignoreRings = true;
-            activator.ForceActivate(prewarmMultiplier);
-            placer.ignoreRings = false;
+            if (placer)
+            {
+                placer.ignoreRings = true;
+                activator.ForceActivate(prewarmMultiplier);
+                placer.ignoreRings = false;
+            }
         }
 
         //========= Spawn Enemy Wrapper ===========

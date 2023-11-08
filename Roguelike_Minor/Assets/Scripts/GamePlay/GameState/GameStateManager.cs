@@ -51,6 +51,8 @@ namespace Game {
         private void OnDestroy()
         {
             EventBus<SceneLoadedEvent>.RemoveListener(HandleSceneLoaded);
+            //announce game end
+            EventBus<GameEndEvent>.Invoke(new GameEndEvent());
         }
     }
 }
