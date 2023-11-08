@@ -8,11 +8,6 @@ using Game.Core;
 namespace Game.Enemy {
     public class MeleeGruntTree : Core.Tree
     {
-        //General Variables
-        [Header("General Variables")]
-        public Agent agent;
-        public NavMeshAgent navAgent;
-
         //Projectile Arch
         [Header("Projectile Variables")]
         [SerializeField] float projectileSpeed;
@@ -30,11 +25,6 @@ namespace Game.Enemy {
         public delegate void Notify(MeleeGruntTree source);
         public event Notify OnHitPlayer;
         public bool charging;
-
-        [Header("Debug variables")]
-        public bool melee;
-        public bool semi;
-        public bool ranged;
 
         protected override void Start()
         {
@@ -80,27 +70,6 @@ namespace Game.Enemy {
             if (collision.transform.tag == "Player" && charging) {
                 Debug.Log("hit player");
                 OnHitPlayer?.Invoke(this);
-            }
-        }
-
-        private void OnDrawGizmos()
-        {
-            if (melee)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(transform.position, meleeAttackRange);
-            }
-
-            if (semi)
-            {
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawWireSphere(transform.position, semiMeleeAttackRange);
-            }
-
-            if (ranged)
-            {
-                Gizmos.color = Color.green;
-                Gizmos.DrawWireSphere(transform.position, rangedAttackRange);
             }
         }
     }

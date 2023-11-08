@@ -21,7 +21,6 @@ namespace Game.Enemy {
             if (!chosen)
             {
                 RandomOneZero = Random.Range(0, 2);
-                RandomOneZero = 1;
 
                 if (RandomOneZero == 0)
                 {
