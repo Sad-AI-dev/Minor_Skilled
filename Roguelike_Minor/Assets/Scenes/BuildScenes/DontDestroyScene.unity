@@ -142,62 +142,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1285765217573816225, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 1421599695142573888, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
-      propertyPath: special.coolDown
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
-      propertyPath: utility.coolDown
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
-      propertyPath: utility.SFX.WwiseObjectReference
-      value: 
-      objectReference: {fileID: 11400000, guid: e0ddf0ebf44cae44ea73623adf5d71d8, type: 2}
-    - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
-      propertyPath: secondary.SFX.WwiseObjectReference
-      value: 
-      objectReference: {fileID: 11400000, guid: 03e691162aea62a49a015de28c3d8200, type: 2}
     - target: {fileID: 6042182213848110425, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: inventory
       value: 
       objectReference: {fileID: 723454604}
-    - target: {fileID: 6042182213848110425, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
-      propertyPath: Footsteps.WwiseObjectReference
-      value: 
-      objectReference: {fileID: 11400000, guid: 56f6f49410c15c6478aabea0f9124629, type: 2}
     - target: {fileID: 6092443099186812197, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 165370653}
     - target: {fileID: 6612914900796368241, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
-      propertyPath: onCanInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6612914900796368241, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: onCanInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1418690910}
     - target: {fileID: 6612914900796368241, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
-      propertyPath: onCanInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: InitializeLabel
-      objectReference: {fileID: 0}
-    - target: {fileID: 6612914900796368241, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: onStopCanInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1418690913}
-    - target: {fileID: 6612914900796368241, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
-      propertyPath: onCanInteract.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Game.InteractionLabelHandler, Game
-      objectReference: {fileID: 0}
     - target: {fileID: 7374867739153013466, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1553550031}
+    - target: {fileID: 7374867739153013466, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: coyoteTime
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374867739153013466, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: coyoteFrames
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374867739153013466, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: slowFallBounds
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374867739153013466, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: slowFallMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7641492428396719861, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

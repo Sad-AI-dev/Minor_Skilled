@@ -394,6 +394,7 @@ GameObject:
   - component: {fileID: 7374867739153013466}
   - component: {fileID: 6425007794457280646}
   - component: {fileID: 1389778117787781048}
+  - component: {fileID: 1994519374690795856}
   - component: {fileID: 1439967887705530693}
   - component: {fileID: 8856083573202198069}
   - component: {fileID: 6092443099186812197}
@@ -445,7 +446,7 @@ MonoBehaviour:
   Footsteps:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 56f6f49410c15c6478aabea0f9124629, type: 2}
 --- !u!114 &7374867739153013466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,6 +464,9 @@ MonoBehaviour:
   acceleration: 3
   JumpForce: 50
   gravity: 2.5
+  slowFallBounds: 0.1
+  slowFallMultiplier: 0.8
+  fastFallMultiplier: 1.5
   cam: {fileID: 0}
 --- !u!114 &6425007794457280646
 MonoBehaviour:
@@ -500,9 +504,32 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.15
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!136 &1994519374690795856
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421599695142573888}
+  m_Material: {fileID: 13400000, guid: 307995eb60b928f438d62977cd850839, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1439967887705530693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,14 +575,14 @@ MonoBehaviour:
     SFX:
       idInternal: 0
       valueGuidInternal: 
-      WwiseObjectReference: {fileID: 0}
+      WwiseObjectReference: {fileID: 11400000, guid: 03e691162aea62a49a015de28c3d8200, type: 2}
     coolDownTimer: 0
   special:
     agent: {fileID: 0}
     abilityData: {fileID: 11400000, guid: 246ee83cf6db190478d1f1ab63556b27, type: 2}
     uses: 1
     maxUses: 1
-    coolDown: 1
+    coolDown: 8
     coolDownMode: 0
     isCoolingDown: 0
     originPoint: {fileID: 2437245198168656956}
@@ -572,7 +599,7 @@ MonoBehaviour:
     abilityData: {fileID: 11400000, guid: 8e216291f235b244abb9c0ba3734e093, type: 2}
     uses: 1
     maxUses: 1
-    coolDown: 1
+    coolDown: 4
     coolDownMode: 0
     isCoolingDown: 0
     originPoint: {fileID: 0}
@@ -582,7 +609,7 @@ MonoBehaviour:
     SFX:
       idInternal: 0
       valueGuidInternal: 
-      WwiseObjectReference: {fileID: 0}
+      WwiseObjectReference: {fileID: 11400000, guid: e0ddf0ebf44cae44ea73623adf5d71d8, type: 2}
     coolDownTimer: 0
 --- !u!114 &8856083573202198069
 MonoBehaviour:
@@ -680,9 +707,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+        m_TargetAssemblyTypeName: Game.InteractionLabelHandler, Game
+        m_MethodName: InitializeLabel
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
