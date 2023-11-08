@@ -11,11 +11,50 @@ namespace Game {
         [HideInInspector] public Camera cam;
         [HideInInspector] public Vector3 trackPos;
 
-        private Vector2 UIOffset;
+        [Header("Movement Options")]
+        [SerializeField] private float horMoveSpeed;
+        [SerializeField] private float horMoveSpeedDropoffMult = 0.8f;
+        [SerializeField] private float arcHeight;
+        [SerializeField] private float arcGravity;
+
+        private Vector3 UIOffset;
+        //hor speed vars
+        private float horSpeed;
+        private int dirMult;
+        //ver speed vars
+        private float verSpeed;
+
+        private void OnEnable()
+        {
+            verSpeed = arcHeight;
+            UIOffset = Vector3.zero;
+            horSpeed = horMoveSpeed;
+            dirMult = Random.Range(0f, 1f) < 0.5f ? -1 : 1;
+        }
 
         private void Update()
         {
+            UpdateArcOffset();
             TrackPosition();
+        }
+
+        //============== Arc Movement ===============
+        private void UpdateArcOffset()
+        {
+            UpdateHorSpeed();
+            UpdateVerSpeed();
+        }
+
+        private void UpdateHorSpeed()
+        {
+            UIOffset.x += horSpeed * dirMult;
+            horSpeed *= horMoveSpeedDropoffMult;
+        }
+
+        private void UpdateVerSpeed()
+        {
+            UIOffset.y += verSpeed;
+            verSpeed -= arcGravity;
         }
 
         //============ Update position ==============
@@ -23,7 +62,7 @@ namespace Game {
         {
             if (PointIsInFrostum(trackPos))
             {
-                label.rectTransform.position = cam.WorldToScreenPoint(trackPos);
+                label.rectTransform.position = cam.WorldToScreenPoint(trackPos) + UIOffset;
             }
         }
 

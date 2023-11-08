@@ -40,7 +40,8 @@ namespace Game {
                 HitEvent hit = eventData.hitEvent;
                 FormatNumberLabel(
                     hit.target.transform.position + GetOffset(), 
-                    hit.labelColor, hit.GetTotalDamage()
+                    hit.isCrit ? hit.critColor : hit.labelColor, 
+                    hit.GetTotalDamage()
                 );
             }
         }
