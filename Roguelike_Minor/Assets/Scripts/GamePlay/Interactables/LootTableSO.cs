@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Core;
 using Game.Core.Data;
 
 namespace Game {
@@ -11,14 +12,19 @@ namespace Game {
         public struct Category
         {
             public string name;
-            public List<GameObject> options;
+            public List<ItemDataSO> options;
         }
 
         public WeightedChance<Category> categories;
 
-        public GameObject GetLoot()
+        public ItemDataSO GetLoot()
         {
-            Category chosenCategory = categories.GetRandomEntry();
+            return GetLoot(0f);
+        }
+
+        public ItemDataSO GetLoot(float luck)
+        {
+            Category chosenCategory = categories.GetRandomEntry(luck);
             return chosenCategory.options[Random.Range(0, chosenCategory.options.Count)];
         }
     }

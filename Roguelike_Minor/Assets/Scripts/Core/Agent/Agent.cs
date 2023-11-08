@@ -29,7 +29,7 @@ namespace Game.Core {
             stats.Copy(baseStats.baseStats);
             //setup abilities
             abilities = GetComponent<AgentAbilities>();
-            abilities.Initialize(this);
+            abilities.agent = this;
             //setup effect handler
             effectHandler = GetComponent<StatusEffectHandler>();
             effectHandler.agent = this;

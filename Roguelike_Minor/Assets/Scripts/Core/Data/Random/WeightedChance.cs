@@ -33,15 +33,16 @@ namespace Game.Core.Data {
         }
 
         //=============== random chance ===============
-        public T GetRandomEntry()
+        public T GetRandomEntry(float luck = 0) //luck is expressed as a percent of totalChance
         {
             if (totalChance <= 0f) { CalcTotalChance(); }
             //choose random option
             T chosenOption = default;
-            float rand = Random.Range(0, totalChance);
+            float rand = Random.Range(0, totalChance) + (totalChance * luck);
+            if (rand > totalChance) { rand = totalChance; }
             for (int i = 0; i < options.Count; i++) {
                 //found chosen option
-                if (rand < options[i].chance) {
+                if (rand <= options[i].chance) {
                     chosenOption = options[i].option;
                     break;
                 }
