@@ -19,7 +19,6 @@ namespace Game {
                 instance = this;
             }
         }
-
         public static EnemySpawner instance;
 
         [Header("Spawn Settings")]
@@ -31,7 +30,7 @@ namespace Game {
         //vars
         [HideInInspector] public EnemyPlacer placer;
         private CostBasedActivator activator;
-        [HideInInspector] public bool paused = false;
+        private GameStateManager gameState;
 
         //=========== Initialize ===========
         private void Start()
@@ -41,6 +40,7 @@ namespace Game {
         
         private void Initialize()
         {
+            gameState = GameStateManager.instance;
             activator = GetComponent<CostBasedActivator>();
             SpawnEnemies();
             EventBus<SceneLoadedEvent>.AddListener(OnSceneLoaded);
@@ -55,13 +55,13 @@ namespace Game {
         private IEnumerator SpawnEnemiesCo()
         {
             yield return new WaitForSeconds(spawnDelay);
-            if (!paused)
+            if (!gameState.scalingIsPaused)
             {
                 activator.Activate();
             }
             else
             { //not active, wait for reactivation
-                while (paused)
+                while (gameState.scalingIsPaused)
                 {
                     yield return null;
                 }
@@ -101,16 +101,9 @@ namespace Game {
             activator.ForceActivate(multiplier);
         }
 
-        //=========== State Management ============
-        public void SetSpawnState(bool state)
-        {
-            paused = state;
-        }
-
         //=========== Handle Scene Loaded ===============
         private void OnSceneLoaded(SceneLoadedEvent data)
         {
-            paused = false;
             StartCoroutine(PrewarmCo());
         }
 

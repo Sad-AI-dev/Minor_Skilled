@@ -28,6 +28,9 @@ namespace Game.Core {
         //death event
         public UnityEvent<HitEvent> onDeath;
 
+        //UI
+        public Color labelColor = Color.white;
+
         //============== Constructors =============
         //=== Default Constructor ===
         public HitEvent(Agent source = null)

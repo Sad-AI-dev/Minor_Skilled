@@ -16,6 +16,10 @@ namespace Game.Core {
         public readonly float baseHeal;
         public float healMultiplier;
 
+        //UI
+        public bool createNumLabel;
+        public Color labelColor;
+
         //ctor
         public HealEvent(float baseHeal, Agent source = null)
         {
@@ -24,6 +28,9 @@ namespace Game.Core {
             this.baseHeal = baseHeal;
             //initialize base vars
             healMultiplier = 1;
+            //initialize UI vars
+            createNumLabel = true;
+            labelColor = Color.green;
         }
 
         public float GetTotalHeal()

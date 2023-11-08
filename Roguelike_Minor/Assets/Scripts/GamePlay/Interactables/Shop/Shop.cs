@@ -23,13 +23,9 @@ namespace Game {
         [HideInInspector] public float itemLuck;
         [HideInInspector] public int rerolls = 0;
 
-        private void Awake()
-        {
-            EventBus<ShopLoadedEvent>.Invoke(new ShopLoadedEvent() { shop = this });
-        }
-
         private void Start()
         {
+            EventBus<ShopLoadedEvent>.Invoke(new ShopLoadedEvent() { shop = this });
             StartCoroutine(GenerateShopContentCo());
         }
 

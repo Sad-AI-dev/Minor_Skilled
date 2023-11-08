@@ -40,6 +40,7 @@ namespace Game.Core {
             //take damage
             health -= hitEvent.GetTotalDamage();
             onHurt?.Invoke(hitEvent);
+            EventBus<AgentTakeDamageEvent>.Invoke(new AgentTakeDamageEvent() { hitEvent = hitEvent });
             if (health <= 0) { HandleDeath(ref hitEvent); }
             //update health bar
             HandleHealthChange();
@@ -52,6 +53,7 @@ namespace Game.Core {
             //heal
             health += healEvent.GetTotalHeal();
             onHeal?.Invoke(healEvent);
+            EventBus<AgentHealEvent>.Invoke(new AgentHealEvent() { healEvent = healEvent });
             //update health bar
             HandleHealthChange();
         }
