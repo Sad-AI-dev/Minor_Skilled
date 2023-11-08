@@ -8,12 +8,14 @@ using UnityEngine.AI;
 namespace Game.Enemy {
     public class MeleeGruntWalkToTarget : BT_Node
     {
+        Transform transform;
         Transform target;
         Agent agent;
         NavMeshAgent navAgent;
 
-        public MeleeGruntWalkToTarget(Agent agent, NavMeshAgent navAgent)
+        public MeleeGruntWalkToTarget(Transform transform, Agent agent, NavMeshAgent navAgent)
         {
+            this.transform = transform;
             this.agent = agent;
             this.navAgent = navAgent;
         }
@@ -30,11 +32,13 @@ namespace Game.Enemy {
             //else go to target
             else
             {
+                Debug.Log("Walking to target");
+                if(GetData("Charging") != null && (bool)GetData("Charging") == false) navAgent.isStopped = false;
+                if (GetData("Charging") != null && (bool)GetData("Charging") == true) transform.LookAt(target);
                 state = NodeState.RUNNING;
                 navAgent.speed = agent.stats.walkSpeed;
                 navAgent.SetDestination(target.position);
             }
-
 
             return state;
         }

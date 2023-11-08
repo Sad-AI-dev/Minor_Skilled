@@ -44,7 +44,6 @@ namespace Game.Enemy {
             if (distanceToTarget > rangedAttackRange)
             {
                 state = NodeState.FAILURE;
-                Debug.Log("Not in range");
             }
             //Else If target in range and 3 or more enemies next to player: Succeed
             else

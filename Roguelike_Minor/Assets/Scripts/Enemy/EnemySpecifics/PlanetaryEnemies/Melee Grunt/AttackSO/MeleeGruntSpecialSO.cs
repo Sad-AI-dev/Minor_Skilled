@@ -6,19 +6,17 @@ using Game.Core.Data;
 using System;
 using UnityEngine.AI;
 
-namespace Game.Enemy
-{
+namespace Game.Enemy {
     [CreateAssetMenu(fileName = "MeleeGruntSpecial", menuName = "ScriptableObjects/Enemy/MeleeGrunt/Special")]
     public class MeleeGruntSpecialSO : AbilitySO
     {
         [SerializeField] private float chargeWindUpTimer;
-
-        //private PlayerController controller;
+        [SerializeField] private float chargeSpeed;
 
         public class MeleeGruntSpecialVars : Ability.AbilityVars
         {
             public MeleeGruntTree enemy;
-            public Vector3 target;
+            public Transform target;
             public NavMeshAgent navAgent;
             public Agent agent;
             public Coroutine chargeCO; 
@@ -32,7 +30,7 @@ namespace Game.Enemy
                 enemy = source.agent.GetComponent<MeleeGruntTree>(),
                 navAgent = source.agent.GetComponent<NavMeshAgent>(),
                 agent = source.agent,
-                target = GameStateManager.instance.player.transform.position,
+                target = GameStateManager.instance.player.transform,
                 chargeCO = null 
             };
         }
@@ -40,25 +38,41 @@ namespace Game.Enemy
         public override void Use(Ability source)
         {
             MeleeGruntSpecialVars vars = (source.vars as MeleeGruntSpecialVars);
-            Vector3 playerDirection = vars.target - vars.enemy.transform.position;
-            Vector3 velocity = playerDirection;
-            vars.chargeCO = source.agent.StartCoroutine(ChargeCO(vars, velocity));
+            vars.chargeCO = source.agent.StartCoroutine(ChargeCO(vars));
         }
 
-        public IEnumerator ChargeCO(MeleeGruntSpecialVars vars, Vector3 dir)
+        public IEnumerator ChargeCO(MeleeGruntSpecialVars vars)
         {
+            vars.enemy.charging = true;
             vars.navAgent.velocity = Vector3.zero;
 
             yield return new WaitForSeconds(chargeWindUpTimer);
 
-            vars.navAgent.velocity = dir * 8;
+            Dash(vars);
+
+            yield return new WaitForSeconds(0.3f);
+
+            StopDash(vars);
+
+            yield return new WaitForSeconds(1);
+
+            vars.enemy.charging = false;
+        }
+
+        void Dash(MeleeGruntSpecialVars vars)
+        {
+            Vector3 playerDirection = vars.target.position - vars.enemy.transform.position;
+            Vector3 velocity = playerDirection * chargeSpeed;
+            vars.navAgent.isStopped = false;
+            vars.navAgent.velocity = velocity;
 
             vars.navAgent.speed = 10;
             vars.navAgent.angularSpeed = 0;
             vars.navAgent.acceleration = 20;
-
-            yield return new WaitForSeconds(0.2f);
-
+        }
+        void StopDash(MeleeGruntSpecialVars vars)
+        {
+            vars.navAgent.velocity = Vector3.zero;
             vars.navAgent.speed = vars.agent.stats.walkSpeed;
             vars.navAgent.angularSpeed = 180;
             vars.navAgent.acceleration = 10;
@@ -71,7 +85,7 @@ namespace Game.Enemy
             tree.navAgent.angularSpeed = 180;
             tree.navAgent.acceleration = 10;
 
-            GameStateManager.instance.transform.GetComponent<Agent>().health.Hurt(new HitEvent(tree.transform.GetComponent<Agent>().abilities.special));
+            GameStateManager.instance.player.health.Hurt(new HitEvent(tree.transform.GetComponent<Agent>().abilities.special));
         }
     }
 }

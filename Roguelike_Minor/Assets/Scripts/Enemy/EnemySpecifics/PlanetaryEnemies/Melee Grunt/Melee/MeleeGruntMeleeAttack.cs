@@ -7,26 +7,24 @@ using UnityEngine.AI;
 using Game.Core;
 
 namespace Game.Enemy {
-    public class MeleeGruntHandleChargeChance : BT_Node
+    public class MeleeGruntMeleeAttack : BT_Node
     {
         Agent agent;
         NavMeshAgent navAgent;
-        Transform transform, target;
-
-
-        public MeleeGruntHandleChargeChance(Agent agent, NavMeshAgent navAgent, Transform transform)
+        public MeleeGruntMeleeAttack(Agent agent, NavMeshAgent navAgent) 
         {
-            this.transform = transform;
             this.agent = agent;
             this.navAgent = navAgent;
         }
 
+        //melee attack
         public override NodeState Evaluate()
         {
             if ((Transform)GetData("Target"))
             {
-                agent.abilities.special.TryUse();
-                state = NodeState.RUNNING;
+                navAgent.isStopped = true;
+                agent.abilities.primary.TryUse();
+                state = NodeState.RUNNING;             
             }
             else state = NodeState.FAILURE;
 
