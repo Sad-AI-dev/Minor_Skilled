@@ -1,13 +1,27 @@
-using Game;
+using Game.Core;
 
-namespace Game.Core
+namespace Game
 {
+    //========= Game Timer Events ========
+    public class EnemyLevelupEvent : Event
+    {
+        public int level;
+    }
+
+    public class PriceIncreaseEvent : Event
+    {
+        public float baseMult;
+    }
+
     //========= Scene Loaded =========
     public class SceneLoadedEvent : Event { }
 
     //========= Shop Loaded ============
     public class ShopLoadedEvent : Event
     {
-        
+        public UnityEngine.MonoBehaviour shop;
     }
+
+    //========== Game State =============
+    public class GameEndEvent : Event { }
 }
