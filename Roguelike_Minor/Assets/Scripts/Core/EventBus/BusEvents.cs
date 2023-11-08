@@ -13,6 +13,17 @@ namespace Game
         public float baseMult;
     }
 
+    //========= Damage / Heal Events ===========
+    public class AgentTakeDamageEvent : Event
+    {
+        public HitEvent hitEvent;
+    }
+
+    public class AgentHealEvent : Event
+    {
+        public HealEvent healEvent;
+    }
+
     //========= Scene Loaded =========
     public class SceneLoadedEvent : Event { }
 

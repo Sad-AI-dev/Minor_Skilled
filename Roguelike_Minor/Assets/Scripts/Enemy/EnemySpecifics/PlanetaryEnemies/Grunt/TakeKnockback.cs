@@ -48,7 +48,6 @@ namespace Game.Enemy {
             if (takingKnockback)
             {
                 grounded = Physics.Raycast(transform.position, -transform.up, 1f);
-                Debug.Log(grounded);
                 if (!coStarted)
                 {
                     //Nav mesh knockback
