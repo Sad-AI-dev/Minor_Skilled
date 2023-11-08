@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Core;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Game {
     public class ConcreteHealthBarPlayer : HealthBar
@@ -10,12 +11,21 @@ namespace Game {
         [SerializeField] private UIManager uiManager;
         [SerializeField] private List<GameObject> healthBarStates;
         [SerializeField] private TextMeshProUGUI healthNumber;
+        [SerializeField] private Slider healthBarSlider;
+
         private void Start()
         {
-            UpdateHealthBar(100);
+            UpdateHealthBar(1);
+            healthNumber.text = GameStateManager.instance.player.stats.maxHealth.ToString();
         }
 
         public override void UpdateHealthBar(float percentage)
+        {
+            healthBarSlider.value = percentage;
+            healthNumber.text = uiManager.agent.health.health.ToString();
+        }
+
+       /* public override void UpdateHealthBar(float percentage)
         {
             healthBarStates[5].SetActive(false);
             healthBarStates[4].SetActive(false);
@@ -40,7 +50,7 @@ namespace Game {
             {
                 healthBarStates[2].SetActive(true);
             }
-            else if(percentage > 0)
+            else if (percentage > 0)
             {
                 healthBarStates[1].SetActive(true);
             }
@@ -50,6 +60,6 @@ namespace Game {
             }
 
             healthNumber.text = uiManager.agent.health.health.ToString();
-        }
+        }*/
     }
 }
