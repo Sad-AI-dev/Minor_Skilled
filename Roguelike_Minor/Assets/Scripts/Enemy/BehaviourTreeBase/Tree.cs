@@ -40,6 +40,13 @@ namespace Game.Enemy.Core
             agent.stats.baseDamage += GameScalingManager.instance.enemyLevel * baseDamageScaling;
             agent.stats.Money += GameScalingManager.instance.enemyLevel * moneyScaling;
             agent.stats.maxHealth += GameScalingManager.instance.enemyLevel * maxHealthScaling;
+
+            HealEvent heal = new HealEvent(agent.stats.maxHealth)
+            {
+                createNumLabel = false
+            };
+
+            agent.health.Heal(heal);
         }
     }
 }
