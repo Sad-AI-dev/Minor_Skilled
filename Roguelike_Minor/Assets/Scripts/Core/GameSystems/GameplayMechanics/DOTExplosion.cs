@@ -14,6 +14,7 @@ namespace Game.Core.GameSystems
         [SerializeField] private float tickCooldown;
         [SerializeField] private float radius;
         [SerializeField] private bool includeCaster;
+        [SerializeField] private bool onlyAffectGrounded;
 
         [Header("Damage")]
         [SerializeField] private int damage;
@@ -27,9 +28,8 @@ namespace Game.Core.GameSystems
 
         [HideInInspector] public Agent source = null;
 
-        private bool canTick = true;
-
         private List<Agent> agentsInRange = new List<Agent>();
+        private List<Agent> agentsToTarget = new List<Agent>();
         private Explosion explosion = new Explosion();
         
         private SphereCollider col;
@@ -39,21 +39,33 @@ namespace Game.Core.GameSystems
             col = GetComponent<SphereCollider>();
             col.isTrigger = true;
             transform.localScale *= radius * 2;
-
-            if(canTick)
-                StartCoroutine(WaitForNextFrameCo());
+            StartCoroutine(WaitForNextFrameCo());
         }
 
         private void ExecuteTick()
         {
-            if(damage > 0 && source != null)
-                explosion.DealDamage(agentsInRange, source, damage);
-            if(knockbackForce > 0)
-                explosion.DealKnockback(agentsInRange, knockbackForce, transform.position);
-            if(effect != null)
-                explosion.AddStatusEffect(agentsInRange, effect, effectStacks);
+            if(onlyAffectGrounded)
+            {
+                List<Agent> groundedAgents = new List<Agent>();
+                foreach(Agent agent in agentsInRange)
+                {
+                    if(agent.isGrounded)
+                        groundedAgents.Add(agent);
+                }
 
-            canTick = false;
+                agentsToTarget = groundedAgents;
+            }
+            else
+            {
+                agentsToTarget = agentsInRange;
+            }
+
+            if(damage > 0 && source != null)
+                explosion.DealDamage(agentsToTarget, source, damage);
+            if(knockbackForce > 0)
+                explosion.DealKnockback(agentsToTarget, knockbackForce, transform.position);
+            if(effect != null)
+                explosion.AddStatusEffect(agentsToTarget, effect, effectStacks);
         }
 
         private IEnumerator WaitForNextFrameCo()
@@ -62,8 +74,7 @@ namespace Game.Core.GameSystems
             
             ExecuteTick();
 
-            if(!canTick)
-                StartCoroutine(TickCooldownCo());
+            StartCoroutine(TickCooldownCo());
         }
 
         private IEnumerator TickCooldownCo()
@@ -84,7 +95,7 @@ namespace Game.Core.GameSystems
         {
             if(other.TryGetComponent<Agent>(out Agent agent))
             {
-                if(source != null)
+                if(!includeCaster)
                 {
                     if(!agent.CompareTag(source.tag))
                         agentsInRange.Add(agent);

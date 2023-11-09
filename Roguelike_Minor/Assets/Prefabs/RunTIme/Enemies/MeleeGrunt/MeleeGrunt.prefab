@@ -532,13 +532,13 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -697,6 +697,8 @@ GameObject:
   - component: {fileID: 9053980708701088319}
   - component: {fileID: 590220394486652246}
   - component: {fileID: 1504405598959527834}
+  - component: {fileID: 6928698356919846774}
+  - component: {fileID: 2948050001797566986}
   m_Layer: 6
   m_Name: MeleeGrunt
   m_TagString: Untagged
@@ -739,6 +741,9 @@ MonoBehaviour:
   baseDamageScaling: 0
   moneyScaling: 0
   maxHealthScaling: 0
+  rb: {fileID: 1504405598959527834}
+  upMultiplier: 3
+  directionMultiplier: 3
   projectileSpeed: 5
   charceChancePercent: 15
   chargeWindUpTimer: 2
@@ -852,7 +857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   health: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 6181822310351374477}
   onMaxHealthChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -864,7 +869,19 @@ MonoBehaviour:
       m_Calls: []
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6928698356919846774}
+        m_TargetAssemblyTypeName: Game.Core.GameSystems.Destroyer, Game.Core.GameSystems
+        m_MethodName: DestroyObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6979495719125071837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,6 +914,7 @@ MonoBehaviour:
   OnKnockbackReceived:
     m_PersistentCalls:
       m_Calls: []
+  isGrounded: 0
 --- !u!114 &9053980708701088319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -960,6 +978,41 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &6928698356919846774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5666398297103683690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825208299186b9748b1a15845b0e9810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &2948050001797566986
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5666398297103683690}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Height: 1.3145002
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.6525032, z: 0}
 --- !u!1 &6177418429845132727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,7 +1138,6 @@ GameObject:
   - component: {fileID: 2352393984197392868}
   - component: {fileID: 5008133412397541913}
   - component: {fileID: 7068493599154275844}
-  - component: {fileID: 2073526652826348706}
   m_Layer: 6
   m_Name: Visuals
   m_TagString: Untagged
@@ -1161,27 +1213,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2073526652826348706
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7150073779242377444}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7986522622031264839
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,8 +10,8 @@ namespace Game.Enemy {
     public class TakeKnockback : BT_Node
     {
         private Transform transform;
-        private NavMeshAgent agent;
-        private Agent enemyAgent;
+        private NavMeshAgent navAgent;
+        private Agent agent;
         private Rigidbody rb;
 
         //Bools
@@ -24,20 +24,21 @@ namespace Game.Enemy {
         private float upMultiplier = 1;
         private float directionMultiplier = 6;
 
-        public TakeKnockback(Transform transform, Agent enemyAgent, NavMeshAgent agent, Rigidbody rb, float upMultiplier, float directionMultiplier)
+        public TakeKnockback(Transform transform, Agent agent, NavMeshAgent navAgent, Rigidbody rb, float upMultiplier, float directionMultiplier)
         {
             this.transform = transform;
-            this.enemyAgent = enemyAgent;
             this.agent = agent;
+            this.navAgent = navAgent;
             this.rb = rb;
             this.upMultiplier = upMultiplier;
             this.directionMultiplier = directionMultiplier;
 
-            enemyAgent.OnKnockbackReceived.AddListener(OnKnockbackRecieved);
+            agent.OnKnockbackReceived.AddListener(OnKnockbackRecieved);
         }
 
         void OnKnockbackRecieved(Vector3 dir)
         {
+            Debug.Log("Taking Knockback enemy");
             takingKnockback = true;
             knockbackDirection = dir;
         }
@@ -68,7 +69,7 @@ namespace Game.Enemy {
         {
             coStarted = true;
             rb.useGravity = true;
-            agent.enabled = false;
+            navAgent.enabled = false;
             grounded = false;
 
             await Task.Delay(200);
@@ -80,7 +81,7 @@ namespace Game.Enemy {
                 if (grounded)
                 {
                     Debug.Log("Hit ground");
-                    agent.enabled = true;
+                    navAgent.enabled = true;
                     rb.isKinematic = true;
                     rb.useGravity = false;
 
