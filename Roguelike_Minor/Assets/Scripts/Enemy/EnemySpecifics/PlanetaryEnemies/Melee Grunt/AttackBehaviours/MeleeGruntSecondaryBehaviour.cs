@@ -22,8 +22,12 @@ namespace Game.Enemy {
             sampleTime += Time.deltaTime * bulletSpeed;
             middle = (sourceTransform + target) / 2;
             middleUp = middle + (Vector3.up * 3);
-            transform.LookAt(EvalBezier(sourceTransform, target, middleUp, sampleTime + 0.001f) + transform.position);
             velocity = EvalBezier(sourceTransform, target, middleUp, sampleTime + 0.001f) - transform.position;
+
+            if(sampleTime >= 1)
+            {
+                transform.gameObject.SetActive(false);
+            }
         }
 
         protected override void OnCollide(RaycastHit hit)
