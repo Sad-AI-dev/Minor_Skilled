@@ -40,7 +40,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3127258870543087108}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78ce3453ed027cc478c9a3283710d803, type: 3}
   m_Name: 
@@ -67,18 +67,21 @@ MonoBehaviour:
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 0}
     coolDownTimer: 0
+  visuals: {fileID: 2304554275700936720, guid: 3ffff26ebd52ed648b21cf29eadb6fb3, type: 3}
+  SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2e27cdbdb18049e418dd0bdcda6688ee, type: 2}
   gravity: 1
-  explosion: {fileID: 2304554275700936720, guid: 3ffff26ebd52ed648b21cf29eadb6fb3, type: 3}
+  radius: 2.5
+  explosionDamage: 50
   grenades:
+    pool: []
     behaviourTemplate: {fileID: 5180419599746193269, guid: 95dc641df33fb0a4c81de9dbd96fec11, type: 3}
   poisonGrenadeSpeed: 0.5
   poisonGrenadeAmount: 4
   minDistance: 0.2
   maxDistance: 0.5
-  SFX:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 2e27cdbdb18049e418dd0bdcda6688ee, type: 2}
 --- !u!1 &7327287741176140361
 GameObject:
   m_ObjectHideFlags: 0

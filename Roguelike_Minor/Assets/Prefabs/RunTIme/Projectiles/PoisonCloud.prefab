@@ -76,8 +76,37 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ccfe66a0e1ea66d4485cc518489431f3, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 111461277577568181, guid: 0c4e9d4c80a3c794c879234107e8863d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1071950442909444679, guid: 0c4e9d4c80a3c794c879234107e8863d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -273298559861702921}
   m_SourcePrefab: {fileID: 100100000, guid: 0c4e9d4c80a3c794c879234107e8863d, type: 3}
+--- !u!1 &1994042670244770660 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1071950442909444679, guid: 0c4e9d4c80a3c794c879234107e8863d, type: 3}
+  m_PrefabInstance: {fileID: 1534625770680981795}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-273298559861702921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994042670244770660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c2c71a2a8c70646a3271430d7bb02e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ticks: 20
+  tickCooldown: 0.2
+  radius: 2.5
+  damage: 5
+  knockbackForce: 0
+  effect: {fileID: 0}
+  effectStacks: 0
+  source: {fileID: 0}

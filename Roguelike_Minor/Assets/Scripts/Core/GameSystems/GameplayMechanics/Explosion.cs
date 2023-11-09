@@ -7,28 +7,35 @@ namespace Game.Core.GameSystems
 {
     public class Explosion
     {        
-        public List<Agent> FindAgentsInRange(Vector3 pos, float radius, bool includePlayer = false)
+        public List<Agent> FindAgentsInRange(Vector3 pos, float radius, Agent source = null)
         {
             Collider[] overlappingColliders = Physics.OverlapSphere(pos, radius);
 
             List<Agent> agentsInRange = new List<Agent>();
 
-            foreach(Collider collider in overlappingColliders)
+            foreach (Collider collider in overlappingColliders)
             {
-                if(collider.TryGetComponent<Agent>(out Agent agent))
+                if (collider.TryGetComponent<Agent>(out Agent agent))
                 {
-                    if(!collider.CompareTag("Player") || includePlayer)
+                    if (source != null)
+                    {
+                        if (!collider.CompareTag(source.tag))
+                            agentsInRange.Add(agent);
+                    }
+                    else
+                    {
                         agentsInRange.Add(agent);
+                    }  
                 }
             }
 
             return agentsInRange;
         }
 
-        public void DealDamage(Agent source, int damage, List<Agent> agents)
+        public void DealDamage(List<Agent> agents, Agent source, int damage)
         {
             HitEvent hitEvent = new HitEvent(source);
-            //hitEvent.baseDamage = damage;
+            hitEvent.baseDamage = damage;
 
             foreach (Agent agent in agents)
             {
@@ -36,7 +43,7 @@ namespace Game.Core.GameSystems
             }
         }
 
-        public void DealKnockback(float knockbackForce, Vector3 position, List<Agent> agents)
+        public void DealKnockback(List<Agent> agents, float knockbackForce, Vector3 position)
         {
             Vector3 knockbackVelocity;
 
@@ -47,6 +54,14 @@ namespace Game.Core.GameSystems
                 knockbackVelocity = (agentPos - position).normalized;
                 knockbackVelocity *= knockbackForce;
                 agent.OnKnockbackReceived.Invoke(knockbackVelocity);
+            }
+        }
+
+        public void AddStatusEffect(List<Agent> agents, StatusEffectSO effect, int stacks = 1)
+        {
+            foreach(Agent agent in agents)
+            {
+                agent.effectHandler.AddEffect(effect, stacks);
             }
         }
     }

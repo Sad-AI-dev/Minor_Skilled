@@ -11,6 +11,8 @@ namespace Game.Player
     {
         [SerializeField] private GameObject explosion;
         [SerializeField] private float explosionRadius;
+        [SerializeField] private float knockbackForce;
+        
 
         Explosion _explosion = new Explosion();
 
@@ -21,9 +23,9 @@ namespace Game.Player
                 HurtAgent(enemy);
             }
 
-            List<Agent> agents = _explosion.FindAgentsInRange(hit.point, explosionRadius, true);
-            _explosion.DealDamage(source, 10, agents);
-            _explosion.DealKnockback(2f, hit.point, agents);
+            List<Agent> agents = _explosion.FindAgentsInRange(hit.point, explosionRadius);
+            _explosion.DealDamage(agents, source, 10);
+            _explosion.DealKnockback(agents, knockbackForce, hit.point);
             GameObject visuals = Instantiate(explosion, hit.point, Quaternion.identity);
             visuals.transform.localScale *= explosionRadius * 2;
         }
