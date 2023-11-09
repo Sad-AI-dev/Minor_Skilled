@@ -9,6 +9,7 @@ namespace Game {
     public class DamageLabelManager : MonoBehaviour
     {
         [SerializeField] private BehaviourPool<NumLabel> labelPool;
+        [SerializeField] private Camera cam;
 
         [Header("Num Visual Settings")]
         [SerializeField] private Vector3 originPosOffset;
@@ -16,12 +17,10 @@ namespace Game {
 
         //refs
         private Agent player;
-        private Camera cam;
 
         private void Start()
         {
             player = GameStateManager.instance.player;
-            cam = Camera.main;
             InitializeEvents();
         }
 
