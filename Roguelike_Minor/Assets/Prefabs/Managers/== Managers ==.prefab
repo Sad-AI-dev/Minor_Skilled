@@ -198,6 +198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5734221256385217703}
   - component: {fileID: 1713493208499697953}
+  - component: {fileID: 595727037471926015}
   m_Layer: 0
   m_Name: GameStateManager
   m_TagString: Untagged
@@ -234,11 +235,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   uiManager: {fileID: 789141063057159887}
+  sceneLoader: {fileID: 595727037471926015}
   onStageComplete:
     m_PersistentCalls:
       m_Calls: []
+  planetSceneIndeces:
+  - list: 02000000
+  - list: 02000000
+  shopIndex: 4
   advanceObjectSpawner: {fileID: 0}
   scalingIsPaused: 0
+--- !u!114 &595727037471926015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8026829324566656996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa0c811594585ed40aa7be4fb1298123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8355906013974447864
 GameObject:
   m_ObjectHideFlags: 0
