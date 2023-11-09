@@ -9,6 +9,8 @@ namespace Game.Core.GameSystems {
         [Header("Events")]
         [Tooltip("triggers when the interactor comes in range of the first interactable")]
         public UnityEvent<Interactable> onCanInteract;
+        [Tooltip("triggers when a new interactable comes in range of the interactor")]
+        public UnityEvent<Interactable> onFindInteractable;
         [Tooltip("triggers when the interactor leaves the range of the last interactable")]
         public UnityEvent onStopCanInteract;
         //vars
@@ -28,6 +30,9 @@ namespace Game.Core.GameSystems {
             if (interactables.Count == 1) {
                 onCanInteract?.Invoke(interactable);
             }
+            //trigger find interactable
+            if (interactables.Count > 1) { SortInteractables(); }
+            onFindInteractable?.Invoke(interactables[0]);
         }
 
         public void RemoveInteractable(Interactable interactable)

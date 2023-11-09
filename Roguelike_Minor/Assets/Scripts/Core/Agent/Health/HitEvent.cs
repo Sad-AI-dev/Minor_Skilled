@@ -16,7 +16,7 @@ namespace Game.Core {
 
         //proc coef
         //procCoef = Proc Coefficient, this is a multiplier applied to the likelyhood of a hitEvent proccing items.
-        public float procCoef = 1f;
+        public float procCoef;
 
         //damage values
         public float baseDamage;
@@ -34,9 +34,11 @@ namespace Game.Core {
 
         //============== Constructors =============
         //=== Default Constructor ===
-        public HitEvent(Agent source = null)
+        public HitEvent(Agent source = null, float procCoef = 1f)
         {
             this.source = source;
+            this.procCoef = procCoef;
+            //Setup vars
             hasAgentSource = source != null;
             if (hasAgentSource) { TryCrit(); }
             InitializeVars();
@@ -92,7 +94,7 @@ namespace Game.Core {
         private void TryCrit()
         {
             isCrit = false; //default value
-            AgentRandom.TryProc(source.stats.critChance, source, () => isCrit = true);
+            AgentRandom.TryProc(source.stats.critChance, this, () => isCrit = true);
         }
 
         //============== Get Total Damage ===============
