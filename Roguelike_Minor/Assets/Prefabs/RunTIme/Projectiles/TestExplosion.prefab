@@ -92,8 +92,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2108883123389210587}
-  - component: {fileID: 1057214534791092740}
   - component: {fileID: 2517907787448788104}
+  - component: {fileID: 111461277577568181}
   m_Layer: 0
   m_Name: TestExplosion
   m_TagString: Untagged
@@ -117,26 +117,6 @@ Transform:
   - {fileID: 7445109024211339312}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1057214534791092740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071950442909444679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2242f7f623c34824d99d93091a906ff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sphere: {fileID: 122043958052562461}
-  source: {fileID: 0}
-  damage: 0
-  areaRadius: 7
-  ticks: 1
-  tickDelay: 1
-  knockbackForce: 2
-  agentsInRange: []
 --- !u!135 &2517907787448788104
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -158,3 +138,17 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &111461277577568181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071950442909444679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98ac85ffb637964bb7882d297dd4461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroy: 1
+  lifeTime: 1

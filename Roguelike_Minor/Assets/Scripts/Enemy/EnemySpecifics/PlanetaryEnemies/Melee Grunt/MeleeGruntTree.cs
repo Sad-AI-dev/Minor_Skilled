@@ -8,6 +8,11 @@ using Game.Core;
 namespace Game.Enemy {
     public class MeleeGruntTree : Core.Tree
     {
+        [Header("Knockback Variables")]
+        public Rigidbody rb;
+        public float upMultiplier;
+        public float directionMultiplier;
+
         //Projectile Arch
         [Header("Projectile Variables")]
         [SerializeField] float projectileSpeed;
@@ -38,6 +43,7 @@ namespace Game.Enemy {
                 new List<BT_Node>
                 {
                     //Choose ranged or Melee
+                    new TakeKnockback(transform, agent, navAgent, rb, upMultiplier, directionMultiplier),
                     new MeleeGruntChooseAttack(transform),
                     new Sequence( new List<BT_Node>
                     {
@@ -63,6 +69,7 @@ namespace Game.Enemy {
             );
             return root;
         }
+
 
         private void OnCollisionEnter(Collision collision)
         {

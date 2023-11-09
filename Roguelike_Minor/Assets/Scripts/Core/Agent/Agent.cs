@@ -23,6 +23,8 @@ namespace Game.Core {
         [HideInInspector] public Inventory inventory;
         [HideInInspector] public KnockbackEvent OnKnockbackReceived;
 
+        [HideInInspector] public bool isGrounded;
+
         private void Awake()
         {
             //setup stats

@@ -30,9 +30,16 @@ namespace Game.Player
         [Header("Jump")]
         [SerializeField] private float JumpForce;
         [SerializeField] private float gravity;
+        [SerializeField] private float slowFallBounds;
+        [SerializeField] private float slowFallMultiplier;
+        [SerializeField] private float fastFallMultiplier;
+        [SerializeField] private float coyoteTime;
         private float yVelocity;
         private float activeGravity;
         private bool grounded;
+        private bool canJump;
+        private bool jumping;
+        private Coroutine coyoteCoroutine;
 
         [Header("External Components")]
         public Camera cam;
@@ -61,7 +68,8 @@ namespace Game.Player
         {
             UpdateSpeed();
             
-            ApplyGravity();
+            if(!grounded)
+                ApplyGravity();
 
             //allows to directly set position of player
             Physics.SyncTransforms();
@@ -129,19 +137,20 @@ namespace Game.Player
 
         public void Jump()
         {
-            if (!grounded) return;
+            if (!canJump || jumping) return;
+            Debug.Log("Jump");
+            yVelocity = 0;
             yVelocity += JumpForce / 100;
-            //Debug.Log(yVelocity);
+            jumping = true;
         }
 
         private void ApplyGravity()
         {
-            if(!grounded)
-            {
-                activeGravity += gravity / 100;
-                //Debug.Log("activeGravity: " +  gravity);
-                yVelocity -= gravity / 100;
-            }
+            if (yVelocity > -slowFallBounds && yVelocity < slowFallBounds && jumping) activeGravity = gravity * slowFallMultiplier;
+            else if (yVelocity < 0 && jumping) activeGravity = gravity * fastFallMultiplier;
+            else activeGravity = gravity;
+
+            yVelocity -= activeGravity / 100;
         }
 
         private void CheckGrounded()
@@ -154,16 +163,23 @@ namespace Game.Player
 
         private void OnTouchGround()
         {
+            if(coyoteCoroutine != null)
+                StopCoroutine(coyoteCoroutine);
+
             yVelocity = -0.1f;
             activeGravity = 0;
             grounded = true;
+            jumping = false;
+            canJump = true;
 
-            //Debug.Log("Ground touched");
+            Debug.Log("Ground touched");
         }
 
         private void OnLeaveGround()
         {
+            Debug.Log("Left Ground");
             grounded = false;
+            coyoteCoroutine = StartCoroutine(CoyoteTimeCo());
         }
 
         public void ResetVelocity()
@@ -206,6 +222,19 @@ namespace Game.Player
             }
             //done resetting knockback
             knockbackVelocity = Vector3.zero;
+        }
+
+        IEnumerator CoyoteTimeCo()
+        {
+            float timePassed = 0;
+
+            while(timePassed < coyoteTime)
+            {
+                timePassed += Time.deltaTime;
+                yield return null;
+            }
+
+            canJump = false;
         }
     }
 }

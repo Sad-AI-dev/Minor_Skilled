@@ -1,13 +1,22 @@
 using Game.Core;
 using Game.Core.Data;
+using Game.Core.GameSystems;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Player
 {
     public class GrenadeProjectile : Projectile
     {
+        [Header("General")]
+        [SerializeField] private GameObject visuals;
+        [SerializeField] private AK.Wwise.Event SFX;
         [SerializeField] private float gravity;
-        [SerializeField] private GameObject explosion;
+
+        [Header("Explosion")]
+        [SerializeField] private float radius;
+        [SerializeField] private int explosionDamage;
 
         [Header("Poison Grenade")]
         [SerializeField] private BehaviourPool<Projectile> grenades = new BehaviourPool<Projectile>();
@@ -15,7 +24,8 @@ namespace Game.Player
         [SerializeField] private int poisonGrenadeAmount;
         [SerializeField] private float minDistance;
         [SerializeField] private float maxDistance;
-        [SerializeField] private AK.Wwise.Event SFX;
+
+        private Explosion explosion = new Explosion();
 
         private float minAngle = 0;
         private float maxAngle;
@@ -35,13 +45,16 @@ namespace Game.Player
 
         protected override void OnCollide(RaycastHit hit)
         {
-            Instantiate(explosion, hit.point, Quaternion.identity);
+            List<Agent> agents = explosion.FindAgentsInRange(hit.point, radius, source);
+            explosion.DealDamage(agents, source, explosionDamage);
+            GameObject visualExplosion = Instantiate(visuals, hit.point, Quaternion.identity);
+            visualExplosion.transform.localScale *= radius * 2;
 
             SFX.Post(gameObject);
 
             minAngle = 0;
 
-            /*for (int i = 0; i < poisonGrenadeAmount; i++)
+            for (int i = 0; i < poisonGrenadeAmount; i++)
             {
                 Projectile projectile = grenades.GetBehaviour();
                 projectile.transform.position = hit.point;
@@ -68,7 +81,7 @@ namespace Game.Player
                 pGrenade.velocity = grenadeVelocity;
                 minAngle = maxAngle;
                 maxAngle = 0;
-            }*/
+            }
         }
     }
 }

@@ -238,6 +238,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   advanceObjectSpawner: {fileID: 0}
+  scalingIsPaused: 0
 --- !u!1 &8355906013974447864
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +287,6 @@ MonoBehaviour:
   spawnDelay: 15
   prewarmMultiplier: 3
   placer: {fileID: 0}
-  paused: 0
 --- !u!114 &8021601860483365532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +323,7 @@ MonoBehaviour:
   minRandInterval: 0
   maxRandInterval: 0
   options:
-  - name: PlanetaryGrunt
+  - name: MeleeGrunt
     price: 1
     onSelect:
       m_PersistentCalls:
@@ -333,7 +333,7 @@ MonoBehaviour:
           m_MethodName: SpawnEnemy
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 5640572280961470500, guid: 0e090577aa25d4c449a69dc0c409d197, type: 3}
+            m_ObjectArgument: {fileID: 5666398297103683690, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0

@@ -1,4 +1,5 @@
 using Game.Core;
+using Game.Core.GameSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,8 @@ namespace Game.Player
 
         protected override void OnCollide(RaycastHit hit)
         {
-            Instantiate(poisonCloud, hit.point, Quaternion.identity);
+            GameObject poison = Instantiate(poisonCloud, hit.point, Quaternion.identity);
+            poison.GetComponent<DOTExplosion>().source = source;
         }
     }
 }
