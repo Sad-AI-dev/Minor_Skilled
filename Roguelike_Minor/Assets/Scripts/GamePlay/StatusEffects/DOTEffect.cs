@@ -59,20 +59,25 @@ namespace Game {
         //=========== Co Routine ========
         private IEnumerator DOTCo(DOTEffectVars vars, Agent target)
         {
-            for (int i = 0; i < tickRate * duration; i++)
+            for (int i = 0; i < GetTotalTicks(); i++)
             {
                 yield return new WaitForSeconds(1f / tickRate); //tick rate is in ticks / second
                 //create hitEvent
-                HitEvent hitEvent = new HitEvent(vars.source)
+                HitEvent hitEvent = new HitEvent(vars.source, 0f)
                 {
                     baseDamage = vars.dmg,
-                    procCoef = 0f,
                     labelColor = numLabelColor
                 };
                 target.health.Hurt(hitEvent);
             }
             //remove stack
             target.effectHandler.RemoveEffect(this);
+        }
+
+        //=========== Util ===========
+        public float GetTotalTicks()
+        {
+            return tickRate * duration;
         }
     }
 }

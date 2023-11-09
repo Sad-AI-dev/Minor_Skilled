@@ -9,6 +9,8 @@ namespace Game.Core.GameSystems {
         [Header("Events")]
         [Tooltip("triggers when the interactor comes in range of the first interactable")]
         public UnityEvent<Interactable> onCanInteract;
+        [Tooltip("triggers when a new interactable comes in range of the interactor")]
+        public UnityEvent<Interactable> onInteractablesChanged;
         [Tooltip("triggers when the interactor leaves the range of the last interactable")]
         public UnityEvent onStopCanInteract;
         //vars
@@ -28,12 +30,20 @@ namespace Game.Core.GameSystems {
             if (interactables.Count == 1) {
                 onCanInteract?.Invoke(interactable);
             }
+            //trigger find interactable
+            if (interactables.Count > 1) { SortInteractables(); }
+            onInteractablesChanged?.Invoke(interactables[0]);
         }
 
         public void RemoveInteractable(Interactable interactable)
         {
             interactables.Remove(interactable);
             if (interactables.Count == 0) { onStopCanInteract.Invoke(); }
+            else
+            {
+                if (interactables.Count > 1) { SortInteractables(); }
+                onInteractablesChanged?.Invoke(interactables[0]);
+            }
         }
 
         //=============== interact with interactable ===============
@@ -50,7 +60,7 @@ namespace Game.Core.GameSystems {
         private void SortInteractables()
         {
             interactables.Sort((Interactable a, Interactable b) => 
-                Vector3.Distance(transform.position, a.transform.position).CompareTo(Vector3.Distance(transform.position, b.transform.position))
+                -Vector3.Distance(transform.position, a.transform.position).CompareTo(Vector3.Distance(transform.position, b.transform.position))
             );
         }
     }
