@@ -30,6 +30,8 @@ namespace Game.Player {
         {
             pauseInput();
 
+            gamePaused = pauseMenu.paused;
+
             if (gamePaused) return;
             WalkInput();
             JumpInput();
@@ -105,13 +107,11 @@ namespace Game.Player {
             if (Input.GetKeyUp(KeyCode.Escape) && !gamePaused)
             {
                 gamePaused = true;
-                Time.timeScale = 0;
                 pauseMenu.ActivateMenu();
             }
             else if(Input.GetKeyUp(KeyCode.Escape) && gamePaused)
             {
                 gamePaused = false;
-                Time.timeScale = 1;
                 pauseMenu.DeactivateMenu();
             }
         }
