@@ -31,6 +31,11 @@ namespace Game.Enemy.Core
             {
                 root.Evaluate();
             }
+
+            if(navAgent != null && agent != null)
+            {
+                agent.isGrounded = navAgent.enabled;
+            }
         }
         protected abstract BT_Node SetupTree();
     

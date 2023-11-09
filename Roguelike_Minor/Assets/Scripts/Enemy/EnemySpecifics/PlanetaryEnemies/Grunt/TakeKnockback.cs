@@ -38,7 +38,6 @@ namespace Game.Enemy {
 
         void OnKnockbackRecieved(Vector3 dir)
         {
-            Debug.Log("knockback Recieved");
             takingKnockback = true;
             knockbackDirection = dir;
         }
@@ -47,13 +46,9 @@ namespace Game.Enemy {
         {
             if (takingKnockback)
             {
-                grounded = Physics.Raycast(transform.position, -transform.up, 1f);
+                grounded = Physics.Raycast(transform.position, -transform.up, 0.2f);
                 if (!coStarted)
                 {
-                    //Nav mesh knockback
-                    //agent.velocity = knockbackDirection * 8;
-                    //KnockbackNavmesh();
-
                     //RB Knockback
                     rb.isKinematic = false;
                     rb.velocity = (knockbackDirection + (Vector3.up * upMultiplier)) * directionMultiplier;
@@ -69,21 +64,6 @@ namespace Game.Enemy {
             return state;
         }
 
-        private async void KnockbackNavmesh()
-        {
-            coStarted = true;
-            agent.speed = 10;
-            agent.angularSpeed = 0;
-            agent.acceleration = 20;
-
-            await Task.Delay(200);
-
-            agent.speed = enemyAgent.stats.walkSpeed;
-            agent.angularSpeed = 180;
-            agent.acceleration = 10;
-            coStarted = false;
-            takingKnockback = false;
-        }
         private async void KnockbackRB()
         {
             coStarted = true;
