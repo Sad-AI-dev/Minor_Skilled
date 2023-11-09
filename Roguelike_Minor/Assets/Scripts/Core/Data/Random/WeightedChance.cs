@@ -38,7 +38,7 @@ namespace Game.Core.Data {
             if (totalChance <= 0f) { CalcTotalChance(); }
             //choose random option
             T chosenOption = default;
-            float rand = Random.Range(0, totalChance) + (totalChance * luck);
+            float rand = Random.Range(totalChance * luck, totalChance);
             if (rand > totalChance) { rand = totalChance; }
             for (int i = 0; i < options.Count; i++) {
                 //found chosen option

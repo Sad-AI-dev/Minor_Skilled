@@ -52,8 +52,9 @@ namespace Game {
             float total = stacks > 0 ? baseChance : 0f;
             for (int i = 1; i < stacks; i++)
             {
-                total += (100 - total) * bonusChance;
+                total += (1f - total) * bonusChance;
             }
+            Debug.Log(total);
             return total;
         }
 
