@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Game.Core;
+using Game.Core.GameSystems;
 
 namespace Game {
     public class GameStateManager : MonoBehaviour
@@ -22,20 +23,39 @@ namespace Game {
         }
         public static GameStateManager instance;
 
+        [System.Serializable] 
+        public class ListWrapper<T> 
+        { 
+            public List<T> list;
+            public T this[int index]
+            {
+                get { return list[index]; }
+                set { list[index] = value; }
+            }
+            public int Count { get { return list.Count; } }
+        }
+
         [Header("Refs")]
         //static ref to player
         public Agent player;
         public UIManager uiManager;
+        [SerializeField] private SceneLoader sceneLoader;
 
         [Header("Events")]
         public UnityEvent onStageComplete;
 
+        [Header("Planet Advancement Settings")]
+        [SerializeField] private List<ListWrapper<int>> planetSceneIndeces;
+        [SerializeField] private int shopIndex;
+
         //ref to advance object spawner
         [HideInInspector] public AdvanceObjectSpawner advanceObjectSpawner;
 
+        //scene advancement vars
+        public int CurrentStage { get; private set; } = 1;
+
         //paused state
         [HideInInspector] public bool scalingIsPaused;
-        private bool isShopStage;
 
         //========== Manage Stage State ==============
         public void HandleCompleteStageObject()
@@ -58,6 +78,23 @@ namespace Game {
         private void HandleShopLoad(ShopLoadedEvent data)
         {
             scalingIsPaused = true;
+        }
+
+        //================== Handle Planet Advancement ================
+        public void AdvanceToNextPlanet()
+        {
+            CurrentStage++;
+            sceneLoader.LoadScene(GetNextStageBuildIndex());
+        }
+        private int GetNextStageBuildIndex()
+        {
+            int stageIndex = CurrentStage % planetSceneIndeces.Count;
+            return planetSceneIndeces[stageIndex][Random.Range(0, planetSceneIndeces[stageIndex].Count)];
+        }
+
+        public void AdvanceToShop()
+        {
+            sceneLoader.LoadScene(shopIndex);
         }
 
         //========= Handle Destroy ==========

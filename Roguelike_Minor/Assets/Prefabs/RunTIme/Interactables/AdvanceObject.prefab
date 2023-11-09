@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 53628007657116971}
   - component: {fileID: 6443564096666078870}
   - component: {fileID: 3294559283217251303}
-  - component: {fileID: 5967134877726914803}
+  - component: {fileID: 6625489666185493177}
   - component: {fileID: 4266547945095109878}
   m_Layer: 0
   m_Name: AdvanceObject
@@ -203,10 +203,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5967134877726914803}
-        m_TargetAssemblyTypeName: Game.Systems.SceneLoader, Game.Systems
-        m_MethodName: LoadSceneRelative
-        m_Mode: 3
+      - m_Target: {fileID: 6625489666185493177}
+        m_TargetAssemblyTypeName: Game.SceneAdvancer, Game
+        m_MethodName: AdvanceToShop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -215,7 +215,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5967134877726914803
+--- !u!114 &6625489666185493177
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3647172517012275734}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa0c811594585ed40aa7be4fb1298123, type: 3}
+  m_Script: {fileID: 11500000, guid: d31ed066f68b65e47acdd42a2e1621ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4266547945095109878
