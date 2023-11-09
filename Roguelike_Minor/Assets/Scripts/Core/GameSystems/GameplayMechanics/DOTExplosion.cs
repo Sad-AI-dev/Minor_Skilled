@@ -29,6 +29,7 @@ namespace Game.Core.GameSystems
         [HideInInspector] public Agent source = null;
 
         private List<Agent> agentsInRange = new List<Agent>();
+        private List<Agent> agentsToTarget = new List<Agent>();
         private Explosion explosion = new Explosion();
         
         private SphereCollider col;
@@ -52,15 +53,19 @@ namespace Game.Core.GameSystems
                         groundedAgents.Add(agent);
                 }
 
-                agentsInRange = groundedAgents;
+                agentsToTarget = groundedAgents;
+            }
+            else
+            {
+                agentsToTarget = agentsInRange;
             }
 
             if(damage > 0 && source != null)
-                explosion.DealDamage(agentsInRange, source, damage);
+                explosion.DealDamage(agentsToTarget, source, damage);
             if(knockbackForce > 0)
-                explosion.DealKnockback(agentsInRange, knockbackForce, transform.position);
+                explosion.DealKnockback(agentsToTarget, knockbackForce, transform.position);
             if(effect != null)
-                explosion.AddStatusEffect(agentsInRange, effect, effectStacks);
+                explosion.AddStatusEffect(agentsToTarget, effect, effectStacks);
         }
 
         private IEnumerator WaitForNextFrameCo()
