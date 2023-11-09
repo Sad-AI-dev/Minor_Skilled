@@ -14,12 +14,18 @@ namespace Game {
         [Header("Trigger Settings")]
         public float triggerPercent = 0.9f;
 
+        [Header("UI visuals Settings")]
+        public Color damageColor;
+        public Color critColor;
+
         //=========== Handle Hit Event ============
         public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
         {
             if (hitEvent.target.health / hitEvent.target.agent.stats.GetMaxHealth() > triggerPercent)
             {
                 hitEvent.damageMultiplier += GetDamageMult(sourceItem);
+                hitEvent.labelColor = damageColor;
+                hitEvent.critColor = critColor;
             }
         }
 

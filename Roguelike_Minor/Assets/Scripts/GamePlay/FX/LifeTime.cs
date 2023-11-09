@@ -7,7 +7,7 @@ namespace Game {
         [SerializeField] private bool destroy = true;
         [SerializeField] private float lifeTime = 1f;
 
-        private void Start()
+        private void OnEnable()
         {
             StartCoroutine(LifeTimeCo());
         }

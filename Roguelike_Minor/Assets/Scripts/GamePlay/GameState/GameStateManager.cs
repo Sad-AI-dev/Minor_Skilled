@@ -17,6 +17,7 @@ namespace Game {
             {
                 instance = this;
                 EventBus<SceneLoadedEvent>.AddListener(HandleSceneLoaded);
+                EventBus<ShopLoadedEvent>.AddListener(HandleShopLoad);
             }
         }
         public static GameStateManager instance;
@@ -32,6 +33,10 @@ namespace Game {
         //ref to advance object spawner
         [HideInInspector] public AdvanceObjectSpawner advanceObjectSpawner;
 
+        //paused state
+        [HideInInspector] public bool scalingIsPaused;
+        private bool isShopStage;
+
         //========== Manage Stage State ==============
         public void HandleCompleteStageObject()
         {
@@ -45,12 +50,21 @@ namespace Game {
         private void HandleSceneLoaded(SceneLoadedEvent data)
         {
             uiManager.ObjectiveComplete = false;
+            //unpause
+            scalingIsPaused = false;
+        }
+
+        //========= Handle Shop Load ========
+        private void HandleShopLoad(ShopLoadedEvent data)
+        {
+            scalingIsPaused = true;
         }
 
         //========= Handle Destroy ==========
         private void OnDestroy()
         {
             EventBus<SceneLoadedEvent>.RemoveListener(HandleSceneLoaded);
+            EventBus<ShopLoadedEvent>.RemoveListener(HandleShopLoad);
             //announce game end
             EventBus<GameEndEvent>.Invoke(new GameEndEvent());
         }

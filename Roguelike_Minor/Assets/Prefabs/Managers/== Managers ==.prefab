@@ -90,6 +90,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23656df1da26f0241bae04050ab91e72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5292170781510028545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3179419511524918328}
+  - component: {fileID: 1673012627733455237}
+  m_Layer: 0
+  m_Name: GameScalingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3179419511524918328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292170781510028545}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5187508906776603956}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1673012627733455237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292170781510028545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4815d1ce4239d7b47a3f3581312a3174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyScalingFrequency: 10
+  priceScalingFrequency: 20
+  priceScalingAmount: 0.1
+  enemyLevel: 0
+  priceMult: 1
 --- !u!1 &5706813191946861257
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,6 +170,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5734221256385217703}
+  - {fileID: 3179419511524918328}
   - {fileID: 8768485515106146458}
   - {fileID: 7986092976093484892}
   - {fileID: 814621497895006510}
@@ -188,6 +238,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   advanceObjectSpawner: {fileID: 0}
+  scalingIsPaused: 0
 --- !u!1 &8355906013974447864
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +323,7 @@ MonoBehaviour:
   minRandInterval: 0
   maxRandInterval: 0
   options:
-  - name: PlanetaryGrunt
+  - name: MeleeGrunt
     price: 1
     onSelect:
       m_PersistentCalls:
@@ -282,7 +333,7 @@ MonoBehaviour:
           m_MethodName: SpawnEnemy
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 5640572280961470500, guid: 0e090577aa25d4c449a69dc0c409d197, type: 3}
+            m_ObjectArgument: {fileID: 5666398297103683690, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0

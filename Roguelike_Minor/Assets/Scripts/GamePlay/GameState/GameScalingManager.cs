@@ -30,8 +30,13 @@ namespace Game {
         [HideInInspector] public int enemyLevel = 0;
         [HideInInspector] public float priceMult = 1f;
 
+        //refs
+        private GameStateManager gameState;
+
         private void Start()
         {
+            gameState = GameStateManager.instance;
+            //start timers
             StartCoroutine(ScaleEnemyLevelCo());
             StartCoroutine(ScalePriceCo());
         }
@@ -43,6 +48,7 @@ namespace Game {
             //activate enemy level up event
             enemyLevel++;
             EventBus<EnemyLevelupEvent>.Invoke(new EnemyLevelupEvent() { level = enemyLevel });
+            while (gameState.scalingIsPaused) { yield return null; } //wait while paused
             //loop
             StartCoroutine(ScaleEnemyLevelCo());
         }
@@ -51,6 +57,12 @@ namespace Game {
         private IEnumerator ScalePriceCo()
         {
             yield return new WaitForSeconds(priceScalingFrequency);
+            //activate price scaling event
+            priceMult += priceScalingAmount;
+            EventBus<PriceIncreaseEvent>.Invoke(new PriceIncreaseEvent() { baseMult = priceMult });
+            while (gameState.scalingIsPaused) { yield return null; }
+            //looop
+            StartCoroutine(ScalePriceCo());
         }
     }
 }

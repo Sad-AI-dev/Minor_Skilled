@@ -28,6 +28,10 @@ namespace Game.Core {
         //death event
         public UnityEvent<HitEvent> onDeath;
 
+        //UI
+        public Color labelColor = Color.white;
+        public Color critColor;
+
         //============== Constructors =============
         //=== Default Constructor ===
         public HitEvent(Agent source = null)
@@ -80,6 +84,9 @@ namespace Game.Core {
             damageMultiplier = 1f;
             itemSources ??= new List<Item>();
             onDeath = new UnityEvent<HitEvent>();
+            //setup colors
+            labelColor = Color.white;
+            critColor = new Color(0.9056604f, 0.5441936f, 0.07176924f, 1f);
         }
         
         private void TryCrit()

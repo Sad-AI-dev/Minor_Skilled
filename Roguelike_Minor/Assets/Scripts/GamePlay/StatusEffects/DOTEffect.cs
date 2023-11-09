@@ -17,6 +17,9 @@ namespace Game {
         public float tickRate = 1f; //expressed in ticks / second
         public float duration = 5f;
 
+        [Header("Visual Settings")]
+        public Color numLabelColor = Color.white;
+
         //========= Manage Effect ============
         public override void AddEffect(StatusEffectHandler handler)
         {
@@ -63,7 +66,8 @@ namespace Game {
                 HitEvent hitEvent = new HitEvent(vars.source)
                 {
                     baseDamage = vars.dmg,
-                    procCoef = 0f
+                    procCoef = 0f,
+                    labelColor = numLabelColor
                 };
                 target.health.Hurt(hitEvent);
             }
