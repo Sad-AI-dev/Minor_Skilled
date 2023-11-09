@@ -13,9 +13,11 @@ namespace Game.Player {
         [SerializeField] private Agent agent;
         [SerializeField] private Interactor interactor;
         [SerializeField] private GameObject inventory;
+        [SerializeField] private PauseMenu pauseMenu;
         [SerializeField] private AK.Wwise.Event Footsteps;
-        
+
         private bool canPlayFootstep = true;
+        private bool gamePaused = false;
 
         private void Start()
         {
@@ -26,6 +28,9 @@ namespace Game.Player {
 
         void Update()
         {
+            pauseInput();
+
+            if (gamePaused) return;
             WalkInput();
             JumpInput();
             AbilitiesInput();
@@ -95,13 +100,28 @@ namespace Game.Player {
             }
         }
 
+        private void pauseInput()
+        {
+            if (Input.GetKeyUp(KeyCode.Escape) && !gamePaused)
+            {
+                gamePaused = true;
+                Time.timeScale = 0;
+                pauseMenu.ActivateMenu();
+            }
+            else if(Input.GetKeyUp(KeyCode.Escape) && gamePaused)
+            {
+                gamePaused = false;
+                Time.timeScale = 1;
+                pauseMenu.DeactivateMenu();
+            }
+        }
+
         private IEnumerator FootstepCo()
         {
             canPlayFootstep = false;
             yield return new WaitForSeconds(0.5f);
             Footsteps.Post(agent.gameObject);
             canPlayFootstep = true;
-        }
-        
+        }        
     }
 }
