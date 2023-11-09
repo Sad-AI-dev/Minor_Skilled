@@ -169,6 +169,7 @@ namespace Game.Player
             yVelocity = -0.1f;
             activeGravity = 0;
             grounded = true;
+            agent.isGrounded = true;
             jumping = false;
             canJump = true;
 
@@ -179,6 +180,7 @@ namespace Game.Player
         {
             Debug.Log("Left Ground");
             grounded = false;
+            agent.isGrounded = false;
             coyoteCoroutine = StartCoroutine(CoyoteTimeCo());
         }
 

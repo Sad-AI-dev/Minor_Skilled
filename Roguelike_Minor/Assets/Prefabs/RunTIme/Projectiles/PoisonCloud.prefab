@@ -102,10 +102,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c2c71a2a8c70646a3271430d7bb02e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ticks: 20
+  ticks: 100
   tickCooldown: 0.2
-  radius: 2.5
-  damage: 5
+  radius: 10
+  includeCaster: 1
+  onlyAffectGrounded: 1
+  damage: 1
   knockbackForce: 0
   effect: {fileID: 0}
   effectStacks: 0
