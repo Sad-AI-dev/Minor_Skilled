@@ -83,7 +83,6 @@ namespace Game.Core.GameSystems
             ticks--;
             if (ticks > 0)
             {
-                Debug.Log(tickCooldown);
                 StartCoroutine(WaitForNextFrameCo());
             }
 

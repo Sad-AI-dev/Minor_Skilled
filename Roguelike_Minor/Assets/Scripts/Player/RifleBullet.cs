@@ -15,6 +15,14 @@ namespace Game.Player
             }
         }
 
+        protected override void CustomCollide(Collider other)
+        {
+            if(other.transform.TryGetComponent(out Agent enemy))
+            {
+                HurtAgent(enemy);
+            }
+        }
+
         protected override void UpdateMoveDir()
         {
             base.UpdateMoveDir();

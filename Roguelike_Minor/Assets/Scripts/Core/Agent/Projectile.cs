@@ -26,6 +26,7 @@ namespace Game.Core
             col.isTrigger = true;
             rb = GetComponent<Rigidbody>();
             rb.useGravity = false;
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             StartCoroutine(LifeTimeCo());
         }
 
@@ -52,7 +53,7 @@ namespace Game.Core
         //========== Update ===============
         private void FixedUpdate()
         {
-            CheckHitObject();
+            //CheckHitObject();
             UpdateMoveDir();
             rb.velocity = velocity;
         }
@@ -77,9 +78,14 @@ namespace Game.Core
         {
             if(!other.CompareTag(sourceTag))
             {
-
+                CustomCollide(other);
                 gameObject.SetActive(false);
             }
+        }
+
+        protected virtual void CustomCollide(Collider other)
+        {
+
         }
 
         protected virtual void OnCollide(RaycastHit hit)

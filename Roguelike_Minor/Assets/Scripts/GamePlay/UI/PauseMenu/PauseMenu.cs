@@ -28,6 +28,13 @@ namespace Game
             Cursor.lockState = CursorLockMode.Locked;
         }
 
+        public void ReturnToMenu()
+        {
+            menu.SetActive(false);
+            paused = false;
+            Time.timeScale = 1;
+        }
+
         public void Settings()
         {
 

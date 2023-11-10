@@ -12,7 +12,10 @@ namespace Game.Player.Soldier
 
         [SerializeField] private GameObject grenade;
         [SerializeField] private LayerMask layermask;
-        [SerializeField] private float bulletSpeed;
+        [SerializeField] private float projectileVelocity;
+        [SerializeField] private float upwardVelocity;
+        [SerializeField] private float projectileGravity;
+
 
         PlayerController controller;
 
@@ -40,8 +43,10 @@ namespace Game.Player.Soldier
             GameObject projectile = Instantiate(grenade, source.originPoint.position, Quaternion.identity);
             projectile.transform.LookAt(target);
             GrenadeProjectile grenadeProjectile = projectile.GetComponent<GrenadeProjectile>();
-            grenadeProjectile.velocity = bulletDir * bulletSpeed;
+            grenadeProjectile.velocity = bulletDir * projectileVelocity;
             grenadeProjectile.Initialize(source);
+            grenadeProjectile.gravity = projectileGravity;
+            grenadeProjectile.upwardVelocity = upwardVelocity;
         }
     }
 }

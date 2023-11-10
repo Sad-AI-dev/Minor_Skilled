@@ -12,7 +12,6 @@ namespace Game.Player
         [Header("General")]
         [SerializeField] private GameObject visuals;
         [SerializeField] private AK.Wwise.Event SFX;
-        [SerializeField] private float gravity;
 
         [Header("Explosion")]
         [SerializeField] private float radius;
@@ -20,10 +19,14 @@ namespace Game.Player
 
         [Header("Poison Grenade")]
         [SerializeField] private BehaviourPool<Projectile> grenades = new BehaviourPool<Projectile>();
-        [SerializeField] private float poisonGrenadeSpeed;
+        [SerializeField] private float poisonUpwardVelocity;
+        [SerializeField] private float poisonGravity;
         [SerializeField] private int poisonGrenadeAmount;
         [SerializeField] private float minDistance;
         [SerializeField] private float maxDistance;
+
+        [HideInInspector] public float gravity;
+        [HideInInspector] public float upwardVelocity;
 
         private Explosion explosion = new Explosion();
 
@@ -36,18 +39,18 @@ namespace Game.Player
         {
             if(!addedVerticalVelocity)
             {
-                velocity += Vector3.up * 0.2f;
+                velocity += Vector3.up * upwardVelocity;
                 addedVerticalVelocity = true;
             }
 
             velocity += new Vector3(0, -gravity * Time.deltaTime, 0);
         }
 
-        protected override void OnCollide(RaycastHit hit)
+        protected override void CustomCollide(Collider other)
         {
-            List<Agent> agents = explosion.FindAgentsInRange(hit.point, radius, source);
+            List<Agent> agents = explosion.FindAgentsInRange(transform.position, radius, source);
             explosion.DealDamage(agents, source, explosionDamage);
-            GameObject visualExplosion = Instantiate(visuals, hit.point, Quaternion.identity);
+            GameObject visualExplosion = Instantiate(visuals, transform.position, Quaternion.identity);
             visualExplosion.transform.localScale *= radius * 2;
 
             SFX.Post(gameObject);
@@ -57,12 +60,10 @@ namespace Game.Player
             for (int i = 0; i < poisonGrenadeAmount; i++)
             {
                 Projectile projectile = grenades.GetBehaviour();
-                projectile.transform.position = hit.point;
+                projectile.transform.position = transform.position + new Vector3(0, 0.5f, 0);
                 projectile.Initialize(ability);
 
                 PoisonGrenade pGrenade = projectile.GetComponent<PoisonGrenade>();
-
-                Vector3 directionOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
 
                 maxAngle = (360 / poisonGrenadeAmount) * (i + 1);
 
@@ -76,8 +77,9 @@ namespace Game.Player
 
                 Vector3 grenadeVelocity = projectile.transform.up + directionVector;
                 grenadeVelocity.Normalize();
-                grenadeVelocity *= directionDistance;
+                grenadeVelocity = new Vector3(grenadeVelocity.x * directionDistance, grenadeVelocity.y * poisonUpwardVelocity, grenadeVelocity.z *  directionDistance);
 
+                pGrenade.gravity = poisonGravity;
                 pGrenade.velocity = grenadeVelocity;
                 minAngle = maxAngle;
                 maxAngle = 0;
