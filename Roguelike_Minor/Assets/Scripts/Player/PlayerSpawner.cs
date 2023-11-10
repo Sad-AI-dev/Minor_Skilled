@@ -15,11 +15,6 @@ namespace Game.Player {
             //warp
             player.transform.position = destination;
             player.ResetVelocity();
-            //invoke bus event
-            EventBus<PlayerWarpedEvent>.Invoke(new PlayerWarpedEvent() { 
-                player = player.transform, 
-                newPlayerPos = destination
-            });
         }
     }
 }

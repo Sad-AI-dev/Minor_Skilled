@@ -27,12 +27,6 @@ namespace Game
     //========= Scene Loaded =========
     public class SceneLoadedEvent : Event { }
 
-    public class PlayerWarpedEvent : Event
-    {
-        public UnityEngine.Transform player;
-        public UnityEngine.Vector3 newPlayerPos;
-    }
-
     //========= Shop Loaded ============
     public class ShopLoadedEvent : Event
     {
