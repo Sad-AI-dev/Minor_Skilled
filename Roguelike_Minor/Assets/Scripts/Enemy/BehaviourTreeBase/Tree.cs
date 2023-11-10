@@ -23,6 +23,11 @@ namespace Game.Enemy.Core
         {
             root = SetupTree();
             HandleScaling();
+
+            if(agent && !agent.enabled)
+            {
+                agent.enabled = true;
+            }
         }
 
         protected virtual void Update()
