@@ -112,27 +112,6 @@ namespace Game {
                 //deal damage
                 target.health.Hurt(hit);
             }
-            /*
-            //sphere cast to deal damage
-            Collider[] results = Physics.OverlapSphere(pos, explodeRadius);
-
-            if (results.Length > 0)
-            {
-                for (int i = 0; i < results.Length; i++)
-                {
-                    if (results[i].CompareTag("Enemy"))
-                    {
-                        Agent enemy = results[i].gameObject.GetComponent<Agent>();
-                        //create new hitevent
-                        HitEvent hit = new HitEvent(hitEvent, sourceItem);
-                        //setup damage
-                        hit.baseDamage = CalcDamage(hitEvent);
-                        //deal damage
-                        enemy.health.Hurt(hit);
-                    }
-                }
-            }
-            */
         }
 
         //============== Description ===========
