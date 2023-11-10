@@ -3,7 +3,6 @@ using Game.Core.Data;
 using Game.Core.GameSystems;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Player
 {
@@ -11,8 +10,10 @@ namespace Game.Player
     {
         [Header("General")]
         [SerializeField] private GameObject visuals;
-        [SerializeField] private AK.Wwise.Event SFX;
         [SerializeField] private float gravity;
+
+        [Header("Audio")]
+        [SerializeField] private AudioPlayer audioPlayer;
 
         [Header("Explosion")]
         [SerializeField] private float radius;
@@ -50,7 +51,7 @@ namespace Game.Player
             GameObject visualExplosion = Instantiate(visuals, hit.point, Quaternion.identity);
             visualExplosion.transform.localScale *= radius * 2;
 
-            SFX.Post(gameObject);
+            audioPlayer.Play();
 
             minAngle = 0;
 
