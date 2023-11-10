@@ -16,7 +16,7 @@ namespace Game.Enemy.Core
 
         [Header("Scaling Variables")]
         public float baseDamageScaling;
-        public int moneyScaling;
+        public float moneyScaling;
         public float maxHealthScaling;
 
         protected virtual void Awake()
@@ -52,7 +52,7 @@ namespace Game.Enemy.Core
         {
             //SETUP VARIABLE SCALING
             agent.stats.baseDamage += GameScalingManager.instance.enemyLevel * baseDamageScaling;
-            agent.stats.Money += GameScalingManager.instance.enemyLevel * moneyScaling;
+            agent.stats.Money += Mathf.RoundToInt(GameScalingManager.instance.enemyLevel * moneyScaling);
             agent.stats.maxHealth += GameScalingManager.instance.enemyLevel * maxHealthScaling;
 
             HealEvent heal = new HealEvent(agent.stats.maxHealth)
