@@ -47,7 +47,8 @@ namespace Game.Core.GameSystems {
             {
                 Destroy(dontDestroyObjects[i]);
             }
-            dontDestroyObjects.Clear(); //ready list reuse
+            //destroy self
+            Destroy(gameObject);
         }
     }
 }
