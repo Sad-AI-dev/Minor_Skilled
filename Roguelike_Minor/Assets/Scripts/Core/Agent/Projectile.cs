@@ -4,6 +4,7 @@ using UnityEngine.PlayerLoop;
 
 namespace Game.Core
 {
+    [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
     public class Projectile : MonoBehaviour
     {
         [SerializeField] private float lifeTime;
@@ -15,9 +16,16 @@ namespace Game.Core
         private string sourceTag;
         private float baseDamage;
 
+        private Rigidbody rb;
+        private SphereCollider col;
+
         //========== Initialize ===========
         private void OnEnable()
         {
+            col = GetComponent<SphereCollider>();
+            col.isTrigger = true;
+            rb = GetComponent<Rigidbody>();
+            rb.useGravity = false;
             StartCoroutine(LifeTimeCo());
         }
 
@@ -46,7 +54,7 @@ namespace Game.Core
         {
             CheckHitObject();
             UpdateMoveDir();
-            transform.position += velocity;
+            rb.velocity = velocity;
         }
 
         //=========== Collision ==============
@@ -58,10 +66,19 @@ namespace Game.Core
             {
                 if (!hit.transform.CompareTag(sourceTag))
                 {
-                    Debug.Log(hit.transform.name);
+                    //Debug.Log(hit.transform.name);
                     OnCollide(hit);
                     gameObject.SetActive(false);
                 }
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(!other.CompareTag(sourceTag))
+            {
+
+                gameObject.SetActive(false);
             }
         }
 
