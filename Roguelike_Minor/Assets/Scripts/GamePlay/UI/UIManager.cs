@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Game.Core;
 
 namespace Game {
@@ -9,6 +10,10 @@ namespace Game {
         [Header("Refferences")]
         public Agent agent;
 
+        [Header("UI Refs")]
+        public UIProgressBarHandler progressBar;
+
+        //temp
         public bool ObjectiveComplete = false;
     }
 }
