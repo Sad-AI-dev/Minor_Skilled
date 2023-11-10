@@ -5,9 +5,9 @@ using UnityEngine.UIElements;
 
 namespace Game.Core.GameSystems
 {
-    public class Explosion
+    public static class Explosion
     {        
-        public List<Agent> FindAgentsInRange(Vector3 pos, float radius, Agent source = null)
+        public static List<Agent> FindAgentsInRange(Vector3 pos, float radius, Agent source = null)
         {
             Collider[] overlappingColliders = Physics.OverlapSphere(pos, radius);
 
@@ -32,7 +32,7 @@ namespace Game.Core.GameSystems
             return agentsInRange;
         }
 
-        public void DealDamage(List<Agent> agents, Agent source, int damage)
+        public static void DealDamage(List<Agent> agents, Agent source, int damage)
         {
             HitEvent hitEvent = new HitEvent(source);
             hitEvent.baseDamage = damage;
@@ -43,21 +43,20 @@ namespace Game.Core.GameSystems
             }
         }
 
-        public void DealKnockback(List<Agent> agents, float knockbackForce, Vector3 position)
+        public static void DealKnockback(List<Agent> agents, float knockbackForce, Vector3 position)
         {
             Vector3 knockbackVelocity;
 
             foreach (Agent agent in agents)
             {
                 Vector3 agentPos = agent.transform.position + new Vector3(0, agent.transform.localScale.y / 2, 0);
-                Debug.Log(position + ", " + agentPos);
                 knockbackVelocity = (agentPos - position).normalized;
                 knockbackVelocity *= knockbackForce;
                 agent.OnKnockbackReceived.Invoke(knockbackVelocity);
             }
         }
 
-        public void AddStatusEffect(List<Agent> agents, StatusEffectSO effect, int stacks = 1)
+        public static void AddStatusEffect(List<Agent> agents, StatusEffectSO effect, int stacks = 1)
         {
             foreach(Agent agent in agents)
             {

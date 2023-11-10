@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Core;
+using Game.Core.GameSystems;
 
 namespace Game {
     [CreateAssetMenu(fileName = "3Exploding_Greens", menuName = "ScriptableObjects/Items/T2/3: Exploding Greens", order = 203)]
@@ -101,24 +102,15 @@ namespace Game {
             obj.transform.position = pos;
             obj.transform.localScale = new Vector3(2, 2, 2) * explodeRadius;
 
-            //sphere cast to deal damage
-            Collider[] results = Physics.OverlapSphere(pos, explodeRadius);
-
-            if (results.Length > 0)
+            List<Agent> targets = Explosion.FindAgentsInRange(pos, explodeRadius, hitEvent.source);
+            //deal damage
+            foreach (Agent target in targets)
             {
-                for (int i = 0; i < results.Length; i++)
-                {
-                    if (results[i].CompareTag("Enemy"))
-                    {
-                        Agent enemy = results[i].gameObject.GetComponent<Agent>();
-                        //create new hitevent
-                        HitEvent hit = new HitEvent(hitEvent, sourceItem);
-                        //setup damage
-                        hit.baseDamage = CalcDamage(hitEvent);
-                        //deal damage
-                        enemy.health.Hurt(hit);
-                    }
-                }
+                HitEvent hit = new HitEvent(hitEvent, sourceItem);
+                //setup damage
+                hit.baseDamage = CalcDamage(hitEvent);
+                //deal damage
+                target.health.Hurt(hit);
             }
         }
 

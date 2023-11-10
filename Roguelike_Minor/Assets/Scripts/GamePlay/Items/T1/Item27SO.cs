@@ -54,7 +54,6 @@ namespace Game {
             {
                 total += (1f - total) * bonusChance;
             }
-            Debug.Log(total);
             return total;
         }
 
