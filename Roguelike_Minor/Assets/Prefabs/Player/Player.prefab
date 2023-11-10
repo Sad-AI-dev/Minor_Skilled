@@ -393,6 +393,7 @@ GameObject:
   - component: {fileID: 6042182213848110425}
   - component: {fileID: 7374867739153013466}
   - component: {fileID: 6425007794457280646}
+  - component: {fileID: 7380479126621435635}
   - component: {fileID: 1389778117787781048}
   - component: {fileID: 1439967887705530693}
   - component: {fileID: 8856083573202198069}
@@ -442,6 +443,7 @@ MonoBehaviour:
   agent: {fileID: 8530711646383118276}
   interactor: {fileID: 6612914900796368241}
   inventory: {fileID: 0}
+  pauseMenu: {fileID: 0}
   Footsteps:
     idInternal: 0
     valueGuidInternal: 
@@ -481,6 +483,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 5844694640700254909}
+--- !u!114 &7380479126621435635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421599695142573888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa0c811594585ed40aa7be4fb1298123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!143 &1389778117787781048
 CharacterController:
   m_ObjectHideFlags: 0
@@ -559,7 +573,7 @@ MonoBehaviour:
     abilityData: {fileID: 11400000, guid: 246ee83cf6db190478d1f1ab63556b27, type: 2}
     uses: 1
     maxUses: 1
-    coolDown: 1
+    coolDown: 8
     coolDownMode: 0
     isCoolingDown: 0
     originPoint: {fileID: 2437245198168656956}
@@ -628,7 +642,19 @@ MonoBehaviour:
       m_Calls: []
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7380479126621435635}
+        m_TargetAssemblyTypeName: Game.Core.GameSystems.SceneLoader, Game.Core.GameSystems
+        m_MethodName: LoadScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8530711646383118276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,6 +717,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onCanInteract:
     m_PersistentCalls:
+      m_Calls: []
+  onInteractablesChanged:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Game.InteractionLabelHandler, Game
@@ -702,7 +731,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
   onStopCanInteract:
     m_PersistentCalls:
