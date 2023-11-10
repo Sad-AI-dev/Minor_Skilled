@@ -403,6 +403,7 @@ GameObject:
   - component: {fileID: 6612914900796368241}
   - component: {fileID: 6237387186357606691}
   - component: {fileID: 2595134782193159625}
+  - component: {fileID: 8869651875822535198}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -444,10 +445,7 @@ MonoBehaviour:
   interactor: {fileID: 6612914900796368241}
   inventory: {fileID: 0}
   pauseMenu: {fileID: 0}
-  Footsteps:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 56f6f49410c15c6478aabea0f9124629, type: 2}
+  audioPlayer: {fileID: 8869651875822535198}
 --- !u!114 &7374867739153013466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -779,6 +777,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08684d5be87bed4f87593a4e42d9103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8869651875822535198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421599695142573888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86866b813429b9e4aa0d9e72eb5c091a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvents:
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!1 &3014019172444536401
 GameObject:
   m_ObjectHideFlags: 3
