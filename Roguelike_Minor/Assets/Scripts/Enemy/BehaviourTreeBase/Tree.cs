@@ -21,9 +21,10 @@ namespace Game.Enemy.Core
 
         protected virtual void Awake()
         {
-            if (agent != null && !agent.enabled)
+            if (navAgent != null)
             {
-                agent.enabled = true;
+                navAgent.enabled = true;
+                Debug.Log("enable");
             }
         }
 
