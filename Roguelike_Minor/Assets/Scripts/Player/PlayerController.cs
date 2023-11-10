@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using Cinemachine;
+using Game.Core.GameSystems;
 
 namespace Game.Player
 {

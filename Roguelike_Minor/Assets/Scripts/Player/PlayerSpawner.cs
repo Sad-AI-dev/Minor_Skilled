@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Game.Core.GameSystems;
+using Game.Core;
 
 namespace Game.Player {
     public class PlayerSpawner : MonoBehaviour
@@ -15,6 +15,11 @@ namespace Game.Player {
             //warp
             player.transform.position = destination;
             player.ResetVelocity();
+            //invoke bus event
+            EventBus<PlayerWarpedEvent>.Invoke(new PlayerWarpedEvent() { 
+                player = player.transform, 
+                newPlayerPos = destination
+            });
         }
     }
 }
