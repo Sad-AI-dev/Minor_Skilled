@@ -28,8 +28,6 @@ namespace Game.Player
         [HideInInspector] public float gravity;
         [HideInInspector] public float upwardVelocity;
 
-        private Explosion explosion = new Explosion();
-
         private float minAngle = 0;
         private float maxAngle;
 
@@ -48,8 +46,8 @@ namespace Game.Player
 
         protected override void CustomCollide(Collider other)
         {
-            List<Agent> agents = explosion.FindAgentsInRange(transform.position, radius, source);
-            explosion.DealDamage(agents, source, explosionDamage);
+            List<Agent> agents = Explosion.FindAgentsInRange(transform.position, radius, source);
+            Explosion.DealDamage(agents, source, explosionDamage);
             GameObject visualExplosion = Instantiate(visuals, transform.position, Quaternion.identity);
             visualExplosion.transform.localScale *= radius * 2;
 
