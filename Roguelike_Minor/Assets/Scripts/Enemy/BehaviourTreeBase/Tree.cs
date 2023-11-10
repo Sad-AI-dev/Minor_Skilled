@@ -24,7 +24,6 @@ namespace Game.Enemy.Core
             if (navAgent != null)
             {
                 navAgent.enabled = true;
-                Debug.Log("enable");
             }
         }
 

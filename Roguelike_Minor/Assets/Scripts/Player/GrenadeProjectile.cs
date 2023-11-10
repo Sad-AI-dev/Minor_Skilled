@@ -26,8 +26,6 @@ namespace Game.Player
         [SerializeField] private float minDistance;
         [SerializeField] private float maxDistance;
 
-        private Explosion explosion = new Explosion();
-
         private float minAngle = 0;
         private float maxAngle;
 
@@ -46,8 +44,8 @@ namespace Game.Player
 
         protected override void OnCollide(RaycastHit hit)
         {
-            List<Agent> agents = explosion.FindAgentsInRange(hit.point, radius, source);
-            explosion.DealDamage(agents, source, explosionDamage);
+            List<Agent> agents = Explosion.FindAgentsInRange(hit.point, radius, source);
+            Explosion.DealDamage(agents, source, explosionDamage);
             GameObject visualExplosion = Instantiate(visuals, hit.point, Quaternion.identity);
             visualExplosion.transform.localScale *= radius * 2;
 

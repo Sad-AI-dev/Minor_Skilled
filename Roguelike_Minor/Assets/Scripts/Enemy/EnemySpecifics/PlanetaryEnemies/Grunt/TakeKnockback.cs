@@ -38,7 +38,7 @@ namespace Game.Enemy {
 
         void OnKnockbackRecieved(Vector3 dir)
         {
-            Debug.Log("Taking Knockback enemy");
+            //Debug.Log("Taking Knockback enemy");
             takingKnockback = true;
             knockbackDirection = dir;
         }
@@ -80,7 +80,7 @@ namespace Game.Enemy {
 
                 if (grounded)
                 {
-                    Debug.Log("Hit ground");
+                    //Debug.Log("Hit ground");
                     navAgent.enabled = true;
                     rb.isKinematic = true;
                     rb.useGravity = false;
