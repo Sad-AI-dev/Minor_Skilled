@@ -32,7 +32,6 @@ namespace Game.Enemy {
             //else go to target
             else
             {
-                Debug.Log("Walking to target");
                 if(GetData("Charging") != null && (bool)GetData("Charging") == false) navAgent.isStopped = false;
                 if (GetData("Charging") != null && (bool)GetData("Charging") == true) transform.LookAt(target);
                 state = NodeState.RUNNING;

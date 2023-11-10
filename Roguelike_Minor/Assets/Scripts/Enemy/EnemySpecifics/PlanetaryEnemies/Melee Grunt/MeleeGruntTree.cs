@@ -75,7 +75,6 @@ namespace Game.Enemy {
         {
             //TODO: Make it only work on charge
             if (collision.transform.tag == "Player" && charging) {
-                Debug.Log("hit player");
                 OnHitPlayer?.Invoke(this);
             }
         }

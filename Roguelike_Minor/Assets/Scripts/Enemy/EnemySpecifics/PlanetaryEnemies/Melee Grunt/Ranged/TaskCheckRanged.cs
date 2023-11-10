@@ -40,7 +40,6 @@ namespace Game.Enemy
         void SetEnemySpecificRange()
         {
             parent.parent.SetData("SecificRange", Random.Range(MeleeGruntTree.rangedAttackRange, MeleeGruntTree.rangedAttackRange/2));
-            Debug.Log((float)GetData("SecificRange"));
         }
     }
 }

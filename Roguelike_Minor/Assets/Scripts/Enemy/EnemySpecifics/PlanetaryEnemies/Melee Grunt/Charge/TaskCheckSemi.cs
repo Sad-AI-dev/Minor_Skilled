@@ -47,7 +47,6 @@ namespace Game.Enemy
                         Charged();
                         QuickSetData("ChargeRandom", chargeChancePercent + 1);
                         agent.StopCoroutine((Coroutine)GetData("getRandomCO"));
-                        Debug.Log("attacking  Semi");
                         state = NodeState.SUCCESS;
                         return state;
                     }

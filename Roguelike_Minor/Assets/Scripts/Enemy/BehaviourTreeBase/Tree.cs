@@ -19,15 +19,18 @@ namespace Game.Enemy.Core
         public int moneyScaling;
         public float maxHealthScaling;
 
+        protected virtual void Awake()
+        {
+            if (agent != null && !agent.enabled)
+            {
+                agent.enabled = true;
+            }
+        }
+
         protected virtual void Start()
         {
             root = SetupTree();
             HandleScaling();
-
-            if(agent && !agent.enabled)
-            {
-                agent.enabled = true;
-            }
         }
 
         protected virtual void Update()
