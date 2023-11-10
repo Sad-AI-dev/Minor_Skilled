@@ -30,7 +30,6 @@ namespace Game.Enemy {
                 if (GetData("Charging") != null)
                 {
                     charging = (bool)GetData("Charging");
-                    Debug.Log((bool)GetData("Charging"));
                 }
                 if ((float)GetData("DistanceToTarget") <= MeleeGruntTree.meleeAttackRange && !charging)
                 {
@@ -43,7 +42,6 @@ namespace Game.Enemy {
                         agent.StopCoroutine((Coroutine)GetData("getRandomCO"));
                         parent.parent.SetData("getRandomCO", null);
                     }
-                    Debug.Log("attacking  Melee");
                     state = NodeState.SUCCESS;
                 }
                 else
