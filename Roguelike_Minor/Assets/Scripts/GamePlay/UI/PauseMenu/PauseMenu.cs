@@ -33,6 +33,7 @@ namespace Game
             menu.SetActive(false);
             paused = false;
             Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         public void Settings()

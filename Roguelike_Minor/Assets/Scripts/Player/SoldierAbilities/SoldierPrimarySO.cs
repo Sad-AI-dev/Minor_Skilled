@@ -19,6 +19,8 @@ namespace Game.Player.Soldier
             public bool isShooting = false;
             public Coroutine stopShootingCo;
             public BehaviourPool<Projectile> bulletPool = new BehaviourPool<Projectile>();
+            public LineRenderer lineRenderer;
+            public float lineOpacity;
         }
 
         public GameObject bullet;
@@ -40,7 +42,9 @@ namespace Game.Player.Soldier
                 buildingDownSpread = false,
                 isShooting = false,
                 stopShootingCo = null,
-                bulletPool = new BehaviourPool<Projectile>()
+                bulletPool = new BehaviourPool<Projectile>(),
+                lineRenderer = source.agent.GetComponent<LineRenderer>(),
+                lineOpacity = 255
             };
 
             PrimaryVars vars = source.vars as PrimaryVars;
@@ -63,8 +67,15 @@ namespace Game.Player.Soldier
                 target = hit.point;
             else
                 target = cam.ViewportToWorldPoint(new UnityEngine.Vector3(0.5f, 0.5f, 1000));
-           
-            //add inaccuracy
+
+            UnityEngine.Vector3[] positions = { source.originPoint.position, target};
+            vars.lineRenderer.SetPositions(positions);
+            vars.lineRenderer.widthMultiplier = 0.2f;
+            vars.lineOpacity = 255f;
+
+            source.agent.StartCoroutine(ReduceLineOpacity(vars));
+
+            /*//add inaccuracy
             vars.inaccuracy += source.coolDown * spreadBuildupSpeed;
             vars.inaccuracy = Mathf.Clamp(vars.inaccuracy, 0, 1);
             //Debug.Log("Increased: " + inaccuracy);
@@ -106,7 +117,7 @@ namespace Game.Player.Soldier
                 shootRoutine = source.agent.StartCoroutine(IsShootingCo(source));
                 vars.stopShootingCo = shootRoutine;
                 //Debug.Log("Started counting down");
-            }
+            }*/
         }
 
         private IEnumerator IsShootingCo(Ability source)
@@ -140,6 +151,17 @@ namespace Game.Player.Soldier
             //done cooling down
             if (!vars.isShooting)
                 vars.inaccuracy = 0;
+        }
+
+        private IEnumerator ReduceLineOpacity(PrimaryVars vars)
+        {
+            while(vars.lineOpacity > 0)
+            {
+                yield return null;
+                Color color = new Color(158, 52, 235, vars.lineOpacity);
+                vars.lineRenderer.SetColors(color, color);
+                vars.lineOpacity -= 25.5f;
+            }
         }
     }
 }
