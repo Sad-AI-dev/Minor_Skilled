@@ -1,8 +1,6 @@
 using Game.Core;
 using Game.Core.GameSystems;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 namespace Game.Player
