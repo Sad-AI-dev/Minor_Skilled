@@ -34,7 +34,7 @@ namespace Game {
         //============== Handle Events ==============
         private void OnAgentTakeDamage(AgentTakeDamageEvent eventData)
         {
-            if (eventData.hitEvent.target != player) //don't show damage number for player getting hit
+            if (eventData.hitEvent.target.agent != player) //don't show damage number for player getting hit
             {
                 HitEvent hit = eventData.hitEvent;
                 FormatNumberLabel(
