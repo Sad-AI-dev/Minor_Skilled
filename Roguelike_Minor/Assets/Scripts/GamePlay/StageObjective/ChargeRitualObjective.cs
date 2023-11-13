@@ -50,6 +50,7 @@ namespace Game {
         {
             if (isCharging) { Charge(); }
             else if (canDecharge) { Decharge(); }
+            else { return; } //objective is not active
             UpdatePillarSpeed();
             //done check
             if (progress >= 100) { StopCharge(); }

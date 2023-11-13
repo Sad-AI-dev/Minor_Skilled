@@ -76,7 +76,7 @@ namespace Game.Core
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other == this) return;
+            if (other.isTrigger) { return; }
             if(!other.CompareTag(sourceTag))
             {
                 CustomCollide(other);
