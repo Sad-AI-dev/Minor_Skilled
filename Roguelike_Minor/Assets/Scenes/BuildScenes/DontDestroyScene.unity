@@ -459,6 +459,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdae28cd85f8544f8912d8f782def8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1130069504 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4993068225731915393, guid: 8f0d54591f7f8184c9f5334bcd79dfb2, type: 3}
+  m_PrefabInstance: {fileID: 1418690909}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164330c5fa78af247a000217bc32577e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1418690909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -571,10 +582,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6819881373176139140}
-    - target: {fileID: 2878450509317318210, guid: 8f0d54591f7f8184c9f5334bcd79dfb2, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ReturnToMenu
-      objectReference: {fileID: 0}
     - target: {fileID: 4229676567141978222, guid: 8f0d54591f7f8184c9f5334bcd79dfb2, type: 3}
       propertyPath: agent
       value: 
@@ -846,6 +853,10 @@ PrefabInstance:
       propertyPath: agent
       value: 
       objectReference: {fileID: 684490301}
+    - target: {fileID: 789141063057159887, guid: 175ff97370cd4484c996ee4e91791029, type: 3}
+      propertyPath: progressBar
+      value: 
+      objectReference: {fileID: 1130069504}
     - target: {fileID: 1713493208499697953, guid: 175ff97370cd4484c996ee4e91791029, type: 3}
       propertyPath: player
       value: 
