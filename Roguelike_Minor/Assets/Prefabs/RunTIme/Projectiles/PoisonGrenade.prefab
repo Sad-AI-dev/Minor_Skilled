@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 1437803798652820379}
   - component: {fileID: 7236387855493414906}
   - component: {fileID: 4656607885349075287}
+  - component: {fileID: 3779279123046360641}
   m_Layer: 7
   m_Name: PoisonGrenade
   m_TagString: Untagged
@@ -153,6 +154,7 @@ MonoBehaviour:
       WwiseObjectReference: {fileID: 0}
     coolDownTimer: 0
   poisonCloud: {fileID: 1994042670244770660, guid: fc1635ef9ab4a8e45b12783db9b0179a, type: 3}
+  AP: {fileID: 3779279123046360641}
   gravity: 0
 --- !u!54 &7236387855493414906
 Rigidbody:
@@ -202,3 +204,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3779279123046360641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180419599746193269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86866b813429b9e4aa0d9e72eb5c091a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvents:
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 72b0ff17c2ff4e242b9975f643fbf8cc, type: 2}
