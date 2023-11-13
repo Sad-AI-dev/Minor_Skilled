@@ -19,9 +19,6 @@ namespace Game.Enemy {
 
         public MeleeGruntHandleRanged(Transform transform, float rangedAttackRange, Agent agent, NavMeshAgent navAgent)
         {
-            /*this.A = A;
-            this.B = B;
-            this.Control = Control;*/
             this.transform = transform;
             this.rangedAttackRange = rangedAttackRange;
             this.agent = agent;
@@ -52,7 +49,7 @@ namespace Game.Enemy {
                 navAgent.velocity = Vector3.zero;
 
                 //Rotate to target
-                Vector3 targetPostition = new Vector3(target.position.x, 0.5f, target.position.z);
+                Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
                 transform.LookAt(targetPostition);
 
                 agent.abilities.secondary.TryUse();

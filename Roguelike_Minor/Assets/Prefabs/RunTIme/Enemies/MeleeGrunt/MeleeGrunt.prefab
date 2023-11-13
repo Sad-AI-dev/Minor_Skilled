@@ -699,9 +699,10 @@ GameObject:
   - component: {fileID: 1504405598959527834}
   - component: {fileID: 6928698356919846774}
   - component: {fileID: 2948050001797566986}
+  - component: {fileID: 8501894440369378193}
   m_Layer: 6
   m_Name: MeleeGrunt
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -722,6 +723,7 @@ Transform:
   - {fileID: 8159488915718030471}
   - {fileID: 2352393984197392868}
   - {fileID: 5035561420904149890}
+  - {fileID: 7035349910993062790}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6988676269613643135
@@ -744,7 +746,6 @@ MonoBehaviour:
   rb: {fileID: 1504405598959527834}
   upMultiplier: 3
   directionMultiplier: 3
-  projectileSpeed: 5
   charceChancePercent: 15
   chargeWindUpTimer: 2
   charging: 0
@@ -769,7 +770,7 @@ MonoBehaviour:
     coolDown: 1
     coolDownMode: 0
     isCoolingDown: 0
-    originPoint: {fileID: 0}
+    originPoint: {fileID: 7035349910993062790}
     onUse:
       m_PersistentCalls:
         m_Calls: []
@@ -976,7 +977,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &6928698356919846774
 MonoBehaviour:
@@ -1010,9 +1011,32 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.6
-  m_Height: 1.3145002
+  m_Height: 1.4156221
   m_Direction: 1
-  m_Center: {x: 0, y: 0.6525032, z: 0}
+  m_Center: {x: 0, y: 0.7011964, z: 0}
+--- !u!136 &8501894440369378193
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5666398297103683690}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Height: 1.4156221
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7011964, z: 0}
 --- !u!1 &6177418429845132727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,3 +1395,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8808227833602274179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7035349910993062790}
+  m_Layer: 6
+  m_Name: MeleeOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7035349910993062790
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8808227833602274179}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.51, z: 0.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2557869092605271841}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

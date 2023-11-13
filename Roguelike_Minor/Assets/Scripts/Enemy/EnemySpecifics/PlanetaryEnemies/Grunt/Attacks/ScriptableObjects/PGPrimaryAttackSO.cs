@@ -31,7 +31,7 @@ namespace Game.Enemy
             primary.source = source;
             primary.gameObject.transform.parent = source.agent.gameObject.transform;
             primary.gameObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
-            primary.gameObject.transform.position = source.agent.gameObject.transform.position + source.agent.gameObject.transform.forward;
+            primary.gameObject.transform.position = source.originPoint.position;
         }
     }
 }

@@ -15,9 +15,9 @@ namespace Game.Enemy.Core
         public NavMeshAgent navAgent;
 
         [Header("Scaling Variables")]
-        public float baseDamageScaling;
-        public float moneyScaling;
-        public float maxHealthScaling;
+        public float baseDamageScaling = 1;
+        public float moneyScaling = 1;
+        public float maxHealthScaling = 1;
 
         protected virtual void Awake()
         {

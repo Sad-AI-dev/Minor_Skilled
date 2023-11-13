@@ -16,7 +16,7 @@ namespace Game.Core
         private string sourceTag;
         private float baseDamage;
 
-        private Rigidbody rb;
+        protected Rigidbody rb;
         private SphereCollider col;
 
         //========== Initialize ===========
