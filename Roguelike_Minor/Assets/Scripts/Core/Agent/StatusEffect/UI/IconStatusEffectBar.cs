@@ -23,6 +23,7 @@ namespace Game.Core {
             EffectIconElement element = elementPool.GetBehaviour();
             //setup element
             element.transform.SetParent(effectHolder);
+            element.transform.localRotation = Quaternion.identity; //reset rotation
             element.Initialize();
             element.icon.sprite = effect.icon;
             //store reference
