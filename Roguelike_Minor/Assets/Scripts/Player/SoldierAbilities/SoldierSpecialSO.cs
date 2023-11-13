@@ -15,7 +15,7 @@ namespace Game.Player.Soldier
         [Header("explosion")]
         [SerializeField] private GameObject explosion;
         [SerializeField] private float radius;
-        [SerializeField]
+        [SerializeField] private float knockbackForce;
 
         PlayerController controller;
 
@@ -42,7 +42,10 @@ namespace Game.Player.Soldier
                 agent.health.Hurt(new HitEvent(source));
             }
 
+
+            Explosion.DealKnockback(Explosion.FindAgentsInRange(target, radius), knockbackForce, target);
             GameObject projectile = Instantiate(explosion, target, Quaternion.identity);
+            projectile.transform.localScale *= radius * 2;
         }
     }
 }
