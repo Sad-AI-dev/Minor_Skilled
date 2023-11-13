@@ -13,17 +13,17 @@ namespace Game.Player
         [SerializeField] private float explosionRadius;
         [SerializeField] private float knockbackForce;
 
-        protected override void OnCollide(RaycastHit hit)
+        protected override void CustomCollide(Collider other)
         {
-            if (hit.transform.TryGetComponent(out Agent enemy))
+            if (other.TryGetComponent(out Agent enemy))
             {
                 HurtAgent(enemy);
             }
 
-            List<Agent> agents = Explosion.FindAgentsInRange(hit.point, explosionRadius);
+            List<Agent> agents = Explosion.FindAgentsInRange(transform.position, explosionRadius);
             Explosion.DealDamage(agents, source, 10);
-            Explosion.DealKnockback(agents, knockbackForce, hit.point);
-            GameObject visuals = Instantiate(explosion, hit.point, Quaternion.identity);
+            Explosion.DealKnockback(agents, knockbackForce, transform.position);
+            GameObject visuals = Instantiate(explosion, transform.position, Quaternion.identity);
             visuals.transform.localScale *= explosionRadius * 2;
         }
     }

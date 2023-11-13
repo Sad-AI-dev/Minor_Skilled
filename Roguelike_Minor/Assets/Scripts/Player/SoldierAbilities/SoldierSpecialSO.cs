@@ -9,9 +9,13 @@ namespace Game.Player.Soldier
     [CreateAssetMenu(fileName = "SoldierSpecial", menuName = "ScriptableObjects/Agent/Ability/Soldier/Special")]
     public class SoldierSpecialSO : AbilitySO
     {
-        [SerializeField] private GameObject bullet;
         [SerializeField] private float bulletSpeed;
         [SerializeField] private LayerMask layermask;
+
+        [Header("explosion")]
+        [SerializeField] private GameObject explosion;
+        [SerializeField] private float radius;
+        [SerializeField]
 
         PlayerController controller;
 
@@ -24,7 +28,6 @@ namespace Game.Player.Soldier
         {
             Camera cam = Camera.main;
             Vector3 target;
-            Vector3 bulletDir;
 
             controller.StartSlowCoroutine(.2f);
 
@@ -32,15 +35,14 @@ namespace Game.Player.Soldier
             if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500, layermask))
                 target = hit.point;
             else
-                target = cam.transform.forward * 1000;
+                return;
 
-            bulletDir = (target - source.originPoint.position).normalized;
+            if(hit.transform.TryGetComponent<Agent>(out Agent agent))
+            {
+                agent.health.Hurt(new HitEvent(source));
+            }
 
-            GameObject projectile = Instantiate(bullet, source.originPoint.position, Quaternion.identity);
-            projectile.transform.LookAt(target);
-            RailgunBullet rgBullet = projectile.GetComponent<RailgunBullet>();
-            rgBullet.velocity = bulletDir * bulletSpeed;
-            rgBullet.Initialize(source);
+            GameObject projectile = Instantiate(explosion, target, Quaternion.identity);
         }
     }
 }
