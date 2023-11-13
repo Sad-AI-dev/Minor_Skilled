@@ -15,8 +15,10 @@ MonoBehaviour:
   title: Special
   procCoef: 1
   damageMultiplier: 6
-  bullet: {fileID: 6044588302236839696, guid: 8053a4f2176b24f4aa0c2697dc7cdaa0, type: 3}
-  bulletSpeed: 5
+  bulletSpeed: 100
   layermask:
     serializedVersion: 2
     m_Bits: 119
+  explosion: {fileID: 1071950442909444679, guid: 0c4e9d4c80a3c794c879234107e8863d, type: 3}
+  radius: 3.5
+  knockbackForce: 2

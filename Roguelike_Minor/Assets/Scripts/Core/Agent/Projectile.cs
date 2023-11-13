@@ -26,7 +26,7 @@ namespace Game.Core
             col.isTrigger = true;
             rb = GetComponent<Rigidbody>();
             rb.useGravity = false;
-            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             StartCoroutine(LifeTimeCo());
         }
 
@@ -76,6 +76,7 @@ namespace Game.Core
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other == this) return;
             if(!other.CompareTag(sourceTag))
             {
                 CustomCollide(other);
