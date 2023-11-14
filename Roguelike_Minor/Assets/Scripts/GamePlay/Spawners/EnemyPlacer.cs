@@ -26,10 +26,11 @@ namespace Game {
         }
 
         //============== Spawn Enemy =============
-        public void SpawnEnemy(GameObject prefab)
+        public GameObject SpawnEnemy(GameObject prefab)
         {
             GameObject enemy = Instantiate(prefab);
             enemy.GetComponent<NavMeshAgent>().Warp(GetSpawnPos());
+            return enemy;
         }
 
         private Vector3 GetSpawnPos()
