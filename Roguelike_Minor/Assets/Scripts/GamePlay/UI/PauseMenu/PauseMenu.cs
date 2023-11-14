@@ -43,14 +43,7 @@ namespace Game
 
         public void ExitGame()
         {
-            if(Application.isEditor)
-            {
-                EditorApplication.ExitPlaymode();
-            }
-            else
-            {
-                Application.Quit();
-            }
+            Application.Quit();
         }
     }
 }

@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
+  progressBar: {fileID: 0}
   ObjectiveComplete: 0
 --- !u!1 &4750709742145104940
 GameObject:
@@ -134,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4815d1ce4239d7b47a3f3581312a3174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyScalingFrequency: 10
+  enemyScalingFrequency: 60
   priceScalingFrequency: 20
   priceScalingAmount: 0.1
   enemyLevel: 0
@@ -303,8 +304,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537db1a22ab3c85439f3f90c1ff96283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDelay: 15
+  spawnFrequency: 20
+  minDelay: 0.05
+  maxDelay: 0.15
   prewarmMultiplier: 3
+  minHeight: 10
+  maxHeight: 30
   placer: {fileID: 0}
 --- !u!114 &8021601860483365532
 MonoBehaviour:

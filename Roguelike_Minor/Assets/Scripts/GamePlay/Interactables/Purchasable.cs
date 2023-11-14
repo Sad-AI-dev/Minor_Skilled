@@ -10,7 +10,8 @@ namespace Game {
     public class Purchasable : MonoBehaviour
     {
         [Header("Gameplay Settings")]
-        [SerializeField] protected int price = 5;
+        [SerializeField] protected int basePrice = 20;
+        protected int price;
 
         [Header("Technical Settings")]
         [SerializeField] private TMP_Text priceLabel;
@@ -19,19 +20,21 @@ namespace Game {
         private void Start()
         {
             Initialize();
-            if (priceLabel) { priceLabel.text = "$" + price; }
+            
         }
         //========== Initialize =============
-        private void Initialize()
+        public void Initialize()
         {
             //calc base price
             price = CalcPrice(GameScalingManager.instance.priceMult);
+            //update UI
+            if (priceLabel) { priceLabel.text = "$" + price; }
         }
 
         //========= Handle Price Increase =========
         protected virtual int CalcPrice(float priceMult)
         {
-            return Mathf.RoundToInt(price * priceMult);
+            return Mathf.RoundToInt(basePrice * priceMult);
         }
 
         //========== Try Purchase =============
