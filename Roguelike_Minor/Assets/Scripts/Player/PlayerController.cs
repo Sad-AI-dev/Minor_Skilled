@@ -13,7 +13,12 @@ namespace Game.Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private GameObject visuals;
-        private Agent agent;
+        [HideInInspector] public Agent agent;
+        
+        [Header("External Components")]
+        public Camera cam;
+        private GroundedChecker groundedChecker;
+
 
         [Header("walk")]
         private float speed;
@@ -35,21 +40,16 @@ namespace Game.Player
         [SerializeField] private float slowFallMultiplier;
         [SerializeField] private float fastFallMultiplier;
         [SerializeField] private float coyoteTime;
-        private float yVelocity;
-        private float activeGravity;
-        private bool grounded;
-        private bool canJump;
-        private bool jumping;
-        private Coroutine coyoteCoroutine;
+        [HideInInspector] public float yVelocity;
+        [HideInInspector] public float activeGravity;
+        [HideInInspector] public bool grounded;
+        [HideInInspector] public bool jumping;
 
-        [Header("External Components")]
-        public Camera cam;
         private CharacterController cc;
 
         private float smoothVelocity;
         private float smoothTime = 0.1f;
-
-        Vector3 warpPosition = Vector3.zero;
+        
         private Coroutine slowCo;
         private Coroutine kbReset;
 
@@ -59,6 +59,7 @@ namespace Game.Player
             //cam = Camera.main;
             cc = GetComponent<CharacterController>();
             agent = GetComponent<Agent>();
+            groundedChecker = GetComponent<GroundedChecker>();
             agent.OnKnockbackReceived.AddListener(ReceiveKnockback);
         }
 
@@ -74,7 +75,7 @@ namespace Game.Player
 
             cc.Move((moveDirection * speed) + knockbackVelocity + new Vector3(0, yVelocity, 0));
 
-            CheckGrounded();
+            groundedChecker.CheckGrounded();
         }
 
         public void SetMoveDirection(Vector2 moveInput)
@@ -135,8 +136,8 @@ namespace Game.Player
 
         public void Jump()
         {
-            if (!canJump || jumping) return;
-            //Debug.Log("Jump");
+            Debug.Log(grounded + ", " + jumping);
+            if (!grounded || jumping) return;
             yVelocity = 0;
             yVelocity += JumpForce / 100;
             jumping = true;
@@ -149,37 +150,6 @@ namespace Game.Player
             else activeGravity = gravity;
 
             yVelocity -= activeGravity / 100;
-        }
-
-        private void CheckGrounded()
-        {
-            if (!grounded && cc.isGrounded)
-                OnTouchGround();
-            if (grounded && !cc.isGrounded)
-                OnLeaveGround();
-        }
-
-        private void OnTouchGround()
-        {
-            if(coyoteCoroutine != null)
-                StopCoroutine(coyoteCoroutine);
-
-            yVelocity = -0.1f;
-            activeGravity = 0;
-            grounded = true;
-            agent.isGrounded = true;
-            jumping = false;
-            canJump = true;
-
-            //Debug.Log("Ground touched");
-        }
-
-        private void OnLeaveGround()
-        {
-            //Debug.Log("Left Ground");
-            grounded = false;
-            agent.isGrounded = false;
-            coyoteCoroutine = StartCoroutine(CoyoteTimeCo());
         }
 
         public void ResetVelocity()
@@ -205,6 +175,7 @@ namespace Game.Player
         public void ReceiveKnockback(Vector3 kbForce)
         {
             knockbackVelocity = kbForce;
+            jumping = false;
 
             //start coroutine to reduce knockback over time
             if (kbReset != null)
@@ -222,19 +193,6 @@ namespace Game.Player
             }
             //done resetting knockback
             knockbackVelocity = Vector3.zero;
-        }
-
-        IEnumerator CoyoteTimeCo()
-        {
-            float timePassed = 0;
-
-            while(timePassed < coyoteTime)
-            {
-                timePassed += Time.deltaTime;
-                yield return null;
-            }
-
-            canJump = false;
         }
     }
 }
