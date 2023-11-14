@@ -9,7 +9,7 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{E2785AF7-869C-9662-4B40-72C9ABE87817}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{999E5F98-D793-06E6-B3FE-061753F6F178}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
@@ -24,6 +24,7 @@
 			<Busses>
 				<Bus Id="85412153" Name="Ambience"/>
 				<Bus Id="1069431850" Name="Player"/>
+				<Bus Id="1551306167" Name="UI"/>
 				<Bus Id="2299321487" Name="Enemy"/>
 				<Bus Id="3174030640" Name="Auxiliary busses"/>
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
@@ -40,6 +41,7 @@
 			<GameParameters>
 				<GameParameter Id="822163944" Name="SS_Air_RPM"/>
 				<GameParameter Id="1029930033" Name="SS_Air_Fury"/>
+				<GameParameter Id="1308554018" Name="Obelisk_progress"/>
 				<GameParameter Id="1351367891" Name="SS_Air_Fear"/>
 				<GameParameter Id="2309143834" Name="Running_speed"/>
 				<GameParameter Id="2648548617" Name="SS_Air_Month"/>
@@ -53,6 +55,7 @@
 			<SwitchGroups>
 				<SwitchGroup Id="2385628198" Name="Footsteps">
 					<Switches>
+						<Switch Id="1216965916" Name="Stone"/>
 						<Switch Id="2185786256" Name="Gravel"/>
 						<Switch Id="4248645337" Name="Grass"/>
 					</Switches>
@@ -173,10 +176,14 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{652F6C9B-9257-BE5C-03AF-25789EE4335C}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{059457C3-5998-1A30-39BF-B36E68C533AE}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
+				<File Id="59103797" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 3.wav</ShortName>
+					<CachePath>SFX/015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 3_10C4C929.wem</CachePath>
+				</File>
 				<File Id="89932490" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Footsteps, Human, Gravel, Walk SND62071 1.wav</ShortName>
 					<CachePath>SFX/Footsteps, Human, Gravel, Walk SND62071 1_10C4C929.wem</CachePath>
@@ -189,17 +196,29 @@
 					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 4.wav</ShortName>
 					<CachePath>SFX/169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 4_10C4C929.wem</CachePath>
 				</File>
-				<File Id="121030824" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations 2.wav</ShortName>
-					<CachePath>SFX/Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations 2_10C4C929.wem</CachePath>
-				</File>
 				<File Id="134680864" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Ambience, Underground, Cave, Magic, Deep, Wind, Howling 01 SND46571 1.wav</ShortName>
 					<CachePath>SFX/Ambience, Underground, Cave, Magic, Deep, Wind, Howling 01 SND46571 1_D79FB2B7.wem</CachePath>
 				</File>
+				<File Id="137129379" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Obelisk_charge_pulse.wav</ShortName>
+					<CachePath>SFX/Obelisk_charge_pulse_9AF7B267.wem</CachePath>
+				</File>
 				<File Id="152143633" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>New-Zealand-Auckland-City-02.wav</ShortName>
 					<CachePath>SFX/New-Zealand-Auckland-City-02_D79FB2B7.wem</CachePath>
+				</File>
+				<File Id="166783542" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Splat 4-201936__beatmad__sizzling_frypan.wav</ShortName>
+					<CachePath>SFX/Splat 4-201936__beatmad__sizzling_frypan_10C4C929.wem</CachePath>
+				</File>
+				<File Id="199357792" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Splat 5-551449__jjxmf__splats.wav</ShortName>
+					<CachePath>SFX/Splat 5-551449__jjxmf__splats_10C4C929.wem</CachePath>
+				</File>
+				<File Id="200846055" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Obelisk_charge_static.wav</ShortName>
+					<CachePath>SFX/Obelisk_charge_static_2248D8A1.wem</CachePath>
 				</File>
 				<File Id="239838964" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Special_fire_tail.wav</ShortName>
@@ -209,6 +228,18 @@
 					<ShortName>Footsteps, Human, Gravel, Walk SND62071 3.wav</ShortName>
 					<CachePath>SFX/Footsteps, Human, Gravel, Walk SND62071 3_10C4C929.wem</CachePath>
 				</File>
+				<File Id="261670173" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 11.wav</ShortName>
+					<CachePath>SFX/015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 11_10C4C929.wem</CachePath>
+				</File>
+				<File Id="267493234" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 1.wav</ShortName>
+					<CachePath>SFX/015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 1_EB6A2DC2.wem</CachePath>
+				</File>
+				<File Id="270473895" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>388019__saturdaysoundguy__celery-snap.wav</ShortName>
+					<CachePath>SFX/388019__saturdaysoundguy__celery-snap_0044A120.wem</CachePath>
+				</File>
 				<File Id="271074604" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 2.wav</ShortName>
 					<CachePath>SFX/169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 2_10C4C929.wem</CachePath>
@@ -216,10 +247,6 @@
 				<File Id="284965498" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Footsteps, Human, Gravel, Walk SND62071 2.wav</ShortName>
 					<CachePath>SFX/Footsteps, Human, Gravel, Walk SND62071 2_10C4C929.wem</CachePath>
-				</File>
-				<File Id="366976699" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations 3.wav</ShortName>
-					<CachePath>SFX/Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations 3_10C4C929.wem</CachePath>
 				</File>
 				<File Id="369054095" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>large gear 03 metal slow 8040.wav</ShortName>
@@ -233,17 +260,45 @@
 					<ShortName>Grenade_throw.wav</ShortName>
 					<CachePath>SFX/Grenade_throw_10C4C929.wem</CachePath>
 				</File>
-				<File Id="519582251" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations.wav</ShortName>
-					<CachePath>SFX/Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations_10C4C929.wem</CachePath>
+				<File Id="488684898" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Splat 3-551449__jjxmf__splats.wav</ShortName>
+					<CachePath>SFX/Splat 3-551449__jjxmf__splats_10C4C929.wem</CachePath>
 				</File>
-				<File Id="606275329" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>ObeliskSound.wav</ShortName>
-					<CachePath>SFX/ObeliskSound_EA81EE49.wem</CachePath>
+				<File Id="529136300" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>BREAK_HIT_Celery_2.wav</ShortName>
+					<CachePath>SFX/BREAK_HIT_Celery_2_0D15B523.wem</CachePath>
+				</File>
+				<File Id="590001429" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Splat 7-551449__jjxmf__splats.wav</ShortName>
+					<CachePath>SFX/Splat 7-551449__jjxmf__splats_10C4C929.wem</CachePath>
+				</File>
+				<File Id="604688318" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Gore, Flesh, Drop, Impact, Hit, Short, Bloody, Wet 01 SND9893 1.wav</ShortName>
+					<CachePath>SFX/Gore, Flesh, Drop, Impact, Hit, Short, Bloody, Wet 01 SND9893 1_10C4C929.wem</CachePath>
+				</File>
+				<File Id="699093671" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 7.wav</ShortName>
+					<CachePath>SFX/015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 7_10C4C929.wem</CachePath>
+				</File>
+				<File Id="699752730" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 8.wav</ShortName>
+					<CachePath>SFX/015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 8_10C4C929.wem</CachePath>
+				</File>
+				<File Id="705499710" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Start Obelisk Concept.wav</ShortName>
+					<CachePath>SFX/Start Obelisk Concept_10C4C929.wem</CachePath>
+				</File>
+				<File Id="716720316" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 9.wav</ShortName>
+					<CachePath>SFX/015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 9_10C4C929.wem</CachePath>
 				</File>
 				<File Id="742923068" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 1.wav</ShortName>
 					<CachePath>SFX/169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 1_10C4C929.wem</CachePath>
+				</File>
+				<File Id="753373456" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 12.wav</ShortName>
+					<CachePath>SFX/015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 12_10C4C929.wem</CachePath>
 				</File>
 				<File Id="766868557" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Dash.wav</ShortName>
@@ -257,17 +312,29 @@
 					<ShortName>Primary_Fire.wav</ShortName>
 					<CachePath>SFX/Primary_Fire_10C4C929.wem</CachePath>
 				</File>
-				<File Id="783614672" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations 7.wav</ShortName>
-					<CachePath>SFX/Vegetable Carnage, Cabbage, Snap, Short Length, Light Strength, 4 variations 7_10C4C929.wem</CachePath>
-				</File>
 				<File Id="827923736" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close.wav</ShortName>
 					<CachePath>SFX/169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close_10C4C929.wem</CachePath>
 				</File>
+				<File Id="835267405" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>EFX SD GORE Fast Rip 01 BM 2.wav</ShortName>
+					<CachePath>SFX/EFX SD GORE Fast Rip 01 BM 2_10C4C929.wem</CachePath>
+				</File>
+				<File Id="889319335" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Footstep_servo.wav</ShortName>
+					<CachePath>SFX/Footstep_servo_A5487EFA.wem</CachePath>
+				</File>
 				<File Id="924415776" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Special_fire.wav</ShortName>
 					<CachePath>SFX/Special_fire_10C4C929.wem</CachePath>
+				</File>
+				<File Id="964094415" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Splat 8-551449__jjxmf__splats.wav</ShortName>
+					<CachePath>SFX/Splat 8-551449__jjxmf__splats_10C4C929.wem</CachePath>
+				</File>
+				<File Id="965924032" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Gore, Bone, Head Crack Open, Rip Hands SND22368.wav</ShortName>
+					<CachePath>SFX/Gore, Bone, Head Crack Open, Rip Hands SND22368_10C4C929.wem</CachePath>
 				</File>
 				<File Id="1019175650" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Grenade_explode.wav</ShortName>
@@ -281,7 +348,16 @@
 					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 3.wav</ShortName>
 					<CachePath>SFX/169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 3_10C4C929.wem</CachePath>
 				</File>
+				<File Id="1069017231" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Splat 6-551449__jjxmf__splats.wav</ShortName>
+					<CachePath>SFX/Splat 6-551449__jjxmf__splats_10C4C929.wem</CachePath>
+				</File>
 			</Media>
+			<Plugins>
+				<ShareSets>
+					<Plugin Id="602546716" Name="Room_Large" LibName="Wwise RoomVerb" LibId="7733251"/>
+				</ShareSets>
+			</Plugins>
 			<Events>
 				<Event Id="278617630" Name="Play_Ambience" DurationType="Infinite">
 					<MediaRefs>
@@ -294,19 +370,33 @@
 						<MediaRef Id="766868557"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2045007312" Name="Play_Enemy_hit" MaxAttenuation="100" DurationType="OneShot" DurationMin="0.1908458" DurationMax="0.9683333">
+				<Event Id="2045007312" Name="Play_Enemy_hit" MaxAttenuation="100" DurationType="OneShot" DurationMin="1.1737076" DurationMax="1.5151678">
 					<MediaRefs>
-						<MediaRef Id="121030824"/>
-						<MediaRef Id="366976699"/>
-						<MediaRef Id="519582251"/>
-						<MediaRef Id="783614672"/>
+						<MediaRef Id="270473895"/>
+						<MediaRef Id="529136300"/>
+						<MediaRef Id="604688318"/>
+						<MediaRef Id="835267405"/>
+						<MediaRef Id="965924032"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1602358412" Name="Play_footstep" DurationType="OneShot" DurationMin="0.21762408" DurationMax="0.65995055">
+				<Event Id="1602358412" Name="Play_footstep" DurationType="OneShot" DurationMin="0.47972447" DurationMax="0.85995054">
 					<MediaRefs>
 						<MediaRef Id="369054095"/>
+						<MediaRef Id="889319335"/>
 					</MediaRefs>
 					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="2385628198" Id="1216965916"/>
+							<MediaRefs>
+								<MediaRef Id="59103797"/>
+								<MediaRef Id="261670173"/>
+								<MediaRef Id="267493234"/>
+								<MediaRef Id="699093671"/>
+								<MediaRef Id="699752730"/>
+								<MediaRef Id="716720316"/>
+								<MediaRef Id="753373456"/>
+							</MediaRefs>
+						</SwitchContainer>
 						<SwitchContainer>
 							<SwitchValue GroupType="Switch" GroupId="2385628198" Id="4248645337" Default="true"/>
 							<MediaRefs>
@@ -335,15 +425,32 @@
 						<MediaRef Id="1019175650"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="3537222909" Name="Play_Grenade_splat" MaxAttenuation="20" DurationType="OneShot" DurationMin="0.5781179" DurationMax="0.5781179">
+					<MediaRefs>
+						<MediaRef Id="166783542"/>
+						<MediaRef Id="199357792"/>
+						<MediaRef Id="488684898"/>
+						<MediaRef Id="590001429"/>
+						<MediaRef Id="964094415"/>
+						<MediaRef Id="1069017231"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="2492084817" Name="Play_Grenade_throw" DurationType="OneShot" DurationMin="0.671678" DurationMax="0.671678">
 					<MediaRefs>
 						<MediaRef Id="476744445"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2990404959" Name="Play_Obelisk_passive" MaxAttenuation="50" DurationType="Infinite">
+				<Event Id="1731259975" Name="Play_Hitmarker" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="2990404959" Name="Play_Obelisk_passive" MaxAttenuation="55" DurationType="Infinite">
 					<MediaRefs>
-						<MediaRef Id="606275329"/>
+						<MediaRef Id="137129379"/>
+						<MediaRef Id="200846055"/>
 					</MediaRefs>
+					<PluginRefs>
+						<ShareSets>
+							<PluginRef Id="602546716"/>
+						</ShareSets>
+					</PluginRefs>
 				</Event>
 				<Event Id="3128913152" Name="Play_Pickup_item" DurationType="OneShot" DurationMin="1.0993161" DurationMax="1.1250113">
 					<MediaRefs>
@@ -361,13 +468,20 @@
 						<MediaRef Id="924415776"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="3577284316" Name="Play_Start_Obelisk" DurationType="OneShot" DurationMin="4.634658" DurationMax="4.634658">
+					<MediaRefs>
+						<MediaRef Id="705499710"/>
+					</MediaRefs>
+				</Event>
 			</Events>
 			<GameParameters>
+				<GameParameter Id="1308554018" Name="Obelisk_progress"/>
 				<GameParameter Id="2309143834" Name="Running_speed"/>
 			</GameParameters>
 			<SwitchGroups>
 				<SwitchGroup Id="2385628198" Name="Footsteps">
 					<Switches>
+						<Switch Id="1216965916" Name="Stone"/>
 						<Switch Id="2185786256" Name="Gravel"/>
 						<Switch Id="4248645337" Name="Grass"/>
 					</Switches>
@@ -375,5 +489,5 @@
 			</SwitchGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{41916DD2-C8D3-548C-89D7-06A536FCDF14}</FileHash>
+	<FileHash>{884D375B-3A46-9FD7-CC70-DD4D96E4CB4D}</FileHash>
 </SoundBanksInfo>

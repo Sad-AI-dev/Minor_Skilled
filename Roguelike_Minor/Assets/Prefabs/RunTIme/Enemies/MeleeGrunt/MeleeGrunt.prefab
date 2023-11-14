@@ -461,7 +461,7 @@ MonoBehaviour:
   navAgent: {fileID: 590220394486652246}
   baseDamageScaling: 0.5
   moneyScaling: 0.25
-  maxHealthScaling: 5
+  maxHealthScaling: 2
   rb: {fileID: 1504405598959527834}
   upMultiplier: 3
   directionMultiplier: 3
@@ -513,7 +513,7 @@ MonoBehaviour:
     SFX:
       idInternal: 0
       valueGuidInternal: 
-      WwiseObjectReference: {fileID: 0}
+      WwiseObjectReference: {fileID: 11400000, guid: e7b2c0dab8b407d41823688cb6acd1af, type: 2}
     coolDownTimer: 0
   special:
     agent: {fileID: 0}
@@ -1128,19 +1128,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4554167545920961564, guid: 22aa743fc916e3a45a28406ac446e37b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4554167545920961564, guid: 22aa743fc916e3a45a28406ac446e37b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4554167545920961564, guid: 22aa743fc916e3a45a28406ac446e37b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4554167545920961564, guid: 22aa743fc916e3a45a28406ac446e37b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4554167545920961564, guid: 22aa743fc916e3a45a28406ac446e37b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1156,7 +1156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4554167545920961564, guid: 22aa743fc916e3a45a28406ac446e37b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 4554167545920961564, guid: 22aa743fc916e3a45a28406ac446e37b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

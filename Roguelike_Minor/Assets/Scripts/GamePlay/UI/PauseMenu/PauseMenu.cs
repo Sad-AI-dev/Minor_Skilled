@@ -33,6 +33,7 @@ namespace Game
             menu.SetActive(false);
             paused = false;
             Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         public void Settings()
@@ -42,14 +43,7 @@ namespace Game
 
         public void ExitGame()
         {
-            if(Application.isEditor)
-            {
-                EditorApplication.ExitPlaymode();
-            }
-            else
-            {
-                Application.Quit();
-            }
+            Application.Quit();
         }
     }
 }

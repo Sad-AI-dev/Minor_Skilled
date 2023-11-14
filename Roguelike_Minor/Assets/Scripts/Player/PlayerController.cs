@@ -17,8 +17,8 @@ namespace Game.Player
 
         [Header("walk")]
         private float speed;
-        private float walkSpeed;
-        private float sprintSpeed;
+        private float walkSpeed { get { return agent.stats.walkSpeed; } }
+        private float sprintSpeed { get { return agent.stats.sprintSpeed; } }
         [SerializeField] private float deceleration;
         [SerializeField] private float acceleration;
         private float speedMultiplier;
@@ -59,9 +59,6 @@ namespace Game.Player
             //cam = Camera.main;
             cc = GetComponent<CharacterController>();
             agent = GetComponent<Agent>();
-            walkSpeed = agent.stats.walkSpeed;
-            sprintSpeed = agent.stats.sprintSpeed;
-
             agent.OnKnockbackReceived.AddListener(ReceiveKnockback);
         }
 
