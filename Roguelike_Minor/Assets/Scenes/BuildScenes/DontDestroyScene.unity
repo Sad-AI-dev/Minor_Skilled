@@ -158,6 +158,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 733756480}
+    - target: {fileID: 6042182213848110425, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: camController
+      value: 
+      objectReference: {fileID: 759672568}
     - target: {fileID: 6092443099186812197, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: healthBar
       value: 
@@ -463,6 +467,17 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &759672568 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6425007794457280646, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+  m_PrefabInstance: {fileID: 684490300}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759672548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db499deb1e0fd794abff6d3e93c16ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &952841115
 PrefabInstance:
   m_ObjectHideFlags: 0

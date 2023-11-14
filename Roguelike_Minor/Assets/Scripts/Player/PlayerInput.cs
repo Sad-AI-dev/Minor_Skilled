@@ -13,6 +13,7 @@ namespace Game.Player {
         [SerializeField] private Interactor interactor;
         [SerializeField] private GameObject inventory;
         [SerializeField] private PauseMenu pauseMenu;
+        [SerializeField] private CameraController camController;
 
         [Header("Audio")]
         [SerializeField] private AudioPlayer audioPlayer;
@@ -95,11 +96,13 @@ namespace Game.Player {
             {
                 inventory.SetActive(true);
                 Cursor.lockState = CursorLockMode.Confined;
+                camController.LockCamera();
             }
             if (Input.GetKeyUp(KeyCode.Tab))
             {
                 inventory.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
+                camController.UnlockCamera();
             }
         }
 
