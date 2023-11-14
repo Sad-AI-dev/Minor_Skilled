@@ -51,7 +51,7 @@ namespace Game.Player.Soldier
         {
             canTick = false;
 
-            Debug.Log("Executed tick");
+            //Debug.Log("Executed tick");
 
             HitEvent hitEvent = new HitEvent(source);
             hitEvent.baseDamage = damage;
@@ -103,7 +103,7 @@ namespace Game.Player.Soldier
                 if (other.TryGetComponent(out Agent enemy))
                 {
                     agentsInRange.Add(enemy);
-                    Debug.Log("Added enemy");
+                    //Debug.Log("Added enemy");
                 }
                     
             }

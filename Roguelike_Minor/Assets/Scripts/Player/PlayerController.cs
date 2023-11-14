@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using Cinemachine;
+using Game.Core.GameSystems;
 
 namespace Game.Player
 {
@@ -16,8 +17,8 @@ namespace Game.Player
 
         [Header("walk")]
         private float speed;
-        private float walkSpeed;
-        private float sprintSpeed;
+        private float walkSpeed { get { return agent.stats.walkSpeed; } }
+        private float sprintSpeed { get { return agent.stats.sprintSpeed; } }
         [SerializeField] private float deceleration;
         [SerializeField] private float acceleration;
         private float speedMultiplier;
@@ -58,9 +59,6 @@ namespace Game.Player
             //cam = Camera.main;
             cc = GetComponent<CharacterController>();
             agent = GetComponent<Agent>();
-            walkSpeed = agent.stats.walkSpeed;
-            sprintSpeed = agent.stats.sprintSpeed;
-
             agent.OnKnockbackReceived.AddListener(ReceiveKnockback);
         }
 
@@ -138,7 +136,7 @@ namespace Game.Player
         public void Jump()
         {
             if (!canJump || jumping) return;
-            Debug.Log("Jump");
+            //Debug.Log("Jump");
             yVelocity = 0;
             yVelocity += JumpForce / 100;
             jumping = true;
@@ -173,12 +171,12 @@ namespace Game.Player
             jumping = false;
             canJump = true;
 
-            Debug.Log("Ground touched");
+            //Debug.Log("Ground touched");
         }
 
         private void OnLeaveGround()
         {
-            Debug.Log("Left Ground");
+            //Debug.Log("Left Ground");
             grounded = false;
             agent.isGrounded = false;
             coyoteCoroutine = StartCoroutine(CoyoteTimeCo());

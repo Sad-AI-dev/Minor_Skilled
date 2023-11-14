@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 8828643640491751089}
   - component: {fileID: 5956735985547937547}
   - component: {fileID: 3287371535045237397}
+  - component: {fileID: 2022256010065270865}
+  - component: {fileID: 7002932733917414048}
+  - component: {fileID: 232362418315842035}
   m_Layer: 7
   m_Name: TestGrenade
   m_TagString: Untagged
@@ -73,16 +76,18 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 2e27cdbdb18049e418dd0bdcda6688ee, type: 2}
-  gravity: 1
   radius: 2.5
   explosionDamage: 50
   grenades:
     pool: []
     behaviourTemplate: {fileID: 5180419599746193269, guid: 95dc641df33fb0a4c81de9dbd96fec11, type: 3}
-  poisonGrenadeSpeed: 0.5
+  poisonUpwardVelocity: 20
+  poisonGravity: 0.5
   poisonGrenadeAmount: 4
-  minDistance: 0.2
-  maxDistance: 0.5
+  minDistance: 2
+  maxDistance: 8
+  gravity: 10
+  upwardVelocity: 0
 --- !u!96 &3287371535045237397
 TrailRenderer:
   serializedVersion: 3
@@ -196,6 +201,70 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!54 &2022256010065270865
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127258870543087108}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &7002932733917414048
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127258870543087108}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &232362418315842035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127258870543087108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86866b813429b9e4aa0d9e72eb5c091a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvents:
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!1 &7327287741176140361
 GameObject:
   m_ObjectHideFlags: 0

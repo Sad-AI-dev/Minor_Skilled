@@ -24,7 +24,10 @@ namespace Game.Enemy {
         {
             if (GetData("Target") != null)
             {
-                transform.LookAt((Transform)GetData("Target"));
+                Transform target = (Transform)GetData("Target");
+                Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
+                transform.LookAt(targetPostition);
+
                 agent.abilities.special.TryUse();
                 navAgent.isStopped = true;
                 state = NodeState.RUNNING;

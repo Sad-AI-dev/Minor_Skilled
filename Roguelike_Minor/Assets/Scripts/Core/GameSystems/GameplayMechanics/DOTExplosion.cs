@@ -1,8 +1,6 @@
-using PlasticPipe.PlasticProtocol.Messages;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Core.GameSystems
 {
@@ -30,7 +28,6 @@ namespace Game.Core.GameSystems
 
         private List<Agent> agentsInRange = new List<Agent>();
         private List<Agent> agentsToTarget = new List<Agent>();
-        private Explosion explosion = new Explosion();
         
         private SphereCollider col;
 
@@ -61,11 +58,11 @@ namespace Game.Core.GameSystems
             }
 
             if(damage > 0 && source != null)
-                explosion.DealDamage(agentsToTarget, source, damage);
+                Explosion.DealDamage(agentsToTarget, source, damage);
             if(knockbackForce > 0)
-                explosion.DealKnockback(agentsToTarget, knockbackForce, transform.position);
+                Explosion.DealKnockback(agentsToTarget, knockbackForce, transform.position);
             if(effect != null)
-                explosion.AddStatusEffect(agentsToTarget, effect, effectStacks);
+                Explosion.AddStatusEffect(agentsToTarget, effect, effectStacks);
         }
 
         private IEnumerator WaitForNextFrameCo()
@@ -83,7 +80,6 @@ namespace Game.Core.GameSystems
             ticks--;
             if (ticks > 0)
             {
-                Debug.Log(tickCooldown);
                 StartCoroutine(WaitForNextFrameCo());
             }
 

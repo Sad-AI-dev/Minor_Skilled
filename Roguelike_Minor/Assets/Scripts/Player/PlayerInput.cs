@@ -3,7 +3,6 @@ using Game.Core.GameSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UIElements;
 
 namespace Game.Player {
     [RequireComponent(typeof(PlayerController))]
@@ -14,7 +13,9 @@ namespace Game.Player {
         [SerializeField] private Interactor interactor;
         [SerializeField] private GameObject inventory;
         [SerializeField] private PauseMenu pauseMenu;
-        [SerializeField] private AK.Wwise.Event Footsteps;
+
+        [Header("Audio")]
+        [SerializeField] private AudioPlayer audioPlayer;
 
         private bool canPlayFootstep = true;
         private bool gamePaused = false;
@@ -120,7 +121,7 @@ namespace Game.Player {
         {
             canPlayFootstep = false;
             yield return new WaitForSeconds(0.5f);
-            Footsteps.Post(agent.gameObject);
+            audioPlayer.Play();
             canPlayFootstep = true;
         }        
     }

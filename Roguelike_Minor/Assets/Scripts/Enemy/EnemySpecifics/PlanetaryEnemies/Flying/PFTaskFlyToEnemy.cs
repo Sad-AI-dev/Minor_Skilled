@@ -55,7 +55,7 @@ namespace Game.Enemy {
         {
             if (PFTree.path != null && currentTarget != PFTree.path.Peek())
             {
-                Debug.Log("Getting target");
+                //Debug.Log("Getting target");
                 currentTarget = PFTree.path.Peek();
             }
             if (PFTree.path.Count > 0)
@@ -70,7 +70,7 @@ namespace Game.Enemy {
                 //transform.Translate((currentTarget - transform.position) * PFTree.FlightSpeed * Time.deltaTime);
                 if (Vector3.Distance(transform.position, PFTree.path.Peek()) < 0.01)
                 {
-                    Debug.Log("Target Reached");
+                    //Debug.Log("Target Reached");
                     transform.position = currentTarget;
                     SetCurrentNode();
                     PFTree.path.Dequeue();
@@ -82,7 +82,7 @@ namespace Game.Enemy {
         private void SetCurrentNode() 
         {
             GNode temp = GridBuilder.GetInstance().GetNodeClosestToWorldPos(transform.position);
-            Debug.Log(temp.worldPosition);
+            //Debug.Log(temp.worldPosition);
             currentNode = new Vector3(temp.x, temp.y, temp.z);
         }
 
@@ -96,7 +96,7 @@ namespace Game.Enemy {
                 }
                 else
                 {
-                    Debug.Log("no target");
+                    //Debug.Log("no target");
                 }
                 await Task.Delay(2);
             }

@@ -15,9 +15,17 @@ namespace Game.Enemy.Core
         public NavMeshAgent navAgent;
 
         [Header("Scaling Variables")]
-        public float baseDamageScaling;
-        public int moneyScaling;
-        public float maxHealthScaling;
+        public float baseDamageScaling = 1;
+        public float moneyScaling = 1;
+        public float maxHealthScaling = 1;
+
+        protected virtual void Awake()
+        {
+            if (navAgent != null)
+            {
+                navAgent.enabled = true;
+            }
+        }
 
         protected virtual void Start()
         {
@@ -43,7 +51,7 @@ namespace Game.Enemy.Core
         {
             //SETUP VARIABLE SCALING
             agent.stats.baseDamage += GameScalingManager.instance.enemyLevel * baseDamageScaling;
-            agent.stats.Money += GameScalingManager.instance.enemyLevel * moneyScaling;
+            agent.stats.Money += Mathf.RoundToInt(GameScalingManager.instance.enemyLevel * moneyScaling);
             agent.stats.maxHealth += GameScalingManager.instance.enemyLevel * maxHealthScaling;
 
             HealEvent heal = new HealEvent(agent.stats.maxHealth)

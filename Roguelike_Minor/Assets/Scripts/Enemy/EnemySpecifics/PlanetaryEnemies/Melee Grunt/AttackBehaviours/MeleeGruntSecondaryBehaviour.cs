@@ -7,6 +7,8 @@ namespace Game.Enemy {
     public class MeleeGruntSecondaryBehaviour : Projectile
     {
         [HideInInspector] public Vector3 target;
+        float time = 0.5f;
+        Vector3 acceleration = Vector3.down;
         [HideInInspector] public Vector3 sourceTransform;
         [HideInInspector] public float bulletSpeed;
         [HideInInspector] public float sampleTime;
@@ -14,27 +16,49 @@ namespace Game.Enemy {
 
         protected override void InitializeVars()
         {
+            transform.LookAt(target + Vector3.up);
             //velocity = transform.forward * (Time.deltaTime * bulletSpeed);
+
+            //TODO: Calculate the amount of time for a bullet to reach the target 
+            //velocity = GetLaunchVelocity(0.5f, transform.position, target);
         }
 
+        private Vector3 GetLaunchVelocity(float flightTime, Vector3 startingPoint, Vector3 endPoint)
+        {
+            Vector3 gravityNormal = Physics.gravity.normalized;
+            Vector3 dx = Vector3.ProjectOnPlane(endPoint, gravityNormal) - Vector3.ProjectOnPlane(startingPoint, gravityNormal);
+            Vector3 initialVelocityX = dx / flightTime;
+
+            Vector3 dy = Vector3.Project(endPoint, gravityNormal) - Vector3.Project(startingPoint, gravityNormal);
+            Vector3 g = 0.5f * Physics.gravity * (flightTime * flightTime);
+            Vector3 initialVelocityY = (dy - g) / flightTime;
+            return initialVelocityX + initialVelocityY;
+        }
         protected override void UpdateMoveDir()
+        {
+            //AgnleWithBezier();
+
+            //CalculateVelocity();
+            velocity = transform.forward * (Time.deltaTime * bulletSpeed);
+        }
+        private void AgnleWithBezier()
         {
             sampleTime += Time.deltaTime * bulletSpeed;
             middle = (sourceTransform + target) / 2;
             middleUp = middle + (Vector3.up * 3);
             velocity = EvalBezier(sourceTransform, target, middleUp, sampleTime + 0.001f) - transform.position;
 
-            if(sampleTime >= 1)
+            if (sampleTime >= 1)
             {
                 transform.gameObject.SetActive(false);
             }
         }
 
-        protected override void OnCollide(RaycastHit hit)
+        protected override void CustomCollide(Collider other)
         {
-            if (hit.transform.CompareTag("Player"))
+            if (other.CompareTag("Player"))
             {
-                HurtAgent(hit.transform.GetComponent<Agent>());
+                HurtAgent(other.transform.GetComponent<Agent>());
             }
         }
 

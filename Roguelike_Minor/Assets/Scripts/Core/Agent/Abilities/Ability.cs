@@ -29,6 +29,8 @@ namespace Game.Core {
 
         [Header("Events")]
         public UnityEvent<Ability> onUse;
+
+        [Header("Audio")]
         public AK.Wwise.Event SFX;
 
         //vars

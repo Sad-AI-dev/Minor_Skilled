@@ -13,10 +13,6 @@ namespace Game.Enemy {
         public float upMultiplier;
         public float directionMultiplier;
 
-        //Projectile Arch
-        [Header("Projectile Variables")]
-        [SerializeField] float projectileSpeed;
-
         //Variables
         [Header("Attack Ranged")]
         public static float rangedAttackRange = 12;
@@ -61,7 +57,7 @@ namespace Game.Enemy {
                     {
                         //Else Melee
                         new TaskCheckMelee(false, agent),
-                        new MeleeGruntMeleeAttack(agent, navAgent),
+                        new MeleeGruntMeleeAttack(agent, navAgent, transform),
                     }),
                     //If not in any range, Walk to target
                     new MeleeGruntWalkToTarget(transform, agent, navAgent)
@@ -70,12 +66,11 @@ namespace Game.Enemy {
             return root;
         }
 
-
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
-            //TODO: Make it only work on charge
-            if (collision.transform.tag == "Player" && charging) {
-                Debug.Log("hit player");
+            if (other.CompareTag("Player") && charging)
+            {
+                Debug.Log("Hit Player Trigger");
                 OnHitPlayer?.Invoke(this);
             }
         }

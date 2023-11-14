@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 40, y: 40, z: 40}
+  m_LocalScale: {x: 80, y: 80, z: 80}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4207710274514503960}
@@ -261,7 +261,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 20
+  m_Radius: 40
   m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &2975053443793941856
 MonoBehaviour:
@@ -278,8 +278,8 @@ MonoBehaviour:
   chargeSpeed: 1.5
   dechargeDelay: 1
   dechargeSpeed: 1
-  prewarmMultiplier: 3
-  spawnMultiplier: 2
+  prewarmMultiplier: 2
+  spawnMultiplier: 1.5
   rangeIndicator: {fileID: 1892869895408823452}
   pillarMovement: {fileID: 3414221189752458270}
   pillarSpeed:

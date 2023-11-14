@@ -37,6 +37,9 @@ namespace Game {
         private Coroutine dechargeDelayRoutine;
         private bool canDecharge;
 
+        //ref
+        private UIProgressBarHandler progressBar;
+
         private void Start()
         {
             rangeIndicator.SetActive(false);
@@ -47,6 +50,7 @@ namespace Game {
         {
             if (isCharging) { Charge(); }
             else if (canDecharge) { Decharge(); }
+            else { return; } //objective is not active
             UpdatePillarSpeed();
             //done check
             if (progress >= 100) { StopCharge(); }
@@ -66,6 +70,9 @@ namespace Game {
             //up enemy spawning
             EnemySpawner.instance.ForceSpawn(prewarmMultiplier);
             EnemySpawner.instance.SetExternalSpawnMultiplier(spawnMultiplier);
+            //UI
+            progressBar = GameStateManager.instance.uiManager.progressBar;
+            progressBar.Show();
         }
 
         //=============== Charge ===============
@@ -96,6 +103,7 @@ namespace Game {
         private void UpdateUI()
         {
             progressLabel.text = Mathf.FloorToInt(progress) + "%";
+            progressBar.UpdateProgress(progress / 100f);
         }
 
         //============== Stop Charge ==========
@@ -103,6 +111,9 @@ namespace Game {
         {
             EnemySpawner.instance.SetExternalSpawnMultiplier(-spawnMultiplier);
             GameStateManager.instance.HandleCompleteStageObject();
+            //Update UI
+            progressBar.Hide();
+            //destroy
             Destroy(gameObject);
         }
 

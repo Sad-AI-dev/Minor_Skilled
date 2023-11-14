@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Game.Core.GameSystems;
+using Game.Core;
 
 namespace Game.Player {
     public class PlayerSpawner : MonoBehaviour
