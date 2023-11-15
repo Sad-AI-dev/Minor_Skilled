@@ -57,7 +57,7 @@ namespace Game.Enemy {
             {
                 if (root.GetData("MoveDirection") != null)
                 {
-                    rb.MovePosition((Vector3)root.GetData("MoveDirection"));
+                    rb.MovePosition(transform.position + (Vector3)root.GetData("MoveDirection") * Time.fixedDeltaTime);
                 }
             }
         }

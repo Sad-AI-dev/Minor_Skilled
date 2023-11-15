@@ -52,7 +52,7 @@ namespace Game.Enemy {
                         360 * Time.deltaTime);
 
                     //Move
-                    parent.parent.SetData("MoveDirection", transform.position + dir * agent.stats.sprintSpeed * Time.fixedDeltaTime);
+                    parent.parent.SetData("MoveDirection", dir * agent.stats.sprintSpeed);
                     rb.MoveRotation(targetRotation);
                     //transform.Translate(direction * (Time.deltaTime * agent.stats.sprintSpeed));
                 }
