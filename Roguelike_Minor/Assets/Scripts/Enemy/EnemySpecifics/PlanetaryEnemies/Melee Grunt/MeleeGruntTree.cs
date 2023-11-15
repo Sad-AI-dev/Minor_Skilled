@@ -9,7 +9,6 @@ namespace Game.Enemy {
     public class MeleeGruntTree : Core.Tree
     {
         [Header("Knockback Variables")]
-        public Rigidbody rb;
         public float upMultiplier;
         public float directionMultiplier;
 

@@ -12,16 +12,21 @@ namespace Game.Enemy {
         Transform target;
         Agent agent;
         NavMeshAgent navAgent;
+        bool gameEnded = false;
 
         public MeleeGruntWalkToTarget(Transform transform, Agent agent, NavMeshAgent navAgent)
         {
             this.transform = transform;
             this.agent = agent;
             this.navAgent = navAgent;
+
+            EventBus<GameEndEvent>.AddListener(OnGameEnd);
+            
         }
 
         public override NodeState Evaluate()
         {
+            if (GetData("GameEnded") == null) parent.SetData("GameEnded", false);
             if (GetData("Target") == null) { SetTarget(); }
             target = (Transform)GetData("Target");
 
@@ -44,7 +49,15 @@ namespace Game.Enemy {
 
         void SetTarget()
         {
-            parent.SetData("Target", GameStateManager.instance.player.transform);
+            if (!(bool)GetData("GameEnded"))
+            {
+                parent.SetData("Target", GameStateManager.instance.player.transform);
+            }
+        }
+        void OnGameEnd(GameEndEvent gameEndEvent)
+        {
+            parent.SetData("GameEnded", true);
+            EventBus<GameEndEvent>.RemoveListener(OnGameEnd);
         }
     }
 }

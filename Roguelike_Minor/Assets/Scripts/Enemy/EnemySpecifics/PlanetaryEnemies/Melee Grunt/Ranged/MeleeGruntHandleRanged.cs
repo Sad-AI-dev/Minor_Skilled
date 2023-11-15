@@ -29,8 +29,10 @@ namespace Game.Enemy {
         {
             //----=====Get Variables=====----
             //Get Target
-            if ((Transform)GetData("Target") == null) parent.SetData("Target", GameStateManager.instance.player.transform);
-            target = (Transform)GetData("Target");
+            if (GetData("Target") != null) 
+            {
+                target = (Transform)GetData("Target");
+            }
 
             //Get distance to target;
             if (GetData("DistanceToTarget") == null) CheckDistance();
@@ -45,14 +47,16 @@ namespace Game.Enemy {
             //Else If target in range and 3 or more enemies next to player: Succeed
             else
             {
-                //Stop moving
-                navAgent.velocity = Vector3.zero;
+                if (target != null && transform != null)
+                {
+                    //Stop moving
+                    navAgent.velocity = Vector3.zero;
 
-                //Rotate to target
-                Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
-                transform.LookAt(targetPostition);
-
-                agent.abilities.secondary.TryUse();
+                    //Rotate to target
+                    Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
+                    transform.LookAt(targetPostition);
+                    agent.abilities.secondary.TryUse();
+                }
                 state = NodeState.RUNNING;
             }
 
@@ -61,7 +65,7 @@ namespace Game.Enemy {
 
         private async void CheckDistance()
         {
-            while (transform != null)
+            while (transform != null && target )
             {
                 if (target != null && transform != null)
                 {

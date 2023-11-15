@@ -1,59 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Game.Enemy.Core;
 using Game.Core;
 using System.Threading.Tasks;
 
 namespace Game.Enemy {
-    public class SmallSquidCheckRange : BT_Node
+    public class BigSquidRangeCheck : BT_Node
     {
-        Transform transform;
-        Transform target;
-        Agent agent;
+        private Transform transform;
+        private Transform target;
 
-        public SmallSquidCheckRange(Transform transform, Agent agent)
+        public BigSquidRangeCheck(Transform transform)
         {
             this.transform = transform;
-            this.agent = agent;
-
             EventBus<GameEndEvent>.AddListener(ClearTarget);
         }
 
         public override NodeState Evaluate()
         {
-            //Get Target and distance to target
-            if(GetData("Target") == null)
-            {
-                SetTarget();
-                target = (Transform)GetData("Target");
-            }
-            if(GetData("DistanceToTarget") == null)
-            {
-                CheckDistance();
-            }
+            if (GetData("Target") == null) SetTarget();
+            if (GetData("DistanceToTarget") == null) CheckDistance();
 
-            float distanceToTarget = (float)GetData("DistanceToTarget");
-            Vector3 direction = (target.position - transform.position).normalized;
-
-            if(distanceToTarget > SmallSquidTree.AttackRange)
+            if((float)GetData("DistanceToTarget") > BigSquidTree.FireRange)
             {
                 state = NodeState.FAILURE;
                 return state;
             }
             else
             {
-                RaycastHit hit;
-                if (Physics.SphereCast(transform.position, 0.5f, direction, out hit, distanceToTarget))
-                {
-                    Debug.Log(hit.transform.name);
-                    if (!hit.transform.CompareTag("Player"))
-                    {
-                        state = NodeState.FAILURE;
-                        return state;
-                    }
-                    else state = NodeState.SUCCESS;
-                }
+                state = NodeState.SUCCESS;
             }
 
             return state;
@@ -66,8 +43,6 @@ namespace Game.Enemy {
         }
         private async void CheckDistance()
         {
-            if (GetData("Target") != null) target = (Transform)GetData("Target");
-
             while (transform != null && target != null)
             {
                 if (target != null && transform != null)
@@ -85,3 +60,4 @@ namespace Game.Enemy {
         }
     }
 }
+
