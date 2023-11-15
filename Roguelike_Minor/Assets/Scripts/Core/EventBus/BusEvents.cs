@@ -33,6 +33,12 @@ namespace Game
         public UnityEngine.MonoBehaviour shop;
     }
 
+    //===== Purchaseables =====
+    public class PurchaseEvent : Event
+    {
+        public int price;
+    }
+
     //========== Game State =============
     public class GameEndEvent : Event { }
 }
