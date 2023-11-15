@@ -1983,7 +1983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &702266202
 Transform:
   m_ObjectHideFlags: 0
@@ -2676,7 +2676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1071136696
 Transform:
   m_ObjectHideFlags: 0
@@ -5097,6 +5097,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1071136696}
     m_Modifications:
+    - target: {fileID: 1520220567871372143, guid: cf6e19b5c8e3d2c47be9689de5c78a65, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520220567871372143, guid: cf6e19b5c8e3d2c47be9689de5c78a65, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6980009012232646921, guid: cf6e19b5c8e3d2c47be9689de5c78a65, type: 3}
       propertyPath: m_Name
       value: SmallSquid

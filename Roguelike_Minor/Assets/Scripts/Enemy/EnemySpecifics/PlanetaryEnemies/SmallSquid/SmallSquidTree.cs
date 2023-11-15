@@ -25,10 +25,10 @@ namespace Game.Enemy {
                         //Check target in range
                         new SmallSquidCheckRange(transform, agent),
                         //Dive and Explode when in range
-                        new SmallSquidMoveToTarget(transform, agent, playerLayerMask, ExplosionVisuals)
+                        new SmallSquidMoveToTarget(transform, agent, playerLayerMask, ExplosionVisuals, rb)
                     }),
                     //Otherwise fly in the sky between random points
-                    new SmallSquidMoveThroughSky(transform, agent)
+                    new SmallSquidMoveThroughSky(transform, agent, rb)
                 }
             );
             return root;

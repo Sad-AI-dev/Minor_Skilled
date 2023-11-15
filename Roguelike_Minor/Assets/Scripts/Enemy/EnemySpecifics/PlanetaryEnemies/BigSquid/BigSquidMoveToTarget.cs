@@ -30,37 +30,40 @@ namespace Game.Enemy {
         public override NodeState Evaluate()
         {
             if(randomMinimumHeight == 0) randomMinimumHeight = Random.Range(BigSquidTree.MinimumHeight, BigSquidTree.MinimumHeight + 25);
-            if (target == null) target = GameStateManager.instance.player.transform;
-            if (calculatePathCo == null)
+            if (target == null && GameStateManager.instance.player != null) target = GameStateManager.instance.player.transform;
+
+            if (target != null)
             {
-                calculatePathCo = agent.StartCoroutine(CalculatePathCO());
-            }
-
-            if (pathQueue.Count > 0)
-            {
-                //Handle Direction
-                Vector3 dir = (pathQueue.Peek() - transform.position).normalized;
-
-                //Handle rotation
-                Quaternion targetRotation = Quaternion.LookRotation(dir);
-                targetRotation = Quaternion.RotateTowards(
-                    transform.rotation,
-                    targetRotation,
-                    360 * Time.deltaTime);
-
-                //Move
-                rb.MovePosition(transform.position + dir * (agent.stats.walkSpeed * Time.deltaTime));
-                rb.MoveRotation(targetRotation);
-
-                //Check for target range
-                float distance = Vector3.Distance(transform.position, pathQueue.Peek());
-                if (distance <= 0.1f)
+                if (calculatePathCo == null)
                 {
-                    pathQueue.Dequeue();
+                    calculatePathCo = agent.StartCoroutine(CalculatePathCO());
                 }
-            }
-            else rb.velocity = Vector3.zero;
 
+                if (pathQueue.Count > 0)
+                {
+                    //Handle Direction
+                    Vector3 dir = (pathQueue.Peek() - transform.position).normalized;
+
+                    //Handle rotation
+                    Quaternion targetRotation = Quaternion.LookRotation(dir);
+                    targetRotation = Quaternion.RotateTowards(
+                        transform.rotation,
+                        targetRotation,
+                        360 * Time.deltaTime);
+
+                    //Move
+                    rb.MovePosition(transform.position + dir * (agent.stats.walkSpeed * Time.deltaTime));
+                    rb.MoveRotation(targetRotation);
+
+                    //Check for target range
+                    float distance = Vector3.Distance(transform.position, pathQueue.Peek());
+                    if (distance <= 0.1f)
+                    {
+                        pathQueue.Dequeue();
+                    }
+                }
+                else rb.velocity = Vector3.zero;
+            }
             state = NodeState.RUNNING;
             return state;
         }
