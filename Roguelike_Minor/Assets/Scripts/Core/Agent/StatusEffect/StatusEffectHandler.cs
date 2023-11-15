@@ -5,13 +5,10 @@ using UnityEngine;
 namespace Game.Core {
     public class StatusEffectHandler : MonoBehaviour
     {
-        public class EffectVars
-        {
-            public int stacks;
-        }
+        public class EffectVars { }
 
         [HideInInspector] public Agent agent;
-        public Dictionary<StatusEffectSO, EffectVars> statusEffects = new();
+        public Dictionary<StatusEffectSO, List<EffectVars>> statusEffects = new();
 
         [Header("UI Settings")]
         public StatusEffectBar effectBar;
@@ -29,20 +26,24 @@ namespace Game.Core {
             {
                 AddNewEffect(effect);
             }
-            AddStacks(effect, stacks);
+            StartCoroutine(AddStacks(effect, stacks));
         }
 
         private void AddNewEffect(StatusEffectSO effect)
         {
-            statusEffects.Add(effect, new EffectVars());
+            statusEffects.Add(effect, new List<EffectVars>());
             effect.AddEffect(this);
             if (effectBar) { effectBar.HandleAddEffect(effect); }
         }
-        private void AddStacks(StatusEffectSO effect, int stacks)
+        private IEnumerator AddStacks(StatusEffectSO effect, int stacks)
         {
-            effect.AddStacks(this, stacks);
-            statusEffects[effect].stacks += stacks;
-            if (effectBar) { effectBar.HandleUpdateStacks(effect, statusEffects[effect].stacks); }
+            for (int i = 0; i < stacks; i++)
+            {
+                effect.AddVars(this, statusEffects[effect]);
+                effect.AddStacks(this);
+                yield return null;
+            }
+            if (effectBar) { effectBar.HandleUpdateStacks(effect, statusEffects[effect].Count); }
         }
 
         //==================== Manage Effect Removal ===================
@@ -50,9 +51,9 @@ namespace Game.Core {
         {
             if (statusEffects.ContainsKey(effect))
             {
-                RemoveStacks(effect, Mathf.Min(stacks, statusEffects[effect].stacks));
+                RemoveStacks(effect, Mathf.Min(stacks, statusEffects[effect].Count));
                 //remove effect check
-                if (statusEffects[effect].stacks == 0)
+                if (statusEffects[effect].Count == 0)
                 {
                     RemoveEffect(effect);
                 }
@@ -67,9 +68,12 @@ namespace Game.Core {
         }
         private void RemoveStacks(StatusEffectSO effect, int stacksToRemove)
         {
-            effect.RemoveStacks(this, stacksToRemove);
-            statusEffects[effect].stacks -= stacksToRemove;
-            if (effectBar) { effectBar.HandleUpdateStacks(effect, statusEffects[effect].stacks); }
+            for (int i = 0; i < stacksToRemove; i++)
+            {
+                effect.RemoveStacks(this);
+                effect.RemoveVars(this, statusEffects[effect]);
+            }
+            if (effectBar) { effectBar.HandleUpdateStacks(effect, statusEffects[effect].Count); }
         }
 
         //========== Clear ==========
@@ -77,7 +81,7 @@ namespace Game.Core {
         {
             foreach (var kvp in statusEffects)
             {
-                RemoveEffect(kvp.Key, kvp.Value.stacks);
+                RemoveEffect(kvp.Key, kvp.Value.Count);
             }
             statusEffects.Clear();
         }
