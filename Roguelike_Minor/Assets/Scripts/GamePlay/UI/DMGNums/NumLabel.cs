@@ -11,31 +11,28 @@ namespace Game {
         [HideInInspector] public Camera cam;
         [HideInInspector] public Vector3 trackPos;
 
-        [Header("Movement Options")]
-        [SerializeField] private float horMoveSpeed;
-        [SerializeField] private float horMoveSpeedDropoffMult = 0.8f;
+        [Header("Movement settings")]
+        [SerializeField] private float targetHorOffset = 10;
+        [SerializeField] private float horMoveSpeed = 1f;
+        [Header("Vertical movement settings")]
         [SerializeField] private float arcHeight;
         [SerializeField] private float arcGravity;
 
         private Vector3 UIOffset;
         //hor speed vars
-        private float horSpeed;
-        private int dirMult;
+        private float dirMult;
         //ver speed vars
         private float verSpeed;
 
         //visible vars
         private bool isVisible;
-        private Color color;
 
         private void OnEnable()
         {
             verSpeed = arcHeight;
             UIOffset = Vector3.zero;
-            horSpeed = horMoveSpeed;
             dirMult = Random.Range(0f, 1f) < 0.5f ? -1 : 1;
-            //setup color
-            color = label.color;
+            //hide by default
             Hide();
         }
 
@@ -54,8 +51,8 @@ namespace Game {
 
         private void UpdateHorSpeed()
         {
-            UIOffset.x += horSpeed * dirMult * Time.deltaTime * 100;
-            horSpeed *= horMoveSpeedDropoffMult * Time.deltaTime * 100;
+            float blend = Mathf.Pow(0.5f, horMoveSpeed * Time.deltaTime);
+            UIOffset.x = dirMult * Mathf.Lerp(targetHorOffset, Mathf.Abs(UIOffset.x), blend);
         }
 
         private void UpdateVerSpeed()
@@ -69,10 +66,10 @@ namespace Game {
         {
             if (PointIsInFrostum(trackPos))
             {
-                //if (!isVisible) { Show(); }
+                if (!label.enabled) { Show(); }
                 label.rectTransform.position = cam.WorldToScreenPoint(trackPos) + UIOffset;
             }
-            else if (isVisible) { Hide(); }
+            else if (label.enabled) { Hide(); }
         }
 
         private bool PointIsInFrostum(Vector3 worldPos)
@@ -88,14 +85,12 @@ namespace Game {
         //============== Hide / Show ================
         private void Hide()
         {
-            isVisible = false;
-            label.color = Color.clear;
+            label.enabled = false;
         }
 
         private void Show()
         {
-            isVisible = true;
-            label.color = color;
+            label.enabled = true;
         }
     }
 }

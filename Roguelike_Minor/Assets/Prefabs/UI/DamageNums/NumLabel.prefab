@@ -54,7 +54,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3242085061307412503}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -151,10 +151,10 @@ MonoBehaviour:
   label: {fileID: 7772426267087086467}
   cam: {fileID: 0}
   trackPos: {x: 0, y: 0, z: 0}
-  horMoveSpeed: 1.5
-  horMoveSpeedDropoffMult: 0.97
-  arcHeight: 1.5
-  arcGravity: 0.03
+  targetHorOffset: 100
+  horMoveSpeed: 1
+  arcHeight: 2
+  arcGravity: 0.08
 --- !u!114 &7480130039698247783
 MonoBehaviour:
   m_ObjectHideFlags: 0
