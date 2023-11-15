@@ -515,6 +515,7 @@ GameObject:
   - component: {fileID: 7888821655187383602}
   - component: {fileID: 9208291337652911016}
   - component: {fileID: 2419075893538802240}
+  - component: {fileID: 4376714846207376044}
   m_Layer: 6
   m_Name: SmallSquid
   m_TagString: Enemy
@@ -576,6 +577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 9208291337652911016}
   navAgent: {fileID: 0}
+  rb: {fileID: 0}
   baseDamageScaling: 1
   moneyScaling: 1
   maxHealthScaling: 1
@@ -752,6 +754,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   items: []
+--- !u!54 &4376714846207376044
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6980009012232646921}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1 &8209808868078383825
 GameObject:
   m_ObjectHideFlags: 0
