@@ -65,8 +65,11 @@ namespace Game.Enemy {
 
         void SetTarget()
         {
-            parent.parent.SetData("Target", GameStateManager.instance.player.transform);
-            target = (Transform)GetData("Target");
+            if (GameStateManager.instance.player != null)
+            {
+                parent.parent.SetData("Target", GameStateManager.instance.player.transform);
+                target = (Transform)GetData("Target");
+            }
         }
         private async void CheckDistance()
         {
