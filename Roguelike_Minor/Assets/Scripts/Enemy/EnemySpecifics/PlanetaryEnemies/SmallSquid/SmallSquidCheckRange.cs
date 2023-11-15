@@ -50,7 +50,6 @@ namespace Game.Enemy {
                     RaycastHit hit;
                     if (Physics.SphereCast(transform.position, 0.5f, direction, out hit, distanceToTarget))
                     {
-                        Debug.Log(hit.transform.name);
                         if (!hit.transform.CompareTag("Player"))
                         {
                             state = NodeState.FAILURE;

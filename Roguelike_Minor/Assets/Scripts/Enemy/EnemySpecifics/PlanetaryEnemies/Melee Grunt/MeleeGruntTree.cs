@@ -69,7 +69,6 @@ namespace Game.Enemy {
         {
             if (other.CompareTag("Player") && charging)
             {
-                Debug.Log("Hit Player Trigger");
                 OnHitPlayer?.Invoke(this);
             }
         }
