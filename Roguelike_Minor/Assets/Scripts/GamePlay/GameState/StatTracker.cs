@@ -19,8 +19,8 @@ namespace Game {
 
         [Header("Money Stats")]
         public int totalMoneyCollected;
-        //totalMoneySpent
-        //totalPurchases
+        public int totalMoneySpent;
+        public int totalPurchases;
 
         //total run time
         //stages cleared
@@ -37,6 +37,7 @@ namespace Game {
             //initialize events
             EventBus<AgentTakeDamageEvent>.AddListener(HandleAgentTakeDamage);
             EventBus<AgentHealEvent>.AddListener(HandleAgentHeal);
+            EventBus<PurchaseEvent>.AddListener(HandlePurchase);
         }
 
         //================== Track Stats =======================
@@ -66,6 +67,12 @@ namespace Game {
             totalMoneyCollected += hitEvent.target.agent.stats.Money;
         }
 
+        private void HandlePurchase(PurchaseEvent eventData)
+        {
+            UpdatePurchase(eventData.price);
+        }
+
+        //================== Update Stats =======================
         //====== Deal Damage Stats ======
         private void UpdateDealDamage(HitEvent hitEvent)
         {
@@ -90,11 +97,18 @@ namespace Game {
             totalHealed += healEvent.GetTotalHeal();
         }
 
+        private void UpdatePurchase(int price)
+        {
+            totalMoneySpent += price;
+            totalPurchases++;
+        }
+
         //===== Handle Destroy =====
         private void OnDestroy()
         {
             EventBus<AgentTakeDamageEvent>.RemoveListener(HandleAgentTakeDamage);
             EventBus<AgentHealEvent>.RemoveListener(HandleAgentHeal);
+            EventBus<PurchaseEvent>.RemoveListener(HandlePurchase);
         }
     }
 }
