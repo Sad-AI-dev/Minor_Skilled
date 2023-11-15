@@ -105,6 +105,7 @@ namespace Game {
             {
                 placer.ignoreRings = true;
                 activator.ForceActivate(prewarmMultiplier);
+                placeEnemyRoutine ??= StartCoroutine(PlaceEnemiesCo());
                 placer.ignoreRings = false;
             }
         }
