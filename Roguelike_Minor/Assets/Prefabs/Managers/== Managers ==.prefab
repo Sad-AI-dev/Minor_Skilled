@@ -175,6 +175,7 @@ Transform:
   - {fileID: 8768485515106146458}
   - {fileID: 7986092976093484892}
   - {fileID: 814621497895006510}
+  - {fileID: 8898164479351814847}
   - {fileID: 4041252644223707848}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -190,6 +191,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c7105b59978ae4ba13dd3b44855c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6236549753252518977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8898164479351814847}
+  - component: {fileID: 2898110328259281441}
+  m_Layer: 0
+  m_Name: StatTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8898164479351814847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6236549753252518977}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5187508906776603956}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2898110328259281441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6236549753252518977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1044e10c305ff674095862018d88d963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDealt: 0
+  damageTaken: 0
+  enemiesKilled: 0
+  mostDamageDealt: 0
+  totalHealed: 0
+  totalMoneyCollected: 0
 --- !u!1 &8026829324566656996
 GameObject:
   m_ObjectHideFlags: 0
