@@ -38,7 +38,6 @@ namespace Game.Enemy {
                 if (col.Length > 0 && explode == null)
                 {
                     explode = agent.StartCoroutine(ExlodeAfterSeconds());
-                    Debug.Log("Exploding");
                 }
                 else
                 {
@@ -53,7 +52,7 @@ namespace Game.Enemy {
                         360 * Time.deltaTime);
 
                     //Move
-                    rb.MovePosition(transform.position + dir * (agent.stats.sprintSpeed * Time.deltaTime));
+                    parent.parent.SetData("MoveDirection", transform.position + dir * agent.stats.sprintSpeed * Time.fixedDeltaTime);
                     rb.MoveRotation(targetRotation);
                     //transform.Translate(direction * (Time.deltaTime * agent.stats.sprintSpeed));
                 }
@@ -63,7 +62,7 @@ namespace Game.Enemy {
 
         IEnumerator ExlodeAfterSeconds()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(SmallSquidTree.ExplosionTime);
             ExplosionVisuals.SetActive(true);
             yield return new WaitForSeconds(0.1f);
             agent.abilities.primary.TryUse();

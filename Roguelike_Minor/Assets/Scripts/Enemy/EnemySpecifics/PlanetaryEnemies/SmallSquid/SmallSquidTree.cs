@@ -8,17 +8,34 @@ using Game.Core;
 namespace Game.Enemy {
     public class SmallSquidTree : Core.Tree
     {
-        public static int FlightPatrolRange = 15;
-        public static int AttackRange = 40;
+        public static int FlightPatrolRange = 20;
+        public static int AttackRange = 50;
         public static float ExplosionRange = 1.2f;
+        public static float ExplosionTime = 0.5f;
 
         [Header("Small Squid Specific Variables")]
+        public int flightPatrolRange = 20;
+        public int attackRange = 50;
+        public float explosionRange = 1.2f;
+        public float explosionTime = 0.5f;
+
         public GameObject ExplosionVisuals;
         public LayerMask playerLayerMask;
 
+        BT_Node root;
+
+        protected override void Start()
+        {
+            base.Start();
+            FlightPatrolRange = flightPatrolRange;
+            AttackRange = attackRange;
+            ExplosionRange = explosionRange;
+            ExplosionTime = explosionTime;
+        }
+
         protected override BT_Node SetupTree()
         {
-            BT_Node root = new Selector(
+            root = new Selector(
                 new List<BT_Node>
                 {
                     new Sequence(new List<BT_Node>{
@@ -34,6 +51,16 @@ namespace Game.Enemy {
             return root;
         }
 
+        protected void FixedUpdate()
+        {
+            if (root != null)
+            {
+                if (root.GetData("MoveDirection") != null)
+                {
+                    rb.MovePosition((Vector3)root.GetData("MoveDirection"));
+                }
+            }
+        }
 
         private void OnDrawGizmosSelected()
         {

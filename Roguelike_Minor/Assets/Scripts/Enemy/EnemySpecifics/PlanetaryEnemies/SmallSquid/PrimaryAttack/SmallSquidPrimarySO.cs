@@ -23,7 +23,6 @@ namespace Game.Enemy
             List<Agent> agents = Explosion.FindAgentsInRange(agent.transform.position, SmallSquidTree.ExplosionRange, agent);
             if (agents.Count > 0)
             {
-                Debug.Log("Hit " + agents[0].name);
                 Explosion.DealDamage(agents, agent, Mathf.RoundToInt(agent.stats.baseDamage * source.abilityData.damageMultiplier));
                 Explosion.DealKnockback(agents, KnockbackForce, agent.transform.position);
             }
