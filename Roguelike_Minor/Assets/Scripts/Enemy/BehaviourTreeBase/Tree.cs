@@ -4,8 +4,8 @@ using UnityEngine;
 using Game.Core;
 using UnityEngine.AI;
 
-namespace Game.Enemy.Core
-{
+namespace Game.Enemy.Core {
+    [RequireComponent(typeof(Rigidbody))]
     public abstract class Tree : MonoBehaviour
     {
         private BT_Node root = null;
@@ -13,6 +13,7 @@ namespace Game.Enemy.Core
         [Header("General Variables")]
         public Agent agent;
         public NavMeshAgent navAgent;
+        public Rigidbody rb;
 
         [Header("Scaling Variables")]
         public float baseDamageScaling = 1;
@@ -21,6 +22,7 @@ namespace Game.Enemy.Core
 
         protected virtual void Awake()
         {
+            if (rb == null) rb = GetComponent<Rigidbody>();
             if (navAgent != null)
             {
                 navAgent.enabled = true;
