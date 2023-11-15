@@ -26,7 +26,7 @@ namespace Game.Core {
             {
                 AddNewEffect(effect);
             }
-            StartCoroutine(AddStacks(effect, stacks));
+            StartCoroutine(AddStacksCo(effect, stacks));
         }
 
         private void AddNewEffect(StatusEffectSO effect)
@@ -35,7 +35,7 @@ namespace Game.Core {
             effect.AddEffect(this);
             if (effectBar) { effectBar.HandleAddEffect(effect); }
         }
-        private IEnumerator AddStacks(StatusEffectSO effect, int stacks)
+        private IEnumerator AddStacksCo(StatusEffectSO effect, int stacks)
         {
             for (int i = 0; i < stacks; i++)
             {
