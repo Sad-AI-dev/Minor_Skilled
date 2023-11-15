@@ -53,7 +53,7 @@ namespace Game.Enemy {
 
                     //Move
                     //transform.Translate(Direction * (agent.stats.walkSpeed * Time.deltaTime));
-                    rb.MovePosition(transform.position + dir * (agent.stats.sprintSpeed * Time.deltaTime));
+                    rb.MovePosition(transform.position + dir * (agent.stats.walkSpeed * Time.deltaTime));
                     rb.MoveRotation(targetRotation);
                 }
             }
