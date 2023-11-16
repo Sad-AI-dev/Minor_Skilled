@@ -19,7 +19,7 @@ namespace Game {
 
         [Header("Effect settings")]
         public DOTEffect bleedEffect;
-        public float bleedDamage = 0.5f;
+        public float bleedDamageMult = 0.5f;
 
         public override void InitializeVars(Item item)
         {
@@ -53,9 +53,9 @@ namespace Game {
             StatusEffectHandler effectHandler = hitEvent.target.agent.effectHandler;
             effectHandler.AddEffect(bleedEffect);
             //initialize effect vars
-            int varsIndex = effectHandler.statusEffects.Count - 1;
+            int varsIndex = effectHandler.statusEffects[bleedEffect].Count - 1;
             DOTEffect.DOTEffectVars vars = effectHandler.statusEffects[bleedEffect][varsIndex] as DOTEffect.DOTEffectVars;
-            vars.dmg = bleedDamage * hitEvent.source.stats.baseDamage;
+            vars.dmg = bleedDamageMult * hitEvent.source.stats.baseDamage;
             vars.source = hitEvent.source;
         }
 
@@ -65,7 +65,7 @@ namespace Game {
             return $"Adds a <color=#{HighlightColor}>{baseChance}%</color> " +
                 $"<color=#{StackColor}>(+{bonusChance}% per stack)</color> " +
                 $"chance to inflict <color=#{HighlightColor}>bleed</color> on hit, dealing " +
-                $"<color=#{HighlightColor}>{bleedEffect.GetTotalTicks() * bleedDamage * 100}% " +
+                $"<color=#{HighlightColor}>{bleedEffect.GetTotalTicks() * bleedDamageMult * 100}% " +
                 $"base damage</color> over " +
                 $"<color=#{HighlightColor}>{bleedEffect.duration} seconds</color>";
         }
