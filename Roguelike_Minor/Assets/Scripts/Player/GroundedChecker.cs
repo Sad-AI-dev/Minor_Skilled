@@ -8,6 +8,9 @@ namespace Game.Player
     public class GroundedChecker : MonoBehaviour
     {
         [SerializeField] private float coyoteTime;
+        [SerializeField] private float airFriction;
+        [SerializeField] private float groundFriction;
+        [HideInInspector] public float friction;
 
         private Coroutine coyoteCoroutine;
         private PlayerController controller = null;
@@ -37,11 +40,12 @@ namespace Game.Player
             controller.grounded = true;
             controller.agent.isGrounded = true;
             controller.jumping = false;
+
+            friction = groundFriction;
         }
 
         private void OnLeaveGround()
         {
-            controller.agent.isGrounded = false;
             coyoteCoroutine = StartCoroutine(CoyoteTimeCo());
         }
 
@@ -54,7 +58,10 @@ namespace Game.Player
                 timePassed += Time.deltaTime;
                 yield return null;
             }
+            
+            friction = airFriction;
 
+            controller.agent.isGrounded = false;
             controller.grounded = false;
         }
     }

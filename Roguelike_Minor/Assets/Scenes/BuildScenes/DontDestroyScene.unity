@@ -154,6 +154,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 733756480}
+    - target: {fileID: 6042182213848110425, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: jumpBufferFrames
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6092443099186812197, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: healthBar
       value: 
@@ -178,6 +182,14 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1553550031}
+    - target: {fileID: 7374867739153013466, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: deceleration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374867739153013466, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: abilityFriction
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7374867739153013466, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: fastFallMultiplier
       value: 1.2
@@ -412,7 +424,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce2a7d370fc8584d8c11b7780f4fbe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coyoteTime: 0
+  coyoteTime: 0.1
+  airFriction: 5
+  groundFriction: 8
+  friction: 0
 --- !u!114 &1130069504 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4993068225731915393, guid: 8f0d54591f7f8184c9f5334bcd79dfb2, type: 3}

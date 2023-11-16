@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using Cinemachine;
 using Game.Core.GameSystems;
+using Unity.Properties;
 
 namespace Game.Player
 {
@@ -31,7 +32,7 @@ namespace Game.Player
 
         private Vector3 moveDirection;
         private Vector3 lastMoveDir;
-        private Vector3 knockbackVelocity;
+        private Vector3 excessVelocity;
 
         [Header("Jump")]
         [SerializeField] private float JumpForce;
@@ -39,12 +40,12 @@ namespace Game.Player
         [SerializeField] private float slowFallBounds;
         [SerializeField] private float slowFallMultiplier;
         [SerializeField] private float fastFallMultiplier;
-        [SerializeField] private float coyoteTime;
+        [SerializeField] private float abilityFriction;
         [HideInInspector] public float yVelocity;
         [HideInInspector] public float activeGravity;
         [HideInInspector] public bool grounded;
         [HideInInspector] public bool jumping;
-
+        
         private CharacterController cc;
 
         private float smoothVelocity;
@@ -66,14 +67,16 @@ namespace Game.Player
         private void FixedUpdate()
         {
             UpdateSpeed();
-            
-            if(!grounded)
+            if(excessVelocity.magnitude > 0)
+                UpdateExcessVelocity();
+
+            if (!grounded)
                 ApplyGravity();
 
             //allows to directly set position of player
             Physics.SyncTransforms();
-
-            cc.Move((moveDirection * speed) + knockbackVelocity + new Vector3(0, yVelocity, 0));
+            
+            cc.Move((moveDirection * speed) + excessVelocity + new Vector3(0, yVelocity, 0));
 
             groundedChecker.CheckGrounded();
         }
@@ -93,7 +96,8 @@ namespace Game.Player
             else if (lastMoveDir != Vector3.zero && speed > 0)
             {
                 moveDirection = lastMoveDir;
-                Decelerate(deceleration);
+                if(grounded)
+                    Decelerate(deceleration);
             }
         }
 
@@ -105,7 +109,7 @@ namespace Game.Player
 
         public void Decelerate(float deceleration)
         {
-            speedMultiplier -= deceleration * Time.deltaTime;
+            speedMultiplier -= deceleration * groundedChecker.friction * Time.deltaTime;
             speedMultiplier = Mathf.Clamp(speedMultiplier, 0, 1);
         }
 
@@ -134,9 +138,19 @@ namespace Game.Player
             speed /= 100;
         }
 
+        private void UpdateExcessVelocity()
+        {
+            Debug.Log(groundedChecker.friction);
+            float drag = 0.5f * groundedChecker.friction * excessVelocity.magnitude * 0.47f * 2;
+            float tempDeceleration = (drag) * Time.fixedDeltaTime;
+
+            excessVelocity -= excessVelocity.normalized * tempDeceleration;
+            if (excessVelocity.magnitude < 0.1f)
+                excessVelocity = Vector3.zero;
+        }
+
         public void Jump()
         {
-            Debug.Log(grounded + ", " + jumping);
             if (!grounded || jumping) return;
             yVelocity = 0;
             yVelocity += JumpForce / 100;
@@ -174,25 +188,25 @@ namespace Game.Player
 
         public void ReceiveKnockback(Vector3 kbForce)
         {
-            knockbackVelocity = kbForce;
+            excessVelocity += kbForce;
             jumping = false;
 
             //start coroutine to reduce knockback over time
-            if (kbReset != null)
+/*            if (kbReset != null)
                 StopCoroutine(kbReset);
-            kbReset = StartCoroutine(ResetKnockbackCo());
+            kbReset = StartCoroutine(ResetKnockbackCo());*/
         }
 
         IEnumerator ResetKnockbackCo()
         {
-            while(knockbackVelocity.magnitude >= 0)
+            while(excessVelocity.magnitude >= 0)
             {
                 yield return null;
                 //Debug.Log(knockbackVelocity);
-                knockbackVelocity -= knockbackVelocity * deceleration * Time.deltaTime;
+                excessVelocity -= excessVelocity * deceleration * Time.deltaTime;
             }
             //done resetting knockback
-            knockbackVelocity = Vector3.zero;
+            excessVelocity = Vector3.zero;
         }
     }
 }
