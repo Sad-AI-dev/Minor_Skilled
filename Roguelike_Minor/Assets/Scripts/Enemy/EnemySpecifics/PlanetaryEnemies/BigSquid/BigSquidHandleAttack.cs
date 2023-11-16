@@ -9,36 +9,36 @@ using Game.Enemy.Core;
 namespace Game.Enemy {
     public class BigSquidHandleAttack : BT_Node
     {
-        Transform lazerOrigin;
+        Transform transform;
         Transform target;
         Agent agent;
         LineRenderer lineRenderer;
+        Rigidbody rb;
 
-        Coroutine targetingCo;
-
-        public BigSquidHandleAttack(Agent agent, LineRenderer lineRenderer, Transform laserOrigin)
+        public BigSquidHandleAttack(Transform transform, Agent agent, LineRenderer lineRenderer, Rigidbody rb)
         {
             this.agent = agent;
             this.lineRenderer = lineRenderer;
-            this.lazerOrigin = laserOrigin;
+            this.rb = rb;
+            this.transform = transform;
         }
 
         public override NodeState Evaluate()
         {
             if (target == null) target = (Transform)GetData("Target");
-            if (targetingCo == null) targetingCo = agent.StartCoroutine(TargetingCo());
+            if(target != null) transform.LookAt(target);
+            lineRenderer.SetPosition(0, agent.abilities.primary.originPoint.position);
+            lineRenderer.SetPosition(1, target.position + Vector3.up);
+            agent.abilities.primary.vars = new BigSquidPrimaryVars
+            {
+                target = this.target,
+                lineRenderer = this.lineRenderer
+            };
+            agent.abilities.primary.TryUse();
+            parent.parent.ClearData("MoveDirection");
+            rb.velocity = Vector3.zero;
 
             return state;
-        }
-
-        IEnumerator TargetingCo()
-        {
-            lineRenderer.enabled = true;
-            lineRenderer.SetPosition(0, lazerOrigin.position);
-            lineRenderer.SetPosition(1, target.position + Vector3.up);
-            yield return new WaitForSeconds(3);
-            lineRenderer.enabled = false;
-            agent.abilities.primary.TryUse();
         }
     }
 }

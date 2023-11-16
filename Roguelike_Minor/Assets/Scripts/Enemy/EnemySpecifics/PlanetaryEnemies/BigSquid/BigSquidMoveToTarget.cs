@@ -29,7 +29,7 @@ namespace Game.Enemy {
 
         public override NodeState Evaluate()
         {
-            if(randomMinimumHeight == 0) randomMinimumHeight = Random.Range(BigSquidTree.MinimumHeight, BigSquidTree.MinimumHeight + 25);
+            if(randomMinimumHeight == 0) randomMinimumHeight = Random.Range(BigSquidTree.MinimumHeight, BigSquidTree.MinimumHeight + 10);
             if (target == null && GameStateManager.instance.player != null) target = GameStateManager.instance.player.transform;
 
             if (target != null)
@@ -52,12 +52,12 @@ namespace Game.Enemy {
                         360 * Time.deltaTime);
 
                     //Move
-                    rb.MovePosition(transform.position + dir * (agent.stats.walkSpeed * Time.deltaTime));
+                    parent.SetData("MoveDirection", dir * agent.stats.walkSpeed);
                     rb.MoveRotation(targetRotation);
 
                     //Check for target range
                     float distance = Vector3.Distance(transform.position, pathQueue.Peek());
-                    if (distance <= 0.1f)
+                    if (distance <= 0.2f)
                     {
                         pathQueue.Dequeue();
                     }
@@ -72,7 +72,11 @@ namespace Game.Enemy {
         {
             path = new NavMeshPath();
             Vector3 origin = transform.position;
-            origin.y = 0;
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, -transform.up, out hit, Mathf.Infinity))
+            {
+                origin.y = hit.point.y;
+            }
             NavMesh.CalculatePath(origin, target.position, NavMesh.AllAreas, path);
 
             pathQueue.Clear();
@@ -84,10 +88,15 @@ namespace Game.Enemy {
                     for (int i = 1; i < path.corners.Length - 1; i++)
                     {
                         Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red, 100);
-                        Vector3 corner = path.corners[i];
-                        //ToDo, Change to random height;
-                        corner.y += randomMinimumHeight;
-                        pathQueue.Enqueue(corner);
+
+                        Vector3 nextCorner = path.corners[i];
+                        nextCorner.y += randomMinimumHeight;
+
+                        Vector3 lastCorner = path.corners[i - 1];
+                        lastCorner.y += randomMinimumHeight;
+
+                        pathQueue.Enqueue(RandomPointBetweenVectors(lastCorner, nextCorner));
+                        pathQueue.Enqueue(nextCorner);
                     }
                     Vector3 targetpos = target.position;
                     //ToDo, Change to random height;
@@ -97,6 +106,13 @@ namespace Game.Enemy {
             }
             yield return new WaitForSeconds(2);
             calculatePathCo = agent.StartCoroutine(CalculatePathCO());
+        }
+
+        Vector3 RandomPointBetweenVectors(Vector3 v1, Vector3 v2)
+        {
+            Vector3 middle = (v2 - v1) / 2 + v1;
+            Vector3 RandomUnitVector = middle + Random.insideUnitSphere;
+            return RandomUnitVector;
         }
     }
 }

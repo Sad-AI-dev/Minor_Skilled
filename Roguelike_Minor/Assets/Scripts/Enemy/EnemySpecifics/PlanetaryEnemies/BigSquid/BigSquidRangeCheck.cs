@@ -22,15 +22,26 @@ namespace Game.Enemy {
         {
             if (GetData("Target") == null) SetTarget();
             if (GetData("DistanceToTarget") == null) CheckDistance();
+            if (GetData("RandomFireRange") == null) parent.parent.SetData("RandomFireRange", Random.Range(BigSquidTree.FireRangeMin, BigSquidTree.FireRangeMax));
 
-            if((float)GetData("DistanceToTarget") > BigSquidTree.FireRange)
+            if((float)GetData("DistanceToTarget") > (int)GetData("RandomFireRange"))
             {
                 state = NodeState.FAILURE;
                 return state;
             }
             else
             {
-                state = NodeState.SUCCESS;
+                Vector3 dir = (target.position - transform.position).normalized;
+
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, dir, out hit, Mathf.Infinity))
+                {
+                    if (hit.transform.CompareTag("Player"))
+                    {
+                        state = NodeState.SUCCESS;
+                    }
+                    else state = NodeState.FAILURE;
+                }
             }
 
             return state;
