@@ -12,39 +12,57 @@ namespace Game.Enemy {
         Agent agent;
         LayerMask layerMask;
         GameObject ExplosionVisuals;
+        Rigidbody rb;
 
         Coroutine explode;
 
-        public SmallSquidMoveToTarget(Transform transform, Agent agent, LayerMask playerLayerMask, GameObject ExplosionVisuals)
+        public SmallSquidMoveToTarget(Transform transform, Agent agent, LayerMask playerLayerMask, GameObject ExplosionVisuals, Rigidbody rb)
         {
             this.transform = transform;
             this.agent = agent;
             this.layerMask = playerLayerMask;
             this.ExplosionVisuals = ExplosionVisuals;
+            this.rb = rb;
         }
 
         public override NodeState Evaluate()
         {
             target = (Transform)GetData("Target");
-            Vector3 direction = ((target.position + Vector3.up*1.5f) - transform.position).normalized;
 
-            Collider[] col = Physics.OverlapSphere(transform.position, SmallSquidTree.ExplosionRange, layerMask);
-
-            if (col.Length > 0 && explode == null)
+            if (target != null && transform != null)
             {
-                explode = agent.StartCoroutine(ExlodeAfterSeconds());
-            }
-            else
-            {
-                transform.Translate(direction * (Time.deltaTime * agent.stats.sprintSpeed));
-            }
+                Vector3 direction = ((target.position + Vector3.up * 1.5f) - transform.position).normalized;
 
+                Collider[] col = Physics.OverlapSphere(transform.position, SmallSquidTree.ExplosionRange, layerMask);
+
+                if (col.Length > 0 && explode == null)
+                {
+                    explode = agent.StartCoroutine(ExlodeAfterSeconds());
+                }
+                else
+                {
+                    //Handle Direction
+                    Vector3 dir = ((target.position + Vector3.up) - transform.position).normalized;
+
+                    //Handle rotation
+                    Quaternion targetRotation = Quaternion.LookRotation(dir);
+                    targetRotation = Quaternion.RotateTowards(
+                        transform.rotation,
+                        targetRotation,
+                        360 * Time.deltaTime);
+
+                    //Move
+                    parent.parent.SetData("MoveDirection", dir * agent.stats.sprintSpeed);
+                    rb.MoveRotation(targetRotation);
+                    //transform.Translate(direction * (Time.deltaTime * agent.stats.sprintSpeed));
+                }
+            }
             return state;
         }
 
         IEnumerator ExlodeAfterSeconds()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(SmallSquidTree.ExplosionTime);
             ExplosionVisuals.SetActive(true);
             yield return new WaitForSeconds(0.1f);
             agent.abilities.primary.TryUse();

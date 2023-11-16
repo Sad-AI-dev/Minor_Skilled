@@ -5,7 +5,7 @@ using Game.Core;
 using Game.Core.GameSystems;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "3Exploding_Greens", menuName = "ScriptableObjects/Items/T2/3: Exploding Greens", order = 203)]
+    [CreateAssetMenu(fileName = "3Explosive_Greens", menuName = "ScriptableObjects/Items/T2/3: Explosive Greens", order = 203)]
     public class Item3SO : ItemDataSO
     {
         public class DeathExplodeItemVars : Item.ItemVars

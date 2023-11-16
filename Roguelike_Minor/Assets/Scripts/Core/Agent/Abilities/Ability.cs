@@ -51,8 +51,8 @@ namespace Game.Core {
         public void TryUse()
         {
             if (CanUse()) {
-                Use();
                 if (!isCoolingDown) { StartCoolDown(); }
+                Use();
             }
         }
 

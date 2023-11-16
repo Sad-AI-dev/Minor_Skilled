@@ -16,6 +16,8 @@ namespace Game.Enemy {
         {
             this.transform = transform;
             this.agent = agent;
+
+            EventBus<GameEndEvent>.AddListener(ClearTarget);
         }
 
         public override NodeState Evaluate()
@@ -31,26 +33,30 @@ namespace Game.Enemy {
                 CheckDistance();
             }
 
-            float distanceToTarget = (float)GetData("DistanceToTarget");
-            Vector3 direction = (target.position - transform.position).normalized;
+            if (target != null && transform != null)
+            {
+                float distanceToTarget = (float)GetData("DistanceToTarget");
+                Vector3 direction = ((target.position + Vector3.up ) - transform.position).normalized;
 
-            if(distanceToTarget > SmallSquidTree.AttackRange)
-            {
-                state = NodeState.FAILURE;
-                return state;
-            }
-            else
-            {
-                RaycastHit hit;
-                if (Physics.SphereCast(transform.position, 0.5f, direction, out hit, distanceToTarget))
+                if (distanceToTarget > SmallSquidTree.AttackRange)
                 {
-                    Debug.Log(hit.transform.name);
-                    if (!hit.transform.CompareTag("Player"))
+                    if (GetData("Chasing") != null && (bool)GetData("Chasing")) parent.parent.SetData("Chasing", false);
+                    state = NodeState.FAILURE;
+                    return state;
+                }
+                else
+                {
+                    if (GetData("Chasing") == null) parent.parent.SetData("Chasing", true);
+                    RaycastHit hit;
+                    if (Physics.SphereCast(transform.position, 0.5f, direction, out hit, distanceToTarget))
                     {
-                        state = NodeState.FAILURE;
-                        return state;
+                        if (!hit.transform.CompareTag("Player"))
+                        {
+                            state = NodeState.FAILURE;
+                            return state;
+                        }
+                        else state = NodeState.SUCCESS;
                     }
-                    else state = NodeState.SUCCESS;
                 }
             }
 
@@ -59,13 +65,17 @@ namespace Game.Enemy {
 
         void SetTarget()
         {
-            parent.parent.SetData("Target", GameStateManager.instance.player.transform);
-            target = (Transform)GetData("Target");
+            if (GameStateManager.instance.player != null)
+            {
+                parent.parent.SetData("Target", GameStateManager.instance.player.transform);
+                target = (Transform)GetData("Target");
+            }
         }
         private async void CheckDistance()
         {
-            Transform target = (Transform)GetData("Target");
-            while (transform != null)
+            if (GetData("Target") != null) target = (Transform)GetData("Target");
+
+            while (transform != null && target != null)
             {
                 if (target != null && transform != null)
                 {
@@ -73,6 +83,12 @@ namespace Game.Enemy {
                 }
                 await Task.Delay(2);
             }
+        }
+        private void ClearTarget(GameEndEvent eventData)
+        {
+            ClearData("Target");
+            target = null;
+            EventBus<GameEndEvent>.RemoveListener(ClearTarget);
         }
     }
 }

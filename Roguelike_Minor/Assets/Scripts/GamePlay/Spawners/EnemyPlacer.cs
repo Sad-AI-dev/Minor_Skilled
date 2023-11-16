@@ -29,7 +29,12 @@ namespace Game {
         public GameObject SpawnEnemy(GameObject prefab)
         {
             GameObject enemy = Instantiate(prefab);
-            enemy.GetComponent<NavMeshAgent>().Warp(GetSpawnPos());
+            Vector3 spawnPos = GetSpawnPos();
+            if (enemy.TryGetComponent(out NavMeshAgent navMeshAgent))
+            {
+                navMeshAgent.Warp(spawnPos);
+            }
+            else { enemy.transform.position = spawnPos; }
             return enemy;
         }
 

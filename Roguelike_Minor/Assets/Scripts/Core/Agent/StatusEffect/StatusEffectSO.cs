@@ -12,12 +12,21 @@ namespace Game.Core {
         public abstract void RemoveEffect(StatusEffectHandler handler);
 
         //============== Manage Effect stacking ==================
-        public abstract void AddStacks(StatusEffectHandler handler, int stacks = 1);
-        public abstract void RemoveStacks(StatusEffectHandler handler, int stacks = 1);
+        public abstract void AddStacks(StatusEffectHandler handler);
+        public virtual void AddVars(StatusEffectHandler handler, List<StatusEffectHandler.EffectVars> vars)
+        {
+            vars.Add(new StatusEffectHandler.EffectVars());
+        }
+
+        public abstract void RemoveStacks(StatusEffectHandler handler);
+        public virtual void RemoveVars(StatusEffectHandler handler, List<StatusEffectHandler.EffectVars> vars)
+        {
+            vars.RemoveAt(0);
+        }
 
         //============== Process Events ================
-        public virtual void ProcessDealDamage(ref HitEvent hitEvent, StatusEffectHandler.EffectVars vars) { }
-        public virtual void ProcessTakeDamage(ref HitEvent hitEvent, StatusEffectHandler.EffectVars vars) { }
-        public virtual void ProcessHealEvent(ref HealEvent healEvent, StatusEffectHandler.EffectVars vars) { }
+        public virtual void ProcessDealDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
+        public virtual void ProcessTakeDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
+        public virtual void ProcessHealEvent(ref HealEvent healEvent, List<StatusEffectHandler.EffectVars> vars) { }
     }
 }

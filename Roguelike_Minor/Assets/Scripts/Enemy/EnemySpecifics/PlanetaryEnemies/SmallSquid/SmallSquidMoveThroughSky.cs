@@ -9,13 +9,16 @@ namespace Game.Enemy {
     {
         Transform transform;
         Agent agent;
+        Rigidbody rb;
 
         Vector3 randomWaipoint = Vector3.zero;
+        Vector3 dir = Vector3.zero;
 
-        public SmallSquidMoveThroughSky(Transform transform, Agent agent)
+        public SmallSquidMoveThroughSky(Transform transform, Agent agent, Rigidbody rb)
         {
             this.transform = transform;
             this.agent = agent;
+            this.rb = rb;
         }
 
         public override NodeState Evaluate()
@@ -30,17 +33,39 @@ namespace Game.Enemy {
             {
                 randomWaipoint = (Vector3)GetData("FlightSpaceOrigin") + (Random.insideUnitSphere * SmallSquidTree.FlightPatrolRange);
             }
-            //Get direction of the point
-            Vector3 Direction = (randomWaipoint - transform.position).normalized;
+
+            if (randomWaipoint != Vector3.zero)
+            {
+                if (GetData("Chasing") != null && (bool)GetData("Chasing") == true)
+                {
+                    return NodeState.FAILURE;
+                }
+                else
+                {
+                    dir = (randomWaipoint - transform.position).normalized;
+
+                    //Handle rotation
+                    Quaternion targetRotation = Quaternion.LookRotation(dir);
+                    targetRotation = Quaternion.RotateTowards(
+                    transform.rotation,
+                    targetRotation,
+                    360 * Time.deltaTime);
+
+                    //Move
+                    parent.SetData("MoveDirection", dir * agent.stats.walkSpeed);
+                    rb.MoveRotation(targetRotation);
+                }
+            }
 
             //Get distance to that point
             float distance = Vector3.Distance(transform.position, randomWaipoint);
 
             //Check if path is valid
             RaycastHit hit;
-            if(Physics.SphereCast(transform.position, 0.5f, Direction, out hit, distance))
+            if(Physics.SphereCast(transform.position, 0.5f, dir, out hit, distance))
             {
                 state = NodeState.FAILURE;
+                randomWaipoint = Vector3.zero;
                 return state;
             }
 
@@ -48,12 +73,6 @@ namespace Game.Enemy {
             if (distance <= 0.1f)
             {
                 randomWaipoint = Vector3.zero ;
-            }
-
-            //Handle move if not at point yet
-            if(randomWaipoint != Vector3.zero)
-            {
-                transform.Translate(Direction * (agent.stats.walkSpeed * Time.deltaTime));
             }
 
             state = NodeState.RUNNING;
