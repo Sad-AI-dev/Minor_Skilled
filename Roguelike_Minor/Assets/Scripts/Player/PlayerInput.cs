@@ -1,8 +1,10 @@
+using Codice.Client.Common.GameUI;
 using Game.Core;
 using Game.Core.GameSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Player {
     [RequireComponent(typeof(PlayerController))]
@@ -24,6 +26,9 @@ namespace Game.Player {
 
         private bool canPlayFootstep = true;
         private bool gamePaused = false;
+        private bool shooting;
+        
+        public UnityEvent stopShooting;
 
         private void Start()
         {
@@ -73,7 +78,15 @@ namespace Game.Player {
         {
             if(Input.GetMouseButton(0))
             {
+                if (!shooting)
+                    shooting = true;
+
                 agent.abilities.primary.TryUse();
+            }
+            if(!Input.GetMouseButton(0) && shooting)
+            {
+                shooting = false;
+                stopShooting.Invoke();
             }
             if (Input.GetMouseButtonDown(1))
             {

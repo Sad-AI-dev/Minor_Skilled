@@ -1,12 +1,7 @@
 using Game.Core;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
-using Cinemachine;
-using Game.Core.GameSystems;
-using Unity.Properties;
+using UnityEngine.Events;
 
 namespace Game.Player
 {
@@ -55,6 +50,10 @@ namespace Game.Player
         private Coroutine slowCo;
         private Coroutine kbReset;
 
+        public UnityEvent startRunning;
+        public UnityEvent stopRunning;
+        public UnityEvent jump;
+
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -92,8 +91,9 @@ namespace Game.Player
                 visuals.transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
                 moveDirection = Quaternion.Euler(0, dirAngle, 0) * Vector3.forward;
                 moveDirection.Normalize();
-                lastMoveDir = moveDirection;
+                lastMoveDir = moveDirection;  
                 Accelerate(acceleration);
+                startRunning.Invoke();
             }
             else if (lastMoveDir != Vector3.zero && speed > 0)
             {
@@ -124,6 +124,11 @@ namespace Game.Player
 
                 speed *= speedMultiplier;
             }
+
+            if(speed > 0)
+                startRunning.Invoke();
+            else
+                stopRunning.Invoke();
             
             speed /= 100;
         }
@@ -148,6 +153,7 @@ namespace Game.Player
         public void Jump()
         {
             if (!grounded || jumping) return;
+            jump.Invoke();
             yVelocity = 0;
             yVelocity += JumpForce / 100;
             jumping = true;
