@@ -452,6 +452,9 @@ MonoBehaviour:
   camController: {fileID: 6425007794457280646}
   jumpBufferFrames: 10
   audioPlayer: {fileID: 8869651875822535198}
+  stopShooting:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7374867739153013466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,6 +481,15 @@ MonoBehaviour:
   activeGravity: 0
   grounded: 0
   jumping: 0
+  startRunning:
+    m_PersistentCalls:
+      m_Calls: []
+  stopRunning:
+    m_PersistentCalls:
+      m_Calls: []
+  jump:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6938933166841411173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,7 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558b2b8f70387304786a38a94b5890ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1412348619536585011}
+  animator: {fileID: 2673467769186082349}
 --- !u!114 &7380479126621435635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,7 +610,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2426554313753245973}
           m_TargetAssemblyTypeName: Game.Player.AnimationManager, Game.Player
-          m_MethodName: ActivatePrimary
+          m_MethodName: AnimPrimary
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -627,7 +639,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2426554313753245973}
           m_TargetAssemblyTypeName: Game.Player.AnimationManager, Game.Player
-          m_MethodName: ActivateSecondary
+          m_MethodName: AnimSecondary
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -656,7 +668,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2426554313753245973}
           m_TargetAssemblyTypeName: Game.Player.AnimationManager, Game.Player
-          m_MethodName: ActivateSpecial
+          m_MethodName: AnimSpecial
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -685,7 +697,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2426554313753245973}
           m_TargetAssemblyTypeName: Game.Player.AnimationManager, Game.Player
-          m_MethodName: ActivateUtility
+          m_MethodName: AnimUtility
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -737,7 +749,19 @@ MonoBehaviour:
       m_Calls: []
   onHurt:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2426554313753245973}
+        m_TargetAssemblyTypeName: Game.Player.AnimationManager, Game.Player
+        m_MethodName: AnimHit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -769,6 +793,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Game.Core.GameSystems.SceneLoader, Game.Core.GameSystems
         m_MethodName: LoadScene
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2426554313753245973}
+        m_TargetAssemblyTypeName: Game.Player.AnimationManager, Game.Player
+        m_MethodName: AnimDeath
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -862,6 +898,21 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2426554313753245973}
+        m_TargetAssemblyTypeName: Game.Player.AnimationManager, Game.Player
+        m_MethodName: AnimInteract
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1700,7 +1751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6dbf58682b0e5af47a31a31359af3d40, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1782,13 +1833,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1285765217573816225}
     m_Modifications:
+    - target: {fileID: 617497946785555611, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 010f3511d340e474e960102c323fb03c, type: 2}
     - target: {fileID: 6141281946529047643, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
       propertyPath: m_Name
       value: Player_withWeapon
       objectReference: {fileID: 0}
+    - target: {fileID: 6141281946529047643, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6805475361918451425, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.060512364
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6805475361918451425, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1796,7 +1855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6805475361918451425, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.9986539
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6805475361918451425, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1831,6 +1890,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
+--- !u!95 &2673467769186082349 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 617497946785555611, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
+  m_PrefabInstance: {fileID: 3281958478983559862}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8357058106441008215 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6805475361918451425, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
@@ -1904,11 +1968,6 @@ PrefabInstance:
       addedObject: {fileID: 1408891002923627082}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7971fb3a5cd80874bb1d4c6071fa49ef, type: 3}
---- !u!95 &1412348619536585011 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 7971fb3a5cd80874bb1d4c6071fa49ef, type: 3}
-  m_PrefabInstance: {fileID: 4824268069867973794}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5006181181071297353 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7971fb3a5cd80874bb1d4c6071fa49ef, type: 3}
