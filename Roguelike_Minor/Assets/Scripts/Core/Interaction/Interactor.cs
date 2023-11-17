@@ -13,6 +13,9 @@ namespace Game.Core.GameSystems {
         public UnityEvent<Interactable> onInteractablesChanged;
         [Tooltip("triggers when the interactor leaves the range of the last interactable")]
         public UnityEvent onStopCanInteract;
+
+        [Header("Base Event")]
+        public UnityEvent onInteract;
         //vars
         private List<Interactable> interactables;
         [HideInInspector] public Agent agent;
@@ -54,6 +57,7 @@ namespace Game.Core.GameSystems {
                     SortInteractables(); //interact with closest interactable
                 }
                 interactables[0].onInteract?.Invoke(this);
+                onInteract?.Invoke();
             }
         }
 
