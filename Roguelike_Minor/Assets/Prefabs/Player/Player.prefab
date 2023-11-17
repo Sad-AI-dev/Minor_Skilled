@@ -392,6 +392,8 @@ GameObject:
   - component: {fileID: 7641492428396719861}
   - component: {fileID: 6042182213848110425}
   - component: {fileID: 7374867739153013466}
+  - component: {fileID: 6938933166841411173}
+  - component: {fileID: 2247936208319766161}
   - component: {fileID: 6425007794457280646}
   - component: {fileID: 7380479126621435635}
   - component: {fileID: 1389778117787781048}
@@ -447,6 +449,7 @@ MonoBehaviour:
   inventory: {fileID: 0}
   pauseMenu: {fileID: 0}
   camController: {fileID: 6425007794457280646}
+  jumpBufferFrames: 10
   audioPlayer: {fileID: 8869651875822535198}
 --- !u!114 &7374867739153013466
 MonoBehaviour:
@@ -461,15 +464,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visuals: {fileID: 7107147114416228610}
+  agent: {fileID: 0}
+  cam: {fileID: 0}
   deceleration: 3
   acceleration: 3
-  JumpForce: 50
+  JumpForce: 30
   gravity: 2.5
-  slowFallBounds: 0
-  slowFallMultiplier: 1
-  fastFallMultiplier: 1.5
-  coyoteTime: 0.05
-  cam: {fileID: 0}
+  slowFallBounds: 0.05
+  slowFallMultiplier: 0.8
+  fastFallMultiplier: 1.2
+  yVelocity: 0
+  activeGravity: 0
+  grounded: 0
+  jumping: 0
+--- !u!114 &6938933166841411173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421599695142573888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ce2a7d370fc8584d8c11b7780f4fbe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coyoteTime: 0.1
+--- !u!114 &2247936208319766161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421599695142573888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d818ea53090407442bbd8d1fb17d0e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  airFriction: 6
+  groundFriction: 10
+  dashFriction: 7.5
+  jumpFriction: 2.5
 --- !u!114 &6425007794457280646
 MonoBehaviour:
   m_ObjectHideFlags: 0
