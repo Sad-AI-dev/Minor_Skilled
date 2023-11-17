@@ -10,7 +10,7 @@ namespace Game {
         public class DOTEffectVars : StatusEffectHandler.EffectVars
         {
             public Agent source;
-            public List<Coroutine> currentRoutines;
+            public Coroutine currentRoutine;
             public float dmg;
         }
 
@@ -20,40 +20,38 @@ namespace Game {
         [Header("Visual Settings")]
         public Color numLabelColor = Color.white;
 
-        //========= Manage Effect ============
-        public override void AddEffect(StatusEffectHandler handler)
-        {
-            handler.statusEffects[this] = new DOTEffectVars() { currentRoutines = new List<Coroutine>() };
-        }
-
         public override void RemoveEffect(StatusEffectHandler handler) { }
 
-        //========= Manage Stacks ===========
-        public override void AddStacks(StatusEffectHandler handler, int stacks = 1)
+        //========== Manage Effect =======
+        public override void AddEffect(StatusEffectHandler handler) { }
+
+        //========= Manage Vars =========
+        public override void AddVars(StatusEffectHandler handler, List<StatusEffectHandler.EffectVars> vars)
         {
-            DOTEffectVars vars = handler.statusEffects[this] as DOTEffectVars;
-            for (int i = 0; i < stacks; i++)
-            {
-                vars.currentRoutines.Add(handler.agent.StartCoroutine(DOTCo(vars, handler.agent)));
-            }
+            handler.statusEffects[this].Add(new DOTEffectVars());
         }
 
-        public override void RemoveStacks(StatusEffectHandler handler, int stacks = 1)
+        //========= Manage Stacks ===========
+        public override void AddStacks(StatusEffectHandler handler)
         {
-            DOTEffectVars vars = handler.statusEffects[this] as DOTEffectVars;
-            for (int i = 0; i < stacks; i++)
-            {
-                RemoveStack(handler, vars);
-            }
+            DOTEffectVars vars = handler.statusEffects[this][handler.statusEffects[this].Count - 1] as DOTEffectVars;
+            vars.currentRoutine = handler.agent.StartCoroutine(DOTCo(vars, handler.agent));
+        }
+
+        public override void RemoveStacks(StatusEffectHandler handler)
+        {
+
+            DOTEffectVars vars = handler.statusEffects[this][0] as DOTEffectVars;
+            RemoveStack(handler, vars);
         }
         private void RemoveStack(StatusEffectHandler handler, DOTEffectVars vars)
         {
             //end coroutine
-            if (vars.currentRoutines.Count > 0 && vars.currentRoutines[0] != null)
+            if (vars.currentRoutine != null)
             {
-                handler.agent.StopCoroutine(vars.currentRoutines[0]);
+                handler.agent.StopCoroutine(vars.currentRoutine);
+                vars.currentRoutine = null;
             }
-            vars.currentRoutines.RemoveAt(0);
         }
 
         //=========== Co Routine ========

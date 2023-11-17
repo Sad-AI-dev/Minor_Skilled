@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Enemy.Core;
 using System.Threading.Tasks;
+using Game.Core;
 
 namespace Game.Enemy {
     public class MeleeGruntChooseAttack : BT_Node
@@ -10,10 +11,12 @@ namespace Game.Enemy {
         bool chosen = false;
         int RandomOneZero;
         Transform transform;
+        Transform target;
 
         public MeleeGruntChooseAttack(Transform transform)
         {
             this.transform = transform;
+            EventBus<GameEndEvent>.AddListener(ClearTarget);
         }
 
         public override NodeState Evaluate()
@@ -46,9 +49,9 @@ namespace Game.Enemy {
 
         private async void CheckDistance()
         {
-            Transform target = (Transform)GetData("Target");
+            if(GetData("Target") != null) target = (Transform)GetData("Target");
 
-            while (transform != null)
+            while (transform != null && target != null)
             {
                 if (target != null && transform != null)
                 {
@@ -56,6 +59,13 @@ namespace Game.Enemy {
                 }
                 await Task.Delay(2);
             }
+        }
+
+        private void ClearTarget(GameEndEvent eventData)
+        {
+            ClearData("Target");
+            target = null;
+            EventBus<GameEndEvent>.RemoveListener(ClearTarget);
         }
     }
 }

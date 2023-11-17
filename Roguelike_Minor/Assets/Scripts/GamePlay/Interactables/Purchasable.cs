@@ -45,6 +45,7 @@ namespace Game {
             {
                 if (CanPurchase(agent)) //additional prereqs
                 {
+                    EventBus<PurchaseEvent>.Invoke(new PurchaseEvent() { price = price });
                     agent.stats.Money -= price;
                     onPurchase?.Invoke(agent);
                 }
