@@ -14,5 +14,5 @@ Wouter - Sound designer
 
 THE GAME  
 
-
+This game is a singleplayer action roguelike with the main goal of completing stage objectives to continue to the next stage.
 
