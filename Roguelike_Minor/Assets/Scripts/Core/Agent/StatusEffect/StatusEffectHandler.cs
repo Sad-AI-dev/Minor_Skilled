@@ -20,7 +20,12 @@ namespace Game.Core {
         }
 
         //============== Manage Effect Adding =====================
-        public void AddEffect(StatusEffectSO effect, int stacks = 1)
+        public EffectVars AddEffect(StatusEffectSO effect)
+        {
+            AddEffect(effect, 1);
+            return statusEffects[effect][^1];
+        }
+        public void AddEffect(StatusEffectSO effect, int stacks)
         {
             if (!statusEffects.ContainsKey(effect)) 
             {
@@ -40,7 +45,7 @@ namespace Game.Core {
             for (int i = 0; i < stacks; i++)
             {
                 effect.AddVars(this, statusEffects[effect]);
-                effect.AddStacks(this);
+                effect.AddStack(this);
                 yield return null;
             }
             if (effectBar) { effectBar.HandleUpdateStacks(effect, statusEffects[effect].Count); }
@@ -70,7 +75,7 @@ namespace Game.Core {
         {
             for (int i = 0; i < stacksToRemove; i++)
             {
-                effect.RemoveStacks(this);
+                effect.RemoveStack(this);
                 effect.RemoveVars(this, statusEffects[effect]);
             }
             if (effectBar) { effectBar.HandleUpdateStacks(effect, statusEffects[effect].Count); }

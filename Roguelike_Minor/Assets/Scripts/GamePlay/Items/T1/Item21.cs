@@ -65,10 +65,7 @@ namespace Game {
             //initialize poison effect
             foreach (Agent agent in agentsInRange)
             {
-                agent.effectHandler.AddEffect(poisonEffect);
-                //initialize vars
-                int varsIndex = agent.effectHandler.statusEffects[poisonEffect].Count - 1;
-                DOTEffect.DOTEffectVars effectVars = agent.effectHandler.statusEffects[poisonEffect][varsIndex] as DOTEffect.DOTEffectVars;
+                DOTEffect.DOTEffectVars effectVars = agent.effectHandler.AddEffect(poisonEffect) as DOTEffect.DOTEffectVars;
                 //set values
                 effectVars.dmg = poisonDamageMult * hitEvent.source.stats.baseDamage;
                 effectVars.source = hitEvent.source;

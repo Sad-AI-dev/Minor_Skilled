@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021e56e08d5106743a6533343ef9742a, type: 3}
+  m_Name: 5Special_Surprise
+  m_EditorClassIdentifier: 
+  size: {fileID: 11400000, guid: aaa7839693155fe46a5ce1c6da18f970, type: 2}
+  tier: {fileID: 11400000, guid: 9e8f1b09a5f0e164382a3e6b6759f388, type: 2}
+  canProcSelf: 0
+  pickupPrefab: {fileID: 2858984015360725450, guid: 798e7eb17231be4429ae57372b83f8fc, type: 3}
+  UISprite: {fileID: 21300000, guid: 1e27141f3b1a83b4e964511d4d612989, type: 3}
+  title: Special Suprise
+  shortDescription: Chance to inflict Doom
+  highlightColor: {r: 1, g: 0.9764706, b: 0.8039216, a: 1}
+  stackColor: {r: 0.8196079, g: 0.8196079, b: 0.8196079, a: 1}
+  chance: 20
+  doomEffect: {fileID: 11400000, guid: 1a3175e0171cab74285afa3e45d52201, type: 2}
+  baseDamageMult: 2
+  bonusDamageMult: 1.5
+  procCoef: 1

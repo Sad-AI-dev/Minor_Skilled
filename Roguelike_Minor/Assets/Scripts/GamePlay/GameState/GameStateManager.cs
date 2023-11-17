@@ -50,12 +50,14 @@ namespace Game {
 
         //ref to advance object spawner
         [HideInInspector] public AdvanceObjectSpawner advanceObjectSpawner;
+        [HideInInspector] public LootSpawner lootSpawner;
 
         //scene advancement vars
         public int CurrentStage { get; private set; } = 1;
 
         //paused state
         [HideInInspector] public bool scalingIsPaused;
+        private bool isShopStage;
 
         //========== Manage Stage State ==============
         public void HandleCompleteStageObject()
@@ -70,14 +72,15 @@ namespace Game {
         private void HandleSceneLoaded(SceneLoadedEvent data)
         {
             uiManager.ObjectiveComplete = false;
-            //unpause
-            scalingIsPaused = false;
+            //handle pause
+            scalingIsPaused = isShopStage;
+            isShopStage = false; //reset
         }
 
         //========= Handle Shop Load ========
         private void HandleShopLoad(ShopLoadedEvent data)
         {
-            scalingIsPaused = true;
+            isShopStage = true;
         }
 
         //================== Handle Planet Advancement ================
