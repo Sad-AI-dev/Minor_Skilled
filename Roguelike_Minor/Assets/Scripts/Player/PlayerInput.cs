@@ -13,6 +13,11 @@ namespace Game.Player {
         [SerializeField] private Interactor interactor;
         [SerializeField] private GameObject inventory;
         [SerializeField] private PauseMenu pauseMenu;
+        [SerializeField] private CameraController camController;
+
+        [Header("Variables")]
+        [SerializeField] private int jumpBufferFrames;
+        private Coroutine jumpBufferCoroutine;
 
         [Header("Audio")]
         [SerializeField] private AudioPlayer audioPlayer;
@@ -57,7 +62,10 @@ namespace Game.Player {
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                playerController.Jump();
+                if(jumpBufferCoroutine != null)
+                    StopCoroutine(jumpBufferCoroutine);
+
+                jumpBufferCoroutine = StartCoroutine(JumpBufferCo());
             }
         }
 
@@ -95,11 +103,13 @@ namespace Game.Player {
             {
                 inventory.SetActive(true);
                 Cursor.lockState = CursorLockMode.Confined;
+                camController.LockCamera();
             }
             if (Input.GetKeyUp(KeyCode.Tab))
             {
                 inventory.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
+                camController.UnlockCamera();
             }
         }
 
@@ -114,6 +124,17 @@ namespace Game.Player {
             {
                 gamePaused = false;
                 pauseMenu.DeactivateMenu();
+            }
+        }
+
+        private IEnumerator JumpBufferCo()
+        {
+            int framesPassed = 0;
+            while (framesPassed < jumpBufferFrames)
+            {
+                framesPassed++;
+                playerController.Jump();
+                yield return null;
             }
         }
 
