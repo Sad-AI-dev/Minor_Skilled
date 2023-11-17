@@ -8,13 +8,11 @@ namespace Game.Player
     public class GroundedChecker : MonoBehaviour
     {
         [SerializeField] private float coyoteTime;
-        [SerializeField] private float airFriction;
-        [SerializeField] private float groundFriction;
-        [HideInInspector] public float friction;
 
         private Coroutine coyoteCoroutine;
-        private PlayerController controller = null;
-        private CharacterController cc = null;
+        private PlayerController controller;
+        private CharacterController cc;
+        private FrictionManager frictionManager;
 
         public void CheckGrounded()
         {
@@ -22,6 +20,7 @@ namespace Game.Player
             {
                 controller = GetComponent<PlayerController>();
                 cc = GetComponent<CharacterController>();
+                frictionManager = GetComponent<FrictionManager>();
             }
 
             if (!controller.grounded && cc.isGrounded)
@@ -40,8 +39,8 @@ namespace Game.Player
             controller.grounded = true;
             controller.agent.isGrounded = true;
             controller.jumping = false;
-
-            friction = groundFriction;
+            
+            frictionManager.SetFriction(frictionTypes.ground);
         }
 
         private void OnLeaveGround()
@@ -58,8 +57,9 @@ namespace Game.Player
                 timePassed += Time.deltaTime;
                 yield return null;
             }
-            
-            friction = airFriction;
+
+            if(!controller.jumping)
+                frictionManager.SetFriction(frictionTypes.air);
 
             controller.agent.isGrounded = false;
             controller.grounded = false;

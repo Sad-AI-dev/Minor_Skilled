@@ -20,7 +20,7 @@ namespace Game.Player.Soldier
         public override void Use(Ability source)
         {
             Vector3 velocity = controller.cam.transform.forward * dashForce;
-            controller.ReceiveKnockback(velocity);
+            controller.Dash(velocity);
         }
     }
 }

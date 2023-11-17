@@ -19,6 +19,7 @@ namespace Game.Player
         [Header("External Components")]
         public Camera cam;
         private GroundedChecker groundedChecker;
+        private FrictionManager frictionManager;
 
 
         [Header("walk")]
@@ -31,6 +32,7 @@ namespace Game.Player
         private bool isSlowed = false;
 
         private Vector3 moveDirection;
+        private Vector3 walkVelocity;
         private Vector3 lastMoveDir;
         private Vector3 excessVelocity;
 
@@ -40,7 +42,6 @@ namespace Game.Player
         [SerializeField] private float slowFallBounds;
         [SerializeField] private float slowFallMultiplier;
         [SerializeField] private float fastFallMultiplier;
-        [SerializeField] private float abilityFriction;
         [HideInInspector] public float yVelocity;
         [HideInInspector] public float activeGravity;
         [HideInInspector] public bool grounded;
@@ -61,6 +62,7 @@ namespace Game.Player
             cc = GetComponent<CharacterController>();
             agent = GetComponent<Agent>();
             groundedChecker = GetComponent<GroundedChecker>();
+            frictionManager = GetComponent<FrictionManager>();
             agent.OnKnockbackReceived.AddListener(ReceiveKnockback);
         }
 
@@ -109,20 +111,8 @@ namespace Game.Player
 
         public void Decelerate(float deceleration)
         {
-            speedMultiplier -= deceleration * groundedChecker.friction * Time.deltaTime;
+            speedMultiplier -= deceleration * Time.deltaTime;
             speedMultiplier = Mathf.Clamp(speedMultiplier, 0, 1);
-        }
-
-        public void ToggleSlow(bool slowed)
-        {
-            if(slowed)
-            {
-                isSlowed = true;
-            }
-            else
-            {
-                isSlowed = false;
-            }
         }
 
         private void UpdateSpeed()
@@ -138,13 +128,19 @@ namespace Game.Player
             speed /= 100;
         }
 
+        public void Dash(Vector3 force)
+        {
+            if (grounded)
+                frictionManager.SetFriction(frictionTypes.dash);
+            else
+                frictionManager.SetFriction(frictionTypes.air);
+
+            ReceiveKnockback(force);
+        }
+
         private void UpdateExcessVelocity()
         {
-            Debug.Log(groundedChecker.friction);
-            float drag = 0.5f * groundedChecker.friction * excessVelocity.magnitude * 0.47f * 2;
-            float tempDeceleration = (drag) * Time.fixedDeltaTime;
-
-            excessVelocity -= excessVelocity.normalized * tempDeceleration;
+            excessVelocity = frictionManager.ApplyFriction(excessVelocity);
             if (excessVelocity.magnitude < 0.1f)
                 excessVelocity = Vector3.zero;
         }
@@ -155,6 +151,7 @@ namespace Game.Player
             yVelocity = 0;
             yVelocity += JumpForce / 100;
             jumping = true;
+            frictionManager.SetFriction(frictionTypes.jump);
         }
 
         private void ApplyGravity()
@@ -190,23 +187,6 @@ namespace Game.Player
         {
             excessVelocity += kbForce;
             jumping = false;
-
-            //start coroutine to reduce knockback over time
-/*            if (kbReset != null)
-                StopCoroutine(kbReset);
-            kbReset = StartCoroutine(ResetKnockbackCo());*/
-        }
-
-        IEnumerator ResetKnockbackCo()
-        {
-            while(excessVelocity.magnitude >= 0)
-            {
-                yield return null;
-                //Debug.Log(knockbackVelocity);
-                excessVelocity -= excessVelocity * deceleration * Time.deltaTime;
-            }
-            //done resetting knockback
-            excessVelocity = Vector3.zero;
         }
     }
 }
