@@ -7,12 +7,12 @@ This game is being developed as part of the 6 month "minor skilled" course from 
 
 THE TEAM  
 Arvid - Lead/system programmer - [Portfolio](https://github.com/Sad-AI-dev)  
-Niels - Gameplay/player programmer - [Portfolio](https://github.com/NielsdeGruijl)
-Freek - AI programmer - [Portfolio](https://github.com/Sad-AI-dev)  
-Emma - Lead/concept artist  
-Diana - 3D artist  
-Mitchell - UI designer  
-Wouter - Sound designer  
+Niels - Gameplay/player programmer - [Portfolio](https://github.com/NielsdeGruijl)  
+Freek - AI programmer - [Portfolio](https://github.com/FreekPluim)  
+Emma - Lead/concept artist - [Portfolio]()  
+Diana - 3D artist - [Portfolio]()  
+Mitchell - UI designer - [Portfolio]()   
+Wouter - Sound designer - [Portfolio]()    
 
 THE GAME  
 
