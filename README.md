@@ -9,7 +9,7 @@ THE TEAM
 Arvid - Lead/system programmer - [Portfolio](https://github.com/Sad-AI-dev)  
 Niels - Gameplay/player programmer - [Portfolio](https://github.com/NielsdeGruijl)  
 Freek - AI programmer - [Portfolio](https://github.com/FreekPluim)  
-Emma - Lead/concept artist  - [Portfolio](https://www.artstation.com/thesoupwizard)
+Emma - Lead/concept artist  - [Portfolio](https://www.artstation.com/thesoupwizard)  
 Diana - 3D artist   
 Mitchell - UI designer  
 Wouter - Sound designer   
