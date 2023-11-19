@@ -10,7 +10,7 @@ Arvid - Lead/system programmer - [Portfolio](https://github.com/Sad-AI-dev)
 Niels - Gameplay/player programmer - [Portfolio](https://github.com/NielsdeGruijl)  
 Freek - AI programmer - [Portfolio](https://github.com/FreekPluim)  
 Emma - Lead/concept artist  - [Portfolio](https://www.artstation.com/thesoupwizard)  
-Diana - 3D artist   
+Diana - 3D artist  - [Portfolio](https://www.artstation.com/diana_cojocaru)  
 Mitchell - UI designer - [Portfolio](https://mthartwig.myportfolio.com/)  
 Wouter - Sound designer   
 
