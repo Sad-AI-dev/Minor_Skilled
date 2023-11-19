@@ -11,7 +11,7 @@ Niels - Gameplay/player programmer - [Portfolio](https://github.com/NielsdeGruij
 Freek - AI programmer - [Portfolio](https://github.com/FreekPluim)  
 Emma - Lead/concept artist  - [Portfolio](https://www.artstation.com/thesoupwizard)  
 Diana - 3D artist   
-Mitchell - UI designer  
+Mitchell - UI designer - [Portfolio](https://mthartwig.myportfolio.com/)  
 Wouter - Sound designer   
 
 THE GAME  
