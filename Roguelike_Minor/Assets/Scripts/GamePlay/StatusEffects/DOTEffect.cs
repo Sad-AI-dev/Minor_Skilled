@@ -32,20 +32,15 @@ namespace Game {
         }
 
         //========= Manage Stacks ===========
-        public override void AddStacks(StatusEffectHandler handler)
+        public override void AddStack(StatusEffectHandler handler)
         {
             DOTEffectVars vars = handler.statusEffects[this][handler.statusEffects[this].Count - 1] as DOTEffectVars;
             vars.currentRoutine = handler.agent.StartCoroutine(DOTCo(vars, handler.agent));
         }
 
-        public override void RemoveStacks(StatusEffectHandler handler)
+        public override void RemoveStack(StatusEffectHandler handler)
         {
-
             DOTEffectVars vars = handler.statusEffects[this][0] as DOTEffectVars;
-            RemoveStack(handler, vars);
-        }
-        private void RemoveStack(StatusEffectHandler handler, DOTEffectVars vars)
-        {
             //end coroutine
             if (vars.currentRoutine != null)
             {

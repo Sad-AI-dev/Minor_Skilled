@@ -27,14 +27,14 @@ namespace Game {
         }
 
         //========= Manage Stacks ==========
-        public override void AddStacks(StatusEffectHandler handler)
+        public override void AddStack(StatusEffectHandler handler)
         {
             int varsIndex = handler.statusEffects[this].Count - 1;
             AttackSpeedEffectVars vars = handler.statusEffects[this][varsIndex] as AttackSpeedEffectVars;
             vars.activeRoutine = handler.agent.StartCoroutine(IncreaseAttackSpeedCo(handler.agent));
         }
 
-        public override void RemoveStacks(StatusEffectHandler handler)
+        public override void RemoveStack(StatusEffectHandler handler)
         {
             handler.agent.stats.attackSpeed -= attackSpeedIncrease;
             RemoveStack(handler, handler.statusEffects[this][0] as AttackSpeedEffectVars);

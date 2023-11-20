@@ -12,13 +12,13 @@ namespace Game.Core {
         public abstract void RemoveEffect(StatusEffectHandler handler);
 
         //============== Manage Effect stacking ==================
-        public abstract void AddStacks(StatusEffectHandler handler);
+        public abstract void AddStack(StatusEffectHandler handler);
         public virtual void AddVars(StatusEffectHandler handler, List<StatusEffectHandler.EffectVars> vars)
         {
             vars.Add(new StatusEffectHandler.EffectVars());
         }
 
-        public abstract void RemoveStacks(StatusEffectHandler handler);
+        public abstract void RemoveStack(StatusEffectHandler handler);
         public virtual void RemoveVars(StatusEffectHandler handler, List<StatusEffectHandler.EffectVars> vars)
         {
             vars.RemoveAt(0);
