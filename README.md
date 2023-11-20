@@ -12,7 +12,10 @@ Freek - AI programmer - [Portfolio](https://github.com/FreekPluim)
 Emma - Lead/concept artist  - [Portfolio](https://www.artstation.com/thesoupwizard)  
 Diana - 3D artist  - [Portfolio](https://www.artstation.com/diana_cojocaru)  
 Mitchell - UI designer - [Portfolio](https://mthartwig.myportfolio.com/)  
-Wouter - Sound designer   
+Wouter - Sound designer  - [Portfolio](https://www.linkedin.com/in/wouter-m-4a0778201/)  
+
+SUPPORTING ARTIST
+Deniz - 3D artist - [Portfolio](https://denizjanfisekci.artstation.com/)  
 
 THE GAME  
 
