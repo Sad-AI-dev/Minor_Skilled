@@ -2,6 +2,7 @@ using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Player
 {
@@ -13,6 +14,8 @@ namespace Game.Player
         private PlayerController controller;
         private CharacterController cc;
         private FrictionManager frictionManager;
+
+        public UnityEvent<bool> GroundedEvent;
 
         public void CheckGrounded()
         {
@@ -39,6 +42,7 @@ namespace Game.Player
             controller.grounded = true;
             controller.agent.isGrounded = true;
             controller.jumping = false;
+            GroundedEvent.Invoke(true);
             
             frictionManager.SetFriction(frictionTypes.ground);
         }
@@ -63,6 +67,7 @@ namespace Game.Player
 
             controller.agent.isGrounded = false;
             controller.grounded = false;
+            GroundedEvent.Invoke(false);
         }
     }
 }

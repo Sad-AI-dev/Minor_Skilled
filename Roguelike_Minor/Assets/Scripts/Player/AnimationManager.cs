@@ -22,22 +22,29 @@ namespace Game.Player
     {
         [SerializeField] Animator animator;
         private PlayerController controller;
+        private GroundedChecker groundedChecker;
         private Agent agent;
         private PlayerInput input;
 
         //animation parameter identifiers
         int running;
         int jump;
+        int grounded;
         int hit;
         int grenade;
         int interact;
         int dash;
         int die;
         int shoot;
+        int special;
+     
 
         private void Start()
         {
             InitializeIdentifiers();
+
+            groundedChecker = GetComponent<GroundedChecker>();
+            groundedChecker.GroundedEvent.AddListener(SetAnimGrounded);
 
             input = GetComponent<PlayerInput>();
             input.stopShooting.AddListener(StopAnimPrimary);
@@ -52,12 +59,19 @@ namespace Game.Player
         {
             running = Animator.StringToHash("isRunning");
             jump = Animator.StringToHash("Jump");
+            grounded = Animator.StringToHash("Grounded");
             hit = Animator.StringToHash("Hit");
             grenade = Animator.StringToHash("Grenade");
             interact = Animator.StringToHash("Interact");
             dash = Animator.StringToHash("Dash");
             die = Animator.StringToHash("Die");
             shoot = Animator.StringToHash("Shoot");
+            special = Animator.StringToHash("Special");
+        }
+
+        private void SetAnimGrounded(bool value)
+        {
+            animator.SetBool(grounded, value);
         }
 
         private void AnimRun()
@@ -87,7 +101,7 @@ namespace Game.Player
         }
         public void AnimSpecial()
         {
-            animator.SetTrigger(shoot);
+            animator.SetTrigger(special);
         }
         public void AnimUtility()
         {

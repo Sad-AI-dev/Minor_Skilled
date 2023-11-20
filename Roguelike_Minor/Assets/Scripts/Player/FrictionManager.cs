@@ -42,7 +42,7 @@ namespace Game.Player
 
         public Vector3 ApplyFriction(Vector3 velocity)
         {
-            Debug.Log(activeFriction);
+            //Debug.Log(activeFriction);
             float drag = 0.5f * activeFriction * velocity.magnitude * 0.47f * 2;
             velocity -= velocity.normalized * drag * Time.fixedDeltaTime;
             return velocity;
