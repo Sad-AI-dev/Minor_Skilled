@@ -51,10 +51,8 @@ namespace Game {
         private void ApplyBleed(HitEvent hitEvent)
         {
             StatusEffectHandler effectHandler = hitEvent.target.agent.effectHandler;
-            effectHandler.AddEffect(bleedEffect);
+            DOTEffect.DOTEffectVars vars = effectHandler.AddEffect(bleedEffect) as DOTEffect.DOTEffectVars;
             //initialize effect vars
-            int varsIndex = effectHandler.statusEffects[bleedEffect].Count - 1;
-            DOTEffect.DOTEffectVars vars = effectHandler.statusEffects[bleedEffect][varsIndex] as DOTEffect.DOTEffectVars;
             vars.dmg = bleedDamageMult * hitEvent.source.stats.baseDamage;
             vars.source = hitEvent.source;
         }

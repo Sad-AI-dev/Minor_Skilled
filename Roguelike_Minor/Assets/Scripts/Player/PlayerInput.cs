@@ -1,8 +1,10 @@
+using Codice.Client.Common.GameUI;
 using Game.Core;
 using Game.Core.GameSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Player {
     [RequireComponent(typeof(PlayerController))]
@@ -13,12 +15,20 @@ namespace Game.Player {
         [SerializeField] private Interactor interactor;
         [SerializeField] private GameObject inventory;
         [SerializeField] private PauseMenu pauseMenu;
+        [SerializeField] private CameraController camController;
+
+        [Header("Variables")]
+        [SerializeField] private int jumpBufferFrames;
+        private Coroutine jumpBufferCoroutine;
 
         [Header("Audio")]
         [SerializeField] private AudioPlayer audioPlayer;
 
         private bool canPlayFootstep = true;
         private bool gamePaused = false;
+        private bool shooting;
+        
+        public UnityEvent stopShooting;
 
         private void Start()
         {
@@ -57,7 +67,10 @@ namespace Game.Player {
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                playerController.Jump();
+                if(jumpBufferCoroutine != null)
+                    StopCoroutine(jumpBufferCoroutine);
+
+                jumpBufferCoroutine = StartCoroutine(JumpBufferCo());
             }
         }
 
@@ -65,7 +78,15 @@ namespace Game.Player {
         {
             if(Input.GetMouseButton(0))
             {
+                if (!shooting)
+                    shooting = true;
+
                 agent.abilities.primary.TryUse();
+            }
+            if(!Input.GetMouseButton(0) && shooting)
+            {
+                shooting = false;
+                stopShooting.Invoke();
             }
             if (Input.GetMouseButtonDown(1))
             {
@@ -95,11 +116,13 @@ namespace Game.Player {
             {
                 inventory.SetActive(true);
                 Cursor.lockState = CursorLockMode.Confined;
+                camController.LockCamera();
             }
             if (Input.GetKeyUp(KeyCode.Tab))
             {
                 inventory.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
+                camController.UnlockCamera();
             }
         }
 
@@ -114,6 +137,17 @@ namespace Game.Player {
             {
                 gamePaused = false;
                 pauseMenu.DeactivateMenu();
+            }
+        }
+
+        private IEnumerator JumpBufferCo()
+        {
+            int framesPassed = 0;
+            while (framesPassed < jumpBufferFrames)
+            {
+                framesPassed++;
+                playerController.Jump();
+                yield return null;
             }
         }
 

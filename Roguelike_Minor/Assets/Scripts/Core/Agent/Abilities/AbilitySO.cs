@@ -19,5 +19,6 @@ namespace Game.Core {
 
         //======== Upgrade Support ==========
         public virtual void Upgrade(Ability source) { }
+        public virtual void DownGrade(Ability source) { }
     }
 }

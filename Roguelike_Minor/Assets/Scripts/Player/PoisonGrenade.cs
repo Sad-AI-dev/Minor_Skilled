@@ -17,7 +17,7 @@ namespace Game.Player
 
         protected override void UpdateMoveDir()
         {
-            Debug.Log(velocity);
+            //Debug.Log(velocity);
             velocity += new Vector3(0, -gravity, 0);
         }
 

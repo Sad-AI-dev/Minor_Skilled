@@ -71,6 +71,7 @@ namespace Game.Core {
             source = baseEvent.source;
             hasAgentSource = true; //proc chain cannot happen without agent source
             //copy vars
+            baseDamage = baseEvent.GetTotalDamage();
             procCoef = baseEvent.procCoef;
             isCrit = baseEvent.isCrit;
             //manage item
