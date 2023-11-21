@@ -15,8 +15,6 @@ namespace Game.Player
         public Camera cam;
         private GroundedChecker groundedChecker;
         private FrictionManager frictionManager;
-        private ScreenShakeManager shakeManager;
-
 
         [Header("walk")]
         private float speed;
@@ -63,7 +61,6 @@ namespace Game.Player
             agent = GetComponent<Agent>();
             groundedChecker = GetComponent<GroundedChecker>();
             frictionManager = GetComponent<FrictionManager>();
-            shakeManager = GetComponent<ScreenShakeManager>();
             agent.OnKnockbackReceived.AddListener(ReceiveKnockback);
         }
 

@@ -33,7 +33,7 @@ namespace Game.Core.GameSystems
             }
         }
 
-        public void ShakeCamera(float intensity, float duration, Vector3 pos)
+        public void ShakeCamera(float intensity, float frequency, float duration, Vector3 pos)
         {
             StopAllCoroutines();
 
@@ -43,7 +43,7 @@ namespace Game.Core.GameSystems
             Debug.Log(distance);
 
             if(distance < maxDistance)
-                StartCoroutine(ShakeCo(intensity, duration, distance));
+                StartCoroutine(ShakeCo(intensity, frequency, duration, distance));
         }
 
         public void StopShake()
@@ -51,11 +51,15 @@ namespace Game.Core.GameSystems
             StopAllCoroutines();
         }
 
-        private IEnumerator ShakeCo(float intensity, float duration, float distance)
+        private IEnumerator ShakeCo(float intensity, float frequency, float duration, float distance)
         {
-            for (int i = 0; i < 3; i++)
+            intensity *= 1 - distance/maxDistance;
+
+            foreach(var shake in shakeComponents)
             {
-                cam.GetRig(i).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = intensity * 1 / distance;
+                shake.m_AmplitudeGain = intensity;
+                shake.m_FrequencyGain = frequency;
+                Debug.Log(shake.m_AmplitudeGain);
             }
 
             float timeElapsed = 0;

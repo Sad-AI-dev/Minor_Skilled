@@ -37,8 +37,6 @@ namespace Game.Core.GameSystems
             HitEvent hitEvent = new HitEvent(source);
             hitEvent.baseDamage = damage;
 
-            
-
             foreach (Agent agent in agents)
             {
                 agent.health.Hurt(hitEvent);
