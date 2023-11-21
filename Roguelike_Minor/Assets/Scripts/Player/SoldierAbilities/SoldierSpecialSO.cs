@@ -28,6 +28,9 @@ namespace Game.Player.Soldier
             Camera cam = Camera.main;
             Vector3 target;
 
+            ScreenShakeManager.instance.ShakeCamera(1, 1, source.agent.transform.position);
+
+
             controller.StartSlowCoroutine(.2f);
 
             RaycastHit hit;
