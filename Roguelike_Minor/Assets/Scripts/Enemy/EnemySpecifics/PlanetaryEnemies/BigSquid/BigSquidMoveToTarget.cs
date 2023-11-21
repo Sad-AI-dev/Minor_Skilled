@@ -77,7 +77,7 @@ namespace Game.Enemy {
             {
                 origin.y = hit.point.y;
             }
-            NavMesh.CalculatePath(origin, target.position, NavMesh.AllAreas, path);
+            NavMesh.CalculatePath(origin, target.position, NavMesh.GetAreaFromName("BigSquid"), path);
 
             pathQueue.Clear();
 

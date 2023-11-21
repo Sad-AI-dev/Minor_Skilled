@@ -46,7 +46,6 @@ namespace Game.Enemy {
                 }
                 else
                 {
-                    if (GetData("Chasing") == null) parent.parent.SetData("Chasing", true);
                     RaycastHit hit;
                     if (Physics.SphereCast(transform.position, 0.5f, direction, out hit, distanceToTarget))
                     {
@@ -55,6 +54,7 @@ namespace Game.Enemy {
                             state = NodeState.FAILURE;
                             return state;
                         }
+                        if (GetData("Chasing") == null) parent.parent.SetData("Chasing", true);
                         else state = NodeState.SUCCESS;
                     }
                 }
