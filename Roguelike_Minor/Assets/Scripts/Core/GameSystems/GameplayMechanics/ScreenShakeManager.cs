@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-namespace Game.Player
+namespace Game.Core.GameSystems
 {
     public class ScreenShakeManager : MonoBehaviour
     {
