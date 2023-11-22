@@ -88,6 +88,8 @@ namespace Game {
             uiManager.ObjectiveComplete = false;
             //handle pause
             scalingIsPaused = isShopStage;
+            //notify stage was loaded
+            if (!isShopStage) { EventBus<StageLoadedEvent>.Invoke(new StageLoadedEvent()); }
             isShopStage = false; //reset
         }
 

@@ -7,4 +7,10 @@ namespace Game
     {
         public Shop shop;
     }
+
+    //========= Spawn Objectives ============
+    public class ObjectiveSpawned : Event
+    {
+        public UnityEngine.GameObject objective;
+    }
 }

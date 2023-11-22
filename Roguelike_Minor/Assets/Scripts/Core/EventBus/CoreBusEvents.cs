@@ -24,6 +24,8 @@ namespace Game.Core {
     //========= Scene Loaded =========
     public class SceneLoadedEvent : Event { }
 
+    public class StageLoadedEvent: Event { }
+
     //===== Purchaseables =====
     public class PurchaseEvent : Event
     {

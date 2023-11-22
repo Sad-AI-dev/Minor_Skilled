@@ -19,7 +19,15 @@ namespace Game.Core.GameSystems {
 
         private ObjectiveStep InitializeStep(GameObject prefab)
         {
-            return Instantiate(prefab).GetComponent<ObjectiveStep>();
+            GameObject obj = Instantiate(prefab);
+            if (obj.TryGetComponent(out ObjectiveStep step))
+            {
+                return step;
+            }
+            else
+            {
+                return obj.GetComponentInChildren<ObjectiveStep>();
+            }
         }
     }
 }

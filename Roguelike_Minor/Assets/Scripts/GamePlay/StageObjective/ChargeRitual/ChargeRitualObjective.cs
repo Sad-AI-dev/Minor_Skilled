@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
 using TMPro;
 using Game.Core.GameSystems;
+using Game.Core;
 
 namespace Game {
-    public class ChargeRitualObjective : MonoBehaviour
+    public class ChargeRitualObjective : ObjectiveStep
     {
         [Header("Timings")]
         [SerializeField] private float chargeSpeed;
@@ -40,6 +39,11 @@ namespace Game {
         //ref
         private UIProgressBarHandler progressBar;
 
+        private void Awake()
+        {
+            EventBus<ObjectiveSpawned>.Invoke(new ObjectiveSpawned { objective = transform.parent.gameObject });
+        }
+
         private void Start()
         {
             rangeIndicator.SetActive(false);
@@ -52,11 +56,12 @@ namespace Game {
             else if (canDecharge) { Decharge(); }
             else { return; } //objective is not active
             UpdatePillarSpeed();
-            //done check
-            if (progress >= 100) { StopCharge(); }
             //update UI
             progress = Mathf.Clamp(progress, 0, 100f);
             UpdateUI();
+            //done check
+            if (progress >= 100) { StopCharge(); }
+            else { onStateChanged?.Invoke(this); } //normal state objective
         }
         
         //=============== Start Charge ==============
@@ -113,8 +118,20 @@ namespace Game {
             GameStateManager.instance.HandleCompleteStageObject();
             //Update UI
             progressBar.Hide();
-            //destroy
-            Destroy(gameObject);
+            //announce completion
+            OnComplete();
+        }
+
+        private void OnComplete()
+        {
+            state = ObjectiveState.Done;
+            onStateChanged?.Invoke(this);
+        }
+
+        //===== Handle Destroy ====
+        public override void ForceDestroy()
+        {
+            Destroy(transform.parent.gameObject);
         }
 
         //============== Manage Triggers ==================

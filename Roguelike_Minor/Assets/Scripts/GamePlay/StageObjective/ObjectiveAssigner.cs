@@ -19,11 +19,11 @@ namespace Game {
             //get external components
             manager = GetComponent<ObjectiveManager>();
             //setup events
-            EventBus<SceneLoadedEvent>.AddListener(HandleSceneLoad);
+            EventBus<StageLoadedEvent>.AddListener(HandleStageLoad);
         }
 
         //====== Handle Scene Load ========
-        private void HandleSceneLoad(SceneLoadedEvent sceneLoaded)
+        private void HandleStageLoad(StageLoadedEvent sceneLoaded)
         {
             manager.Clear();
             if (!GameStateManager.instance.scalingIsPaused)
@@ -39,7 +39,7 @@ namespace Game {
         //========= Handle Destroy ========
         private void OnDestroy()
         {
-            EventBus<SceneLoadedEvent>.RemoveListener(HandleSceneLoad);
+            EventBus<StageLoadedEvent>.RemoveListener(HandleStageLoad);
         }
     }
 }

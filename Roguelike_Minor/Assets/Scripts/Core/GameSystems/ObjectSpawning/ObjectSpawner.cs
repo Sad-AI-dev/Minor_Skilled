@@ -23,6 +23,11 @@ namespace Game.Core.GameSystems {
         public void SpawnObject(GameObject prefab)
         {
             GameObject obj = Instantiate(prefab);
+            PlaceObject(obj);
+        }
+
+        public void PlaceObject(GameObject obj)
+        {
             obj.transform.SetPositionAndRotation(GetRandomSpawnPoint(), GetRandomYRotation());
         }
 
