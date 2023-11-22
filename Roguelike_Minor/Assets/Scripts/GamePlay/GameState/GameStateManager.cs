@@ -17,8 +17,7 @@ namespace Game {
             else
             {
                 instance = this;
-                EventBus<SceneLoadedEvent>.AddListener(HandleSceneLoaded);
-                EventBus<ShopLoadedEvent>.AddListener(HandleShopLoad);
+                Setup();
             }
         }
         public static GameStateManager instance;
@@ -41,9 +40,6 @@ namespace Game {
         public UIManager uiManager;
         [SerializeField] private SceneLoader sceneLoader;
 
-        [Header("Events")]
-        public UnityEvent onStageComplete;
-
         [Header("Planet Advancement Settings")]
         [SerializeField] private List<ListWrapper<int>> planetSceneIndeces;
         [SerializeField] private int shopIndex;
@@ -59,11 +55,29 @@ namespace Game {
         [HideInInspector] public bool scalingIsPaused;
         private bool isShopStage;
 
+        private void Setup()
+        {
+            //setup events
+            EventBus<SceneLoadedEvent>.AddListener(HandleSceneLoaded);
+            EventBus<ShopLoadedEvent>.AddListener(HandleShopLoad);
+            EventBus<ObjectiveCompleteEvent>.AddListener(HandleObjectiveComplete);
+        }
+
         //========== Manage Stage State ==============
+        private void HandleObjectiveComplete(ObjectiveCompleteEvent eventData)
+        {
+            if (eventData.objectiveManager.AllObjectivesCompleted())
+            {
+                //TEMP
+                advanceObjectSpawner.SpawnAdvanceObject();
+                //update UI manager
+                uiManager.ObjectiveComplete = true;
+            }
+        }
+
         public void HandleCompleteStageObject()
         {
             advanceObjectSpawner.SpawnAdvanceObject();
-            onStageComplete?.Invoke();
             //update UI manager
             uiManager.ObjectiveComplete = true;
         }
@@ -105,6 +119,7 @@ namespace Game {
         {
             EventBus<SceneLoadedEvent>.RemoveListener(HandleSceneLoaded);
             EventBus<ShopLoadedEvent>.RemoveListener(HandleShopLoad);
+            EventBus<ObjectiveCompleteEvent>.RemoveListener(HandleObjectiveComplete);
             //announce game end
             EventBus<GameEndEvent>.Invoke(new GameEndEvent());
         }

@@ -60,7 +60,7 @@ namespace Game {
         //======== Handle Shop Load ==========
         private void OnShopLoad(ShopLoadedEvent eventData)
         {
-            (eventData.shop as Shop).itemLuck = totalChance;
+            eventData.shop.itemLuck = totalChance;
         }
 
         //======= Handle Game End ========
