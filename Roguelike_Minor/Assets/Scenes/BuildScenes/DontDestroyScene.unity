@@ -193,18 +193,18 @@ PrefabInstance:
     - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: primary.onUse.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1630274008}
+      objectReference: {fileID: 1630274009}
     - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: primary.onUse.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: primary.onUse.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: AnimPrimary
+      value: SetMinFOV
       objectReference: {fileID: 0}
     - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: primary.onUse.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Game.Player.AnimationManager, Game.Player
+      value: Game.Player.FOVManager, Game.Player
       objectReference: {fileID: 0}
     - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: primary.onUse.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -262,6 +262,10 @@ PrefabInstance:
       propertyPath: m_YAxis.Value
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5844694640700254909, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 58.715508
+      objectReference: {fileID: 0}
     - target: {fileID: 6042182213848110425, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: inventory
       value: 
@@ -282,6 +286,14 @@ PrefabInstance:
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 733756480}
+    - target: {fileID: 6425007794457280646, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: maxFOV
+      value: 78
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425007794457280646, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: minFOV
+      value: 59
+      objectReference: {fileID: 0}
     - target: {fileID: 6612914900796368241, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: onStopCanInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -383,6 +395,9 @@ PrefabInstance:
     - {fileID: 5634662764475601395, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1421599695142573888, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 1630274009}
     - targetCorrespondingSourceObject: {fileID: 4780994281353076404, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1258771809}
@@ -400,7 +415,7 @@ PrefabInstance:
       addedObject: {fileID: 1093045995}
     - targetCorrespondingSourceObject: {fileID: 583641685820129118, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1093045996}
+      addedObject: {fileID: 1093046000}
   m_SourcePrefab: {fileID: 100100000, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
 --- !u!114 &684490301 stripped
 MonoBehaviour:
@@ -619,7 +634,7 @@ MonoBehaviour:
   m_AmplitudeGain: 1
   m_FrequencyGain: 1
   mNoiseOffsets: {x: 0, y: 0, z: 0}
---- !u!114 &1093045996
+--- !u!114 &1093046000
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -990,7 +1005,7 @@ Camera:
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
-  m_FOVAxisMode: 0
+  m_FOVAxisMode: 1
   m_Iso: 200
   m_ShutterSpeed: 0.005
   m_Aperture: 16
@@ -1010,7 +1025,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 52
+  field of view: 58.715508
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -1075,6 +1090,25 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1421599695142573888, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
   m_PrefabInstance: {fileID: 684490300}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1630274009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630274008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4c87f4cc6ee6d43b52a07149484264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1298136000}
+  minFOV: 40
+  defaultFOV: 59
+  maxFOV: 78
+  zoomInSpeed: 0.35
+  zoomOutSpeed: 0.5
+  lockFOV: 0
 --- !u!1001 &6819881373176139139
 PrefabInstance:
   m_ObjectHideFlags: 0

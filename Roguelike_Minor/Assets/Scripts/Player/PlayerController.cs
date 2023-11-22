@@ -1,6 +1,7 @@
 using Game.Core;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.Events;
 
 namespace Game.Player
@@ -15,6 +16,7 @@ namespace Game.Player
         public Camera cam;
         private GroundedChecker groundedChecker;
         private FrictionManager frictionManager;
+        private FOVManager fovManager;
 
         [Header("walk")]
         private float speed;
@@ -61,6 +63,7 @@ namespace Game.Player
             agent = GetComponent<Agent>();
             groundedChecker = GetComponent<GroundedChecker>();
             frictionManager = GetComponent<FrictionManager>();
+            fovManager = GetComponent<FOVManager>();
             agent.OnKnockbackReceived.AddListener(ReceiveKnockback);
         }
 
@@ -75,8 +78,10 @@ namespace Game.Player
 
             //allows to directly set position of player
             Physics.SyncTransforms();
-            
-            cc.Move((moveDirection * speed) + excessVelocity + new Vector3(0, yVelocity, 0));
+
+            walkVelocity = (moveDirection * speed) + excessVelocity;
+            cc.Move(walkVelocity + new Vector3(0, yVelocity, 0));
+            fovManager.UpdateFOV(walkVelocity.magnitude);
 
             groundedChecker.CheckGrounded();
         }

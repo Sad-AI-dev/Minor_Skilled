@@ -40,7 +40,7 @@ namespace Game.Core.GameSystems
             float distance = (pos - player.transform.position).magnitude;
             if(distance < 1) distance = 1;
 
-            Debug.Log(distance);
+            //Debug.Log(distance);
 
             if(distance < maxDistance)
                 StartCoroutine(ShakeCo(intensity, frequency, duration, distance));
@@ -59,7 +59,7 @@ namespace Game.Core.GameSystems
             {
                 shake.m_AmplitudeGain = intensity;
                 shake.m_FrequencyGain = frequency;
-                Debug.Log(shake.m_AmplitudeGain);
+                //Debug.Log(shake.m_AmplitudeGain);
             }
 
             float timeElapsed = 0;
