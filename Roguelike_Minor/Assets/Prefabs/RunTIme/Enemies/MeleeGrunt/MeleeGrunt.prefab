@@ -419,6 +419,7 @@ GameObject:
   - component: {fileID: 6928698356919846774}
   - component: {fileID: 2948050001797566986}
   - component: {fileID: 8501894440369378193}
+  - component: {fileID: -7770819497263058717}
   m_Layer: 6
   m_Name: MeleeGrunt
   m_TagString: Enemy
@@ -459,10 +460,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 6979495719125071837}
   navAgent: {fileID: 590220394486652246}
+  rb: {fileID: 1504405598959527834}
   baseDamageScaling: 0.5
   moneyScaling: 0.25
   maxHealthScaling: 2
-  rb: {fileID: 1504405598959527834}
   upMultiplier: 3
   directionMultiplier: 3
   charceChancePercent: 15
@@ -513,7 +514,7 @@ MonoBehaviour:
     SFX:
       idInternal: 0
       valueGuidInternal: 
-      WwiseObjectReference: {fileID: 11400000, guid: e7b2c0dab8b407d41823688cb6acd1af, type: 2}
+      WwiseObjectReference: {fileID: 0}
     coolDownTimer: 0
   special:
     agent: {fileID: 0}
@@ -586,10 +587,34 @@ MonoBehaviour:
       m_Calls: []
   onHurt:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -7770819497263058717}
+        m_TargetAssemblyTypeName: Game.Core.GameSystems.AudioPlayer, Game.Core.GameSystems
+        m_MethodName: Play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDeath:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: -7770819497263058717}
+        m_TargetAssemblyTypeName: Game.Core.GameSystems.AudioPlayer, Game.Core.GameSystems
+        m_MethodName: Play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 6928698356919846774}
         m_TargetAssemblyTypeName: Game.Core.GameSystems.Destroyer, Game.Core.GameSystems
         m_MethodName: DestroyObject
@@ -756,6 +781,25 @@ CapsuleCollider:
   m_Height: 1.4156221
   m_Direction: 1
   m_Center: {x: 0, y: 0.7011964, z: 0}
+--- !u!114 &-7770819497263058717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5666398297103683690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86866b813429b9e4aa0d9e72eb5c091a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvents:
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e7b2c0dab8b407d41823688cb6acd1af, type: 2}
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 269c2b486f83def4cb2441ad0d8a240f, type: 2}
 --- !u!1 &6177418429845132727
 GameObject:
   m_ObjectHideFlags: 0

@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 8314590307418832766}
   - component: {fileID: 8622193806833575253}
   - component: {fileID: 3900860495363396992}
+  - component: {fileID: -514837013300066416}
   m_Layer: 0
   m_Name: BigSquid
   m_TagString: Untagged
@@ -598,7 +599,19 @@ MonoBehaviour:
       m_Calls: []
   onHurt:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -514837013300066416}
+        m_TargetAssemblyTypeName: Game.Core.GameSystems.AudioPlayer, Game.Core.GameSystems
+        m_MethodName: Play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -827,6 +840,22 @@ CapsuleCollider:
   m_Height: 2.0144293
   m_Direction: 1
   m_Center: {x: 0, y: 0.98519075, z: -0.015088677}
+--- !u!114 &-514837013300066416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6302184283900363943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86866b813429b9e4aa0d9e72eb5c091a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvents:
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c1e54f12ad6357041b5b780de9bb5644, type: 2}
 --- !u!1 &7289322527761356698
 GameObject:
   m_ObjectHideFlags: 0
