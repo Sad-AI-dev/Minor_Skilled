@@ -16,7 +16,10 @@ namespace Game.Player {
         [SerializeField] private GameObject inventory;
         [SerializeField] private PauseMenu pauseMenu;
         [SerializeField] private CameraController camController;
+        private PlayerRotationManager rotator;
         private FOVManager fovManager;
+
+        private Camera cam;
 
         [Header("Variables")]
         [SerializeField] private int jumpBufferFrames;
@@ -35,6 +38,8 @@ namespace Game.Player {
         {
             playerController = GetComponent<PlayerController>();
             fovManager = GetComponent<FOVManager>();
+            rotator = GetComponent<PlayerRotationManager>();
+            cam = Camera.main;
             //hide inventory by default
             inventory.SetActive(false);
         }
@@ -85,13 +90,15 @@ namespace Game.Player {
 
                 fovManager.SetMinFOV();
                 fovManager.lockFOV = true;
+
+                    rotator.RotatePlayer(cam.transform.eulerAngles.y);
                 
                 agent.abilities.primary.TryUse();
             }
             if(!Input.GetMouseButton(0) && shooting)
             {
                 shooting = false;
-                fovManager.lockFOV = false;
+                fovManager.ResetFOV();
                 stopShooting.Invoke();
             }
             if (Input.GetMouseButtonDown(1))

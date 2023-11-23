@@ -17,6 +17,7 @@ namespace Game.Player
         private GroundedChecker groundedChecker;
         private FrictionManager frictionManager;
         private FOVManager fovManager;
+        private PlayerRotationManager rotator;
 
         [Header("walk")]
         private float speed;
@@ -44,12 +45,8 @@ namespace Game.Player
         [HideInInspector] public bool jumping;
         
         private CharacterController cc;
-
-        private float smoothVelocity;
-        private float smoothTime = 0.1f;
         
         private Coroutine slowCo;
-        private Coroutine kbReset;
 
         public UnityEvent startRunning;
         public UnityEvent stopRunning;
@@ -64,6 +61,7 @@ namespace Game.Player
             groundedChecker = GetComponent<GroundedChecker>();
             frictionManager = GetComponent<FrictionManager>();
             fovManager = GetComponent<FOVManager>();
+            rotator = GetComponent<PlayerRotationManager>();
             agent.OnKnockbackReceived.AddListener(ReceiveKnockback);
         }
 
@@ -91,8 +89,8 @@ namespace Game.Player
             if(moveInput.magnitude >= 0.1f)
             {
                 float dirAngle = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
-                float smoothAngle = Mathf.SmoothDampAngle(visuals.transform.eulerAngles.y, dirAngle, ref smoothVelocity, smoothTime);
-                visuals.transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
+                //float smoothAngle = Mathf.SmoothDampAngle(visuals.transform.eulerAngles.y, dirAngle, ref smoothVelocity, smoothTime);
+                rotator.RotatePlayer(dirAngle);
                 moveDirection = Quaternion.Euler(0, dirAngle, 0) * Vector3.forward;
                 moveDirection.Normalize();
                 lastMoveDir = moveDirection;  
