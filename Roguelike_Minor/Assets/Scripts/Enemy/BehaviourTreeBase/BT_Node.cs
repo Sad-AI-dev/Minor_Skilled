@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using Game.Core;
 
 namespace Game.Enemy.Core
 {
@@ -34,8 +36,16 @@ namespace Game.Enemy.Core
         public virtual NodeState Evaluate() => NodeState.FAILURE;
         public void SetData(string key, object value)
         {
-            DataContext[key] = value;
+            if (parent != null)
+            {
+                parent.SetData(key, value);
+            }
+            else
+            {
+                DataContext[key] = value;
+            }
         }
+
         public object GetData(string key)
         {
             object value = null;
@@ -75,6 +85,36 @@ namespace Game.Enemy.Core
                 node = node.parent;
             }
             return false;
+        }
+
+        public void SetTarget(Transform target)
+        {
+            if (parent != null)
+            {
+                parent.SetTarget(target);
+            }
+            else
+            {
+                SetData("Target", target);
+                EventBus<GameEndEvent>.AddListener(ClearTarget);
+            }
+        }
+        public void ClearTarget(GameEndEvent eventData)
+        {
+            ClearData("Target");
+            EventBus<GameEndEvent>.RemoveListener(ClearTarget);
+        }
+
+        public void SetDistanceToTarget(float distanceToTarget)
+        {
+            if (parent != null)
+            {
+                parent.SetDistanceToTarget(distanceToTarget);
+            }
+            else
+            {
+                SetData("DistanceToTarget", distanceToTarget);
+            }
         }
     }
 }
