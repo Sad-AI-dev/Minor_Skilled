@@ -71,12 +71,23 @@ namespace Game.Player {
                 StartCoroutine(FootstepCo());
             }
 
-            if (walking && !shooting)
+            if (!shooting)
             {
                 AdjustRunAnimSpeed.Invoke(1);
-                walking = false;
+                //walking = false;
+            }   
+
+            if(shooting)
+            {
+                Debug.Log(moveInput);
+
+                if(moveInput.y < 0)
+                    AdjustRunAnimSpeed.Invoke(-0.5f);
+                else
+                    AdjustRunAnimSpeed.Invoke(0.5f);
+
+                //walking = true;
             }
-                
         }
 
         private void JumpInput()
@@ -101,12 +112,6 @@ namespace Game.Player {
                 fovManager.lockFOV = true;
 
                 rotator.RotatePlayer(cam.transform.eulerAngles.y);
-
-                if (!walking)
-                {
-                    AdjustRunAnimSpeed.Invoke(0.5f);
-                    walking = true;
-                }
                 
                 agent.abilities.primary.TryUse();
             }
