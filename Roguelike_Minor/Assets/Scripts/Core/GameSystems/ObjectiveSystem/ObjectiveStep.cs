@@ -18,7 +18,7 @@ namespace Game.Core.GameSystems {
         public string progressLabel;
         public int maxCount;
         public int currentCount;
-        public float progressPercent;
+        public float progressPercent; //0 to 1
     }
 
     public abstract class ObjectiveStep : MonoBehaviour
