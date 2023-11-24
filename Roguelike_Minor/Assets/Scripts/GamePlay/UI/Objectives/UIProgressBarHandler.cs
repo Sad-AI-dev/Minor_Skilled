@@ -11,17 +11,20 @@ namespace Game {
         public GameObject sliderHolder;
         public Slider slider;
         public TMP_Text percentLabel;
+        public TMP_Text progressLabel;
 
         //======== Manage State =======
-        public void Show()
+        public void Show(string title)
         {
             sliderHolder.SetActive(true);
             slider.value = 0;
+            progressLabel.text = title;
         }
 
         public void Hide()
         {
             sliderHolder.SetActive(false);
+            progressLabel.text = "";
         }
 
         //======== Manage Progress ========

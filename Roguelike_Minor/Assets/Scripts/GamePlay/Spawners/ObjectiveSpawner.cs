@@ -1,17 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Core;
 using Game.Core.GameSystems;
 
 namespace Game {
     [RequireComponent(typeof(ObjectSpawner))]
     public class ObjectiveSpawner : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> objectives;
+        private ObjectSpawner spawner;
 
-        private void Start()
+        private void Awake()
         {
-            GetComponent<ObjectSpawner>().SpawnObject(objectives[Random.Range(0, objectives.Count)]);
+            spawner = GetComponent<ObjectSpawner>();
+            EventBus<ObjectiveSpawned>.AddListener(HandleObjectiveSpawned);
+        }
+
+        private void HandleObjectiveSpawned(ObjectiveSpawned eventData)
+        {
+            spawner.PlaceObject(eventData.objective);
+        }
+
+        private void OnDestroy()
+        {
+            EventBus<ObjectiveSpawned>.RemoveListener(HandleObjectiveSpawned);
         }
     }
 }
