@@ -24,8 +24,6 @@ namespace Game.Player
             {
                 float rotation = Mathf.SmoothDampAngle(visuals.transform.eulerAngles.y, angle, ref smoothVelocity, smoothTime);
                 visuals.transform.rotation = Quaternion.Euler(0, rotation, 0);
-
-                Debug.Log($"{visuals.transform.eulerAngles.y} , {angle}");
                 yield return null;
             }
 

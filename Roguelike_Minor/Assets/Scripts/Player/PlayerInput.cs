@@ -30,9 +30,12 @@ namespace Game.Player {
 
         private bool canPlayFootstep = true;
         private bool gamePaused = false;
-        private bool shooting;
+        [HideInInspector] public bool shooting;
+
+        private bool walking = false;
         
         public UnityEvent stopShooting;
+        public UnityEvent<float> AdjustRunAnimSpeed;
 
         private void Start()
         {
@@ -67,7 +70,13 @@ namespace Game.Player {
             {
                 StartCoroutine(FootstepCo());
             }
-            
+
+            if (walking && !shooting)
+            {
+                AdjustRunAnimSpeed.Invoke(1);
+                walking = false;
+            }
+                
         }
 
         private void JumpInput()
@@ -91,7 +100,13 @@ namespace Game.Player {
                 fovManager.SetMinFOV();
                 fovManager.lockFOV = true;
 
-                    rotator.RotatePlayer(cam.transform.eulerAngles.y);
+                rotator.RotatePlayer(cam.transform.eulerAngles.y);
+
+                if (!walking)
+                {
+                    AdjustRunAnimSpeed.Invoke(0.5f);
+                    walking = true;
+                }
                 
                 agent.abilities.primary.TryUse();
             }

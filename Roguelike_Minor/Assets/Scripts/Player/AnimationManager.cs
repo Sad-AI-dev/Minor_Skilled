@@ -37,6 +37,7 @@ namespace Game.Player
         int die;
         int shoot;
         int special;
+        int runSpeed;
      
 
         private void Start()
@@ -48,6 +49,7 @@ namespace Game.Player
 
             input = GetComponent<PlayerInput>();
             input.stopShooting.AddListener(StopAnimPrimary);
+            input.AdjustRunAnimSpeed.AddListener(SetRunAnimSpeed);
 
             controller = GetComponent<PlayerController>();
             controller.startRunning.AddListener(AnimRun);
@@ -67,8 +69,14 @@ namespace Game.Player
             die = Animator.StringToHash("Die");
             shoot = Animator.StringToHash("Shoot");
             special = Animator.StringToHash("Special");
+            runSpeed = Animator.StringToHash("RunSpeed");
         }
 
+
+        private void SetRunAnimSpeed(float value)
+        {
+            animator.SetFloat(runSpeed, value);
+        }
         private void SetAnimGrounded(bool value)
         {
             animator.SetBool(grounded, value);
