@@ -49,9 +49,9 @@ namespace Game.Player
         
         private Coroutine slowCo;
 
-        public UnityEvent startRunning;
-        public UnityEvent stopRunning;
-        public UnityEvent jump;
+        [HideInInspector] public UnityEvent startRunning;
+        [HideInInspector] public UnityEvent stopRunning;
+        [HideInInspector] public UnityEvent jump;
 
         private void Start()
         {
