@@ -6,6 +6,10 @@ namespace Game.Core.GameSystems {
     [CreateAssetMenu(fileName = "Objective", menuName = "ScriptableObjects/Objective")]
     public class ObjectiveDataSO : ScriptableObject
     {
+        [Header("UI Settings")]
+        public string displayName;
+
+        [Header("GamePlay Settings")]
         public List<GameObject> stepPrefabs;
 
         public ObjectiveStep ActivateStep(int index)

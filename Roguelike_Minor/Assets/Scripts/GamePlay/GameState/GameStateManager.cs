@@ -46,7 +46,7 @@ namespace Game {
 
         //ref to advance object spawner
         [HideInInspector] public AdvanceObjectSpawner advanceObjectSpawner;
-        [HideInInspector] public LootSpawner lootSpawner;
+        [HideInInspector] public LootSpawner lootSpawner; //needed for some items
 
         //scene advancement vars
         public int CurrentStage { get; private set; } = 1;
