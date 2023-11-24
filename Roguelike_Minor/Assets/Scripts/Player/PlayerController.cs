@@ -1,6 +1,7 @@
 using Game.Core;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.Events;
 
 namespace Game.Player
@@ -15,6 +16,8 @@ namespace Game.Player
         public Camera cam;
         private GroundedChecker groundedChecker;
         private FrictionManager frictionManager;
+        private FOVManager fovManager;
+        private PlayerRotationManager rotator;
 
         [Header("walk")]
         private float speed;
@@ -42,12 +45,8 @@ namespace Game.Player
         [HideInInspector] public bool jumping;
         
         private CharacterController cc;
-
-        private float smoothVelocity;
-        private float smoothTime = 0.1f;
         
         private Coroutine slowCo;
-        private Coroutine kbReset;
 
         public UnityEvent startRunning;
         public UnityEvent stopRunning;
@@ -61,6 +60,8 @@ namespace Game.Player
             agent = GetComponent<Agent>();
             groundedChecker = GetComponent<GroundedChecker>();
             frictionManager = GetComponent<FrictionManager>();
+            fovManager = GetComponent<FOVManager>();
+            rotator = GetComponent<PlayerRotationManager>();
             agent.OnKnockbackReceived.AddListener(ReceiveKnockback);
         }
 
@@ -75,8 +76,10 @@ namespace Game.Player
 
             //allows to directly set position of player
             Physics.SyncTransforms();
-            
-            cc.Move((moveDirection * speed) + excessVelocity + new Vector3(0, yVelocity, 0));
+
+            walkVelocity = (moveDirection * speed) + excessVelocity;
+            cc.Move(walkVelocity + new Vector3(0, yVelocity, 0));
+            fovManager.UpdateFOV(walkVelocity.magnitude);
 
             groundedChecker.CheckGrounded();
         }
@@ -86,8 +89,8 @@ namespace Game.Player
             if(moveInput.magnitude >= 0.1f)
             {
                 float dirAngle = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
-                float smoothAngle = Mathf.SmoothDampAngle(visuals.transform.eulerAngles.y, dirAngle, ref smoothVelocity, smoothTime);
-                visuals.transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
+                //float smoothAngle = Mathf.SmoothDampAngle(visuals.transform.eulerAngles.y, dirAngle, ref smoothVelocity, smoothTime);
+                rotator.RotatePlayer(dirAngle);
                 moveDirection = Quaternion.Euler(0, dirAngle, 0) * Vector3.forward;
                 moveDirection.Normalize();
                 lastMoveDir = moveDirection;  

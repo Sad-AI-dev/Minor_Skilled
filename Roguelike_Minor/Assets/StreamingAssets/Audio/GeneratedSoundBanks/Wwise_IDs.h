@@ -13,19 +13,21 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID PLAY_AMBIENCE = 278617630U;
+        static const AkUniqueID PLAY_BIRDS = 3025897706U;
         static const AkUniqueID PLAY_DASH = 2211787386U;
-        static const AkUniqueID PLAY_ENEMY_HIT = 2045007312U;
         static const AkUniqueID PLAY_FOOTSTEP = 1602358412U;
         static const AkUniqueID PLAY_GRENADE = 2405798708U;
         static const AkUniqueID PLAY_GRENADE_SPLAT = 3537222909U;
         static const AkUniqueID PLAY_GRENADE_THROW = 2492084817U;
-        static const AkUniqueID PLAY_HITMARKER = 1731259975U;
+        static const AkUniqueID PLAY_GRUNT_DIE = 3392973459U;
+        static const AkUniqueID PLAY_GRUNT_HIT = 2989619110U;
         static const AkUniqueID PLAY_OBELISK_PASSIVE = 2990404959U;
         static const AkUniqueID PLAY_PICKUP_ITEM = 3128913152U;
         static const AkUniqueID PLAY_PRIMARY_FIRE = 3563057235U;
         static const AkUniqueID PLAY_SPECIAL_FIRE = 1149417670U;
+        static const AkUniqueID PLAY_SQUID_HIT = 1455468846U;
         static const AkUniqueID PLAY_START_OBELISK = 3577284316U;
+        static const AkUniqueID PLAY_WIND_AMBIENCE = 3110216747U;
     } // namespace EVENTS
 
     namespace SWITCHES
