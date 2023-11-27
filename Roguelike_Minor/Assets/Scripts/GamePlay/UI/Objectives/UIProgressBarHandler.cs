@@ -18,7 +18,7 @@ namespace Game {
         public void Show(string title, bool showCounter = false)
         {
             sliderHolder.SetActive(true);
-            slider.value = 0;
+            UpdateProgress(0);
             progressLabel.text = title;
             counterLabel.gameObject.SetActive(showCounter);
         }
@@ -34,6 +34,11 @@ namespace Game {
         {
             slider.value = percent * slider.maxValue;
             percentLabel.text = (Mathf.FloorToInt(percent * 100)) + "%";
+        }
+
+        public void UpdateCounter(int counter, int maxCounter)
+        {
+            counterLabel.text = $"{counter}/{maxCounter}";
         }
     }
 }

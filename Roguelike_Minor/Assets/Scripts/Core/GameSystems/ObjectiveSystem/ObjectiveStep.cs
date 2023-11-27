@@ -12,6 +12,7 @@ namespace Game.Core.GameSystems {
         public string title;
         public string description;
         [Header("Progress UI Settings")]
+        public bool useLargeBar;
         public ObjectiveType type;
 
         [Space(10f)]

@@ -8,6 +8,9 @@ using Game.Core.GameSystems;
 namespace Game {
     public class UIObjectiveManager : MonoBehaviour
     {
+        [Header("Refs")]
+        [SerializeField] private UIProgressBarHandler progressBar;
+
         [Header("Technical")]
         [SerializeField] private ObjectiveManager objectiveManager;
         [SerializeField] private BehaviourPool<UIObjectiveCard> cardPool;
@@ -40,7 +43,7 @@ namespace Game {
             card.transform.SetParent(transform); //make sure card is child of manager
             cards.Add(objective, card);
             //initialize card
-            card.Initialize(objective, step);
+            card.Initialize(objective, step, progressBar);
         }
 
         //======= Update Objective State ==========

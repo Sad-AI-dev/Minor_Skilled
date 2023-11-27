@@ -26,22 +26,22 @@ namespace Game {
         }
 
         //====== Initialize =======
-        public void Initialize(Objective objective, ObjectiveStep step)
+        public void Initialize(Objective objective, ObjectiveStep step, UIProgressBarHandler progressBar)
         {
             //setup objective
             title.text = objective.data.displayName;
             //setup first card
-            CreateCard(step);
+            CreateCard(step, progressBar);
             OnStateChanged(step);
         }
 
-        private void CreateCard(ObjectiveStep step)
+        private void CreateCard(ObjectiveStep step, UIProgressBarHandler progressbar)
         {
             //create card object
             UIStepCard card = stepCardPool.GetBehaviour();
             card.transform.SetParent(stepCardHolder);
             //setup card data
-            card.Setup(step);
+            card.Setup(step, progressbar);
             stepCards.Add(step, card);
         }
 

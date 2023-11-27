@@ -25,8 +25,9 @@ namespace Game {
 
         //vars
         private bool done;
+        private UIProgressBarHandler progressBarHandler;
 
-        public void Setup(ObjectiveStep step)
+        public void Setup(ObjectiveStep step, UIProgressBarHandler progressBarHandler)
         {
             done = false;
             StepUISettings settings = step.stepUISettings;
@@ -34,6 +35,11 @@ namespace Game {
             title.text = settings.title;
             description.text = settings.description;
             checkMark.SetActive(false);
+            //setup progress bar
+            if (settings.useLargeBar) {
+                this.progressBarHandler = progressBarHandler;
+                progressBarHandler.Show(settings.title, settings.type == ObjectiveType.Counter);
+            }
             //setup progress data
             switch (settings.type)
             {
@@ -48,6 +54,7 @@ namespace Game {
                     UpdateSlider(settings);
                     break;
             }
+            
         }
 
         //=========== Handle State Change =========
@@ -78,12 +85,20 @@ namespace Game {
         private void UpdateCounter(StepUISettings settings)
         {
             counterLabel.text = $"{settings.progressLabel}: {settings.currentCount}/{settings.maxCount}";
+            if (settings.useLargeBar)
+            {
+                progressBarHandler.UpdateCounter(settings.currentCount, settings.maxCount);
+            }
         }
 
         private void UpdateSlider(StepUISettings settings)
         {
             sliderLabel.text = $"{Mathf.FloorToInt(settings.progressPercent * 100)}%";
             slider.value = settings.progressPercent;
+            if (settings.useLargeBar)
+            {
+                progressBarHandler.UpdateProgress(settings.progressPercent);
+            }
         }
     }
 }
