@@ -1,7 +1,4 @@
-using Game.Core;
-
-namespace Game
-{
+namespace Game.Core {
     //========= Game Timer Events ========
     public class EnemyLevelupEvent : Event
     {
@@ -27,11 +24,7 @@ namespace Game
     //========= Scene Loaded =========
     public class SceneLoadedEvent : Event { }
 
-    //========= Shop Loaded ============
-    public class ShopLoadedEvent : Event
-    {
-        public UnityEngine.MonoBehaviour shop;
-    }
+    public class StageLoadedEvent: Event { }
 
     //===== Purchaseables =====
     public class PurchaseEvent : Event
@@ -41,4 +34,5 @@ namespace Game
 
     //========== Game State =============
     public class GameEndEvent : Event { }
+
 }
