@@ -17,6 +17,11 @@ namespace Game.Enemy.Core
         public BT_Node parent;
         public List<BT_Node> children = new List<BT_Node>();
         private Dictionary<string, object> DataContext = new Dictionary<string, object>();
+
+        public Transform transform;
+        public Transform target;
+        public Agent agent;
+
         public BT_Node()
         {
             parent = null;
@@ -103,6 +108,17 @@ namespace Game.Enemy.Core
         {
             ClearData("Target");
             EventBus<GameEndEvent>.RemoveListener(ClearTarget);
+        }
+
+        public IEnumerator DistanceToTargetCO(Agent agent, Transform transform, Transform target)
+        {
+            if (GetData("Target") != null)
+            {
+                float distance = Vector3.Distance(transform.position, target.position);
+                SetDistanceToTarget(distance);
+                yield return new WaitForSeconds(0.2f);
+                agent.StartCoroutine(DistanceToTargetCO(agent, transform, target));
+            }
         }
 
         public void SetDistanceToTarget(float distanceToTarget)
