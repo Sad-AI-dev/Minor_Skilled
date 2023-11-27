@@ -16,6 +16,11 @@ namespace Game {
             EventBus<ObjectiveSpawned>.AddListener(HandleObjectiveSpawned);
         }
 
+        private void Start()
+        {
+            EventBus<SpawnObjectiveEvent>.Invoke(new SpawnObjectiveEvent());
+        }
+
         private void HandleObjectiveSpawned(ObjectiveSpawned eventData)
         {
             spawner.PlaceObject(eventData.objective);

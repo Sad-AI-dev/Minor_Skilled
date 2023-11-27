@@ -10,15 +10,17 @@ namespace Game {
         [Header("Refs")]
         public GameObject sliderHolder;
         public Slider slider;
-        public TMP_Text percentLabel;
         public TMP_Text progressLabel;
+        public TMP_Text percentLabel;
+        public TMP_Text counterLabel;
 
         //======== Manage State =======
-        public void Show(string title)
+        public void Show(string title, bool showCounter = false)
         {
             sliderHolder.SetActive(true);
-            slider.value = 0;
+            UpdateProgress(0);
             progressLabel.text = title;
+            counterLabel.gameObject.SetActive(showCounter);
         }
 
         public void Hide()
@@ -32,6 +34,11 @@ namespace Game {
         {
             slider.value = percent * slider.maxValue;
             percentLabel.text = (Mathf.FloorToInt(percent * 100)) + "%";
+        }
+
+        public void UpdateCounter(int counter, int maxCounter)
+        {
+            counterLabel.text = $"{counter}/{maxCounter}";
         }
     }
 }

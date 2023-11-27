@@ -8,7 +8,7 @@ namespace Game.Core.GameSystems {
         private List<Objective> objectives;
 
         public System.Action<Objective, ObjectiveStep> onStateChanged;
-        public System.Action<ObjectiveManager, Objective> onObjectiveCompleted;
+        public System.Action<Objective> onObjectiveCompleted;
 
         private void Awake()
         {
@@ -44,7 +44,7 @@ namespace Game.Core.GameSystems {
 
         public void OnObjectiveCompleted(Objective objective)
         {
-            onObjectiveCompleted?.Invoke(this, objective); //notify others of objective completion
+            onObjectiveCompleted?.Invoke(objective); //notify others of objective completion
             RemoveObjective(objective);
             
         }

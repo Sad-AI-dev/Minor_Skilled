@@ -19,27 +19,24 @@ namespace Game {
             //get external components
             manager = GetComponent<ObjectiveManager>();
             //setup events
-            EventBus<StageLoadedEvent>.AddListener(HandleStageLoad);
+            EventBus<SpawnObjectiveEvent>.AddListener(HandleStageLoad);
         }
 
         //====== Handle Scene Load ========
-        private void HandleStageLoad(StageLoadedEvent sceneLoaded)
+        private void HandleStageLoad(SpawnObjectiveEvent eventData)
         {
             manager.Clear();
-            if (!GameStateManager.instance.scalingIsPaused)
-            {
-                //pick objective
-                List<ObjectiveDataSO> category = objectives.GetRandomEntry();
-                ObjectiveDataSO data = category[Random.Range(0, category.Count)];
-                //assign objective
-                manager.AddObjective(new Objective(data));
-            }
+            //pick objective
+            List<ObjectiveDataSO> category = objectives.GetRandomEntry();
+            ObjectiveDataSO data = category[Random.Range(0, category.Count)];
+            //assign objective
+            manager.AddObjective(new Objective(data));
         }
 
         //========= Handle Destroy ========
         private void OnDestroy()
         {
-            EventBus<StageLoadedEvent>.RemoveListener(HandleStageLoad);
+            EventBus<SpawnObjectiveEvent>.RemoveListener(HandleStageLoad);
         }
     }
 }

@@ -56,7 +56,7 @@ namespace Game.Core {
             }
         }
 
-        private bool CanUse()
+        public bool CanUse()
         {
             return uses > 0;
         }

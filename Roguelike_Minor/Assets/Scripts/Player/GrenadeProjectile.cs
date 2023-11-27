@@ -58,11 +58,14 @@ namespace Game.Player
 
             for (int i = 0; i < poisonGrenadeAmount; i++)
             {
+
                 Projectile projectile = grenades.GetBehaviour();
                 projectile.transform.position = transform.position + new Vector3(0, 0.5f, 0);
                 projectile.Initialize(ability);
 
                 PoisonGrenade pGrenade = projectile.GetComponent<PoisonGrenade>();
+
+                pGrenade.velocity = Vector3.zero;
 
                 maxAngle = (360 / poisonGrenadeAmount) * (i + 1);
 
