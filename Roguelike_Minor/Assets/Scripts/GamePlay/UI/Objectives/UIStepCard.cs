@@ -33,6 +33,7 @@ namespace Game {
             //setup general data
             title.text = settings.title;
             description.text = settings.description;
+            checkMark.SetActive(false);
             //setup progress data
             switch (settings.type)
             {
