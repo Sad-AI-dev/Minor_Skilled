@@ -61,7 +61,7 @@ namespace Game
 
         public override string GenerateLongDescription()
         {
-            return "When hit reflect the damage, " +
+            return "When taking damage, reflect the damage, " +
                    $"dealing {damageMultiplier * 100}% (+{bonusDamageMultiplier * 100}% per stack) damage of damage taken.";
         }
     }

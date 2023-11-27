@@ -10,7 +10,6 @@ namespace Game.Player
         [SerializeField] private float smoothTime = 0.1f;
 
         private float smoothVelocity;
-       
 
         public void RotatePlayer(float angle)
         {
