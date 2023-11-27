@@ -18,6 +18,7 @@ namespace Game.Player
         private FrictionManager frictionManager;
         private FOVManager fovManager;
         private PlayerRotationManager rotator;
+        private PlayerInput input;
 
         [Header("walk")]
         private float speed;
@@ -48,9 +49,9 @@ namespace Game.Player
         
         private Coroutine slowCo;
 
-        public UnityEvent startRunning;
-        public UnityEvent stopRunning;
-        public UnityEvent jump;
+        [HideInInspector] public UnityEvent startRunning;
+        [HideInInspector] public UnityEvent stopRunning;
+        [HideInInspector] public UnityEvent jump;
 
         private void Start()
         {
@@ -62,6 +63,7 @@ namespace Game.Player
             frictionManager = GetComponent<FrictionManager>();
             fovManager = GetComponent<FOVManager>();
             rotator = GetComponent<PlayerRotationManager>();
+            input = GetComponent<PlayerInput>();
             agent.OnKnockbackReceived.AddListener(ReceiveKnockback);
         }
 
@@ -90,7 +92,10 @@ namespace Game.Player
             {
                 float dirAngle = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
                 //float smoothAngle = Mathf.SmoothDampAngle(visuals.transform.eulerAngles.y, dirAngle, ref smoothVelocity, smoothTime);
-                rotator.RotatePlayer(dirAngle);
+
+                if(!input.shooting)
+                    rotator.RotatePlayer(dirAngle);
+
                 moveDirection = Quaternion.Euler(0, dirAngle, 0) * Vector3.forward;
                 moveDirection.Normalize();
                 lastMoveDir = moveDirection;  
