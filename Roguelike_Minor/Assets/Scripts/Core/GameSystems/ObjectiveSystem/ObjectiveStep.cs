@@ -31,6 +31,14 @@ namespace Game.Core.GameSystems {
         public ObjectiveState state;
         [HideInInspector] public Action<ObjectiveStep> onStateChanged;
 
+        //refs
+        [HideInInspector] public Objective objective;
+
+        public virtual void OnCompleteStep()
+        {
+            Destroy(gameObject);
+        }
+
         public virtual void ForceDestroy()
         {
             Destroy(gameObject);

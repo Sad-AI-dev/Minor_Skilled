@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using Game.Core.GameSystems;
-using Game.Core;
 
 namespace Game {
     public class ChargeRitualObjective : ObjectiveStep
@@ -15,12 +14,12 @@ namespace Game {
         [SerializeField] private float dechargeSpeed;
 
         [Header("Difficulty Settings")]
+        [SerializeField] private float range;
         [SerializeField] private float prewarmMultiplier; //multiplier for enemies spawned on objective start
         [SerializeField] private float spawnMultiplier; //multiplier for amount of enemies being spawned
 
         [Header("Visuals")]
-        [SerializeField] private GameObject rangeIndicator;
-        [SerializeField] private PickupMovement pillarMovement;
+        [SerializeField] private Transform rangeIndicator;
         [SerializeField] private AnimationCurve pillarSpeed;
         [SerializeField] private float maxPillarSpeed = 300f;
 
@@ -28,7 +27,6 @@ namespace Game {
         [SerializeField] private TMP_Text progressLabel;
 
         //vars
-        private bool activated;
         private float progress;
         private bool isCharging;
 
@@ -36,17 +34,31 @@ namespace Game {
         private Coroutine dechargeDelayRoutine;
         private bool canDecharge;
 
-        private void Awake()
-        {
-            EventBus<ObjectiveSpawned>.Invoke(new ObjectiveSpawned { objective = transform.parent.gameObject });
-        }
+        //external refs
+        private PickupMovement pillarMovement;
 
+        //=============== Start Charge ==============
         private void Start()
         {
-            rangeIndicator.SetActive(false);
-            enabled = false;
+            StartCharge();
         }
 
+        private void StartCharge()
+        {
+            //setup range vars
+            GetComponent<SphereCollider>().radius = range;
+            transform.localScale = Vector3.one * (range * 2);
+            //setup pillar movement
+            pillarMovement = objective.steps[^2].GetComponentInChildren<PickupMovement>();
+            //setup base state vars
+            isCharging = true;
+            progress = 0;
+            //up enemy spawning
+            EnemySpawner.instance.ForceSpawn(prewarmMultiplier);
+            EnemySpawner.instance.SetExternalSpawnMultiplier(spawnMultiplier);
+        }
+
+        //=============== Charge ==============
         private void Update()
         {
             if (isCharging) { Charge(); }
@@ -60,21 +72,7 @@ namespace Game {
             if (progress >= 100) { StopCharge(); }
             else { onStateChanged?.Invoke(this); } //normal state objective
         }
-        
-        //=============== Start Charge ==============
-        public void StartCharge()
-        {
-            activated = true;
-            enabled = true;
-            isCharging = true;
-            progress = 0;
-            rangeIndicator.SetActive(true);
-            //up enemy spawning
-            EnemySpawner.instance.ForceSpawn(prewarmMultiplier);
-            EnemySpawner.instance.SetExternalSpawnMultiplier(spawnMultiplier);
-        }
 
-        //=============== Charge ===============
         private void Charge()
         {
             progress += chargeSpeed * Time.deltaTime;
@@ -129,7 +127,7 @@ namespace Game {
         //============== Manage Triggers ==================
         private void OnTriggerEnter(Collider other)
         {
-            if (!activated || !other.CompareTag("Player")) { return; } //only activate on player
+            if (!other.CompareTag("Player")) { return; } //only activate on player
             isCharging = true;
             canDecharge = false;
             if (dechargeDelayRoutine != null) { StopCoroutine(dechargeDelayRoutine); }
@@ -137,7 +135,7 @@ namespace Game {
 
         private void OnTriggerExit(Collider other)
         {
-            if (!activated || !other.CompareTag("Player")) { return; } //only activate on player
+            if (!other.CompareTag("Player")) { return; } //only activate on player
             isCharging = false;
             dechargeDelayRoutine = StartCoroutine(DechargeDelayCo());
         }

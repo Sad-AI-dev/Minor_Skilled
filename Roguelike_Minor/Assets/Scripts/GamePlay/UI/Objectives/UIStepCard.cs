@@ -79,6 +79,11 @@ namespace Game {
             {
                 done = true;
                 checkMark.SetActive(true);
+                //hide progress bar if need
+                if (settings.useLargeBar)
+                {
+                    progressBarHandler.Hide();
+                }
             }
         }
 

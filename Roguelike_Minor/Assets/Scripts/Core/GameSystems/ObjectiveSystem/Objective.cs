@@ -15,11 +15,15 @@ namespace Game.Core.GameSystems {
         [Header("State Info")]
         public int currentStep;
 
+        //vars
+        [HideInInspector] public List<ObjectiveStep> steps;
+
         public Objective(ObjectiveDataSO data)
         {
             this.data = data;
             //set defaults
             currentStep = 0;
+            steps = new List<ObjectiveStep>();
         }
 
         //========== Create Next Step ============
@@ -27,16 +31,28 @@ namespace Game.Core.GameSystems {
         {
             currentStep++;
             //objective completed
-            if (IsCompleted()) { onCompletion?.Invoke(this); }
+            if (IsCompleted()) { HandleComplete(); }
             //create next step
             else { CreateNextStep(); }
+        }
+        private void HandleComplete()
+        {
+            //force destroy all steps
+            for (int i = steps.Count - 1; i >= 0; i--)
+            {
+                if (steps[i]) { steps[i].ForceDestroy(); }
+            }
+            //notify completion
+            onCompletion?.Invoke(this);
         }
         
         public void CreateNextStep()
         {
             ObjectiveStep step = data.ActivateStep(currentStep);
+            step.objective = this;
             step.state = ObjectiveState.InProgress;
             step.onStateChanged += HandleStateChange;
+            steps.Add(step);
             //notify change
             onStateChanged?.Invoke(this, step);
         }
@@ -49,7 +65,7 @@ namespace Game.Core.GameSystems {
             
             if (changedStep.state == ObjectiveState.Done)
             { //destroy data object
-                changedStep.ForceDestroy();
+                changedStep.OnCompleteStep();
                 //advance to next step
                 HandleStepComplete();
             }
