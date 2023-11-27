@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEditor;
 using UnityEngine;
+using Game.Core.GameSystems;
 
 namespace Game.Player.Soldier
 {
@@ -57,8 +58,11 @@ namespace Game.Player.Soldier
             Camera cam = Camera.main;
             UnityEngine.Vector3 target = UnityEngine.Vector3.zero;
             UnityEngine.Vector3 bulletDir;
+            
 
             PrimaryVars vars = source.vars as PrimaryVars;
+
+            ScreenShakeManager.instance.ShakeCamera(.8f, 1, 1, source.agent.transform.position);
 
             controller.StartSlowCoroutine(source.coolDown * 1.1f);
 

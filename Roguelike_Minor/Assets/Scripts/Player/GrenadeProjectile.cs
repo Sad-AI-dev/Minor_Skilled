@@ -48,6 +48,7 @@ namespace Game.Player
         {
             List<Agent> agents = Explosion.FindAgentsInRange(transform.position, radius, source);
             Explosion.DealDamage(agents, source, explosionDamage);
+            ScreenShakeManager.instance.ShakeCamera(5, 2, 1, transform.position);
             GameObject visualExplosion = Instantiate(visuals, transform.position, Quaternion.identity);
             visualExplosion.transform.localScale *= radius * 2;
 

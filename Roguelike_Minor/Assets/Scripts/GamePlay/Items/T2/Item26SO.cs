@@ -38,7 +38,7 @@ namespace Game {
         //========== Handle Events ============
         private void OnShopLoad(ShopLoadedEvent eventData)
         {
-            (eventData.shop as Shop).rerolls = rerolls;
+            eventData.shop.rerolls = rerolls;
         }
 
         private void OnGameEnd(GameEndEvent eventData)

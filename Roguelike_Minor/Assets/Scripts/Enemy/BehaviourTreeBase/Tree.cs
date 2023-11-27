@@ -8,7 +8,7 @@ namespace Game.Enemy.Core {
     [RequireComponent(typeof(Rigidbody))]
     public abstract class Tree : MonoBehaviour
     {
-        private BT_Node root = null;
+        protected BT_Node root = null;
 
         [Header("General Variables")]
         public Agent agent;
