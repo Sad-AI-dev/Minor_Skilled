@@ -2,20 +2,28 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PineTreeLeaves
   m_Shader: {fileID: 4800000, guid: 0f96a2937f6bace459a5fdaac39c0fb3, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _BASEWINDCHANNEL_B _INVERTGRADIENT_ON _MICROWINDCHANNEL_B
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _BASEWINDCHANNEL_B
+  - _INVERTGRADIENT_ON
+  - _MICROWINDCHANNEL_B
+  m_InvalidKeywords:
+  - _ALPHATEST_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -107,6 +115,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
     - _BaseWind: 2
@@ -230,9 +239,9 @@ Material:
     - _ColorVariation1: {r: 1, g: 0, b: 0, a: 0}
     - _DirtColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GradientColor: {r: 0.21156082, g: 0.4150942, b: 0.08615155, a: 1}
+    - _GradientColor: {r: 0.15635458, g: 0.3124679, b: 0.6792453, a: 1}
     - _GradientColor1: {r: 1, g: 1, b: 1, a: 0}
-    - _MainColor: {r: 0.59938353, g: 0.8773585, b: 0, a: 1}
+    - _MainColor: {r: 0.0017087595, g: 0.032109603, b: 0.4528302, a: 1}
     - _MainColor1: {r: 0.57778096, g: 1, b: 0, a: 0}
     - _ScatteringColor: {r: 0.4030302, g: 0.7264151, b: 0, a: 0}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
@@ -241,3 +250,4 @@ Material:
     - _TreeInstanceScale: {r: 0, g: 0, b: 0, a: 0}
     - _TreeOffset: {r: 0, g: 5, b: 0, a: 0}
     - _windOrientation: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
