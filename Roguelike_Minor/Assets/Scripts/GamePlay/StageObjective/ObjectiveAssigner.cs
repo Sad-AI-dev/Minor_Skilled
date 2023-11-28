@@ -19,13 +19,18 @@ namespace Game {
             //get external components
             manager = GetComponent<ObjectiveManager>();
             //setup events
+            EventBus<SceneLoadedEvent>.AddListener(HandleSceneLoad);
             EventBus<SpawnObjectiveEvent>.AddListener(HandleStageLoad);
         }
 
         //====== Handle Scene Load ========
+        private void HandleSceneLoad(SceneLoadedEvent eventData)
+        {
+            manager.Clear(); //scene loaded, clear list
+        }
+
         private void HandleStageLoad(SpawnObjectiveEvent eventData)
         {
-            manager.Clear();
             //pick objective
             List<ObjectiveDataSO> category = objectives.GetRandomEntry();
             ObjectiveDataSO data = category[Random.Range(0, category.Count)];
@@ -36,6 +41,7 @@ namespace Game {
         //========= Handle Destroy ========
         private void OnDestroy()
         {
+            EventBus<SceneLoadedEvent>.RemoveListener(HandleSceneLoad);
             EventBus<SpawnObjectiveEvent>.RemoveListener(HandleStageLoad);
         }
     }

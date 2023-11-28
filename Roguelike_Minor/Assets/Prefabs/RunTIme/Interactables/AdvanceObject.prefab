@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 3294559283217251303}
   - component: {fileID: 6625489666185493177}
   - component: {fileID: 4266547945095109878}
+  - component: {fileID: -461332965647897481}
   m_Layer: 0
   m_Name: AdvanceObject
   m_TagString: Untagged
@@ -240,6 +241,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {fileID: 11400000, guid: dfaeea43fb7497947801a52fae9ad6eb, type: 2}
+--- !u!114 &-461332965647897481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647172517012275734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08bdbeffcb031ea4fb02b5a7c7926f09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepUISettings:
+    title: Find the green pillar
+    description: 
+    useLargeBar: 0
+    type: 0
+    progressLabel: 
+    maxCount: 0
+    currentCount: 0
+    progressPercent: 0
+  state: 0
+  objective:
+    data: {fileID: 0}
+    currentStep: 0
+    steps: []
+  destroyOnComplete: 1
 --- !u!1 &5102836417900314780
 GameObject:
   m_ObjectHideFlags: 0
