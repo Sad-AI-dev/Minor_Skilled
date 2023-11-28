@@ -73,14 +73,7 @@ namespace Game {
         {
             //handle scaling pause
             scalingIsPaused = isShopStage;
-            //notify stage was loaded
-            if (!isShopStage) { StartCoroutine(StageLoadedCo()); }
             isShopStage = false; //reset
-        }
-        private IEnumerator StageLoadedCo()
-        {
-            yield return null;
-            EventBus<StageLoadedEvent>.Invoke(new StageLoadedEvent());
         }
 
         //========= Handle Shop Load ========
