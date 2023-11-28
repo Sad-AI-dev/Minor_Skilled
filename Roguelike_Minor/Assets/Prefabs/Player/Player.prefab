@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 2595134782193159625}
   - component: {fileID: 8869651875822535198}
   - component: {fileID: 1857768514169513729}
+  - component: {fileID: 3669836135115761641}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -503,6 +504,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coyoteTime: 0.1
+  GroundedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2247936208319766161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,6 +1076,18 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &3669836135115761641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421599695142573888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec91ee29e89f1c4c83f50d8f5c95cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3014019172444536401
 GameObject:
   m_ObjectHideFlags: 3
