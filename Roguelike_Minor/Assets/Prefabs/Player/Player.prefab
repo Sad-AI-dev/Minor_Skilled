@@ -453,7 +453,11 @@ MonoBehaviour:
   camController: {fileID: 6425007794457280646}
   jumpBufferFrames: 10
   audioPlayer: {fileID: 8869651875822535198}
+  shooting: 0
   stopShooting:
+    m_PersistentCalls:
+      m_Calls: []
+  AdjustRunAnimSpeed:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &7374867739153013466
@@ -971,7 +975,7 @@ MonoBehaviour:
   audioEvents:
   - idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 56f6f49410c15c6478aabea0f9124629, type: 2}
 --- !u!120 &1857768514169513729
 LineRenderer:
   serializedVersion: 2
@@ -1088,6 +1092,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec91ee29e89f1c4c83f50d8f5c95cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  footstepSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 56f6f49410c15c6478aabea0f9124629, type: 2}
+  soundMaterialSet: {fileID: 11400000, guid: d71c15135eb978446bbeda282f825f2c, type: 2}
+  floorlayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &3014019172444536401
 GameObject:
   m_ObjectHideFlags: 3
