@@ -8,7 +8,7 @@ namespace Game {
     {
         private void Awake()
         {
-            EventBus<ObjectiveSpawned>.Invoke(new ObjectiveSpawned { objective = transform.parent.gameObject });
+            EventBus<ObjectiveSpawned>.Invoke(new ObjectiveSpawned { objective = gameObject });
         }
     }
 }

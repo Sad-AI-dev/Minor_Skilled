@@ -47,9 +47,12 @@ namespace Game {
         {
             //setup range vars
             GetComponent<SphereCollider>().radius = range;
-            transform.localScale = Vector3.one * (range * 2);
+            rangeIndicator.localScale = Vector3.one * (range * 2);
+            //set position
+            ObjectiveStep lastStep = objective.steps[^2];
+            transform.position = lastStep.transform.position;
             //setup pillar movement
-            pillarMovement = objective.steps[^2].GetComponentInChildren<PickupMovement>();
+            pillarMovement = lastStep.GetComponentInChildren<PickupMovement>();
             //setup base state vars
             isCharging = true;
             progress = 0;
@@ -121,7 +124,7 @@ namespace Game {
         //===== Handle Destroy ====
         public override void ForceDestroy()
         {
-            Destroy(transform.parent.gameObject);
+            Destroy(gameObject);
         }
 
         //============== Manage Triggers ==================

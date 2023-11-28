@@ -19,6 +19,9 @@ namespace Game {
         [HideInInspector]
         public Dictionary<ObjectiveStep, UIStepCard> stepCards;
 
+        //refs
+        private UIProgressBarHandler progressBar;
+
         private void Awake()
         {
             //initialize vars
@@ -28,20 +31,21 @@ namespace Game {
         //====== Initialize =======
         public void Initialize(Objective objective, ObjectiveStep step, UIProgressBarHandler progressBar)
         {
+            this.progressBar = progressBar;
             //setup objective
             title.text = objective.data.displayName;
             //setup first card
-            CreateCard(step, progressBar);
+            CreateCard(step);
             OnStateChanged(step);
         }
 
-        private void CreateCard(ObjectiveStep step, UIProgressBarHandler progressbar)
+        private void CreateCard(ObjectiveStep step)
         {
             //create card object
             UIStepCard card = stepCardPool.GetBehaviour();
             card.transform.SetParent(stepCardHolder);
             //setup card data
-            card.Setup(step, progressbar);
+            card.Setup(step, progressBar);
             stepCards.Add(step, card);
         }
 
@@ -52,6 +56,7 @@ namespace Game {
             {
                 stepCards[step].HandleStateChange(step);
             }
+            else { CreateCard(step); }
         }
 
         //====== Handle Objective Completion ========

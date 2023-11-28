@@ -12,12 +12,14 @@ namespace Game {
         public void CompleteStep(Interactor interactor)
         {
             state = ObjectiveState.Done;
+            //update state
             onStateChanged?.Invoke(this);
         }
 
         public override void OnCompleteStep()
         {
             if (destroyOnComplete) { base.OnCompleteStep(); }
+            else { GetComponent<Interactable>().enabled = false; }
         }
     }
 }
