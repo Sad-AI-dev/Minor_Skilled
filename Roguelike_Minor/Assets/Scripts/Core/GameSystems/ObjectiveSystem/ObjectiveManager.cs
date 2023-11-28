@@ -5,6 +5,9 @@ using UnityEngine;
 namespace Game.Core.GameSystems {
     public class ObjectiveManager : MonoBehaviour
     {
+        [Header("Stage Complete Settings")]
+        public ObjectiveDataSO stageCompleteObjective;
+        
         private List<Objective> objectives;
 
         public System.Action<Objective, ObjectiveStep> onStateChanged;
@@ -46,7 +49,11 @@ namespace Game.Core.GameSystems {
         {
             onObjectiveCompleted?.Invoke(objective); //notify others of objective completion
             RemoveObjective(objective);
-            
+            //stage complete check
+            if (AllObjectivesCompleted())
+            {
+                AddObjective(new Objective(stageCompleteObjective));
+            }
         }
 
         public bool AllObjectivesCompleted()

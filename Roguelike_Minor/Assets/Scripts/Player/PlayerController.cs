@@ -42,9 +42,19 @@ namespace Game.Player
         [SerializeField] private float fastFallMultiplier;
         [HideInInspector] public float yVelocity;
         [HideInInspector] public float activeGravity;
-        [HideInInspector] public bool grounded;
         [HideInInspector] public bool jumping;
-        
+
+        public bool Grounded 
+        {
+            get 
+            {
+                if (groundedChecker == null)
+                    return true;
+                return groundedChecker.grounded;
+            } 
+        }
+
+
         private CharacterController cc;
         
         private Coroutine slowCo;
@@ -73,7 +83,7 @@ namespace Game.Player
             if(excessVelocity.magnitude > 0)
                 UpdateExcessVelocity();
 
-            if (!grounded)
+            if (!groundedChecker.grounded)
                 ApplyGravity();
 
             //allows to directly set position of player
@@ -105,7 +115,7 @@ namespace Game.Player
             else if (lastMoveDir != Vector3.zero && speed > 0)
             {
                 moveDirection = lastMoveDir;
-                if(grounded)
+                if(groundedChecker.grounded)
                     Decelerate(deceleration);
             }
         }
@@ -142,7 +152,7 @@ namespace Game.Player
 
         public void Dash(Vector3 force)
         {
-            if (grounded)
+            if (groundedChecker.grounded)
                 frictionManager.SetFriction(frictionTypes.dash);
             else
                 frictionManager.SetFriction(frictionTypes.air);
@@ -159,7 +169,7 @@ namespace Game.Player
 
         public void Jump()
         {
-            if (!grounded || jumping) return;
+            if (!groundedChecker.grounded || jumping) return;
             jump.Invoke();
             yVelocity = 0;
             yVelocity += JumpForce / 100;

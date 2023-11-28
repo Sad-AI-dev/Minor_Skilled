@@ -20,13 +20,13 @@ namespace Game {
 
         private void Awake()
         {
+            //initialize vars
+            cards = new Dictionary<Objective, UIObjectiveCard>();
             //setup events
             objectiveManager.onStateChanged += OnStateChanged;
             objectiveManager.onObjectiveCompleted += OnObjectiveCompleted;
-            //initialize vars
-            cards = new Dictionary<Objective, UIObjectiveCard>();
             //setup bus event
-            EventBus<StageLoadedEvent>.AddListener(OnStageLoaded);
+            EventBus<SceneLoadedEvent>.AddListener(OnSceneLoaded);
         }
 
         //========= Handle State Change ========
@@ -64,19 +64,20 @@ namespace Game {
         }
 
         //========== Handle Scene Load ==========
-        private void OnStageLoaded(StageLoadedEvent eventData) //actives after assigner, causing it to reset right after
+        private void OnSceneLoaded(SceneLoadedEvent eventData)
         {
             //hard reset
-            foreach (var kvp in cards)
-            {
-                OnObjectiveCompleted(kvp.Key);
+            List<Objective> cardsCopy = new List<Objective>(cards.Keys);
+            for (int i = cardsCopy.Count - 1; i >= 0; i--)
+            { //this calls a remove func, so loop through in reverse order
+                OnObjectiveCompleted(cardsCopy[i]);
             }
         }
 
         //====== Handle Destroy =======
         private void OnDestroy()
         {
-            EventBus<StageLoadedEvent>.RemoveListener(OnStageLoaded);
+            EventBus<SceneLoadedEvent>.RemoveListener(OnSceneLoaded);
         }
     }
 }

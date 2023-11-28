@@ -60,36 +60,19 @@ namespace Game {
             //setup events
             EventBus<SceneLoadedEvent>.AddListener(HandleSceneLoaded);
             EventBus<ShopLoadedEvent>.AddListener(HandleShopLoad);
-            EventBus<ObjectiveCompleteEvent>.AddListener(HandleObjectiveComplete);
         }
 
         //========== Manage Stage State ==============
-        private void HandleObjectiveComplete(ObjectiveCompleteEvent eventData)
-        {
-            if (eventData.objectiveManager.AllObjectivesCompleted())
-            {
-                //TEMP
-                advanceObjectSpawner.SpawnAdvanceObject();
-                //update UI manager
-                uiManager.ObjectiveComplete = true;
-            }
-        }
-
         public void HandleCompleteStageObject()
         {
             advanceObjectSpawner.SpawnAdvanceObject();
-            //update UI manager
-            uiManager.ObjectiveComplete = true;
         }
 
         //========= Handle Scene Load ========
         private void HandleSceneLoaded(SceneLoadedEvent data)
         {
-            uiManager.ObjectiveComplete = false;
-            //handle pause
+            //handle scaling pause
             scalingIsPaused = isShopStage;
-            //notify stage was loaded
-            if (!isShopStage) { EventBus<StageLoadedEvent>.Invoke(new StageLoadedEvent()); }
             isShopStage = false; //reset
         }
 
@@ -121,7 +104,6 @@ namespace Game {
         {
             EventBus<SceneLoadedEvent>.RemoveListener(HandleSceneLoaded);
             EventBus<ShopLoadedEvent>.RemoveListener(HandleShopLoad);
-            EventBus<ObjectiveCompleteEvent>.RemoveListener(HandleObjectiveComplete);
             //announce game end
             EventBus<GameEndEvent>.Invoke(new GameEndEvent());
         }

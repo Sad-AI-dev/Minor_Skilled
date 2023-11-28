@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f79fd9e3d56a9d34b972d2fd8b1c361c, type: 3}
+  m_Name: 19Radiating_Ration
+  m_EditorClassIdentifier: 
+  size: {fileID: 11400000, guid: aaa7839693155fe46a5ce1c6da18f970, type: 2}
+  tier: {fileID: 11400000, guid: 9e8f1b09a5f0e164382a3e6b6759f388, type: 2}
+  canProcSelf: 0
+  pickupPrefab: {fileID: 2858984015360725450, guid: 798e7eb17231be4429ae57372b83f8fc, type: 3}
+  UISprite: {fileID: 21300000, guid: 689802a1b23693b40b7a1729d127dc96, type: 3}
+  title: Radiating Ration
+  shortDescription: Deal damage to enemies close to you
+  highlightColor: {r: 1, g: 0.9764706, b: 0.8039216, a: 1}
+  stackColor: {r: 0.8196079, g: 0.8196079, b: 0.8196079, a: 1}
+  baseRadius: 3
+  bonusRadius: 1
+  cooldown: 5
+  damage: 20

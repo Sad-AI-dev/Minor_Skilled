@@ -13,6 +13,7 @@ namespace Game.Core.GameSystems {
         public string description;
         [Header("Progress UI Settings")]
         public bool useLargeBar;
+        public bool useSmallBar = true;
         public ObjectiveType type;
 
         [Space(10f)]
@@ -30,6 +31,14 @@ namespace Game.Core.GameSystems {
         [Header("Gameplay Data")]
         public ObjectiveState state;
         [HideInInspector] public Action<ObjectiveStep> onStateChanged;
+
+        //refs
+        [HideInInspector] public Objective objective;
+
+        public virtual void OnCompleteStep()
+        {
+            Destroy(gameObject);
+        }
 
         public virtual void ForceDestroy()
         {

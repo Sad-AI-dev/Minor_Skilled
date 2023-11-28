@@ -59,20 +59,6 @@ namespace Game.Core
         }
 
         //=========== Collision ==============
-        private void CheckHitObject()
-        {
-            Vector3 transformPos = transform.position - new Vector3(0, 0, transform.localScale.z / 2);
-            RaycastHit hit;
-            if (Physics.Raycast(transformPos, velocity, out hit, velocity.magnitude, layermask, QueryTriggerInteraction.Ignore))
-            {
-                if (!hit.transform.CompareTag(sourceTag))
-                {
-                    //Debug.Log(hit.transform.name);
-                    OnCollide(hit);
-                    gameObject.SetActive(false);
-                }
-            }
-        }
 
         private void OnTriggerEnter(Collider other)
         {
