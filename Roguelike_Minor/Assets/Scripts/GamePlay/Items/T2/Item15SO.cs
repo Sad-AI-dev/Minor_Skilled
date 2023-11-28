@@ -23,7 +23,7 @@ namespace Game
 
         public override void InitializeVars(Item item)
         {
-            bonusDuration = 0;
+            item.vars = new AirflowItemVars { duration = 0 };
         }
 
         public override void AddStack(Item item)
