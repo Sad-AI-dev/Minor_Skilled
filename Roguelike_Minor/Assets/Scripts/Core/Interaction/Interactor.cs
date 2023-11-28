@@ -29,6 +29,7 @@ namespace Game.Core.GameSystems {
         //=============== interactables management ===============
         public void AddInteractable(Interactable interactable)
         {
+            if (!interactable.enabled) { return; }
             interactables.Add(interactable);
             if (interactables.Count == 1) {
                 onCanInteract?.Invoke(interactable);

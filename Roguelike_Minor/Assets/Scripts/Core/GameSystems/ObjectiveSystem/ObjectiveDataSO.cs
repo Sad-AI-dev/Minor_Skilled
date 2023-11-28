@@ -30,6 +30,7 @@ namespace Game.Core.GameSystems {
             }
             else
             {
+                Debug.LogWarning($"objective step script not found on {obj.name}, searching children...");
                 return obj.GetComponentInChildren<ObjectiveStep>();
             }
         }
