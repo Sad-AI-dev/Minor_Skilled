@@ -12,13 +12,14 @@ namespace Game.Core.GameSystems {
         public string title;
         public string description;
         [Header("Progress UI Settings")]
+        public bool useLargeBar;
         public ObjectiveType type;
 
         [Space(10f)]
         public string progressLabel;
         public int maxCount;
         public int currentCount;
-        public float progressPercent;
+        public float progressPercent; //0 to 1
     }
 
     public abstract class ObjectiveStep : MonoBehaviour
