@@ -2,20 +2,26 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ocean
   m_Shader: {fileID: 4800000, guid: 6468bfbdaa889dd40a87fa06b6428b8f, type: 3}
-  m_ShaderKeywords: _MULTIPLYOPACITY_ON _USETRANSPARENCY_ON
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _MULTIPLYOPACITY_ON
+  - _USETRANSPARENCY_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2998
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -111,7 +117,9 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _BumpScale: 1
     - _CausticsScale: 0.15
     - _CausticsSpeed: 1.5
@@ -187,11 +195,11 @@ Material:
     - _hhdjt: 500
     - _kykyk: 1000
     m_Colors:
-    - _CausticsColor: {r: 0.29125133, g: 0.5575275, b: 0.7264151, a: 0}
+    - _CausticsColor: {r: 0.29019612, g: 0.6813315, b: 0.7254902, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color0: {r: 0, g: 0.5987654, b: 1, a: 0}
     - _Color1: {r: 1, g: 0.76618373, b: 0, a: 1}
-    - _DepthColor: {r: 0.05206473, g: 0.3498848, b: 0.735849, a: 1}
+    - _DepthColor: {r: 0.050980408, g: 0.703983, b: 0.7372549, a: 1}
     - _DepthColor1: {r: 0, g: 1, b: 0.8509803, a: 0}
     - _Direction: {r: 1, g: 0, b: -1, a: 0.2}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
@@ -207,3 +215,4 @@ Material:
     - _WavesScale: {r: 1, g: 1, b: 0, a: 0}
     - _WavesScaleOLD: {r: 1, g: 1, b: 0, a: 0}
     - _WavesScaleXY: {r: 0.1, g: 0.1, b: 0, a: 0}
+  m_BuildTextureStacks: []
