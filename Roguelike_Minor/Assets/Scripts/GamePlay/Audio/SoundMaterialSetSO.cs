@@ -8,6 +8,8 @@ namespace Game {
     [CreateAssetMenu(fileName = "SoundMaterialSet", menuName = "ScriptableObjects/Audio/SoundMaterialSet")]
     public class SoundMaterialSetSO : ScriptableObject
     {
+        [SerializeField] private Switch defaultValue;
+
         [SerializeField] private UnityDictionary<List<TerrainLayer>, Switch> terrainLookup;
 
         public Switch GetSwitchByTerrain(TerrainLayer layer)
@@ -23,7 +25,7 @@ namespace Game {
                 }
             }
 
-            return null;
+            return defaultValue;
         }
     }
 }

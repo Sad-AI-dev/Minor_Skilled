@@ -79,7 +79,7 @@ namespace Game {
             LootSpawner spawner = GameStateManager.instance.lootSpawner;
             if (spawner)
             {
-                spawner.spawner.SpawnObject(chestPrefab);
+                spawner.PlaceLoot(chestPrefab);
             }
         }
 
