@@ -14,7 +14,7 @@ namespace Game.Player
         
         [Header("External Components")]
         public Camera cam;
-        private GroundedChecker groundedChecker;
+        private GroundedManager groundedChecker;
         private FrictionManager frictionManager;
         private FOVManager fovManager;
         private PlayerRotationManager rotator;
@@ -69,7 +69,7 @@ namespace Game.Player
             //cam = Camera.main;
             cc = GetComponent<CharacterController>();
             agent = GetComponent<Agent>();
-            groundedChecker = GetComponent<GroundedChecker>();
+            groundedChecker = GetComponent<GroundedManager>();
             frictionManager = GetComponent<FrictionManager>();
             fovManager = GetComponent<FOVManager>();
             rotator = GetComponent<PlayerRotationManager>();
@@ -90,6 +90,7 @@ namespace Game.Player
             Physics.SyncTransforms();
 
             walkVelocity = (moveDirection * speed) + excessVelocity;
+            Debug.Log(yVelocity);
             cc.Move(walkVelocity + new Vector3(0, yVelocity, 0));
             fovManager.UpdateFOV(walkVelocity.magnitude);
 
@@ -167,14 +168,30 @@ namespace Game.Player
                 excessVelocity = Vector3.zero;
         }
 
-        public void Jump()
+        public bool TryJump()
         {
-            if (!groundedChecker.grounded || jumping) return;
-            jump.Invoke();
+            if (agent.stats.currentJumps > 0)
+            {
+                Jump();
+                return true;
+            }
+
+            return false;
+        }
+
+        private void Jump()
+        {
             yVelocity = 0;
-            yVelocity += JumpForce / 100;
+
+            if (agent.stats.currentJumps < agent.stats.totalJumps)
+                yVelocity += JumpForce * 1.5f / 100;
+            else
+                yVelocity += JumpForce / 100;
+
+            jump.Invoke();
             jumping = true;
             frictionManager.SetFriction(frictionTypes.jump);
+            agent.stats.currentJumps--;
         }
 
         private void ApplyGravity()

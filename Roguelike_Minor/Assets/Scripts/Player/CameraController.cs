@@ -23,5 +23,7 @@ namespace Game.Player
             cam.m_XAxis.m_MaxSpeed = xSpeed;
             cam.m_YAxis.m_MaxSpeed = ySpeed;
         }
+
+       
     }
 }

@@ -78,8 +78,6 @@ namespace Game.Player {
 
             if(shooting)
             {
-                Debug.Log(moveInput);
-
                 if(moveInput.y < 0)
                     AdjustRunAnimSpeed.Invoke(-0.5f);
                 else
@@ -178,7 +176,10 @@ namespace Game.Player {
             while (framesPassed < jumpBufferFrames)
             {
                 framesPassed++;
-                playerController.Jump();
+                if(playerController.TryJump())
+                {
+                    break;
+                }
                 yield return null;
             }
         }
