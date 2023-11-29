@@ -17,6 +17,8 @@ namespace Game.Player
 
         public UnityEvent<bool> GroundedEvent;
 
+        [HideInInspector] public bool grounded;
+
         public void CheckGrounded()
         {
             if (controller == null)
@@ -26,9 +28,9 @@ namespace Game.Player
                 frictionManager = GetComponent<FrictionManager>();
             }
 
-            if (!controller.grounded && cc.isGrounded)
+            if (!grounded && cc.isGrounded)
                 OnTouchGround();
-            if (controller.grounded && !cc.isGrounded)
+            if (grounded && !cc.isGrounded)
                 OnLeaveGround();
         }
 
@@ -39,7 +41,7 @@ namespace Game.Player
 
             controller.yVelocity = -0.1f;
             controller.activeGravity = 0;
-            controller.grounded = true;
+            grounded = true;
             controller.agent.isGrounded = true;
             controller.jumping = false;
             GroundedEvent.Invoke(true);
@@ -66,7 +68,7 @@ namespace Game.Player
                 frictionManager.SetFriction(frictionTypes.air);
 
             controller.agent.isGrounded = false;
-            controller.grounded = false;
+            grounded = false;
             GroundedEvent.Invoke(false);
         }
     }

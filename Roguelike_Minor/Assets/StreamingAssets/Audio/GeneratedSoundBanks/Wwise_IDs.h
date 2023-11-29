@@ -28,6 +28,8 @@ namespace AK
         static const AkUniqueID PLAY_SQUID_HIT = 1455468846U;
         static const AkUniqueID PLAY_START_OBELISK = 3577284316U;
         static const AkUniqueID PLAY_WIND_AMBIENCE = 3110216747U;
+        static const AkUniqueID STOP_OBELISK = 1647081223U;
+        static const AkUniqueID STOP_WIND_AMBIENCE = 2725535549U;
     } // namespace EVENTS
 
     namespace SWITCHES
