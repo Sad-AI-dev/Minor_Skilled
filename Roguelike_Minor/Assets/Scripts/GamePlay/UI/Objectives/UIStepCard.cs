@@ -41,20 +41,22 @@ namespace Game {
                 progressBarHandler.Show(settings.title, settings.type == ObjectiveType.Counter);
             }
             //setup progress data
-            switch (settings.type)
+            if (settings.useSmallBar)
             {
-                case ObjectiveType.Checkmark: break; //do nothing
-                case ObjectiveType.Counter:
-                    counterHolder.SetActive(true);
-                    UpdateCounter(settings);
-                    break;
+                switch (settings.type)
+                {
+                    case ObjectiveType.Checkmark: break; //do nothing
+                    case ObjectiveType.Counter:
+                        counterHolder.SetActive(true);
+                        UpdateCounter(settings);
+                        break;
 
-                case ObjectiveType.ProgressBar:
-                    sliderHolder.SetActive(true);
-                    UpdateSlider(settings);
-                    break;
+                    case ObjectiveType.ProgressBar:
+                        sliderHolder.SetActive(true);
+                        UpdateSlider(settings);
+                        break;
+                }
             }
-            
         }
 
         //=========== Handle State Change =========
@@ -79,6 +81,11 @@ namespace Game {
             {
                 done = true;
                 checkMark.SetActive(true);
+                //hide progress bar if need
+                if (settings.useLargeBar)
+                {
+                    progressBarHandler.Hide();
+                }
             }
         }
 

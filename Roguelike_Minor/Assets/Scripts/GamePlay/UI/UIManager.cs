@@ -12,8 +12,5 @@ namespace Game {
 
         [Header("UI Refs")]
         public UIProgressBarHandler progressBar;
-
-        //temp
-        public bool ObjectiveComplete = false;
     }
 }

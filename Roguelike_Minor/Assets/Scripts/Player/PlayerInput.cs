@@ -19,7 +19,7 @@ namespace Game.Player {
         private PlayerRotationManager rotator;
         private FOVManager fovManager;
 
-        private Camera cam;
+        [SerializeField] private Camera cam;
 
         [Header("Variables")]
         [SerializeField] private int jumpBufferFrames;
@@ -42,7 +42,6 @@ namespace Game.Player {
             playerController = GetComponent<PlayerController>();
             fovManager = GetComponent<FOVManager>();
             rotator = GetComponent<PlayerRotationManager>();
-            cam = Camera.main;
             //hide inventory by default
             inventory.SetActive(false);
         }
