@@ -37,16 +37,14 @@ namespace Game {
             while (true)
             {
                 if (controller.velocity != Vector3.zero && Physics.Raycast(
-                        transform.position - new Vector3(0, 0.5f * controller.height + 0.5f * controller.radius, 0),
-                        Vector3.down, out RaycastHit hit, 1f))
+                        transform.position - new Vector3(0, 0, 0),
+                        Vector3.down, out RaycastHit hit, 0.5f))
                 {
                     if (hit.collider.TryGetComponent(out Terrain terrain))
                     {
-                        Debug.Log("Hit Terrain");
-
                         SetFootstepSFXTerrain(terrain, hit.point);
                     }
-                    else if (hit.collider.TryGetComponent(out GameObject obj))
+                    else 
                     {
                         Debug.Log("Hit object");
                     }
@@ -67,17 +65,25 @@ namespace Game {
 
             float[,,] alphamap = terrain.terrainData.GetAlphamaps(x, z, 1, 1);
 
+            Dictionary<int, float> layersAtPosition = new Dictionary<int, float>();
+
             int primaryIndex = 0;
             for (int i = 0; i < alphamap.Length; i++)
             {
+                layersAtPosition.Add(i, alphamap[0,0,i]);
                 if (alphamap[0, 0, i] > alphamap[0, 0, primaryIndex])
                 {
                     primaryIndex = i;
                 }
             }
 
-            Debug.Log(primaryIndex);
-            Debug.Log(terrain.terrainData.terrainLayers[primaryIndex]);
+            //Debug.Log(terrain.terrainData.terrainLayers[primaryIndex]);
+            // string msg = "Terrain Data found: \n\n";
+            // foreach (var kvp in layersAtPosition)
+            // {
+            //     msg += $"layer data: layer Index: {kvp.Key}, value {kvp.Value}\n";
+            // }
+            // Debug.Log(msg);
 
             AK.Wwise.Switch sound = soundMaterialSet.GetSwitchByTerrain(terrain.terrainData.terrainLayers[primaryIndex]);
             sound.SetValue(gameObject);
