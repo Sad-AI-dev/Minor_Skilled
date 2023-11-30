@@ -9,11 +9,10 @@ namespace Game.Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private GameObject visuals;
-        [HideInInspector] public Agent agent;
-        
         [Header("External Components")]
         public Camera cam;
+        [HideInInspector] public Agent agent;
+        private CharacterController cc;
         private GroundedManager groundedChecker;
         private FrictionManager frictionManager;
         private FOVManager fovManager;
@@ -21,28 +20,29 @@ namespace Game.Player
         private PlayerInput input;
 
         [Header("walk")]
+        [SerializeField] private float deceleration;
+        [SerializeField] private float acceleration;
         private float speed;
         private float walkSpeed { get { return agent.stats.walkSpeed; } }
         private float sprintSpeed { get { return agent.stats.sprintSpeed; } }
-        [SerializeField] private float deceleration;
-        [SerializeField] private float acceleration;
         private float speedMultiplier;
         private bool isSlowed = false;
 
         private Vector3 moveDirection;
-        private Vector3 walkVelocity;
-        private Vector3 lastMoveDir;
         private Vector3 excessVelocity;
 
         [Header("Jump")]
         [SerializeField] private float JumpForce;
+        [HideInInspector] public float yVelocity;
+        [HideInInspector] public bool jumping;
+
+        [Header("Gravity")]
         [SerializeField] private float gravity;
+        [HideInInspector] public float activeGravity;
         [SerializeField] private float slowFallBounds;
         [SerializeField] private float slowFallMultiplier;
         [SerializeField] private float fastFallMultiplier;
-        [HideInInspector] public float yVelocity;
-        [HideInInspector] public float activeGravity;
-        [HideInInspector] public bool jumping;
+
 
         public bool Grounded 
         {
@@ -55,7 +55,6 @@ namespace Game.Player
         }
 
 
-        private CharacterController cc;
         
         private Coroutine slowCo;
 
@@ -66,7 +65,6 @@ namespace Game.Player
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            //cam = Camera.main;
             cc = GetComponent<CharacterController>();
             agent = GetComponent<Agent>();
             groundedChecker = GetComponent<GroundedManager>();
@@ -89,7 +87,7 @@ namespace Game.Player
             //allows to directly set position of player
             Physics.SyncTransforms();
 
-            walkVelocity = (moveDirection * speed) + excessVelocity;
+            Vector3 walkVelocity = (moveDirection * speed) + excessVelocity;
             Debug.Log(yVelocity);
             cc.Move(walkVelocity + new Vector3(0, yVelocity, 0));
             fovManager.UpdateFOV(walkVelocity.magnitude);
@@ -99,11 +97,11 @@ namespace Game.Player
 
         public void SetMoveDirection(Vector2 moveInput)
         {
+            Vector3 lastMoveDir = new Vector3();
             if(moveInput.magnitude >= 0.1f)
             {
                 float dirAngle = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
-                //float smoothAngle = Mathf.SmoothDampAngle(visuals.transform.eulerAngles.y, dirAngle, ref smoothVelocity, smoothTime);
-
+                
                 if(!input.shooting)
                     rotator.RotatePlayer(dirAngle);
 
@@ -163,7 +161,7 @@ namespace Game.Player
 
         private void UpdateExcessVelocity()
         {
-            excessVelocity = frictionManager.ApplyFriction(excessVelocity);
+            excessVelocity = frictionManager.ApplyVectorFriction(excessVelocity);
             if (excessVelocity.magnitude < 0.1f)
                 excessVelocity = Vector3.zero;
         }

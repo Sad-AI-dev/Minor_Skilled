@@ -31,8 +31,6 @@ namespace Game.Player {
         private bool canPlayFootstep = true;
         private bool gamePaused = false;
         [HideInInspector] public bool shooting;
-
-        private bool walking = false;
         
         public UnityEvent stopShooting;
         public UnityEvent<float> AdjustRunAnimSpeed;
