@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Game.Core;
 
 namespace Game.Player {
     public class PlayerSpawner : MonoBehaviour
@@ -15,7 +14,7 @@ namespace Game.Player {
             //warp
             player.transform.SetPositionAndRotation(destination.position, Quaternion.LookRotation(destination.forward));
             player.ResetVelocity();
-            //reset cinemachine
+            //reset cam
             player.GetComponent<CameraController>().ResetCamera(player.transform.rotation);
         }
     }
