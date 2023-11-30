@@ -4197,7 +4197,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 7115000119781062588}
         m_TargetAssemblyTypeName: Game.Core.GameSystems.SceneLoader, Game.Core.GameSystems
-        m_MethodName: LoadScene
+        m_MethodName: FastLoadScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5421,6 +5421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0c811594585ed40aa7be4fb1298123, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiFader: {fileID: 0}
+  allowLoadScene: 0
 --- !u!1 &5170788877881731557
 GameObject:
   m_ObjectHideFlags: 0

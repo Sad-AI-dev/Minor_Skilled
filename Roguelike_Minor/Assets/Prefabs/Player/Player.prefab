@@ -368,6 +368,7 @@ GameObject:
   - component: {fileID: 2595134782193159625}
   - component: {fileID: 8869651875822535198}
   - component: {fileID: 1857768514169513729}
+  - component: {fileID: 3669836135115761641}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -969,7 +970,7 @@ MonoBehaviour:
   audioEvents:
   - idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 56f6f49410c15c6478aabea0f9124629, type: 2}
 --- !u!120 &1857768514169513729
 LineRenderer:
   serializedVersion: 2
@@ -1074,6 +1075,26 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &3669836135115761641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421599695142573888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec91ee29e89f1c4c83f50d8f5c95cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 56f6f49410c15c6478aabea0f9124629, type: 2}
+  soundMaterialSet: {fileID: 11400000, guid: d71c15135eb978446bbeda282f825f2c, type: 2}
+  floorlayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &3014019172444536401
 GameObject:
   m_ObjectHideFlags: 3

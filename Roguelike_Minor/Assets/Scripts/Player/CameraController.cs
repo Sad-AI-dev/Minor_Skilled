@@ -24,6 +24,12 @@ namespace Game.Player
             cam.m_YAxis.m_MaxSpeed = ySpeed;
         }
 
-       
+        public void ResetCamera(Quaternion lookDirection)
+        {
+            float angle = Quaternion.Angle(Quaternion.identity, lookDirection);
+            if (lookDirection.eulerAngles.y > 180) { angle *= -1; }
+            cam.m_XAxis.Value = angle;
+            cam.m_YAxis.Value = 0.5f;
+        }
     }
 }
