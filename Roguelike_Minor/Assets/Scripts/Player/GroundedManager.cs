@@ -6,9 +6,10 @@ using UnityEngine.Events;
 
 namespace Game.Player
 {
-    public class GroundedChecker : MonoBehaviour
+    public class GroundedManager : MonoBehaviour
     {
         [SerializeField] private float coyoteTime;
+        private Agent agent;
 
         private Coroutine coyoteCoroutine;
         private PlayerController controller;
@@ -26,6 +27,7 @@ namespace Game.Player
                 controller = GetComponent<PlayerController>();
                 cc = GetComponent<CharacterController>();
                 frictionManager = GetComponent<FrictionManager>();
+                agent = GetComponent<Agent>();
             }
 
             if (!grounded && cc.isGrounded)
@@ -45,6 +47,8 @@ namespace Game.Player
             controller.agent.isGrounded = true;
             controller.jumping = false;
             GroundedEvent.Invoke(true);
+
+            agent.stats.currentJumps = agent.stats.totalJumps;
             
             frictionManager.SetFriction(frictionTypes.ground);
         }

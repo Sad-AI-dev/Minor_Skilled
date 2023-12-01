@@ -36,6 +36,10 @@ namespace Game {
         [Header("Spawn Frequency Settings")]
         public float spawnFrequency = 1f;
 
+        [Header("Batching Settings")]
+        public int minBatchSize = 2;
+        public int maxBatchSize = 5;
+
         [Header("Spawn Queue Settings")]
         public float minDelay = 0.05f;
         public float maxDelay = 0.2f;
@@ -126,12 +130,23 @@ namespace Game {
         {
             while (spawnQueue.Count > 0)
             {
-                if (placer) {  PlaceEnemy(spawnQueue.Dequeue()); }
+                if (placer) 
+                {
+                    //batch spawns
+                    for (int i = 0; i < GetBatchSize(); i++)
+                    {
+                        PlaceEnemy(spawnQueue.Dequeue());
+                    }
+                }
                 yield return new WaitForSeconds(Random.Range(minDelay, maxDelay));
             }
             placeEnemyRoutine = null;
         }
 
+        private int GetBatchSize()
+        {
+            return Mathf.Min(spawnQueue.Count, Random.Range(minBatchSize, maxBatchSize));
+        }
         private void PlaceEnemy(EnemySpawnData data)
         {
             GameObject enemy = placer.SpawnEnemy(data.prefab);

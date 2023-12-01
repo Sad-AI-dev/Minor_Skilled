@@ -64,7 +64,10 @@ namespace Game
 
         public override string GenerateLongDescription()
         {
-            return "balls";
+            return $"On hit, chance to fire a seeking missile dealing " +
+                   $"<color=#{HighlightColor}>{baseDamageMult * 100}%</color> <color=#{StackColor}>(+{bonusDamageMult * 100}% per stack)</color> " +
+                   $"times the damage of the original attack.";
+                   
         }
     }
 }
