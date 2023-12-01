@@ -46,7 +46,7 @@ namespace Game {
                     }
                     else 
                     {
-                        Debug.Log("Hit object");
+                        // Debug.Log("Hit object");
                     }
                 }
 
@@ -67,26 +67,22 @@ namespace Game {
 
             Dictionary<int, float> layersAtPosition = new Dictionary<int, float>();
 
-            int primaryIndex = 0;
             for (int i = 0; i < alphamap.Length; i++)
             {
-                layersAtPosition.Add(i, alphamap[0,0,i]);
-                if (alphamap[0, 0, i] > alphamap[0, 0, primaryIndex])
-                {
-                    primaryIndex = i;
-                }
+                layersAtPosition.Add(i, alphamap[0, 0, i]);
             }
 
-            //Debug.Log(terrain.terrainData.terrainLayers[primaryIndex]);
-            // string msg = "Terrain Data found: \n\n";
-            // foreach (var kvp in layersAtPosition)
-            // {
-            //     msg += $"layer data: layer Index: {kvp.Key}, value {kvp.Value}\n";
-            // }
-            // Debug.Log(msg);
+             foreach (var kvp in layersAtPosition)
+             {
+                 //msg += $"layer data: layer Index: {kvp.Key}, value {kvp.Value}\n";
 
-            AK.Wwise.Switch sound = soundMaterialSet.GetSwitchByTerrain(terrain.terrainData.terrainLayers[primaryIndex]);
-            sound.SetValue(gameObject);
+                 AK.Wwise.RTPC param = soundMaterialSet.GetSwitchByTerrain(terrain.terrainData.terrainLayers[kvp.Key]);
+                 if (kvp.Value > 0) ;
+                 {
+                     param.SetGlobalValue(kvp.Value * 100f);
+                     Debug.Log(kvp.Value);
+                 }
+             }
         }
 
         private IEnumerator SetFootstepSFXRender(GameObject obj)
