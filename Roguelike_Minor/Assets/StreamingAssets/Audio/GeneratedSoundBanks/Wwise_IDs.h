@@ -16,7 +16,7 @@ namespace AK
         static const AkUniqueID PLAY_BIRDS = 3025897706U;
         static const AkUniqueID PLAY_DASH = 2211787386U;
         static const AkUniqueID PLAY_FOOTSTEP = 1602358412U;
-        static const AkUniqueID PLAY_FOOTSTEP_2 = 3731463379U;
+        static const AkUniqueID PLAY_FOOTSTEP_OLD = 923366262U;
         static const AkUniqueID PLAY_GRENADE = 2405798708U;
         static const AkUniqueID PLAY_GRENADE_SPLAT = 3537222909U;
         static const AkUniqueID PLAY_GRENADE_THROW = 2492084817U;
@@ -81,6 +81,7 @@ namespace AK
         static const AkUniqueID ENEMY = 2299321487U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
         static const AkUniqueID PLAYER = 1069431850U;
+        static const AkUniqueID SPECIALFIRE = 3582546886U;
         static const AkUniqueID UI = 1551306167U;
     } // namespace BUSSES
 

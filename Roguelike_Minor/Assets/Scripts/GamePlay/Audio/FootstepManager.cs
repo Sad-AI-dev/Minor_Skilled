@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AK.Wwise;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -72,16 +73,23 @@ namespace Game {
                 layersAtPosition.Add(i, alphamap[0, 0, i]);
             }
 
-             foreach (var kvp in layersAtPosition)
-             {
-                 //msg += $"layer data: layer Index: {kvp.Key}, value {kvp.Value}\n";
+            Dictionary<RTPC, float> percentagePerLayerType = new Dictionary<RTPC, float>();
+            foreach (var kvp in layersAtPosition)
+            {
+                RTPC param = soundMaterialSet.GetSwitchByTerrain(terrain.terrainData.terrainLayers[kvp.Key]);
+                if (!percentagePerLayerType.ContainsKey(param))
+                {
+                    percentagePerLayerType.Add(param, kvp.Value);
+                }
+                else
+                {
+                    percentagePerLayerType[param] += kvp.Value;
+                }
+            }
 
-                 AK.Wwise.RTPC param = soundMaterialSet.GetSwitchByTerrain(terrain.terrainData.terrainLayers[kvp.Key]);
-                 if (kvp.Value > 0) ;
-                 {
-                     param.SetGlobalValue(kvp.Value * 100f);
-                     Debug.Log(kvp.Value);
-                 }
+             foreach (var kvp in percentagePerLayerType)
+             {
+                 kvp.Key.SetGlobalValue(kvp.Value * 100f);
              }
         }
 
