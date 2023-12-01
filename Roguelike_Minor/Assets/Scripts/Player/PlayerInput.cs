@@ -186,7 +186,7 @@ namespace Game.Player {
         {
             canPlayFootstep = false;
             yield return new WaitForSeconds(0.5f);
-            audioPlayer.Play();
+            //audioPlayer.Play();
             canPlayFootstep = true;
         }        
     }

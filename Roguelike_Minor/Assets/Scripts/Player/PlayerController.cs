@@ -44,6 +44,9 @@ namespace Game.Player
         [SerializeField] private float fastFallMultiplier;
 
 
+        private Coroutine decelerateCo;
+        private bool canDecelerate = true;
+
         public bool Grounded 
         {
             get 
@@ -88,7 +91,6 @@ namespace Game.Player
             Physics.SyncTransforms();
 
             Vector3 walkVelocity = (moveDirection * speed) + excessVelocity;
-            Debug.Log(yVelocity);
             cc.Move(walkVelocity + new Vector3(0, yVelocity, 0));
             fovManager.UpdateFOV(walkVelocity.magnitude);
 
@@ -98,6 +100,7 @@ namespace Game.Player
         public void SetMoveDirection(Vector2 moveInput)
         {
             Vector3 lastMoveDir = new Vector3();
+
             if(moveInput.magnitude >= 0.1f)
             {
                 float dirAngle = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
@@ -111,42 +114,53 @@ namespace Game.Player
                 Accelerate(acceleration);
                 startRunning.Invoke();
             }
-            else if (lastMoveDir != Vector3.zero && speed > 0)
+            else if (speed > 0)
             {
                 moveDirection = lastMoveDir;
-                if(groundedChecker.grounded)
-                    Decelerate(deceleration);
+                if (groundedChecker.grounded && canDecelerate)
+                    decelerateCo = StartCoroutine(Decelerate(deceleration));
             }
         }
 
         public void Accelerate(float acceleration)
         {
+            if(decelerateCo!= null)
+            {
+                StopCoroutine(decelerateCo);
+                canDecelerate = true;
+            }
+
             speedMultiplier += acceleration * Time.deltaTime;
             speedMultiplier = Mathf.Clamp(speedMultiplier, 0, 1);
         }
 
-        public void Decelerate(float deceleration)
+        private IEnumerator Decelerate(float deceleration)
         {
-            speedMultiplier -= deceleration * Time.deltaTime;
-            speedMultiplier = Mathf.Clamp(speedMultiplier, 0, 1);
+            canDecelerate = false;
+            while (speedMultiplier > 0)
+            {
+                speedMultiplier -= deceleration * Time.deltaTime;
+                Debug.Log($"{speed} * {speedMultiplier}");
+                yield return null;
+            }
+            speedMultiplier = 0;
+            canDecelerate = true;
         }
 
         private void UpdateSpeed()
         {
             if(moveDirection.magnitude > 0.1f)
             {
-                if (!isSlowed) speed = walkSpeed * sprintSpeed;
-                if (isSlowed) speed = walkSpeed;
+                if (!isSlowed) speed = speedMultiplier * (walkSpeed * sprintSpeed / 100);
+                if (isSlowed) speed = speedMultiplier * (walkSpeed / 100);
 
-                speed *= speedMultiplier;
+                //speed *= speedMultiplier;
             }
 
-            if(speed > 0)
+            if(speedMultiplier > 0)
                 startRunning.Invoke();
             else
                 stopRunning.Invoke();
-            
-            speed /= 100;
         }
 
         public void Dash(Vector3 force)
