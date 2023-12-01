@@ -33,6 +33,11 @@ namespace Game.Player
 
         private bool addedVerticalVelocity = false;
 
+        public void Start()
+        {
+            SetTrigger(false);
+        }
+
         protected override void UpdateMoveDir()
         {
             if(!addedVerticalVelocity)
@@ -44,7 +49,7 @@ namespace Game.Player
             velocity += new Vector3(0, -gravity * Time.deltaTime, 0);
         }
 
-        protected override void CustomCollide(Collider other)
+        protected override void CustomCollide(Collision collision)
         {
             List<Agent> agents = Explosion.FindAgentsInRange(transform.position, radius, source);
             Explosion.DealDamage(agents, source, explosionDamage);
@@ -58,7 +63,7 @@ namespace Game.Player
 
             for (int i = 0; i < poisonGrenadeAmount; i++)
             {
-
+                Vector3 colNormal = collision.GetContact(0).normal;
                 Projectile projectile = grenades.GetBehaviour();
                 projectile.transform.position = transform.position + new Vector3(0, 0.5f, 0);
                 projectile.Initialize(ability);
@@ -71,13 +76,13 @@ namespace Game.Player
 
                 float angle = Random.Range(minAngle, maxAngle);
 
-                Quaternion direction = Quaternion.AngleAxis(angle, Vector3.up);
+                Quaternion direction = Quaternion.AngleAxis(angle, colNormal);
                 Vector3 directionVector = direction * Vector3.forward;
                 directionVector.Normalize();
 
                 float directionDistance = Random.Range(minDistance, maxDistance);
 
-                Vector3 grenadeVelocity = projectile.transform.up + directionVector;
+                Vector3 grenadeVelocity = colNormal * 2 + directionVector;
                 grenadeVelocity.Normalize();
                 grenadeVelocity = new Vector3(grenadeVelocity.x * directionDistance, grenadeVelocity.y * poisonUpwardVelocity, grenadeVelocity.z *  directionDistance);
 
