@@ -20,6 +20,7 @@ namespace Game {
             public float ringRadius;
 
             //damage data
+            public float procCoef;
             public float damageMult;
         }
 
@@ -29,6 +30,7 @@ namespace Game {
         [Space(10f)]
         public float baseDamageMult = 1.5f;
         public float bonusDamageMult = 0f;
+        public float procCoef = 1f;
 
         [Header("Prefab Settings")]
         public GameObject planetPrefab;
@@ -47,7 +49,8 @@ namespace Game {
                 holder = item,
                 projectiles = new List<PlanetProjectile>(),
                 ringCapacity = ringCapacity,
-                ringRadius = ringRadius
+                ringRadius = ringRadius,
+                procCoef = procCoef
             };
         }
 
