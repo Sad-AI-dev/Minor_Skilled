@@ -15,6 +15,7 @@ namespace Game.Core.GameSystems
 
         private void OnSceneLoaded(SceneLoadedEvent eventData)
         {
+            uiFader.targetGroup.alpha = 1f;
             uiFader.StartFade();
         }
 
