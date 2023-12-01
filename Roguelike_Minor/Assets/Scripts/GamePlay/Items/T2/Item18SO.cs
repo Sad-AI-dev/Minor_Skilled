@@ -28,7 +28,7 @@ namespace Game {
         public int bonusPlanets = 3;
         [Space(10f)]
         public float baseDamageMult = 1.5f;
-        public float bonusDamageMult = 0.5f;
+        public float bonusDamageMult = 0f;
 
         [Header("Prefab Settings")]
         public GameObject planetPrefab;
@@ -45,6 +45,7 @@ namespace Game {
         {
             item.vars = new Item18Vars {
                 holder = item,
+                projectiles = new List<PlanetProjectile>(),
                 ringCapacity = ringCapacity,
                 ringRadius = ringRadius
             };
@@ -55,23 +56,31 @@ namespace Game {
         {
             Item18Vars vars = item.vars as Item18Vars;
             //update data
-            UpdateDamageData(vars);
-            UpdateRingVars(vars);
-            SetupProjectile(vars);
+            int planetsToCreate = item.stacks == 1 ? basePlanets : bonusPlanets;
+            for (int i = 0; i < planetsToCreate; i++)
+            {
+                UpdateDamageData(vars);
+                UpdateRingVars(vars);
+                SetupProjectile(vars);
+            }
         }
 
         //damage vars
         private void UpdateDamageData(Item18Vars vars)
         {
-            if (vars.holder.stacks == 1) { vars.damageMult += baseDamageMult; }
-            else { vars.damageMult += bonusDamageMult; }
+            float damage = 0;
+            if (vars.holder.stacks > 0) 
+            {
+                damage += baseDamageMult + bonusDamageMult * (vars.holder.stacks - 1);
+            }
+            vars.damageMult = damage;
         }
 
         //ring vars
         private void UpdateRingVars(Item18Vars vars)
         {
             vars.currentProjectilesInRing++;
-            if (vars.currentProjectilesInRing >= vars.ringCapacity)
+            if (vars.currentProjectilesInRing > vars.ringCapacity)
             {
                 IncreaseRingIndex(vars);
             }
@@ -79,7 +88,7 @@ namespace Game {
         private void IncreaseRingIndex(Item18Vars vars)
         {
             vars.currentRingIndex++;
-            vars.currentProjectilesInRing = 0;
+            vars.currentProjectilesInRing = 1; //1 projectile is being added, no space in last ring, so add to new ring
             vars.ringCapacity = GetRingCapacity(vars.currentRingIndex);
             vars.ringRadius = GetRingRadius(vars.currentRingIndex);
         }
@@ -104,15 +113,49 @@ namespace Game {
         }
         private void SetupProjectileVars(PlanetProjectile proj, Item18Vars vars)
         {
-            //TODO setup vars, look at planetProjectile class for what it needs
-            //TODO everything in the planetProjectile class
-            //TODO remove item logic
+            proj.holderVars = vars;
+            proj.ringCapacity = vars.ringCapacity;
+            proj.numInRing = vars.currentProjectilesInRing;
+            proj.targetRadius = vars.ringRadius;
         }
 
         //========= Manage Remove Stack ==========
         public override void RemoveStack(Item item)
         {
             Item18Vars vars = item.vars as Item18Vars;
+            //update data
+            int planetsToRemove = item.stacks == 0 ? basePlanets : bonusPlanets;
+            for (int i = 0; i < planetsToRemove; i++)
+            {
+                UpdateDamageData(vars);
+                UpdateRemovedRingData(vars);
+                RemoveProjectile(vars);
+            }
+        }
+
+        private void UpdateRemovedRingData(Item18Vars vars)
+        {
+            vars.currentProjectilesInRing--;
+            if (vars.currentProjectilesInRing < 0)
+            {
+                DecreaseRingIndex(vars);
+            }
+        }
+        private void DecreaseRingIndex(Item18Vars vars)
+        {
+            vars.currentRingIndex--;
+            vars.ringCapacity = GetRingCapacity(vars.currentRingIndex);
+            vars.currentProjectilesInRing = vars.ringCapacity - 1; //1 projectile is being removed
+            vars.ringRadius = GetRingRadius(vars.currentRingIndex);
+        }
+
+        private void RemoveProjectile(Item18Vars vars)
+        {
+            PlanetProjectile proj = vars.projectiles[^1]; //^1 == count - 1
+            //unregister
+            vars.projectiles.Remove(proj);
+            //destroy object
+            Destroy(proj.gameObject);
         }
 
         //========== Description ===========
