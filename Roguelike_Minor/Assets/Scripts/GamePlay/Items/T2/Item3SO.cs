@@ -8,7 +8,7 @@ namespace Game {
     [CreateAssetMenu(fileName = "3Explosive_Greens", menuName = "ScriptableObjects/Items/T2/3: Explosive Greens", order = 203)]
     public class Item3SO : ItemDataSO
     {
-        public class DeathExplodeItemVars : Item.ItemVars
+        private class Item3Vars : Item.ItemVars
         {
             public float explodeRadius;
         }
@@ -34,18 +34,20 @@ namespace Game {
         //========= Initialize Vars ============
         public override void InitializeVars(Item item)
         {
-            item.vars = new DeathExplodeItemVars { explodeRadius = explosionRadius };
+            item.vars = new Item3Vars();
         }
 
         //========= Manage Stacks ===========
         public override void AddStack(Item item)
         {
-            (item.vars as DeathExplodeItemVars).explodeRadius += bonusExplosionRadius;
+            Item3Vars vars = item.vars as Item3Vars;
+            if (item.stacks == 1) { vars.explodeRadius += explosionRadius; }
+            else { vars.explodeRadius += bonusExplosionRadius; }
         }
 
         public override void RemoveStack(Item item)
         {
-            DeathExplodeItemVars vars = item.vars as DeathExplodeItemVars;
+            Item3Vars vars = item.vars as Item3Vars;
             if (item.stacks == 0) { vars.explodeRadius -= explosionRadius; }
             else { vars.explodeRadius -= bonusExplosionRadius; }
         }
@@ -59,7 +61,7 @@ namespace Game {
         //========= Util Funcs ==========
         private float GetExplodeRadius(Item item)
         {
-            return (item.vars as DeathExplodeItemVars).explodeRadius;
+            return (item.vars as Item3Vars).explodeRadius;
         }
 
         private float CalcDamage(HitEvent hitEvent)

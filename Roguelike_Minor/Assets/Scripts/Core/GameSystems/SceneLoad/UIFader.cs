@@ -54,8 +54,7 @@ namespace Game.Core.GameSystems {
 
         private void DetermineStartState()
         {
-            fadingIn = true;
-            if (targetGroup.alpha >= 0.5f) { fadingIn = false; }
+            fadingIn = targetGroup.alpha < 0.5f;
         }
 
         //========= state management =========
@@ -64,6 +63,7 @@ namespace Game.Core.GameSystems {
             timer = 0f;
             fading = true;
             fadedOnce = false;
+            DetermineStartState();
             //blink mode
             if (fadeMode == FadeMode.Blink) { StartCoroutine(BlinkTimer()); }
         }
