@@ -29,6 +29,7 @@ namespace Game.Player
         private bool isSlowed = false;
 
         private Vector3 moveDirection;
+        private Vector3 lastMoveDir;
         private Vector3 excessVelocity;
 
         [Header("Jump")]
@@ -99,8 +100,6 @@ namespace Game.Player
 
         public void SetMoveDirection(Vector2 moveInput)
         {
-            Vector3 lastMoveDir = new Vector3();
-
             if(moveInput.magnitude >= 0.1f)
             {
                 float dirAngle = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
@@ -110,7 +109,7 @@ namespace Game.Player
 
                 moveDirection = Quaternion.Euler(0, dirAngle, 0) * Vector3.forward;
                 moveDirection.Normalize();
-                lastMoveDir = moveDirection;  
+                lastMoveDir = moveDirection;
                 Accelerate(acceleration);
                 startRunning.Invoke();
             }
@@ -140,7 +139,6 @@ namespace Game.Player
             while (speedMultiplier > 0)
             {
                 speedMultiplier -= deceleration * Time.deltaTime;
-                Debug.Log($"{speed} * {speedMultiplier}");
                 yield return null;
             }
             speedMultiplier = 0;
