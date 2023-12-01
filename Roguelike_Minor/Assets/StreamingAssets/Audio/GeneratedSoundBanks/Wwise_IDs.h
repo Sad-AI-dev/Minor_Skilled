@@ -16,6 +16,7 @@ namespace AK
         static const AkUniqueID PLAY_BIRDS = 3025897706U;
         static const AkUniqueID PLAY_DASH = 2211787386U;
         static const AkUniqueID PLAY_FOOTSTEP = 1602358412U;
+        static const AkUniqueID PLAY_FOOTSTEP_2 = 3731463379U;
         static const AkUniqueID PLAY_GRENADE = 2405798708U;
         static const AkUniqueID PLAY_GRENADE_SPLAT = 3537222909U;
         static const AkUniqueID PLAY_GRENADE_THROW = 2492084817U;
@@ -50,6 +51,8 @@ namespace AK
 
     namespace GAME_PARAMETERS
     {
+        static const AkUniqueID GRASS = 4248645337U;
+        static const AkUniqueID GRAVEL = 2185786256U;
         static const AkUniqueID OBELISK_PROGRESS = 1308554018U;
         static const AkUniqueID RUNNING_SPEED = 2309143834U;
         static const AkUniqueID SS_AIR_FEAR = 1351367891U;
@@ -62,6 +65,7 @@ namespace AK
         static const AkUniqueID SS_AIR_STORM = 3715662592U;
         static const AkUniqueID SS_AIR_TIMEOFDAY = 3203397129U;
         static const AkUniqueID SS_AIR_TURBULENCE = 4160247818U;
+        static const AkUniqueID STONE = 1216965916U;
     } // namespace GAME_PARAMETERS
 
     namespace BANKS

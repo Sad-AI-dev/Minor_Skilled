@@ -8,11 +8,11 @@ namespace Game {
     [CreateAssetMenu(fileName = "SoundMaterialSet", menuName = "ScriptableObjects/Audio/SoundMaterialSet")]
     public class SoundMaterialSetSO : ScriptableObject
     {
-        [SerializeField] private Switch defaultValue;
+        [SerializeField] private RTPC defaultValue;
 
-        [SerializeField] private UnityDictionary<List<TerrainLayer>, Switch> terrainLookup;
+        [SerializeField] private UnityDictionary<List<TerrainLayer>, RTPC> terrainLookup;
 
-        public Switch GetSwitchByTerrain(TerrainLayer layer)
+        public RTPC GetSwitchByTerrain(TerrainLayer layer)
         {
             foreach (var kvp in terrainLookup)
             {
