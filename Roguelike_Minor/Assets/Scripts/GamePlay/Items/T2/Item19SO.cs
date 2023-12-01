@@ -68,7 +68,9 @@ namespace Game
 
         public override string GenerateLongDescription()
         {
-            return "balls";
+            return $"Deal <color=#{HighlightColor}>{damage}</color> damage to enemies within a " +
+                   $"<color=#{HighlightColor}>{baseRadius}m</color> <color=#{StackColor}>(+{bonusRadius}m per stack)</color> " +
+                   $"radius around you.";
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Game.Player
     {
         [SerializeField] Animator animator;
         private PlayerController controller;
-        private GroundedChecker groundedChecker;
+        private GroundedManager groundedChecker;
         private Agent agent;
         private PlayerInput input;
 
@@ -44,7 +44,7 @@ namespace Game.Player
         {
             InitializeIdentifiers();
 
-            groundedChecker = GetComponent<GroundedChecker>();
+            groundedChecker = GetComponent<GroundedManager>();
             groundedChecker.GroundedEvent.AddListener(SetAnimGrounded);
 
             input = GetComponent<PlayerInput>();

@@ -62,7 +62,8 @@ namespace Game
         public override string GenerateLongDescription()
         {
             return "When taking damage, reflect the damage, " +
-                   $"dealing {damageMultiplier * 100}% (+{bonusDamageMultiplier * 100}% per stack) damage of damage taken.";
+                   $"dealing <color=#{HighlightColor}>{damageMultiplier * 100}%</color> " +
+                   $"<color=#{StackColor}>(+{bonusDamageMultiplier * 100}% per stack)</color> damage of damage taken.";
         }
     }
 }
