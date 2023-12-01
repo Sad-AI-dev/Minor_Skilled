@@ -37,6 +37,8 @@ namespace Game.Core {
         [Header("Movement")]
         public float walkSpeed;
         public float sprintSpeed;
+        public int currentJumps;
+        public int totalJumps;
 
         [Header("Luck")]
         public int luck;
@@ -62,6 +64,8 @@ namespace Game.Core {
             //movement
             walkSpeed = other.walkSpeed;
             sprintSpeed = other.sprintSpeed;
+            currentJumps = other.currentJumps;
+            totalJumps = other.totalJumps;
 
             //luck
             luck = other.luck;
