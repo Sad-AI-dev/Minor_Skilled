@@ -47,6 +47,7 @@ namespace Game.Player {
         void Update()
         {
             pauseInput();
+            SetTimeScale();
 
             gamePaused = pauseMenu.paused;
 
@@ -188,6 +189,22 @@ namespace Game.Player {
             yield return new WaitForSeconds(0.5f);
             audioPlayer.Play();
             canPlayFootstep = true;
-        }        
+        }
+
+        private void SetTimeScale()
+        {
+            if(Input.GetKeyDown(KeyCode.P))
+            {
+                if (Time.timeScale == 1)
+                    Time.timeScale = 0;
+                else
+                    Time.timeScale = 1;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Period))
+                Time.timeScale += 0.05f;
+            if (Input.GetKeyDown(KeyCode.Comma))
+                Time.timeScale -= 0.05f;
+        }
     }
 }

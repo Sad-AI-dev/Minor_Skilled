@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3437888096162313602}
   - component: {fileID: 1759089210157971561}
+  - component: {fileID: 2614002183427038706}
+  - component: {fileID: 5623270738001738829}
   m_Layer: 0
   m_Name: PineTree01
   m_TagString: Untagged
@@ -57,6 +59,45 @@ LODGroup:
     renderers:
     - renderer: {fileID: 3871243089498643075}
   m_Enabled: 1
+--- !u!208 &2614002183427038706
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163511134011263822}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1.02, y: 5, z: 1.02}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 4.44, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!136 &5623270738001738829
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163511134011263822}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.38
+  m_Height: 6.7334456
+  m_Direction: 1
+  m_Center: {x: 0.053427745, y: 2.7760003, z: -0.025985494}
 --- !u!1 &463138514441733492
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,7 +109,6 @@ GameObject:
   - component: {fileID: 5523811089217161776}
   - component: {fileID: 4058612038939439525}
   - component: {fileID: 4297841357547049759}
-  - component: {fileID: 5983949572805646558}
   m_Layer: 0
   m_Name: PineTree01_LOD0
   m_TagString: Untagged
@@ -142,29 +182,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5983949572805646558
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463138514441733492}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.13440186
-  m_Height: 6.273711
-  m_Direction: 1
-  m_Center: {x: 0.053427726, y: 3.0058675, z: -0.02598551}
 --- !u!1 &2795704596346436541
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8069581803349424533
 Transform:
   m_ObjectHideFlags: 0

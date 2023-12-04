@@ -9,7 +9,7 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{0BBDEB36-ABC2-12D5-E70D-9FDECBDF05ED}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{605A352D-3FFA-E0BB-8CCE-57FC1F11143B}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
@@ -27,6 +27,7 @@
 				<Bus Id="1551306167" Name="UI"/>
 				<Bus Id="2299321487" Name="Enemy"/>
 				<Bus Id="3174030640" Name="Auxiliary busses"/>
+				<Bus Id="3582546886" Name="Specialfire"/>
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 			<AuxBusses>
@@ -41,8 +42,10 @@
 			<GameParameters>
 				<GameParameter Id="822163944" Name="SS_Air_RPM"/>
 				<GameParameter Id="1029930033" Name="SS_Air_Fury"/>
+				<GameParameter Id="1216965916" Name="Stone"/>
 				<GameParameter Id="1308554018" Name="Obelisk_progress"/>
 				<GameParameter Id="1351367891" Name="SS_Air_Fear"/>
+				<GameParameter Id="2185786256" Name="Gravel"/>
 				<GameParameter Id="2309143834" Name="Running_speed"/>
 				<GameParameter Id="2648548617" Name="SS_Air_Month"/>
 				<GameParameter Id="3002758120" Name="SS_Air_Freefall"/>
@@ -51,6 +54,7 @@
 				<GameParameter Id="3715662592" Name="SS_Air_Storm"/>
 				<GameParameter Id="3847924954" Name="SS_Air_Presence"/>
 				<GameParameter Id="4160247818" Name="SS_Air_Turbulence"/>
+				<GameParameter Id="4248645337" Name="Grass"/>
 			</GameParameters>
 			<SwitchGroups>
 				<SwitchGroup Id="2385628198" Name="Footsteps">
@@ -176,7 +180,7 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{75277B71-8238-267F-214E-580A3F4447CC}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{244015D1-A0F7-9A04-3930-1442FCA7F7F1}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -286,7 +290,7 @@
 				</File>
 				<File Id="541444666" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>536746__egomassive__pig 6.wav</ShortName>
-					<CachePath>SFX/536746__egomassive__pig 6_A98CE6D9.wem</CachePath>
+					<CachePath>SFX/536746__egomassive__pig 6_D67068D8.wem</CachePath>
 				</File>
 				<File Id="577496908" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>365141__gibarroule__pig-scream-loud-oink.wav</ShortName>
@@ -302,7 +306,7 @@
 				</File>
 				<File Id="660608096" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>271666__honorhunter__tomato-squishwet.wav</ShortName>
-					<CachePath>SFX/271666__honorhunter__tomato-squishwet_7402967A.wem</CachePath>
+					<CachePath>SFX/271666__honorhunter__tomato-squishwet_CAD2C782.wem</CachePath>
 				</File>
 				<File Id="699093671" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 7.wav</ShortName>
@@ -318,7 +322,7 @@
 				</File>
 				<File Id="710330148" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Soundly Audio\wind_desert_01_60_loop 1.wav</ShortName>
-					<CachePath>SFX/Soundly Audio/wind_desert_01_60_loop 1_54CDA1BA.wem</CachePath>
+					<CachePath>SFX/Soundly Audio/wind_desert_01_60_loop 1_C21714B9.wem</CachePath>
 				</File>
 				<File Id="716720316" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 9.wav</ShortName>
@@ -326,7 +330,7 @@
 				</File>
 				<File Id="741460009" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>536746__egomassive__pig 3.wav</ShortName>
-					<CachePath>SFX/536746__egomassive__pig 3_C7C34C10.wem</CachePath>
+					<CachePath>SFX/536746__egomassive__pig 3_7C77E203.wem</CachePath>
 				</File>
 				<File Id="742923068" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close 1.wav</ShortName>
@@ -370,7 +374,7 @@
 				</File>
 				<File Id="940789584" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>536746__egomassive__pig 4.wav</ShortName>
-					<CachePath>SFX/536746__egomassive__pig 4_1FDAA7B6.wem</CachePath>
+					<CachePath>SFX/536746__egomassive__pig 4_C44EA791.wem</CachePath>
 				</File>
 				<File Id="964094415" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Splat 8-551449__jjxmf__splats.wav</ShortName>
@@ -420,7 +424,31 @@
 						<MediaRef Id="766868557"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1602358412" Name="Play_footstep" DurationType="OneShot" DurationMin="0.47972447" DurationMax="0.85995054">
+				<Event Id="1602358412" Name="Play_footstep" DurationType="OneShot" DurationMin="0.7058289" DurationMax="0.85995054">
+					<MediaRefs>
+						<MediaRef Id="59103797"/>
+						<MediaRef Id="89932490"/>
+						<MediaRef Id="110500809"/>
+						<MediaRef Id="114167700"/>
+						<MediaRef Id="245396275"/>
+						<MediaRef Id="261670173"/>
+						<MediaRef Id="267493234"/>
+						<MediaRef Id="271074604"/>
+						<MediaRef Id="284965498"/>
+						<MediaRef Id="369054095"/>
+						<MediaRef Id="699093671"/>
+						<MediaRef Id="699752730"/>
+						<MediaRef Id="716720316"/>
+						<MediaRef Id="742923068"/>
+						<MediaRef Id="753373456"/>
+						<MediaRef Id="769638221"/>
+						<MediaRef Id="827923736"/>
+						<MediaRef Id="889319335"/>
+						<MediaRef Id="1045493623"/>
+						<MediaRef Id="1064136553"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="923366262" Name="Play_footstep_old" DurationType="OneShot" DurationMin="0.47972447" DurationMax="0.85995054">
 					<MediaRefs>
 						<MediaRef Id="369054095"/>
 						<MediaRef Id="889319335"/>
@@ -429,13 +457,11 @@
 						<SwitchContainer>
 							<SwitchValue GroupType="Switch" GroupId="2385628198" Id="1216965916"/>
 							<MediaRefs>
-								<MediaRef Id="59103797"/>
-								<MediaRef Id="261670173"/>
-								<MediaRef Id="267493234"/>
-								<MediaRef Id="699093671"/>
-								<MediaRef Id="699752730"/>
-								<MediaRef Id="716720316"/>
-								<MediaRef Id="753373456"/>
+								<MediaRef Id="89932490"/>
+								<MediaRef Id="245396275"/>
+								<MediaRef Id="284965498"/>
+								<MediaRef Id="769638221"/>
+								<MediaRef Id="1045493623"/>
 							</MediaRefs>
 						</SwitchContainer>
 						<SwitchContainer>
@@ -452,11 +478,13 @@
 						<SwitchContainer>
 							<SwitchValue GroupType="Switch" GroupId="2385628198" Id="2185786256"/>
 							<MediaRefs>
-								<MediaRef Id="89932490"/>
-								<MediaRef Id="245396275"/>
-								<MediaRef Id="284965498"/>
-								<MediaRef Id="769638221"/>
-								<MediaRef Id="1045493623"/>
+								<MediaRef Id="59103797"/>
+								<MediaRef Id="261670173"/>
+								<MediaRef Id="267493234"/>
+								<MediaRef Id="699093671"/>
+								<MediaRef Id="699752730"/>
+								<MediaRef Id="716720316"/>
+								<MediaRef Id="753373456"/>
 							</MediaRefs>
 						</SwitchContainer>
 					</SwitchContainers>
@@ -481,7 +509,7 @@
 						<MediaRef Id="476744445"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="3392973459" Name="Play_grunt_die" MaxAttenuation="45" DurationType="OneShot" DurationMin="0.5173825" DurationMax="0.7106167">
+				<Event Id="3392973459" Name="Play_grunt_die" MaxAttenuation="45" DurationType="OneShot" DurationMin="0.63330394" DurationMax="0.8698329">
 					<MediaRefs>
 						<MediaRef Id="577496908"/>
 						<MediaRef Id="894723020"/>
@@ -534,20 +562,27 @@
 						<MediaRef Id="1064680169"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="3577284316" Name="Play_Start_Obelisk" DurationType="OneShot" DurationMin="3.6153352" DurationMax="3.6153352">
+				<Event Id="3577284316" Name="Play_Start_Obelisk" DurationType="OneShot" DurationMin="3.3732271" DurationMax="3.3732271">
 					<MediaRefs>
 						<MediaRef Id="705499710"/>
 					</MediaRefs>
+					<ActionPostEvent>
+						<ActionPostEventEntry Id="2990404959" Name="Play_Obelisk_passive"/>
+					</ActionPostEvent>
 				</Event>
 				<Event Id="3110216747" Name="Play_Wind_ambience" DurationType="Infinite">
 					<MediaRefs>
 						<MediaRef Id="710330148"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="1647081223" Name="Stop_obelisk" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="2725535549" Name="Stop_Wind_ambience" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 			<GameParameters>
+				<GameParameter Id="1216965916" Name="Stone"/>
 				<GameParameter Id="1308554018" Name="Obelisk_progress"/>
-				<GameParameter Id="2309143834" Name="Running_speed"/>
+				<GameParameter Id="2185786256" Name="Gravel"/>
+				<GameParameter Id="4248645337" Name="Grass"/>
 			</GameParameters>
 			<SwitchGroups>
 				<SwitchGroup Id="2385628198" Name="Footsteps">
@@ -560,5 +595,5 @@
 			</SwitchGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{CCC276AB-1CF2-82E2-5900-52B7DA8718AD}</FileHash>
+	<FileHash>{F885ED6E-EC3B-44A5-87C4-13600664B513}</FileHash>
 </SoundBanksInfo>

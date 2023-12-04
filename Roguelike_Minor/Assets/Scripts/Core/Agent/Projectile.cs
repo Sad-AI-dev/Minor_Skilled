@@ -26,7 +26,7 @@ namespace Game.Core
             col.isTrigger = true;
             rb = GetComponent<Rigidbody>();
             rb.useGravity = false;
-            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             StartCoroutine(LifeTimeCo());
         }
 
@@ -60,6 +60,11 @@ namespace Game.Core
 
         //=========== Collision ==============
 
+        protected void SetTrigger(bool value)
+        {
+            col.isTrigger = value;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.isTrigger) { return; }
@@ -70,12 +75,22 @@ namespace Game.Core
             }
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.collider.isTrigger) { return; }
+            if (!collision.transform.CompareTag(sourceTag))
+            {
+                CustomCollide(collision);
+                gameObject.SetActive(false);
+            }
+        }
+
         protected virtual void CustomCollide(Collider other)
         {
 
         }
 
-        protected virtual void OnCollide(RaycastHit hit)
+        protected virtual void CustomCollide(Collision collision)
         {
 
         }

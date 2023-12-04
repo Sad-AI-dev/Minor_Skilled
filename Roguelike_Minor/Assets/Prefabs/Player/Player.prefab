@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67414044404434119}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5606288, y: -0, z: -0, w: 0.82806724}
+  m_LocalRotation: {x: -0.5547551, y: -0, z: -0, w: 0.8320137}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -433,20 +433,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 314f756d65691164cb42be978475e60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visuals: {fileID: 7107147114416228610}
-  agent: {fileID: 0}
   cam: {fileID: 0}
+  agent: {fileID: 0}
   deceleration: 3
   acceleration: 3
   JumpForce: 30
+  yVelocity: 0
+  jumping: 0
   gravity: 2.5
+  activeGravity: 0
   slowFallBounds: 0.05
   slowFallMultiplier: 0.8
   fastFallMultiplier: 1.2
-  yVelocity: 0
-  activeGravity: 0
-  grounded: 0
-  jumping: 0
   startRunning:
     m_PersistentCalls:
       m_Calls: []
@@ -486,6 +484,7 @@ MonoBehaviour:
   GroundedEvent:
     m_PersistentCalls:
       m_Calls: []
+  grounded: 0
 --- !u!114 &2247936208319766161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,6 +559,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0c811594585ed40aa7be4fb1298123, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiFader: {fileID: 0}
+  allowLoadScene: 0
 --- !u!143 &1389778117787781048
 CharacterController:
   m_ObjectHideFlags: 0
@@ -633,7 +634,7 @@ MonoBehaviour:
     abilityData: {fileID: 11400000, guid: 5dbafad3a5945d643a2dbc8379c06249, type: 2}
     uses: 1
     maxUses: 1
-    coolDown: 5
+    coolDown: 1
     coolDownMode: 0
     isCoolingDown: 0
     originPoint: {fileID: 2437245198168656956}
@@ -662,7 +663,7 @@ MonoBehaviour:
     abilityData: {fileID: 11400000, guid: 246ee83cf6db190478d1f1ab63556b27, type: 2}
     uses: 1
     maxUses: 1
-    coolDown: 1
+    coolDown: 8
     coolDownMode: 0
     isCoolingDown: 0
     originPoint: {fileID: 2437245198168656956}
@@ -840,6 +841,8 @@ MonoBehaviour:
     coolDownMultiplier: 1
     walkSpeed: 15
     sprintSpeed: 2
+    currentJumps: 0
+    totalJumps: 0
     luck: 0
   abilities: {fileID: 0}
   effectHandler: {fileID: 0}
@@ -970,7 +973,7 @@ MonoBehaviour:
   audioEvents:
   - idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 56f6f49410c15c6478aabea0f9124629, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 8922c2d517fe28a449a6bd3695e81bf9, type: 2}
 --- !u!120 &1857768514169513729
 LineRenderer:
   serializedVersion: 2
@@ -1090,7 +1093,7 @@ MonoBehaviour:
   footstepSFX:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 56f6f49410c15c6478aabea0f9124629, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 8922c2d517fe28a449a6bd3695e81bf9, type: 2}
   soundMaterialSet: {fileID: 11400000, guid: d71c15135eb978446bbeda282f825f2c, type: 2}
   floorlayer:
     serializedVersion: 2
@@ -1120,7 +1123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3014019172444536401}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5606288, y: -0, z: -0, w: 0.82806724}
+  m_LocalRotation: {x: -0.5547551, y: -0, z: -0, w: 0.8320137}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1457,8 +1460,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7114456423401257476}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.60050535, y: -0.039804127, z: 0.02995058, w: 0.7980676}
-  m_LocalPosition: {x: 0, y: 6, z: 0}
+  m_LocalRotation: {x: -0.5547551, y: -0, z: -0, w: 0.8320137}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
