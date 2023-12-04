@@ -9,7 +9,7 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{19FBFDFE-0193-16E0-B63E-0C72BF0628F8}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{605A352D-3FFA-E0BB-8CCE-57FC1F11143B}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
@@ -27,6 +27,7 @@
 				<Bus Id="1551306167" Name="UI"/>
 				<Bus Id="2299321487" Name="Enemy"/>
 				<Bus Id="3174030640" Name="Auxiliary busses"/>
+				<Bus Id="3582546886" Name="Specialfire"/>
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 			<AuxBusses>
@@ -179,7 +180,7 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{8D0DAAD4-8F7E-C708-B714-015DB0C75232}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{244015D1-A0F7-9A04-3930-1442FCA7F7F1}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -423,7 +424,31 @@
 						<MediaRef Id="766868557"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1602358412" Name="Play_footstep" DurationType="OneShot" DurationMin="0.47972447" DurationMax="0.85995054">
+				<Event Id="1602358412" Name="Play_footstep" DurationType="OneShot" DurationMin="0.7058289" DurationMax="0.85995054">
+					<MediaRefs>
+						<MediaRef Id="59103797"/>
+						<MediaRef Id="89932490"/>
+						<MediaRef Id="110500809"/>
+						<MediaRef Id="114167700"/>
+						<MediaRef Id="245396275"/>
+						<MediaRef Id="261670173"/>
+						<MediaRef Id="267493234"/>
+						<MediaRef Id="271074604"/>
+						<MediaRef Id="284965498"/>
+						<MediaRef Id="369054095"/>
+						<MediaRef Id="699093671"/>
+						<MediaRef Id="699752730"/>
+						<MediaRef Id="716720316"/>
+						<MediaRef Id="742923068"/>
+						<MediaRef Id="753373456"/>
+						<MediaRef Id="769638221"/>
+						<MediaRef Id="827923736"/>
+						<MediaRef Id="889319335"/>
+						<MediaRef Id="1045493623"/>
+						<MediaRef Id="1064136553"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="923366262" Name="Play_footstep_old" DurationType="OneShot" DurationMin="0.47972447" DurationMax="0.85995054">
 					<MediaRefs>
 						<MediaRef Id="369054095"/>
 						<MediaRef Id="889319335"/>
@@ -463,30 +488,6 @@
 							</MediaRefs>
 						</SwitchContainer>
 					</SwitchContainers>
-				</Event>
-				<Event Id="3731463379" Name="Play_footstep_2" DurationType="OneShot" DurationMin="0.5058289" DurationMax="0.65995055">
-					<MediaRefs>
-						<MediaRef Id="59103797"/>
-						<MediaRef Id="89932490"/>
-						<MediaRef Id="110500809"/>
-						<MediaRef Id="114167700"/>
-						<MediaRef Id="245396275"/>
-						<MediaRef Id="261670173"/>
-						<MediaRef Id="267493234"/>
-						<MediaRef Id="271074604"/>
-						<MediaRef Id="284965498"/>
-						<MediaRef Id="369054095"/>
-						<MediaRef Id="699093671"/>
-						<MediaRef Id="699752730"/>
-						<MediaRef Id="716720316"/>
-						<MediaRef Id="742923068"/>
-						<MediaRef Id="753373456"/>
-						<MediaRef Id="769638221"/>
-						<MediaRef Id="827923736"/>
-						<MediaRef Id="889319335"/>
-						<MediaRef Id="1045493623"/>
-						<MediaRef Id="1064136553"/>
-					</MediaRefs>
 				</Event>
 				<Event Id="2405798708" Name="Play_Grenade" MaxAttenuation="55" DurationType="OneShot" DurationMin="1.3043311" DurationMax="1.3043311">
 					<MediaRefs>
@@ -594,5 +595,5 @@
 			</SwitchGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{E4CCA2D3-01A6-0885-128B-269F13308CCA}</FileHash>
+	<FileHash>{F885ED6E-EC3B-44A5-87C4-13600664B513}</FileHash>
 </SoundBanksInfo>
