@@ -7,8 +7,10 @@ namespace Game.Core {
     public class AgentStatsSO : ScriptableObject
     {
         public AgentStats baseStats;
+        [Space(10f)]
         public ScalingStats scalingStats;
 
+        [System.Serializable]
         public class ScalingStats
         {
             public float baseDamageScaling = 1;

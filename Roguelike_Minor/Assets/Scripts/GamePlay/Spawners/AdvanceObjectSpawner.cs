@@ -17,9 +17,8 @@ namespace Game {
             GameStateManager.instance.advanceObjectSpawner = this;
         }
 
-        public void SpawnAdvanceObject()
+        public void SpawnAdvanceObject(GameObject advanceObject)
         {
-            GameObject advanceObject = Instantiate(advanceObjectPrefab);
             advanceObject.transform.position = NavMeshUtil.RandomNavmeshLocationAtDistance(
                 GameStateManager.instance.player.transform.position,
                 Random.Range(minDistance, minDistance + range)
