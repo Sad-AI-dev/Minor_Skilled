@@ -7,14 +7,6 @@ namespace Game.Player
 {
     public class RifleBullet : Projectile
     {
-        protected override void OnCollide(RaycastHit hit)
-        {
-            if (hit.transform.TryGetComponent(out Agent enemy))
-            {
-                HurtAgent(enemy);
-            }
-        }
-
         protected override void CustomCollide(Collider other)
         {
             if(other.transform.TryGetComponent(out Agent enemy))
