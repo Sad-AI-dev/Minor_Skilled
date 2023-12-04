@@ -7,5 +7,13 @@ namespace Game.Core {
     public class AgentStatsSO : ScriptableObject
     {
         public AgentStats baseStats;
+        public ScalingStats scalingStats;
+
+        public class ScalingStats
+        {
+            public float baseDamageScaling = 1;
+            public float moneyScaling = 1;
+            public float maxHealthScaling = 1;
+        }
     }
 }
