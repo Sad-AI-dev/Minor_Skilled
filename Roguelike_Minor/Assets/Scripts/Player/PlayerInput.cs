@@ -35,6 +35,8 @@ namespace Game.Player {
         public UnityEvent stopShooting;
         public UnityEvent<float> AdjustRunAnimSpeed;
 
+        private float delayFOVChange = 0;
+
         private void Start()
         {
             playerController = GetComponent<PlayerController>();
@@ -42,6 +44,10 @@ namespace Game.Player {
             rotator = GetComponent<PlayerRotationManager>();
             //hide inventory by default
             inventory.SetActive(false);
+
+            agent.abilities.utility.onUse.AddListener((Ability abilty) => rotator.RotatePlayer(cam.transform.eulerAngles.y));
+            agent.abilities.secondary.onUse.AddListener((Ability abilty) => rotator.RotatePlayer(cam.transform.eulerAngles.y));
+            agent.abilities.special.onUse.AddListener((Ability abilty) => rotator.RotatePlayer(cam.transform.eulerAngles.y));
         }
 
         void Update()
@@ -104,8 +110,13 @@ namespace Game.Player {
                 if (!shooting)
                     shooting = true;
 
-                fovManager.SetMinFOV();
-                fovManager.lockFOV = true;
+                if (delayFOVChange < 0.2f)
+                    delayFOVChange += Time.deltaTime;
+                else
+                {
+                    fovManager.SetMinFOV();
+                    fovManager.lockFOV = true;
+                }
 
                 rotator.RotatePlayer(cam.transform.eulerAngles.y);
                 
@@ -113,6 +124,7 @@ namespace Game.Player {
             }
             if(!Input.GetMouseButton(0) && shooting)
             {
+                delayFOVChange = 0;
                 shooting = false;
                 fovManager.ResetFOV();
                 stopShooting.Invoke();

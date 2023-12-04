@@ -180,7 +180,7 @@ namespace Game.Player
 
         public bool TryJump()
         {
-            if (agent.stats.currentJumps > 0)
+            if (groundedChecker.grounded || (!groundedChecker.grounded && jumping && agent.stats.currentJumps > 0))
             {
                 Jump();
                 return true;
