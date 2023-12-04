@@ -9,40 +9,44 @@ namespace Game.Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private GameObject visuals;
-        [HideInInspector] public Agent agent;
-        
         [Header("External Components")]
         public Camera cam;
-        private GroundedChecker groundedChecker;
+        [HideInInspector] public Agent agent;
+        private CharacterController cc;
+        private GroundedManager groundedChecker;
         private FrictionManager frictionManager;
         private FOVManager fovManager;
         private PlayerRotationManager rotator;
         private PlayerInput input;
 
         [Header("walk")]
+        [SerializeField] private float deceleration;
+        [SerializeField] private float acceleration;
         private float speed;
         private float walkSpeed { get { return agent.stats.walkSpeed; } }
         private float sprintSpeed { get { return agent.stats.sprintSpeed; } }
-        [SerializeField] private float deceleration;
-        [SerializeField] private float acceleration;
         private float speedMultiplier;
         private bool isSlowed = false;
 
         private Vector3 moveDirection;
-        private Vector3 walkVelocity;
         private Vector3 lastMoveDir;
         private Vector3 excessVelocity;
 
         [Header("Jump")]
         [SerializeField] private float JumpForce;
+        [HideInInspector] public float yVelocity;
+        [HideInInspector] public bool jumping;
+
+        [Header("Gravity")]
         [SerializeField] private float gravity;
+        [HideInInspector] public float activeGravity;
         [SerializeField] private float slowFallBounds;
         [SerializeField] private float slowFallMultiplier;
         [SerializeField] private float fastFallMultiplier;
-        [HideInInspector] public float yVelocity;
-        [HideInInspector] public float activeGravity;
-        [HideInInspector] public bool jumping;
+
+
+        private Coroutine decelerateCo;
+        private bool canDecelerate = true;
 
         public bool Grounded 
         {
@@ -55,7 +59,6 @@ namespace Game.Player
         }
 
 
-        private CharacterController cc;
         
         private Coroutine slowCo;
 
@@ -66,10 +69,9 @@ namespace Game.Player
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            //cam = Camera.main;
             cc = GetComponent<CharacterController>();
             agent = GetComponent<Agent>();
-            groundedChecker = GetComponent<GroundedChecker>();
+            groundedChecker = GetComponent<GroundedManager>();
             frictionManager = GetComponent<FrictionManager>();
             fovManager = GetComponent<FOVManager>();
             rotator = GetComponent<PlayerRotationManager>();
@@ -89,7 +91,7 @@ namespace Game.Player
             //allows to directly set position of player
             Physics.SyncTransforms();
 
-            walkVelocity = (moveDirection * speed) + excessVelocity;
+            Vector3 walkVelocity = (moveDirection * speed) + excessVelocity;
             cc.Move(walkVelocity + new Vector3(0, yVelocity, 0));
             fovManager.UpdateFOV(walkVelocity.magnitude);
 
@@ -101,53 +103,62 @@ namespace Game.Player
             if(moveInput.magnitude >= 0.1f)
             {
                 float dirAngle = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
-                //float smoothAngle = Mathf.SmoothDampAngle(visuals.transform.eulerAngles.y, dirAngle, ref smoothVelocity, smoothTime);
-
+                
                 if(!input.shooting)
                     rotator.RotatePlayer(dirAngle);
 
                 moveDirection = Quaternion.Euler(0, dirAngle, 0) * Vector3.forward;
                 moveDirection.Normalize();
-                lastMoveDir = moveDirection;  
+                lastMoveDir = moveDirection;
                 Accelerate(acceleration);
                 startRunning.Invoke();
             }
-            else if (lastMoveDir != Vector3.zero && speed > 0)
+            else if (speed > 0)
             {
                 moveDirection = lastMoveDir;
-                if(groundedChecker.grounded)
-                    Decelerate(deceleration);
+                if (groundedChecker.grounded && canDecelerate)
+                    decelerateCo = StartCoroutine(Decelerate(deceleration));
             }
         }
 
         public void Accelerate(float acceleration)
         {
+            if(decelerateCo!= null)
+            {
+                StopCoroutine(decelerateCo);
+                canDecelerate = true;
+            }
+
             speedMultiplier += acceleration * Time.deltaTime;
             speedMultiplier = Mathf.Clamp(speedMultiplier, 0, 1);
         }
 
-        public void Decelerate(float deceleration)
+        private IEnumerator Decelerate(float deceleration)
         {
-            speedMultiplier -= deceleration * Time.deltaTime;
-            speedMultiplier = Mathf.Clamp(speedMultiplier, 0, 1);
+            canDecelerate = false;
+            while (speedMultiplier > 0)
+            {
+                speedMultiplier -= deceleration * Time.deltaTime;
+                yield return null;
+            }
+            speedMultiplier = 0;
+            canDecelerate = true;
         }
 
         private void UpdateSpeed()
         {
             if(moveDirection.magnitude > 0.1f)
             {
-                if (!isSlowed) speed = walkSpeed * sprintSpeed;
-                if (isSlowed) speed = walkSpeed;
+                if (!isSlowed) speed = speedMultiplier * (walkSpeed * sprintSpeed / 100);
+                if (isSlowed) speed = speedMultiplier * (walkSpeed / 100);
 
-                speed *= speedMultiplier;
+                //speed *= speedMultiplier;
             }
 
-            if(speed > 0)
+            if(speedMultiplier > 0)
                 startRunning.Invoke();
             else
                 stopRunning.Invoke();
-            
-            speed /= 100;
         }
 
         public void Dash(Vector3 force)
@@ -162,19 +173,35 @@ namespace Game.Player
 
         private void UpdateExcessVelocity()
         {
-            excessVelocity = frictionManager.ApplyFriction(excessVelocity);
+            excessVelocity = frictionManager.ApplyVectorFriction(excessVelocity);
             if (excessVelocity.magnitude < 0.1f)
                 excessVelocity = Vector3.zero;
         }
 
-        public void Jump()
+        public bool TryJump()
         {
-            if (!groundedChecker.grounded || jumping) return;
-            jump.Invoke();
+            if (agent.stats.currentJumps > 0)
+            {
+                Jump();
+                return true;
+            }
+
+            return false;
+        }
+
+        private void Jump()
+        {
             yVelocity = 0;
-            yVelocity += JumpForce / 100;
+
+            if (agent.stats.currentJumps < agent.stats.totalJumps)
+                yVelocity += JumpForce * 1.5f / 100;
+            else
+                yVelocity += JumpForce / 100;
+
+            jump.Invoke();
             jumping = true;
             frictionManager.SetFriction(frictionTypes.jump);
+            agent.stats.currentJumps--;
         }
 
         private void ApplyGravity()

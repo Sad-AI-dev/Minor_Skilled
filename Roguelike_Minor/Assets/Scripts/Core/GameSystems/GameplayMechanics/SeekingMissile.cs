@@ -17,21 +17,33 @@ namespace Game.Core.GameSystems
         private float speed = 35;
         private Quaternion lookAtEnemy;
         private float turnSpeed = 0.2f;
+
+        private float cooldown = 5f;
+        private bool canFindTarget = false;
         
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
             rb.useGravity = false;
             transform.rotation = Quaternion.LookRotation(Vector3.up);
-            target = FindEnemy();
+            target = FindTarget();
         }
 
         private void FixedUpdate()
         {
-            if (target == null)
-                target = FindEnemy();
+            Vector3 targetDir;
+            if (target == null && canFindTarget)
+            {
+                target = FindTarget();
+                StartCoroutine(FindTargetDelayCo());   
+            }
 
-            Vector3 targetDir = (target.transform.position + Vector3.up) - transform.position;
+            if (target != null)
+                targetDir = (target.transform.position + Vector3.up) - transform.position;
+            else
+                targetDir = Vector3.up;
+
+
             lookAtEnemy = Quaternion.LookRotation(targetDir);
 
             transform.rotation = Quaternion.Lerp(transform.rotation, lookAtEnemy, turnSpeed);
@@ -60,7 +72,7 @@ namespace Game.Core.GameSystems
             Destroy(gameObject);
         }
 
-        private Agent FindEnemy()
+        private Agent FindTarget()
         {
             List<Agent> agents = new List<Agent>();
             float radius = 20;
@@ -69,9 +81,21 @@ namespace Game.Core.GameSystems
             {
                 agents = Explosion.FindAgentsInRange(sourceAgent.transform.position, radius, hitEvent.source);
                 radius += 10;
+
+                if (radius > 100)
+                    break;
             }
 
-            return agents[0];
+            if (agents.Count > 0)
+                return agents[0];
+            else
+                return null;
+        }
+
+        private IEnumerator FindTargetDelayCo()
+        {
+            yield return new WaitForSeconds(cooldown);
+
         }
     }
 }

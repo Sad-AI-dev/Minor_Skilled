@@ -31,8 +31,6 @@ namespace Game.Player {
         private bool canPlayFootstep = true;
         private bool gamePaused = false;
         [HideInInspector] public bool shooting;
-
-        private bool walking = false;
         
         public UnityEvent stopShooting;
         public UnityEvent<float> AdjustRunAnimSpeed;
@@ -49,6 +47,7 @@ namespace Game.Player {
         void Update()
         {
             pauseInput();
+            SetTimeScale();
 
             gamePaused = pauseMenu.paused;
 
@@ -78,8 +77,6 @@ namespace Game.Player {
 
             if(shooting)
             {
-                Debug.Log(moveInput);
-
                 if(moveInput.y < 0)
                     AdjustRunAnimSpeed.Invoke(-0.5f);
                 else
@@ -178,7 +175,10 @@ namespace Game.Player {
             while (framesPassed < jumpBufferFrames)
             {
                 framesPassed++;
-                playerController.Jump();
+                if(playerController.TryJump())
+                {
+                    break;
+                }
                 yield return null;
             }
         }
@@ -189,6 +189,22 @@ namespace Game.Player {
             yield return new WaitForSeconds(0.5f);
             audioPlayer.Play();
             canPlayFootstep = true;
-        }        
+        }
+
+        private void SetTimeScale()
+        {
+            if(Input.GetKeyDown(KeyCode.P))
+            {
+                if (Time.timeScale == 1)
+                    Time.timeScale = 0;
+                else
+                    Time.timeScale = 1;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Period))
+                Time.timeScale += 0.05f;
+            if (Input.GetKeyDown(KeyCode.Comma))
+                Time.timeScale -= 0.05f;
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AK.Wwise;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -37,18 +38,16 @@ namespace Game {
             while (true)
             {
                 if (controller.velocity != Vector3.zero && Physics.Raycast(
-                        transform.position - new Vector3(0, 0.5f * controller.height + 0.5f * controller.radius, 0),
-                        Vector3.down, out RaycastHit hit, 1f))
+                        transform.position - new Vector3(0, 0, 0),
+                        Vector3.down, out RaycastHit hit, 0.5f))
                 {
                     if (hit.collider.TryGetComponent(out Terrain terrain))
                     {
-                        Debug.Log("Hit Terrain");
-
                         SetFootstepSFXTerrain(terrain, hit.point);
                     }
-                    else if (hit.collider.TryGetComponent(out GameObject obj))
+                    else 
                     {
-                        Debug.Log("Hit object");
+                        // Debug.Log("Hit object");
                     }
                 }
 
@@ -67,20 +66,31 @@ namespace Game {
 
             float[,,] alphamap = terrain.terrainData.GetAlphamaps(x, z, 1, 1);
 
-            int primaryIndex = 0;
+            Dictionary<int, float> layersAtPosition = new Dictionary<int, float>();
+
             for (int i = 0; i < alphamap.Length; i++)
             {
-                if (alphamap[0, 0, i] > alphamap[0, 0, primaryIndex])
+                layersAtPosition.Add(i, alphamap[0, 0, i]);
+            }
+
+            Dictionary<RTPC, float> percentagePerLayerType = new Dictionary<RTPC, float>();
+            foreach (var kvp in layersAtPosition)
+            {
+                RTPC param = soundMaterialSet.GetSwitchByTerrain(terrain.terrainData.terrainLayers[kvp.Key]);
+                if (!percentagePerLayerType.ContainsKey(param))
                 {
-                    primaryIndex = i;
+                    percentagePerLayerType.Add(param, kvp.Value);
+                }
+                else
+                {
+                    percentagePerLayerType[param] += kvp.Value;
                 }
             }
 
-            Debug.Log(primaryIndex);
-            Debug.Log(terrain.terrainData.terrainLayers[primaryIndex]);
-
-            AK.Wwise.Switch sound = soundMaterialSet.GetSwitchByTerrain(terrain.terrainData.terrainLayers[primaryIndex]);
-            sound.SetValue(gameObject);
+             foreach (var kvp in percentagePerLayerType)
+             {
+                 kvp.Key.SetGlobalValue(kvp.Value * 100f);
+             }
         }
 
         private IEnumerator SetFootstepSFXRender(GameObject obj)
