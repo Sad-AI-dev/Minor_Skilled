@@ -18,7 +18,7 @@ namespace Game {
         {
             GameObject obj = Instantiate(prefab);
             obj.transform.position = NavMeshUtil.RandomNavmeshLocationAtDistance(
-                transform.position, stageRange
+                transform.position, Random.Range(0, stageRange)
             );
         }
     }
