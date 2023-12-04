@@ -46,7 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   progressBar: {fileID: 0}
-  ObjectiveComplete: 0
 --- !u!1 &3001862601912414758
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,53 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23656df1da26f0241bae04050ab91e72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4792170268720294266
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6245043535969686401}
-  - component: {fileID: 7760625777095697715}
-  m_Layer: 0
-  m_Name: ScreenShakeManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6245043535969686401
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4792170268720294266}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5187508906776603956}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7760625777095697715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4792170268720294266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a30d7a53a0a4a864ea38b3a48171ab8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  cam: {fileID: 0}
-  maxDistance: 0
 --- !u!1 &5292170781510028545
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyScalingFrequency: 60
-  priceScalingFrequency: 20
+  priceScalingFrequency: 30
   priceScalingAmount: 0.1
   enemyLevel: 0
   priceMult: 1
@@ -287,7 +239,6 @@ Transform:
   - {fileID: 814621497895006510}
   - {fileID: 8898164479351814847}
   - {fileID: 4041252644223707848}
-  - {fileID: 6245043535969686401}
   - {fileID: 8342219291215039906}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -422,6 +373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0c811594585ed40aa7be4fb1298123, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiFader: {fileID: 0}
+  allowLoadScene: 0
 --- !u!1 &8355906013974447864
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +421,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnFrequency: 20
+  minBatchSize: 2
+  maxBatchSize: 5
   minDelay: 0.05
   maxDelay: 0.15
   prewarmMultiplier: 3
@@ -492,16 +447,16 @@ MonoBehaviour:
   budget: 0
   budgetGain: 5
   gainRampup: 1
-  gainRampupFrequency: 5
-  enableExponentialScaling: 0
-  exponentialRampup: 0
-  exponentialRampupFrequency: 0
-  budgetSpikeMode: 0
-  budgetSpikeMultiplier: 1
+  gainRampupFrequency: 2
+  enableExponentialScaling: 1
+  exponentialRampup: 1
+  exponentialRampupFrequency: 10
+  budgetSpikeMode: 3
+  budgetSpikeMultiplier: 2
   budgetSpikeActivationChance: 0
-  budgetSpikeInterval: 0
-  budgetSpikeIntervalMin: 0
-  budgetSpikeIntervalMax: 0
+  budgetSpikeInterval: 6
+  budgetSpikeIntervalMin: 5
+  budgetSpikeIntervalMax: 10
   saveMode: 0
   minSavePercent: 0
   maxSavePercent: 0
@@ -511,7 +466,7 @@ MonoBehaviour:
   maxRandInterval: 0
   options:
   - name: MeleeGrunt
-    price: 1
+    price: 2
     onSelect:
       m_PersistentCalls:
         m_Calls:
@@ -529,7 +484,7 @@ MonoBehaviour:
           m_CallState: 2
     initialized: 1
   - name: small Squid
-    price: 2
+    price: 1
     onSelect:
       m_PersistentCalls:
         m_Calls:
@@ -557,6 +512,24 @@ MonoBehaviour:
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 6302184283900363943, guid: 2ea46eaac858d954dbe1122aa3de8e63, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    initialized: 1
+  - name: Boss Big Squid
+    price: 50
+    onSelect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1772826402637452629}
+          m_TargetAssemblyTypeName: Game.EnemySpawner, Game
+          m_MethodName: SpawnFlyingEnemy
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3194772888341048763, guid: 5f303abe0f102044d98a4d55b00d0a5c, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
