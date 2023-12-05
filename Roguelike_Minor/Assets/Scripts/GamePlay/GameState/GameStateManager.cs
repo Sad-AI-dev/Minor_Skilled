@@ -62,12 +62,6 @@ namespace Game {
             EventBus<ShopLoadedEvent>.AddListener(HandleShopLoad);
         }
 
-        //========== Manage Stage State ==============
-        public void HandleCompleteStageObject()
-        {
-            advanceObjectSpawner.SpawnAdvanceObject();
-        }
-
         //========= Handle Scene Load ========
         private void HandleSceneLoaded(SceneLoadedEvent data)
         {

@@ -42,5 +42,11 @@ namespace Game.Core {
             inventory = GetComponent<Inventory>();
             inventory.agent = this;
         }
+
+        //======== Get Stats SO ==========
+        public AgentStatsSO GetStatsSO()
+        {
+            return baseStats;
+        }
     }
 }

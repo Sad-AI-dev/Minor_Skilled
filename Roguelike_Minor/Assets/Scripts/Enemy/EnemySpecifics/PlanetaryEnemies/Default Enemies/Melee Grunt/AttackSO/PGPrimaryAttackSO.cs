@@ -5,8 +5,7 @@ using Game.Core;
 using Game.Core.Data;
 using System;
 
-namespace Game.Enemy
-{
+namespace Game.Enemy {
     [CreateAssetMenu(fileName = "PrimaryAttack", menuName = "ScriptableObjects/Enemy/PlanetGrunt/PrimaryAttack")]
     public class PGPrimaryAttackSO : AbilitySO
     {

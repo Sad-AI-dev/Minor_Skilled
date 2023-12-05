@@ -110,7 +110,6 @@ namespace Game {
         private void StopCharge()
         {
             EnemySpawner.instance.SetExternalSpawnMultiplier(-spawnMultiplier);
-            GameStateManager.instance.HandleCompleteStageObject();
             //announce completion
             OnComplete();
         }
