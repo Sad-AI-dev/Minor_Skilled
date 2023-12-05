@@ -9,9 +9,6 @@ using System.Threading.Tasks;
 namespace Game.Enemy {
     public class BigSquidRangeCheck : BT_Node
     {
-        private Transform transform;
-        private Transform target;
-
         public BigSquidRangeCheck(Transform transform)
         {
             this.transform = transform;
@@ -20,10 +17,16 @@ namespace Game.Enemy {
 
         public override NodeState Evaluate()
         {
-            if (GetData("Target") == null) SetTarget();
+            if (GetData("Target") == null) SetTarget(GameStateManager.instance.player.transform);
+            target = (Transform)GetData("Target");
             if (GetData("DistanceToTarget") == null) CheckDistance();
             if (GetData("RandomFireRange") == null) SetData("RandomFireRange", Random.Range(BigSquidTree.FireRangeMin, BigSquidTree.FireRangeMax));
 
+            if(GetData("DistanceToTarget") == null)
+            {
+                state = NodeState.FAILURE;
+                return state;
+            }
             if((float)GetData("DistanceToTarget") > (int)GetData("RandomFireRange"))
             {
                 state = NodeState.FAILURE;
@@ -47,11 +50,6 @@ namespace Game.Enemy {
             return state;
         }
 
-        void SetTarget()
-        {
-            SetData("Target", GameStateManager.instance.player.transform);
-            target = (Transform)GetData("Target");
-        }
         private async void CheckDistance()
         {
             while (transform != null && target != null)
