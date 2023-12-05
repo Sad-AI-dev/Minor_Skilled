@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Boss_BigSquidStats
   m_EditorClassIdentifier: 
   baseStats:
-    maxHealth: 150
+    maxHealth: 1500
     maxHealthMult: 1
     baseDamage: 10
     critChance: 1
@@ -23,4 +23,10 @@ MonoBehaviour:
     coolDownMultiplier: 1
     walkSpeed: 4
     sprintSpeed: 8
+    currentJumps: 0
+    totalJumps: 0
     luck: 0
+  scalingStats:
+    baseDamageScaling: 2
+    moneyScaling: 20
+    maxHealthScaling: 1

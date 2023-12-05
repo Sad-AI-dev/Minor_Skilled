@@ -24,6 +24,7 @@ namespace Game {
 
         [Header("Price Scaling Settings")]
         [SerializeField] private float priceScalingFrequency = 20f; //expressed in seconds
+        [Tooltip("increases the multiplier (0.1 = +10% of base price)")]
         [SerializeField] private float priceScalingAmount = 0.1f;
 
         //=== game scaling vars ===
