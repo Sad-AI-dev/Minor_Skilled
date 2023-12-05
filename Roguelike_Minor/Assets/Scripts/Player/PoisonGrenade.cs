@@ -12,7 +12,6 @@ namespace Game.Player
         [SerializeField] private AudioPlayer AP;
 
         [HideInInspector] public float gravity;
-        private SphereCollider col;
 
         private void Awake()
         {
