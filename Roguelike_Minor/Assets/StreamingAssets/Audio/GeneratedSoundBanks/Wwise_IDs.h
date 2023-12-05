@@ -13,15 +13,17 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID PLAY_BIG_GRUNT_DIE = 3218574908U;
+        static const AkUniqueID PLAY_BIG_GRUNT_HIT = 3350824361U;
         static const AkUniqueID PLAY_BIRDS = 3025897706U;
         static const AkUniqueID PLAY_DASH = 2211787386U;
         static const AkUniqueID PLAY_FOOTSTEP = 1602358412U;
-        static const AkUniqueID PLAY_FOOTSTEP_OLD = 923366262U;
         static const AkUniqueID PLAY_GRENADE = 2405798708U;
         static const AkUniqueID PLAY_GRENADE_SPLAT = 3537222909U;
         static const AkUniqueID PLAY_GRENADE_THROW = 2492084817U;
         static const AkUniqueID PLAY_GRUNT_DIE = 3392973459U;
         static const AkUniqueID PLAY_GRUNT_HIT = 2989619110U;
+        static const AkUniqueID PLAY_LANDING = 2323405115U;
         static const AkUniqueID PLAY_OBELISK_PASSIVE = 2990404959U;
         static const AkUniqueID PLAY_PICKUP_ITEM = 3128913152U;
         static const AkUniqueID PLAY_PRIMARY_FIRE = 3563057235U;
