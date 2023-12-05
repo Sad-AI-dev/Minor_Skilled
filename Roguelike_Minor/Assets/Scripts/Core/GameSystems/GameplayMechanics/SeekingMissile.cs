@@ -18,7 +18,7 @@ namespace Game.Core.GameSystems
         private Quaternion lookAtEnemy;
         private float turnSpeed = 0.2f;
 
-        private float cooldown = 5f;
+        private float cooldown = 0.25f;
         private bool canFindTarget = false;
         
         private void Start()
