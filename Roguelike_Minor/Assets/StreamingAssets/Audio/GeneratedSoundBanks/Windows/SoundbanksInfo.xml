@@ -9,12 +9,13 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{605A352D-3FFA-E0BB-8CCE-57FC1F11143B}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{B6CCF306-0F81-D3EA-44BA-CADD19F7C2CD}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
 				<ShareSets>
 					<Plugin Id="48620415" Name="Have_U_Ever_Been_Outside" LibName="Wwise RoomVerb" LibId="7733251"/>
+					<Plugin Id="2038996943" Name="Plate_Sizzle" LibName="Wwise RoomVerb" LibId="7733251"/>
 				</ShareSets>
 				<AudioDevices>
 					<Plugin Id="2317455096" Name="No_Output" LibName="No Output" LibId="11862023"/>
@@ -25,12 +26,20 @@
 				<Bus Id="85412153" Name="Ambience"/>
 				<Bus Id="1069431850" Name="Player"/>
 				<Bus Id="1551306167" Name="UI"/>
+				<Bus Id="1901312945" Name="Abilities"/>
 				<Bus Id="2299321487" Name="Enemy"/>
 				<Bus Id="3174030640" Name="Auxiliary busses"/>
 				<Bus Id="3582546886" Name="Specialfire"/>
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 			<AuxBusses>
+				<AuxBus Id="1063264192" Name="Valley_verb">
+					<PluginRefs>
+						<ShareSets>
+							<PluginRef Id="2038996943"/>
+						</ShareSets>
+					</PluginRefs>
+				</AuxBus>
 				<AuxBus Id="3018232304" Name="Default_Verb">
 					<PluginRefs>
 						<ShareSets>
@@ -180,7 +189,7 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{7DB2DF3E-2C96-406E-0CA9-99EAFF4E95C7}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{BC0798B3-F795-B174-3F53-32728F647144}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -586,5 +595,5 @@
 			</GameParameters>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{FD8ED563-B1B0-838A-8367-70D457D88806}</FileHash>
+	<FileHash>{FEF7AEA1-81AB-A608-8AF0-5CE716C3D93F}</FileHash>
 </SoundBanksInfo>
