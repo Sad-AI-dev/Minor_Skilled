@@ -81,7 +81,9 @@ namespace Game.Player.Soldier
                 agent.health.Hurt(new HitEvent(source));
             }
 
-            vars.lineRenderer.enabled = true;
+            if(!vars.lineRenderer.enabled)
+                vars.lineRenderer.enabled = true;
+
             UnityEngine.Vector3[] positions = { source.originPoint.position, target};
             vars.lineRenderer.SetPositions(positions);
             vars.lineRenderer.widthMultiplier = 0.2f;
