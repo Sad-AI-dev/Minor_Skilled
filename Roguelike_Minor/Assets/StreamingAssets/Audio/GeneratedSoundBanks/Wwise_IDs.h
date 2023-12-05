@@ -78,6 +78,7 @@ namespace AK
 
     namespace BUSSES
     {
+        static const AkUniqueID ABILITIES = 1901312945U;
         static const AkUniqueID AMBIENCE = 85412153U;
         static const AkUniqueID AUXILIARY_BUSSES = 3174030640U;
         static const AkUniqueID ENEMY = 2299321487U;
@@ -90,6 +91,7 @@ namespace AK
     namespace AUX_BUSSES
     {
         static const AkUniqueID DEFAULT_VERB = 3018232304U;
+        static const AkUniqueID VALLEY_VERB = 1063264192U;
     } // namespace AUX_BUSSES
 
     namespace AUDIO_DEVICES
