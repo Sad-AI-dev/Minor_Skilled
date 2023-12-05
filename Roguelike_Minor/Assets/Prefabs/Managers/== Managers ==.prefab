@@ -445,16 +445,16 @@ MonoBehaviour:
   activateIntervalTime: 0
   activateOnStart: 0
   budget: 0
-  budgetGain: 5
+  budgetGain: 20
   gainRampup: 1
-  gainRampupFrequency: 2
+  gainRampupFrequency: 3
   enableExponentialScaling: 1
   exponentialRampup: 1
-  exponentialRampupFrequency: 10
+  exponentialRampupFrequency: 15
   budgetSpikeMode: 3
-  budgetSpikeMultiplier: 2
+  budgetSpikeMultiplier: 1.1
   budgetSpikeActivationChance: 0
-  budgetSpikeInterval: 6
+  budgetSpikeInterval: 8
   budgetSpikeIntervalMin: 5
   budgetSpikeIntervalMax: 10
   saveMode: 0
@@ -520,7 +520,7 @@ MonoBehaviour:
           m_CallState: 2
     initialized: 1
   - name: Boss Big Squid
-    price: 50
+    price: 75
     onSelect:
       m_PersistentCalls:
         m_Calls:
@@ -537,7 +537,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     initialized: 1
-  cyclesToSimulate: 100
+  cyclesToSimulate: 30
   externalMultiplier: 1
 --- !u!1001 &4858414539229480720
 PrefabInstance:
