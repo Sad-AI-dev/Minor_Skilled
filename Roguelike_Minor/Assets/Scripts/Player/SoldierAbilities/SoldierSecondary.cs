@@ -36,7 +36,7 @@ namespace Game.Player.Soldier
             if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500, layermask))
                 target = hit.point;
             else
-                target = cam.transform.forward * 1000;
+                target = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 500));
 
             bulletDir = (target - source.originPoint.position).normalized;
 

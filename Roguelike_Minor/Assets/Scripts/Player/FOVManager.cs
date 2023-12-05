@@ -22,6 +22,9 @@ namespace Game.Player
 
         public bool lockFOV = false;
 
+        private bool canUpdateFOV = false;
+        private Coroutine delayUpdateFOV;
+
         private void Start()
         {
             agent = GetComponent<Agent>();
@@ -51,13 +54,16 @@ namespace Game.Player
                 FOV = Mathf.Clamp(FOV, minFOV, maxFOV);
 
                 cam.m_Lens.FieldOfView = Mathf.Lerp(currentFOV, FOV, zoomOutSpeed);
+
+                if(FOV == defaultFOV)
+                    canUpdateFOV = false;
             }
         }
 
         public void SetMinFOV()
         {
             StopAllCoroutines();
-            currentFOV = cam.GetRig(0).m_Lens.FieldOfView;
+            currentFOV = cam.m_Lens.FieldOfView;
             cam.m_Lens.FieldOfView = Mathf.Lerp(currentFOV, minFOV, zoomInSpeed);
         }
 
@@ -70,7 +76,6 @@ namespace Game.Player
         {
             while((defaultFOV - currentFOV) > 0.1f)
             {
-                
                 cam.m_Lens.FieldOfView = Mathf.Lerp(currentFOV, defaultFOV, resetSpeed);
                 currentFOV = cam.m_Lens.FieldOfView;
                 yield return null;
