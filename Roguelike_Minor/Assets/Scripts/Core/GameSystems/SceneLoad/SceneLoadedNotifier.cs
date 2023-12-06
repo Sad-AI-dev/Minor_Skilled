@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +11,10 @@ namespace Game.Core.GameSystems {
 
         private void InvokeSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            EventBus<SceneLoadedEvent>.Invoke(new SceneLoadedEvent());
+            if (mode != LoadSceneMode.Additive) //don't invoke if additive was loaded
+            {
+                EventBus<SceneLoadedEvent>.Invoke(new SceneLoadedEvent());
+            }
         }
 
         private void OnDestroy()
