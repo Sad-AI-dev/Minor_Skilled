@@ -11,10 +11,7 @@ namespace Game.Core.GameSystems {
 
         private void InvokeSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (mode != LoadSceneMode.Additive) //don't invoke if additive was loaded
-            {
-                EventBus<SceneLoadedEvent>.Invoke(new SceneLoadedEvent());
-            }
+            EventBus<SceneLoadedEvent>.Invoke(new SceneLoadedEvent { loadedIndex = scene.buildIndex });
         }
 
         private void OnDestroy()
