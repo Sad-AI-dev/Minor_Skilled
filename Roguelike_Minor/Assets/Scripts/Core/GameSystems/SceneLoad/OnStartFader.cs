@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Core.GameSystems
@@ -11,6 +9,11 @@ namespace Game.Core.GameSystems
         private void Awake()
         {
             EventBus<SceneLoadedEvent>.AddListener(OnSceneLoaded);
+        }
+        private void Start()
+        {
+            //hide by default
+            uiFader.targetGroup.alpha = 1f;
         }
 
         private void OnSceneLoaded(SceneLoadedEvent eventData)
