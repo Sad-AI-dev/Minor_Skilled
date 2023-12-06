@@ -9,9 +9,8 @@ using Game.Core;
 namespace Game.Enemy {
     public class MeleeGruntMeleeAttack : BT_Node
     {
-        Agent agent;
         NavMeshAgent navAgent;
-        Transform transform;
+
         public MeleeGruntMeleeAttack(Agent agent, NavMeshAgent navAgent, Transform transform) 
         {
             this.agent = agent;
