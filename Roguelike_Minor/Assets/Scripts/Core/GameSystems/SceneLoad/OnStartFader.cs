@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Core.GameSystems
 {
@@ -10,16 +11,25 @@ namespace Game.Core.GameSystems
         {
             EventBus<SceneLoadedEvent>.AddListener(OnSceneLoaded);
         }
-        private void Start()
-        {
-            //hide by default
-            uiFader.targetGroup.alpha = 1f;
-        }
 
         private void OnSceneLoaded(SceneLoadedEvent eventData)
         {
             uiFader.targetGroup.alpha = 1f;
-            uiFader.StartFade();
+            if (ShouldFade()) 
+            {
+                uiFader.StartFade();
+            }
+        }
+        private bool ShouldFade()
+        {
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                if (SceneManager.GetSceneAt(i).buildIndex > 1) //dont fade on Main Menu = 0 and Dont Destroy = 1
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void OnDestroy()

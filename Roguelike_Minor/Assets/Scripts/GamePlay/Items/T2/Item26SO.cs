@@ -38,7 +38,7 @@ namespace Game {
         //========== Handle Events ============
         private void OnShopLoad(ShopLoadedEvent eventData)
         {
-            eventData.shop.rerolls = rerolls;
+            eventData.shop.rerolls += rerolls;
         }
 
         private void OnGameEnd(GameEndEvent eventData)
@@ -51,7 +51,7 @@ namespace Game {
         public override string GenerateLongDescription()
         {
             return $"Gain the ability to <color=#{HighlightColor}>reroll items</color> " +
-                $"int the <color=#{HighlightColor}>shop</color> " +
+                $"in the <color=#{HighlightColor}>shop</color> " +
                 $"<color=#{HighlightColor}>{baseRerolls}</color> " +
                 $"<color=#{StackColor}>(+{bonusRerolls} per stack)</color> times";
         }
