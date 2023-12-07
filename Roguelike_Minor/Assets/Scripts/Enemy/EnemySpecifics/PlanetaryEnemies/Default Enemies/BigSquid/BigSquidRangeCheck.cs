@@ -9,47 +9,70 @@ using System.Threading.Tasks;
 namespace Game.Enemy {
     public class BigSquidRangeCheck : BT_Node
     {
-        private Transform transform;
-        private Transform target;
+        BigSquidPrimaryVars vars;
 
-        public BigSquidRangeCheck(Transform transform)
+        public BigSquidRangeCheck(Transform transform, Agent agent)
         {
             this.transform = transform;
+            this.agent = agent;
             EventBus<GameEndEvent>.AddListener(DoClearTarget);
         }
-
+        
         public override NodeState Evaluate()
         {
-            if (GetData("Target") == null) SetTarget();
+            HandleSetTarget();
             if (GetData("DistanceToTarget") == null) CheckDistance();
             if (GetData("RandomFireRange") == null) SetData("RandomFireRange", Random.Range(BigSquidTree.FireRangeMin, BigSquidTree.FireRangeMax));
 
-            if((float)GetData("DistanceToTarget") > (int)GetData("RandomFireRange"))
+            if (GetData("DistanceToTarget") == null)
             {
                 state = NodeState.FAILURE;
                 return state;
             }
+            if (vars == null) vars = agent.abilities.primary.vars as BigSquidPrimaryVars;
+            if ((float)GetData("DistanceToTarget") > (int)GetData("RandomFireRange"))
+            {
+                state = NodeState.FAILURE;
+                if (vars.targetingCo != null)
+                {
+                    agent.StopCoroutine(vars.targetingCo);
+                    vars.targetingCo = null;
+                }
+                SetData("Targeting", false);
+
+                return state;
+            }
             else
             {
-                Vector3 dir = (target.position - transform.position).normalized;
+                Vector3 dir = ((target.position + (Vector3.up / 2)) - transform.position).normalized;
 
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, dir, out hit, Mathf.Infinity))
                 {
                     if (hit.transform.CompareTag("Player"))
                     {
+                        SetData("Targeting", true);
                         state = NodeState.SUCCESS;
                     }
-                    else state = NodeState.FAILURE;
+                    else
+                    {
+                        if (GetData("Targeting") != null && (bool)GetData("Targeting"))
+                        {
+                            state = NodeState.SUCCESS;
+                            return state;
+                        }
+
+                        state = NodeState.FAILURE;
+                    }
                 }
             }
 
             return state;
         }
 
-        void SetTarget()
+        private void HandleSetTarget()
         {
-            SetData("Target", GameStateManager.instance.player.transform);
+            if (GetData("Target") == null) SetTarget(GameStateManager.instance.player.transform);
             target = (Transform)GetData("Target");
         }
         private async void CheckDistance()

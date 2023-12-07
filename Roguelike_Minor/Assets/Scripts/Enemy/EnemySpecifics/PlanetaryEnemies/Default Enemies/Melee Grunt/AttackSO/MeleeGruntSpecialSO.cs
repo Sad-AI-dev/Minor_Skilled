@@ -19,7 +19,8 @@ namespace Game.Enemy {
             public Transform target;
             public NavMeshAgent navAgent;
             public Agent agent;
-            public Coroutine chargeCO; 
+            public Coroutine chargeCO;
+            public Animator anim;
         }
 
         public override void InitializeVars(Ability source)
@@ -31,13 +32,15 @@ namespace Game.Enemy {
                 navAgent = source.agent.GetComponent<NavMeshAgent>(),
                 agent = source.agent,
                 target = GameStateManager.instance.player.transform,
-                chargeCO = null 
+                chargeCO = null,
+                anim = source.agent.GetComponent<Animator>()
             };
         }
 
         public override void Use(Ability source)
         {
             MeleeGruntSpecialVars vars = (source.vars as MeleeGruntSpecialVars);
+            vars.anim.SetTrigger("Charge");
             vars.chargeCO = source.agent.StartCoroutine(ChargeCO(vars));
         }
 

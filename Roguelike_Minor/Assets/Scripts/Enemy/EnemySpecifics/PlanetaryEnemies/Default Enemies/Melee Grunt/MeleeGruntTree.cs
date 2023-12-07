@@ -8,6 +8,10 @@ using Game.Core;
 namespace Game.Enemy {
     public class MeleeGruntTree : Core.Tree
     {
+        [Header("Attack variables")]
+        public Animator anim;
+        public GameObject PrimaryPrefab;
+
         [Header("Knockback Variables")]
         public float upMultiplier;
         public float directionMultiplier;
@@ -29,6 +33,12 @@ namespace Game.Enemy {
         protected override void Start()
         {
             navAgent.stoppingDistance = meleeAttackRange - 0.1f;
+            agent.abilities.primary.vars = new PGPrimaryAttackVars
+            {
+                anim = this.anim,
+                prefab = PrimaryPrefab
+            };
+
             base.Start();
         }
 

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67414044404434119}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.39642444, y: 0.585532, z: 0.39642444, w: 0.585532}
+  m_LocalRotation: {x: -0.5606288, y: -0, z: -0, w: 0.82806724}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -581,12 +581,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.4
+  m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.04
+  m_SkinWidth: 0.15
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.1, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1439967887705530693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,7 +634,7 @@ MonoBehaviour:
     abilityData: {fileID: 11400000, guid: 5dbafad3a5945d643a2dbc8379c06249, type: 2}
     uses: 1
     maxUses: 1
-    coolDown: 5
+    coolDown: 1
     coolDownMode: 0
     isCoolingDown: 0
     originPoint: {fileID: 2437245198168656956}
@@ -795,7 +795,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 7380479126621435635}
         m_TargetAssemblyTypeName: Game.Core.GameSystems.SceneLoader, Game.Core.GameSystems
-        m_MethodName: FastLoadScene
+        m_MethodName: LoadScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1123,7 +1123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3014019172444536401}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.39642444, y: 0.585532, z: 0.39642444, w: 0.585532}
+  m_LocalRotation: {x: -0.5606288, y: -0, z: -0, w: 0.82806724}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1426,9 +1426,9 @@ Transform:
   m_GameObject: {fileID: 7107147114416228610}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: -0.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1705575255224708296}
   - {fileID: 8357058106441008215}
@@ -1460,7 +1460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7114456423401257476}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.39642444, y: 0.585532, z: 0.39642444, w: 0.585532}
+  m_LocalRotation: {x: -0.5547551, y: -0, z: -0, w: 0.8320137}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1541,7 +1541,7 @@ Transform:
   m_GameObject: {fileID: 8966662666157391180}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.0000001, y: -2.5, z: 0.00000011920929}
+  m_LocalPosition: {x: 0, y: -2.5, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1834,10 +1834,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6141281946529047643, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8587124977476158613}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
 --- !u!95 &2673467769186082349 stripped
 Animator:
@@ -1849,25 +1846,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6805475361918451425, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
   m_PrefabInstance: {fileID: 3281958478983559862}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8696992653583539949 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6141281946529047643, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
-  m_PrefabInstance: {fileID: 3281958478983559862}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8587124977476158613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8696992653583539949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b4b032db930f43439f086743b8da30b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 2673467769186082349}
-  distanceToGround: 0.3
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 2048

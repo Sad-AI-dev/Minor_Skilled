@@ -561,7 +561,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2431803
+  m_Radius: 0.63
   m_Height: 0.54561836
   m_Direction: 1
   m_Center: {x: 0, y: 0.23536351, z: -0.01772049}
@@ -580,9 +580,6 @@ MonoBehaviour:
   agent: {fileID: 9208291337652911016}
   navAgent: {fileID: 0}
   rb: {fileID: 4376714846207376044}
-  baseDamageScaling: 1
-  moneyScaling: 1
-  maxHealthScaling: 1
   flightPatrolRange: 20
   attackRange: 50
   explosionRange: 1.2
@@ -749,6 +746,8 @@ MonoBehaviour:
     coolDownMultiplier: 1
     walkSpeed: 0
     sprintSpeed: 0
+    currentJumps: 0
+    totalJumps: 0
     luck: 0
   abilities: {fileID: 0}
   effectHandler: {fileID: 0}

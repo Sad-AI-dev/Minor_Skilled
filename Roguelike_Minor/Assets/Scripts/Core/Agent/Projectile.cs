@@ -17,7 +17,7 @@ namespace Game.Core
         private float baseDamage;
 
         protected Rigidbody rb;
-        private SphereCollider col;
+        protected SphereCollider col;
 
         //========== Initialize ===========
         private void OnEnable()

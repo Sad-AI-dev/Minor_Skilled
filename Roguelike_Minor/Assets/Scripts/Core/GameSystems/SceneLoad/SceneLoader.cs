@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace Game.Core.GameSystems {
     public class SceneLoader : MonoBehaviour
     {
         [SerializeField] private UIFader uiFader;
+        [SerializeField] private UnityEvent onSceneLoaded;
+
         [HideInInspector] public bool allowLoadScene;
 
         private void Start()
@@ -78,6 +81,15 @@ namespace Game.Core.GameSystems {
                 }
                 yield return null;
             }
+            HandleSceneLoaded();
+        }
+
+        private void HandleSceneLoaded()
+        {
+            //lightprobe magic
+            LightProbes.Tetrahedralize();
+            //invoke events
+            onSceneLoaded?.Invoke();
         }
 
         //========== Manage AllowLoad ==========

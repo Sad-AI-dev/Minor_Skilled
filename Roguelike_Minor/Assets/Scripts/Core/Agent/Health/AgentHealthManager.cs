@@ -10,6 +10,7 @@ namespace Game.Core {
 
         [Header("Health")]
         public float health;
+        public float regenDelay = 1f;
         private float MaxHealth { get { return agent.stats.maxHealth * agent.stats.maxHealthMult; } }
         public HealthBar healthBar;
 
@@ -22,12 +23,19 @@ namespace Game.Core {
         //vars
         private bool useHealthBar;
 
+        //regen vars
+        private bool canRegen;
+        private Coroutine pauseRegenRoutine;
+
         private void Start()
         {
             useHealthBar = healthBar != null;
             health = MaxHealth;
             onMaxHealthChanged = new UnityEvent();
             onMaxHealthChanged.AddListener(HandleHealthChange);
+            //Setup regen vars
+            canRegen = true;
+            StartCoroutine(RegenCo());
         }
 
         //============ IHittable ===============
@@ -37,6 +45,8 @@ namespace Game.Core {
 
             hitEvent.target = this;
             ProcessHitEvent(ref hitEvent);
+            //pause regen
+            PauseRegen();
             //take damage
             health -= hitEvent.GetTotalDamage();
             onHurt?.Invoke(hitEvent);
@@ -103,6 +113,39 @@ namespace Game.Core {
             {
                 healthBar.UpdateHealthBar(health / MaxHealth);
             }
+        }
+
+        //========= Passive Regeneration ===========
+        private IEnumerator RegenCo()
+        {
+            while (true)
+            {
+                //regen health based on elapsed time
+                if (canRegen) {
+                    RegenHealth(agent.stats.regeneration * Time.deltaTime); }
+                //wait for frame
+                yield return null;
+            }
+        }
+
+        private void RegenHealth(float toRegen)
+        {
+            health += toRegen;
+            HandleHealthChange();
+        }
+
+        private void PauseRegen()
+        {
+            //stop existing routine
+            if (pauseRegenRoutine != null) { StopCoroutine(pauseRegenRoutine); }
+            //reset timer
+            pauseRegenRoutine = StartCoroutine(PauseRegenCo());
+        }
+        private IEnumerator PauseRegenCo()
+        {
+            canRegen = false;
+            yield return new WaitForSeconds(regenDelay);
+            canRegen = true;
         }
     }
 }

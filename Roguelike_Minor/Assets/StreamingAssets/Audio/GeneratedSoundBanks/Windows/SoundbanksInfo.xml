@@ -9,12 +9,13 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{605A352D-3FFA-E0BB-8CCE-57FC1F11143B}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{B6CCF306-0F81-D3EA-44BA-CADD19F7C2CD}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
 				<ShareSets>
 					<Plugin Id="48620415" Name="Have_U_Ever_Been_Outside" LibName="Wwise RoomVerb" LibId="7733251"/>
+					<Plugin Id="2038996943" Name="Plate_Sizzle" LibName="Wwise RoomVerb" LibId="7733251"/>
 				</ShareSets>
 				<AudioDevices>
 					<Plugin Id="2317455096" Name="No_Output" LibName="No Output" LibId="11862023"/>
@@ -25,12 +26,20 @@
 				<Bus Id="85412153" Name="Ambience"/>
 				<Bus Id="1069431850" Name="Player"/>
 				<Bus Id="1551306167" Name="UI"/>
+				<Bus Id="1901312945" Name="Abilities"/>
 				<Bus Id="2299321487" Name="Enemy"/>
 				<Bus Id="3174030640" Name="Auxiliary busses"/>
 				<Bus Id="3582546886" Name="Specialfire"/>
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 			<AuxBusses>
+				<AuxBus Id="1063264192" Name="Valley_verb">
+					<PluginRefs>
+						<ShareSets>
+							<PluginRef Id="2038996943"/>
+						</ShareSets>
+					</PluginRefs>
+				</AuxBus>
 				<AuxBus Id="3018232304" Name="Default_Verb">
 					<PluginRefs>
 						<ShareSets>
@@ -180,7 +189,7 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{244015D1-A0F7-9A04-3930-1442FCA7F7F1}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{BC0798B3-F795-B174-3F53-32728F647144}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -411,6 +420,24 @@
 				</ShareSets>
 			</Plugins>
 			<Events>
+				<Event Id="3218574908" Name="Play_big_grunt_die" MaxAttenuation="45" DurationType="OneShot" DurationMin="0.96546996" DurationMax="1.3260578">
+					<MediaRefs>
+						<MediaRef Id="577496908"/>
+						<MediaRef Id="894723020"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3350824361" Name="Play_big_grunt_hit" MaxAttenuation="100" DurationType="OneShot" DurationMin="1.7893137" DurationMax="2.3098686">
+					<MediaRefs>
+						<MediaRef Id="270473895"/>
+						<MediaRef Id="529136300"/>
+						<MediaRef Id="541444666"/>
+						<MediaRef Id="604688318"/>
+						<MediaRef Id="741460009"/>
+						<MediaRef Id="835267405"/>
+						<MediaRef Id="940789584"/>
+						<MediaRef Id="965924032"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="3025897706" Name="Play_Birds" DurationType="OneShot" DurationMin="1.6568854" DurationMax="8.075708">
 					<MediaRefs>
 						<MediaRef Id="30634264"/>
@@ -448,47 +475,6 @@
 						<MediaRef Id="1064136553"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="923366262" Name="Play_footstep_old" DurationType="OneShot" DurationMin="0.47972447" DurationMax="0.85995054">
-					<MediaRefs>
-						<MediaRef Id="369054095"/>
-						<MediaRef Id="889319335"/>
-					</MediaRefs>
-					<SwitchContainers>
-						<SwitchContainer>
-							<SwitchValue GroupType="Switch" GroupId="2385628198" Id="1216965916"/>
-							<MediaRefs>
-								<MediaRef Id="89932490"/>
-								<MediaRef Id="245396275"/>
-								<MediaRef Id="284965498"/>
-								<MediaRef Id="769638221"/>
-								<MediaRef Id="1045493623"/>
-							</MediaRefs>
-						</SwitchContainer>
-						<SwitchContainer>
-							<SwitchValue GroupType="Switch" GroupId="2385628198" Id="4248645337" Default="true"/>
-							<MediaRefs>
-								<MediaRef Id="110500809"/>
-								<MediaRef Id="114167700"/>
-								<MediaRef Id="271074604"/>
-								<MediaRef Id="742923068"/>
-								<MediaRef Id="827923736"/>
-								<MediaRef Id="1064136553"/>
-							</MediaRefs>
-						</SwitchContainer>
-						<SwitchContainer>
-							<SwitchValue GroupType="Switch" GroupId="2385628198" Id="2185786256"/>
-							<MediaRefs>
-								<MediaRef Id="59103797"/>
-								<MediaRef Id="261670173"/>
-								<MediaRef Id="267493234"/>
-								<MediaRef Id="699093671"/>
-								<MediaRef Id="699752730"/>
-								<MediaRef Id="716720316"/>
-								<MediaRef Id="753373456"/>
-							</MediaRefs>
-						</SwitchContainer>
-					</SwitchContainers>
-				</Event>
 				<Event Id="2405798708" Name="Play_Grenade" MaxAttenuation="55" DurationType="OneShot" DurationMin="1.3043311" DurationMax="1.3043311">
 					<MediaRefs>
 						<MediaRef Id="1019175650"/>
@@ -525,6 +511,29 @@
 						<MediaRef Id="835267405"/>
 						<MediaRef Id="940789584"/>
 						<MediaRef Id="965924032"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2323405115" Name="Play_landing" DurationType="OneShot" DurationMin="0.8058289" DurationMax="0.95995057">
+					<MediaRefs>
+						<MediaRef Id="59103797"/>
+						<MediaRef Id="89932490"/>
+						<MediaRef Id="110500809"/>
+						<MediaRef Id="114167700"/>
+						<MediaRef Id="245396275"/>
+						<MediaRef Id="261670173"/>
+						<MediaRef Id="267493234"/>
+						<MediaRef Id="271074604"/>
+						<MediaRef Id="284965498"/>
+						<MediaRef Id="369054095"/>
+						<MediaRef Id="699093671"/>
+						<MediaRef Id="699752730"/>
+						<MediaRef Id="716720316"/>
+						<MediaRef Id="742923068"/>
+						<MediaRef Id="753373456"/>
+						<MediaRef Id="769638221"/>
+						<MediaRef Id="827923736"/>
+						<MediaRef Id="1045493623"/>
+						<MediaRef Id="1064136553"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="2990404959" Name="Play_Obelisk_passive" MaxAttenuation="55" DurationType="Infinite">
@@ -584,16 +593,7 @@
 				<GameParameter Id="2185786256" Name="Gravel"/>
 				<GameParameter Id="4248645337" Name="Grass"/>
 			</GameParameters>
-			<SwitchGroups>
-				<SwitchGroup Id="2385628198" Name="Footsteps">
-					<Switches>
-						<Switch Id="1216965916" Name="Stone"/>
-						<Switch Id="2185786256" Name="Gravel"/>
-						<Switch Id="4248645337" Name="Grass"/>
-					</Switches>
-				</SwitchGroup>
-			</SwitchGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{F885ED6E-EC3B-44A5-87C4-13600664B513}</FileHash>
+	<FileHash>{FEF7AEA1-81AB-A608-8AF0-5CE716C3D93F}</FileHash>
 </SoundBanksInfo>
