@@ -34,7 +34,6 @@ namespace Game.Enemy {
                 Vector3 flightPatrolRange = Random.insideUnitSphere * SmallSquidTree.FlightPatrolRange;
                 flightPatrolRange.y = Random.Range(-4, 5);
                 randomWaipoint = (Vector3)GetData("FlightSpaceOrigin") + flightPatrolRange;
-                Debug.Log(randomWaipoint);
             }
 
             if (randomWaipoint != Vector3.zero)
@@ -65,7 +64,7 @@ namespace Game.Enemy {
 
             //Check if path is valid
             RaycastHit hit;
-            if(Physics.SphereCast(transform.position, 0.5f, dir, out hit, distance))
+            if(Physics.SphereCast(transform.position, 10f, dir, out hit, distance))
             {
                 state = NodeState.FAILURE;
                 randomWaipoint = Vector3.zero;
@@ -86,7 +85,6 @@ namespace Game.Enemy {
         {
             Vector3 pos = transform.position;
             SetData("FlightSpaceOrigin", pos);
-            Debug.Log((Vector3)GetData("FlightSpaceOrigin"));
         }
     }
 }

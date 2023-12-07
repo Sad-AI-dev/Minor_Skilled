@@ -10,6 +10,17 @@ namespace Game.Enemy {
         public float poisonDamageMult;
         public float despawnTimer;
         [HideInInspector] public Agent source;
+        Rigidbody rb;
+
+        private void Awake()
+        {
+            if (rb == null) rb = GetComponent<Rigidbody>();
+        }
+
+        private void Update()
+        {
+            if (rb.velocity.y > Physics.gravity.y - 2) rb.velocity = new Vector3(0, -7, 0);
+        }
 
         IEnumerator DespawnTimerCO()
         {

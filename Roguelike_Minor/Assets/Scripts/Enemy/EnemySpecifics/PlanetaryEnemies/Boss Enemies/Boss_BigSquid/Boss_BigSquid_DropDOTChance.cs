@@ -8,8 +8,6 @@ using Game.Core;
 namespace Game.Enemy {
     public class Boss_BigSquid_DropDOTChance : BT_Node
     {
-        Transform transform;
-        Agent agent;
         int goopDropChance;
         float goopChanceCooldown;
 
@@ -25,6 +23,7 @@ namespace Game.Enemy {
 
         public override NodeState Evaluate()
         {
+            state = NodeState.SUCCESS;
             if (canDrop)
             {
                 int chance = Random.Range(1, 101);

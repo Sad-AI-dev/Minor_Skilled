@@ -32,6 +32,10 @@ namespace Game.Enemy {
         public int goopDropChance = 20;
         public float goopChanceCooldown = 3;
 
+        [Header("Shotgun Variables")]
+        public int shotgunChance = 20;
+        public float shotgunCooldownTime = 3;
+
         [Header("Debug variables")]
         [SerializeField] Transform target = null;
         [SerializeField] float distanceToCurrentTarget = 0;
@@ -63,7 +67,8 @@ namespace Game.Enemy {
                                     //If so keep moving randomly within attack range but to handle attacks
                                     new Boss_BigSquidFlyAroundTarget(agent, transform),
                                     //Drop goop
-                                    new Boss_BigSquid_DropDOTChance(transform, agent, goopDropChance, goopChanceCooldown)
+                                    new Boss_BigSquid_DropDOTChance(transform, agent, goopDropChance, goopChanceCooldown),
+                                    new Boss_BigSquid_ShotgunChance(transform, agent, shotgunChance, shotgunCooldownTime)
                                 }),
                             //If not in attack range move closer;
                             new Boss_BigSquid_MoveToTarget(transform, agent, rb)
