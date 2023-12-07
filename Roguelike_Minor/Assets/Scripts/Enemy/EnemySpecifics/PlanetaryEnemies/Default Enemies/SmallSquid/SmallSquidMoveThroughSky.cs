@@ -31,7 +31,10 @@ namespace Game.Enemy {
             //Get random point
             if (randomWaipoint == Vector3.zero)
             {
-                randomWaipoint = (Vector3)GetData("FlightSpaceOrigin") + (Random.insideUnitSphere * SmallSquidTree.FlightPatrolRange);
+                Vector3 flightPatrolRange = Random.insideUnitSphere * SmallSquidTree.FlightPatrolRange;
+                flightPatrolRange.y = Random.Range(-4, 5);
+                randomWaipoint = (Vector3)GetData("FlightSpaceOrigin") + flightPatrolRange;
+                Debug.Log(randomWaipoint);
             }
 
             if (randomWaipoint != Vector3.zero)
@@ -83,6 +86,7 @@ namespace Game.Enemy {
         {
             Vector3 pos = transform.position;
             SetData("FlightSpaceOrigin", pos);
+            Debug.Log((Vector3)GetData("FlightSpaceOrigin"));
         }
     }
 }
