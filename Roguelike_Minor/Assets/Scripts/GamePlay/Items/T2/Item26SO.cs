@@ -50,10 +50,9 @@ namespace Game {
         //========== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Gain the ability to <color=#{HighlightColor}>reroll items</color> " +
-                $"in the <color=#{HighlightColor}>shop</color> " +
-                $"<color=#{HighlightColor}>{baseRerolls}</color> " +
-                $"<color=#{StackColor}>(+{bonusRerolls} per stack)</color> times";
+            return $"<color=#{HighlightColor}>+{baseRerolls}</color> " +
+                $"<color=#{StackColor}>(+{bonusRerolls} per stack)</color> rerolls in the " +
+                $"<color=#{HighlightColor}>shop</color>";
         }
     }
 }

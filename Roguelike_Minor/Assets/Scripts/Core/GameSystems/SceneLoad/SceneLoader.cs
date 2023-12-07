@@ -81,6 +81,14 @@ namespace Game.Core.GameSystems {
                 }
                 yield return null;
             }
+            HandleSceneLoaded();
+        }
+
+        private void HandleSceneLoaded()
+        {
+            //lightprobe magic
+            LightProbes.Tetrahedralize();
+            //invoke events
             onSceneLoaded?.Invoke();
         }
 

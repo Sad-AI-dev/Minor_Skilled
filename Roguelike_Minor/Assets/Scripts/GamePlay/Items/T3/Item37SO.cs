@@ -27,9 +27,11 @@ namespace Game {
         //========== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"gain <color=#{HighlightColor}>{baseLuck}</color> " +
+            return $"<color=#{HighlightColor}>Chance based effects</color> " +
+                $"are rerolled <color=#{HighlightColor}>+{baseLuck}</color> " +
                 $"<color=#{StackColor}>(+{bonusLuck} per stack)</color> " +
-                $"<color=#{HighlightColor}>luck</color>.";
+                $"times for a " +
+                $"<color=#{HighlightColor}>favorable outcome</color>";
         }
     }
 }
