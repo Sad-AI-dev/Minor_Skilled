@@ -103,30 +103,30 @@ namespace Game.Player
             animator.SetBool(shoot, false);
         }
 
-        public void AnimSecondary()
+        private void AnimSecondary()
         {
             animator.SetTrigger(grenade);
         }
-        public void AnimSpecial()
+        private void AnimSpecial()
         {
             animator.SetTrigger(special);
         }
-        public void AnimUtility()
+        private void AnimUtility()
         {
             animator.SetTrigger(dash);
         }
 
-        public void AnimHit()
+        private void AnimHit()
         {
             animator.SetTrigger(hit);
         }
 
-        public void AnimDeath()
+        private void AnimDeath()
         {
             animator.SetTrigger(die);
         }
 
-        public void AnimInteract()
+        private void AnimInteract()
         {
             animator.SetTrigger(interact);
         }
