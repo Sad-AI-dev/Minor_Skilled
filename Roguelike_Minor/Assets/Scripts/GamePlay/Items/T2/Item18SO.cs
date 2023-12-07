@@ -164,8 +164,12 @@ namespace Game {
         //========== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Temp Description.\n\n" +
-                $"If you are seeing this, let Arvid know he's a dumbass";
+            return $"<color=#{HighlightColor}>+{basePlanets}</color> " +
+                $"<color=#{StackColor}>(+{bonusPlanets} per stack)</color> " +
+                $"orbiting planets which seek out " +
+                $"<color=#{StackColor}>nearby enemies</color> " +
+                $"dealing <color=#{HighlightColor}>{baseDamageMult * 100}%</color> " +
+                $"damage";
         }
     }
 }

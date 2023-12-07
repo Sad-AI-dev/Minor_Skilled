@@ -86,8 +86,8 @@ namespace Game {
         //========== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Gain a <color=#{HighlightColor}>{baseChance * 100}%</color> " +
-                $"<color=#{StackColor}>(+{bonusChance * 100}% per stack)</color> " +
+            return $"Gain a <color=#{HighlightColor}>{baseChance}%</color> " +
+                $"<color=#{StackColor}>(+{bonusChance}% per stack)</color> " +
                 $"chance to spawn a <color=#{HighlightColor}>chest</color> " +
                 $"on the next planet";
         }
