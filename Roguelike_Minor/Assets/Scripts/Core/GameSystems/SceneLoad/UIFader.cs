@@ -78,7 +78,7 @@ namespace Game.Core.GameSystems {
         private void Update()
         {
             if (fading) {
-                timer += Time.deltaTime;
+                timer += Time.unscaledDeltaTime;
                 if (fadingIn) { FadeIn(); }
                 else { FadeOut(); }
             }

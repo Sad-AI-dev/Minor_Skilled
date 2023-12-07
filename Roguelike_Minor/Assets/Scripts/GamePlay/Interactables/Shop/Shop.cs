@@ -11,6 +11,9 @@ namespace Game {
         public Transform[] spawnPoints;
         [SerializeField] private float spawnDelay = 0.5f;
 
+        [Header("Balance Settings")]
+        [SerializeField] private int defaultReloads = 1;
+
         [Header("Tech Settings")]
         [SerializeField] private LootTableSO lootTable;
         [SerializeField] private BehaviourPool<ShopPurchasable> pool;
@@ -25,7 +28,11 @@ namespace Game {
 
         private void Awake()
         {
+            //setup default vars
+            rerolls = defaultReloads;
+            //invoke events
             EventBus<ShopLoadedEvent>.Invoke(new ShopLoadedEvent() { shop = this });
+            //generate visuals
             StartCoroutine(GenerateShopContentCo());
         }
 

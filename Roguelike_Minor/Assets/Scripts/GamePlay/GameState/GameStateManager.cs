@@ -49,7 +49,7 @@ namespace Game {
         [HideInInspector] public LootSpawner lootSpawner; //needed for some items
 
         //scene advancement vars
-        public int CurrentStage { get; private set; } = 0;
+        public int CurrentStage { get; private set; } = 1;
 
         //paused state
         [HideInInspector] public bool scalingIsPaused;
@@ -60,8 +60,6 @@ namespace Game {
             //setup events
             EventBus<SceneLoadedEvent>.AddListener(HandleSceneLoaded);
             EventBus<ShopLoadedEvent>.AddListener(HandleShopLoad);
-            //load first stage
-            AdvanceToNextPlanet();
         }
 
         //========= Handle Scene Load ========
