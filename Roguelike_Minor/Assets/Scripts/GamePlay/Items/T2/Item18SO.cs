@@ -167,7 +167,7 @@ namespace Game {
             return $"<color=#{HighlightColor}>+{basePlanets}</color> " +
                 $"<color=#{StackColor}>(+{bonusPlanets} per stack)</color> " +
                 $"orbiting planets which seek out " +
-                $"<color=#{StackColor}>nearby enemies</color> " +
+                $"<color=#{HighlightColor}>nearby enemies</color> " +
                 $"dealing <color=#{HighlightColor}>{baseDamageMult * 100}%</color> " +
                 $"damage";
         }
