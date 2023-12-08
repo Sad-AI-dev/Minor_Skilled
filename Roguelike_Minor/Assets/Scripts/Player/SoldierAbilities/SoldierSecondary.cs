@@ -16,11 +16,22 @@ namespace Game.Player.Soldier
         [SerializeField] private float upwardVelocity;
         [SerializeField] private float projectileGravity;
 
+        private PlayerController controller;
+        private GrenadeProjectile grenadeProjectile;
 
-        PlayerController controller;
+        [Header("Poison")]
+        [SerializeField] int defaultPoisonOrbs = 4;
+        [SerializeField] int upgradePoisonOrbs = 1;
+
+        public class SecondaryVars : Ability.AbilityVars
+        {
+            public int totalPoisonOrbs;
+        }
+
 
         public override void InitializeVars(Ability source)
         {
+            source.vars = new SecondaryVars { totalPoisonOrbs = defaultPoisonOrbs };
             controller = source.agent.GetComponent<PlayerController>();
         }
 
@@ -42,11 +53,25 @@ namespace Game.Player.Soldier
 
             GameObject projectile = Instantiate(grenade, source.originPoint.position, Quaternion.identity);
             projectile.transform.LookAt(target);
-            GrenadeProjectile grenadeProjectile = projectile.GetComponent<GrenadeProjectile>();
+            grenadeProjectile = projectile.GetComponent<GrenadeProjectile>();
             grenadeProjectile.velocity = bulletDir * projectileVelocity;
             grenadeProjectile.Initialize(source);
             grenadeProjectile.gravity = projectileGravity;
             grenadeProjectile.upwardVelocity = upwardVelocity;
+            grenadeProjectile.poisonGrenadeAmount = (source.vars as SecondaryVars).totalPoisonOrbs;
+        }
+
+        public override void Upgrade(Ability source)
+        {
+
+            (source.vars as SecondaryVars).totalPoisonOrbs += upgradePoisonOrbs;
+        }
+
+        public override void DownGrade(Ability source)
+        {
+            SecondaryVars vars = source.vars as SecondaryVars;
+            if(vars.totalPoisonOrbs > defaultPoisonOrbs)
+                vars.totalPoisonOrbs -= upgradePoisonOrbs;
         }
     }
 }

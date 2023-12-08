@@ -199,7 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyScalingFrequency: 60
   priceScalingFrequency: 30
-  priceScalingAmount: 0.1
+  priceScalingAmount: 0.3
   enemyLevel: 0
   priceMult: 1
 --- !u!1 &5706813191946861257
@@ -374,6 +374,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiFader: {fileID: 0}
+  onSceneLoaded:
+    m_PersistentCalls:
+      m_Calls: []
   allowLoadScene: 0
 --- !u!1 &8355906013974447864
 GameObject:
@@ -454,7 +457,7 @@ MonoBehaviour:
   budgetSpikeMode: 3
   budgetSpikeMultiplier: 0.5
   budgetSpikeActivationChance: 0
-  budgetSpikeInterval: 5
+  budgetSpikeInterval: 10
   budgetSpikeIntervalMin: 5
   budgetSpikeIntervalMax: 10
   saveMode: 0
@@ -467,6 +470,7 @@ MonoBehaviour:
   options:
   - name: MeleeGrunt
     price: 2
+    chance: 2
     onSelect:
       m_PersistentCalls:
         m_Calls:
@@ -485,6 +489,7 @@ MonoBehaviour:
     initialized: 1
   - name: small Squid
     price: 1
+    chance: 1
     onSelect:
       m_PersistentCalls:
         m_Calls:
@@ -503,6 +508,7 @@ MonoBehaviour:
     initialized: 1
   - name: big Squid
     price: 10
+    chance: 1
     onSelect:
       m_PersistentCalls:
         m_Calls:
@@ -521,6 +527,7 @@ MonoBehaviour:
     initialized: 1
   - name: Boss Big Squid
     price: 75
+    chance: 0.5
     onSelect:
       m_PersistentCalls:
         m_Calls:

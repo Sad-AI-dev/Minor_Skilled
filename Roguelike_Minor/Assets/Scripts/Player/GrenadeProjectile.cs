@@ -21,9 +21,9 @@ namespace Game.Player
         [SerializeField] private BehaviourPool<Projectile> grenades = new BehaviourPool<Projectile>();
         [SerializeField] private float poisonUpwardVelocity;
         [SerializeField] private float poisonGravity;
-        [SerializeField] private int poisonGrenadeAmount;
         [SerializeField] private float minDistance;
         [SerializeField] private float maxDistance;
+        public int poisonGrenadeAmount;
 
         [HideInInspector] public float gravity;
         [HideInInspector] public float upwardVelocity;

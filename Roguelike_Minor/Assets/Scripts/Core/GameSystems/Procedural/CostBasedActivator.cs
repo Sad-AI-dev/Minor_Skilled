@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Game.Core.Data;
 using Game.Util;
 
 namespace Game.Core.GameSystems {
@@ -11,6 +12,7 @@ namespace Game.Core.GameSystems {
         public class Option : ISerializationCallbackReceiver {
             public string name;
             public int price;
+            public float chance;
             public UnityEvent onSelect;
             [HideInInspector] public bool initialized;
 
@@ -320,11 +322,17 @@ namespace Game.Core.GameSystems {
         private void PurchaseOptions()
         {
             while (budget >= minPrice) {
-                List<Option> availableOptions = GetAvailableOptions();
-                Option chosenOption = availableOptions[Random.Range(0, availableOptions.Count)];
+                WeightedChance<Option> availableOptions = OptionsToWeightedChance(GetAvailableOptions());
+                Option chosenOption = availableOptions.GetRandomEntry();
                 budget -= chosenOption.price; //pay
                 chosenOption.onSelect?.Invoke();
             }
+        }
+        private WeightedChance<Option> OptionsToWeightedChance(List<Option> optionList)
+        {
+            WeightedChance<Option> options = new WeightedChance<Option>();
+            optionList.ForEach((Option option) => options.Add(option, option.chance));
+            return options;
         }
 
         //========= price calcs =========
