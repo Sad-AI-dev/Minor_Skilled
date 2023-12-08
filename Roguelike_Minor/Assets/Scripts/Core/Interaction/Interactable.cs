@@ -16,7 +16,7 @@ namespace Game.Core.GameSystems {
 
         private List<Interactor> interactors;
 
-        private void Start()
+        private void Awake()
         {
             interactors = new List<Interactor>();
         }
