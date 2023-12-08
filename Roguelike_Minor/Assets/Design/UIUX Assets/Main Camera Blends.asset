@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CustomBlends:
   - m_From: Main Menu Camera
-    m_To: Character
+    m_To: CharacterFirst
     m_Blend:
       m_Style: 1
       m_Time: 2
@@ -24,33 +24,66 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Character
-    m_To: Character2
+  - m_From: CharacterFirst
+    m_To: CharacterSecond
     m_Blend:
       m_Style: 1
-      m_Time: 2
+      m_Time: 1.5
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Character2
-    m_To: Character
+  - m_From: CharacterSecond
+    m_To: CharacterFirst
     m_Blend:
       m_Style: 1
-      m_Time: 2
+      m_Time: 1.5
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Character
+  - m_From: CharacterFirst
     m_To: Main Menu Camera
     m_Blend:
       m_Style: 1
-      m_Time: 2
+      m_Time: 1.5
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: CharacterSecond
+    m_To: Main Menu Camera
+    m_Blend:
+      m_Style: 1
+      m_Time: 1.5
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: CharacterFirst
+    m_To: After Select
+    m_Blend:
+      m_Style: 1
+      m_Time: 10
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: CharacterSecond
+    m_To: After Select
+    m_Blend:
+      m_Style: 1
+      m_Time: 10
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
