@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +11,7 @@ namespace Game.Core.GameSystems {
 
         private void InvokeSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            EventBus<SceneLoadedEvent>.Invoke(new SceneLoadedEvent());
+            EventBus<SceneLoadedEvent>.Invoke(new SceneLoadedEvent { loadedIndex = scene.buildIndex });
         }
 
         private void OnDestroy()

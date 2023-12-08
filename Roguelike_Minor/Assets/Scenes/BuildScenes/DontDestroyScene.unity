@@ -146,6 +146,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FadeUI
       objectReference: {fileID: 0}
+    - target: {fileID: 292381905848309006, guid: b0e3086c05abfcc43b2e281de487b116, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3916261566847022851, guid: b0e3086c05abfcc43b2e281de487b116, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -255,11 +259,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1160534683721558313, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.82806724
+      value: 0.8320137
       objectReference: {fileID: 0}
     - target: {fileID: 1160534683721558313, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5606288
+      value: -0.5547551
       objectReference: {fileID: 0}
     - target: {fileID: 1421599695142573888, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_Name
@@ -271,11 +275,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4989740113520203968, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.82806724
+      value: 0.8320137
       objectReference: {fileID: 0}
     - target: {fileID: 4989740113520203968, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5606288
+      value: -0.5547551
       objectReference: {fileID: 0}
     - target: {fileID: 6042182213848110425, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: cam
@@ -293,6 +297,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 165370653}
+    - target: {fileID: 6092443099186812197, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: regenDelay
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6092443099186812197, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -315,11 +323,11 @@ PrefabInstance:
       objectReference: {fileID: 1418690910}
     - target: {fileID: 6899417798536063078, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.82806724
+      value: 0.8320137
       objectReference: {fileID: 0}
     - target: {fileID: 6899417798536063078, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5606288
+      value: -0.5547551
       objectReference: {fileID: 0}
     - target: {fileID: 7374867739153013466, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: cam
@@ -1502,8 +1510,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1553550026}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5606288, y: 0, z: 0, w: 0.82806724}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalRotation: {x: -0.5547551, y: 0, z: 0, w: 0.8320137}
+  m_LocalPosition: {x: 0, y: 0.09999999, z: -0.9996286}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
