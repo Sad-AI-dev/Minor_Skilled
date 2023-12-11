@@ -5,8 +5,12 @@ using Game.Core;
 
 namespace Game {
     [CreateAssetMenu(fileName = "4Overclock", menuName = "ScriptableObjects/Items/T3/4: Overclock", order = 304)]
-    public class Item4SO : ItemDataSO
+    public class Item4SO : ItemDataSO, IDealDamageProcessor
     {
+        [Header("Priority")]
+        public int priority;
+        public int GetPriority() { return priority; }
+
         [Header("Stack Settings")]
         public int baseUsesIncrease = 0;
         public int bonusUseIncrease = 1;
@@ -29,10 +33,11 @@ namespace Game {
         }
 
         //========= Process Hit Events ===========
-        public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem) 
+        public void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
         {
             hitEvent.onDeath.AddListener(GainSpecialUse);
         }
+        public void ProcessDealDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
 
         //====== Handle Enemy Death =======
         private void GainSpecialUse(HitEvent hitEvent)
