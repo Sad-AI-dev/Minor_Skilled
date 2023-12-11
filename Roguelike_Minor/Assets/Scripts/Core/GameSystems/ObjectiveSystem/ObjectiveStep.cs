@@ -6,6 +6,13 @@ namespace Game.Core.GameSystems {
     public enum ObjectiveState { InProgress, Done }
     public enum ObjectiveType { Checkmark, Counter, ProgressBar }
 
+    //public struct ObjectiveProgress
+    //{
+    //    int current;
+    //    int goal;
+    //    ObjectiveType type;
+    //}
+
     [System.Serializable]
     public class StepUISettings
     {

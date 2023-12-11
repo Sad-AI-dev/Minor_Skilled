@@ -11,6 +11,8 @@ public class SwitchCinemamachineMenuCamera : MonoBehaviour
 
     public GameObject SelectButtonPressed;
 
+    public GameObject CorporationCanvas; 
+    public Animator LogoComingInScreen;
     public Animator animator;
 
     public Animator animationloading;
@@ -51,6 +53,13 @@ public class SwitchCinemamachineMenuCamera : MonoBehaviour
         CharacterSecond.SetActive(true);
     }
 
+    public void PlayLogoAnimation(){
+    LogoComingInScreen.enabled = true;
+    }
+
+    public void PlayCorporationVideo(){
+       CorporationCanvas.SetActive(true); 
+    }
     public void ButtonSelectPressed()
     {
         Debug.Log("test");
@@ -59,6 +68,9 @@ public class SwitchCinemamachineMenuCamera : MonoBehaviour
         SelectButtonPressed.SetActive(true);
         LoadingCanvas.SetActive(true);
         animationloading.enabled = true;
+        Invoke("PlayLogoAnimation", 6.0f);
+        //PlayLogoAnimation();
+        Invoke("PlayCorporationVideo", 8.5f);
     }
 }
 

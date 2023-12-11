@@ -35,11 +35,6 @@ namespace Game.Core {
         public virtual void AddStack(Item item) { }
         public virtual void RemoveStack(Item item) { }
 
-        //============ Process hit / heal events ==============
-        public virtual void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem) { }
-        public virtual void ProcessTakeDamage(ref HitEvent hitEvent, Item sourceItem) { }
-        public virtual void ProcessHealEvent(ref HealEvent healEvent, Item sourceItem) { }
-
         //============ Description ===========
         public abstract string GenerateLongDescription();
 

@@ -46,31 +46,31 @@ namespace Game.Core {
         }
 
         //=========== Process Hit / Heal Events =============
-        public void ProcessHitEvent(ref HitEvent hitEvent)
-        {
-            bool dealDamage = hitEvent.hasAgentSource && hitEvent.source.Equals(agent);
 
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (CanTriggerItem(ref hitEvent, items[i])) 
-                {
-                    if (dealDamage) items[i].data.ProcessDealDamage(ref hitEvent, items[i]);
-                    else items[i].data.ProcessTakeDamage(ref hitEvent, items[i]);
-                }
-            }
+        //==== Process take damage ====
+        public void ProcessTakeDamage(ref HitEvent hitEvent, ITakeDamageProcessor processor)
+        {
+            processor.ProcessTakeDamage(ref hitEvent, GetItemOfType(processor as ItemDataSO));
         }
 
+        //==== Process deal damage ====
+        public void ProcessDealDamage(ref HitEvent hitEvent, IDealDamageProcessor processor)
+        {
+            Item item = GetItemOfType(processor as ItemDataSO);
+            if (CanTriggerItem(ref hitEvent, item))
+            {
+                processor.ProcessDealDamage(ref hitEvent, item);
+            }
+        }
         private bool CanTriggerItem(ref HitEvent hitEvent, Item item)
         {
             return !hitEvent.itemSources.Contains(item) || item.data.canProcSelf;
         }
 
-        public void ProcessHealEvent(ref HealEvent healEvent)
+        //==== Process heal ====
+        public void ProcessHealEvent(ref HealEvent healEvent, IHealProcessor processor)
         {
-            for (int i = 0; i < items.Count; i++)
-            {
-                items[i].data.ProcessHealEvent(ref healEvent, items[i]);
-            }
+            processor.ProcessHeal(ref healEvent, GetItemOfType(processor as ItemDataSO));
         }
     }
 }

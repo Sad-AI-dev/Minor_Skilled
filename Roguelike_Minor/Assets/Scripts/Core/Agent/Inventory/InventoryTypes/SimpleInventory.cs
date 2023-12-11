@@ -15,7 +15,9 @@ namespace Game.Core {
             }
             else //add new type to inventory
             {
-                items.Add(new Item(itemData, this));
+                Item item = new Item(itemData, this);
+                items.Add(item);
+                if (item.data is IEventProcessor) { agent.health.AddProcessor(item.data as IEventProcessor); }
             }
             onContentsChanged?.Invoke();
             return true;
@@ -42,6 +44,7 @@ namespace Game.Core {
                 if (items[itemIndex].stacks <= 0)
                 {
                     items.Remove(items[itemIndex]);
+                    if (itemData is IEventProcessor) { agent.health.RemoveProcessor(itemData as IEventProcessor); }
                 }
                 onContentsChanged?.Invoke();
             }

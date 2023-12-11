@@ -6,12 +6,16 @@ using System;
 
 namespace Game {
     [CreateAssetMenu(fileName = "16Spiked_Bracers", menuName = "ScriptableObjects/Items/T1/16: Spiked Bracers", order = 116)]
-    public class Item16SO : ItemDataSO
+    public class Item16SO : ItemDataSO, IDealDamageProcessor
     {
         private class Item16Vars : Item.ItemVars
         {
             public float bleedChance;
         }
+
+        [Header("Priority")]
+        public int priority;
+        public int GetPriority() { return priority; }
 
         [Header("Bleed settings")]
         public float baseChance = 10f;
@@ -42,11 +46,12 @@ namespace Game {
         }
 
         //=========== Process Hit Event ==========
-        public override void ProcessDealDamage(ref HitEvent hitEvent, Item item)
+        public void ProcessDealDamage(ref HitEvent hitEvent, Item item)
         {
             Item16Vars vars = item.vars as Item16Vars;
             AgentRandom.TryProc(vars.bleedChance, hitEvent, ApplyBleed, hitEvent);
         }
+        public void ProcessDealDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
 
         private void ApplyBleed(HitEvent hitEvent)
         {

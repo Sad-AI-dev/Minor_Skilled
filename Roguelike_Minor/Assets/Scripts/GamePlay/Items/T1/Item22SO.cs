@@ -7,14 +7,20 @@ namespace Game {
     [CreateAssetMenu(fileName = "22Monkey's_Paw", menuName = "ScriptableObjects/Items/T1/22: Monkey's Paw", order = 122)]
     public class Item22SO : ItemDataSO
     {
+        [Header("Priority")]
+        public int priority;
+        public int GetPriority() { return priority; }
+
+        [Header("Money Settings")]
         public float baseMoneyMult = 0.1f;
         public float bonusMoneyMult = 0.1f;
 
         //========== Handle hit event =========
-        public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
+        public void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
         {
             hitEvent.onDeath.AddListener(RewardAdditionalMoney);
         }
+        public void ProcessDealDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
 
         private void RewardAdditionalMoney(HitEvent hitEvent)
         {
