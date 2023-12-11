@@ -19,10 +19,12 @@ namespace Game {
 
         public void SpawnAdvanceObject(GameObject advanceObject)
         {
-            advanceObject.transform.position = NavMeshUtil.RandomNavmeshLocationAtDistance(
+            NavMeshUtil.RandomNavmeshLocationAtDistance(
+                out Vector3 spawnPos,
                 GameStateManager.instance.player.transform.position,
                 Random.Range(minDistance, minDistance + range)
             );
+            advanceObject.transform.position = spawnPos;
         }
     }
 }
