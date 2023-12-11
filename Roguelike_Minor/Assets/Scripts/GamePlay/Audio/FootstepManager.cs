@@ -8,7 +8,6 @@ using UnityEngine;
 namespace Game {
     public class FootstepManager : MonoBehaviour
     {
-        [SerializeField] private AK.Wwise.Event footstepSFX;
 
         [SerializeField] private SoundMaterialSetSO soundMaterialSet;
 
@@ -28,10 +27,7 @@ namespace Game {
             //CheckGround();
         }
 
-        public void PlayFootstep()
-        {
-            footstepSFX.Post(gameObject);
-        }
+     
 
         private IEnumerator CheckGround()
         {
