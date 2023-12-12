@@ -15,8 +15,8 @@ namespace Game {
         public override void AddStack(Item item)
         {
             float oldMaxHealth = item.agent.stats.GetMaxHealth();
-            if (item.stacks == 1) { item.agent.stats.maxHealthMult += baseHealth; }
-            else { item.agent.stats.maxHealthMult += bonusHealth; }
+            if (item.stacks == 1) { item.agent.stats.maxHealth += baseHealth; }
+            else { item.agent.stats.maxHealth += bonusHealth; }
 
             //heal to compensate for increased max health
             float toHeal = item.agent.stats.GetMaxHealth() - oldMaxHealth;
@@ -26,8 +26,8 @@ namespace Game {
 
         public override void RemoveStack(Item item)
         {
-            if (item.stacks == 0) { item.agent.stats.maxHealthMult -= baseHealth; }
-            else { item.agent.stats.maxHealthMult -= bonusHealth; }
+            if (item.stacks == 0) { item.agent.stats.maxHealth -= baseHealth; }
+            else { item.agent.stats.maxHealth -= bonusHealth; }
 
             //update health manager
             item.agent.health.onMaxHealthChanged?.Invoke();
@@ -37,8 +37,8 @@ namespace Game {
         public override string GenerateLongDescription()
         {
             return $"Increase <color=#{HighlightColor}>max health</color> by" +
-                $" <color=#{HighlightColor}>{baseHealth * 100}%</color> " +
-                $"<color=#{StackColor}>(+{bonusHealth * 100}% per stack)</color>";
+                $" <color=#{HighlightColor}>{baseHealth}</color> " +
+                $"<color=#{StackColor}>(+{bonusHealth} per stack)</color>";
         }
     }
 }
