@@ -772,7 +772,7 @@ MonoBehaviour:
   activateMode: 0
   activateIntervalTime: 0
   activateOnStart: 1
-  budget: 6
+  budget: 10
   budgetGain: 0
   gainRampup: 0
   gainRampupFrequency: 0
@@ -795,6 +795,7 @@ MonoBehaviour:
   options:
   - name: Chest
     price: 1
+    chance: 5
     onSelect:
       m_PersistentCalls:
         m_Calls:
@@ -804,6 +805,25 @@ MonoBehaviour:
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 3591282554343670712, guid: 9a1efa74b40aaa7469714aba060abbcc, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    initialized: 1
+  - name: Big Chest
+    price: 2
+    chance: 1
+    onSelect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 502154242}
+          m_TargetAssemblyTypeName: Game.LootSpawner, Game
+          m_MethodName: PlaceLoot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 6464204651980668487, guid: 20c19d0b6e99cba4991f7c92578ad8b0, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0

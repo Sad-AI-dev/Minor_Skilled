@@ -35,6 +35,7 @@ namespace Game.Core {
             {
                 Item item = new Item(itemData, this);
                 items.Add(item);
+                if (item.data is IEventProcessor) { agent.health.AddProcessor(item.data as IEventProcessor); }
             }
             //increase total item size
             totalItemSize += itemData.size.capacity;
@@ -60,6 +61,7 @@ namespace Game.Core {
             if (items[itemIndex].stacks <= 0)
             {
                 items.Remove(item);
+                if (item.data is IEventProcessor) { agent.health.RemoveProcessor(item.data as IEventProcessor); }
             }
         }
 

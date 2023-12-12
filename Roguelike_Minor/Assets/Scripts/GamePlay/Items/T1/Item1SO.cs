@@ -5,17 +5,22 @@ using Game.Core;
 
 namespace Game {
     [CreateAssetMenu(fileName = "1Necrotic_Ammunition", menuName = "ScriptableObjects/Items/T1/1: Necrotic Ammunition", order = 101)]
-    public class Item1SO : ItemDataSO
+    public class Item1SO : ItemDataSO, IDealDamageProcessor
     {
+        [Header("Priority")]
+        public int priority;
+        public int GetPriority() { return priority; }
+
         [Header("Healing settings")]
         public float baseHeal = 2f;
         public float bonusHeal = 1f;
 
         //============ Process hit / heal events ==============
-        public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
+        public void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
         {
             hitEvent.onDeath.AddListener(OnEnemyDeath);
         }
+        public void ProcessDealDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
 
         //============ Handle Enemy Kill ============
         private void OnEnemyDeath(HitEvent hitEvent)

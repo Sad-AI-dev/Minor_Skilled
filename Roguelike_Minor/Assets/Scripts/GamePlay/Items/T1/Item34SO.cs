@@ -5,8 +5,12 @@ using Game.Core;
 
 namespace Game {
     [CreateAssetMenu(fileName = "34Unruly_Equalizer", menuName = "ScriptableObjects/Items/T1/34: Unruly Equalizer", order = 134)]
-    public class Item34SO : ItemDataSO
+    public class Item34SO : ItemDataSO, IDealDamageProcessor
     {
+        [Header("Priority")]
+        public int priority;
+        public int GetPriority() { return priority; }
+
         [Header("Damage Settings")]
         public float baseDamageMult = 0.2f;
         public float bonusDamageMult = 0.2f;
@@ -19,7 +23,7 @@ namespace Game {
         public Color critColor;
 
         //=========== Handle Hit Event ============
-        public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
+        public void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
         {
             if (hitEvent.target.health / hitEvent.target.agent.stats.GetMaxHealth() > triggerPercent)
             {
@@ -28,6 +32,7 @@ namespace Game {
                 hitEvent.critColor = critColor;
             }
         }
+        public void ProcessDealDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
 
         private float GetDamageMult(Item sourceItem)
         {

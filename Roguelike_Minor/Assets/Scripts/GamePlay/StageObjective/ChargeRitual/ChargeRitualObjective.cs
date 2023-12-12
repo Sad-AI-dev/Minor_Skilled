@@ -1,7 +1,9 @@
 using System.Collections;
+using AK.Wwise;
 using UnityEngine;
 using TMPro;
 using Game.Core.GameSystems;
+using Event = AK.Wwise.Event;
 
 namespace Game {
     public class ChargeRitualObjective : ObjectiveStep
@@ -25,6 +27,11 @@ namespace Game {
 
         [Header("UI Settings")]
         [SerializeField] private TMP_Text progressLabel;
+
+        [Header("SFX")]
+        [SerializeField] private Event startObeliskSFX;
+        [SerializeField] private RTPC obeliskSpeed;
+        [SerializeField] private Event endObeliskSFX;
 
         //vars
         private float progress;
@@ -59,6 +66,7 @@ namespace Game {
             //up enemy spawning
             EnemySpawner.instance.ForceSpawn(prewarmMultiplier);
             EnemySpawner.instance.SetExternalSpawnMultiplier(spawnMultiplier);
+            startObeliskSFX.Post(gameObject);
         }
 
         //=============== Charge ==============
@@ -74,6 +82,7 @@ namespace Game {
             //done check
             if (progress >= 100) { StopCharge(); }
             else { onStateChanged?.Invoke(this); } //normal state objective
+            obeliskSpeed.SetGlobalValue(progress);
         }
 
         private void Charge()
@@ -118,6 +127,7 @@ namespace Game {
         {
             state = ObjectiveState.Done;
             onStateChanged?.Invoke(this);
+            endObeliskSFX.Post(gameObject);
         }
 
         //===== Handle Destroy ====
