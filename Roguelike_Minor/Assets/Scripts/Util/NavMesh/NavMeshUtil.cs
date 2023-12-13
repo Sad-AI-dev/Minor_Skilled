@@ -7,28 +7,38 @@ namespace Game.Util
 {
     public class NavMeshUtil : MonoBehaviour
     {
-        public static Vector3 RandomNavmeshLocation(Vector3 center, float radius)
+        public static bool RandomNavmeshLocation(out Vector3 position, Vector3 center, float radius)
         {
             Vector2 randDirection = Random.insideUnitCircle * radius;
             Vector3 randomPoint = new Vector3(randDirection.x, 0, randDirection.y) + center;
-            Vector3 finalPosition = Vector3.zero;
             if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, radius, 1))
             {
-                finalPosition = hit.position;
+                position = hit.position;
+                return true;
             }
-            return finalPosition;
+            //fail fallback
+            else 
+            {
+                position = Vector3.zero;
+                return false;
+            }
         }
 
-        public static Vector3 RandomNavmeshLocationAtDistance(Vector3 center, float radius)
+        public static bool RandomNavmeshLocationAtDistance(out Vector3 position, Vector3 center, float radius)
         {
             Vector2 randDirection = Random.insideUnitCircle.normalized * radius;
             Vector3 randomPoint = new Vector3(randDirection.x, 0, randDirection.y) + center;
-            Vector3 finalPosition = Vector3.zero;
             if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, radius, 1))
             {
-                finalPosition = hit.position;
+                position =  hit.position;
+                return true;
             }
-            return finalPosition;
+            //fail fallback
+            else 
+            {
+                position = Vector3.zero;
+                return false; 
+            }
         }
     }
 }

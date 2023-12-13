@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 namespace Game.Core {
     public class AgentHealthManager : MonoBehaviour, IHittable
@@ -27,6 +28,15 @@ namespace Game.Core {
         private bool canRegen;
         private Coroutine pauseRegenRoutine;
 
+        //event processors
+        private List<IDealDamageProcessor> dealDamageProcessors;
+        private List<ITakeDamageProcessor> takeDamageProcessors;
+        private List<IHealProcessor> healProcessors;
+
+        private void Awake()
+        {
+            InitializeProcessors();
+        }
         private void Start()
         {
             useHealthBar = healthBar != null;
@@ -37,6 +47,12 @@ namespace Game.Core {
             canRegen = true;
             StartCoroutine(RegenCo());
         }
+        private void InitializeProcessors()
+        {
+            dealDamageProcessors = new List<IDealDamageProcessor>();
+            takeDamageProcessors = new List<ITakeDamageProcessor>();
+            healProcessors = new List<IHealProcessor>();
+        }
 
         //============ IHittable ===============
         public void Hurt(HitEvent hitEvent)
@@ -44,7 +60,8 @@ namespace Game.Core {
             if (health <= 0f) { return; } //ignore if dead
 
             hitEvent.target = this;
-            ProcessHitEvent(ref hitEvent);
+            if (hitEvent.hasAgentSource) { hitEvent.source.health.ProcessDealDamageEvent(ref hitEvent); }
+            ProcessTakeDamageEvent(ref hitEvent);
             //pause regen
             PauseRegen();
             //take damage
@@ -69,15 +86,21 @@ namespace Game.Core {
         }
 
         //=============== Take Damage ================
-        private void ProcessHitEvent(ref HitEvent hitEvent)
+        private void ProcessTakeDamageEvent(ref HitEvent hitEvent)
         {
-            if (hitEvent.hasAgentSource)
+            //process
+            foreach (ITakeDamageProcessor processor in takeDamageProcessors)
             {
-                hitEvent.source.effectHandler.ProcessHitEvent(ref hitEvent);
-                hitEvent.source.inventory.ProcessHitEvent(ref hitEvent);
+                ProcessTakeDamageProcessor(ref hitEvent, processor);
             }
-            agent.effectHandler.ProcessHitEvent(ref hitEvent);
-            agent.inventory.ProcessHitEvent(ref hitEvent);
+        }
+        private void ProcessDealDamageEvent(ref HitEvent hitEvent)
+        {
+            //process
+            foreach (IDealDamageProcessor processor in dealDamageProcessors)
+            {
+                ProcessDealDamageProcessor(ref hitEvent, processor);
+            }
         }
 
         private void HandleDeath(ref HitEvent hitEvent)
@@ -101,8 +124,10 @@ namespace Game.Core {
         //=================== Heal ===================
         private void ProcessHealEvent(ref HealEvent healEvent)
         {
-            agent.effectHandler.ProcessHealEvent(ref healEvent);
-            agent.inventory.ProcessHealEvent(ref healEvent);
+            foreach (IHealProcessor processor in healProcessors)
+            {
+                ProcessHealEventProcessor(ref healEvent, processor);
+            }
         }
 
         //=============== Generic Health Change ==============
@@ -146,6 +171,55 @@ namespace Game.Core {
             canRegen = false;
             yield return new WaitForSeconds(regenDelay);
             canRegen = true;
+        }
+
+        //================= Manage Processors ===================
+        public void AddProcessor(IEventProcessor processor)
+        {
+            if (processor is IDealDamageProcessor) 
+            { 
+                dealDamageProcessors.Add(processor as IDealDamageProcessor);
+                dealDamageProcessors.Sort((IDealDamageProcessor a, IDealDamageProcessor b) => a.CompareTo(b));
+            }
+            else if (processor is ITakeDamageProcessor) 
+            { 
+                takeDamageProcessors.Add(processor as ITakeDamageProcessor);
+                takeDamageProcessors.Sort((ITakeDamageProcessor a, ITakeDamageProcessor b) => a.CompareTo(b));
+            }
+            else 
+            { 
+                healProcessors.Add(processor as IHealProcessor);
+                healProcessors.Sort((IHealProcessor a, IHealProcessor b) => a.CompareTo(b));
+            }
+        }
+
+        public void RemoveProcessor(IEventProcessor processor)
+        {
+            if (processor is IDealDamageProcessor) { dealDamageProcessors.Remove(processor as IDealDamageProcessor); }
+            else if (processor is ITakeDamageProcessor) { takeDamageProcessors.Remove(processor as ITakeDamageProcessor); }
+            else { healProcessors.Remove(processor as IHealProcessor); }
+        }
+
+        //================ Processors ========================
+        private void ProcessDealDamageProcessor(ref HitEvent hitEvent, IDealDamageProcessor processor)
+        {
+            if (processor is ItemDataSO) { agent.inventory.ProcessDealDamage(ref hitEvent, processor); }
+            //if not item, then must be status condition
+            else { agent.effectHandler.ProcessDealDamage(ref hitEvent, processor); }
+        }
+
+        private void ProcessTakeDamageProcessor(ref HitEvent hitEvent, ITakeDamageProcessor processor)
+        {
+            if (processor is ItemDataSO) { agent.inventory.ProcessTakeDamage(ref hitEvent, processor); }
+            //if not item, then must be status condition
+            else { agent.effectHandler.ProcessTakeDamage(ref hitEvent, processor); }
+        }
+
+        private void ProcessHealEventProcessor(ref HealEvent healEvent, IHealProcessor processor)
+        {
+            if (processor is ItemDataSO) { agent.inventory.ProcessHealEvent(ref healEvent, processor); }
+            //if not item, then must be status condition
+            else { agent.effectHandler.ProcessHeal(ref healEvent, processor); }
         }
     }
 }

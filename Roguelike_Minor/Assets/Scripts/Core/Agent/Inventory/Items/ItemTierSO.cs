@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Core {
-    [CreateAssetMenu(fileName = "Tier", menuName = "ScriptableObjects/Items/Item Tier", order = 40)]
+    [CreateAssetMenu(fileName = "Tier", menuName = "ScriptableObjects/Items/Item Tier", order = -500)]
     public class ItemTierSO : ScriptableObject
     {
         public string title;

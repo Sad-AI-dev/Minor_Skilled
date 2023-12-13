@@ -6,15 +6,18 @@ using System.Linq;
 
 namespace Game {
     [CreateAssetMenu(fileName = "Vulnerable", menuName = "ScriptableObjects/Status Effects/Vulnerable Effect")]
-    public class VulnerableEffectSO : StatusEffectSO
+    public class VulnerableEffectSO : StatusEffectSO, ITakeDamageProcessor
     {
         public class VulnerableVars : StatusEffectHandler.EffectVars
         {
             public float damageMult;
         }
 
+        public int priority;
         public float duration;
         public Color labelColor;
+
+        public int GetPriority() { return priority; }
 
         //======== Manage Effect =============
         public override void AddEffect(StatusEffectHandler handler) { }
@@ -41,7 +44,7 @@ namespace Game {
         }
 
         //========== Manage Take Damage ==============
-        public override void ProcessTakeDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars)
+        public void ProcessTakeDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars)
         {
             float totalDamageMult = 0f;
             foreach (VulnerableVars vulnerableVars in vars.Cast<VulnerableVars>())
@@ -50,5 +53,6 @@ namespace Game {
             }
             hitEvent.damageMultiplier += totalDamageMult;
         }
+        public void ProcessTakeDamage(ref HitEvent hitEvent, Item item) { }
     }
 }

@@ -17,9 +17,22 @@ namespace Game {
         public void PlaceLoot(GameObject prefab)
         {
             GameObject obj = Instantiate(prefab);
-            obj.transform.position = NavMeshUtil.RandomNavmeshLocationAtDistance(
-                transform.position, Random.Range(0, stageRange)
-            );
+            obj.transform.position = GetLootPosition();
+        }
+
+        private Vector3 GetLootPosition()
+        {
+            bool success = false;
+            Vector3 pos = new Vector3();
+
+            while (!success)
+            {
+                success = NavMeshUtil.RandomNavmeshLocationAtDistance(
+                    out Vector3 position, transform.position, Random.Range(0, stageRange)
+                );
+                pos = position;
+            }
+            return pos;
         }
     }
 }

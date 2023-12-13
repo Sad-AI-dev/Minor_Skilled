@@ -772,7 +772,7 @@ MonoBehaviour:
   activateMode: 0
   activateIntervalTime: 0
   activateOnStart: 1
-  budget: 6
+  budget: 10
   budgetGain: 0
   gainRampup: 0
   gainRampupFrequency: 0
@@ -795,6 +795,7 @@ MonoBehaviour:
   options:
   - name: Chest
     price: 1
+    chance: 5
     onSelect:
       m_PersistentCalls:
         m_Calls:
@@ -804,6 +805,25 @@ MonoBehaviour:
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 3591282554343670712, guid: 9a1efa74b40aaa7469714aba060abbcc, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    initialized: 1
+  - name: Big Chest
+    price: 2
+    chance: 1
+    onSelect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 502154242}
+          m_TargetAssemblyTypeName: Game.LootSpawner, Game
+          m_MethodName: PlaceLoot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 6464204651980668487, guid: 20c19d0b6e99cba4991f7c92578ad8b0, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -1624,7 +1644,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7962374809249754714, guid: 194c574cf9cf3f54eacae2fa7a338d7e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1830503901}
+    - targetCorrespondingSourceObject: {fileID: 7962374809249754714, guid: 194c574cf9cf3f54eacae2fa7a338d7e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1830503900}
   m_SourcePrefab: {fileID: 100100000, guid: 194c574cf9cf3f54eacae2fa7a338d7e, type: 3}
 --- !u!4 &1368781375 stripped
 Transform:
@@ -2022,6 +2048,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 69967297}
   m_LocalEulerAnglesHint: {x: 0, y: -34.309, z: 0}
+--- !u!1 &1830503899 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7962374809249754714, guid: 194c574cf9cf3f54eacae2fa7a338d7e, type: 3}
+  m_PrefabInstance: {fileID: 1368781374}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1830503900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830503899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851b4bc986d72934089e048b2a089b9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  actionOnEventType: 0
+  curveInterpolation: 4
+  enableActionOnEvent: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 4f473f6f493623749af0df617a67817c, type: 2}
+  useCallbacks: 0
+  Callbacks: []
+  playingId: 0
+  soundEmitterObject: {fileID: 0}
+  transitionDuration: 0
+  eventIdInternal: 0
+  valueGuidInternal: 
+  m_callbackDataInternal: {fileID: 0}
+  MultiPositionType: 1
+  multiPositionTypeLabel: 0
+  attenuationSphereColor: {r: 1, g: 0, b: 0, a: 0.1}
+  LargeModePositions: []
+  multiPositionArray: []
+--- !u!114 &1830503901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830503899}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525d550a1db3e3f4b87ae4a618494984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 1
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &1933058542
 GameObject:
   m_ObjectHideFlags: 0

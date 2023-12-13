@@ -18,13 +18,14 @@ namespace AK
         static const AkUniqueID PLAY_BIRDS = 3025897706U;
         static const AkUniqueID PLAY_DASH = 2211787386U;
         static const AkUniqueID PLAY_FOOTSTEP = 1602358412U;
+        static const AkUniqueID PLAY_FOOTSTEP_SERVO = 1408608858U;
         static const AkUniqueID PLAY_GRENADE = 2405798708U;
         static const AkUniqueID PLAY_GRENADE_SPLAT = 3537222909U;
         static const AkUniqueID PLAY_GRENADE_THROW = 2492084817U;
         static const AkUniqueID PLAY_GRUNT_DIE = 3392973459U;
         static const AkUniqueID PLAY_GRUNT_HIT = 2989619110U;
+        static const AkUniqueID PLAY_JUMP = 3689126666U;
         static const AkUniqueID PLAY_LANDING = 2323405115U;
-        static const AkUniqueID PLAY_OBELISK_PASSIVE = 2990404959U;
         static const AkUniqueID PLAY_PICKUP_ITEM = 3128913152U;
         static const AkUniqueID PLAY_PRIMARY_FIRE = 3563057235U;
         static const AkUniqueID PLAY_SPECIAL_FIRE = 1149417670U;
@@ -55,6 +56,7 @@ namespace AK
     {
         static const AkUniqueID GRASS = 4248645337U;
         static const AkUniqueID GRAVEL = 2185786256U;
+        static const AkUniqueID HEALTHPERCANTAGE = 3510318599U;
         static const AkUniqueID OBELISK_PROGRESS = 1308554018U;
         static const AkUniqueID RUNNING_SPEED = 2309143834U;
         static const AkUniqueID SS_AIR_FEAR = 1351367891U;
@@ -78,14 +80,14 @@ namespace AK
 
     namespace BUSSES
     {
-        static const AkUniqueID ABILITIES = 1901312945U;
         static const AkUniqueID AMBIENCE = 85412153U;
         static const AkUniqueID AUXILIARY_BUSSES = 3174030640U;
         static const AkUniqueID ENEMY = 2299321487U;
+        static const AkUniqueID GAMEPLAY_AMBIENCE = 116641803U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
         static const AkUniqueID PLAYER = 1069431850U;
-        static const AkUniqueID SPECIALFIRE = 3582546886U;
         static const AkUniqueID UI = 1551306167U;
+        static const AkUniqueID WORLD_AMBIENCE = 2221585665U;
     } // namespace BUSSES
 
     namespace AUX_BUSSES

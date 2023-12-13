@@ -6,12 +6,16 @@ using Game.Core.GameSystems;
 
 namespace Game {
     [CreateAssetMenu(fileName = "21Poisonous_Skull", menuName = "ScriptableObjects/Items/T1/21: Poisonous Skull", order = 121)]
-    public class Item21 : ItemDataSO
+    public class Item21 : ItemDataSO, IDealDamageProcessor
     {
         private class Item21Vars : Item.ItemVars
         {
             public float range;
         }
+
+        [Header("Priority")]
+        public int priority;
+        public int GetPriority() { return priority; }
 
         [Header("Cloud settings")]
         public float baseRange = 3f;
@@ -46,11 +50,12 @@ namespace Game {
         }
 
         //=========== Process Hit Event ==========
-        public override void ProcessDealDamage(ref HitEvent hitEvent, Item item)
+        public void ProcessDealDamage(ref HitEvent hitEvent, Item item)
         {
             ValueTuple<HitEvent, Item21Vars> tuple = new(hitEvent, item.vars as Item21Vars);
             AgentRandom.TryProc(chance, hitEvent, ApplyPoison, tuple);
         }
+        public void ProcessDealDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
 
         private void ApplyPoison(ValueTuple<HitEvent, Item21Vars> tuple)
         {

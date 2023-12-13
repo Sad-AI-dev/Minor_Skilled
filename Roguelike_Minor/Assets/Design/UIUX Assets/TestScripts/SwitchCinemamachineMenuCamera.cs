@@ -3,47 +3,74 @@ using UnityEngine;
 public class SwitchCinemamachineMenuCamera : MonoBehaviour
 {
     public GameObject CameraMainMenu;
-    //public GameObject Character1;
-    public GameObject Character2; 
 
+    public GameObject CharacterFirst;
+    public GameObject CharacterSecond;
+
+    public GameObject LoadingCanvas;
+
+    public GameObject SelectButtonPressed;
+
+    public GameObject CorporationCanvas; 
+    public Animator LogoComingInScreen;
     public Animator animator;
-    bool Select; 
 
-    void Start(){
-        if (!animator){ 
+    public Animator animationloading;
+    bool Select;
+
+    void Start()
+    {
+        if (!animator)
+        {
             animator = gameObject.GetComponent<Animator>();
         }
         Select = false;
-    } 
+    }
 
     public void SetFalse()
     {
         CameraMainMenu.SetActive(false);
-        //Character1.SetActive(false);
-        Character2.SetActive(false);
+        CharacterFirst.SetActive(false);
+        CharacterSecond.SetActive(false);
         //CharacterAnimation.enabled = false;
     }
 
-    public void OnButtonClickMainCamera()
+    public void MainMenuActive()
     {
         SetFalse();
         CameraMainMenu.SetActive(true);
     }
 
-    // public void OnButtonClickCharacter1()
-    // {
-    //     SetFalse();
-    //     Character1.SetActive(true);
-    // }
-
-    public void OnButtonClickCharacter2()
+    public void CharacterFirstActive()
     {
         SetFalse();
-        Character2.SetActive(true);
+        CharacterFirst.SetActive(true);
     }
-    public void OnSelectClickButtonC2(){
+
+    public void CharacterSecondActive()
+    {
+        SetFalse();
+        CharacterSecond.SetActive(true);
+    }
+
+    public void PlayLogoAnimation(){
+    LogoComingInScreen.enabled = true;
+    }
+
+    public void PlayCorporationVideo(){
+       CorporationCanvas.SetActive(true); 
+    }
+    public void ButtonSelectPressed()
+    {
         Debug.Log("test");
         animator.SetBool("Select", true);
-        }
+        SetFalse();
+        SelectButtonPressed.SetActive(true);
+        LoadingCanvas.SetActive(true);
+        animationloading.enabled = true;
+        Invoke("PlayLogoAnimation", 6.0f);
+        //PlayLogoAnimation();
+        Invoke("PlayCorporationVideo", 8.5f);
+    }
 }
 

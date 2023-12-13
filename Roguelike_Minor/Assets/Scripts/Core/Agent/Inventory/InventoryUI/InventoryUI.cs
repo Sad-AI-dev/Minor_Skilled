@@ -69,8 +69,12 @@ namespace Game.Core {
             {
                 if (TryValidateIndex(ref itemIndex, ref stackIndex))
                 {
-                    slotItems[index] = inventory.items[itemIndex];
-                    index += inventory.items[itemIndex].data.size.capacity;
+                    //T0 exception
+                    if (inventory.items[itemIndex].data.size.capacity > 0)
+                    { //normal item
+                        slotItems[index] = inventory.items[itemIndex];
+                        index += inventory.items[itemIndex].data.size.capacity;
+                    }
                     stackIndex++;
                 }
                 else { break; } //no more items to loop over

@@ -40,7 +40,17 @@ namespace Game {
 
         private Vector3 GetSpawnPos()
         {
-            return NavMeshUtil.RandomNavmeshLocationAtDistance(player.position, GetRandomRadius());
+            bool success = false;
+            Vector3 pos = new Vector3();
+
+            while (!success)
+            {
+                success = NavMeshUtil.RandomNavmeshLocationAtDistance(
+                    out Vector3 position, player.position, GetRandomRadius()
+                );
+                pos = position;
+            }
+            return pos;
         }
 
         private float GetRandomRadius()

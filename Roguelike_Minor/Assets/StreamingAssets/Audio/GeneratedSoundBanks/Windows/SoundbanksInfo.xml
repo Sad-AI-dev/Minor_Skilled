@@ -9,7 +9,7 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{B6CCF306-0F81-D3EA-44BA-CADD19F7C2CD}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{D5C124AF-4FF6-EEDC-123E-4E8594FF5589}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
@@ -24,12 +24,12 @@
 			</Plugins>
 			<Busses>
 				<Bus Id="85412153" Name="Ambience"/>
+				<Bus Id="116641803" Name="Gameplay Ambience"/>
 				<Bus Id="1069431850" Name="Player"/>
 				<Bus Id="1551306167" Name="UI"/>
-				<Bus Id="1901312945" Name="Abilities"/>
+				<Bus Id="2221585665" Name="World Ambience"/>
 				<Bus Id="2299321487" Name="Enemy"/>
 				<Bus Id="3174030640" Name="Auxiliary busses"/>
-				<Bus Id="3582546886" Name="Specialfire"/>
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 			<AuxBusses>
@@ -39,7 +39,7 @@
 							<PluginRef Id="2038996943"/>
 						</ShareSets>
 					</PluginRefs>
-				</AuxBus>
+ MaxAttenuation="100"				</AuxBus>
 				<AuxBus Id="3018232304" Name="Default_Verb">
 					<PluginRefs>
 						<ShareSets>
@@ -60,6 +60,7 @@
 				<GameParameter Id="3002758120" Name="SS_Air_Freefall"/>
 				<GameParameter Id="3074696722" Name="SS_Air_Size"/>
 				<GameParameter Id="3203397129" Name="SS_Air_TimeOfDay"/>
+				<GameParameter Id="3510318599" Name="HealthPercantage"/>
 				<GameParameter Id="3715662592" Name="SS_Air_Storm"/>
 				<GameParameter Id="3847924954" Name="SS_Air_Presence"/>
 				<GameParameter Id="4160247818" Name="SS_Air_Turbulence"/>
@@ -189,13 +190,17 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{BC0798B3-F795-B174-3F53-32728F647144}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{912982B0-7829-D040-07F9-B92F909B1C38}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
 				<File Id="30634264" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Ambience, Birdsong, Singing Birds, Early Morning SND11282 7.wav</ShortName>
 					<CachePath>SFX/Ambience, Birdsong, Singing Birds, Early Morning SND11282 7_10C4C929.wem</CachePath>
+				</File>
+				<File Id="46361113" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Primary_fire_3_BG.wav</ShortName>
+					<CachePath>SFX/Primary_fire_3_BG_10C4C929.wem</CachePath>
 				</File>
 				<File Id="59103797" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 3.wav</ShortName>
@@ -221,6 +226,10 @@
 					<ShortName>Obelisk_charge_pulse.wav</ShortName>
 					<CachePath>SFX/Obelisk_charge_pulse_9AF7B267.wem</CachePath>
 				</File>
+				<File Id="140163996" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Footstep_servo.wav</ShortName>
+					<CachePath>SFX/Footstep_servo_0154EC0D.wem</CachePath>
+				</File>
 				<File Id="166783542" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Splat 4-201936__beatmad__sizzling_frypan.wav</ShortName>
 					<CachePath>SFX/Splat 4-201936__beatmad__sizzling_frypan_10C4C929.wem</CachePath>
@@ -237,9 +246,9 @@
 					<ShortName>Obelisk_charge_static.wav</ShortName>
 					<CachePath>SFX/Obelisk_charge_static_2248D8A1.wem</CachePath>
 				</File>
-				<File Id="239838964" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Special_fire_tail.wav</ShortName>
-					<CachePath>SFX/Special_fire_tail_10C4C929.wem</CachePath>
+				<File Id="238877923" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Special_fire_2.wav</ShortName>
+					<CachePath>SFX/Special_fire_2_239CA491.wem</CachePath>
 				</File>
 				<File Id="242414373" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Ambience, Birdsong, Singing Birds, Early Morning SND11282 9.wav</ShortName>
@@ -268,6 +277,10 @@
 				<File Id="284965498" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Footsteps, Human, Gravel, Walk SND62071 2.wav</ShortName>
 					<CachePath>SFX/Footsteps, Human, Gravel, Walk SND62071 2_10C4C929.wem</CachePath>
+				</File>
+				<File Id="353592572" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>ARMOR Body Drop Chain Leather Short 02.wav</ShortName>
+					<CachePath>SFX/ARMOR Body Drop Chain Leather Short 02_F75B6B42.wem</CachePath>
 				</File>
 				<File Id="369054095" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>large gear 03 metal slow 8040.wav</ShortName>
@@ -357,10 +370,6 @@
 					<ShortName>Footsteps, Human, Gravel, Walk SND62071.wav</ShortName>
 					<CachePath>SFX/Footsteps, Human, Gravel, Walk SND62071_10C4C929.wem</CachePath>
 				</File>
-				<File Id="781659621" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Primary_Fire.wav</ShortName>
-					<CachePath>SFX/Primary_Fire_10C4C929.wem</CachePath>
-				</File>
 				<File Id="827923736" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close.wav</ShortName>
 					<CachePath>SFX/169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close_10C4C929.wem</CachePath>
@@ -377,10 +386,6 @@
 					<ShortName>442905__qubodup__pig-sound.wav</ShortName>
 					<CachePath>SFX/442905__qubodup__pig-sound_1B25C312.wem</CachePath>
 				</File>
-				<File Id="924415776" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Special_fire.wav</ShortName>
-					<CachePath>SFX/Special_fire_10C4C929.wem</CachePath>
-				</File>
 				<File Id="940789584" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>536746__egomassive__pig 4.wav</ShortName>
 					<CachePath>SFX/536746__egomassive__pig 4_C44EA791.wem</CachePath>
@@ -392,6 +397,10 @@
 				<File Id="965924032" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Gore, Bone, Head Crack Open, Rip Hands SND22368.wav</ShortName>
 					<CachePath>SFX/Gore, Bone, Head Crack Open, Rip Hands SND22368_10C4C929.wem</CachePath>
+				</File>
+				<File Id="1012745883" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Special_fire_tail_2.wav</ShortName>
+					<CachePath>SFX/Special_fire_tail_2_C413C595.wem</CachePath>
 				</File>
 				<File Id="1019175650" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Grenade_explode.wav</ShortName>
@@ -446,7 +455,7 @@
 						<MediaRef Id="533766557"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2211787386" Name="Play_Dash" DurationType="OneShot" DurationMin="0.4917886" DurationMax="0.4917886">
+				<Event Id="2211787386" Name="Play_Dash" DurationType="OneShot" DurationMin="0.59574914" DurationMax="0.7523331">
 					<MediaRefs>
 						<MediaRef Id="766868557"/>
 					</MediaRefs>
@@ -470,9 +479,13 @@
 						<MediaRef Id="753373456"/>
 						<MediaRef Id="769638221"/>
 						<MediaRef Id="827923736"/>
-						<MediaRef Id="889319335"/>
 						<MediaRef Id="1045493623"/>
 						<MediaRef Id="1064136553"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1408608858" Name="Play_Footstep_servo" DurationType="OneShot" DurationMin="0.47972447" DurationMax="0.58012855">
+					<MediaRefs>
+						<MediaRef Id="889319335"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="2405798708" Name="Play_Grenade" MaxAttenuation="55" DurationType="OneShot" DurationMin="1.3043311" DurationMax="1.3043311">
@@ -513,6 +526,13 @@
 						<MediaRef Id="965924032"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="3689126666" Name="Play_jump" DurationType="OneShot" DurationMin="1.1270713" DurationMax="1.1270713">
+					<MediaRefs>
+						<MediaRef Id="140163996"/>
+						<MediaRef Id="353592572"/>
+						<MediaRef Id="889319335"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="2323405115" Name="Play_landing" DurationType="OneShot" DurationMin="0.8058289" DurationMax="0.95995057">
 					<MediaRefs>
 						<MediaRef Id="59103797"/>
@@ -536,34 +556,23 @@
 						<MediaRef Id="1064136553"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2990404959" Name="Play_Obelisk_passive" MaxAttenuation="55" DurationType="Infinite">
-					<MediaRefs>
-						<MediaRef Id="137129379"/>
-						<MediaRef Id="200846055"/>
-					</MediaRefs>
-					<PluginRefs>
-						<ShareSets>
-							<PluginRef Id="602546716"/>
-						</ShareSets>
-					</PluginRefs>
-				</Event>
 				<Event Id="3128913152" Name="Play_Pickup_item" DurationType="OneShot" DurationMin="1.0993161" DurationMax="1.1250113">
 					<MediaRefs>
 						<MediaRef Id="371601698"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="3563057235" Name="Play_Primary_Fire" DurationType="OneShot" DurationMin="0.9433292" DurationMax="1.0594631">
+				<Event Id="3563057235" Name="Play_Primary_Fire" DurationType="OneShot" DurationMin="0.56249434" DurationMax="0.56249434">
 					<MediaRefs>
-						<MediaRef Id="781659621"/>
+						<MediaRef Id="46361113"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1149417670" Name="Play_Special_fire" DurationType="OneShot" DurationMin="7.8749886" DurationMax="7.8749886">
+				<Event Id="1149417670" Name="Play_Special_fire" DurationType="OneShot" DurationMin="3.4250903" DurationMax="3.4250903">
 					<MediaRefs>
-						<MediaRef Id="239838964"/>
-						<MediaRef Id="924415776"/>
+						<MediaRef Id="238877923"/>
+						<MediaRef Id="1012745883"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1455468846" Name="Play_Squid_hit" MaxAttenuation="100" DurationType="OneShot" DurationMin="0.15346552" DurationMax="0.38516876">
+				<Event Id="1455468846" Name="Play_Squid_hit" MaxAttenuation="45" DurationType="OneShot" DurationMin="0.15346552" DurationMax="0.38516876">
 					<MediaRefs>
 						<MediaRef Id="90731653"/>
 						<MediaRef Id="193485069"/>
@@ -571,13 +580,17 @@
 						<MediaRef Id="1064680169"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="3577284316" Name="Play_Start_Obelisk" DurationType="OneShot" DurationMin="3.3732271" DurationMax="3.3732271">
+				<Event Id="3577284316" Name="Play_Start_Obelisk" DurationType="Infinite">
 					<MediaRefs>
+						<MediaRef Id="137129379"/>
+						<MediaRef Id="200846055"/>
 						<MediaRef Id="705499710"/>
 					</MediaRefs>
-					<ActionPostEvent>
-						<ActionPostEventEntry Id="2990404959" Name="Play_Obelisk_passive"/>
-					</ActionPostEvent>
+					<PluginRefs>
+						<ShareSets>
+							<PluginRef Id="602546716"/>
+						</ShareSets>
+					</PluginRefs>
 				</Event>
 				<Event Id="3110216747" Name="Play_Wind_ambience" DurationType="Infinite">
 					<MediaRefs>
@@ -595,5 +608,5 @@
 			</GameParameters>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{FEF7AEA1-81AB-A608-8AF0-5CE716C3D93F}</FileHash>
+	<FileHash>{C6AE3CB2-E383-283E-502D-05A41A53D0C6}</FileHash>
 </SoundBanksInfo>
