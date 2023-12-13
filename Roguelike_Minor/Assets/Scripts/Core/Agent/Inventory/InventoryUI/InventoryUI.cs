@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using Game.Core.Data;
 
 namespace Game.Core {
@@ -13,8 +14,13 @@ namespace Game.Core {
         public BehaviourPool<SlotUI> slotPool;
         public RectTransform slotHolder;
 
+        [Header("SlotPiece Settings")]
+        public TMP_Text slotPieceLabel;
+        public int maxPieces = 4;
+
         [Header("Technical Settings")]
         [SerializeField] private int slotSize = 4;
+        [SerializeField] private ItemDataSO slotPiece;
 
         //hover item
         private ItemUI hoveredItem;
@@ -38,6 +44,7 @@ namespace Game.Core {
         private void GenerateVisuals()
         {
             ResetVisuals();
+            GenerateSlotPieceVisuals();
             GenerateSlotVisuals();
         }
 
@@ -46,6 +53,18 @@ namespace Game.Core {
             slotPool.Reset();
         }
 
+        //======== Slot Piece Visuals =======
+        private void GenerateSlotPieceVisuals()
+        {
+            //get slotPiece count
+            int pieces = 0;
+            Item slotPieces = inventory.GetItemOfType(slotPiece);
+            if (slotPieces != null) { pieces = slotPieces.stacks; }
+            //set label
+            slotPieceLabel.text = $"{pieces} / {maxPieces}";
+        }
+
+        //====== Slot Visuals ===========
         private void GenerateSlotVisuals()
         {
             //create slots
