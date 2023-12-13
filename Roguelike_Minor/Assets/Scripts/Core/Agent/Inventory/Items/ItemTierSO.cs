@@ -11,6 +11,7 @@ namespace Game.Core {
 
         [Header("Image Settings")]
         public Sprite pickupBackground;
+        public Sprite slotBackground;
 
         [Header("Item visuals Settings")]
         public Material itemMat;
