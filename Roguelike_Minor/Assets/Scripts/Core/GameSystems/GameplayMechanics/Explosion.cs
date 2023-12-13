@@ -32,9 +32,9 @@ namespace Game.Core.GameSystems
             return agentsInRange;
         }
 
-        public static void DealDamage(List<Agent> agents, Agent source, int damage)
+        public static void DealDamage(List<Agent> agents, Agent source, int damage, float procCoef = 1)
         {
-            HitEvent hitEvent = new HitEvent(source);
+            HitEvent hitEvent = new HitEvent(source, procCoef);
             hitEvent.baseDamage = damage;
 
             foreach (Agent agent in agents)

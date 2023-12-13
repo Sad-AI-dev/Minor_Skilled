@@ -17,17 +17,17 @@ namespace Game.Player
         {
             if (anim)
             {
-                anim.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
-                anim.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
-                anim.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
-                anim.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1);
+                anim.SetIKPositionWeight(AvatarIKGoal.LeftFoot, anim.GetFloat("LeftIKWeight"));
+                anim.SetIKRotationWeight(AvatarIKGoal.LeftFoot, anim.GetFloat("LeftIKWeight"));
+                anim.SetIKPositionWeight(AvatarIKGoal.RightFoot, anim.GetFloat("RightIKWeight"));
+                anim.SetIKRotationWeight(AvatarIKGoal.RightFoot, anim.GetFloat("RightIKWeight"));
 
                 RaycastHit leftHit;
                 if (Physics.Raycast(anim.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down, out leftHit, distanceToGround + 1, layerMask))
                 {
                     Vector3 footPos = leftHit.point;
                     Debug.Log(footPos);
-                    footPos.y += distanceToGround * anim.GetFloat("LeftFootDistance");
+                    footPos.y += distanceToGround;
                     anim.SetIKPosition(AvatarIKGoal.LeftFoot, footPos);
                     anim.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward, leftHit.normal));
                 }
@@ -37,7 +37,7 @@ namespace Game.Player
                 {
                     Vector3 footPos = rightHit.point;
                     Debug.Log(footPos);
-                    footPos.y += distanceToGround * anim.GetFloat("RightFootDistance");
+                    footPos.y += distanceToGround;
                     anim.SetIKPosition(AvatarIKGoal.RightFoot, footPos);
                     anim.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(transform.forward, rightHit.normal));
                 }

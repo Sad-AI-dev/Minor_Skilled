@@ -16,8 +16,10 @@ MonoBehaviour:
   procCoef: 1
   damageMultiplier: 1
   bullet: {fileID: 4999970908319164100, guid: 404ad2e6cf8c3e14a826677e3f019515, type: 3}
-  marker: {fileID: 659331264967026304, guid: ce2513020b7da7d4d86e5665e7aaf76f, type: 3}
   bulletSpeed: 100
+  layermask:
+    serializedVersion: 2
+    m_Bits: 119
   spreadMultiplier: 0.5
   spreadBuildupSpeed: 0.25
   spreadResetSpeed: 1
@@ -45,6 +47,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  layermask:
-    serializedVersion: 2
-    m_Bits: 119
+  amplitude: 1
+  frequency: 1
+  duration: 1

@@ -24,16 +24,26 @@ namespace Game.Player.Soldier
             public float lineOpacity;
         }
 
+        [Header("Bullet")]
         public GameObject bullet;
-        public GameObject marker;
         public float bulletSpeed;
+
+        [Header("Aiming")]
+        public LayerMask layermask;
+
+        [Header("Recoil")]
         public float spreadMultiplier;
         public float spreadBuildupSpeed;
         public float spreadResetSpeed;
         public AnimationCurve spreadBuildup;
-        public LayerMask layermask;
 
-        PlayerController controller;
+        [Header("ScreenShake")]
+        public float amplitude;
+        public float frequency;
+        public float duration;
+
+        private PlayerController controller;
+        private Camera cam;
 
         public override void InitializeVars(Ability source)
         {
@@ -51,18 +61,18 @@ namespace Game.Player.Soldier
             PrimaryVars vars = source.vars as PrimaryVars;
             vars.bulletPool.behaviourTemplate = bullet;
             controller = source.agent.GetComponent<PlayerController>();
+            cam = controller.cam;
         }
 
         public override void Use(Ability source)
         {
-            Camera cam = Camera.main;
             UnityEngine.Vector3 target = UnityEngine.Vector3.zero;
             UnityEngine.Vector3 bulletDir;
             
 
             PrimaryVars vars = source.vars as PrimaryVars;
 
-            ScreenShakeManager.instance.ShakeCamera(.8f, 1, 1, source.agent.transform.position);
+            ScreenShakeManager.instance.ShakeCamera(amplitude, frequency, duration, source.agent.transform.position);
 
             controller.StartSlowCoroutine(source.coolDown * 1.1f);
 

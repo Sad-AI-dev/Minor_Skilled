@@ -62,7 +62,7 @@ namespace Game
             yield return new WaitForSeconds(cooldown);
             RadiatingItemVars vars = item.vars as RadiatingItemVars;
             List<Agent> agents = Explosion.FindAgentsInRange(item.agent.transform.position, vars.radius, item.agent);
-            Explosion.DealDamage(agents, item.agent, damage);
+            Explosion.DealDamage(agents, item.agent, damage, 0);
             vars.damageCoroutine = item.agent.StartCoroutine(DealDamageCo(item));
         }
 
