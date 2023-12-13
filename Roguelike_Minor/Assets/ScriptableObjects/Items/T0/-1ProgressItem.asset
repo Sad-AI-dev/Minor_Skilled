@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80bf1ea8abe01de41bde7f944212cefe, type: 3}
-  m_Name: 12HeartBeet
+  m_Script: {fileID: 11500000, guid: ea863f165f6f5da4e83468e2b052b3e6, type: 3}
+  m_Name: -1ProgressItem
   m_EditorClassIdentifier: 
-  size: {fileID: 11400000, guid: aaa7839693155fe46a5ce1c6da18f970, type: 2}
-  tier: {fileID: 11400000, guid: 54323556310c92549b1f4469f1b5b53b, type: 2}
+  size: {fileID: 11400000, guid: 99482256edd2a8d4f947db5d68449ac3, type: 2}
+  tier: {fileID: 11400000, guid: 023d18f56c778924c9dbd6f2bcb06aa2, type: 2}
   canProcSelf: 0
   pickupPrefab: {fileID: 2858984015360725450, guid: 798e7eb17231be4429ae57372b83f8fc, type: 3}
-  UISprite: {fileID: 21300000, guid: fe61bef3143abb24b8c0165fd4a6ca08, type: 3}
-  title: HeartBeet
-  shortDescription: increases max health
+  UISprite: {fileID: 0}
+  title: Progress Item
+  shortDescription: well, this is akward
   highlightColor: {r: 1, g: 0.9764706, b: 0.8039216, a: 1}
   stackColor: {r: 0.8196079, g: 0.8196079, b: 0.8196079, a: 1}
-  baseHealth: 30
-  bonusHealth: 30
+  maxHealth: 10
+  damage: 1

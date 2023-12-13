@@ -10,14 +10,13 @@ namespace Game.Core {
 
         private void Start()
         {
-            StartCoroutine(InitializeCo());
+            InitializeSlots();
         }
 
-        private IEnumerator InitializeCo()
+        private void InitializeSlots()
         {
-            yield return null; //wait 1 frame
             SlotInventory inventory = GetComponent<SlotInventory>();
-
+            //fill inventory
             foreach (var kvp in slotsToInitialize)
             {
                 for (int i = 0; i < kvp.Value; i++)
