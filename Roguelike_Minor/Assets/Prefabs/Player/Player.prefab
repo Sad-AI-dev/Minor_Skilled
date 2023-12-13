@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67414044404434119}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5489224, y: -0, z: -0, w: 0.8358733}
+  m_LocalRotation: {x: -0.5547551, y: -0, z: -0, w: 0.8320137}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -412,7 +412,6 @@ MonoBehaviour:
   camController: {fileID: 6425007794457280646}
   cam: {fileID: 0}
   jumpBufferFrames: 10
-  audioPlayer: {fileID: 0}
   shooting: 0
   stopShooting:
     m_PersistentCalls:
@@ -947,9 +946,7 @@ MonoBehaviour:
   slotsToInitialize:
     dictionary:
     - key: {fileID: 11400000, guid: aaa7839693155fe46a5ce1c6da18f970, type: 2}
-      value: 4
-    - key: {fileID: 11400000, guid: dfaeea43fb7497947801a52fae9ad6eb, type: 2}
-      value: 1
+      value: 8
 --- !u!114 &2595134782193159625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1107,7 +1104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3014019172444536401}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5489224, y: -0, z: -0, w: 0.8358733}
+  m_LocalRotation: {x: -0.5547551, y: -0, z: -0, w: 0.8320137}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1854,7 +1851,7 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 8922c2d517fe28a449a6bd3695e81bf9, type: 2}
-  jumpSFX:
+  servoSFX:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 665b4d9523c167f4d82383e65f4faeec, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 892ff91640b11804b8f0a0daf9b55175, type: 2}

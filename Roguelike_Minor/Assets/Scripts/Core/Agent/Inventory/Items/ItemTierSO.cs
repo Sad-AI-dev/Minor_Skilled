@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Core {
-    [CreateAssetMenu(fileName = "Tier", menuName = "ScriptableObjects/Items/Item Tier", order = 40)]
+    [CreateAssetMenu(fileName = "Tier", menuName = "ScriptableObjects/Items/Item Tier", order = -500)]
     public class ItemTierSO : ScriptableObject
     {
         public string title;
@@ -11,6 +11,7 @@ namespace Game.Core {
 
         [Header("Image Settings")]
         public Sprite pickupBackground;
+        public Sprite slotBackground;
 
         [Header("Item visuals Settings")]
         public Material itemMat;
