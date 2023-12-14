@@ -12,6 +12,14 @@ namespace Game {
             public Agent source;
             public Coroutine currentRoutine;
             public float dmg;
+
+            public override void Copy(StatusEffectHandler.EffectVars otherVars)
+            {
+                DOTEffectVars vars = otherVars as DOTEffectVars;
+                source = vars.source;
+                dmg = vars.dmg;
+                //do not copy current routine, we want to start a new routine as a result of this
+            }
         }
 
         public float tickRate = 1f; //expressed in ticks / second

@@ -22,6 +22,7 @@ namespace Game.Core {
         public float baseDamage;
         public float damageMultiplier;
         public float damageReduction;
+        public bool blocked;
         //crit vars
         public bool isCrit;
 

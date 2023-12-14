@@ -11,6 +11,13 @@ namespace Game {
         {
             public HitEvent sourceEvent;
             public float damageMult;
+
+            public override void Copy(StatusEffectHandler.EffectVars otherVars)
+            {
+                DelayDamageEffectVars vars = otherVars as DelayDamageEffectVars;
+                sourceEvent = vars.sourceEvent;
+                damageMult = vars.damageMult;
+            }
         }
 
         public float damageDelay = 0.5f;
