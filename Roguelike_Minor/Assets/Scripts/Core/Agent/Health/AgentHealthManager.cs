@@ -62,6 +62,7 @@ namespace Game.Core {
             hitEvent.target = this;
             if (hitEvent.hasAgentSource) { hitEvent.source.health.ProcessDealDamageEvent(ref hitEvent); }
             ProcessTakeDamageEvent(ref hitEvent);
+            if (hitEvent.blocked) { return; } //hit was blocked, ignore
             //pause regen
             PauseRegen();
             //take damage
