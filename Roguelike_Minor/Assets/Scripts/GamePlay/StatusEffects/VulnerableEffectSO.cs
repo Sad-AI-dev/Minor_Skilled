@@ -11,6 +11,12 @@ namespace Game {
         public class VulnerableVars : StatusEffectHandler.EffectVars
         {
             public float damageMult;
+
+            public override void Copy(StatusEffectHandler.EffectVars otherVars)
+            {
+                VulnerableVars vars = otherVars as VulnerableVars;
+                damageMult = vars.damageMult;
+            }
         }
 
         public int priority;
