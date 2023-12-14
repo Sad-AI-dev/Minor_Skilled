@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2aadf8c768aab4aa12185ce3283e04, type: 3}
+  m_Name: SpawnPool
+  m_EditorClassIdentifier: 
+  categories:
+  - name: small Squid
+    contents:
+      options:
+      - option:
+          prefab: {fileID: 6980009012232646921, guid: cf6e19b5c8e3d2c47be9689de5c78a65, type: 3}
+          isFlying: 1
+        chance: 1
+  - name: small Squid Variants
+    contents:
+      options:
+      - option:
+          prefab: {fileID: 7177948606470110204, guid: a971a56c85a350e40bce6f146e2ded0d, type: 3}
+          isFlying: 1
+        chance: 1
+      - option:
+          prefab: {fileID: 7790163726390556934, guid: 3efd3ce9ba2dec049b101770ff62e203, type: 3}
+          isFlying: 1
+        chance: 1
+  - name: Melee Grunt
+    contents:
+      options:
+      - option:
+          prefab: {fileID: 5666398297103683690, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}
+          isFlying: 0
+        chance: 1
+  - name: Melee Grunt Variants
+    contents:
+      options:
+      - option:
+          prefab: {fileID: 3379680737519867047, guid: 18ec42171a0efe34a94c3f3ee6c5983c, type: 3}
+          isFlying: 0
+        chance: 1
+      - option:
+          prefab: {fileID: 9210480330387740794, guid: f88f7df78a5446c4faacdffcfa130d79, type: 3}
+          isFlying: 0
+        chance: 1
+  - name: Big Squid
+    contents:
+      options:
+      - option:
+          prefab: {fileID: 6302184283900363943, guid: 2ea46eaac858d954dbe1122aa3de8e63, type: 3}
+          isFlying: 1
+        chance: 1
+  - name: Big Squid Variants
+    contents:
+      options:
+      - option:
+          prefab: {fileID: 8706325097718418101, guid: 82358f8795feec842b462273d070f706, type: 3}
+          isFlying: 1
+        chance: 1
+      - option:
+          prefab: {fileID: 828712640256720236, guid: c78cdb23a450e8f4ab62786287420081, type: 3}
+          isFlying: 1
+        chance: 1
+  - name: Boss Big Squid
+    contents:
+      options:
+      - option:
+          prefab: {fileID: 3194772888341048763, guid: 5f303abe0f102044d98a4d55b00d0a5c, type: 3}
+          isFlying: 1
+        chance: 1

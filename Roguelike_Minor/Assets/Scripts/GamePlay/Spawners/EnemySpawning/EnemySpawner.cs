@@ -7,7 +7,8 @@ using Game.Core.GameSystems;
 namespace Game {
     public class EnemySpawner : MonoBehaviour
     {
-        private struct EnemySpawnData
+        [System.Serializable]
+        public struct EnemySpawnData
         {
             public EnemySpawnData(GameObject prefab, bool isFlying = false)
             {
@@ -32,6 +33,8 @@ namespace Game {
             }
         }
         public static EnemySpawner instance;
+
+        public EnemySpawnPoolSO spawnPool;
 
         [Header("Spawn Frequency Settings")]
         public float spawnFrequency = 1f;
@@ -115,14 +118,10 @@ namespace Game {
         }
 
         //========= Spawn Enemy Wrapper ===========
-        public void SpawnEnemy(GameObject prefab)
+        public void SpawnEnemy(int category)
         {
-            spawnQueue.Enqueue(new EnemySpawnData(prefab));
-        }
-
-        public void SpawnFlyingEnemy(GameObject prefab)
-        {
-            spawnQueue.Enqueue(new EnemySpawnData(prefab, true));
+            EnemySpawnData data = spawnPool.categories[category].contents.GetRandomEntry();
+            spawnQueue.Enqueue(data);
         }
 
         //=============================== Enemy Spawn Queue Handling =======================================
