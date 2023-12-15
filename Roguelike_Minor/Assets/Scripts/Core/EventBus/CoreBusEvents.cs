@@ -33,6 +33,11 @@ namespace Game.Core {
         public int price;
     }
 
+    public class PickupItemEvent : Event
+    {
+        public ItemDataSO item;
+    }
+
     //========== Game State =============
     public class GameEndEvent : Event { }
 
