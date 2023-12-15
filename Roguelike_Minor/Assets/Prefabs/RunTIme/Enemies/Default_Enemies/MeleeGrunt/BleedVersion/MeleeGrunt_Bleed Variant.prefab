@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 7127740555703992271}
   - component: {fileID: 948109065053137887}
   - component: {fileID: 7646393885642369009}
-  - component: {fileID: 5289594394745696242}
   m_Layer: 6
   m_Name: Spike
   m_TagString: Untagged
@@ -167,27 +166,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5289594394745696242
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5113091985649493085}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3562668590711015440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -277,7 +255,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3931384935271875839, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7127740555703992271}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5666398297103683690, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3368469585096099240}
   m_SourcePrefab: {fileID: 100100000, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}
 --- !u!4 &575952717666995439 stripped
 Transform:
@@ -289,3 +270,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6663653489414312813, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}
   m_PrefabInstance: {fileID: 3562668590711015440}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9210480330387740794 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5666398297103683690, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}
+  m_PrefabInstance: {fileID: 3562668590711015440}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-3368469585096099240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9210480330387740794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c9521a875253944b9fb54ad1eb6fe86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsToGive:
+    dictionary:
+    - key: {fileID: 11400000, guid: 2683bfeea3bd71d4d9ff288ab848e97f, type: 2}
+      value: 7
