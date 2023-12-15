@@ -63,8 +63,7 @@ namespace Game {
             StatusEffectHandler target = hitEvent.target.agent.effectHandler;
             DoomVars effectVars = target.AddEffect(doomEffect) as DoomVars;
             //setup effect vars
-            effectVars.sourceEvent = new HitEvent(hitEvent, sourceItem);
-            effectVars.sourceEvent.procCoef = procCoef;
+            effectVars.sourceEvent = new HitEvent(hitEvent, sourceItem, procCoef);
             effectVars.damageMult = (sourceItem.vars as Item5Vars).damageMult;
         }
 

@@ -23,10 +23,6 @@ namespace Game.Player {
         [SerializeField] private int jumpBufferFrames;
         private Coroutine jumpBufferCoroutine;
 
-        [Header("Audio")]
-        [SerializeField] private AudioPlayer audioPlayer;
-
-        private bool canPlayFootstep = true;
         private bool gamePaused = false;
         [HideInInspector] public bool shooting;
         
@@ -67,11 +63,6 @@ namespace Game.Player {
         {
             Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             playerController.SetMoveDirection(moveInput);
-
-            if (canPlayFootstep && moveInput.magnitude >= 0.1f)
-            {
-                StartCoroutine(FootstepCo());
-            }
 
             if (!shooting)
             {
@@ -191,14 +182,6 @@ namespace Game.Player {
                 }
                 yield return null;
             }
-        }
-
-        private IEnumerator FootstepCo()
-        {
-            canPlayFootstep = false;
-            yield return new WaitForSeconds(0.5f);
-            audioPlayer.Play();
-            canPlayFootstep = true;
         }
 
         private void SetTimeScale()

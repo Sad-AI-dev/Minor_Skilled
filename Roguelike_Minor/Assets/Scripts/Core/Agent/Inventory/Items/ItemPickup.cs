@@ -31,7 +31,10 @@ namespace Game.Core {
             if (interactor.agent)
             {
                 if (interactor.agent.inventory.TryAssignItem(item))
-                { //succesfully picked up item
+                {
+                    //notify item was picked up
+                    EventBus<PickupItemEvent>.Invoke(new PickupItemEvent() { item = item });
+                    //succesfully picked up item
                     Destroy(gameObject);
                 }
             }

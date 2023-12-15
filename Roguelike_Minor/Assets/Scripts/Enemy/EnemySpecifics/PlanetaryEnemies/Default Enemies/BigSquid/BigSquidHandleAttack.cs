@@ -32,7 +32,7 @@ namespace Game.Enemy {
                 HandleRotation();
 
                 lineRenderer.SetPosition(0, agent.abilities.primary.originPoint.position);
-                lineRenderer.SetPosition(1, agent.abilities.primary.originPoint.position + (agent.abilities.primary.originPoint.forward * 30));
+                lineRenderer.SetPosition(1, agent.abilities.primary.originPoint.position + (agent.abilities.primary.originPoint.forward * 100));
 
                 vars = agent.abilities.primary.vars as BigSquidPrimaryVars;
                 vars.target = this.target;
@@ -50,7 +50,7 @@ namespace Game.Enemy {
 
         private void HandleRotation()
         {
-            Vector3 dir = ((target.position + (Vector3.up/2)) - transform.position).normalized;
+            Vector3 dir = ((target.position + -Vector3.up/2) - transform.position).normalized;
 
             Quaternion targetRotation = Quaternion.LookRotation(dir);
             targetRotation = Quaternion.RotateTowards(

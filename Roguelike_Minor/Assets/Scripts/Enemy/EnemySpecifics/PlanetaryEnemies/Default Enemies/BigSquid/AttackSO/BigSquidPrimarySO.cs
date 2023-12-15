@@ -59,7 +59,7 @@ namespace Game.Enemy {
             yield return new WaitForSeconds(0.1f);
 
             vars.lineRenderer.enabled = false;
-            vars.root.SetData("Targeting", false);
+            if(vars.root != null) vars.root.SetData("Targeting", false);
         }
 
         void attack(Ability source, Vector3 target)

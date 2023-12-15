@@ -12,11 +12,14 @@ namespace Game.Core {
         public Image bgImage;
         public CanvasGroup group;
 
+        [Header("Settings")]
+        public Sprite defaultBackground;
+
         //vars
         [HideInInspector] public InventoryUI inventoryUI;
         public Item item { get; private set; }
 
-        public void GenerateVisuals(Item item)
+        public void GenerateVisuals(Item item, bool showBackground = true)
         {
             if (item != null) 
             { 
@@ -25,12 +28,13 @@ namespace Game.Core {
                 img.sprite = item.data.UISprite;
                 group.blocksRaycasts = true;
             }
-            ShowBGImage();
+            if (showBackground) { ShowBGImage(item); }
         }
 
-        private void ShowBGImage()
+        private void ShowBGImage(Item item)
         {
             bgImage.color = Color.white;
+            bgImage.sprite = item != null ? item.data.tier.slotBackground : defaultBackground;
         }
 
         public void ResetVisuals()
