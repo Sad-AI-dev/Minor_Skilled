@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67414044404434119}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5547551, y: -0, z: -0, w: 0.8320137}
+  m_LocalRotation: {x: -0.5547601, y: -0, z: -0, w: 0.8320103}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1075,7 +1075,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec91ee29e89f1c4c83f50d8f5c95cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameters:
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a42f004306b8f1b40bc0296dc8641ff8, type: 2}
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 27e3c27cadb65eb4d9ae6d6450d9878c, type: 2}
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1af88bad045f784408b0aaaa56126eb4, type: 2}
   soundMaterialSet: {fileID: 11400000, guid: d71c15135eb978446bbeda282f825f2c, type: 2}
+  soundObjectSet: {fileID: 11400000, guid: 98938dcc8e9436c40b869d76fbce8f33, type: 2}
   floorlayer:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1104,7 +1115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3014019172444536401}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5547551, y: -0, z: -0, w: 0.8320137}
+  m_LocalRotation: {x: -0.5547601, y: -0, z: -0, w: 0.8320103}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1441,7 +1452,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7114456423401257476}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5489224, y: -0, z: -0, w: 0.8358733}
+  m_LocalRotation: {x: -0.5547601, y: -0, z: -0, w: 0.8320103}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1847,6 +1858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02e051455224f0bba5970b7c1c977ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  footstepManager: {fileID: 3669836135115761641}
   footstepSFX:
     idInternal: 0
     valueGuidInternal: 

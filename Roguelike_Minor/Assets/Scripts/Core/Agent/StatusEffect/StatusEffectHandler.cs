@@ -5,7 +5,10 @@ using UnityEngine;
 namespace Game.Core {
     public class StatusEffectHandler : MonoBehaviour
     {
-        public class EffectVars { }
+        public class EffectVars 
+        {
+            public virtual void Copy(EffectVars otherVars) { }
+        }
 
         [HideInInspector] public Agent agent;
         public Dictionary<StatusEffectSO, List<EffectVars>> statusEffects = new();

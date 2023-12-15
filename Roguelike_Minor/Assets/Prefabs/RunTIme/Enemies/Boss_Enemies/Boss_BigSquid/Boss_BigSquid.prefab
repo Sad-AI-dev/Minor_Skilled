@@ -506,9 +506,9 @@ MonoBehaviour:
     coolDownTimer: 0
   secondary:
     agent: {fileID: 0}
-    abilityData: {fileID: 0}
+    abilityData: {fileID: 11400000, guid: 6e8885a94fc327945829abde529b1a63, type: 2}
     uses: 0
-    maxUses: 1
+    maxUses: 1000
     coolDown: 0
     coolDownMode: 0
     isCoolingDown: 0
@@ -583,6 +583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   health: 0
+  regenDelay: 1
   healthBar: {fileID: 1850828633539918107}
   onMaxHealthChanged:
     m_PersistentCalls:
@@ -624,6 +625,7 @@ MonoBehaviour:
   stats:
     maxHealth: 10
     maxHealthMult: 1
+    regeneration: 0
     baseDamage: 1
     critChance: 1
     critMult: 2
