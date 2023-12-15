@@ -17,13 +17,6 @@ namespace Game {
         [Header("Raycast Settings")]
         [SerializeField] private LayerMask floorlayer;
 
-        private CharacterController controller;
-
-        private void Start()
-        {
-            controller = GetComponent<CharacterController>();
-        }
-
         public void CheckGround()
         {
             if (TryFindGround(out RaycastHit hit)) {
@@ -99,7 +92,7 @@ namespace Game {
         //================ GameObject Sounds ==================
         private void SetFootstepSFXObject(MeshRenderer meshRenderer)
         {
-            RTPCValuePair[] parameters = soundObjectSet.GetRTPCValuePairFromMaterial(meshRenderer.material);
+            RTPCValuePair[] parameters = soundObjectSet.GetRTPCValuePairFromMaterial(meshRenderer.sharedMaterial);
             //set volumes based on parameters
             Array.ForEach(parameters, (RTPCValuePair valuePair) => valuePair.parameter.SetGlobalValue(valuePair.value));
         }
