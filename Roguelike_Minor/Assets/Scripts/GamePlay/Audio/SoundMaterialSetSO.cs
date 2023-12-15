@@ -12,7 +12,7 @@ namespace Game {
 
         [SerializeField] private UnityDictionary<List<TerrainLayer>, RTPC> terrainLookup;
 
-        public RTPC GetSwitchByTerrain(TerrainLayer layer)
+        public RTPC GetParamByTerrain(TerrainLayer layer)
         {
             foreach (var kvp in terrainLookup)
             {

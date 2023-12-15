@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 6030932706955882987}
   - component: {fileID: 7639213463917537888}
   - component: {fileID: 3769368453295964956}
+  - component: {fileID: 7228733026948687870}
   m_Layer: 0
   m_Name: ItemTemplate
   m_TagString: Untagged
@@ -380,6 +381,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7228733026948687870}
+        m_TargetAssemblyTypeName: Game.Core.GameSystems.AudioPlayer, Game.Core.GameSystems
+        m_MethodName: Play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3769368453295964956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +409,22 @@ MonoBehaviour:
   spriteHolder: {fileID: 1552186548570891735}
   matHolder: {fileID: 8042720974019510885}
   pointLight: {fileID: 6521289331697593055}
+--- !u!114 &7228733026948687870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2858984015360725450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86866b813429b9e4aa0d9e72eb5c091a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvents:
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 04d5a23525f0bcd4691ca267b06bae66, type: 2}
 --- !u!1 &3532547105226070079
 GameObject:
   m_ObjectHideFlags: 0
