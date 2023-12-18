@@ -45,11 +45,11 @@ namespace Game {
             if (!itemQueue.Contains(eventData.item))
             { //only queue new unique items (prevents 10 duplicates playing in sequence)
                 itemQueue.Enqueue(eventData.item);
-            }
-            //added first item in queue check
-            if (itemQueue.Count == 1)
-            {
-                StartCoroutine(ShowNotifierCo());
+                //added first item in queue check
+                if (itemQueue.Count == 1)
+                {
+                    StartCoroutine(ShowNotifierCo());
+                }
             }
             //play sound
             audioPlayer.Play();
