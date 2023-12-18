@@ -16,14 +16,18 @@ namespace Game {
         //========= Manage Stacks ===========
         public override void AddStack(Item item)
         {
-            item.agent.stats.maxHealth += maxHealth;
             item.agent.stats.baseDamage += damage;
+            //increase max health
+            float oldMaxHealth = item.agent.stats.GetMaxHealth();
+            item.agent.stats.maxHealth += maxHealth;
+            float toHeal = item.agent.stats.GetMaxHealth() - oldMaxHealth;
+            item.agent.health.Heal(new HealEvent(toHeal));
         }
 
         public override void RemoveStack(Item item)
         {
-            item.agent.stats.maxHealth -= maxHealth;
             item.agent.stats.baseDamage -= damage;
+            item.agent.stats.maxHealth -= maxHealth;
         }
 
         //========== Description ===========

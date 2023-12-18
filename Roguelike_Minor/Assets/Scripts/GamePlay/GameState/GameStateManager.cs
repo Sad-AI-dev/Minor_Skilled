@@ -79,6 +79,7 @@ namespace Game {
         //================== Handle Planet Advancement ================
         public void AdvanceToNextPlanet()
         {
+            //advance stage
             CurrentStage++;
             sceneLoader.LoadScene(GetNextStageBuildIndex());
         }

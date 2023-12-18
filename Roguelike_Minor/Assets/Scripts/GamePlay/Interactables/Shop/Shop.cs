@@ -14,6 +14,10 @@ namespace Game {
         [Header("Balance Settings")]
         [SerializeField] private int defaultReloads = 1;
 
+        [Header("SlotPiece Settings")]
+        [SerializeField] private float slotPieceChance = 10f;
+        [SerializeField] private ItemDataSO slotPiece;
+
         [Header("Tech Settings")]
         [SerializeField] private LootTableSO lootTable;
         [SerializeField] private BehaviourPool<ShopPurchasable> pool;
@@ -55,10 +59,19 @@ namespace Game {
         {
             ShopPurchasable purchasable = pool.GetBehaviour();
             //initialize purchasable
-            purchasable.Setup(lootTable.GetLoot(itemLuck));
+            purchasable.Setup(GetItem());
             purchasable.transform.position = spawnPoints[index].position;
             //store ref
             purchasables[index] = purchasable;
+        }
+
+        private ItemDataSO GetItem()
+        {
+            if (Random.Range(0f, 100f) < slotPieceChance)
+            {
+                return slotPiece;
+            }
+            else { return lootTable.GetLoot(itemLuck); }
         }
 
         //================ Refresh ===========
@@ -78,7 +91,9 @@ namespace Game {
             {
                 for (int i = 0; i < purchasables.Length; i++)
                 {
-                    yield return new WaitForSeconds(spawnDelay);
+                    if (purchasables[i].gameObject.activeSelf) {
+                        yield return new WaitForSeconds(spawnDelay);
+                    }
                     //reset puchasable
                     purchasables[i].gameObject.SetActive(false);
                 }

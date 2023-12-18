@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Core;
 
 namespace Game {
-    [CreateAssetMenu(fileName = "29Timmy", menuName = "ScriptableObjects/Items/T2/29: Timmy", order = 229)]
+    [CreateAssetMenu(fileName = "29Timmy", menuName = "ScriptableObjects/Items/T3/29: Timmy", order = 329)]
     public class Item29SO : ItemDataSO, IDealDamageProcessor
     {
         private class Item29Vars : Item.ItemVars
