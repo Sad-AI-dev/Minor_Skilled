@@ -37,9 +37,9 @@ namespace Game.Enemy {
         protected override void UpdateMoveDir()
         {
             //AgnleWithBezier();
-
             //CalculateVelocity();
-            velocity = transform.forward * (Time.deltaTime * bulletSpeed);
+
+            velocity = transform.forward * (Time.deltaTime * (bulletSpeed * 100));
         }
         private void AgnleWithBezier()
         {

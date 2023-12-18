@@ -23,10 +23,5 @@ namespace Game.Core {
         {
             vars.RemoveAt(0);
         }
-
-        //============== Process Events ================
-        public virtual void ProcessDealDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
-        public virtual void ProcessTakeDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
-        public virtual void ProcessHealEvent(ref HealEvent healEvent, List<StatusEffectHandler.EffectVars> vars) { }
     }
 }

@@ -90,7 +90,7 @@ namespace Game {
             return $"using your Utility ability creates a " +
                 $"<color=#{HighlightColor}>{baseRange}m</color> " +
                 $"<color=#{StackColor}>(+{bonusRange}m per stack)</color> " +
-                $"explosion, dealing" +
+                $"shockwave, dealing" +
                 $" <color=#{HighlightColor}>{baseDamage * 100}%</color> " +
                 $"<color=#{StackColor}>(+{bonusDamage * 100}% per stack)</color> damage";
         }

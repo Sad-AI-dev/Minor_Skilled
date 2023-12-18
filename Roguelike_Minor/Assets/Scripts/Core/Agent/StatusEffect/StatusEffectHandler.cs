@@ -5,7 +5,10 @@ using UnityEngine;
 namespace Game.Core {
     public class StatusEffectHandler : MonoBehaviour
     {
-        public class EffectVars { }
+        public class EffectVars 
+        {
+            public virtual void Copy(EffectVars otherVars) { }
+        }
 
         [HideInInspector] public Agent agent;
         public Dictionary<StatusEffectSO, List<EffectVars>> statusEffects = new();
@@ -38,6 +41,7 @@ namespace Game.Core {
         {
             statusEffects.Add(effect, new List<EffectVars>());
             effect.AddEffect(this);
+            if (effect is IEventProcessor) { agent.health.AddProcessor(effect as IEventProcessor); }
             if (effectBar) { effectBar.HandleAddEffect(effect); }
         }
         private IEnumerator AddStacksCo(StatusEffectSO effect, int stacks)
@@ -69,6 +73,7 @@ namespace Game.Core {
         {
             effect.RemoveEffect(this);
             statusEffects.Remove(effect);
+            if (effect is IEventProcessor) { agent.health.RemoveProcessor(effect as IEventProcessor); }
             if (effectBar) { effectBar.HandleRemoveEffect(effect); }
         }
         private void RemoveStacks(StatusEffectSO effect, int stacksToRemove)
@@ -92,30 +97,22 @@ namespace Game.Core {
         }
 
         //================ Process Heal / Hurt Event ==================
-        public void ProcessHitEvent(ref HitEvent hitEvent)
+        //Process Take Damage
+        public void ProcessTakeDamage(ref HitEvent hitEvent, ITakeDamageProcessor processor)
         {
-            if (hitEvent.hasAgentSource && hitEvent.source.Equals(agent)) //is source of hitEvent
-            {
-                foreach (var kvp in statusEffects)
-                {
-                    kvp.Key.ProcessDealDamage(ref hitEvent, kvp.Value);
-                }
-            }
-            else
-            {
-                foreach (var kvp in statusEffects)
-                {
-                    kvp.Key.ProcessTakeDamage(ref hitEvent, kvp.Value);
-                }
-            }
+            processor.ProcessTakeDamage(ref hitEvent, statusEffects[processor as StatusEffectSO]);
         }
 
-        public void ProcessHealEvent(ref HealEvent healEvent)
+        //Process Deal Damage
+        public void ProcessDealDamage(ref HitEvent hitEvent, IDealDamageProcessor processor)
         {
-            foreach (var kvp in statusEffects)
-            {
-                kvp.Key.ProcessHealEvent(ref healEvent, kvp.Value);
-            }
+            processor.ProcessDealDamage(ref hitEvent, statusEffects[processor as StatusEffectSO]);
+        }
+
+        //Process Heal
+        public void ProcessHeal(ref HealEvent healEvent, IHealProcessor processor)
+        {
+            processor.ProcessHeal(ref healEvent, statusEffects[processor as StatusEffectSO]);
         }
     }
 }

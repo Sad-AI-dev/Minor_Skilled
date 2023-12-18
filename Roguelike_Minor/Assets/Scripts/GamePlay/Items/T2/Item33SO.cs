@@ -9,12 +9,15 @@ using static Game.Item15SO;
 namespace Game
 {
     [CreateAssetMenu(fileName = "33Killer_Tail", menuName = "ScriptableObjects/Items/T2/33: Killer Tail", order = 233)]
-    public class Item33SO : ItemDataSO
+    public class Item33SO : ItemDataSO, IDealDamageProcessor
     {
         public class KillerItemitemVars : Item.ItemVars
         {
             public float damageMultiplier;
         }
+
+        [Header("Priority")]
+        public int priority;
 
         [Header("Proc Chance Settings")]
         public float procChance = 50f;
@@ -45,11 +48,12 @@ namespace Game
             else { vars.damageMultiplier -= bonusDamageMult; }
         }
 
-        public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
+        public void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
         {
             if (!hitEvent.hasAgentSource) return;
             AgentRandom.TryProc(procChance, hitEvent, FireMissile, hitEvent);
         }
+        public void ProcessDealDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
 
         private void FireMissile(HitEvent hitEvent)
         {
@@ -62,11 +66,18 @@ namespace Game
             missileScript.InitializeVars(newHitEvent);
         }
 
+        //=== Priority ===
+        public int GetPriority() { return priority; }
+
+        //=== Description ===
         public override string GenerateLongDescription()
         {
-            return $"On hit, chance to fire a seeking missile dealing " +
-                   $"<color=#{HighlightColor}>{baseDamageMult * 100}%</color> <color=#{StackColor}>(+{bonusDamageMult * 100}% per stack)</color> " +
-                   $"times the damage of the original attack.";
+            return $"On hit, gain a " +
+                $"<color=#{HighlightColor}>{procChance}%</color> " +
+                $"chance to fire a seeking missile dealing " +
+                $"<color=#{HighlightColor}>{baseDamageMult * 100}%</color> " +
+                $"<color=#{StackColor}>(+{bonusDamageMult * 100}% per stack)</color> " +
+                $"total damage";
                    
         }
     }

@@ -6,13 +6,17 @@ using UnityEngine;
 namespace Game
 {
     [CreateAssetMenu(fileName = "13Mirror_Of_Reflection", menuName = "ScriptableObjects/Items/T2/13: Mirror of Reflection", order = 213)]
-    public class Item13SO : ItemDataSO
+    public class Item13SO : ItemDataSO, ITakeDamageProcessor
     {
         public class MirrorReflectionItemVars : Item.ItemVars
         {
             public float totalDamage;
             public float reflectionDamageMultiplier;
         }
+
+        [Header("Priority")]
+        [SerializeField] private int priority;
+        public int GetPriority() { return priority; }
 
         [Header("Damage")]
         [SerializeField] private float damageMultiplier;
@@ -43,12 +47,13 @@ namespace Game
 
         //Process HitEvents
 
-        public override void ProcessTakeDamage(ref HitEvent hitEvent, Item sourceItem)
+        public void ProcessTakeDamage(ref HitEvent hitEvent, Item sourceItem)
         {
             if (!hitEvent.hasAgentSource) return;
             (sourceItem.vars as MirrorReflectionItemVars).totalDamage = hitEvent.GetTotalDamage();
             DamageSource(hitEvent, sourceItem);
         }
+        public void ProcessTakeDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
 
         private void DamageSource(HitEvent hitEvent, Item item)
         {

@@ -131,6 +131,8 @@ GameObject:
   - component: {fileID: 3294559283217251303}
   - component: {fileID: 6625489666185493177}
   - component: {fileID: 4266547945095109878}
+  - component: {fileID: 127700050751894287}
+  - component: {fileID: 3570904098939767778}
   - component: {fileID: -461332965647897481}
   - component: {fileID: 7456248144288869117}
   m_Layer: 0
@@ -205,6 +207,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 127700050751894287}
+        m_TargetAssemblyTypeName: Game.ItemGiver, Game
+        m_MethodName: GiveItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3570904098939767778}
+        m_TargetAssemblyTypeName: Game.Healer, Game
+        m_MethodName: Heal
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 6625489666185493177}
         m_TargetAssemblyTypeName: Game.SceneAdvancer, Game
         m_MethodName: AdvanceToShop
@@ -242,6 +268,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {fileID: 11400000, guid: dfaeea43fb7497947801a52fae9ad6eb, type: 2}
+--- !u!114 &127700050751894287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647172517012275734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed896eb72f4abdc4fbd2836df8c6721c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemToGive: {fileID: 11400000, guid: 03e3837c2eb7531488981bf419acb80a, type: 2}
+--- !u!114 &3570904098939767778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647172517012275734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a9b1bffd51f0a42a8e7bd8bf004bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healPercent: 1
 --- !u!114 &-461332965647897481
 MonoBehaviour:
   m_ObjectHideFlags: 0

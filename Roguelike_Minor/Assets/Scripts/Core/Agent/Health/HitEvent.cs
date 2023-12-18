@@ -22,6 +22,7 @@ namespace Game.Core {
         public float baseDamage;
         public float damageMultiplier;
         public float damageReduction;
+        public bool blocked;
         //crit vars
         public bool isCrit;
 
@@ -66,13 +67,13 @@ namespace Game.Core {
         }
 
         //=== Constructor for proc chain ===
-        public HitEvent(HitEvent baseEvent, Item procItem)
+        public HitEvent(HitEvent baseEvent, Item procItem, float procCoef = -1f)
         {
             source = baseEvent.source;
             hasAgentSource = true; //proc chain cannot happen without agent source
             //copy vars
             baseDamage = baseEvent.GetTotalDamage();
-            procCoef = baseEvent.procCoef;
+            this.procCoef = procCoef < 0f ? baseEvent.procCoef : procCoef;
             isCrit = baseEvent.isCrit;
             //manage item
             itemSources = new List<Item>(baseEvent.itemSources);

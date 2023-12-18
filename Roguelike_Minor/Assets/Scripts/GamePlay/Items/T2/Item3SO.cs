@@ -6,12 +6,16 @@ using Game.Core.GameSystems;
 
 namespace Game {
     [CreateAssetMenu(fileName = "3Explosive_Greens", menuName = "ScriptableObjects/Items/T2/3: Explosive Greens", order = 203)]
-    public class Item3SO : ItemDataSO
+    public class Item3SO : ItemDataSO, IDealDamageProcessor
     {
         private class Item3Vars : Item.ItemVars
         {
             public float explodeRadius;
         }
+
+        [Header("Priority")]
+        public int priority;
+        public int GetPriority() { return priority; }
 
         [Header("Proc Chance Settings")]
         public float procChance = 50f;
@@ -53,10 +57,11 @@ namespace Game {
         }
 
         //========= Process Hit Events ===========
-        public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem) 
+        public void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
         {
             hitEvent.onDeath.AddListener(TryExplode);
         }
+        public void ProcessDealDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
 
         //========= Util Funcs ==========
         private float GetExplodeRadius(Item item)

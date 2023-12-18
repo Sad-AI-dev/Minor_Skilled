@@ -12,10 +12,22 @@ namespace Game.Enemy {
         public static int FireRangeMax = 40;
         public static float MinimumHeight = 10;
 
-        [Header("Small Squid Specific Variables")]
+        [Header("Big Squid Specific Variables")]
         public LineRenderer lineRenderer;
+        public float rotationSpeedMoving = 100;
+        public float rotationSpeedTargeting = 60;
 
-        BT_Node root;
+        protected override void Start()
+        {
+            agent.abilities.primary.vars = new BigSquidPrimaryVars
+            {
+                target = null,
+                lineRenderer = this.lineRenderer,
+                targetingCo = null,
+                root = this.root
+            };
+            base.Start();
+        }
 
         protected override BT_Node SetupTree()
         {
@@ -25,11 +37,11 @@ namespace Game.Enemy {
                     //Check if in shooting range
                     //handle shooting
                     new Sequence(new List<BT_Node>{
-                        new BigSquidRangeCheck(transform),
-                        new BigSquidHandleAttack(transform, agent, lineRenderer, rb)
+                        new BigSquidRangeCheck(transform, agent),
+                        new BigSquidHandleAttack(transform, agent, lineRenderer, rb, rotationSpeedTargeting)
                     }),
                     //Get Path to player and follow path
-                    new BigSquidMoveToTarget(transform, agent, rb)
+                    new BigSquidMoveToTarget(transform, agent, rb, rotationSpeedMoving)
 
                 }
             ) ;
@@ -41,7 +53,8 @@ namespace Game.Enemy {
         {
             if (root != null)
             {
-                if(root.GetData("MoveDirection") != null) rb.MovePosition(transform.position + (Vector3)root.GetData("MoveDirection") * Time.fixedDeltaTime);
+                if (root.GetData("MoveDirection") != null) rb.MovePosition(transform.position + (Vector3)root.GetData("MoveDirection") * Time.fixedDeltaTime);
+                if (root.GetData("MoveRotation") != null) rb.MoveRotation((Quaternion)root.GetData("MoveRotation"));
             }
         }
 

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67414044404434119}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5606288, y: -0, z: -0, w: 0.82806724}
+  m_LocalRotation: {x: -0.5547601, y: -0, z: -0, w: 0.8320103}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 1
   m_FrequencyGain: 1
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
+  mNoiseOffsets: {x: 198.53415, y: 923.5029, z: 221.3472}
 --- !u!114 &4140032139113685274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +366,6 @@ GameObject:
   - component: {fileID: 6612914900796368241}
   - component: {fileID: 6237387186357606691}
   - component: {fileID: 2595134782193159625}
-  - component: {fileID: 8869651875822535198}
   - component: {fileID: 1857768514169513729}
   - component: {fileID: 3669836135115761641}
   m_Layer: 3
@@ -413,7 +412,6 @@ MonoBehaviour:
   camController: {fileID: 6425007794457280646}
   cam: {fileID: 0}
   jumpBufferFrames: 10
-  audioPlayer: {fileID: 8869651875822535198}
   shooting: 0
   stopShooting:
     m_PersistentCalls:
@@ -560,6 +558,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiFader: {fileID: 0}
+  onSceneLoaded:
+    m_PersistentCalls:
+      m_Calls: []
   allowLoadScene: 0
 --- !u!143 &1389778117787781048
 CharacterController:
@@ -744,6 +745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   health: 0
+  regenDelay: 1
   healthBar: {fileID: 0}
   onMaxHealthChanged:
     m_PersistentCalls:
@@ -833,6 +835,7 @@ MonoBehaviour:
   stats:
     maxHealth: 10
     maxHealthMult: 1
+    regeneration: 0
     baseDamage: 1
     critChance: 1
     critMult: 2
@@ -943,9 +946,7 @@ MonoBehaviour:
   slotsToInitialize:
     dictionary:
     - key: {fileID: 11400000, guid: aaa7839693155fe46a5ce1c6da18f970, type: 2}
-      value: 4
-    - key: {fileID: 11400000, guid: dfaeea43fb7497947801a52fae9ad6eb, type: 2}
-      value: 1
+      value: 8
 --- !u!114 &2595134782193159625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -958,22 +959,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08684d5be87bed4f87593a4e42d9103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8869651875822535198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1421599695142573888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86866b813429b9e4aa0d9e72eb5c091a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioEvents:
-  - idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 8922c2d517fe28a449a6bd3695e81bf9, type: 2}
 --- !u!120 &1857768514169513729
 LineRenderer:
   serializedVersion: 2
@@ -1090,11 +1075,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec91ee29e89f1c4c83f50d8f5c95cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footstepSFX:
-    idInternal: 0
+  parameters:
+  - idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 8922c2d517fe28a449a6bd3695e81bf9, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: a42f004306b8f1b40bc0296dc8641ff8, type: 2}
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 27e3c27cadb65eb4d9ae6d6450d9878c, type: 2}
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1af88bad045f784408b0aaaa56126eb4, type: 2}
   soundMaterialSet: {fileID: 11400000, guid: d71c15135eb978446bbeda282f825f2c, type: 2}
+  soundObjectSet: {fileID: 11400000, guid: 98938dcc8e9436c40b869d76fbce8f33, type: 2}
   floorlayer:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1123,7 +1115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3014019172444536401}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5606288, y: -0, z: -0, w: 0.82806724}
+  m_LocalRotation: {x: -0.5547601, y: -0, z: -0, w: 0.8320103}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1294,7 +1286,7 @@ MonoBehaviour:
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 1
   m_FrequencyGain: 1
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
+  mNoiseOffsets: {x: -432.81592, y: -496.0133, z: -215.59253}
 --- !u!114 &8262257906017214653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1460,7 +1452,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7114456423401257476}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5547551, y: -0, z: -0, w: 0.8320137}
+  m_LocalRotation: {x: -0.5547601, y: -0, z: -0, w: 0.8320103}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1834,7 +1826,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6141281946529047643, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2790128241606484669}
   m_SourcePrefab: {fileID: 100100000, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
 --- !u!95 &2673467769186082349 stripped
 Animator:
@@ -1846,3 +1841,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6805475361918451425, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
   m_PrefabInstance: {fileID: 3281958478983559862}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8696992653583539949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6141281946529047643, guid: 749e1668ea7e887418a694d9a9839190, type: 3}
+  m_PrefabInstance: {fileID: 3281958478983559862}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2790128241606484669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8696992653583539949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b02e051455224f0bba5970b7c1c977ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepManager: {fileID: 3669836135115761641}
+  footstepSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8922c2d517fe28a449a6bd3695e81bf9, type: 2}
+  servoSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 892ff91640b11804b8f0a0daf9b55175, type: 2}

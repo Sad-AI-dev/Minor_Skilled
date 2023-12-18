@@ -7,12 +7,16 @@ using EffectVars = Game.VulnerableEffectSO.VulnerableVars;
 
 namespace Game {
     [CreateAssetMenu(fileName = "30Critical_Squid", menuName = "ScriptableObjects/Items/T2/30: Critical Squid", order = 230)]
-    public class Item30SO : ItemDataSO
+    public class Item30SO : ItemDataSO, IDealDamageProcessor
     {
         private class Item30Vars : Item.ItemVars
         {
             public float damageMult;
         }
+
+        [Header("Priority")]
+        public int priority;
+        public int GetPriority() { return priority; }
 
         [Header("Crit Settings")]
         public float critChance = 5f;
@@ -52,7 +56,7 @@ namespace Game {
         }
 
         //========== Handle Hit Event ==========
-        public override void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
+        public void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
         {
             if (hitEvent.isCrit)
             {
@@ -60,12 +64,13 @@ namespace Game {
                 vars.damageMult = (sourceItem.vars as Item30Vars).damageMult;
             }
         }
+        public void ProcessDealDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
 
         //========== Description ===========
         public override string GenerateLongDescription()
         {
             return $"Crits inflict <color=#{HighlightColor}>Vulnerable</color> " +
-                $"making enemies take <color=#{HighlightColor}>{baseDamageMult * 100}%</color> " +
+                $"causing enemies to take <color=#{HighlightColor}>+{baseDamageMult * 100}%</color> " +
                 $"<color=#{StackColor}>(+{bonusDamageMult * 100}% per stack)</color> damage from all sources " +
                 $"for <color=#{HighlightColor}>{effect.duration} seconds</color>.\n" +
                 $"Additionally, increase <color=#{HighlightColor}>crit chance</color> by" +

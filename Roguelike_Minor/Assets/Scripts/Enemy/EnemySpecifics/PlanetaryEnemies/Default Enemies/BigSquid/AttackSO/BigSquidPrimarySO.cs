@@ -10,24 +10,26 @@ namespace Game.Enemy {
     {
         public Transform target;
         public LineRenderer lineRenderer;
+        public Coroutine targetingCo;
+        public BT_Node root;
     }
 
     [CreateAssetMenu(fileName = "BigSquidPrimary", menuName = "ScriptableObjects/Enemy/BigSquid/PrimaryAttack")]
 
     public class BigSquidPrimarySO : AbilitySO
-    {
-        public GameObject explosion;
-        
+    { 
         public override void InitializeVars(Ability source)
         {
-
+            
         }
 
         public override void Use(Ability source)
         {
-            source.agent.StartCoroutine(TargetingCo(source));   
+            BigSquidPrimaryVars vars = source.vars as BigSquidPrimaryVars;
+            vars.targetingCo = source.agent.StartCoroutine(TargetingCo(source));   
         }
 
+        Vector3 shootPos;
         IEnumerator TargetingCo(Ability source)
         {
             BigSquidPrimaryVars vars = source.vars as BigSquidPrimaryVars;
@@ -38,8 +40,17 @@ namespace Game.Enemy {
             yield return new WaitForSeconds(3);
 
             //Shooting
+            
             vars.lineRenderer.enabled = false;
-            Vector3 shootPos = vars.target.position + Vector3.up;
+            RaycastHit hit;
+            if (Physics.Raycast(source.originPoint.position, source.originPoint.forward, out hit, Mathf.Infinity))
+            {
+                shootPos = hit.point;
+            }
+            else
+            {
+                shootPos = source.originPoint.position + source.originPoint.forward * 30;
+            }
 
             yield return new WaitForSeconds(0.2f);
             FireLineRenderer(vars, source.originPoint.position, shootPos);
@@ -48,6 +59,7 @@ namespace Game.Enemy {
             yield return new WaitForSeconds(0.1f);
 
             vars.lineRenderer.enabled = false;
+            if(vars.root != null) vars.root.SetData("Targeting", false);
         }
 
         void attack(Ability source, Vector3 target)
@@ -61,8 +73,6 @@ namespace Game.Enemy {
                 {
                     hit.transform.GetComponent<Agent>().health.Hurt(new HitEvent(source));
                 }
-
-                Instantiate(explosion, hit.point, Quaternion.identity);
             }
         }
 

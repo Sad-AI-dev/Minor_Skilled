@@ -199,7 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyScalingFrequency: 60
   priceScalingFrequency: 30
-  priceScalingAmount: 0.1
+  priceScalingAmount: 0.3
   enemyLevel: 0
   priceMult: 1
 --- !u!1 &5706813191946861257
@@ -374,6 +374,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiFader: {fileID: 0}
+  onSceneLoaded:
+    m_PersistentCalls:
+      m_Calls: []
   allowLoadScene: 0
 --- !u!1 &8355906013974447864
 GameObject:
@@ -420,6 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537db1a22ab3c85439f3f90c1ff96283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPool: {fileID: 11400000, guid: a28daa60fdc127248938c3415969eb30, type: 2}
   spawnFrequency: 20
   minBatchSize: 2
   maxBatchSize: 5
@@ -454,7 +458,7 @@ MonoBehaviour:
   budgetSpikeMode: 3
   budgetSpikeMultiplier: 0.5
   budgetSpikeActivationChance: 0
-  budgetSpikeInterval: 5
+  budgetSpikeInterval: 10
   budgetSpikeIntervalMin: 5
   budgetSpikeIntervalMax: 10
   saveMode: 0
@@ -465,37 +469,77 @@ MonoBehaviour:
   minRandInterval: 0
   maxRandInterval: 0
   options:
-  - name: MeleeGrunt
-    price: 2
+  - name: small Squid
+    price: 1
+    chance: 1
     onSelect:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1772826402637452629}
-          m_TargetAssemblyTypeName: Game.Systems.EnemySpawner, Game.Systems
+          m_TargetAssemblyTypeName: Game.EnemySpawner, Game
           m_MethodName: SpawnEnemy
-          m_Mode: 2
+          m_Mode: 3
           m_Arguments:
-            m_ObjectArgument: {fileID: 5666398297103683690, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
     initialized: 1
-  - name: small Squid
-    price: 1
+  - name: Small Squid Variant
+    price: 5
+    chance: 0.5
     onSelect:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1772826402637452629}
           m_TargetAssemblyTypeName: Game.EnemySpawner, Game
-          m_MethodName: SpawnFlyingEnemy
-          m_Mode: 2
+          m_MethodName: SpawnEnemy
+          m_Mode: 3
           m_Arguments:
-            m_ObjectArgument: {fileID: 6980009012232646921, guid: cf6e19b5c8e3d2c47be9689de5c78a65, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    initialized: 1
+  - name: MeleeGrunt
+    price: 1
+    chance: 1.5
+    onSelect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1772826402637452629}
+          m_TargetAssemblyTypeName: Game.EnemySpawner, Game
+          m_MethodName: SpawnEnemy
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    initialized: 1
+  - name: Melee Grunt Variant
+    price: 5
+    chance: 0.5
+    onSelect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1772826402637452629}
+          m_TargetAssemblyTypeName: Game.EnemySpawner, Game
+          m_MethodName: SpawnEnemy
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -503,17 +547,37 @@ MonoBehaviour:
     initialized: 1
   - name: big Squid
     price: 10
+    chance: 1
     onSelect:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1772826402637452629}
           m_TargetAssemblyTypeName: Game.EnemySpawner, Game
-          m_MethodName: SpawnFlyingEnemy
-          m_Mode: 2
+          m_MethodName: SpawnEnemy
+          m_Mode: 3
           m_Arguments:
-            m_ObjectArgument: {fileID: 6302184283900363943, guid: 2ea46eaac858d954dbe1122aa3de8e63, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    initialized: 1
+  - name: Big Squid Variant
+    price: 25
+    chance: 0.5
+    onSelect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1772826402637452629}
+          m_TargetAssemblyTypeName: Game.EnemySpawner, Game
+          m_MethodName: SpawnEnemy
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 5
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -521,17 +585,18 @@ MonoBehaviour:
     initialized: 1
   - name: Boss Big Squid
     price: 75
+    chance: 0.5
     onSelect:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1772826402637452629}
           m_TargetAssemblyTypeName: Game.EnemySpawner, Game
-          m_MethodName: SpawnFlyingEnemy
-          m_Mode: 2
+          m_MethodName: SpawnEnemy
+          m_Mode: 3
           m_Arguments:
-            m_ObjectArgument: {fileID: 3194772888341048763, guid: 5f303abe0f102044d98a4d55b00d0a5c, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 6
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0

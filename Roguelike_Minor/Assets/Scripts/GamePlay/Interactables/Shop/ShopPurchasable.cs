@@ -31,7 +31,10 @@ namespace Game {
         //======= Purchase Check =========
         protected override bool CanPurchase(Agent agent)
         {
-            return agent.inventory.TryAssignItem(itemPickup.item); //purchase item
+            bool result = agent.inventory.TryAssignItem(itemPickup.item); //purchase item
+            //notify item was picked up
+            if (result) { EventBus<PickupItemEvent>.Invoke(new PickupItemEvent() { item = itemPickup.item }); }
+            return result;
         }
     }
 }

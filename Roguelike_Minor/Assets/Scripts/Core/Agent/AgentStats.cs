@@ -9,6 +9,8 @@ namespace Game.Core {
         [Header("Health")]
         public float maxHealth = 10f;
         public float maxHealthMult = 1f;
+        [Tooltip("Expressed in health / second")]
+        public float regeneration = 0f;
         //combat
         [Header("Combat")]
         public float baseDamage = 1;
@@ -48,6 +50,7 @@ namespace Game.Core {
             //health
             maxHealth = other.maxHealth;
             maxHealthMult = other.maxHealthMult;
+            regeneration = other.regeneration;
 
             //combat
             baseDamage = other.baseDamage;

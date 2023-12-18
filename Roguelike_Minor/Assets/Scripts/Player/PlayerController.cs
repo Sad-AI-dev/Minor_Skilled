@@ -11,12 +11,14 @@ namespace Game.Player
     {
         [Header("External Components")]
         public Camera cam;
+
         [HideInInspector] public Agent agent;
         private CharacterController cc;
-        private GroundedManager groundedChecker;
-        private FrictionManager frictionManager;
+        private GroundedManager groundedChecker;//
+        private FrictionManager frictionManager;//
         private FOVManager fovManager;
-        private PlayerRotationManager rotator;
+        private PlayerRotationManager rotator;//
+ 
         private PlayerInput input;
 
         [Header("walk")]
@@ -57,8 +59,6 @@ namespace Game.Player
                 return groundedChecker.grounded;
             } 
         }
-
-
         
         private Coroutine slowCo;
 

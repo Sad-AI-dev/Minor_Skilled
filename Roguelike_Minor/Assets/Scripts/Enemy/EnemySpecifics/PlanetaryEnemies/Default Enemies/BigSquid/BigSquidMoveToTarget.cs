@@ -17,14 +17,16 @@ namespace Game.Enemy {
         private Coroutine calculatePathCo;
 
         private float randomMinimumHeight = 0;
+        private float rotationSpeedMoving;
 
         private Queue<Vector3> pathQueue = new Queue<Vector3>();
 
-        public BigSquidMoveToTarget(Transform transform, Agent agent, Rigidbody rb)
+        public BigSquidMoveToTarget(Transform transform, Agent agent, Rigidbody rb, float rotationSpeedMoving)
         {
             this.transform = transform;
             this.agent = agent;
             this.rb = rb;
+            this.rotationSpeedMoving = rotationSpeedMoving;
         }
 
         public override NodeState Evaluate()
@@ -34,11 +36,20 @@ namespace Game.Enemy {
 
             if (target != null)
             {
+                //Check if not targeting
+                if(GetData("Targeting") != null && (bool)GetData("Targeting"))
+                {
+                    state = NodeState.RUNNING;
+                    return state;
+                }
+
+                //Check if we have a path
                 if (calculatePathCo == null)
                 {
                     calculatePathCo = agent.StartCoroutine(CalculatePathCO());
                 }
 
+                //follow path
                 if (pathQueue.Count > 0)
                 {
                     //Handle Direction
@@ -49,11 +60,11 @@ namespace Game.Enemy {
                     targetRotation = Quaternion.RotateTowards(
                         transform.rotation,
                         targetRotation,
-                        360 * Time.deltaTime);
+                        rotationSpeedMoving * Time.deltaTime);
 
                     //Move
-                    SetData("MoveDirection", dir * agent.stats.walkSpeed);
-                    rb.MoveRotation(targetRotation);
+                    SetData("MoveDirection", dir * agent.stats.sprintSpeed);
+                    SetData("MoveRotation", targetRotation);
 
                     //Check for target range
                     float distance = Vector3.Distance(transform.position, pathQueue.Peek());
@@ -62,6 +73,7 @@ namespace Game.Enemy {
                         pathQueue.Dequeue();
                     }
                 }
+                //If not path, stand still
                 else rb.velocity = Vector3.zero;
             }
             state = NodeState.RUNNING;
