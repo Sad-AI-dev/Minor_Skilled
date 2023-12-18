@@ -6,7 +6,7 @@ public class SwitchCinemamachineMenuCamera : MonoBehaviour
 
     public GameObject CharacterFirst;
     public GameObject CharacterSecond;
-
+    private AfterAnimation afterAnimation;
     public GameObject LoadingCanvas;
 
     public GameObject SelectButtonPressed;
@@ -25,6 +25,14 @@ public class SwitchCinemamachineMenuCamera : MonoBehaviour
             animator = gameObject.GetComponent<Animator>();
         }
         Select = false;
+
+        GameObject animatedObject = GameObject.Find("CorporationScreen"); 
+        if (animatedObject != null)
+        {
+            Debug.Log("AnimationTriggered");
+            // Get the AnimationEventHandler component
+            afterAnimation = animatedObject.GetComponent<AfterAnimation>();
+        }
     }
 
     public void SetFalse()
@@ -59,7 +67,16 @@ public class SwitchCinemamachineMenuCamera : MonoBehaviour
 
     public void PlayCorporationVideo(){
        CorporationCanvas.SetActive(true); 
+       if (afterAnimation != null)
+            {
+                afterAnimation.PlayAnimation();
+            }
     }
+
+    // public void MenuAnimationDone(){
+    //     Debug.Log("animation done");
+    // }
+
     public void ButtonSelectPressed()
     {
         Debug.Log("test");
