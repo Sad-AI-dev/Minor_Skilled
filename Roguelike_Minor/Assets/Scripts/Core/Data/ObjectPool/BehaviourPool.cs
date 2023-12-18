@@ -10,9 +10,10 @@ namespace Game.Core.Data {
         public GameObject behaviourTemplate;
 
         //ctor
-        public BehaviourPool()
+        public BehaviourPool(GameObject template = null)
         {
             pool = new List<T>();
+            behaviourTemplate = template;
         }
 
         //============= Get Behaviour =================
