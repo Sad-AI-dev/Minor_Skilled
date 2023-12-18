@@ -2330,6 +2330,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 835838256758490456}
+  - component: {fileID: 6526030329589036352}
+  - component: {fileID: 1398295491263236538}
   m_Layer: 5
   m_Name: PlanetIntroLabel
   m_TagString: Untagged
@@ -2357,6 +2359,40 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &6526030329589036352
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535835183883670945}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 1
+--- !u!114 &1398295491263236538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535835183883670945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 608c2bfd67fcb9e4896894e84f5b899e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetGroup: {fileID: 6526030329589036352}
+  fadeMode: 1
+  fadeOnStart: 0
+  fadeTime: 0.5
+  fadedInDelay: 2
+  fadedOutDelay: 0.1
+  blinkTime: 1
+  onFadeEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1768357012526860273
 GameObject:
   m_ObjectHideFlags: 0
@@ -7658,7 +7694,7 @@ GameObject:
   - component: {fileID: 4402311420055914845}
   - component: {fileID: 3134353787853924174}
   - component: {fileID: 2395278816151607039}
-  - component: {fileID: 5576707023700778770}
+  - component: {fileID: 7564479586496878045}
   m_Layer: 5
   m_Name: StageText
   m_TagString: Untagged
@@ -7722,8 +7758,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7782,27 +7818,27 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!95 &5576707023700778770
-Animator:
-  serializedVersion: 5
+--- !u!114 &7564479586496878045
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6341499116723153787}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2ba8f7f681f116c43847426a15c62d95, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b4de6c3012dba40b825209bc682e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultName: ??? The realm beyond ???
+  planetNames:
+    dictionary:
+    - key: 2
+      value: 'Endorama : The Plains of Battle'
+    - key: 4
+      value: Shop
+  label: {fileID: 2395278816151607039}
+  fader: {fileID: 1398295491263236538}
 --- !u!1 &6405076083049496865
 GameObject:
   m_ObjectHideFlags: 0
