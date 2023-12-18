@@ -235,7 +235,10 @@ namespace Game.Player
 
         public void ReceiveKnockback(Vector3 kbForce)
         {
-            excessVelocity += kbForce;
+            yVelocity = 0;
+            excessVelocity += moveDirection * kbForce.magnitude;
+            //excessVelocity += kbForce;
+            yVelocity += kbForce.y;
             jumping = false;
         }
     }
