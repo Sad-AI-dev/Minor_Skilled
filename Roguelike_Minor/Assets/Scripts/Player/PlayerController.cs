@@ -10,6 +10,7 @@ namespace Game.Player
     public class PlayerController : MonoBehaviour
     {
         [Header("External Components")]
+        [SerializeField] private AnimationManager animManager;
         public Camera cam;
 
         [HideInInspector] public Agent agent;
@@ -46,6 +47,9 @@ namespace Game.Player
         [SerializeField] private float slowFallMultiplier;
         [SerializeField] private float fastFallMultiplier;
 
+        [Header("Dash")]
+        [SerializeField] private float dashDuration;
+        private Coroutine dashCo;
 
         private Coroutine decelerateCo;
         private bool canDecelerate = true;
@@ -65,6 +69,8 @@ namespace Game.Player
         [HideInInspector] public UnityEvent startRunning;
         [HideInInspector] public UnityEvent stopRunning;
         [HideInInspector] public UnityEvent jump;
+        [HideInInspector] public UnityEvent startDashing;
+        [HideInInspector] public UnityEvent stopDashing;
 
         private void Start()
         {
@@ -111,7 +117,6 @@ namespace Game.Player
                 moveDirection.Normalize();
                 lastMoveDir = moveDirection;
                 Accelerate(acceleration);
-                startRunning.Invoke();
             }
             else if (speed > 0)
             {
@@ -156,9 +161,9 @@ namespace Game.Player
             }
 
             if(speedMultiplier > 0)
-                startRunning.Invoke();
+                startRunning?.Invoke();
             else
-                stopRunning.Invoke();
+                stopRunning?.Invoke();
         }
 
         public void Dash(Vector3 force)
@@ -168,6 +173,9 @@ namespace Game.Player
             else
                 frictionManager.SetFriction(frictionTypes.air);
 
+            if (dashCo != null)
+                StopCoroutine(dashCo);
+            StartCoroutine(HandleDashAnim(dashDuration));
             ReceiveKnockback(force);
         }
 
@@ -240,6 +248,13 @@ namespace Game.Player
             //excessVelocity += kbForce;
             yVelocity += kbForce.y;
             jumping = false;
+        }
+
+        private IEnumerator HandleDashAnim(float duration)
+        {
+            startDashing?.Invoke();
+            yield return new WaitForSeconds(duration);
+            stopDashing?.Invoke();   
         }
     }
 }
