@@ -21,10 +21,7 @@ namespace Game {
         //refs
         private Rigidbody rb;
         //shorthand
-        private float Speed { get { return settings.moveSpeed * Time.fixedDeltaTime * 100f; } }
-
-        //vars
-        private Coroutine explodeRoutine;
+        private float Speed { get { return settings.moveSpeed * Time.fixedDeltaTime; } }
 
         private void Awake()
         {
@@ -33,53 +30,53 @@ namespace Game {
 
         private void FixedUpdate()
         {
-            rb.velocity = GetTargetVelocity();
-            if (explodeRoutine != null) { DistanceCheck(); }
-        }
-
-        private Vector3 GetTargetVelocity()
-        {
-            return (targetPos - transform.position).normalized * Speed;
+            //move
+            rb.MovePosition(Vector3.MoveTowards(transform.position, targetPos, Speed));
+            //distance check
+            DistanceCheck();
         }
 
         //======= Distance Check =======
         private void DistanceCheck()
         {
-            if (Vector3.Distance(transform.position, targetPos) < rb.velocity.magnitude)
+            if (Vector3.Distance(transform.position, targetPos) < 0.1f)
             {
-                explodeRoutine = StartCoroutine(DelayExplodeCo());
+                //reached destination, explode
+                Explode();
             }
-        }
-
-        private IEnumerator DelayExplodeCo()
-        {
-            yield return new WaitForSeconds(0.1f);
-            ApplyVulnerable();
-            gameObject.SetActive(false);
         }
 
         //======= Hit Detection =========
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.Equals(owner.agent.gameObject)) { return; }
-            if (other.TryGetComponent(out Agent agent)) {
-                StopCoroutine(DelayExplodeCo());
-                //deal damage to agent
-                DealDamage(agent);
-                //apply vulnerabel
-                ApplyVulnerable();
-            }
+            //explode on impact
+            Explode();
+        }
+
+        private void Explode()
+        {
+            //deal damage to agent
+            DealDamage();
+            //apply vulnerabel
+            ApplyVulnerable();
             //setup for reuse
             gameObject.SetActive(false);
         }
 
-        private void DealDamage(Agent target)
+        private void DealDamage()
         {
-            //setup hit event
-            HitEvent hit = new HitEvent(sourceEvent, owner, settings.procCoef);
-            hit.baseDamage = owner.agent.stats.baseDamage * damageMult;
-            //deal damage
-            target.health.Hurt(hit);
+            List<Agent> agents = Explosion.FindAgentsInRange(transform.position, settings.damageRange, owner.agent);
+            //damage agents in range
+            foreach (Agent agent in agents)
+            {
+                //setup hit event
+                HitEvent hit = new HitEvent(sourceEvent, owner, settings.procCoef) {
+                    baseDamage = owner.agent.stats.baseDamage * damageMult
+                };
+                //deal damage
+                agent.health.Hurt(hit);
+            }
         }
 
         //========== Vulnerable =========
