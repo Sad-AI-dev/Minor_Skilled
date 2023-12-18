@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Game.Core;
 using Game.Core.GameSystems;
@@ -87,9 +88,25 @@ namespace Game {
             //apply vulnerable to each agent
             foreach (Agent agent in agents)
             {
-                EffectVars effectVars = agent.effectHandler.AddEffect(settings.vulnerableEffect) as EffectVars;
-                effectVars.damageMult = settings.vulnerableDamageMult;
+                if (TargetIsValid(agent))
+                {
+                    EffectVars effectVars = agent.effectHandler.AddEffect(settings.vulnerableEffect) as EffectVars;
+                    effectVars.source = settings;
+                    effectVars.damageMult = settings.vulnerableDamageMult;
+                }
             }
+        }
+
+        private bool TargetIsValid(Agent target)
+        {
+            if (target.effectHandler.statusEffects.ContainsKey(settings.vulnerableEffect))
+            {
+                foreach (EffectVars vars in target.effectHandler.statusEffects[settings.vulnerableEffect].Cast<EffectVars>())
+                {
+                    if (vars.source == settings) { return false; }
+                }
+            }
+            return true;
         }
     }
 }
