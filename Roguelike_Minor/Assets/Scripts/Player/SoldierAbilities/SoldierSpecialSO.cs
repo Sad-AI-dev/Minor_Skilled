@@ -35,7 +35,7 @@ namespace Game.Player.Soldier
             controller.StartSlowCoroutine(.2f);
 
             RaycastHit hit;
-            if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500, layermask))
+            if (Physics.Raycast(cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit, 500, layermask))
                 targetPos = hit.point;
             else
                 return;

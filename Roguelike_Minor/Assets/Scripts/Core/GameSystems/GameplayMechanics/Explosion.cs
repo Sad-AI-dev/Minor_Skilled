@@ -35,10 +35,14 @@ namespace Game.Core.GameSystems
         public static void DealDamage(List<Agent> agents, Agent source, int damage, float procCoef = 1)
         {
             HitEvent hitEvent = new HitEvent(source, procCoef);
-            hitEvent.baseDamage = damage;
 
             foreach (Agent agent in agents)
             {
+                if (agent == source)
+                    hitEvent.baseDamage = damage * 0f;
+                else
+                    hitEvent.baseDamage = damage;
+
                 agent.health.Hurt(hitEvent);
             }
         }
