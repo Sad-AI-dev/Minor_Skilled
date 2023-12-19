@@ -36,7 +36,7 @@ namespace Game.Player
         private Vector3 excessVelocity;
 
         [Header("Jump")]
-        [SerializeField] private float JumpForce;
+        [SerializeField] private float jumpForce;
         [HideInInspector] public float yVelocity;
         [HideInInspector] public bool jumping;
 
@@ -50,6 +50,9 @@ namespace Game.Player
         [Header("Dash")]
         [SerializeField] private float dashDuration;
         private Coroutine dashCo;
+
+        [Header("VFX")]
+        [SerializeField] ParticleSystem doubleJumpVFX;
 
         private Coroutine decelerateCo;
         private bool canDecelerate = true;
@@ -202,9 +205,14 @@ namespace Game.Player
             yVelocity = 0;
 
             if (agent.stats.currentJumps < agent.stats.totalJumps)
-                yVelocity += JumpForce * 1.5f / 100;
+            {
+                yVelocity += jumpForce * 1.5f / 100;
+                doubleJumpVFX.Play();
+            }
             else
-                yVelocity += JumpForce / 100;
+            {
+                yVelocity += jumpForce / 100;
+            }
 
             jump.Invoke();
             jumping = true;
