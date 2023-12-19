@@ -10,11 +10,6 @@ namespace Game.Enemy {
     public class MeleeGruntHandleRanged : BT_Node
     {
         /*Transform A, B, Control;*/
-        Transform target;
-        Transform transform;
-        NavMeshAgent navAgent;
-        Agent agent;
-
         float distanceToTarget, rangedAttackRange;
 
         public MeleeGruntHandleRanged(Transform transform, float rangedAttackRange, Agent agent, NavMeshAgent navAgent)

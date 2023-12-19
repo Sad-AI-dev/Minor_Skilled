@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Game.Enemy
 {
-    public class TaskCheckRanged : BT_Node
+    public class TaskCheckRanged : CheckRangeNode
     {
         bool ranged;
 
-        public TaskCheckRanged(bool ranged)
+        public TaskCheckRanged(Transform transform, float distanceToCheck, bool ranged) : base(transform, distanceToCheck)
         {
             this.ranged = ranged;
         }
@@ -23,23 +23,11 @@ namespace Game.Enemy
                 state = NodeState.FAILURE;
                 return state;
             }
-            else
-            {
-                if (GetData("SecificRange") == null) SetEnemySpecificRange();
-                if ((float)GetData("DistanceToTarget") <= (float)GetData("SecificRange"))
-                {
-                    state = NodeState.SUCCESS;
-                    return state;
-                }
-                else state = NodeState.FAILURE;
-            }
 
+            state = base.Evaluate();
+            
             return state;
         }
 
-        void SetEnemySpecificRange()
-        {
-            SetData("SecificRange", Random.Range(MeleeGruntTree.rangedAttackRange, MeleeGruntTree.rangedAttackRange/2));
-        }
     }
 }

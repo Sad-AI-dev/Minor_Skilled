@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Core;
+using UnityEngine.AI;
 
 namespace Game.Enemy.Core
 {
@@ -21,6 +22,7 @@ namespace Game.Enemy.Core
         public Transform transform;
         public Transform target;
         public Agent agent;
+        public NavMeshAgent navAgent;
 
         public BT_Node()
         {
@@ -39,6 +41,8 @@ namespace Game.Enemy.Core
             children.Add(node);
         }
         public virtual NodeState Evaluate() => NodeState.FAILURE;
+        
+        //Handle Data sharing between nodes
         public void SetData(string key, object value)
         {
             if (parent != null)
@@ -50,7 +54,6 @@ namespace Game.Enemy.Core
                 DataContext[key] = value;
             }
         }
-
         public object GetData(string key)
         {
             object value = null;
@@ -92,6 +95,7 @@ namespace Game.Enemy.Core
             return false;
         }
 
+        //Handle Setting Target
         public void SetTarget(Transform target)
         {
             if (parent != null)
@@ -120,7 +124,6 @@ namespace Game.Enemy.Core
                 agent.StartCoroutine(DistanceToTargetCO(agent, transform, target));
             }
         }
-
         public void SetDistanceToTarget(float distanceToTarget)
         {
             if (parent != null)

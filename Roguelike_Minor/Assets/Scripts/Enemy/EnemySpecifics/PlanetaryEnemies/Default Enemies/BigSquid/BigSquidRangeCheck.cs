@@ -7,44 +7,21 @@ using Game.Core;
 using System.Threading.Tasks;
 
 namespace Game.Enemy {
-    public class BigSquidRangeCheck : BT_Node
+    public class BigSquidRangeCheck : CheckRangeNode
     {
-        BigSquidPrimaryVars vars;
-
-        public BigSquidRangeCheck(Transform transform, Agent agent)
+        public BigSquidRangeCheck(Transform transform, float distanceToCheck, Agent agent) : base(transform, distanceToCheck)
         {
-            this.transform = transform;
             this.agent = agent;
-            EventBus<GameEndEvent>.AddListener(DoClearTarget);
         }
-        
+
+        Vector3 dir;
         public override NodeState Evaluate()
         {
-            HandleSetTarget();
-            if (GetData("DistanceToTarget") == null) CheckDistance();
-            if (GetData("RandomFireRange") == null) SetData("RandomFireRange", Random.Range(BigSquidTree.FireRangeMin, BigSquidTree.FireRangeMax));
+            state = base.Evaluate();
 
-            if (GetData("DistanceToTarget") == null)
+            if (state == NodeState.SUCCESS)
             {
-                state = NodeState.FAILURE;
-                return state;
-            }
-            if (vars == null) vars = agent.abilities.primary.vars as BigSquidPrimaryVars;
-            if ((float)GetData("DistanceToTarget") > (int)GetData("RandomFireRange"))
-            {
-                state = NodeState.FAILURE;
-                if (vars.targetingCo != null)
-                {
-                    agent.StopCoroutine(vars.targetingCo);
-                    vars.targetingCo = null;
-                }
-                SetData("Targeting", false);
-
-                return state;
-            }
-            else
-            {
-                Vector3 dir = ((target.position + (Vector3.up / 2)) - transform.position).normalized;
+                dir = ((target.position + (Vector3.up / 2)) - transform.position).normalized;
 
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, dir, out hit, Mathf.Infinity))
@@ -52,7 +29,7 @@ namespace Game.Enemy {
                     if (hit.transform.CompareTag("Player"))
                     {
                         SetData("Targeting", true);
-                        state = NodeState.SUCCESS;
+                        return state;
                     }
                     else
                     {
@@ -66,31 +43,8 @@ namespace Game.Enemy {
                     }
                 }
             }
-
+            
             return state;
-        }
-
-        private void HandleSetTarget()
-        {
-            if (GetData("Target") == null) SetTarget(GameStateManager.instance.player.transform);
-            target = (Transform)GetData("Target");
-        }
-        private async void CheckDistance()
-        {
-            while (transform != null && target != null)
-            {
-                if (target != null && transform != null)
-                {
-                    SetData("DistanceToTarget", Vector3.Distance(transform.position, target.position));
-                }
-                await Task.Delay(2);
-            }
-        }
-        private void DoClearTarget(GameEndEvent eventData)
-        {
-            ClearData("Target");
-            target = null;
-            EventBus<GameEndEvent>.RemoveListener(DoClearTarget);
         }
     }
 }
