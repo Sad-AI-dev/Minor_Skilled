@@ -10,13 +10,11 @@ namespace Game.Enemy {
     {
         bool chosen = false;
         int RandomOneZero;
-        Transform transform;
-        Transform target;
 
         public MeleeGruntChooseAttack(Transform transform)
         {
             this.transform = transform;
-            EventBus<GameEndEvent>.AddListener(ClearTarget);
+            EventBus<GameEndEvent>.AddListener(HandleClearTarget);
         }
 
         public override NodeState Evaluate()
@@ -35,7 +33,7 @@ namespace Game.Enemy {
                     SetData("Ranged", false);
                     chosen = true;
                 }
-                SetData("Target", GameStateManager.instance.player.transform);
+                SetTarget(GameStateManager.instance.player.transform);
                 if (GetData("DistanceToTarget") == null) CheckDistance();
             }
 
@@ -61,11 +59,11 @@ namespace Game.Enemy {
             }
         }
 
-        private void ClearTarget(GameEndEvent eventData)
+        private void HandleClearTarget(GameEndEvent eventData)
         {
             ClearData("Target");
             target = null;
-            EventBus<GameEndEvent>.RemoveListener(ClearTarget);
+            EventBus<GameEndEvent>.RemoveListener(HandleClearTarget);
         }
     }
 }

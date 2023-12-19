@@ -10,8 +10,6 @@ using Game.Core.Data;
 namespace Game.Enemy {
     public class Boss_MeleeGrunt_MoveToTarget : BT_Node
     {
-        NavMeshAgent navAgent;
-
         public Boss_MeleeGrunt_MoveToTarget(Transform transform, Agent agent, NavMeshAgent navAgent)
         {
             this.transform = transform;

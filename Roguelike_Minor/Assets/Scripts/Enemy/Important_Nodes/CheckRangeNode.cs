@@ -26,7 +26,7 @@ namespace Game.Enemy {
             target = (Transform)GetData("Target");
 
             //Set distance to target
-            if (GetData("DistanceToTarget") == null) DistanceToTarget();
+            if (GetData("DistanceToTarget") == null) agent.StartCoroutine(DistanceToTargetCO(agent, transform, target));
 
             if((float)GetData("DistanceToTarget") < distanceToCheck)
             {
@@ -34,16 +34,6 @@ namespace Game.Enemy {
             }
 
             return state;
-        }
-
-        async void DistanceToTarget()
-        {
-            while(target != null && transform != null)
-            {
-                SetDistanceToTarget(Vector3.Distance(transform.position, target.position));
-
-                await Task.Delay(1);
-            }
         }
     }
 }

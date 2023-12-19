@@ -11,10 +11,6 @@ namespace Game.Enemy
 {
     public class Boss_BigSquid_SpawnMinionCheck : BT_Node
     {
-        //Components
-        Agent agent;
-        Transform transform;
-
         //Variables
         int minionSpawnChancePercent;
         float minionSpawnChanceCooldownTime;

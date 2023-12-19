@@ -9,9 +9,6 @@ namespace Game.Enemy {
     public class Boss_BigSquidFlyAroundTarget : BT_Node
     {
         Vector3 randomMovePosition = Vector3.zero;
-        Transform target;
-        Transform transform;
-        Agent agent;
 
         public Boss_BigSquidFlyAroundTarget(Agent agent, Transform transform)
         {

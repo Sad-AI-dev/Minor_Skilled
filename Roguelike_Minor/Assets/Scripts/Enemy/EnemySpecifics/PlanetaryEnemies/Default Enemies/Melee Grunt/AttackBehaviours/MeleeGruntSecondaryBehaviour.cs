@@ -7,7 +7,6 @@ namespace Game.Enemy {
     public class MeleeGruntSecondaryBehaviour : Projectile
     {
         [HideInInspector] public Vector3 target;
-        float time = 0.5f;
         Vector3 acceleration = Vector3.down;
         [HideInInspector] public Vector3 sourceTransform;
         [HideInInspector] public float bulletSpeed;

@@ -9,9 +9,6 @@ namespace Game.Enemy {
     public class BigSquidMoveToTarget : BT_Node
     {
         //Components
-        private Agent agent;
-        private Transform transform;
-        private Transform target;
         private Rigidbody rb;
         private NavMeshPath path;
         private Coroutine calculatePathCo;

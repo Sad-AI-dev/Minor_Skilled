@@ -7,8 +7,6 @@ using Game.Core;
 namespace Game.Enemy {
     public class SmallSquidMoveThroughSky : BT_Node
     {
-        Transform transform;
-        Agent agent;
         Rigidbody rb;
 
         Vector3 randomWaipoint = Vector3.zero;

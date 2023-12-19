@@ -11,7 +11,6 @@ namespace Game.Enemy {
         LineRenderer lineRenderer;
         float rotationSpeedTargeting;
         BigSquidPrimaryVars vars;
-        NavMeshAgent navAgent;
 
         public Rock_BigSquid_HandleRanged(Transform transform, Agent agent, LineRenderer lineRenderer, NavMeshAgent navAgent, float rotationSpeedTargeting)
         {

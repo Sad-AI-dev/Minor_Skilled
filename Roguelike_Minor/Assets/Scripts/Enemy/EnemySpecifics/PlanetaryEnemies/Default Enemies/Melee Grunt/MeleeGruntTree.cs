@@ -18,8 +18,8 @@ namespace Game.Enemy {
 
         //Variables
         [Header("Attack Ranged")]
-        public static float rangedAttackRange = 12;
-        public static float semiMeleeAttackRange = 7;
+        public float rangedAttackRange = 12;
+        public float semiMeleeAttackRange = 7;
         public static float meleeAttackRange = 1.6f;
 
         [Header("Charce Variables")]
@@ -44,31 +44,33 @@ namespace Game.Enemy {
 
         protected override BT_Node SetupTree()
         {
-            BT_Node root = new Selector(
+            root = new Selector(
                 new List<BT_Node>
                 {
                     //Choose ranged or Melee
                     new TakeKnockback(transform, agent, navAgent, rb, upMultiplier, directionMultiplier),
                     new MeleeGruntChooseAttack(transform),
+
+                    //Handle Ranged attack
                     new Sequence( new List<BT_Node>
                     {
                        //If chosen Ranged, handle ranged
-                       new TaskCheckRanged(true),
+                       new TaskCheckRanged(transform, Random.Range(rangedAttackRange, rangedAttackRange/2), true),
                        new MeleeGruntHandleRanged(transform, rangedAttackRange, agent, navAgent)
-                    }),//Works
+                    }),
+                    //Handle charge chance
                     new Sequence( new List<BT_Node>
                     {
-                        //If chosen Melee, Check Semi
-                        new TaskCheckSemi(false, charceChancePercent, agent),
+                        new TaskCheckSemi(transform, semiMeleeAttackRange, false, charceChancePercent, agent),
                         new MeleeGruntHandleChargeChance(agent, navAgent, transform),
                     }),
+                    //Handle melee attack
                     new Sequence( new List<BT_Node>
                     {
-                        //Else Melee
-                        new TaskCheckMelee(false, agent),
+                        new TaskCheckMelee(transform, meleeAttackRange, false, agent),
                         new MeleeGruntMeleeAttack(agent, navAgent, transform),
                     }),
-                    //If not in any range, Walk to target
+                    //Handle moving to target
                     new MeleeGruntWalkToTarget(transform, agent, navAgent)
                 }
             );
