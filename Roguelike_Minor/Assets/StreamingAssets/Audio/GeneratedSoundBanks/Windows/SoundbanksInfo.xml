@@ -9,13 +9,13 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{D5C124AF-4FF6-EEDC-123E-4E8594FF5589}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{8198E07F-F9BD-B163-34C3-03395290EE5B}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
 				<ShareSets>
 					<Plugin Id="48620415" Name="Have_U_Ever_Been_Outside" LibName="Wwise RoomVerb" LibId="7733251"/>
-					<Plugin Id="2038996943" Name="Plate_Sizzle" LibName="Wwise RoomVerb" LibId="7733251"/>
+					<Plugin Id="3164629247" Name="Holy" LibName="Wwise RoomVerb" LibId="7733251"/>
 				</ShareSets>
 				<AudioDevices>
 					<Plugin Id="2317455096" Name="No_Output" LibName="No Output" LibId="11862023"/>
@@ -29,14 +29,16 @@
 				<Bus Id="1551306167" Name="UI"/>
 				<Bus Id="2221585665" Name="World Ambience"/>
 				<Bus Id="2299321487" Name="Enemy"/>
+				<Bus Id="2607556080" Name="Menu"/>
 				<Bus Id="3174030640" Name="Auxiliary busses"/>
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
+				<Bus Id="3991942870" Name="Music"/>
 			</Busses>
 			<AuxBusses>
 				<AuxBus Id="1063264192" Name="Valley_verb">
 					<PluginRefs>
 						<ShareSets>
-							<PluginRef Id="2038996943"/>
+							<PluginRef Id="3164629247"/>
 						</ShareSets>
 					</PluginRefs>
  MaxAttenuation="100"				</AuxBus>
@@ -190,10 +192,14 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{912982B0-7829-D040-07F9-B92F909B1C38}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{27C90EE1-95DF-124F-5E2F-6EE33804D519}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
+				<File Id="25907549" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>UnpauseGame.wav</ShortName>
+					<CachePath>SFX/UnpauseGame_10C4C929.wem</CachePath>
+				</File>
 				<File Id="30634264" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Ambience, Birdsong, Singing Birds, Early Morning SND11282 7.wav</ShortName>
 					<CachePath>SFX/Ambience, Birdsong, Singing Birds, Early Morning SND11282 7_10C4C929.wem</CachePath>
@@ -205,6 +211,10 @@
 				<File Id="59103797" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 3.wav</ShortName>
 					<CachePath>SFX/015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 3_10C4C929.wem</CachePath>
+				</File>
+				<File Id="59410772" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Click_button.wav</ShortName>
+					<CachePath>SFX/Click_button_10C4C929.wem</CachePath>
 				</File>
 				<File Id="89932490" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Footsteps, Human, Gravel, Walk SND62071 1.wav</ShortName>
@@ -330,6 +340,10 @@
 					<ShortName>271666__honorhunter__tomato-squishwet.wav</ShortName>
 					<CachePath>SFX/271666__honorhunter__tomato-squishwet_CAD2C782.wem</CachePath>
 				</File>
+				<File Id="677144876" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Ability Recharge.wav</ShortName>
+					<CachePath>SFX/Ability Recharge_10C4C929.wem</CachePath>
+				</File>
 				<File Id="699093671" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 7.wav</ShortName>
 					<CachePath>SFX/015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 7_10C4C929.wem</CachePath>
@@ -386,6 +400,10 @@
 					<ShortName>442905__qubodup__pig-sound.wav</ShortName>
 					<CachePath>SFX/442905__qubodup__pig-sound_1B25C312.wem</CachePath>
 				</File>
+				<File Id="911444961" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>PauseGame.wav</ShortName>
+					<CachePath>SFX/PauseGame_10C4C929.wem</CachePath>
+				</File>
 				<File Id="940789584" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>536746__egomassive__pig 4.wav</ShortName>
 					<CachePath>SFX/536746__egomassive__pig 4_C44EA791.wem</CachePath>
@@ -418,24 +436,28 @@
 					<ShortName>Bloody_Squish_Fienup_CLASSIC_006 3.wav</ShortName>
 					<CachePath>SFX/Bloody_Squish_Fienup_CLASSIC_006 3_10C4C929.wem</CachePath>
 				</File>
+				<File Id="1065195588" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Hover_button2.wav</ShortName>
+					<CachePath>SFX/Hover_button2_10C4C929.wem</CachePath>
+				</File>
 				<File Id="1069017231" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Splat 6-551449__jjxmf__splats.wav</ShortName>
 					<CachePath>SFX/Splat 6-551449__jjxmf__splats_10C4C929.wem</CachePath>
 				</File>
 			</Media>
-			<Plugins>
-				<ShareSets>
-					<Plugin Id="602546716" Name="Room_Large" LibName="Wwise RoomVerb" LibId="7733251"/>
-				</ShareSets>
-			</Plugins>
 			<Events>
+				<Event Id="2431691136" Name="Play_Ability_recharge" DurationType="OneShot" DurationMin="1.5312471" DurationMax="1.5312471">
+					<MediaRefs>
+						<MediaRef Id="677144876"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="3218574908" Name="Play_big_grunt_die" MaxAttenuation="45" DurationType="OneShot" DurationMin="0.96546996" DurationMax="1.3260578">
 					<MediaRefs>
 						<MediaRef Id="577496908"/>
 						<MediaRef Id="894723020"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="3350824361" Name="Play_big_grunt_hit" MaxAttenuation="100" DurationType="OneShot" DurationMin="1.7893137" DurationMax="2.3098686">
+				<Event Id="3350824361" Name="Play_big_grunt_hit" MaxAttenuation="70" DurationType="OneShot" DurationMin="1.7893137" DurationMax="2.3098686">
 					<MediaRefs>
 						<MediaRef Id="270473895"/>
 						<MediaRef Id="529136300"/>
@@ -453,6 +475,11 @@
 						<MediaRef Id="242414373"/>
 						<MediaRef Id="398272583"/>
 						<MediaRef Id="533766557"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1619866993" Name="Play_Click_button" DurationType="OneShot" DurationMin="0.41271186" DurationMax="0.45713967">
+					<MediaRefs>
+						<MediaRef Id="59410772"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="2211787386" Name="Play_Dash" DurationType="OneShot" DurationMin="0.59574914" DurationMax="0.7523331">
@@ -514,7 +541,7 @@
 						<MediaRef Id="894723020"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2989619110" Name="Play_grunt_hit" MaxAttenuation="100" DurationType="OneShot" DurationMin="1.7893137" DurationMax="2.3098686">
+				<Event Id="2989619110" Name="Play_grunt_hit" MaxAttenuation="70" DurationType="OneShot" DurationMin="1.7893137" DurationMax="2.3098686">
 					<MediaRefs>
 						<MediaRef Id="270473895"/>
 						<MediaRef Id="529136300"/>
@@ -524,6 +551,11 @@
 						<MediaRef Id="835267405"/>
 						<MediaRef Id="940789584"/>
 						<MediaRef Id="965924032"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2407781483" Name="Play_Hover_button" DurationType="OneShot" DurationMin="0.20724398" DurationMax="0.21654448">
+					<MediaRefs>
+						<MediaRef Id="1065195588"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="3689126666" Name="Play_jump" DurationType="OneShot" DurationMin="1.1270713" DurationMax="1.1270713">
@@ -556,6 +588,11 @@
 						<MediaRef Id="1064136553"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="2508072086" Name="Play_PauseGame" DurationType="OneShot" DurationMin="0.5424126" DurationMax="0.6095413">
+					<MediaRefs>
+						<MediaRef Id="911444961"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="3128913152" Name="Play_Pickup_item" DurationType="OneShot" DurationMin="1.0993161" DurationMax="1.1250113">
 					<MediaRefs>
 						<MediaRef Id="371601698"/>
@@ -586,11 +623,11 @@
 						<MediaRef Id="200846055"/>
 						<MediaRef Id="705499710"/>
 					</MediaRefs>
-					<PluginRefs>
-						<ShareSets>
-							<PluginRef Id="602546716"/>
-						</ShareSets>
-					</PluginRefs>
+				</Event>
+				<Event Id="2865946037" Name="Play_UnpauseGame" DurationType="OneShot" DurationMin="0.5646351" DurationMax="0.61645067">
+					<MediaRefs>
+						<MediaRef Id="25907549"/>
+					</MediaRefs>
 				</Event>
 				<Event Id="3110216747" Name="Play_Wind_ambience" DurationType="Infinite">
 					<MediaRefs>
@@ -608,5 +645,5 @@
 			</GameParameters>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{C6AE3CB2-E383-283E-502D-05A41A53D0C6}</FileHash>
+	<FileHash>{E7D62D0E-C49D-F1F3-8613-B57433392E1F}</FileHash>
 </SoundBanksInfo>
