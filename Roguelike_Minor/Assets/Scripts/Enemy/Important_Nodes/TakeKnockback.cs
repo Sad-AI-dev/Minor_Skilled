@@ -9,9 +9,6 @@ using System.Threading.Tasks;
 namespace Game.Enemy {
     public class TakeKnockback : BT_Node
     {
-        private Transform transform;
-        private NavMeshAgent navAgent;
-        private Agent agent;
         private Rigidbody rb;
 
         //Bools

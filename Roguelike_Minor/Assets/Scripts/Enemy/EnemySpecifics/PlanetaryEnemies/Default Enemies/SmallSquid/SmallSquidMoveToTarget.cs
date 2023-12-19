@@ -7,9 +7,6 @@ using Game.Core;
 namespace Game.Enemy {
     public class SmallSquidMoveToTarget : BT_Node
     {
-        Transform transform;
-        Transform target;
-        Agent agent;
         LayerMask layerMask;
         GameObject ExplosionVisuals;
         Rigidbody rb;

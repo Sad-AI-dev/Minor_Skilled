@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Game.Core;
 
@@ -58,13 +59,31 @@ namespace Game {
         //========== Handle Hit Event ==========
         public void ProcessDealDamage(ref HitEvent hitEvent, Item sourceItem)
         {
-            if (hitEvent.isCrit)
+            if (hitEvent.isCrit && TargetIsValid(hitEvent))
             {
-                EffectVars vars = hitEvent.target.agent.effectHandler.AddEffect(effect) as EffectVars;
-                vars.damageMult = (sourceItem.vars as Item30Vars).damageMult;
+                ApplyEffect(hitEvent, sourceItem);
             }
         }
         public void ProcessDealDamage(ref HitEvent hitEvent, List<StatusEffectHandler.EffectVars> vars) { }
+
+        private bool TargetIsValid(HitEvent hitEvent)
+        {
+            StatusEffectHandler handler = hitEvent.target.agent.effectHandler;
+            if (handler.statusEffects.ContainsKey(effect))
+            {
+                foreach (EffectVars vars in handler.statusEffects[effect].Cast<EffectVars>()) 
+                {
+                    if (vars.source == this) { return false; }
+                }
+            }
+            return true;
+        }
+        private void ApplyEffect(HitEvent hitEvent, Item sourceItem)
+        {
+            EffectVars vars = hitEvent.target.agent.effectHandler.AddEffect(effect) as EffectVars;
+            vars.source = this;
+            vars.damageMult = (sourceItem.vars as Item30Vars).damageMult;
+        }
 
         //========== Description ===========
         public override string GenerateLongDescription()

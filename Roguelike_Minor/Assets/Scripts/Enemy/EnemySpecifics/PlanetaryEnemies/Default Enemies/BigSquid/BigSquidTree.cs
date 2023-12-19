@@ -34,10 +34,9 @@ namespace Game.Enemy {
             root = new Selector(
                 new List<BT_Node>
                 {
-                    //Check if in shooting range
                     //handle shooting
                     new Sequence(new List<BT_Node>{
-                        new BigSquidRangeCheck(transform, agent),
+                        new BigSquidRangeCheck(transform, Random.Range(FireRangeMin, FireRangeMax), agent),
                         new BigSquidHandleAttack(transform, agent, lineRenderer, rb, rotationSpeedTargeting)
                     }),
                     //Get Path to player and follow path

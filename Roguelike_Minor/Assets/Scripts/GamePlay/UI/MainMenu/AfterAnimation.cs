@@ -1,11 +1,14 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AfterAnimation : MonoBehaviour
 {
+    public string FadeInCorporationScreen;
+    public UnityEvent onAnimationFinished;
+
     private Animator animator;
     private bool hasStarted = false;
-    public string FadeInCorporationScreen;
-    
+
     void Start()
     {
         // Get the Animator component attached to the GameObject
@@ -24,7 +27,8 @@ public class AfterAnimation : MonoBehaviour
             {
                 hasStarted = false; // Reset flag
                 OnAnimationFinished();
-            
+                //turn off
+                enabled = false;
             }
         }
     }
@@ -42,8 +46,8 @@ public class AfterAnimation : MonoBehaviour
     // Function to be called once the animation is finished
     void OnAnimationFinished()
     {
-        Debug.Log("Animation Finished!");
         // Call your desired method or perform actions here after animation finishes
+        onAnimationFinished?.Invoke();
     }
 }
 

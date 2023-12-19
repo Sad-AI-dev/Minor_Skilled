@@ -9,7 +9,6 @@ namespace Game.Enemy {
     public class SmallSquidTree : Core.Tree
     {
         public static int FlightPatrolRange = 20;
-        public static int AttackRange = 50;
         public static float ExplosionRange = 1.2f;
         public static float ExplosionTime = 0.5f;
 
@@ -22,13 +21,10 @@ namespace Game.Enemy {
         public GameObject ExplosionVisuals;
         public LayerMask playerLayerMask;
 
-        BT_Node root;
-
         protected override void Start()
         {
             base.Start();
             FlightPatrolRange = flightPatrolRange;
-            AttackRange = attackRange;
             ExplosionRange = explosionRange;
             ExplosionTime = explosionTime;
         }
@@ -40,7 +36,7 @@ namespace Game.Enemy {
                 {
                     new Sequence(new List<BT_Node>{
                         //Check target in range
-                        new SmallSquidCheckRange(transform, agent),
+                        new SmallSquidCheckRange(transform, attackRange, agent),
                         //Dive and Explode when in range
                         new SmallSquidMoveToTarget(transform, agent, playerLayerMask, ExplosionVisuals, rb)
                     }),

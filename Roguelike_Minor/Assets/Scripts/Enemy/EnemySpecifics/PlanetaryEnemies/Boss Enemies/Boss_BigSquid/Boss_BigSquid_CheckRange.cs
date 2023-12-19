@@ -10,9 +10,6 @@ using System.Threading.Tasks;
 namespace Game.Enemy {
     public class Boss_BigSquid_CheckRange : BT_Node
     {
-        Transform transform;
-        Transform target;
-
         float distanceToTarget;
         Vector3 sphereCastDirection;
 

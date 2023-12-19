@@ -6,13 +6,12 @@ using Game.Enemy.Core;
 using UnityEngine.AI;
 
 namespace Game.Enemy {
-    public class TaskCheckMelee: BT_Node
+    public class TaskCheckMelee: CheckRangeNode
     {
         bool ranged;
         bool charging = false;
-        Agent agent;
 
-        public TaskCheckMelee(bool ranged, Agent agent)
+        public TaskCheckMelee(Transform transform, float distanceToCheck, bool ranged, Agent agent) : base(transform, distanceToCheck)
         {
             this.ranged = ranged;
             this.agent = agent;
@@ -25,28 +24,22 @@ namespace Game.Enemy {
                 state = NodeState.FAILURE;
                 return state;
             }
-            else
+            if (GetData("Charging") != null)
             {
-                if (GetData("Charging") != null)
+                charging = (bool)GetData("Charging");
+            }
+            state = base.Evaluate();
+
+            if(state == NodeState.SUCCESS)
+            {
+                if (!charging)
                 {
-                    charging = (bool)GetData("Charging");
-                }
-                if ((float)GetData("DistanceToTarget") <= MeleeGruntTree.meleeAttackRange && !charging)
-                {
-                    if (GetData("ChargeRandom") != null)
-                    {
-                        SetData("ChargeRandom", 100);
-                    }
+                    //Stop charging co routine
                     if (GetData("getRandomCO") != null)
                     {
                         agent.StopCoroutine((Coroutine)GetData("getRandomCO"));
                         SetData("getRandomCO", null);
                     }
-                    state = NodeState.SUCCESS;
-                }
-                else
-                {
-                    state = NodeState.FAILURE;
                 }
             }
 

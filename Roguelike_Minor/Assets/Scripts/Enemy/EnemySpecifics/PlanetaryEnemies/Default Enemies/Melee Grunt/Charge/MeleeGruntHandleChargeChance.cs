@@ -9,10 +9,6 @@ using Game.Core;
 namespace Game.Enemy {
     public class MeleeGruntHandleChargeChance : BT_Node
     {
-        Agent agent;
-        NavMeshAgent navAgent;
-        Transform transform;
-
         public MeleeGruntHandleChargeChance(Agent agent, NavMeshAgent navAgent, Transform transform)
         {
             this.transform = transform;
@@ -22,6 +18,7 @@ namespace Game.Enemy {
 
         public override NodeState Evaluate()
         {
+            Debug.Log("Handling Charge");
             if (GetData("Target") != null)
             {
                 Transform target = (Transform)GetData("Target");

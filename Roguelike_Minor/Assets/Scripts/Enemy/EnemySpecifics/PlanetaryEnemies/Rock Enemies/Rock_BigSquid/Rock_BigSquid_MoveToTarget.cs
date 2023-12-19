@@ -9,8 +9,6 @@ namespace Game.Enemy
 {
     public class Rock_BigSquid_MoveToTarget : BT_Node
     {
-        NavMeshAgent navAgent;
-
         public Rock_BigSquid_MoveToTarget(NavMeshAgent navAgent)
         {
             this.navAgent = navAgent;

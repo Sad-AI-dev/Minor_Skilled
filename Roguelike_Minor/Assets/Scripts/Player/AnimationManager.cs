@@ -30,7 +30,7 @@ namespace Game.Player
         int hit;
         int grenade;
         int interact;
-        int dash;
+        int dashing;
         int die;
         int shoot;
         int special;
@@ -52,6 +52,8 @@ namespace Game.Player
             controller.startRunning.AddListener(AnimRun);
             controller.stopRunning.AddListener(StopAnimRun);
             controller.jump.AddListener(Jump);
+            controller.startDashing.AddListener(StartDash);
+            controller.stopDashing.AddListener(StopDash);
         }
 
         private void InitializeIdentifiers()
@@ -62,7 +64,7 @@ namespace Game.Player
             hit = Animator.StringToHash("Hit");
             grenade = Animator.StringToHash("Grenade");
             interact = Animator.StringToHash("Interact");
-            dash = Animator.StringToHash("Dash");
+            dashing = Animator.StringToHash("Dashing");
             die = Animator.StringToHash("Die");
             shoot = Animator.StringToHash("Shoot");
             special = Animator.StringToHash("Special");
@@ -108,9 +110,14 @@ namespace Game.Player
         {
             animator.SetTrigger(special);
         }
-        private void AnimUtility()
+        private void StartDash()
         {
-            animator.SetTrigger(dash);
+            animator.SetBool(dashing, true);
+        }
+
+        private void StopDash()
+        {
+            animator.SetBool(dashing, false);
         }
 
         private void AnimHit()
