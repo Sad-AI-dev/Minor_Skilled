@@ -46,7 +46,11 @@ namespace Game {
         public override void RemoveStack(Item item)
         {
             Item23Vars vars = item.vars as Item23Vars;
-            if (item.stacks == 0) { vars.baseMoney -= baseMoney; }
+            if (item.stacks == 0) 
+            { 
+                vars.baseMoney -= baseMoney;
+                HandleGameEnd(null);
+            }
             else { vars.baseMoney -= bonusMoney; }
         }
 
