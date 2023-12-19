@@ -1,33 +1,32 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Core.GameSystems {
     [Serializable]
     public enum ObjectiveState { InProgress, Done }
-    public enum ObjectiveType { Checkmark, Counter, ProgressBar }
+    public enum ObjectiveUIElementType { Description, Counter, ProgressBar }
 
-    //public struct ObjectiveProgress
-    //{
-    //    int current;
-    //    int goal;
-    //    ObjectiveType type;
-    //}
+    [System.Serializable]
+    public class ObjectiveProgress
+    {
+        //counter
+        public string label;
+        public int total;
+        public int current;
+        //ui instructions
+        public ObjectiveUIElementType type;
+        public bool useLargeBar;
+    }
 
     [System.Serializable]
     public class StepUISettings
     {
+        [Header("General UI Settings")]
         public string title;
-        public string description;
-        [Header("Progress UI Settings")]
-        public bool useLargeBar;
-        public bool useSmallBar = true;
-        public ObjectiveType type;
 
-        [Space(10f)]
-        public string progressLabel;
-        public int maxCount;
-        public int currentCount;
-        public float progressPercent; //0 to 1
+        [Header("Progress UI Settings")]
+        public List<ObjectiveProgress> progress;
     }
 
     public abstract class ObjectiveStep : MonoBehaviour

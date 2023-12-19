@@ -111,7 +111,7 @@ namespace Game {
         //=============== UI =============
         private void UpdateUI()
         {
-            stepUISettings.progressPercent = progress / 100f;
+            stepUISettings.progress[0].current = Mathf.FloorToInt(progress);
             progressLabel.text = Mathf.FloorToInt(progress) + "%";
         }
 

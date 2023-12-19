@@ -70,14 +70,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepUISettings:
     title: Charge The Obelisk
-    description: 
-    useLargeBar: 1
-    useSmallBar: 1
-    type: 2
-    progressLabel: Obelisk Progress
-    maxCount: 0
-    currentCount: 0
-    progressPercent: 0
+    progress:
+    - label: 'Charge Proress:'
+      total: 100
+      current: 0
+      type: 2
+      useLargeBar: 1
   state: 0
   objective:
     data: {fileID: 0}
