@@ -58,7 +58,7 @@ namespace Game {
                 //destroy check
                 if (step.state == ObjectiveState.Done)
                 { //step completed, destroy card
-                    Destroy(stepCards[step].gameObject);
+                    stepCards[step].gameObject.SetActive(false);
                     stepCards.Remove(step);
                 }
             }

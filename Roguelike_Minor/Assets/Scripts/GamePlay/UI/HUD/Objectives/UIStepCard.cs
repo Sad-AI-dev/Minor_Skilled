@@ -20,6 +20,7 @@ namespace Game {
 
         //vars
         private UIProgressBarHandler progressBarHandler;
+        private bool usingBigBar;
 
         //manage created elements
         private List<UIStepElement> stepElements;
@@ -27,6 +28,7 @@ namespace Game {
         public void Setup(ObjectiveStep step, UIProgressBarHandler progressBarHandler)
         {
             //initialize vars
+            usingBigBar = false;
             this.progressBarHandler = progressBarHandler;
             stepElements = new List<UIStepElement>();
             //generate visuals
@@ -43,7 +45,9 @@ namespace Game {
             //generate elements
             for (int i = 0; i < settings.progress.Count; i++) 
             {
-                //GenerateElement(settings.progress[i]);
+                //big bar check
+                if (!usingBigBar) { usingBigBar = settings.progress[i].useLargeBar; }
+                //register created element
                 stepElements.Add(GenerateElement(settings.progress[i]));
             }
         }
@@ -59,6 +63,7 @@ namespace Game {
             //set default value
             UIStepElement stepElement = Instantiate(prefab, elementsHolder).GetComponent<UIStepElement>();
             stepElement.Initailize(progressBarHandler, progress);
+            //return result
             return stepElement;
         }
 
@@ -72,6 +77,19 @@ namespace Game {
                 {
                     stepElements[i].UpdateVisuals(step.stepUISettings.progress[i]);
                 }
+            }
+            else { HandleOnComplete(); } //objective step was completed
+        }
+        
+        //=========== Handle On Complete ============
+        private void HandleOnComplete()
+        {
+            //hide large bar if need
+            if (usingBigBar) { progressBarHandler.Hide(); }
+            //destroy elements
+            foreach (Transform element in elementsHolder)
+            {
+                Destroy(element.gameObject);
             }
         }
     }
