@@ -5,11 +5,20 @@ using Game.Core;
 using Game.Core.GameSystems;
 
 namespace Game {
-    [RequireComponent(typeof(BoxCollider))]
     public class Crusher : MonoBehaviour
     {
         [Header("Detection Settings")]
+        [SerializeField] private BoxCollider detectCollider;
         [SerializeField] private LayerMask mask;
+
+        [Header("Animation Settings")]
+        [SerializeField] private BoxCollider blockCollider;
+        [SerializeField] private Animator animator;
+        [SerializeField] private string animationClip;
+
+        [Header("Timings")]
+        [SerializeField] private float swapDelay = 0.5f;
+        [SerializeField] private float blockedDelay = 1f;
 
         [Header("SlotPiece Settings")]
         [SerializeField] private GameObject itemTemplate;
@@ -17,15 +26,48 @@ namespace Game {
         [SerializeField] private float yOffset = 0.2f;
 
         //vars
-        private BoxCollider boxCollider;
+        private bool isCrushing;
+        private int animationHash;
 
         private void Start()
         {
-            boxCollider = GetComponent<BoxCollider>();
+            //initialize vars
+            isCrushing = false;
+            blockCollider.enabled = false;
+            //setup animator
+            animator.enabled = false;
         }
 
         //======== Crush Item Logic ==========
         public void Crush(Interactor interactor)
+        {
+            if (!isCrushing) { StartCoroutine(CrushCo()); }
+        }
+
+        private IEnumerator CrushCo()
+        {
+            //initialize vars
+            isCrushing = true;
+            blockCollider.enabled = true;
+            //play animation
+            PlayAnimation();
+            yield return new WaitForSeconds(swapDelay);
+            //crush items
+            SwapItems();
+            yield return new WaitForSeconds(blockedDelay);
+            //reset
+            blockCollider.enabled = false;
+            isCrushing = false;
+            animator.enabled = false;
+        }
+
+        private void PlayAnimation()
+        {
+            animator.enabled = true;
+            animator.Play(animationClip);
+        }
+
+        private void SwapItems()
         {
             List<ItemDataSO> items = GetItemsInRange();
             int pieceValue = ItemsToPieceValue(items);
@@ -38,8 +80,8 @@ namespace Game {
             List<ItemDataSO> itemsInRange = new List<ItemDataSO>();
             //find items
             Collider[] results = Physics.OverlapBox(
-                transform.position + boxCollider.center,
-                boxCollider.size / 2,
+                transform.position + detectCollider.center,
+                detectCollider.size / 2,
                 transform.rotation,
                 mask,
                 QueryTriggerInteraction.Collide
@@ -85,11 +127,11 @@ namespace Game {
 
         private Vector3 GetRandomBoundsPosition()
         {
-            Vector3 centerPos = transform.position + boxCollider.center;
+            Vector3 centerPos = transform.position + detectCollider.center;
             Vector3 randomOffset = new Vector3(
-                Random.Range(-boxCollider.size.x / 2f, boxCollider.size.x / 2f), 
+                Random.Range(-detectCollider.size.x / 2f, detectCollider.size.x / 2f), 
                 0f, 
-                Random.Range(-boxCollider.size.z / 2f, boxCollider.size.z / 2f)
+                Random.Range(-detectCollider.size.z / 2f, detectCollider.size.z / 2f)
             );
             return new Vector3(centerPos.x, transform.position.y + yOffset, centerPos.z) + randomOffset;
         }
