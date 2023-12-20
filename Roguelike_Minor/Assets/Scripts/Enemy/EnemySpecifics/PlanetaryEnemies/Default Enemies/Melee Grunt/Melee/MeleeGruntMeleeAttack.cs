@@ -9,8 +9,6 @@ using Game.Core;
 namespace Game.Enemy {
     public class MeleeGruntMeleeAttack : BT_Node
     {
-        NavMeshAgent navAgent;
-
         public MeleeGruntMeleeAttack(Agent agent, NavMeshAgent navAgent, Transform transform) 
         {
             this.agent = agent;
@@ -19,13 +17,15 @@ namespace Game.Enemy {
         }
 
         //melee attack
+        Vector3 targetPostition;
         public override NodeState Evaluate()
         {
+            Debug.Log("Handling melee");
             if ((Transform)GetData("Target"))
             {
                 navAgent.isStopped = true;
-                Transform target = (Transform)GetData("Target");
-                Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
+                target = (Transform)GetData("Target");
+                targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
                 transform.LookAt(targetPostition);
                 agent.abilities.primary.TryUse();
                 state = NodeState.RUNNING;             

@@ -14,11 +14,14 @@ namespace Game {
         [Header("Technical")]
         [SerializeField] private GameObject itemTemplate;
 
+        //luck var
+        [HideInInspector] public float lootLuck = 0f;
+
         public void DropLoot()
         {
             GameObject obj = Instantiate(itemTemplate);
             //setup item data
-            obj.GetComponent<ItemPickup>().item = lootTable.GetLoot();
+            obj.GetComponent<ItemPickup>().item = lootTable.GetLoot(lootLuck);
             //set item pos
             obj.transform.SetPositionAndRotation(transform.position + transform.forward, GetRandomRotation());
         }

@@ -56,13 +56,13 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves:
-      - name: RightFootDistance
+      - name: RightIKWeight
         curve:
           serializedVersion: 2
           curve:
           - serializedVersion: 3
             time: 0
-            value: 1.5
+            value: 1
             inSlope: 0
             outSlope: 0
             tangentMode: 34
@@ -71,7 +71,7 @@ ModelImporter:
             outWeight: 0.33333334
           - serializedVersion: 3
             time: 0.10003285
-            value: 1.5
+            value: 1
             inSlope: -0
             outSlope: 0.024894172
             tangentMode: 5
@@ -80,7 +80,7 @@ ModelImporter:
             outWeight: 0.69135416
           - serializedVersion: 3
             time: 0.27930057
-            value: 1
+            value: 0
             inSlope: -0.2436676
             outSlope: 0
             tangentMode: 65
@@ -89,7 +89,7 @@ ModelImporter:
             outWeight: 0.13916941
           - serializedVersion: 3
             time: 0.7071554
-            value: 1
+            value: 0
             inSlope: -0
             outSlope: 0.05334174
             tangentMode: 5
@@ -98,7 +98,7 @@ ModelImporter:
             outWeight: 0.43115583
           - serializedVersion: 3
             time: 0.99853516
-            value: 1.5
+            value: 1
             inSlope: -0.01479829
             outSlope: -0.01479829
             tangentMode: 0
@@ -108,13 +108,13 @@ ModelImporter:
           preInfinity: 2
           postInfinity: 2
           rotationOrder: 4
-      - name: LeftFootDistance
+      - name: LeftIKWeight
         curve:
           serializedVersion: 2
           curve:
           - serializedVersion: 3
             time: 0
-            value: 1
+            value: 0
             inSlope: 0
             outSlope: 0
             tangentMode: 34
@@ -123,7 +123,7 @@ ModelImporter:
             outWeight: 0.33333334
           - serializedVersion: 3
             time: 0.25
-            value: 1
+            value: 0
             inSlope: 0.0026927283
             outSlope: 0.0026927283
             tangentMode: 0
@@ -132,7 +132,7 @@ ModelImporter:
             outWeight: 0.69770813
           - serializedVersion: 3
             time: 0.4
-            value: 1.5
+            value: 1
             inSlope: 0.0014529262
             outSlope: 0
             tangentMode: 65
@@ -141,7 +141,7 @@ ModelImporter:
             outWeight: 0.33333334
           - serializedVersion: 3
             time: 0.66237074
-            value: 1.5
+            value: 1
             inSlope: -0
             outSlope: -0.0015992727
             tangentMode: 5
@@ -150,7 +150,7 @@ ModelImporter:
             outWeight: 0.42679304
           - serializedVersion: 3
             time: 1
-            value: 1
+            value: 0
             inSlope: 0.0036405027
             outSlope: 0.0036405027
             tangentMode: 0

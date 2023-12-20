@@ -8,12 +8,6 @@ using UnityEngine.AI;
 namespace Game.Enemy {
     public class MeleeGruntWalkToTarget : BT_Node
     {
-        Transform transform;
-        Transform target;
-        Agent agent;
-        NavMeshAgent navAgent;
-        bool gameEnded = false;
-
         public MeleeGruntWalkToTarget(Transform transform, Agent agent, NavMeshAgent navAgent)
         {
             this.transform = transform;
@@ -21,7 +15,6 @@ namespace Game.Enemy {
             this.navAgent = navAgent;
 
             EventBus<GameEndEvent>.AddListener(OnGameEnd);
-            
         }
 
         public override NodeState Evaluate()

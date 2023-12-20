@@ -20,6 +20,8 @@ namespace Game {
             sliderHolder.SetActive(true);
             UpdateProgress(0);
             progressLabel.text = title;
+            //show correct labels
+            percentLabel.gameObject.SetActive(!showCounter);
             counterLabel.gameObject.SetActive(showCounter);
         }
 
@@ -38,6 +40,7 @@ namespace Game {
 
         public void UpdateCounter(int counter, int maxCounter)
         {
+            slider.value = (counter / (float)maxCounter) * slider.maxValue;
             counterLabel.text = $"{counter}/{maxCounter}";
         }
     }

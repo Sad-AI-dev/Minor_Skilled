@@ -5,25 +5,20 @@ using Game.Core;
 using Game.Enemy.Core;
 using System.Threading.Tasks;
 
-namespace Game.Enemy
-{
-    public class TaskCheckSemi : BT_Node
+namespace Game.Enemy {
+    public class TaskCheckSemi : CheckRangeNode
     {
-        Agent agent;
-        Coroutine getRandomCo;
-
         bool ranged;
         int chargeChancePercent;
 
-        int random;
-        bool checkingRandom;
-
-        public TaskCheckSemi(bool ranged, int chargeChancePercent, Agent agent)
+        public TaskCheckSemi(Transform transform, float distanceToCheck, bool ranged, int chargeChancePercent, Agent agent) : base(transform, distanceToCheck)
         {
             this.ranged = ranged;
             this.chargeChancePercent = chargeChancePercent;
             this.agent = agent;
         }
+
+        int chanceNumber;
 
         public override NodeState Evaluate()
         {
@@ -32,68 +27,44 @@ namespace Game.Enemy
                 state = NodeState.FAILURE;
                 return state;
             }
-            else
-            {
-                if ((float)GetData("DistanceToTarget") <= MeleeGruntTree.semiMeleeAttackRange && 
-                    (float)GetData("DistanceToTarget") > MeleeGruntTree.meleeAttackRange)
-                {
-                    //Get random number.
-                    if (GetData("getRandomCO") == null) SetData("getRandomCO", agent.StartCoroutine(GetRandomCO()));
+            state = base.Evaluate();
 
-                    //Fail charge if true and keep walking;
-                    if ((int)GetData("ChargeRandom") <= chargeChancePercent)
+            if(state == NodeState.SUCCESS) 
+            {
+                state = NodeState.FAILURE;
+                if ((float)GetData("DistanceToTarget") > MeleeGruntTree.meleeAttackRange)
+                {
+                    //Chance to charge
+                    if(null == GetData("getRandomCO")) SetData("getRandomCO", agent.StartCoroutine(CheckForChargeCooldownCo()));
+
+                    if(chanceNumber <= chargeChancePercent)
                     {
-                        SetData("Charging", true);
-                        Charged();
-                        QuickSetData("ChargeRandom", chargeChancePercent + 1);
-                        agent.StopCoroutine((Coroutine)GetData("getRandomCO"));
+                        agent.StartCoroutine(ChargingCo());
                         state = NodeState.SUCCESS;
-                        return state;
-                    }
-                    else
-                    {
-                        state = NodeState.FAILURE;
-                        return state;
                     }
                 }
-                else state = NodeState.FAILURE;
             }
 
             return state;
         }
 
-        async void Charged()
+        IEnumerator ChargingCo()
         {
-            await Task.Delay(5000);
+            SetData("Charging", true);
+            yield return new WaitForSeconds(5);
+            ClearData("getRandomCO");
             SetData("Charging", false);
         }
 
-        IEnumerator GetRandomCO()
+        IEnumerator CheckForChargeCooldownCo()
         {
-            if (GetData("ChargeRandom") != null && (int)GetData("ChargeRandom") <= chargeChancePercent)
+            chanceNumber = Random.Range(1, 101);
+            Debug.Log("Chance Charge: " + chanceNumber);
+            yield return new WaitForSeconds(3);
+            if (null == GetData("Charging") || !(bool)GetData("Charging"))
             {
-                QuickSetData("ChargeRandom", chargeChancePercent + 1);
+                SetData("getRandomCO", agent.StartCoroutine(CheckForChargeCooldownCo()));
             }
-            else QuickSetData("ChargeRandom", Random.Range(1, 101));
-            checkingRandom = true;
-            yield return new WaitForSeconds(1);
-            SetData("getRandomCO", agent.StartCoroutine(GetRandomCO()));
-        }
-
-        void QuickSetData(string name, object value)
-        {
-            SetData(name, value);
-        }
-        async void GetRandom()
-        {
-            if(random <= chargeChancePercent)
-            {
-                random = chargeChancePercent + 1;
-            }
-            else random = Random.Range(1, 101);
-            checkingRandom = true;
-            await Task.Delay(1000);
-            GetRandom();
         }
     }
 }

@@ -22,5 +22,10 @@ namespace Game.Player.Soldier
             Vector3 velocity = controller.cam.transform.forward * dashForce;
             controller.Dash(velocity);
         }
+
+        private IEnumerator HandDashAnim(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+        }
     }
 }

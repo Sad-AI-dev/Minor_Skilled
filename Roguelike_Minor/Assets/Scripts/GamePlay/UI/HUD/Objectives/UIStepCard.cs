@@ -11,100 +11,85 @@ namespace Game {
     {
         [Header("General Refs")]
         public TMP_Text title;
-        public TMP_Text description;
-        public GameObject checkMark;
+        public RectTransform elementsHolder;
 
         [Header("Progress Refs")]
-        public GameObject counterHolder;
-        public TMP_Text counterLabel;
-
-        [Space(10f)]
-        public GameObject sliderHolder;
-        public TMP_Text sliderLabel;
-        public Slider slider;
+        public GameObject descriptionPrefab;
+        public GameObject counterPrefab;
+        public GameObject sliderPrefab;
 
         //vars
-        private bool done;
         private UIProgressBarHandler progressBarHandler;
+        private bool usingBigBar;
+
+        //manage created elements
+        private List<UIStepElement> stepElements;
 
         public void Setup(ObjectiveStep step, UIProgressBarHandler progressBarHandler)
         {
-            done = false;
-            StepUISettings settings = step.stepUISettings;
-            //setup general data
-            title.text = settings.title;
-            description.text = settings.description;
-            checkMark.SetActive(false);
-            //setup progress bar
-            if (settings.useLargeBar) {
-                this.progressBarHandler = progressBarHandler;
-                progressBarHandler.Show(settings.title, settings.type == ObjectiveType.Counter);
-            }
-            //setup progress data
-            if (settings.useSmallBar)
-            {
-                switch (settings.type)
-                {
-                    case ObjectiveType.Checkmark: break; //do nothing
-                    case ObjectiveType.Counter:
-                        counterHolder.SetActive(true);
-                        UpdateCounter(settings);
-                        break;
+            //initialize vars
+            usingBigBar = false;
+            this.progressBarHandler = progressBarHandler;
+            stepElements = new List<UIStepElement>();
+            //generate visuals
+            GenerateVisuals(step.stepUISettings);
+            //initialize values
+            HandleStateChange(step);
+        }
 
-                    case ObjectiveType.ProgressBar:
-                        sliderHolder.SetActive(true);
-                        UpdateSlider(settings);
-                        break;
-                }
+        //========= Generate Visuals ===========
+        private void GenerateVisuals(StepUISettings settings)
+        {
+            //setup general visuals
+            title.text = settings.title;
+            //generate elements
+            for (int i = 0; i < settings.progress.Count; i++) 
+            {
+                //big bar check
+                if (!usingBigBar) { usingBigBar = settings.progress[i].useLargeBar; }
+                //register created element
+                stepElements.Add(GenerateElement(settings.progress[i]));
             }
+        }
+
+        private UIStepElement GenerateElement(ObjectiveProgress progress)
+        {
+            GameObject prefab = progress.type switch {
+                ObjectiveUIElementType.Description => descriptionPrefab,
+                ObjectiveUIElementType.Counter => counterPrefab,
+                ObjectiveUIElementType.ProgressBar => sliderPrefab,
+                _ => null,
+            };
+            //set default value
+            UIStepElement stepElement = Instantiate(prefab, elementsHolder).GetComponent<UIStepElement>();
+            stepElement.Initailize(progressBarHandler, progress);
+            //return result
+            return stepElement;
         }
 
         //=========== Handle State Change =========
         public void HandleStateChange(ObjectiveStep step)
         {
-            if (done) return; //don't update if step is completed
-            //update values
-            StepUISettings settings = step.stepUISettings;
-            switch (settings.type)
+            if (step.state == ObjectiveState.InProgress)
             {
-                case ObjectiveType.Checkmark: break; //do nothing
-                case ObjectiveType.Counter:
-                    UpdateCounter(settings);
-                    break;
-
-                case ObjectiveType.ProgressBar:
-                    UpdateSlider(settings);
-                    break;
-            }
-            //done check
-            if (step.state == ObjectiveState.Done)
-            {
-                done = true;
-                checkMark.SetActive(true);
-                //hide progress bar if need
-                if (settings.useLargeBar)
+                //update visuals
+                for (int i = 0; i < step.stepUISettings.progress.Count; i++)
                 {
-                    progressBarHandler.Hide();
+                    stepElements[i].UpdateVisuals(step.stepUISettings.progress[i]);
                 }
             }
+            else { HandleOnComplete(); } //objective step was completed
         }
-
-        private void UpdateCounter(StepUISettings settings)
+        
+        //=========== Handle On Complete ============
+        private void HandleOnComplete()
         {
-            counterLabel.text = $"{settings.progressLabel}: {settings.currentCount}/{settings.maxCount}";
-            if (settings.useLargeBar)
+            //hide large bar if need
+            if (usingBigBar) { progressBarHandler.Hide(); }
+            //destroy elements
+            foreach (Transform element in elementsHolder)
             {
-                progressBarHandler.UpdateCounter(settings.currentCount, settings.maxCount);
-            }
-        }
-
-        private void UpdateSlider(StepUISettings settings)
-        {
-            sliderLabel.text = $"{Mathf.FloorToInt(settings.progressPercent * 100)}%";
-            slider.value = settings.progressPercent;
-            if (settings.useLargeBar)
-            {
-                progressBarHandler.UpdateProgress(settings.progressPercent);
+                Destroy(element.gameObject);
             }
         }
     }

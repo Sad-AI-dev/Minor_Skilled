@@ -15,28 +15,28 @@ namespace Game.Player.Soldier
         [SerializeField] private GameObject explosion;
         [SerializeField] private float radius;
         [SerializeField] private float knockbackForce;
-
-        PlayerController controller;
+        [SerializeField] private int damage;
+ 
+        private PlayerController controller;
+        private Camera cam;
 
         public override void InitializeVars(Ability source)
         {
             controller = source.agent.GetComponent<PlayerController>();
+            cam = controller.cam;
         }
 
         public override void Use(Ability source)
         {
-            Camera cam = Camera.main;
-            Vector3 target;
+            Vector3 targetPos;
 
             ScreenShakeManager.instance.ShakeCamera(3, 1, 1, source.agent.transform.position);
-            
-
 
             controller.StartSlowCoroutine(.2f);
 
             RaycastHit hit;
-            if (Physics.Raycast(cam.ViewportPointToRay(new UnityEngine.Vector3(0.5f, 0.5f, 0)), out hit, 500, layermask))
-                target = hit.point;
+            if (Physics.Raycast(cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit, 500, layermask))
+                targetPos = hit.point;
             else
                 return;
 
@@ -45,9 +45,10 @@ namespace Game.Player.Soldier
                 agent.health.Hurt(new HitEvent(source));
             }
 
-
-            Explosion.DealKnockback(Explosion.FindAgentsInRange(target, radius), knockbackForce, target);
-            GameObject projectile = Instantiate(explosion, target, Quaternion.identity);
+            List<Agent> targetAgents = Explosion.FindAgentsInRange(targetPos, radius);
+            Explosion.DealDamage(targetAgents, source.agent, damage);
+            Explosion.DealKnockback(targetAgents, knockbackForce, targetPos);
+            GameObject projectile = Instantiate(explosion, targetPos, Quaternion.identity);
             projectile.transform.localScale *= radius * 2;
         }
     }

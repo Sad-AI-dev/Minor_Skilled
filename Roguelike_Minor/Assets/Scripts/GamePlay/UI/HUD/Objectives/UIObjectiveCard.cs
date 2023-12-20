@@ -55,6 +55,12 @@ namespace Game {
             if (stepCards.ContainsKey(step))
             {
                 stepCards[step].HandleStateChange(step);
+                //destroy check
+                if (step.state == ObjectiveState.Done)
+                { //step completed, destroy card
+                    stepCards[step].gameObject.SetActive(false);
+                    stepCards.Remove(step);
+                }
             }
             else { CreateCard(step); }
         }

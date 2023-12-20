@@ -20,6 +20,11 @@ namespace Game {
             obj.transform.position = GetLootPosition();
         }
 
+        public void PlaceObject(GameObject obj)
+        {
+            obj.transform.position = GetLootPosition();
+        }
+
         private Vector3 GetLootPosition()
         {
             bool success = false;
