@@ -267,19 +267,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1160534683721558313, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1160534683721558313, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1160534683721558313, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8320137
+      value: 0.9991361
       objectReference: {fileID: 0}
     - target: {fileID: 1160534683721558313, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5547551
+      value: 0.041558642
       objectReference: {fileID: 0}
     - target: {fileID: 1389778117787781048, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_Center.y
@@ -328,6 +328,42 @@ PrefabInstance:
     - target: {fileID: 4989740113520203968, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.041558642
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271601653333589385, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271601653333589385, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271601653333589385, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: InheritVelocityModule.m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271601653333589385, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: InheritVelocityModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271601653333589385, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271601653333589385, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.764151
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271601653333589385, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.764151
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271601653333589385, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.57239234
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271601653333589385, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5844694640700254909, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_Enabled
@@ -397,6 +433,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1553550031}
+    - target: {fileID: 7374867739153013466, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: jumpForce
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7374867739153013466, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: dashDuration
       value: 0.3
