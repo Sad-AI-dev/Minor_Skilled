@@ -69,9 +69,10 @@ namespace Game.Player
         
         private Coroutine slowCo;
 
+        [Header("Events")]
+        public UnityEvent jump;
         [HideInInspector] public UnityEvent startRunning;
         [HideInInspector] public UnityEvent stopRunning;
-        [HideInInspector] public UnityEvent jump;
         [HideInInspector] public UnityEvent startDashing;
         [HideInInspector] public UnityEvent stopDashing;
 
