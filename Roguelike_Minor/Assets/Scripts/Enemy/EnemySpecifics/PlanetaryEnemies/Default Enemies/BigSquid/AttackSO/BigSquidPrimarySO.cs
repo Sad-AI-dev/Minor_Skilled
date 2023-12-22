@@ -20,13 +20,19 @@ namespace Game.Enemy {
     { 
         public override void InitializeVars(Ability source)
         {
-            
+            source.vars = new BigSquidPrimaryVars
+            {
+                lineRenderer = source.agent.GetComponent<LineRenderer>(),
+                root = source.agent.GetComponent<Core.Tree>().root
+            };
         }
 
         public override void Use(Ability source)
         {
             BigSquidPrimaryVars vars = source.vars as BigSquidPrimaryVars;
-            vars.targetingCo = source.agent.StartCoroutine(TargetingCo(source));   
+            vars.target = (Transform)vars.root.GetData("Target");
+
+            vars.targetingCo = source.agent.StartCoroutine(TargetingCo(source));
         }
 
         Vector3 shootPos;

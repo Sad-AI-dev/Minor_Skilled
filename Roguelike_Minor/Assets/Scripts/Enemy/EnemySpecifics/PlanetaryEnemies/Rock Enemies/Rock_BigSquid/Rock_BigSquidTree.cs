@@ -26,44 +26,32 @@ namespace Game.Enemy {
 
         protected override void Start()
         {
-            agent.abilities.primary.vars = new BigSquidPrimaryVars
-            {
-                target = null,
-                lineRenderer = this.lineRenderer,
-                targetingCo = null,
-                root = this.root
-            };
-            agent.abilities.secondary.vars = new Rock_BigSquid_SecondaryAttackVars
-            {
-                anim = this.anim
-            };
-
             base.Start();
         }
 
         protected override BT_Node SetupTree()
         {
-            BT_Node root = new Selector(
+            root = new Selector(
                 new List<BT_Node>
                 {
-                    new TakeKnockback(transform, agent, navAgent, rb, upMultiplier, directionMultiplier),
+                    new TakeKnockback(transform, agent, rb, upMultiplier, directionMultiplier, navAgent),
 
                     //Check range of short ranged attack
                     new Sequence(new List<BT_Node>
                     {
-                        new CheckRangeNode(transform, MeleeAttack),
-                        new Rock_BigSquid_HandleMelee(agent)
+                        new CheckRangeNode(agent, MeleeAttack),
+                        new UseSecondaryNode(agent)
 
                     }),
                     //check range of ranged attack
                     new Sequence(new List<BT_Node>
                     {
-                        new CheckRangeNode(transform, RangedAttack),
-                        new Rock_BigSquid_HandleRanged(transform, agent, lineRenderer, navAgent, rotationSpeedTargeting)
+                        new Rock_BigSquid_HandleRangeCheckRanged(transform, RangedAttack, agent, rotationSpeedTargeting, navAgent),
+                        new UsePrimaryNode(agent)
 
                     }),
                     //Move closer
-                    new Rock_BigSquid_MoveToTarget(navAgent)
+                    new MoveToTargetNavMeshNode(navAgent, agent)
                 }
             );
             return root;
@@ -75,6 +63,13 @@ namespace Game.Enemy {
             {
                 if (root.GetData("MoveRotation") != null) rb.MoveRotation((Quaternion)root.GetData("MoveRotation"));
             }
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            lineRenderer.SetPosition(0, agent.abilities.primary.originPoint.position);
+            lineRenderer.SetPosition(1, agent.abilities.primary.originPoint.position + (agent.abilities.primary.originPoint.forward * 60));
         }
         public void ActivateHitboxMelee()
         {

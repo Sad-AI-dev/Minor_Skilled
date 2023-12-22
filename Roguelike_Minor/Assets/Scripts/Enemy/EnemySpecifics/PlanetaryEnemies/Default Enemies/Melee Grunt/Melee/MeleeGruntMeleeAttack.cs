@@ -20,17 +20,8 @@ namespace Game.Enemy {
         Vector3 targetPostition;
         public override NodeState Evaluate()
         {
-            Debug.Log("Handling melee");
-            if ((Transform)GetData("Target"))
-            {
-                navAgent.isStopped = true;
-                target = (Transform)GetData("Target");
-                targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
-                transform.LookAt(targetPostition);
-                agent.abilities.primary.TryUse();
-                state = NodeState.RUNNING;             
-            }
-            else state = NodeState.FAILURE;
+            agent.abilities.primary.TryUse();
+            state = NodeState.RUNNING;             
 
             return state;
         }

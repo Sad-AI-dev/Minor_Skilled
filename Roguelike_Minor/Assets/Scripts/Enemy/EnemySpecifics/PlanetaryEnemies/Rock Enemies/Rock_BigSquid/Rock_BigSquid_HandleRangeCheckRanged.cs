@@ -7,16 +7,18 @@ using Game.Core;
 using System.Threading.Tasks;
 
 namespace Game.Enemy {
-    public class BigSquidRangeCheck : CheckRangeNode
+    public class Rock_BigSquid_HandleRangeCheckRanged : CheckRangeNode
     {
         float rotationSpeedTargeting;
-        public BigSquidRangeCheck(Transform transform, float distanceToCheck, Agent agent, float rotationSpeedTargeting) : base(agent, distanceToCheck)
+        Vector3 dir;
+        public Rock_BigSquid_HandleRangeCheckRanged(Transform transform, float distanceToCheck, Agent agent, float rotationSpeedTargeting, NavMeshAgent navAgent) : base(agent, distanceToCheck)
         {
+            this.transform = transform;
             this.agent = agent;
             this.rotationSpeedTargeting = rotationSpeedTargeting;
+            this.navAgent = navAgent;
         }
 
-        Vector3 dir;
         public override NodeState Evaluate()
         {
             state = base.Evaluate();
@@ -31,35 +33,32 @@ namespace Game.Enemy {
                     if (hit.transform.CompareTag("Player"))
                     {
                         SetData("Targeting", true);
-                        HandleTargetingMovementAndRotation();
+                        HandleRotation();
                         return state;
                     }
                     else
                     {
                         if (GetData("Targeting") != null && (bool)GetData("Targeting"))
                         {
-                            state = NodeState.SUCCESS;
-                            HandleTargetingMovementAndRotation();
+                            HandleRotation();
                             return state;
                         }
-
+                        navAgent.updatePosition = true;
                         state = NodeState.FAILURE;
                     }
                 }
             }
-            
+            else
+            {
+                navAgent.updatePosition = true;
+            }
+
             return state;
         }
 
-        void HandleTargetingMovementAndRotation()
-        {
-            //Handle Rotation
-            HandleRotation();
-            SetData("MoveDirection", (transform.right) * agent.stats.walkSpeed);
-        }
         private void HandleRotation()
         {
-            Vector3 dir = ((target.position + -Vector3.up / 2) - transform.position).normalized;
+            /*Vector3 dir = ((target.position) - transform.position).normalized;
 
             Quaternion targetRotation = Quaternion.LookRotation(dir);
             targetRotation = Quaternion.RotateTowards(
@@ -67,8 +66,12 @@ namespace Game.Enemy {
                 targetRotation,
                 rotationSpeedTargeting * Time.deltaTime);
 
-            SetData("MoveRotation", targetRotation);
+            SetData("MoveRotation", targetRotation);*/
+
+            navAgent.SetDestination(target.position);
+            navAgent.updatePosition = false;
+
+            //navAgent.isStopped = true;
         }
     }
 }
-

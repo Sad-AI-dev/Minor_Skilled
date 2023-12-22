@@ -8,7 +8,7 @@ namespace Game.Enemy.Core {
     [RequireComponent(typeof(Rigidbody))]
     public abstract class Tree : MonoBehaviour
     {
-        protected BT_Node root = null;
+        public BT_Node root = null;
 
         [Header("General Variables")]
         public Agent agent;
@@ -29,11 +29,11 @@ namespace Game.Enemy.Core {
                 else
                     Debug.LogError("Could not find position on NavMesh!");
             }
+            root = SetupTree();
         }
 
         protected virtual void Start()
         {
-            root = SetupTree();
             HandleScaling();
         }
 

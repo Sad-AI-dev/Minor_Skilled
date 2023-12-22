@@ -55,6 +55,7 @@ namespace Game.Enemy {
             root = new Sequence(
                 new List<BT_Node>
                 {
+                    new TakeKnockback(transform, agent, rb, 1, 2),
                     //Check if want to spawn random small or big squid
                     new Boss_BigSquid_SpawnMinionCheck(agent, transform, spawnChancePercent, weightedChance, spawnChanceCooldown, spawnAmountMinMax),
                     //Check if in range or if moving to target
@@ -81,7 +82,7 @@ namespace Game.Enemy {
 
         private void FixedUpdate()
         {
-            if (root != null)
+            if (root != null && (root.GetData("TakingKnockback") == null || !(bool)root.GetData("TakingKnockback")))
             {
                 if (root.GetData("MoveDirection") != null)
                 {
@@ -90,18 +91,6 @@ namespace Game.Enemy {
                 if (root.GetData("TargetRotation") != null)
                 {
                     rb.MoveRotation((Quaternion)root.GetData("TargetRotation"));
-                }
-                if(root.GetData("Target") != null)
-                {
-                    target = (Transform)root.GetData("Target");
-                }
-                if(root.GetData("DistanceToCurrentTarget") != null)
-                {
-                    distanceToCurrentTarget = (float)root.GetData("DistanceToCurrentTarget");
-                }
-                if(root.GetData("Patroling") != null)
-                {
-                    patroling = (bool)root.GetData("Patroling");
                 }
             }
 
