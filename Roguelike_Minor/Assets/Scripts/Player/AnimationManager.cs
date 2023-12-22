@@ -42,7 +42,8 @@ namespace Game.Player
             InitializeIdentifiers();
 
             groundedChecker = GetComponent<GroundedManager>();
-            groundedChecker.GroundedEvent.AddListener(SetAnimGrounded);
+            groundedChecker.TouchedGround.AddListener(SetAnimGrounded);
+            groundedChecker.LeftGround.AddListener(SetAnimNotGrounded);
 
             input = GetComponent<PlayerInput>();
             input.stopShooting.AddListener(StopAnimPrimary);
@@ -76,9 +77,13 @@ namespace Game.Player
         {
             animator.SetFloat(runSpeed, value);
         }
-        private void SetAnimGrounded(bool value)
+        private void SetAnimGrounded()
         {
-            animator.SetBool(grounded, value);
+            animator.SetBool(grounded, true);
+        }
+        private void SetAnimNotGrounded()
+        {
+            animator.SetBool(grounded, false);
         }
 
         private void AnimRun()

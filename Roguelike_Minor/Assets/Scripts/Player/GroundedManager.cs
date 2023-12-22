@@ -1,6 +1,5 @@
 using Game.Core;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,7 +15,8 @@ namespace Game.Player
         private CharacterController cc;
         private FrictionManager frictionManager;
 
-        public UnityEvent<bool> GroundedEvent;
+        public UnityEvent TouchedGround;
+        public UnityEvent LeftGround;
 
         [HideInInspector] public bool grounded;
 
@@ -46,7 +46,7 @@ namespace Game.Player
             grounded = true;
             controller.agent.isGrounded = true;
             controller.jumping = false;
-            GroundedEvent.Invoke(true);
+            TouchedGround.Invoke();
 
             agent.stats.currentJumps = agent.stats.totalJumps;
             
@@ -73,7 +73,7 @@ namespace Game.Player
 
             controller.agent.isGrounded = false;
             grounded = false;
-            GroundedEvent.Invoke(false);
+            LeftGround.Invoke();
         }
     }
 }
