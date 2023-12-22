@@ -27,6 +27,7 @@ namespace AK
         static const AkUniqueID PLAY_GRUNT_DIE = 3392973459U;
         static const AkUniqueID PLAY_GRUNT_HIT = 2989619110U;
         static const AkUniqueID PLAY_HOVER_BUTTON = 2407781483U;
+        static const AkUniqueID PLAY_HOVER_BUTTON_WILD = 1955166390U;
         static const AkUniqueID PLAY_JUMP = 3689126666U;
         static const AkUniqueID PLAY_LANDING = 2323405115U;
         static const AkUniqueID PLAY_PAUSEGAME = 2508072086U;

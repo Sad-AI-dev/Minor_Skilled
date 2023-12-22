@@ -401,6 +401,7 @@ GameObject:
   - component: {fileID: 2595134782193159625}
   - component: {fileID: 1857768514169513729}
   - component: {fileID: 3669836135115761641}
+  - component: {fileID: -2552076645210674798}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -481,7 +482,19 @@ MonoBehaviour:
   doubleJumpVFX: {fileID: 5271601653333589385}
   jump:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -2552076645210674798}
+        m_TargetAssemblyTypeName: Game.Core.GameSystems.AudioPlayer, Game.Core.GameSystems
+        m_MethodName: Play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   startRunning:
     m_PersistentCalls:
       m_Calls: []
@@ -521,7 +534,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coyoteTime: 0.1
-  GroundedEvent:
+  TouchedGround:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2552076645210674798}
+        m_TargetAssemblyTypeName: Game.Core.GameSystems.AudioPlayer, Game.Core.GameSystems
+        m_MethodName: Play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  LeftGround:
     m_PersistentCalls:
       m_Calls: []
   grounded: 0
@@ -1132,6 +1160,25 @@ MonoBehaviour:
   floorlayer:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-2552076645210674798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421599695142573888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86866b813429b9e4aa0d9e72eb5c091a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvents:
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 665b4d9523c167f4d82383e65f4faeec, type: 2}
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: bf50f032aad29414baebd84abc5b2fc9, type: 2}
 --- !u!1 &3014019172444536401
 GameObject:
   m_ObjectHideFlags: 3
