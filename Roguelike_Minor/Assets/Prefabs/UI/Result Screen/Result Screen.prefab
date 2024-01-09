@@ -1,5 +1,42 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &155554753715038616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2489113420392115906}
+  m_Layer: 5
+  m_Name: TotalScore
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2489113420392115906
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155554753715038616}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 9030180913545239854}
+  - {fileID: 5628915479671711812}
+  m_Father: {fileID: 6189988637965610206}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: -75}
+  m_SizeDelta: {x: 0, y: 50}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &268354958118135329
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,13 +609,148 @@ RectTransform:
   m_Children:
   - {fileID: 8001679172101603193}
   - {fileID: 5746547115274255351}
+  - {fileID: 2489113420392115906}
   m_Father: {fileID: 4913161510204059912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.05, y: 0.06}
   m_AnchorMax: {x: 0.95, y: 0.85}
+  m_AnchoredPosition: {x: 0, y: 37.5}
+  m_SizeDelta: {x: 0, y: -75}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1999248573022259758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5628915479671711812}
+  - component: {fileID: 6474837099189796006}
+  - component: {fileID: 8818206966794732035}
+  m_Layer: 5
+  m_Name: ScoreLabel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5628915479671711812
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999248573022259758}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2489113420392115906}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.82, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6474837099189796006
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999248573022259758}
+  m_CullTransparentMesh: 1
+--- !u!114 &8818206966794732035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999248573022259758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 000
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 1bf5a9ca861fb40489b04d8231619d88, type: 2}
+  m_sharedMaterial: {fileID: -2823076216267445249, guid: 1bf5a9ca861fb40489b04d8231619d88, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 41.65
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 0
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2012089306924163495
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,7 +1117,6 @@ GameObject:
   - component: {fileID: 211166699465203386}
   - component: {fileID: 1836866960444506107}
   - component: {fileID: 1488695650716577099}
-  - component: {fileID: 2556184920191001485}
   m_Layer: 5
   m_Name: Result Screen
   m_TagString: Untagged
@@ -1058,6 +1229,7 @@ MonoBehaviour:
   scoreHolder: {fileID: 5746547115274255351}
   statSettings:
   - name: Total Time Played
+    scoreMult: 1
     onGenerateField:
       m_PersistentCalls:
         m_Calls:
@@ -1075,17 +1247,14 @@ MonoBehaviour:
           m_CallState: 2
     statLabel: {fileID: 0}
     scoreLabel: {fileID: 0}
-  evenSummaryField: {fileID: 2459761857701885449, guid: 3f81cb0fe936f114e9c8de7bc9dabbea, type: 3}
-  oddSummaryField: {fileID: 961063309777508168, guid: dca849f095d11b447aecd2115baba26e, type: 3}
-  summaryHolder: {fileID: 5113333538010964607}
-  summarySettings:
-  - name: Total Score
+  - name: Stages Cleared
+    scoreMult: 1
     onGenerateField:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2556184920191001485}
-          m_TargetAssemblyTypeName: Game.SummaryResultHandler, Game
-          m_MethodName: HandleTotalScore
+        - m_Target: {fileID: 1488695650716577099}
+          m_TargetAssemblyTypeName: Game.StatResultHandler, Game
+          m_MethodName: HandleStagesCleared
           m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1095,7 +1264,199 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    labelPair: {fileID: 0}
+    statLabel: {fileID: 0}
+    scoreLabel: {fileID: 0}
+  - name: Total Kills
+    scoreMult: 1
+    onGenerateField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1488695650716577099}
+          m_TargetAssemblyTypeName: Game.StatResultHandler, Game
+          m_MethodName: HandleTotalKills
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    statLabel: {fileID: 0}
+    scoreLabel: {fileID: 0}
+  - name: Total Damage
+    scoreMult: 1
+    onGenerateField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1488695650716577099}
+          m_TargetAssemblyTypeName: Game.StatResultHandler, Game
+          m_MethodName: HandleDamageDealt
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    statLabel: {fileID: 0}
+    scoreLabel: {fileID: 0}
+  - name: Most Damage Dealt
+    scoreMult: 1
+    onGenerateField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1488695650716577099}
+          m_TargetAssemblyTypeName: Game.StatResultHandler, Game
+          m_MethodName: HandleMostDamage
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    statLabel: {fileID: 0}
+    scoreLabel: {fileID: 0}
+  - name: Damage Taken
+    scoreMult: 1
+    onGenerateField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1488695650716577099}
+          m_TargetAssemblyTypeName: Game.StatResultHandler, Game
+          m_MethodName: HandleDamageTaken
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    statLabel: {fileID: 0}
+    scoreLabel: {fileID: 0}
+  - name: Total Healed
+    scoreMult: 1
+    onGenerateField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1488695650716577099}
+          m_TargetAssemblyTypeName: Game.StatResultHandler, Game
+          m_MethodName: HandleTotalHealed
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    statLabel: {fileID: 0}
+    scoreLabel: {fileID: 0}
+  - name: Items Collected
+    scoreMult: 1
+    onGenerateField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1488695650716577099}
+          m_TargetAssemblyTypeName: Game.StatResultHandler, Game
+          m_MethodName: HandleItemsCollected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    statLabel: {fileID: 0}
+    scoreLabel: {fileID: 0}
+  - name: Slots Collected
+    scoreMult: 1
+    onGenerateField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1488695650716577099}
+          m_TargetAssemblyTypeName: Game.StatResultHandler, Game
+          m_MethodName: HandleSlotsCollected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    statLabel: {fileID: 0}
+    scoreLabel: {fileID: 0}
+  - name: Total Purchases
+    scoreMult: 1
+    onGenerateField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1488695650716577099}
+          m_TargetAssemblyTypeName: Game.StatResultHandler, Game
+          m_MethodName: HandleTotalPurchases
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    statLabel: {fileID: 0}
+    scoreLabel: {fileID: 0}
+  - name: Money Gained
+    scoreMult: 1
+    onGenerateField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1488695650716577099}
+          m_TargetAssemblyTypeName: Game.StatResultHandler, Game
+          m_MethodName: HandleTotalMoney
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    statLabel: {fileID: 0}
+    scoreLabel: {fileID: 0}
+  - name: Money Spent
+    scoreMult: 1
+    onGenerateField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1488695650716577099}
+          m_TargetAssemblyTypeName: Game.StatResultHandler, Game
+          m_MethodName: HandleMoneySpent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    statLabel: {fileID: 0}
+    scoreLabel: {fileID: 0}
+  totalScoreLabel: {fileID: 8818206966794732035}
   statTracker: {fileID: 0}
   totalScore: 0
 --- !u!114 &1488695650716577099
@@ -1108,18 +1469,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcfb39ccf5ca02c4a9786f3f402d92da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2556184920191001485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3207237035739928113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeeb222f200467148805aa5b044840c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3788629000135828789
@@ -1702,6 +2051,140 @@ MonoBehaviour:
   m_fontSizeMin: 29.06
   m_fontSizeMax: 64
   m_fontStyle: 16
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &6109056622675856765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9030180913545239854}
+  - component: {fileID: 43892580140235034}
+  - component: {fileID: 6882878385574795935}
+  m_Layer: 5
+  m_Name: Label
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9030180913545239854
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6109056622675856765}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2489113420392115906}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.75, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &43892580140235034
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6109056622675856765}
+  m_CullTransparentMesh: 1
+--- !u!114 &6882878385574795935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6109056622675856765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Total Score:'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 1bf5a9ca861fb40489b04d8231619d88, type: 2}
+  m_sharedMaterial: {fileID: -2823076216267445249, guid: 1bf5a9ca861fb40489b04d8231619d88, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535

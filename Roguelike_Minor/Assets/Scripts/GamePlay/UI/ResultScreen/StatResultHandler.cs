@@ -23,7 +23,7 @@ namespace Game {
         //title
         private void SetupTitle(StatSettings settings)
         {
-            settings.statLabel.leftLabel.text = settings.name;
+            settings.statLabel.leftLabel.text = settings.name + ":";
         }
 
         //result
@@ -84,6 +84,19 @@ namespace Game {
         {
             int totalHealed = Mathf.FloorToInt(screen.statTracker.totalHealed);
             SetupLabels(settings, screen, totalHealed, totalHealed);
+        }
+
+        //==== Handle Inventory Stats ====
+        public void HandleItemsCollected(StatSettings settings, ResultScreen screen)
+        {
+            int itemsCollected = screen.statTracker.totalItemsCollected;
+            SetupLabels(settings, screen, itemsCollected, itemsCollected);
+        }
+
+        public void HandleSlotsCollected(StatSettings settings, ResultScreen screen)
+        {
+            int slotsCollected = screen.statTracker.totalSlotsCollected;
+            SetupLabels(settings, screen, slotsCollected, slotsCollected);
         }
 
         //==== Handle economy stats ====

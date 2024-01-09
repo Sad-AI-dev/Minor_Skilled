@@ -42,6 +42,8 @@ namespace Game {
             InitializeVars();
             //generate fields
             GeneratePlayerStats();
+            //show total score
+            totalScoreLabel.text = totalScore.ToString();
         }
 
         //============ Initialize =============

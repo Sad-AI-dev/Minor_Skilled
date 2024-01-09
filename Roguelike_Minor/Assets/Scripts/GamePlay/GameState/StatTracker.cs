@@ -27,9 +27,12 @@ namespace Game {
         public int totalShopVisits;
         public float runTime { get { return UITimeManager.currentTime; } }
 
-        //[Header("Inventory Stats")]
-        //public int totalItemsCollected;
-        //public int totalSlotsCollected;
+        [Header("Inventory Stats")]
+        public int totalItemsCollected;
+        public int totalSlotsCollected { get { return CalcTotalSlots(); } }
+        [Space(10f)]
+        [SerializeField] private ItemDataSO slotPieceSO;
+        [SerializeField] private int startSlots = 8;
 
         //vars
         private Agent player;
@@ -42,6 +45,7 @@ namespace Game {
             EventBus<AgentHealEvent>.AddListener(HandleAgentHeal);
             EventBus<PurchaseEvent>.AddListener(HandlePurchase);
             EventBus<SceneLoadedEvent>.AddListener(HandleStageLoad);
+            EventBus<PickupItemEvent>.AddListener(HandleItemPickup);
         }
 
         //================== Track Stats =======================
@@ -79,6 +83,11 @@ namespace Game {
         private void HandleStageLoad(SceneLoadedEvent eventData)
         {
             UpdateStageProgress();
+        }
+
+        private void HandleItemPickup(PickupItemEvent eventData)
+        {
+            UpdatePickupStats(eventData.item);
         }
 
         //================== Update Stats =======================
@@ -125,6 +134,20 @@ namespace Game {
             }
         }
 
+        //=== Inventory stats ===
+        private void UpdatePickupStats(ItemDataSO item)
+        {
+            if (item != slotPieceSO)
+            {
+                totalItemsCollected++;
+            }
+        }
+        private int CalcTotalSlots()
+        {
+            SlotInventory slotInventory = player.inventory as SlotInventory;
+            return slotInventory.slots - startSlots;
+        }
+
         //===== Handle Destroy =====
         private void OnDestroy()
         {
@@ -132,6 +155,7 @@ namespace Game {
             EventBus<AgentHealEvent>.RemoveListener(HandleAgentHeal);
             EventBus<PurchaseEvent>.RemoveListener(HandlePurchase);
             EventBus<SceneLoadedEvent>.RemoveListener(HandleStageLoad);
+            EventBus<PickupItemEvent>.RemoveListener(HandleItemPickup);
         }
     }
 }
