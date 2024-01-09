@@ -15,10 +15,12 @@ namespace Game.Core {
         public RectTransform slotHolder;
 
         [Header("SlotPiece Settings")]
+        public bool showSlotPieces = true;
         public TMP_Text slotPieceLabel;
         public int maxPieces = 4;
 
         [Header("Technical Settings")]
+        [SerializeField] private bool updateInventory = true;
         [SerializeField] private int slotSize = 4;
         [SerializeField] private ItemDataSO slotPiece;
 
@@ -28,23 +30,17 @@ namespace Game.Core {
 
         private void Awake()
         {
-            inventory.onContentsChanged += GenerateVisuals;
-        }
-
-        //============== TEMP =============
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (updateInventory)
             {
-                TryDropItem();
+                inventory.onContentsChanged += GenerateVisuals;
             }
         }
 
         //========= Create Visuals ===========
-        private void GenerateVisuals()
+        public void GenerateVisuals() //public used by result screen
         {
             ResetVisuals();
-            GenerateSlotPieceVisuals();
+            if (showSlotPieces) { GenerateSlotPieceVisuals(); }
             GenerateSlotVisuals();
         }
 
@@ -153,7 +149,10 @@ namespace Game.Core {
         //============= OnDestroy =============
         private void OnDestroy()
         {
-            inventory.onContentsChanged -= GenerateVisuals;
+            if (updateInventory)
+            {
+                inventory.onContentsChanged -= GenerateVisuals;
+            }
         }
     }
 }
