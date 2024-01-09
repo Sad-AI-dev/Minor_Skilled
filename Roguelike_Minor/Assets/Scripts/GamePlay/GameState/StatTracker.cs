@@ -22,11 +22,17 @@ namespace Game {
         public int totalMoneySpent;
         public int totalPurchases;
 
-        //total run time
-        //stages cleared
+        [Header("Progress Stats")]
+        public int totalStagesCleared;
+        public int totalShopVisits;
+        public float runTime { get { return UITimeManager.currentTime; } }
 
-        //total items collected
-        //total slots collected
+        [Header("Inventory Stats")]
+        public int totalItemsCollected;
+        public int totalSlotsCollected { get { return CalcTotalSlots(); } }
+        [Space(10f)]
+        [SerializeField] private ItemDataSO slotPieceSO;
+        [SerializeField] private int startSlots = 8;
 
         //vars
         private Agent player;
@@ -38,6 +44,8 @@ namespace Game {
             EventBus<AgentTakeDamageEvent>.AddListener(HandleAgentTakeDamage);
             EventBus<AgentHealEvent>.AddListener(HandleAgentHeal);
             EventBus<PurchaseEvent>.AddListener(HandlePurchase);
+            EventBus<SceneLoadedEvent>.AddListener(HandleStageLoad);
+            EventBus<PickupItemEvent>.AddListener(HandleItemPickup);
         }
 
         //================== Track Stats =======================
@@ -72,6 +80,16 @@ namespace Game {
             UpdatePurchase(eventData.price);
         }
 
+        private void HandleStageLoad(SceneLoadedEvent eventData)
+        {
+            UpdateStageProgress();
+        }
+
+        private void HandleItemPickup(PickupItemEvent eventData)
+        {
+            UpdatePickupStats(eventData.item);
+        }
+
         //================== Update Stats =======================
         //====== Deal Damage Stats ======
         private void UpdateDealDamage(HitEvent hitEvent)
@@ -103,12 +121,41 @@ namespace Game {
             totalPurchases++;
         }
 
+        //==== stage progress stats ====
+        private void UpdateStageProgress()
+        {
+            if (!GameStateManager.instance.scalingIsPaused) 
+            { 
+                totalStagesCleared++; 
+            }
+            else
+            {
+                totalShopVisits++;
+            }
+        }
+
+        //=== Inventory stats ===
+        private void UpdatePickupStats(ItemDataSO item)
+        {
+            if (item != slotPieceSO)
+            {
+                totalItemsCollected++;
+            }
+        }
+        private int CalcTotalSlots()
+        {
+            SlotInventory slotInventory = player.inventory as SlotInventory;
+            return slotInventory.slots - startSlots;
+        }
+
         //===== Handle Destroy =====
         private void OnDestroy()
         {
             EventBus<AgentTakeDamageEvent>.RemoveListener(HandleAgentTakeDamage);
             EventBus<AgentHealEvent>.RemoveListener(HandleAgentHeal);
             EventBus<PurchaseEvent>.RemoveListener(HandlePurchase);
+            EventBus<SceneLoadedEvent>.RemoveListener(HandleStageLoad);
+            EventBus<PickupItemEvent>.RemoveListener(HandleItemPickup);
         }
     }
 }
