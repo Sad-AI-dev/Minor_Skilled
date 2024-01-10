@@ -11,7 +11,7 @@ namespace Game.Player {
         private PlayerController playerController;
         [SerializeField] private Agent agent;
         [SerializeField] private Interactor interactor;
-        [SerializeField] private GameObject inventory;
+        [SerializeField] private InventoryUI inventory;
         [SerializeField] private PauseMenu pauseMenu;
         [SerializeField] private CameraController camController;
         private PlayerRotationManager rotator;
@@ -37,7 +37,7 @@ namespace Game.Player {
             fovManager = GetComponent<FOVManager>();
             rotator = GetComponent<PlayerRotationManager>();
             //hide inventory by default
-            inventory.SetActive(false);
+            inventory.gameObject.SetActive(false);
 
             agent.abilities.utility.onUse.AddListener((Ability abilty) => rotator.RotatePlayer(cam.transform.eulerAngles.y));
             agent.abilities.secondary.onUse.AddListener((Ability abilty) => rotator.RotatePlayer(cam.transform.eulerAngles.y));
@@ -46,7 +46,7 @@ namespace Game.Player {
 
         void Update()
         {
-            pauseInput();
+            PauseInput();
             SetTimeScale();
 
             gamePaused = pauseMenu.paused;
@@ -142,21 +142,28 @@ namespace Game.Player {
 
         private void InventoryInput()
         {
+            //open / close inventory
             if(Input.GetKeyDown(KeyCode.Tab))
             {
-                inventory.SetActive(true);
+                inventory.gameObject.SetActive(true);
                 Cursor.lockState = CursorLockMode.Confined;
                 camController.LockCamera();
             }
             if (Input.GetKeyUp(KeyCode.Tab))
             {
-                inventory.SetActive(false);
+                inventory.gameObject.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 camController.UnlockCamera();
             }
+
+            //drop item input
+            if (inventory.gameObject.activeSelf && Input.GetKeyDown(KeyCode.E))
+            {
+                inventory.TryDropItem();
+            }
         }
 
-        private void pauseInput()
+        private void PauseInput()
         {
             if (Input.GetKeyUp(KeyCode.Escape) && !gamePaused)
             {
@@ -199,5 +206,12 @@ namespace Game.Player {
             if (Input.GetKeyDown(KeyCode.Comma))
                 Time.timeScale -= 0.05f;
         }
+
+        //=========== Manage Game Paused ===================
+        public void PauseGame(bool paused)
+        {
+            gamePaused = paused;
+        }
     }
-}
+    }
+

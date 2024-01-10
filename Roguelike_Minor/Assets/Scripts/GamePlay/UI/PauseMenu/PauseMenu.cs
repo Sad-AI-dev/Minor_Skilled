@@ -36,6 +36,11 @@ namespace Game
             Cursor.lockState = CursorLockMode.None;
         }
 
+        public void UnPause()
+        {
+            Time.timeScale = 1f;
+        }
+
         public void Settings()
         {
 

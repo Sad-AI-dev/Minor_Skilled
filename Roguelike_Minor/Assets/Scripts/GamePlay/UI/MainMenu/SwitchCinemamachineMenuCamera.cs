@@ -83,9 +83,12 @@ public class SwitchCinemamachineMenuCamera : MonoBehaviour
         SelectButtonPressed.SetActive(true);
         LoadingCanvas.SetActive(true);
         animationloading.enabled = true;
-        Invoke("PlayLogoAnimation", 6.0f);
-        //PlayLogoAnimation();
-        Invoke("PlayCorporationVideo", 8.5f);
+        //Invoke("PlayLogoAnimation", 6.0f);
+        PlayLogoAnimation();
+        
+        //Comment PlayCorporationVideo(); later
+        PlayCorporationVideo(); 
+        //Invoke("PlayCorporationVideo", 8.5f);
     }
 }
 
