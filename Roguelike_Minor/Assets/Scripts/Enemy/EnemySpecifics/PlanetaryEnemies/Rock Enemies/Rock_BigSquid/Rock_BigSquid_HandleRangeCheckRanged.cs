@@ -9,13 +9,11 @@ using System.Threading.Tasks;
 namespace Game.Enemy {
     public class Rock_BigSquid_HandleRangeCheckRanged : CheckRangeNode
     {
-        float rotationSpeedTargeting;
         Vector3 dir;
-        public Rock_BigSquid_HandleRangeCheckRanged(Transform transform, float distanceToCheck, Agent agent, float rotationSpeedTargeting, NavMeshAgent navAgent) : base(agent, distanceToCheck)
+        public Rock_BigSquid_HandleRangeCheckRanged(Transform transform, float distanceToCheck, Agent agent, NavMeshAgent navAgent) : base(agent, distanceToCheck)
         {
             this.transform = transform;
             this.agent = agent;
-            this.rotationSpeedTargeting = rotationSpeedTargeting;
             this.navAgent = navAgent;
         }
 
@@ -26,52 +24,47 @@ namespace Game.Enemy {
             if (state == NodeState.SUCCESS)
             {
                 dir = ((target.position + (Vector3.up / 2)) - transform.position).normalized;
-
+                HandleRotation();
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, dir, out hit, Mathf.Infinity))
                 {
                     if (hit.transform.CompareTag("Player"))
                     {
                         SetData("Targeting", true);
-                        HandleRotation();
                         return state;
                     }
                     else
                     {
                         if (GetData("Targeting") != null && (bool)GetData("Targeting"))
                         {
-                            HandleRotation();
                             return state;
                         }
-                        navAgent.updatePosition = true;
                         state = NodeState.FAILURE;
                     }
                 }
-            }
-            else
-            {
-                navAgent.updatePosition = true;
             }
 
             return state;
         }
 
+        Vector3 rotDir;
+        Quaternion targetRotation;
+        float angle;
+        float r;
         private void HandleRotation()
         {
-            /*Vector3 dir = ((target.position) - transform.position).normalized;
+            rotDir = ((target.position) - transform.position).normalized;
 
-            Quaternion targetRotation = Quaternion.LookRotation(dir);
-            targetRotation = Quaternion.RotateTowards(
-                transform.rotation,
-                targetRotation,
-                rotationSpeedTargeting * Time.deltaTime);
+            targetRotation = Quaternion.LookRotation(rotDir);
+            targetRotation.x = 0;
+            targetRotation.z = 0;
 
-            SetData("MoveRotation", targetRotation);*/
+            SetData("MoveRotation", targetRotation);
 
-            navAgent.SetDestination(target.position);
-            navAgent.updatePosition = false;
+            angle = Quaternion.Angle(Quaternion.LookRotation(transform.forward), Quaternion.LookRotation(dir));
+            SetData("RotationLeft", angle);
 
-            //navAgent.isStopped = true;
+            navAgent.isStopped = true;
         }
     }
 }

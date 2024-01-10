@@ -43,7 +43,7 @@ namespace Game.Enemy {
             // Knockback for Navmesh Agent
             if (navAgent != null)
             {
-                if ((bool)GetData("TakingKnockback"))
+                if (GetData("TakingKnockback") != null && (bool)GetData("TakingKnockback"))
                 {
                     grounded = Physics.Raycast(transform.position, -transform.up, 0.2f);
                     if (!coStarted)

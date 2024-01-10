@@ -49,7 +49,7 @@ namespace Game.Enemy {
             
             vars.lineRenderer.enabled = false;
             RaycastHit hit;
-            if (Physics.Raycast(source.originPoint.position, source.originPoint.forward, out hit, Mathf.Infinity))
+            if (Physics.Raycast(source.originPoint.position, vars.lineRenderer.GetPosition(1) - source.originPoint.position, out hit, Mathf.Infinity))
             {
                 shootPos = hit.point;
             }

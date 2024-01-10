@@ -5,7 +5,6 @@ using Game.Core;
 using UnityEngine.AI;
 
 namespace Game.Enemy.Core {
-    [RequireComponent(typeof(Rigidbody))]
     public abstract class Tree : MonoBehaviour
     {
         public BT_Node root = null;
