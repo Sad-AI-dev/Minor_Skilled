@@ -20,7 +20,7 @@ namespace Game {
 
             //heal to compensate for increased max health
             float toHeal = item.agent.stats.GetMaxHealth() - oldMaxHealth;
-            item.agent.health.Heal(new HealEvent(toHeal) { createNumLabel = false });
+            item.agent.health.HealSubtle(toHeal);
             item.agent.health.onMaxHealthChanged?.Invoke();
         }
 

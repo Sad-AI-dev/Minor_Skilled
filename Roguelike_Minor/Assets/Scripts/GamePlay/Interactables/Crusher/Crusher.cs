@@ -7,6 +7,9 @@ using Game.Core.GameSystems;
 namespace Game {
     public class Crusher : MonoBehaviour
     {
+        [Header("Refs")]
+        [SerializeField] private Interactable interactable;
+
         [Header("Detection Settings")]
         [SerializeField] private BoxCollider detectCollider;
         [SerializeField] private LayerMask mask;
@@ -27,11 +30,11 @@ namespace Game {
 
         //vars
         private bool isCrushing;
-        private int animationHash;
 
         private void Start()
         {
             //initialize vars
+            interactable.enabled = true;
             isCrushing = false;
             blockCollider.enabled = false;
             //setup animator
@@ -46,9 +49,7 @@ namespace Game {
 
         private IEnumerator CrushCo()
         {
-            //initialize vars
-            isCrushing = true;
-            blockCollider.enabled = true;
+            InitializeCrushVars();
             //play animation
             PlayAnimation();
             yield return new WaitForSeconds(swapDelay);
@@ -56,9 +57,21 @@ namespace Game {
             SwapItems();
             yield return new WaitForSeconds(blockedDelay);
             //reset
+            ResetCrushVars();
+        }
+
+        private void InitializeCrushVars()
+        {
+            isCrushing = true;
+            blockCollider.enabled = true;
+            interactable.SetActive(false); //hide UI label while not available
+        }
+        private void ResetCrushVars()
+        {
             blockCollider.enabled = false;
             isCrushing = false;
             animator.enabled = false;
+            interactable.SetActive(true); //show UI label
         }
 
         private void PlayAnimation()
