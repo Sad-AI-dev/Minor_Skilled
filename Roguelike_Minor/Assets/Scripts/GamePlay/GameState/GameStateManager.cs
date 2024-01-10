@@ -39,6 +39,7 @@ namespace Game {
         public Agent player;
         public UIManager uiManager;
         [SerializeField] private SceneLoader sceneLoader;
+        public StatTracker statTracker; //required by resultscreen
 
         [Header("Planet Advancement Settings")]
         [SerializeField] private List<ListWrapper<int>> planetSceneIndeces;
