@@ -63,7 +63,7 @@ namespace Game {
 
         private void HandleAgentHeal(AgentHealEvent eventData)
         {
-            if (eventData.healEvent.target == player)
+            if (eventData.healEvent.target.agent == player)
             {
                 UpdateHeal(eventData.healEvent);
             }
