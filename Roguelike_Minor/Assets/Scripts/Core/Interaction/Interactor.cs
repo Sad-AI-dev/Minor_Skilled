@@ -29,7 +29,7 @@ namespace Game.Core.GameSystems {
         //=============== interactables management ===============
         public void AddInteractable(Interactable interactable)
         {
-            if (!interactable.enabled) { return; }
+            if (!enabled || !interactable.enabled) { return; }
             interactables.Add(interactable);
             if (interactables.Count == 1) {
                 onCanInteract?.Invoke(interactable);
@@ -67,6 +67,16 @@ namespace Game.Core.GameSystems {
             interactables.Sort((Interactable a, Interactable b) => 
                 -Vector3.Distance(transform.position, a.transform.position).CompareTo(Vector3.Distance(transform.position, b.transform.position))
             );
+        }
+
+        //============== Handle Disable ===============
+        private void OnDisable()
+        {
+            //clear interactables
+            for (int i = interactables.Count - 1; i >= 0; i--)
+            {
+                RemoveInteractable(interactables[i]);
+            }
         }
     }
 }

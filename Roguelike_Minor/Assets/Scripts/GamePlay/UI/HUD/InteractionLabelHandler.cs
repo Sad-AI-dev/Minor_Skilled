@@ -32,17 +32,20 @@ namespace Game {
         public void InitializeLabel(Interactable interactable)
         {
             if (interactable.label != null && interactable.label != "")
-            {
+            { //show default label
                 interactionLabel.text = "to " + interactable.label;
                 gameObject.SetActive(true);
                 defaultHolder.SetActive(true);
-
+                //hide item label
+                itemLabelHolder.SetActive(false);
             }
             else if (interactable.TryGetComponent(out ItemPickup pickup))
-            {
+            { //show item label
                 SetupItemLabel(pickup.item);
                 gameObject.SetActive(true);
                 itemLabelHolder.SetActive(true);
+                //hide default label
+                defaultHolder.SetActive(false);
             }
         }
 
@@ -61,13 +64,6 @@ namespace Game {
             //tier
             itemTier.text = itemData.tier.title;
             itemTier.color = itemData.tier.titleColor;
-        }
-
-        //============ Handle Hide ==============
-        private void OnDisable()
-        {
-            defaultHolder.SetActive(false);
-            itemLabelHolder.SetActive(false);
         }
     }
 }
