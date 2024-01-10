@@ -3,18 +3,14 @@ using UnityEngine;
 public class SwitchCinemamachineMenuCamera : MonoBehaviour
 {
     public GameObject CameraMainMenu;
-
     public GameObject CharacterFirst;
     public GameObject CharacterSecond;
     private AfterAnimation afterAnimation;
     public GameObject LoadingCanvas;
-
     public GameObject SelectButtonPressed;
-
-    public GameObject CorporationCanvas; 
+    public GameObject CorporationCanvas;
     public Animator LogoComingInScreen;
     public Animator animator;
-
     public Animator animationloading;
     bool Select;
 
@@ -26,7 +22,7 @@ public class SwitchCinemamachineMenuCamera : MonoBehaviour
         }
         Select = false;
 
-        GameObject animatedObject = GameObject.Find("CorporationScreen"); 
+        GameObject animatedObject = GameObject.Find("CorporationScreen");
         if (animatedObject != null)
         {
             Debug.Log("AnimationTriggered");
@@ -61,16 +57,18 @@ public class SwitchCinemamachineMenuCamera : MonoBehaviour
         CharacterSecond.SetActive(true);
     }
 
-    public void PlayLogoAnimation(){
-    LogoComingInScreen.enabled = true;
+    public void PlayLogoAnimation()
+    {
+        LogoComingInScreen.enabled = true;
     }
 
-    public void PlayCorporationVideo(){
-       CorporationCanvas.SetActive(true); 
-       if (afterAnimation != null)
-            {
-                afterAnimation.PlayAnimation();
-            }
+    public void PlayCorporationVideo()
+    {
+        CorporationCanvas.SetActive(true);
+        if (afterAnimation != null)
+        {
+            afterAnimation.PlayAnimation();
+        }
     }
 
     // public void MenuAnimationDone(){
@@ -85,9 +83,12 @@ public class SwitchCinemamachineMenuCamera : MonoBehaviour
         SelectButtonPressed.SetActive(true);
         LoadingCanvas.SetActive(true);
         animationloading.enabled = true;
-        Invoke("PlayLogoAnimation", 6.0f);
-        //PlayLogoAnimation();
-        Invoke("PlayCorporationVideo", 8.5f);
+        //Invoke("PlayLogoAnimation", 6.0f);
+        PlayLogoAnimation();
+        
+        //Comment PlayCorporationVideo(); later
+        PlayCorporationVideo(); 
+        //Invoke("PlayCorporationVideo", 8.5f);
     }
 }
 

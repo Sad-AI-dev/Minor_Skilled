@@ -10,10 +10,11 @@ namespace Game {
         [SerializeField] private TextMeshProUGUI timeText;
 
         //vars
-        private float currentTime = 0;
+        public static float currentTime;
 
         private void Start()
         {
+            currentTime = 0f;
             StartCoroutine(UpdateTimerCo());
         }
 

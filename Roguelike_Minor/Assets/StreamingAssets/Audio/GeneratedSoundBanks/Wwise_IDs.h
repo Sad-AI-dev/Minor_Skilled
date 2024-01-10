@@ -13,9 +13,11 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID PLAY_ABILITY_RECHARGE = 2431691136U;
         static const AkUniqueID PLAY_BIG_GRUNT_DIE = 3218574908U;
         static const AkUniqueID PLAY_BIG_GRUNT_HIT = 3350824361U;
         static const AkUniqueID PLAY_BIRDS = 3025897706U;
+        static const AkUniqueID PLAY_CLICK_BUTTON = 1619866993U;
         static const AkUniqueID PLAY_DASH = 2211787386U;
         static const AkUniqueID PLAY_FOOTSTEP = 1602358412U;
         static const AkUniqueID PLAY_FOOTSTEP_SERVO = 1408608858U;
@@ -24,13 +26,17 @@ namespace AK
         static const AkUniqueID PLAY_GRENADE_THROW = 2492084817U;
         static const AkUniqueID PLAY_GRUNT_DIE = 3392973459U;
         static const AkUniqueID PLAY_GRUNT_HIT = 2989619110U;
+        static const AkUniqueID PLAY_HOVER_BUTTON = 2407781483U;
+        static const AkUniqueID PLAY_HOVER_BUTTON_WILD = 1955166390U;
         static const AkUniqueID PLAY_JUMP = 3689126666U;
         static const AkUniqueID PLAY_LANDING = 2323405115U;
+        static const AkUniqueID PLAY_PAUSEGAME = 2508072086U;
         static const AkUniqueID PLAY_PICKUP_ITEM = 3128913152U;
         static const AkUniqueID PLAY_PRIMARY_FIRE = 3563057235U;
         static const AkUniqueID PLAY_SPECIAL_FIRE = 1149417670U;
         static const AkUniqueID PLAY_SQUID_HIT = 1455468846U;
         static const AkUniqueID PLAY_START_OBELISK = 3577284316U;
+        static const AkUniqueID PLAY_UNPAUSEGAME = 2865946037U;
         static const AkUniqueID PLAY_WIND_AMBIENCE = 3110216747U;
         static const AkUniqueID STOP_OBELISK = 1647081223U;
         static const AkUniqueID STOP_WIND_AMBIENCE = 2725535549U;
@@ -85,6 +91,8 @@ namespace AK
         static const AkUniqueID ENEMY = 2299321487U;
         static const AkUniqueID GAMEPLAY_AMBIENCE = 116641803U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
+        static const AkUniqueID MENU = 2607556080U;
+        static const AkUniqueID MUSIC = 3991942870U;
         static const AkUniqueID PLAYER = 1069431850U;
         static const AkUniqueID UI = 1551306167U;
         static const AkUniqueID WORLD_AMBIENCE = 2221585665U;
