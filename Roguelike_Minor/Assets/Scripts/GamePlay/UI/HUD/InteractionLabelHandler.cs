@@ -33,7 +33,8 @@ namespace Game {
         {
             if (interactable.label != null && interactable.label != "")
             { //show default label
-                interactionLabel.text = "to " + interactable.label;
+                //interactionLabel.text = "to " + interactable.label;
+                interactionLabel.text = interactable.label;
                 gameObject.SetActive(true);
                 defaultHolder.SetActive(true);
                 //hide item label
