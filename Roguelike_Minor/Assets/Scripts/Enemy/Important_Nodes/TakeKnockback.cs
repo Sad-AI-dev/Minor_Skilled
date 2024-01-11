@@ -63,7 +63,7 @@ namespace Game.Enemy {
             // Knockback for Flying Enemy
             else
             {
-                if ((bool)GetData("TakingKnockback"))
+                if (GetData("TakingKnockback") != null && (bool)GetData("TakingKnockback"))
                 {
                     rb.velocity = (knockbackDirection + (Vector3.up * upMultiplier)) * directionMultiplier;
                     agent.StartCoroutine(HandleFlyingKnockback());

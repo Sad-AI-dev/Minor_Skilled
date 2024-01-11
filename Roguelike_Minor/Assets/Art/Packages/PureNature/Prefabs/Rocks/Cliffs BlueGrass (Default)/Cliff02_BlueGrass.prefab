@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1738378923116633123}
   - component: {fileID: 4610279891222685929}
   - component: {fileID: 8012671900650975513}
+  - component: {fileID: 4339124113529476251}
+  - component: {fileID: 631087585251386205}
   m_Layer: 10
   m_Name: Cliff02_BlueGrass
   m_TagString: Untagged
@@ -106,3 +108,35 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2298213860806583902, guid: 00194efaa8dc40c4ab4553308e71360f, type: 3}
+--- !u!114 &4339124113529476251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2665002134388066620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 14.693472, y: 9.895916, z: 11.384819}
+  m_Center: {x: -0.1572597, y: -0.16546917, z: 0.47407436}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
+--- !u!114 &631087585251386205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2665002134388066620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 9.752258, y: 8.322131, z: 2.9478226}
+  m_Center: {x: 1.2929258, y: -1.1699356, z: -5.21391}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
