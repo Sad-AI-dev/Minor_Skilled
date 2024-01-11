@@ -148,12 +148,16 @@ namespace Game.Player {
                 inventory.gameObject.SetActive(true);
                 Cursor.lockState = CursorLockMode.Confined;
                 camController.LockCamera();
+                //disable interactor while inventory is open
+                interactor.enabled = false;
             }
             if (Input.GetKeyUp(KeyCode.Tab))
             {
                 inventory.gameObject.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 camController.UnlockCamera();
+                //re-enable interactor
+                interactor.enabled = true;
             }
 
             //drop item input

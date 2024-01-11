@@ -38,6 +38,9 @@ namespace Game.Core {
         public ItemDataSO item;
     }
 
+    //===== Player Leave Bounds =====
+    public class RespawnEvent : Event { }
+
     //========== Game State =============
     public class GameEndEvent : Event { }
 

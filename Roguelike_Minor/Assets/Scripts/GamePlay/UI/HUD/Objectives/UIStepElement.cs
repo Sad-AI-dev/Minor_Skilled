@@ -58,12 +58,13 @@ namespace Game {
 
         private void UpdateSlider(ObjectiveProgress progress)
         {
-            label.text = progress.label;
             slider.value = progress.current / (float)progress.total;
             if (progress.useLargeBar)
             {
                 progressBarHandler.UpdateProgress(progress.current / (float)progress.total);
             }
+            //set label text
+            label.text = $"{Mathf.FloorToInt(slider.value * 100f)}%";
         }
     }
 }

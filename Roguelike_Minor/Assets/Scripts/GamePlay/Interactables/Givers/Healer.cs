@@ -13,7 +13,7 @@ namespace Game
 
         public void Heal(Interactor interactor)
         {
-            interactor.agent.health.Heal(new HealEvent(interactor.agent.stats.GetMaxHealth() * healPercent));
+            interactor.agent.health.HealSubtle(interactor.agent.stats.GetMaxHealth() * (healPercent / 100f));
         }
     }
 }

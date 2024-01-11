@@ -86,6 +86,13 @@ namespace Game.Core {
             HandleHealthChange();
         }
 
+        //heal without updating systems
+        public void HealSubtle(float toHeal)
+        {
+            health += toHeal;
+            HandleHealthChange();
+        }
+
         //=============== Take Damage ================
         private void ProcessTakeDamageEvent(ref HitEvent hitEvent)
         {

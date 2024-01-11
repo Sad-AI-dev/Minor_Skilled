@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38321efa1dd5947428f4627ba463bed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label: progress objective
+  label: progress
   onInteract:
     m_PersistentCalls:
       m_Calls:
@@ -169,4 +169,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08bdbeffcb031ea4fb02b5a7c7926f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stepUISettings:
+    title: 
+    progress: []
   state: 0
+  objective:
+    data: {fileID: 0}
+    currentStep: 0
+    steps: []
+  destroyOnComplete: 1
