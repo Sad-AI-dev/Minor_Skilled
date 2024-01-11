@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 namespace Game.Enemy {
     public class BigSquidRangeCheck : CheckRangeNode
     {
-        public BigSquidRangeCheck(Transform transform, float distanceToCheck, Agent agent) : base(transform, distanceToCheck)
+        float rotationSpeedTargeting;
+        public BigSquidRangeCheck(Transform transform, float distanceToCheck, Agent agent, float rotationSpeedTargeting) : base(agent, distanceToCheck)
         {
             this.agent = agent;
+            this.rotationSpeedTargeting = rotationSpeedTargeting;
         }
 
         Vector3 dir;
@@ -29,6 +31,7 @@ namespace Game.Enemy {
                     if (hit.transform.CompareTag("Player"))
                     {
                         SetData("Targeting", true);
+                        HandleTargetingMovementAndRotation();
                         return state;
                     }
                     else
@@ -36,6 +39,7 @@ namespace Game.Enemy {
                         if (GetData("Targeting") != null && (bool)GetData("Targeting"))
                         {
                             state = NodeState.SUCCESS;
+                            HandleTargetingMovementAndRotation();
                             return state;
                         }
 
@@ -45,6 +49,25 @@ namespace Game.Enemy {
             }
             
             return state;
+        }
+
+        void HandleTargetingMovementAndRotation()
+        {
+            //Handle Rotation
+            HandleRotation();
+            SetData("MoveDirection", (transform.right) * agent.stats.walkSpeed);
+        }
+        private void HandleRotation()
+        {
+            Vector3 dir = ((target.position + -Vector3.up / 2) - transform.position).normalized;
+
+            Quaternion targetRotation = Quaternion.LookRotation(dir);
+            targetRotation = Quaternion.RotateTowards(
+                transform.rotation,
+                targetRotation,
+                rotationSpeedTargeting * Time.deltaTime);
+
+            SetData("MoveRotation", targetRotation);
         }
     }
 }

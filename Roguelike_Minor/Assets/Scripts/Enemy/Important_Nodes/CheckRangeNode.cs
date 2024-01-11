@@ -11,9 +11,9 @@ namespace Game.Enemy {
     {
         float distanceToCheck;
 
-        public CheckRangeNode(Transform transform, float distanceToCheck)
+        public CheckRangeNode(Agent agent, float distanceToCheck)
         {
-            this.transform = transform;
+            this.agent = agent;
             this.distanceToCheck = distanceToCheck;
         }
 
@@ -26,9 +26,9 @@ namespace Game.Enemy {
             target = (Transform)GetData("Target");
 
             //Set distance to target
-            if (GetData("DistanceToTarget") == null) agent.StartCoroutine(DistanceToTargetCO(agent, transform, target));
+            if (GetData("DistanceToTarget") == null) agent.StartCoroutine(DistanceToTargetCO(agent, agent.transform, target));
 
-            if((float)GetData("DistanceToTarget") < distanceToCheck)
+            if ((float)GetData("DistanceToTarget") < distanceToCheck)
             {
                 state = NodeState.SUCCESS;
             }
