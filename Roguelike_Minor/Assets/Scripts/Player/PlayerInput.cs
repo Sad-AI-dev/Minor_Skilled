@@ -31,6 +31,26 @@ namespace Game.Player {
 
         private float delayFOVChange = 0;
 
+        private void Awake()
+        {
+            EventBus<SceneLoadedEvent>.AddListener(OnSceneLoad);
+        }
+
+        private void OnDestroy()
+        {
+            EventBus<SceneLoadedEvent>.RemoveListener(OnSceneLoad);
+        }
+
+        private void OnSceneLoad(SceneLoadedEvent eventData)
+        {
+            if(inventory.gameObject.activeSelf)
+            {
+                inventory.gameObject.SetActive(false);
+                camController.UnlockCamera();
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+
         private void Start()
         {
             playerController = GetComponent<PlayerController>();
@@ -169,6 +189,12 @@ namespace Game.Player {
             {
                 gamePaused = true;
                 pauseMenu.ActivateMenu();
+
+                if (inventory.gameObject.activeSelf)
+                {
+                    inventory.gameObject.SetActive(false);
+                    camController.UnlockCamera();
+                }
             }
             else if(Input.GetKeyUp(KeyCode.Escape) && gamePaused)
             {

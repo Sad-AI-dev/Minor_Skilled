@@ -1,4 +1,5 @@
 using Cinemachine;
+using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,8 @@ namespace Game.Player
         {
             cam.m_XAxis.m_MaxSpeed = xSpeed;
             cam.m_YAxis.m_MaxSpeed = ySpeed;
+
+            Debug.Log("Unlocked");
         }
 
         public void ResetCamera(Quaternion lookDirection)
