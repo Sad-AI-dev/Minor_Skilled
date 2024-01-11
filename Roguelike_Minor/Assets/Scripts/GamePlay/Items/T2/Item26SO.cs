@@ -52,7 +52,7 @@ namespace Game {
         {
             return $"<color=#{HighlightColor}>+{baseRerolls}</color> " +
                 $"<color=#{StackColor}>(+{bonusRerolls} per stack)</color> rerolls in the " +
-                $"<color=#{HighlightColor}>shop</color>";
+                $"<color=#{HighlightColor}>Shop</color>";
         }
     }
 }

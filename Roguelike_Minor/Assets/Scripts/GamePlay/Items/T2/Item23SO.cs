@@ -104,12 +104,12 @@ namespace Game {
         //========== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Earn <color=#{HighlightColor}>{baseMoney} money</color> " +
+            return $"Earn <color=#{HighlightColor}>{baseMoney} Money</color> " +
                 $"<color=#{StackColor}>(+{bonusMoney} money per stack)</color> on stage completion\n" +
-                $"Earn up to <color=#{HighlightColor}>{maxMult * 100}%</color> " +
-                $"additional money based on " +
-                $"<color=#{HighlightColor}>completion time</color>\n" +
-                $"Gives more money over time.";
+                $"Max. <color=#{HighlightColor}>{maxMult * 100}%</color> " +
+                $"based on " +
+                $"<color=#{HighlightColor}>Completion Time. </color> Gives more money over time\n";
+                //$"Gives more money over time";
         }
     }
 }

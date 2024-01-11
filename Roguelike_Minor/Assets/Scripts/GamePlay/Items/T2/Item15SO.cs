@@ -21,7 +21,7 @@ namespace Game
 
         public override string GenerateLongDescription()
         {
-            return $"Gain <color=#{HighlightColor}>+1</color> <color=#{StackColor}>(+1 per stack)</color> extra jumps.";
+            return $"Gain <color=#{HighlightColor}>+1</color> <color=#{StackColor}>(+1 per stack)</color> extra jumps";
         }
     }
 }

@@ -35,9 +35,9 @@ namespace Game {
         //============ Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Killing an enemy <color=#{HighlightColor}>heals</color> you for " +
-                $"<color=#{HighlightColor}>{baseHeal}hp</color> " +
-                $"<color=#{StackColor}>(+{bonusHeal}hp per stack)</color>";
+            return $"Killing an enemy <color=#{HighlightColor}>Heals</color> you for " +
+                $"<color=#{HighlightColor}>{baseHeal}HP</color> " +
+                $"<color=#{StackColor}>(+{bonusHeal}HP per stack)</color>";
         }
     }
 }

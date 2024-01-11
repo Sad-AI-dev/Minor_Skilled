@@ -129,9 +129,9 @@ namespace Game {
         //========== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Gain a <color=#{HighlightColor}>shield</color> " +
-                $"that absorbs <color=#{HighlightColor}>{baseShield} hp</color> " +
-                $"<color=#{StackColor}>(+{bonusShield} hp per stack)</color> " +
+            return $"Gain a <color=#{HighlightColor}>Shield</color> " +
+                $"that absorbs <color=#{HighlightColor}>{baseShield} HP</color> " +
+                $"<color=#{StackColor}>(+{bonusShield} HP per stack)</color> " +
                 $"before <color=#{StackColor}>recharging</color>";
         }
     }

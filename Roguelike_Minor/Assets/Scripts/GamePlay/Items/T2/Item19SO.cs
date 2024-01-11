@@ -70,7 +70,7 @@ namespace Game
         {
             return $"Deal <color=#{HighlightColor}>{damage}</color> damage to enemies within a " +
                    $"<color=#{HighlightColor}>{baseRadius}m</color> <color=#{StackColor}>(+{bonusRadius}m per stack)</color> " +
-                   $"radius around you.";
+                   $"radius around you";
         }
     }
 }
