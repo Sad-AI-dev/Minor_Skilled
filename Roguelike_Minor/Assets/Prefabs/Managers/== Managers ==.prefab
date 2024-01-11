@@ -306,6 +306,11 @@ MonoBehaviour:
   totalMoneyCollected: 0
   totalMoneySpent: 0
   totalPurchases: 0
+  totalStagesCleared: 0
+  totalShopVisits: 0
+  totalItemsCollected: 0
+  slotPieceSO: {fileID: 0}
+  startSlots: 8
 --- !u!1 &8026829324566656996
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,6 +603,25 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 6
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    initialized: 1
+  - name: Rock Big Squid
+    price: 15
+    chance: 10
+    onSelect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1772826402637452629}
+          m_TargetAssemblyTypeName: Game.EnemySpawner, Game
+          m_MethodName: SpawnEnemy
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0

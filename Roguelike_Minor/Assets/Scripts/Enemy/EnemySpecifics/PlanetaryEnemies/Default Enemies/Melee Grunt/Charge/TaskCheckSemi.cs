@@ -11,7 +11,7 @@ namespace Game.Enemy {
         bool ranged;
         int chargeChancePercent;
 
-        public TaskCheckSemi(Transform transform, float distanceToCheck, bool ranged, int chargeChancePercent, Agent agent) : base(transform, distanceToCheck)
+        public TaskCheckSemi(Transform transform, float distanceToCheck, bool ranged, int chargeChancePercent, Agent agent) : base(agent, distanceToCheck)
         {
             this.ranged = ranged;
             this.chargeChancePercent = chargeChancePercent;

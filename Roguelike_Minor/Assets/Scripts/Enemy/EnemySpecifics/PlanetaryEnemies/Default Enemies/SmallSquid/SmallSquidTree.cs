@@ -34,6 +34,7 @@ namespace Game.Enemy {
             root = new Selector(
                 new List<BT_Node>
                 {
+                    new TakeKnockback(transform, agent, rb, 1, 2),
                     new Sequence(new List<BT_Node>{
                         //Check target in range
                         new SmallSquidCheckRange(transform, attackRange, agent),
@@ -49,7 +50,7 @@ namespace Game.Enemy {
 
         protected void FixedUpdate()
         {
-            if (root != null)
+            if (root != null && (root.GetData("TakingKnockback") == null || !(bool)root.GetData("TakingKnockback")))
             {
                 if (root.GetData("MoveDirection") != null)
                 {

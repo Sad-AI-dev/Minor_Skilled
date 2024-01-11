@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7129940685771700126}
   - component: {fileID: 2378777394050040972}
   - component: {fileID: 3713903792888136762}
+  - component: {fileID: 8688886622489174161}
   m_Layer: 0
   m_Name: SeekingMissile
   m_TagString: Untagged
@@ -146,3 +147,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8688886622489174161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9073315389154579441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98ac85ffb637964bb7882d297dd4461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroy: 1
+  lifeTime: 10

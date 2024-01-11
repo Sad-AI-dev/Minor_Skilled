@@ -26,7 +26,7 @@ namespace Game.Player
                 if (Physics.Raycast(anim.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down, out leftHit, distanceToGround + 1, layerMask))
                 {
                     Vector3 footPos = leftHit.point;
-                    Debug.Log(footPos);
+                    //Debug.Log(footPos);
                     footPos.y += distanceToGround;
                     anim.SetIKPosition(AvatarIKGoal.LeftFoot, footPos);
                     anim.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward, leftHit.normal));
@@ -36,7 +36,7 @@ namespace Game.Player
                 if (Physics.Raycast(anim.GetIKPosition(AvatarIKGoal.RightFoot) + Vector3.up, Vector3.down, out rightHit, distanceToGround + 1, layerMask))
                 {
                     Vector3 footPos = rightHit.point;
-                    Debug.Log(footPos);
+                    //Debug.Log(footPos);
                     footPos.y += distanceToGround;
                     anim.SetIKPosition(AvatarIKGoal.RightFoot, footPos);
                     anim.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(transform.forward, rightHit.normal));

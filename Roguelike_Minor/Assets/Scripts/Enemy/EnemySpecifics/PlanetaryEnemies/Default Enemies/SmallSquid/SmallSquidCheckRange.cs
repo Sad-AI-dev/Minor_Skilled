@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 namespace Game.Enemy {
     public class SmallSquidCheckRange : CheckRangeNode
     {
-        public SmallSquidCheckRange(Transform transform, float distanceToCheck, Agent agent) : base(transform, distanceToCheck)
+        public SmallSquidCheckRange(Transform transform, float distanceToCheck, Agent agent) : base(agent, distanceToCheck)
         {
             this.agent = agent;
+            this.transform = transform;
         }
 
         Vector3 direction;
