@@ -30,6 +30,7 @@ namespace AK
         static const AkUniqueID PLAY_HOVER_BUTTON_WILD = 1955166390U;
         static const AkUniqueID PLAY_JUMP = 3689126666U;
         static const AkUniqueID PLAY_LANDING = 2323405115U;
+        static const AkUniqueID PLAY_MAIN_MUSIC = 414863633U;
         static const AkUniqueID PLAY_PAUSEGAME = 2508072086U;
         static const AkUniqueID PLAY_PICKUP_ITEM = 3128913152U;
         static const AkUniqueID PLAY_PRIMARY_FIRE = 3563057235U;
@@ -41,6 +42,23 @@ namespace AK
         static const AkUniqueID STOP_OBELISK = 1647081223U;
         static const AkUniqueID STOP_WIND_AMBIENCE = 2725535549U;
     } // namespace EVENTS
+
+    namespace STATES
+    {
+        namespace GAMESTATE
+        {
+            static const AkUniqueID GROUP = 4091656514U;
+
+            namespace STATE
+            {
+                static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID OBELISKACTIVATED = 2332076429U;
+                static const AkUniqueID OBELISKDONE = 172464216U;
+                static const AkUniqueID OBELISKINACTIVE = 3585588595U;
+            } // namespace STATE
+        } // namespace GAMESTATE
+
+    } // namespace STATES
 
     namespace SWITCHES
     {
@@ -82,6 +100,7 @@ namespace AK
     {
         static const AkUniqueID INIT = 1355168291U;
         static const AkUniqueID MAIN = 3161908922U;
+        static const AkUniqueID MUSIC = 3991942870U;
     } // namespace BANKS
 
     namespace BUSSES
@@ -89,6 +108,7 @@ namespace AK
         static const AkUniqueID AMBIENCE = 85412153U;
         static const AkUniqueID AUXILIARY_BUSSES = 3174030640U;
         static const AkUniqueID ENEMY = 2299321487U;
+        static const AkUniqueID FOOTSTEPS = 2385628198U;
         static const AkUniqueID GAMEPLAY_AMBIENCE = 116641803U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
         static const AkUniqueID MENU = 2607556080U;
@@ -100,6 +120,7 @@ namespace AK
 
     namespace AUX_BUSSES
     {
+        static const AkUniqueID BIG_CAVE = 1032091015U;
         static const AkUniqueID DEFAULT_VERB = 3018232304U;
         static const AkUniqueID VALLEY_VERB = 1063264192U;
     } // namespace AUX_BUSSES
