@@ -17,7 +17,10 @@ namespace Game.Enemy {
     {
         public override void InitializeVars(Ability source)
         {
-            
+            source.vars = new Rock_BigSquid_SecondaryAttackVars()
+            {
+                anim = source.agent.GetComponent<Animator>()
+            };
         }
 
         public override void Use(Ability source)

@@ -33,11 +33,6 @@ namespace Game.Enemy {
         protected override void Start()
         {
             navAgent.stoppingDistance = meleeAttackRange - 0.1f;
-            agent.abilities.primary.vars = new PGPrimaryAttackVars
-            {
-                anim = this.anim,
-                prefab = PrimaryPrefab
-            };
 
             base.Start();
         }
@@ -48,15 +43,15 @@ namespace Game.Enemy {
                 new List<BT_Node>
                 {
                     //Choose ranged or Melee
-                    new TakeKnockback(transform, agent, navAgent, rb, upMultiplier, directionMultiplier),
+                    new TakeKnockback(transform, agent, rb, upMultiplier, directionMultiplier, navAgent),
                     new MeleeGruntChooseAttack(transform),
 
                     //Handle Ranged attack
                     new Sequence( new List<BT_Node>
                     {
                        //If chosen Ranged, handle ranged
-                       new TaskCheckRanged(transform, Random.Range(rangedAttackRange, rangedAttackRange/2), true),
-                       new MeleeGruntHandleRanged(transform, rangedAttackRange, agent, navAgent)
+                       new TaskCheckRanged(agent, Random.Range(rangedAttackRange, rangedAttackRange/2), true),
+                       new UseSecondaryNode(agent)
                     }),
                     //Handle charge chance
                     new Sequence( new List<BT_Node>
@@ -68,7 +63,7 @@ namespace Game.Enemy {
                     new Sequence( new List<BT_Node>
                     {
                         new TaskCheckMelee(transform, meleeAttackRange, false, agent),
-                        new MeleeGruntMeleeAttack(agent, navAgent, transform),
+                        new UsePrimaryNode(agent),
                     }),
                     //Handle moving to target
                     new MeleeGruntWalkToTarget(transform, agent, navAgent)

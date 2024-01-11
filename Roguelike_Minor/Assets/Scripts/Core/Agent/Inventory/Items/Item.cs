@@ -14,6 +14,8 @@ namespace Game.Core {
         //vars
         public ItemVars vars;
 
+        private const float randomDropOffset = 0.5f;
+
         //ctor
         public Item(ItemDataSO data, Inventory holder)
         {
@@ -42,8 +44,17 @@ namespace Game.Core {
             GameObject obj = Object.Instantiate(data.pickupPrefab);
             //setup item vars
             obj.GetComponent<ItemPickup>().item = data;
-            //set item pos
-            obj.transform.position = agent.transform.position;
+            //set item pos, add slight random offset
+            obj.transform.position = agent.transform.position + GetRandomOffset();
+        }
+
+        private Vector3 GetRandomOffset()
+        {
+            return new Vector3(
+                Random.Range(-randomDropOffset, randomDropOffset),
+                0f,
+                Random.Range(-randomDropOffset, randomDropOffset)
+            );
         }
     }
 }

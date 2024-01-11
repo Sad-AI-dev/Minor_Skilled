@@ -114,13 +114,14 @@ namespace Game.Enemy.Core
             EventBus<GameEndEvent>.RemoveListener(ClearTarget);
         }
 
+        //Handle Distance checks
         public IEnumerator DistanceToTargetCO(Agent agent, Transform transform, Transform target)
         {
             if (GetData("Target") != null)
             {
                 float distance = Vector3.Distance(transform.position, target.position);
                 SetDistanceToTarget(distance);
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.1f);
                 agent.StartCoroutine(DistanceToTargetCO(agent, transform, target));
             }
         }

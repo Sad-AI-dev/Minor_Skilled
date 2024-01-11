@@ -18,7 +18,6 @@ namespace Game.Enemy {
 
         public override NodeState Evaluate()
         {
-            Debug.Log("Handling Charge");
             if (GetData("Target") != null)
             {
                 Transform target = (Transform)GetData("Target");

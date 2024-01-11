@@ -11,7 +11,7 @@ namespace Game.Enemy
     {
         bool ranged;
 
-        public TaskCheckRanged(Transform transform, float distanceToCheck, bool ranged) : base(transform, distanceToCheck)
+        public TaskCheckRanged(Agent agent, float distanceToCheck, bool ranged) : base(agent, distanceToCheck)
         {
             this.ranged = ranged;
         }

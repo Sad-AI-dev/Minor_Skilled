@@ -21,7 +21,7 @@ namespace Game {
             float oldMaxHealth = item.agent.stats.GetMaxHealth();
             item.agent.stats.maxHealth += maxHealth;
             float toHeal = item.agent.stats.GetMaxHealth() - oldMaxHealth;
-            item.agent.health.Heal(new HealEvent(toHeal));
+            item.agent.health.HealSubtle(toHeal);
         }
 
         public override void RemoveStack(Item item)

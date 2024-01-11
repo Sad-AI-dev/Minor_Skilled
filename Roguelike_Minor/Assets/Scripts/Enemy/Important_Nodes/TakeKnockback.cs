@@ -12,7 +12,6 @@ namespace Game.Enemy {
         private Rigidbody rb;
 
         //Bools
-        private bool takingKnockback = false;
         private bool coStarted = false;
         private bool grounded = true;
 
@@ -21,7 +20,7 @@ namespace Game.Enemy {
         private float upMultiplier = 1;
         private float directionMultiplier = 6;
 
-        public TakeKnockback(Transform transform, Agent agent, NavMeshAgent navAgent, Rigidbody rb, float upMultiplier, float directionMultiplier)
+        public TakeKnockback(Transform transform, Agent agent, Rigidbody rb, float upMultiplier, float directionMultiplier, NavMeshAgent navAgent = null)
         {
             this.transform = transform;
             this.agent = agent;
@@ -35,30 +34,49 @@ namespace Game.Enemy {
 
         void OnKnockbackRecieved(Vector3 dir)
         {
-            takingKnockback = true;
+            SetData("TakingKnockback", true);
             knockbackDirection = dir;
         }
 
         public override NodeState Evaluate()
         {
-            if (takingKnockback)
+            // Knockback for Navmesh Agent
+            if (navAgent != null)
             {
-                grounded = Physics.Raycast(transform.position, -transform.up, 0.2f);
-                if (!coStarted)
+                if (GetData("TakingKnockback") != null && (bool)GetData("TakingKnockback"))
                 {
-                    //RB Knockback
-                    rb.isKinematic = false;
-                    rb.velocity = (knockbackDirection + (Vector3.up * upMultiplier)) * directionMultiplier;
-                    KnockbackRB();
+                    grounded = Physics.Raycast(transform.position, -transform.up, 0.2f);
+                    if (!coStarted)
+                    {
+                        //RB Knockback
+                        rb.isKinematic = false;
+                        rb.velocity = (knockbackDirection + (Vector3.up * upMultiplier)) * directionMultiplier;
+                        KnockbackRB();
+                    }
+                    state = NodeState.RUNNING;
                 }
-                state = NodeState.RUNNING;
+                else
+                {
+                    state = NodeState.FAILURE;
+                }
             }
+            // Knockback for Flying Enemy
             else
             {
-                state = NodeState.FAILURE;
+                if (GetData("TakingKnockback") != null && (bool)GetData("TakingKnockback"))
+                {
+                    rb.velocity = (knockbackDirection + (Vector3.up * upMultiplier)) * directionMultiplier;
+                    agent.StartCoroutine(HandleFlyingKnockback());
+                }
             }
 
             return state;
+        }
+
+        IEnumerator HandleFlyingKnockback()
+        {
+            yield return new WaitForSeconds(0.2f);
+            SetData("TakingKnockback", false);
         }
 
         private async void KnockbackRB()
@@ -81,11 +99,9 @@ namespace Game.Enemy {
                     rb.useGravity = false;
 
                     coStarted = false;
-                    takingKnockback = false;
+                    SetData("TakingKnockback", false);
                 }
             }
-            
-            
         }
     }
 }
