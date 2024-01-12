@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Game.Core.GameSystems;
+using UnityEngine.UI;
 
 namespace Game
 {
@@ -16,6 +17,9 @@ namespace Game
         [Header("Setting Details Refs")]
         [SerializeField] private TMP_Text descriptionTitleLabel;
         [SerializeField] private TMP_Text descriptionLabel;
+
+        [Header("Scroll Rect Refs")]
+        [SerializeField] private RectTransform scrollRect;
 
         //vars
         private SettingsSaveLoad serializer;
@@ -66,11 +70,18 @@ namespace Game
             //open new tab
             tabContentHolders[tabIndex].SetActive(true);
             openTab = tabIndex;
+            //refresh scroll rect
+            RefreshScrollRect();
         }
 
         private void CloseTab(int tabIndex)
         {
             tabContentHolders[tabIndex].SetActive(false);
+        }
+
+        private void RefreshScrollRect()
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect);
         }
 
         //======== Manage Hover Setting ========

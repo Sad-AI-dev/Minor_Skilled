@@ -16,7 +16,18 @@ namespace Game.Core.GameSystems {
     {
         [HideInInspector] public bool initialized = false; //has settings file been generated?
 
+        [Header("Graphics")]
+        public bool fullScreen;
+
+        [Header("Sensitivity")]
+        public float mouseSensitivity;
+
         [Header("KeyBinds")]
         public UnityDictionary<InputBinding, KeyCode> keyBinds;
+
+        [Header("Volume")]
+        public float masterVolume;
+        public float musicVolume;
+        public float sfxVolume;
     }
 }
