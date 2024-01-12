@@ -18,7 +18,8 @@ namespace Game
         [SerializeField] private TMP_Text descriptionLabel;
 
         //vars
-        [HideInInspector] public SettingsSaveLoad serializer;
+        private SettingsSaveLoad serializer;
+        [HideInInspector] public bool dirty;
 
         //tabs
         private int openTab;
@@ -88,6 +89,16 @@ namespace Game
                 descriptionTitleLabel.text = "";
                 descriptionLabel.text = "";
                 currentHover = null;
+            }
+        }
+
+        //======= Save Settings ========
+        private void SaveSettings()
+        {
+            if (dirty)
+            {
+                dirty = false;
+                serializer.SaveSettings(settings);
             }
         }
     }

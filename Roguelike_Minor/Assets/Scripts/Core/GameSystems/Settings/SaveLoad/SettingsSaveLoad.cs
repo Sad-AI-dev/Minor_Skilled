@@ -30,6 +30,8 @@ namespace Game.Core.GameSystems {
         //============ Save Data =============
         public void SaveSettings(SettingsSO settingsSO)
         {
+            if (!settingsSO.initialized) { settingsSO.initialized = true; }
+            //convert to json string
             string jsonContents = JsonUtility.ToJson(settingsSO);
             //write to file
             File.WriteAllText(filePath, jsonContents);

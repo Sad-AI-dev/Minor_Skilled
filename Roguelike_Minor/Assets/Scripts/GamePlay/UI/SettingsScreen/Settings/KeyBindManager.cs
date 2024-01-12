@@ -7,30 +7,55 @@ namespace Game {
     {
         [Header("Refs")]
         public SettingsScreen screen;
+        [SerializeField] private RectTransform keyBindSettingHolder;
+
+        //vars
+        private KeyBindSetting[] keyBindSettings;
+
+        //====== Initialize =====
+        private void Awake()
+        {
+            InitializeKeyBindSettings();
+            LoadCurrentKeyBinds();
+        }
+
+        private void InitializeKeyBindSettings()
+        {
+            keyBindSettings = keyBindSettingHolder.GetComponentsInChildren<KeyBindSetting>();
+        }
+
+        private void LoadCurrentKeyBinds()
+        {
+            if (screen.settings.initialized)
+            {
+                for (int i = 0; i < keyBindSettings.Length; i++)
+                {
+                    keyBindSettings[i].InitializeCode(screen.settings.keyBinds[keyBindSettings[i].binding]);
+                }
+            }
+            //no save file, generate default key binds
+            else { RestoreDefaultKeyBinds(); }
+        }
 
         //========= Restore Keybinds ============
         public void RestoreDefaultKeyBinds()
         {
-            //movement keybinds
-            screen.settings.forward = KeyCode.W;
-            screen.settings.left = KeyCode.A;
-            screen.settings.backward = KeyCode.S;
-            screen.settings.right = KeyCode.D;
+            System.Array.ForEach(keyBindSettings, (KeyBindSetting setting) => setting.ResetToDefault());
+        }
 
-            screen.settings.jump = KeyCode.Space;
+        //======= Save Setting =========
+        public void SaveSetting(KeyBindSetting setting)
+        {
+            
+            //mark dirty
+            screen.dirty = true;
+        }
 
-            //interaction keybinds
-            screen.settings.interact = KeyCode.E;
-
-            //ability keybinds
-            screen.settings.primary = KeyCode.Mouse0;
-            screen.settings.secondary = KeyCode.Mouse1;
-            screen.settings.utility = KeyCode.LeftShift;
-            screen.settings.special = KeyCode.Q;
-
-            //inventory keybinds
-            screen.settings.openInventory = KeyCode.Tab;
-            screen.settings.dropItem = KeyCode.E;
+        private bool IsCompatibleKeyBind(KeyBindSetting setting)
+        {
+            //get all keybinds with the same key code
+            List<KeyBindSetting> incompatibleBindings = new List<KeyBindSetting>();
+            return true; //del me
         }
     }
 }
