@@ -73,7 +73,7 @@ namespace Game {
         //========== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Increase chance of higher <color=#{HighlightColor}>rarity</color> items " +
+            return $"Increase chance of higher <color=#{HighlightColor}>Rarity</color> items " +
                 $"appearing in the shop by " +
                 $" <color=#{HighlightColor}>{baseChance * 100}%</color> " +
                 $"<color=#{StackColor}>(+{bonusChance * 100}% per stack)</color>";

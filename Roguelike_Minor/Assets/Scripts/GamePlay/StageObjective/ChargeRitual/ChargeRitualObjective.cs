@@ -30,6 +30,7 @@ namespace Game {
 
         [Header("SFX")]
         [SerializeField] private Event startObeliskSFX;
+        [SerializeField] private State changeMusicState;
         [SerializeField] private RTPC obeliskSpeed;
         [SerializeField] private Event endObeliskSFX;
 
@@ -67,6 +68,7 @@ namespace Game {
             EnemySpawner.instance.ForceSpawn(prewarmMultiplier);
             EnemySpawner.instance.SetExternalSpawnMultiplier(spawnMultiplier);
             startObeliskSFX.Post(gameObject);
+            changeMusicState.SetValue();
         }
 
         //=============== Charge ==============

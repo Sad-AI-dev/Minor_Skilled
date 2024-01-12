@@ -9,7 +9,7 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{8198E07F-F9BD-B163-34C3-03395290EE5B}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{A7E1347E-7DFF-3104-ED35-E75EF5994A98}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
@@ -29,12 +29,14 @@
 				<Bus Id="1551306167" Name="UI"/>
 				<Bus Id="2221585665" Name="World Ambience"/>
 				<Bus Id="2299321487" Name="Enemy"/>
+				<Bus Id="2385628198" Name="Footsteps"/>
 				<Bus Id="2607556080" Name="Menu"/>
 				<Bus Id="3174030640" Name="Auxiliary busses"/>
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 				<Bus Id="3991942870" Name="Music"/>
 			</Busses>
 			<AuxBusses>
+				<AuxBus Id="1032091015" Name="Big_cave"/>
 				<AuxBus Id="1063264192" Name="Valley_verb">
 					<PluginRefs>
 						<ShareSets>
@@ -68,6 +70,16 @@
 				<GameParameter Id="4160247818" Name="SS_Air_Turbulence"/>
 				<GameParameter Id="4248645337" Name="Grass"/>
 			</GameParameters>
+			<StateGroups>
+				<StateGroup Id="4091656514" Name="GameState">
+					<States>
+						<State Id="172464216" Name="ObeliskDone"/>
+						<State Id="748895195" Name="None"/>
+						<State Id="2332076429" Name="ObeliskActivated"/>
+						<State Id="3585588595" Name="ObeliskInactive"/>
+					</States>
+				</StateGroup>
+			</StateGroups>
 			<SwitchGroups>
 				<SwitchGroup Id="2385628198" Name="Footsteps">
 					<Switches>
@@ -192,7 +204,7 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{27C90EE1-95DF-124F-5E2F-6EE33804D519}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{B331A3EC-C3AF-0DFD-2145-7D04E75CFB66}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -207,6 +219,10 @@
 				<File Id="46361113" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Primary_fire_3_BG.wav</ShortName>
 					<CachePath>SFX/Primary_fire_3_BG_10C4C929.wem</CachePath>
+				</File>
+				<File Id="57317276" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Hover_button_3.wav</ShortName>
+					<CachePath>SFX/Hover_button_3_10C4C929.wem</CachePath>
 				</File>
 				<File Id="59103797" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>015_Foley_Footsteps_Asphalt_Boot_Walk_Fast_Run_Jog_Close 3.wav</ShortName>
@@ -238,7 +254,7 @@
 				</File>
 				<File Id="140163996" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Footstep_servo.wav</ShortName>
-					<CachePath>SFX/Footstep_servo_0154EC0D.wem</CachePath>
+					<CachePath>SFX/Footstep_servo_3384DC29.wem</CachePath>
 				</File>
 				<File Id="166783542" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Splat 4-201936__beatmad__sizzling_frypan.wav</ShortName>
@@ -553,19 +569,23 @@
 						<MediaRef Id="965924032"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2407781483" Name="Play_Hover_button" DurationType="OneShot" DurationMin="0.20724398" DurationMax="0.21654448">
+				<Event Id="2407781483" Name="Play_Hover_button" DurationType="OneShot" DurationMin="0.30342293" DurationMax="0.31703967">
 					<MediaRefs>
 						<MediaRef Id="1065195588"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1955166390" Name="Play_Hover_button_wild" DurationType="OneShot" DurationMin="0.4218821" DurationMax="0.4218821">
+					<MediaRefs>
+						<MediaRef Id="57317276"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="3689126666" Name="Play_jump" DurationType="OneShot" DurationMin="1.1270713" DurationMax="1.1270713">
 					<MediaRefs>
 						<MediaRef Id="140163996"/>
 						<MediaRef Id="353592572"/>
-						<MediaRef Id="889319335"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2323405115" Name="Play_landing" DurationType="OneShot" DurationMin="0.8058289" DurationMax="0.95995057">
+				<Event Id="2323405115" Name="Play_landing" DurationType="OneShot" DurationMin="0.5058289" DurationMax="0.65995055">
 					<MediaRefs>
 						<MediaRef Id="59103797"/>
 						<MediaRef Id="89932490"/>
@@ -644,6 +664,164 @@
 				<GameParameter Id="4248645337" Name="Grass"/>
 			</GameParameters>
 		</SoundBank>
+		<SoundBank Id="3991942870" Type="User" Language="SFX" Hash="{FA8F5AEE-6FB7-3FD2-43EC-0CB02C5CB39D}">
+			<ShortName>Music</ShortName>
+			<Path>Music.bnk</Path>
+			<Media>
+				<File Id="37472570" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main Lead Synth 2 131bpm4-4 L24M_P0.wav</ShortName>
+					<CachePath>SFX/Main Lead Synth 2 131bpm4-4 L24M_P0_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="98689992" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>End 167bpm4-4 L24M_P0 Basic Reese Bass.wav</ShortName>
+					<CachePath>SFX/End 167bpm4-4 L24M_P0 Basic Reese Bass_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="174746659" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main 167bpm4-4 L24M_P0 2-Group.wav</ShortName>
+					<CachePath>SFX/Main 167bpm4-4 L24M_P0 2-Group_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="236595874" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Intro 167bpm4-4 L16M_P0 167bpm.wav</ShortName>
+					<CachePath>SFX/Intro 167bpm4-4 L16M_P0 167bpm_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="254664524" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Intro 167bpm4-4 L16M_P0 Vital-1.wav</ShortName>
+					<CachePath>SFX/Intro 167bpm4-4 L16M_P0 Vital-1_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="392249334" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Intro 167bpm4-4 L16M_P0 Vital.wav</ShortName>
+					<CachePath>SFX/Intro 167bpm4-4 L16M_P0 Vital_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="427646418" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main Reese Bass 131bpm4-4 L24M_P0.wav</ShortName>
+					<CachePath>SFX/Main Reese Bass 131bpm4-4 L24M_P0_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="525797830" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main Lead Synth 131bpm4-4 L24M_P0.wav</ShortName>
+					<CachePath>SFX/Main Lead Synth 131bpm4-4 L24M_P0_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="541812249" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main Drums 131bpm4-4 L24M_P0.wav</ShortName>
+					<CachePath>SFX/Main Drums 131bpm4-4 L24M_P0_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="555833590" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main 167bpm4-4 L24M_P0 26-Clap Knock (Freeze).wav</ShortName>
+					<CachePath>SFX/Main 167bpm4-4 L24M_P0 26-Clap Knock (Freeze)_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="665377846" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main-2 167bpm4-4 L24M_P0 9-Group.wav</ShortName>
+					<CachePath>SFX/Main-2 167bpm4-4 L24M_P0 9-Group_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="679694694" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main 167bpm4-4 L24M_P0 Basic Reese Bass.wav</ShortName>
+					<CachePath>SFX/Main 167bpm4-4 L24M_P0 Basic Reese Bass_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="684604216" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main 167bpm4-4 L24M_P0 Vital-1.wav</ShortName>
+					<CachePath>SFX/Main 167bpm4-4 L24M_P0 Vital-1_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="770742151" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main Pad 131bpm4-4 L24M_P0.wav</ShortName>
+					<CachePath>SFX/Main Pad 131bpm4-4 L24M_P0_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="830645356" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main 167bpm4-4 L24M_P0 Vital.wav</ShortName>
+					<CachePath>SFX/Main 167bpm4-4 L24M_P0 Vital_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="877363100" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main 167bpm4-4 L24M_P0 9-Group.wav</ShortName>
+					<CachePath>SFX/Main 167bpm4-4 L24M_P0 9-Group_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="920837749" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>End 167bpm4-4 L24M_P0 9-Group.wav</ShortName>
+					<CachePath>SFX/End 167bpm4-4 L24M_P0 9-Group_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="978139187" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Intro 167bpm4-4 L16M_P0 9-Group.wav</ShortName>
+					<CachePath>SFX/Intro 167bpm4-4 L16M_P0 9-Group_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="1000990111" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main Lead Synth 3 131bpm4-4 L24M_P0.wav</ShortName>
+					<CachePath>SFX/Main Lead Synth 3 131bpm4-4 L24M_P0_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="1060435419" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Main 167bpm4-4 L24M_P0 27-Kick 808 Tone8 p (Freeze).wav</ShortName>
+					<CachePath>SFX/Main 167bpm4-4 L24M_P0 27-Kick 808 Tone8 p (Freeze)_A15FB2FF.wem</CachePath>
+				</File>
+				<File Id="1068753928" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Intro 167bpm4-4 L16M_P0 Basic Reese Bass.wav</ShortName>
+					<CachePath>SFX/Intro 167bpm4-4 L16M_P0 Basic Reese Bass_A15FB2FF.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="414863633" Name="Play_Main_Music" DurationType="Infinite">
+					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="State" GroupId="4091656514" Id="3585588595"/>
+							<MediaRefs>
+								<MediaRef Id="37472570"/>
+								<MediaRef Id="427646418"/>
+								<MediaRef Id="525797830"/>
+								<MediaRef Id="541812249"/>
+								<MediaRef Id="770742151"/>
+								<MediaRef Id="1000990111"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="State" GroupId="4091656514" Id="2332076429"/>
+							<MediaRefs>
+								<MediaRef Id="37472570"/>
+								<MediaRef Id="174746659"/>
+								<MediaRef Id="236595874"/>
+								<MediaRef Id="254664524"/>
+								<MediaRef Id="392249334"/>
+								<MediaRef Id="427646418"/>
+								<MediaRef Id="555833590"/>
+								<MediaRef Id="665377846"/>
+								<MediaRef Id="679694694"/>
+								<MediaRef Id="684604216"/>
+								<MediaRef Id="770742151"/>
+								<MediaRef Id="830645356"/>
+								<MediaRef Id="877363100"/>
+								<MediaRef Id="978139187"/>
+								<MediaRef Id="1060435419"/>
+								<MediaRef Id="1068753928"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="State" GroupId="4091656514" Id="748895195"/>
+							<MediaRefs>
+								<MediaRef Id="37472570"/>
+								<MediaRef Id="427646418"/>
+								<MediaRef Id="525797830"/>
+								<MediaRef Id="541812249"/>
+								<MediaRef Id="770742151"/>
+								<MediaRef Id="1000990111"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="State" GroupId="4091656514" Id="172464216"/>
+							<MediaRefs>
+								<MediaRef Id="98689992"/>
+								<MediaRef Id="174746659"/>
+								<MediaRef Id="555833590"/>
+								<MediaRef Id="920837749"/>
+							</MediaRefs>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+			</Events>
+			<StateGroups>
+				<StateGroup Id="4091656514" Name="GameState">
+					<States>
+						<State Id="172464216" Name="ObeliskDone"/>
+						<State Id="748895195" Name="None"/>
+						<State Id="2332076429" Name="ObeliskActivated"/>
+						<State Id="3585588595" Name="ObeliskInactive"/>
+					</States>
+				</StateGroup>
+			</StateGroups>
+		</SoundBank>
 	</SoundBanks>
-	<FileHash>{E7D62D0E-C49D-F1F3-8613-B57433392E1F}</FileHash>
+	<FileHash>{97BB813A-4594-F1E4-4214-080191D8B1ED}</FileHash>
 </SoundBanksInfo>

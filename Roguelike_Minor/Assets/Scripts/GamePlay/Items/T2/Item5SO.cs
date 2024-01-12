@@ -71,7 +71,7 @@ namespace Game {
         public override string GenerateLongDescription()
         {
             return $"On hit, gain a <color=#{HighlightColor}>{chance}% chance</color> " +
-                $"to inflict <color=#{HighlightColor}>Doom</color>\n" +
+                $"to inflict <color=#{HighlightColor}>Doom</color> " +
                 $"Dealing <color=#{HighlightColor}>{baseDamageMult * 100}%</color> " +
                 $"<color=#{StackColor}>(+{bonusDamageMult * 100}% per stack)</color> " +
                 $"total damage after a short delay";

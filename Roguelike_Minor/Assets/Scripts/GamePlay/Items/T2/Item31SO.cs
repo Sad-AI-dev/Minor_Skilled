@@ -35,8 +35,8 @@ namespace Game {
         //========== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Upgrade <color=#{HighlightColor}>utility ability</color> by" +
-                $" <color=#{HighlightColor}>{baseUpgrades} level</color> " +
+            return $"Upgrade <color=#{HighlightColor}>Utility Ability</color> by" +
+                $" <color=#{HighlightColor}>{baseUpgrades} Level</color> " +
                 $"<color=#{StackColor}>(+{bonusUpgrades} level per stack)</color>";
         }
     }

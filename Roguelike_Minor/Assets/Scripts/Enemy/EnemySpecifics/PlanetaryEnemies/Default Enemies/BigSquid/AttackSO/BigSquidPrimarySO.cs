@@ -20,13 +20,19 @@ namespace Game.Enemy {
     { 
         public override void InitializeVars(Ability source)
         {
-            
+            source.vars = new BigSquidPrimaryVars
+            {
+                lineRenderer = source.agent.GetComponent<LineRenderer>(),
+                root = source.agent.GetComponent<Core.Tree>().root
+            };
         }
 
         public override void Use(Ability source)
         {
             BigSquidPrimaryVars vars = source.vars as BigSquidPrimaryVars;
-            vars.targetingCo = source.agent.StartCoroutine(TargetingCo(source));   
+            vars.target = (Transform)vars.root.GetData("Target");
+
+            vars.targetingCo = source.agent.StartCoroutine(TargetingCo(source));
         }
 
         Vector3 shootPos;
@@ -43,7 +49,7 @@ namespace Game.Enemy {
             
             vars.lineRenderer.enabled = false;
             RaycastHit hit;
-            if (Physics.Raycast(source.originPoint.position, source.originPoint.forward, out hit, Mathf.Infinity))
+            if (Physics.Raycast(source.originPoint.position, vars.lineRenderer.GetPosition(1) - source.originPoint.position, out hit, Mathf.Infinity))
             {
                 shootPos = hit.point;
             }

@@ -88,7 +88,7 @@ namespace Game {
         {
             return $"Gain a <color=#{HighlightColor}>{baseChance}%</color> " +
                 $"<color=#{StackColor}>(+{bonusChance}% per stack)</color> " +
-                $"chance to spawn a <color=#{HighlightColor}>chest</color> " +
+                $"chance to spawn a <color=#{HighlightColor}>Chest</color> " +
                 $"on the next stage";
         }
     }
