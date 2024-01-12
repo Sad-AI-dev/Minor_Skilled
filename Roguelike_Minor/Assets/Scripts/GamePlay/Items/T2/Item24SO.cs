@@ -87,10 +87,10 @@ namespace Game {
         //========== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Spawn a <color=#{HighlightColor}>unique chest</color> on the next stage " +
+            return $"Spawn a <color=#{HighlightColor}>Unique Chest</color> on the next stage " +
                 $"with a <color=#{HighlightColor}>{baseChestLuck * 100}%</color> " +
                 $"<color=#{StackColor}>(+{bonusChestLuck * 100}% per stack)</color> " +
-                $"chance to contain a <color=#{HighlightColor}>higher rarity</color> item";
+                $"chance to contain a <color=#{HighlightColor}>Higher Rarity</color> item";
         }
     }
 }

@@ -96,11 +96,11 @@ namespace Game {
         public override string GenerateLongDescription()
         {
             return $"Gain a <color=#{HighlightColor}>{procChance}% chance</color> to fire a " +
-                $"<color=#{HighlightColor}>soul fragment</color>, dealing " +
+                $"<color=#{HighlightColor}>Soul Fragment</color>, dealing " +
                 $"<color=#{HighlightColor}>{baseDamageMult * 100}%</color> " +
                 $"<color=#{StackColor}>(+{bonusDamageMult * 100}% per stack)</color> " +
                 $"damage in a {damageRange}m radius and applies " +
-                $"<color=#{HighlightColor}>vulnerable</color> in a {effectRange}m radius";
+                $"<color=#{HighlightColor}>Vulnerable</color> in a {effectRange}m radius";
         }
     }
 }

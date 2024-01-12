@@ -124,11 +124,11 @@ namespace Game {
         //============== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"enemies have a " +
+            return $"Enemies have a " +
                 $"<color=#{HighlightColor}>{procChance}%</color> chance to " +
-                $"<color=#{HighlightColor}>explode</color> on death, dealing " +
-                $"<color=#{HighlightColor}>{explosionDamageMult * 100}% TOTAL damage</color>\n" +
-                $"in a <color=#{HighlightColor}>{explosionRadius}m radius</color> " +
+                $"<color=#{HighlightColor}>Explode</color> on death, dealing " +
+                $"<color=#{HighlightColor}>{explosionDamageMult * 100}% TOTAL damage</color> " +
+                $"in a <color=#{HighlightColor}>{explosionRadius}m</color> radius" +
                 $"<color=#{StackColor}>(+{bonusExplosionRadius}m per stack)</color>";
         }
     }

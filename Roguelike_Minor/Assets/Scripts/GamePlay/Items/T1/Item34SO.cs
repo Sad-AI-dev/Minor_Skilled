@@ -44,7 +44,7 @@ namespace Game {
         {
             return $"Deal <color=#{HighlightColor}>{baseDamageMult * 100}%</color> " +
                 $"<color=#{StackColor}>(+{bonusDamageMult * 100}% per stack)</color> " +
-                $"additional <color=#{HighlightColor}>damage</color> to enemies " +
+                $"additional <color=#{HighlightColor}>Damage</color> to enemies " +
                 $"above <color=#{HighlightColor}>{triggerPercent * 100}%</color> health";
         }
     }

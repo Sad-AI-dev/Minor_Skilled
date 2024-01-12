@@ -26,6 +26,7 @@ namespace Game.Core.GameSystems
             rb.useGravity = false;
             transform.rotation = Quaternion.LookRotation(Vector3.up);
             target = FindTarget();
+            StartCoroutine(FindTargetDelayCo());
         }
 
         private void FixedUpdate()
@@ -93,8 +94,9 @@ namespace Game.Core.GameSystems
 
         private IEnumerator FindTargetDelayCo()
         {
+            canFindTarget = false;
             yield return new WaitForSeconds(cooldown);
-
+            canFindTarget = true;
         }
     }
 }
