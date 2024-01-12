@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &158421096 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2437245198168656956, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
-  m_PrefabInstance: {fileID: 684490300}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &165370653 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6889364218904063374, guid: 8f0d54591f7f8184c9f5334bcd79dfb2, type: 3}
@@ -254,6 +249,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608c2bfd67fcb9e4896894e84f5b899e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &266506298 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4608935495653878659, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+  m_PrefabInstance: {fileID: 684490300}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &684490300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306,6 +306,18 @@ PrefabInstance:
       propertyPath: secondary.coolDown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: primary.originPoint
+      value: 
+      objectReference: {fileID: 266506298}
+    - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: special.originPoint
+      value: 
+      objectReference: {fileID: 266506298}
+    - target: {fileID: 1439967887705530693, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+      propertyPath: secondary.originPoint
+      value: 
+      objectReference: {fileID: 266506298}
     - target: {fileID: 1857768514169513729, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.g
       value: 0
@@ -654,7 +666,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 2080868657523406450, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2437245198168656956, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 7641492428396719861, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1679714989}
     m_AddedComponents:
@@ -1557,6 +1569,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 150b500675d86ae43899c85caed02b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1630274027 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7641492428396719861, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+  m_PrefabInstance: {fileID: 684490300}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1679714988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,7 +1605,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 158421096}
+  m_Father: {fileID: 1630274027}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &1679714990
 ParticleSystemRenderer:
