@@ -47,10 +47,10 @@ namespace Game {
         //========== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Increases <color=#{HighlightColor}>crit chance</color> by " +
+            return $"Increases <color=#{HighlightColor}>Crit Chance</color> by " +
                 $"<color=#{HighlightColor}>{baseCritChance}%</color> " +
                 $"<color=#{StackColor}>(+{bonusCritChance}% per stack)</color> and " +
-                $"<color=#{HighlightColor}>crit damage</color> by " +
+                $"<color=#{HighlightColor}>Crit Damage</color> by " +
                 $"<color=#{HighlightColor}>{baseCritDmg * 100}%</color> " +
                 $"<color=#{StackColor}>(+{bonusCritDmg * 100}% per stack)</color>";
         }

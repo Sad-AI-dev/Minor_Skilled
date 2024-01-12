@@ -67,9 +67,9 @@ namespace Game {
         {
             return $"Adds a <color=#{HighlightColor}>{baseChance}%</color> " +
                 $"<color=#{StackColor}>(+{bonusChance}% per stack)</color> " +
-                $"chance to inflict <color=#{HighlightColor}>bleed</color> on hit, dealing " +
+                $"chance to inflict <color=#{HighlightColor}>Bleed</color> on hit, dealing " +
                 $"<color=#{HighlightColor}>{bleedEffect.GetTotalTicks() * bleedDamageMult * 100}% " +
-                $"base damage</color> over " +
+                $"Base Damage</color> over " +
                 $"<color=#{HighlightColor}>{bleedEffect.duration} seconds</color>";
         }
     }

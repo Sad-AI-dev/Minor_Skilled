@@ -89,10 +89,10 @@ namespace Game {
         public override string GenerateLongDescription()
         {
             return $"Crits inflict <color=#{HighlightColor}>Vulnerable</color> " +
-                $"causing enemies to take <color=#{HighlightColor}>+{baseDamageMult * 100}%</color> " +
-                $"<color=#{StackColor}>(+{bonusDamageMult * 100}% per stack)</color> damage from all sources " +
-                $"for <color=#{HighlightColor}>{effect.duration} seconds</color>.\n" +
-                $"Additionally, increase <color=#{HighlightColor}>crit chance</color> by" +
+                $"<color=#{HighlightColor}>+{baseDamageMult * 100}%</color> " +
+                $"<color=#{StackColor}>(+{bonusDamageMult * 100}% per stack)</color> all-source damage to enemies " +
+                $"for <color=#{HighlightColor}>{effect.duration} </color> seconds " +
+                $"& increases <color=#{HighlightColor}>Crit Chance</color> by" +
                 $" <color=#{HighlightColor}>{critChance}%</color>";
         }
     }

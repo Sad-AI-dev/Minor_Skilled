@@ -29,7 +29,7 @@ namespace Game {
         {
             return $"<color=#{HighlightColor}>+{baseRegen}</color> " +
                 $"<color=#{StackColor}>(+{bonusRegen} per stack)</color> " +
-                $"<color=#{HighlightColor}>health regeneration</color> " +
+                $"<color=#{HighlightColor}>Health Regeneration</color> " +
                 $"per second";
         }
     }

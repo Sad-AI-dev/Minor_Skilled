@@ -54,9 +54,9 @@ namespace Game {
         {
             return $"Deal <color=#{HighlightColor}>{baseDamageMult * 100}%</color> " +
                 $"<color=#{StackColor}>(+{bonusDamageMult * 100}% per stack)</color> " +
-                $"additional damage for each " +
-                $"<color=#{HighlightColor}>unique status condition</color> " +
-                $"on the enemy.";
+                $"additional damage for each unique " +
+                $"<color=#{HighlightColor}>Status Condition</color> " +
+                $"on the enemy";
         }
     }
 }

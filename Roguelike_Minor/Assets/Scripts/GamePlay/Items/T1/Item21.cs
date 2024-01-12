@@ -84,12 +84,12 @@ namespace Game {
         //========== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Gain a <color=#{HighlightColor}>{chance}%</color> " +
-                $"chance to create a <color=#{HighlightColor}>poison cloud</color> on hit in a " +
-                $"<color=#{HighlightColor}>{baseRange}m radius</color> " +
+            return $"<color=#{HighlightColor}>{chance}%</color> " +
+                $"chance to create a <color=#{HighlightColor}>Poison Cloud</color> on hit in a " +
+                $"<color=#{HighlightColor}>{baseRange}m </color> radius" +
                 $"<color=#{StackColor}>(+{bonusRange}m per stack)</color>, dealing " +
                 $"<color=#{HighlightColor}>{poisonEffect.GetTotalTicks() * poisonDamageMult * 100}% " +
-                $"base damage</color> over " +
+                $"Base Damage</color> over " +
                 $"<color=#{HighlightColor}>{poisonEffect.duration} seconds</color>";
         }
     }

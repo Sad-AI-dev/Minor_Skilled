@@ -84,7 +84,7 @@ namespace Game {
         public override string GenerateLongDescription()
         {
             return $"On death, enemies " +
-                $"<color=#{HighlightColor}>spread status conditions</color> " +
+                $"spread <color=#{HighlightColor}> Status Conditions</color> " +
                 $"in a <color=#{HighlightColor}>{baseRadius}m</color> " +
                 $"<color=#{StackColor}>(+{bonusRadius}m per stack)</color> " +
                 $"radius";

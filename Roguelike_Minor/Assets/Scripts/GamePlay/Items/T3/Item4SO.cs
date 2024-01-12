@@ -48,7 +48,7 @@ namespace Game {
         //============ Description ================
         public override string GenerateLongDescription()
         {
-            return $"Killing an enemy <color=#{HighlightColor}>restores 1 special use</color> " +
+            return $"Killing an enemy restores <color=#{HighlightColor}>1 Special Use</color> " +
                 $"<color=#{StackColor}>(+{bonusUseIncrease} max special use per stack)</color>";
         }
     }

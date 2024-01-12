@@ -91,6 +91,8 @@ namespace Game.Player
 
         private void FixedUpdate()
         {
+            Debug.Log(Time.timeScale);
+
             UpdateSpeed();
             if(excessVelocity.magnitude > 0)
                 UpdateExcessVelocity();
@@ -253,9 +255,7 @@ namespace Game.Player
         public void ReceiveKnockback(Vector3 kbForce)
         {
             yVelocity = 0;
-            excessVelocity += moveDirection * kbForce.magnitude;
-            //excessVelocity += kbForce;
-            yVelocity += kbForce.y;
+            excessVelocity += kbForce;
             jumping = false;
         }
 

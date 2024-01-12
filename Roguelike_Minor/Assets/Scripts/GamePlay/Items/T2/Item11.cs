@@ -27,7 +27,7 @@ namespace Game {
         //========== Description ===========
         public override string GenerateLongDescription()
         {
-            return $"Gain <color=#{HighlightColor}>{baseUses} use</color> " +
+            return $"Gain <color=#{HighlightColor}>{baseUses} Use</color> " +
                 $"<color=#{StackColor}>(+{bonusUses} use per stack)</color> " +
                 $"of your Utility ability";
         }

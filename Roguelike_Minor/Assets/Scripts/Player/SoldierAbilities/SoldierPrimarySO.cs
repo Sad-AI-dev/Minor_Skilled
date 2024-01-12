@@ -26,6 +26,7 @@ namespace Game.Player.Soldier
 
         [Header("Bullet")]
         public GameObject bullet;
+        public GameObject trail;
         public float bulletSpeed;
 
         [Header("Aiming")]
@@ -84,20 +85,28 @@ namespace Game.Player.Soldier
                     target = _hit.point;
             }
             else
-                return;
-
-            if (_hit.transform.TryGetComponent<Agent>(out Agent agent))
             {
-                agent.health.Hurt(new HitEvent(source));
+                target = cam.ViewportToWorldPoint(new UnityEngine.Vector3(0.5f, 0.5f, 100));
             }
 
-            if(!vars.lineRenderer.enabled)
+            if(_hit.transform != null)
+            {
+                if (_hit.transform.TryGetComponent<Agent>(out Agent agent))
+                {
+                    agent.health.Hurt(new HitEvent(source));
+                }
+            }
+
+/*            if(!vars.lineRenderer.enabled)
                 vars.lineRenderer.enabled = true;
 
             UnityEngine.Vector3[] positions = { source.originPoint.position, target};
             vars.lineRenderer.SetPositions(positions);
             vars.lineRenderer.widthMultiplier = 0.2f;
-            vars.lineOpacity = 1;
+            vars.lineOpacity = 1;*/
+
+            BulletTrailKillTimer killTimer = Instantiate(trail, source.originPoint.position, UnityEngine.Quaternion.identity).GetComponent<BulletTrailKillTimer>();
+            killTimer.SetKillTimer(target);
 
             source.agent.StartCoroutine(ReduceLineOpacity(vars, source));
 
