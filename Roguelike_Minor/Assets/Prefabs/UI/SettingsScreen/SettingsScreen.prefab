@@ -3856,11 +3856,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1455819825456412503, guid: 10599eec513517b44a01df4fc04f84f9, type: 3}
       propertyPath: description
-      value: Sensitivity of the mouse when moving the camera.
+      value: 'Sensitivity of the mouse when moving the camera.
+
+
+        Value represents
+        a multiplier to how sensitive the mouse is.'
       objectReference: {fileID: 0}
     - target: {fileID: 2993506549982091024, guid: 10599eec513517b44a01df4fc04f84f9, type: 3}
       propertyPath: maxValue
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2993506549982091024, guid: 10599eec513517b44a01df4fc04f84f9, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
@@ -3888,7 +3892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4687069664112839189, guid: 10599eec513517b44a01df4fc04f84f9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.535
+      value: 0.47368422
       objectReference: {fileID: 0}
     - target: {fileID: 4687069664112839189, guid: 10599eec513517b44a01df4fc04f84f9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3896,7 +3900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5398052999938288032, guid: 10599eec513517b44a01df4fc04f84f9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.535
+      value: 0.47368422
       objectReference: {fileID: 0}
     - target: {fileID: 5398052999938288032, guid: 10599eec513517b44a01df4fc04f84f9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3904,7 +3908,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5398052999938288032, guid: 10599eec513517b44a01df4fc04f84f9, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.535
+      value: 0.47368422
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596975499936782531, guid: 10599eec513517b44a01df4fc04f84f9, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596975499936782531, guid: 10599eec513517b44a01df4fc04f84f9, type: 3}
+      propertyPath: m_MaxValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596975499936782531, guid: 10599eec513517b44a01df4fc04f84f9, type: 3}
+      propertyPath: m_MinValue
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8135080760235531327, guid: 10599eec513517b44a01df4fc04f84f9, type: 3}
       propertyPath: m_Pivot.x

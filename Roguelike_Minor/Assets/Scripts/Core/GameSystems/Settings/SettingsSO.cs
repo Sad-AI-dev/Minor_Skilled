@@ -39,7 +39,7 @@ namespace Game.Core.GameSystems {
             fullScreen = true;
             targetFrameRate = 60;
             //controls
-            mouseSensitivity = 0.5f; //PLACEHOLDER!
+            mouseSensitivity = 1f; //PLACEHOLDER!
             keyBinds = new UnityDictionary<InputBinding, KeyCode>
             {
                 //movement
