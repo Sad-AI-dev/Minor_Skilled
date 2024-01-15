@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AK.Wwise;
 using Game.Core.GameSystems;
 
 namespace Game {
     public class SettingsLoader : MonoBehaviour
     {
         [SerializeField] private SettingsSO settings;
+
+        [Header("Volume Parameters")]
+        [SerializeField] private RTPC masterVolumeParameter;
+        [SerializeField] private RTPC musicVolumeParameter;
+        [SerializeField] private RTPC sfxVolumeParameter;
 
         private void Awake()
         {
@@ -42,7 +48,9 @@ namespace Game {
         //==== Audio ====
         private void ApplyAudioSettings()
         {
-            //TODO apply audio settings
+            masterVolumeParameter.SetGlobalValue(settings.masterVolume);
+            musicVolumeParameter.SetGlobalValue(settings.musicVolume);
+            sfxVolumeParameter.SetGlobalValue(settings.sfxVolume);
         }
     }
 }

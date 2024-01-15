@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using AK.Wwise;
 
 namespace Game {
     [RequireComponent(typeof(SettingsScreen))]
@@ -21,8 +22,11 @@ namespace Game {
 
         [Header("Audio Refs")]
         [SerializeField] private SettingSliderHandler masterVolume;
+        [SerializeField] private RTPC masterVolumeParameter;
         [SerializeField] private SettingSliderHandler musicVolume;
+        [SerializeField] private RTPC musicVolumeParameter;
         [SerializeField] private SettingSliderHandler sfxVolume;
+        [SerializeField] private RTPC sfxVolumeParameter;
 
         private SettingsScreen screen;
 
@@ -120,6 +124,7 @@ namespace Game {
         public void SetMasterVolume(float volume)
         {
             screen.settings.masterVolume = volume;
+            masterVolumeParameter.SetGlobalValue(volume);
             //set screen dirty
             screen.dirty = true;
         }
@@ -127,6 +132,7 @@ namespace Game {
         public void SetMusicVolume(float volume)
         {
             screen.settings.musicVolume = volume;
+            musicVolumeParameter.SetGlobalValue(volume);
             //set screen dirty
             screen.dirty = true;
         }
@@ -134,6 +140,7 @@ namespace Game {
         public void SetSFXVolume(float volume)
         {
             screen.settings.sfxVolume = volume;
+            sfxVolumeParameter.SetGlobalValue(volume);
             //set screen dirty
             screen.dirty = true;
         }

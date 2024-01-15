@@ -125,7 +125,7 @@ namespace Game.Player {
 
         private void AbilitiesInput()
         {
-            if (Input.GetKeyDown(settings.keyBinds[InputBinding.Primary]))
+            if (Input.GetKey(settings.keyBinds[InputBinding.Primary]))
             {
                 if (!shooting)
                     shooting = true;
@@ -142,7 +142,7 @@ namespace Game.Player {
                 
                 agent.abilities.primary.TryUse();
             }
-            if(!Input.GetKeyDown(settings.keyBinds[InputBinding.Primary]) && shooting)
+            if(!Input.GetKey(settings.keyBinds[InputBinding.Primary]) && shooting)
             {
                 delayFOVChange = 0;
                 shooting = false;
