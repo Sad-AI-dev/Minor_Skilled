@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
+using Game.Core;
 using Game.Core.GameSystems;
 
 namespace Game
@@ -16,6 +19,12 @@ namespace Game
         [Header("Setting Details Refs")]
         [SerializeField] private TMP_Text descriptionTitleLabel;
         [SerializeField] private TMP_Text descriptionLabel;
+
+        [Header("Scroll Rect Refs")]
+        [SerializeField] private RectTransform scrollRect;
+
+        [Header("Unload Vars")]
+        [SerializeField] private int buildIndex; 
 
         //vars
         private SettingsSaveLoad serializer;
@@ -34,6 +43,24 @@ namespace Game
             //initialize descriptions
             descriptionTitleLabel.text = "";
             descriptionLabel.text = "";
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                CloseMenu();
+            }
+        }
+
+        //======= Close and Save ========
+        public void CloseMenu()
+        {
+            SaveSettings();
+            //hide object
+            gameObject.SetActive(false);
+            //unload scene
+            SceneManager.UnloadSceneAsync(buildIndex);
         }
 
         //===== Initailize ======
@@ -66,11 +93,18 @@ namespace Game
             //open new tab
             tabContentHolders[tabIndex].SetActive(true);
             openTab = tabIndex;
+            //refresh scroll rect
+            RefreshScrollRect();
         }
 
         private void CloseTab(int tabIndex)
         {
             tabContentHolders[tabIndex].SetActive(false);
+        }
+
+        private void RefreshScrollRect()
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect);
         }
 
         //======== Manage Hover Setting ========
@@ -99,6 +133,8 @@ namespace Game
             {
                 dirty = false;
                 serializer.SaveSettings(settings);
+                //notify settings changed
+                EventBus<SettingsChanged>.Invoke(new SettingsChanged { settings = settings });
             }
         }
     }

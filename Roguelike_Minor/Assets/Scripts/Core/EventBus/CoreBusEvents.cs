@@ -40,7 +40,7 @@ namespace Game.Core {
 
     //===== Player Leave Bounds =====
     public class RespawnEvent : Event { }
-
+ 
     //========== Game State =============
     public class GameEndEvent : Event { }
 

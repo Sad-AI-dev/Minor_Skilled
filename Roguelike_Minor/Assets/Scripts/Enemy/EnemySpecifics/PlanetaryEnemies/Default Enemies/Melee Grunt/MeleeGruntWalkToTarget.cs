@@ -22,8 +22,8 @@ namespace Game.Enemy {
 
             if(state == NodeState.RUNNING)
             {
-                if (GetData("Charging") != null || !(bool)GetData("Charging")) navAgent.isStopped = false;
-                if (GetData("Charging") != null && (bool)GetData("Charging") == true) transform.LookAt(target);
+                if (GetData("Charging") == null || !(bool)GetData("Charging")) navAgent.isStopped = false;
+                if (GetData("Charging") != null && (bool)GetData("Charging")) transform.LookAt(target);
             }
 
             return state;
