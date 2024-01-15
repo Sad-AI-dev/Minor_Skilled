@@ -15,6 +15,7 @@ namespace Game
 
         [Header("Settings")]
         [SerializeField] private InputBinding binding;
+        [SerializeField] private KeyBindLabelDisplaySO displaySettings;
 
         private void Start()
         {
@@ -25,7 +26,16 @@ namespace Game
 
         private void UpdateLabel(SettingsChanged eventData = null)
         {
-            label.text = settings.keyBinds[binding].ToString();
+            label.text = GetKeyString();
+        }
+        private string GetKeyString()
+        {
+            KeyCode code = settings.keyBinds[binding];
+            if (displaySettings.displayDataDict.ContainsKey(code))
+            {
+                return displaySettings.displayDataDict[code].replaceString.ToUpper();
+            }
+            else { return code.ToString().ToUpper(); }
         }
 
         private void OnDestroy()

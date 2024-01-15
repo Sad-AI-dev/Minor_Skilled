@@ -91,8 +91,6 @@ namespace Game.Player
 
         private void FixedUpdate()
         {
-            Debug.Log(Time.timeScale);
-
             UpdateSpeed();
             if(excessVelocity.magnitude > 0)
                 UpdateExcessVelocity();

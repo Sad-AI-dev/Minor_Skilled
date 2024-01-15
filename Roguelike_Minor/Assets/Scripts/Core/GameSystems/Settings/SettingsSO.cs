@@ -7,11 +7,11 @@ namespace Game.Core.GameSystems {
     //all unique inputs used for keybinds
     public enum InputBinding { 
         Forward, Left, Backward, Right, Jump, //movement binds
-        Primary, Secondary, Utility, Special, //ability binds
+        Primary, Secondary, Special, Utility, //ability binds
         Interact, OpenInventory, DropItem //interaction / inventory binds
     }
 
-    [CreateAssetMenu(fileName = "settings", menuName = "ScriptableObjects/Test/SettingsTest")]
+    [CreateAssetMenu(fileName = "settings", menuName = "ScriptableObjects/Settings/Settings")]
     public class SettingsSO : ScriptableObject
     {
         [HideInInspector] public bool initialized = false; //has settings file been generated?
@@ -59,9 +59,9 @@ namespace Game.Core.GameSystems {
                 new KeyValuePair<InputBinding, KeyCode>(InputBinding.DropItem, KeyCode.E)
             };
             //audio
-            masterVolume = 50f;
-            musicVolume = 50f;
-            sfxVolume = 50f;
+            masterVolume = 100f;
+            musicVolume = 100f;
+            sfxVolume = 100f;
         }
     }
 }
