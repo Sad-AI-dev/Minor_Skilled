@@ -34,10 +34,11 @@ namespace Game.Core {
             {
                 inventory.onContentsChanged += GenerateVisuals;
             }
+            GenerateVisuals(); //force generate on awake
         }
 
         //========= Create Visuals ===========
-        public void GenerateVisuals() //public used by result screen
+        private void GenerateVisuals()
         {
             ResetVisuals();
             if (showSlotPieces) { GenerateSlotPieceVisuals(); }

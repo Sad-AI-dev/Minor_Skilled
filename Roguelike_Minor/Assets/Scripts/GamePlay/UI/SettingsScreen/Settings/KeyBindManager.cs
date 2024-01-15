@@ -42,6 +42,7 @@ namespace Game {
         public void RestoreDefaultKeyBinds()
         {
             System.Array.ForEach(keyBindSettings, (KeyBindSetting setting) => setting.ResetToDefault());
+            screen.dirty = true; //make sure to save
         }
 
         //======= Save Setting =========
