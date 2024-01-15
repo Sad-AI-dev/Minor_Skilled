@@ -14,6 +14,7 @@ namespace Game.Player {
         [SerializeField] private InventoryUI inventory;
         [SerializeField] private PauseMenu pauseMenu;
         [SerializeField] private CameraController camController;
+        [SerializeField] private SettingsSO settings;
         private PlayerRotationManager rotator;
         private FOVManager fovManager;
 
@@ -67,7 +68,6 @@ namespace Game.Player {
         void Update()
         {
             PauseInput();
-            SetTimeScale();
 
             gamePaused = pauseMenu.paused;
 
@@ -81,7 +81,7 @@ namespace Game.Player {
         
         private void WalkInput()
         {
-            Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            Vector2 moveInput = GetMoveInput();
             playerController.SetMoveDirection(moveInput);
 
             if (!shooting)
@@ -100,10 +100,21 @@ namespace Game.Player {
                 //walking = true;
             }
         }
+        private Vector2 GetMoveInput()
+        {
+            Vector2 dir = new Vector2();
+            //read inputs
+            if (Input.GetKey(settings.keyBinds[InputBinding.Forward])) { dir.y += 1f; }
+            if (Input.GetKey(settings.keyBinds[InputBinding.Left])) { dir.x -= 1f; }
+            if (Input.GetKey(settings.keyBinds[InputBinding.Right])) { dir.x += 1f; }
+            if (Input.GetKey(settings.keyBinds[InputBinding.Backward])) { dir.y -= 1f; }
+            //return result
+            return dir;
+        }
 
         private void JumpInput()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(settings.keyBinds[InputBinding.Jump]))
             {
                 if(jumpBufferCoroutine != null)
                     StopCoroutine(jumpBufferCoroutine);
@@ -114,7 +125,7 @@ namespace Game.Player {
 
         private void AbilitiesInput()
         {
-            if(Input.GetMouseButton(0))
+            if (Input.GetKey(settings.keyBinds[InputBinding.Primary]))
             {
                 if (!shooting)
                     shooting = true;
@@ -131,22 +142,22 @@ namespace Game.Player {
                 
                 agent.abilities.primary.TryUse();
             }
-            if(!Input.GetMouseButton(0) && shooting)
+            if(!Input.GetKey(settings.keyBinds[InputBinding.Primary]) && shooting)
             {
                 delayFOVChange = 0;
                 shooting = false;
                 fovManager.ResetFOV();
                 stopShooting.Invoke();
             }
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetKeyDown(settings.keyBinds[InputBinding.Secondary]))
             {
                 agent.abilities.secondary.TryUse();
             }
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(settings.keyBinds[InputBinding.Special]))
             {
                 agent.abilities.special.TryUse();
             }
-            if(Input.GetKeyDown(KeyCode.LeftShift))
+            if(Input.GetKeyDown(settings.keyBinds[InputBinding.Utility]))
             {
                 agent.abilities.utility.TryUse();
             }
@@ -154,7 +165,7 @@ namespace Game.Player {
 
         private void InteractInput()
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(settings.keyBinds[InputBinding.Interact]))
             {
                 interactor.TryInteract();
             }
@@ -163,7 +174,7 @@ namespace Game.Player {
         private void InventoryInput()
         {
             //open / close inventory
-            if(Input.GetKeyDown(KeyCode.Tab))
+            if(Input.GetKeyDown(settings.keyBinds[InputBinding.OpenInventory]))
             {
                 inventory.gameObject.SetActive(true);
                 Cursor.lockState = CursorLockMode.Confined;
@@ -171,7 +182,7 @@ namespace Game.Player {
                 //disable interactor while inventory is open
                 interactor.enabled = false;
             }
-            if (Input.GetKeyUp(KeyCode.Tab))
+            if (Input.GetKeyUp(settings.keyBinds[InputBinding.OpenInventory]))
             {
                 inventory.gameObject.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
@@ -181,7 +192,7 @@ namespace Game.Player {
             }
 
             //drop item input
-            if (inventory.gameObject.activeSelf && Input.GetKeyDown(KeyCode.E))
+            if (inventory.gameObject.activeSelf && Input.GetKeyDown(settings.keyBinds[InputBinding.DropItem]))
             {
                 inventory.TryDropItem();
             }
@@ -221,21 +232,21 @@ namespace Game.Player {
             }
         }
 
-        private void SetTimeScale()
-        {
-            if(Input.GetKeyDown(KeyCode.P))
-            {
-                if (Time.timeScale == 1)
-                    Time.timeScale = 0;
-                else
-                    Time.timeScale = 1;
-            }
+        //private void SetTimeScale()
+        //{
+        //    if(Input.GetKeyDown(KeyCode.P))
+        //    {
+        //        if (Time.timeScale == 1)
+        //            Time.timeScale = 0;
+        //        else
+        //            Time.timeScale = 1;
+        //    }
 
-            if (Input.GetKeyDown(KeyCode.Period))
-                Time.timeScale += 0.05f;
-            if (Input.GetKeyDown(KeyCode.Comma))
-                Time.timeScale -= 0.05f;
-        }
+        //    if (Input.GetKeyDown(KeyCode.Period))
+        //        Time.timeScale += 0.05f;
+        //    if (Input.GetKeyDown(KeyCode.Comma))
+        //        Time.timeScale -= 0.05f;
+        //}
 
         //=========== Manage Game Paused ===================
         public void PauseGame(bool paused)
