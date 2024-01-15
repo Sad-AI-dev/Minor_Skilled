@@ -10,10 +10,12 @@ namespace Game
     {
         [SerializeField] private GameObject menu;
 
+        [SerializeField] private GameObject darkBackground;
         public bool paused;
 
         public void ActivateMenu()
         {
+            darkBackground.SetActive(true);
             menu.SetActive(true);
             paused = true;
             Time.timeScale = 0;
@@ -22,6 +24,7 @@ namespace Game
 
         public void DeactivateMenu()
         {
+            darkBackground.SetActive(false);
             menu.SetActive(false);
             paused = false;
             Time.timeScale = 1;
@@ -30,6 +33,7 @@ namespace Game
 
         public void ReturnToMenu()
         {
+            darkBackground.SetActive(false);
             menu.SetActive(false);
             paused = false;
             Time.timeScale = 1;
