@@ -10,6 +10,10 @@ namespace Game {
     {
         [SerializeField] private UnityEvent<float> onValueChanged;
 
+        [Header("Define Range")]
+        [SerializeField] private float minValue = 0f;
+        [SerializeField] private float maxValue = 1f;
+
         [Header("Refs")]
         [SerializeField] private Slider slider;
         [SerializeField] private TMP_InputField field;
@@ -33,6 +37,10 @@ namespace Game {
         //====== Handle Slider =======
         private void OnSliderChanged(float value)
         {
+            //clamp input
+            value = Mathf.Clamp(value, minValue, maxValue);
+            //apply value
+            slider.value = value;
             field.text = string.Format("{0:0.##}", value);
             onValueChanged?.Invoke(value);
         }
@@ -44,6 +52,7 @@ namespace Game {
             if (float.TryParse(value, out float result))
             {
                 float roundedValue = Mathf.Round(result * 100f) / 100f; //force 2 decimals max
+                roundedValue = Mathf.Clamp(roundedValue, minValue, maxValue); //clamp input
                 //update visuals
                 field.text = roundedValue.ToString();
                 slider.value = roundedValue;

@@ -18,6 +18,9 @@ namespace Game.Core.GameSystems {
 
         [Header("Graphics")]
         public bool fullScreen;
+        public bool useVsync;
+        public bool limitFrameRate;
+        public int targetFrameRate = 60;
 
         [Header("Sensitivity")]
         public float mouseSensitivity;

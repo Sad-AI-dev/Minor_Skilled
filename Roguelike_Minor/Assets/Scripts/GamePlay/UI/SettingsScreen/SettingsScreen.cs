@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using Game.Core.GameSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
+using Game.Core;
+using Game.Core.GameSystems;
 
 namespace Game
 {
@@ -20,6 +22,9 @@ namespace Game
 
         [Header("Scroll Rect Refs")]
         [SerializeField] private RectTransform scrollRect;
+
+        [Header("Unload Vars")]
+        [SerializeField] private int buildIndex; 
 
         //vars
         private SettingsSaveLoad serializer;
@@ -38,6 +43,24 @@ namespace Game
             //initialize descriptions
             descriptionTitleLabel.text = "";
             descriptionLabel.text = "";
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                CloseMenu();
+            }
+        }
+
+        //======= Close and Save ========
+        public void CloseMenu()
+        {
+            SaveSettings();
+            //hide object
+            gameObject.SetActive(false);
+            //unload scene
+            SceneManager.UnloadSceneAsync(buildIndex);
         }
 
         //===== Initailize ======
@@ -110,6 +133,8 @@ namespace Game
             {
                 dirty = false;
                 serializer.SaveSettings(settings);
+                //notify settings changed
+                EventBus<SettingsChanged>.Invoke(new SettingsChanged { settings = settings });
             }
         }
     }
