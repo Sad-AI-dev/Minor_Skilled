@@ -17,14 +17,17 @@ namespace Game.Enemy.Core {
         protected virtual void Awake()
         {
             if (rb == null) rb = GetComponent<Rigidbody>();
+
             if (navAgent != null)
             {
                 navAgent.enabled = true;
 
                 NavMeshHit closestHit;
 
-                if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, NavMesh.AllAreas))
+                if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, navAgent.agentTypeID))
+                {
                     gameObject.transform.position = closestHit.position;
+                }
                 else
                     Debug.LogError("Could not find position on NavMesh!");
             }

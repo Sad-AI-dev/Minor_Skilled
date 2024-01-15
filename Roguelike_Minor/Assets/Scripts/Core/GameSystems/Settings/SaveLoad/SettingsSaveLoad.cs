@@ -25,6 +25,11 @@ namespace Game.Core.GameSystems {
                 //overwrite SO object
                 JsonUtility.FromJsonOverwrite(fileContents, settingsSO);
             }
+            else {
+                //create default values
+                settingsSO.SetDefaultValues();
+                settingsSO.initialized = true;
+            }
         }
 
         //============ Save Data =============

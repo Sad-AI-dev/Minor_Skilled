@@ -444,6 +444,7 @@ MonoBehaviour:
   inventory: {fileID: 0}
   pauseMenu: {fileID: 0}
   camController: {fileID: 6425007794457280646}
+  settings: {fileID: 11400000, guid: c790a326a25f72c4582db1c66f24134e, type: 2}
   cam: {fileID: 0}
   jumpBufferFrames: 10
   shooting: 0
@@ -582,6 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 5844694640700254909}
+  settings: {fileID: 11400000, guid: c790a326a25f72c4582db1c66f24134e, type: 2}
 --- !u!114 &7614700956592736563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,7 +681,7 @@ MonoBehaviour:
     coolDown: 0.2
     coolDownMode: 1
     isCoolingDown: 0
-    originPoint: {fileID: 0}
+    originPoint: {fileID: 4608935495653878659}
     onUse:
       m_PersistentCalls:
         m_Calls:
@@ -720,7 +722,7 @@ MonoBehaviour:
     coolDown: 5
     coolDownMode: 0
     isCoolingDown: 0
-    originPoint: {fileID: 0}
+    originPoint: {fileID: 4608935495653878659}
     onUse:
       m_PersistentCalls:
         m_Calls:
