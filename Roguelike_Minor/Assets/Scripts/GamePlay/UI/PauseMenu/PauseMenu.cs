@@ -1,8 +1,8 @@
 using Game.Core.GameSystems;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game
 {
@@ -13,6 +13,10 @@ namespace Game
         [SerializeField] private GameObject darkBackground;
         public bool paused;
 
+        [Header("Events")]
+        [SerializeField] private UnityEvent onOpenPause;
+        [SerializeField] private UnityEvent onClosePause;
+
         public void ActivateMenu()
         {
             darkBackground.SetActive(true);
@@ -20,6 +24,8 @@ namespace Game
             paused = true;
             Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.None;
+            //notify
+            onOpenPause?.Invoke();
         }
 
         public void DeactivateMenu()
@@ -29,6 +35,8 @@ namespace Game
             paused = false;
             Time.timeScale = 1;
             Cursor.lockState = CursorLockMode.Locked;
+            //notify
+            onClosePause?.Invoke();
         }
 
         public void ReturnToMenu()
