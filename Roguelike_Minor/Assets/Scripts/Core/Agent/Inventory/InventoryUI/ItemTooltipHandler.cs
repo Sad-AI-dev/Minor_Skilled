@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Game.Core.Data;
 
 namespace Game.Core {
     public class ItemTooltipHandler : MonoBehaviour
@@ -10,6 +11,9 @@ namespace Game.Core {
 
         [Header("Position Settings")]
         [SerializeField] private Vector2 offset;
+
+        [Header("Tier Settings")]
+        [SerializeField] private UnityDictionary<ItemTierSO, GameObject> starDict;
 
         [Header("Component Refs")]
         [SerializeField] private TMP_Text titleLabel;
@@ -58,8 +62,20 @@ namespace Game.Core {
             //tier label
             tierLabel.text = itemUI.item.data.tier.title;
             tierLabel.color = itemUI.item.data.tier.titleColor;
+            //tier stars
+            ShowTierStars(itemUI.item.data.tier);
             //description
             descriptionLabel.text = itemUI.item.data.GenerateLongDescription();
+        }
+
+        private void ShowTierStars(ItemTierSO tier)
+        {
+            foreach (var pair in starDict)
+            {
+                pair.Value.SetActive(false); //hide all labels
+            }
+            //show new label
+            starDict[tier].SetActive(true);
         }
 
         //========= Unsub events ======

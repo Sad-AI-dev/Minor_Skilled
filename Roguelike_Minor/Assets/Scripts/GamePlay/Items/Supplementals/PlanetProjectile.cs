@@ -128,7 +128,7 @@ namespace Game {
         private IEnumerator CooldownCo()
         {
             yield return new WaitForSeconds(coolDown);
-            if (gameObject) { EndCoolDown(); } //make sure object still exists
+            if (holderVars.holder != null) { EndCoolDown(); } //make sure object still exists
         }
 
         private void EndCoolDown()
