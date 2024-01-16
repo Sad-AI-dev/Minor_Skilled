@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using TMPro;
 using Game.Core;
 using Game.Core.GameSystems;
@@ -7,6 +8,8 @@ using Game.Core.GameSystems;
 namespace Game {
     public class InteractionLabelHandler : MonoBehaviour
     {
+        [SerializeField] private UnityEvent onInteractFail;
+
         [Header("Default interaction label settings")]
         [SerializeField] private GameObject defaultHolder;
         [SerializeField] private TMP_Text interactionLabel;
@@ -20,8 +23,13 @@ namespace Game {
         [SerializeField] private TMP_Text itemDescription;
         [SerializeField] private TMP_Text itemTier;
 
+        //animation vars
+        private Animator animator;
+
         private void Awake()
         {
+            EventBus<InteractFailEvent>.AddListener(OnInteractFail);
+            animator = GetComponent<Animator>();
             //disable visuals
             defaultHolder.SetActive(false);
             itemLabelHolder.SetActive(false);
@@ -65,6 +73,19 @@ namespace Game {
             //tier
             itemTier.text = itemData.tier.title;
             itemTier.color = itemData.tier.titleColor;
+        }
+
+        //========= Handle Interact Fail ============
+        private void OnInteractFail(InteractFailEvent eventData)
+        {
+            animator.Play("Error");
+            onInteractFail?.Invoke();
+        }
+
+        //==== Handle Destroy ====
+        private void OnDestroy()
+        {
+            EventBus<InteractFailEvent>.RemoveListener(OnInteractFail);
         }
     }
 }

@@ -32,6 +32,10 @@ namespace Game.Player {
 
         private float delayFOVChange = 0;
 
+        [Header("Inventory Events")]
+        [SerializeField] private UnityEvent openInventoryEvent;
+        [SerializeField] private UnityEvent closeInventoryEvent;
+
         private void Awake()
         {
             EventBus<SceneLoadedEvent>.AddListener(OnSceneLoad);
@@ -179,6 +183,7 @@ namespace Game.Player {
                 inventory.gameObject.SetActive(true);
                 Cursor.lockState = CursorLockMode.Confined;
                 camController.LockCamera();
+                openInventoryEvent?.Invoke();
                 //disable interactor while inventory is open
                 interactor.enabled = false;
             }
@@ -187,6 +192,7 @@ namespace Game.Player {
                 inventory.gameObject.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 camController.UnlockCamera();
+                closeInventoryEvent?.Invoke();
                 //re-enable interactor
                 interactor.enabled = true;
             }

@@ -20,6 +20,7 @@ namespace Game.Core {
                 onContentsChanged?.Invoke();
                 return true;
             }
+            EventBus<InteractFailEvent>.Invoke(new InteractFailEvent() { failCause = InteractFailCause.inventory });
             return false;
         }
 
