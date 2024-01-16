@@ -662,17 +662,17 @@ PrefabInstance:
       propertyPath: effectBar
       value: 
       objectReference: {fileID: 1000302506}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7515990704904459572, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+    - {fileID: 5275433928161998391, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
+    - {fileID: 1489795406124407888, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
     m_RemovedGameObjects:
     - {fileID: 2080868657523406450, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7641492428396719861, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1679714989}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8696992653583539949, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 922557474}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
 --- !u!114 &684490301 stripped
 MonoBehaviour:
@@ -740,33 +740,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cd184245bb6f46ac1300c745b9342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &922557471 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8696992653583539949, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
-  m_PrefabInstance: {fileID: 684490300}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &922557472 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2673467769186082349, guid: 3161a0567665ae44693616e2cbe91353, type: 3}
-  m_PrefabInstance: {fileID: 684490300}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &922557474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 922557471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b4b032db930f43439f086743b8da30b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 922557472}
-  distanceToGround: 0.3
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 2048
 --- !u!1001 &952841115
 PrefabInstance:
   m_ObjectHideFlags: 0

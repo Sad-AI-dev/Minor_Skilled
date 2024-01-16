@@ -18,7 +18,7 @@ namespace Game.Player.Soldier
             public bool buildingDownSpread = false;
             public bool isShooting = false;
             public Coroutine stopShootingCo;
-            public BehaviourPool<SubEmitterSystem> impactPool = new BehaviourPool<SubEmitterSystem>();
+            //public BehaviourPool<SubEmitterSystem> impactPool = new BehaviourPool<SubEmitterSystem>();
             public LineRenderer lineRenderer;
             public float lineOpacity;
         }
@@ -55,13 +55,13 @@ namespace Game.Player.Soldier
                 buildingDownSpread = false,
                 isShooting = false,
                 stopShootingCo = null,
-                impactPool = new BehaviourPool<SubEmitterSystem>(),
+                //impactPool = new BehaviourPool<SubEmitterSystem>(),
                 lineRenderer = source.agent.GetComponent<LineRenderer>(),
                 lineOpacity = 255
             };
 
             PrimaryVars vars = source.vars as PrimaryVars;
-            vars.impactPool.behaviourTemplate = impact;
+            //vars.impactPool.behaviourTemplate = impact;
             controller = source.agent.GetComponent<PlayerController>();
             cam = controller.cam;
         }
@@ -69,7 +69,7 @@ namespace Game.Player.Soldier
         public override void Use(Ability source)
         {
             UnityEngine.Vector3 target = UnityEngine.Vector3.zero;
-            UnityEngine.Vector3 bulletDir;
+            //UnityEngine.Vector3 bulletDir;
             
 
             PrimaryVars vars = source.vars as PrimaryVars;
