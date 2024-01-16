@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 using Game.Core.GameSystems;
+using System;
 
 namespace Game {
     public class KeyBindSetting : MonoBehaviour
@@ -15,23 +16,33 @@ namespace Game {
         public UnityEvent<KeyBindSetting> onSetCode;
 
         [Header("Refs")]
-        [SerializeField] private KeyBindManager keyBindManager;
         [SerializeField] private TMP_Text bindLabel;
 
         [Header("Visual Settings")]
+        [SerializeField] private string listeningString = "> <";
         [SerializeField] private Color defaultColor = Color.white;
-        [SerializeField] private Color bindingColor = Color.yellow;
+        [SerializeField] private Color listeningColor = Color.yellow;
         [SerializeField] private Color incompatibleColor = Color.red;
 
         //vars
         [HideInInspector] public bool isIncompatible;
         [HideInInspector] public KeyCode currentCode;
+        private bool listening;
 
         //====== Manage State ==========
         public void InitializeCode(KeyCode code)
         {
             currentCode = code;
             UpdateVisuals();
+        }
+
+        public void SetIncompatible(bool state)
+        {
+            if (isIncompatible != state)
+            {
+                isIncompatible = state;
+                UpdateVisuals();
+            }
         }
 
         //======= Manage Visuals ========
@@ -41,14 +52,56 @@ namespace Game {
             bindLabel.color = isIncompatible ? incompatibleColor : defaultColor;
         }
 
-        //======= Reset ============
-        public void ResetToDefault()
+        //======== Listen For Input ============
+        public void ListenForInput()
         {
-            currentCode = defaultCode;
+            if (!listening)
+            {
+                listening = true;
+                //setup visuals
+                bindLabel.text = listeningString;
+                bindLabel.color = listeningColor;
+                //listen for input
+                StartCoroutine(ListenCo());
+            }
+        }
+
+        private IEnumerator ListenCo()
+        {
+            yield return null; //make sure not to listen to input needed to start listen
+            yield return new WaitWhile(() => !Input.anyKeyDown);
+            //input detected
+            if (Input.GetKeyDown(KeyCode.Escape))
+            { //cancel, return to default state
+                InitializeCode(currentCode);
+            }
+            else
+            {
+                foreach (KeyCode code in Enum.GetValues(typeof(KeyCode)))
+                {
+                    if (Input.GetKeyDown(code))
+                    {
+                        SetKeyCode(code);
+                        break; //stop looking for key codes
+                    }
+                }
+            }
+            listening = false;
+        }
+
+        private void SetKeyCode(KeyCode code)
+        {
+            currentCode = code;
             //notify others
             onSetCode?.Invoke(this);
             //update visuals
             UpdateVisuals();
+        }
+
+        //======= Reset ============
+        public void ResetToDefault()
+        {
+            SetKeyCode(defaultCode);
         }
     }
 }

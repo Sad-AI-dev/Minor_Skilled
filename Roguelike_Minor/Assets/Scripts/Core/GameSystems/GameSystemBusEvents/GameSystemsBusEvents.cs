@@ -16,4 +16,9 @@ namespace Game.Core.GameSystems
         public ObjectiveManager objectiveManager;
         public Objective objective;
     }
+
+    public class SettingsChanged : Event
+    {
+        public SettingsSO settings;
+    }
 }

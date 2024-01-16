@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5198041994238168884}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7718280578966118660}
+        m_TargetAssemblyTypeName: Game.KeyBindSetting, Game
+        m_MethodName: ResetToDefault
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1062457182465150683
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +277,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 104605083133914130, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 2055492468290369973, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
       propertyPath: m_Pivot.x
@@ -348,12 +360,44 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2139431051218340188, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
+      propertyPath: m_text
+      value: Keybind
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139431051218340188, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 7900841757450686368, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
       propertyPath: m_Name
       value: KeyBindSettingBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 8198441934897847865, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8198441934897847865, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8198441934897847865, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7718280578966118660}
+    - target: {fileID: 8198441934897847865, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8198441934897847865, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ListenForInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 8198441934897847865, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Game.KeyBindSetting, Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 8198441934897847865, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -383,8 +427,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d9ca3c6bb49924ca2982a3c9bc7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultCode: 0
+  binding: 0
+  compatibleKeyBinds: []
+  onSetCode:
+    m_PersistentCalls:
+      m_Calls: []
+  keyBindManager: {fileID: 0}
+  bindLabel: {fileID: 8470523261893114200}
+  listeningString: '> <'
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  listeningColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  incompatibleColor: {r: 1, g: 0, b: 0, a: 1}
+  isIncompatible: 0
+  currentCode: 0
 --- !u!224 &2002569499282463827 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8013161142622128409, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
   m_PrefabInstance: {fileID: 8430450172478608714}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8470523261893114200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 104605083133914130, guid: 8b8e9865446a3544f942e5b4ff3770c5, type: 3}
+  m_PrefabInstance: {fileID: 8430450172478608714}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.46093994, g: 0, b: 0.6792453, a: 1}
+  m_SubtractiveShadowColor: {r: 0.6886792, g: 0.068218224, b: 0.50452155, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: aa87107d0c3535c4983a4edb2d0e9f7b, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -2063,7 +2063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1819745358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2493,6 +2493,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3640605629281986248, guid: 8d89c57ec06c7104b81d42d1c7ba919e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5622065447948655419, guid: 8d89c57ec06c7104b81d42d1c7ba919e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 42.8

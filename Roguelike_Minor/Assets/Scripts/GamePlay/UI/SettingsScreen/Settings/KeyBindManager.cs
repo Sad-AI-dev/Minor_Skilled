@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Core.GameSystems;
 
 namespace Game {
     public class KeyBindManager : MonoBehaviour
@@ -41,21 +42,63 @@ namespace Game {
         public void RestoreDefaultKeyBinds()
         {
             System.Array.ForEach(keyBindSettings, (KeyBindSetting setting) => setting.ResetToDefault());
+            screen.dirty = true; //make sure to save
         }
 
         //======= Save Setting =========
         public void SaveSetting(KeyBindSetting setting)
         {
-            
-            //mark dirty
-            screen.dirty = true;
+            if (IsIncompatibleKeyBind(setting, out List<KeyBindSetting> incompatibles))
+            {
+                incompatibles.ForEach((KeyBindSetting incompatible) => incompatible.SetIncompatible(true));
+                setting.SetIncompatible(true);
+            }
+            else
+            { //no confilcts. save new keybind
+                if (setting.isIncompatible) { setting.SetIncompatible(false); }
+                //save to SO
+                screen.settings.keyBinds[setting.binding] = setting.currentCode;
+                //mark dirty
+                screen.dirty = true;
+            }
+            //check for incompatibles
+            IncompatibleCheck();
         }
 
-        private bool IsCompatibleKeyBind(KeyBindSetting setting)
+        private bool IsIncompatibleKeyBind(KeyBindSetting setting, out List<KeyBindSetting> incompatibleBindings)
         {
             //get all keybinds with the same key code
-            List<KeyBindSetting> incompatibleBindings = new List<KeyBindSetting>();
-            return true; //del me
+            incompatibleBindings = new List<KeyBindSetting>();
+            //search for non compatible
+            foreach (KeyBindSetting otherSetting in keyBindSettings)
+            {
+                if (otherSetting != setting && //make sure not checking self
+                    otherSetting.currentCode == setting.currentCode && //check if codes are the same
+                    !setting.compatibleKeyBinds.Contains(otherSetting) //compatible check
+                )
+                {
+                    incompatibleBindings.Add(otherSetting);
+                }
+            }
+            //return result
+            return incompatibleBindings.Count > 0;
+        }
+
+        //============ handle incompatible keybinds ===============
+        private void IncompatibleCheck()
+        {
+            foreach (KeyBindSetting setting in keyBindSettings)
+            {
+                if (setting.isIncompatible)
+                {
+                    if (!IsIncompatibleKeyBind(setting, out List<KeyBindSetting> incompatibles))
+                    {
+                        //setting is no longer incompatible, save
+                        setting.SetIncompatible(false);
+                        screen.settings.keyBinds[setting.binding] = setting.currentCode;
+                    }
+                }
+            }
         }
     }
 }

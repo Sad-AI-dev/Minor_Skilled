@@ -34,9 +34,6 @@ namespace Game {
         [Header("Total Score Refs")]
         [SerializeField] private TMP_Text totalScoreLabel;
 
-        [Header("Inventory Refs")]
-        [SerializeField] private InventoryUI inventoryUI;
-
         //vars
         [HideInInspector] public StatTracker statTracker;
         [HideInInspector] public int totalScore;
@@ -48,8 +45,6 @@ namespace Game {
             GeneratePlayerStats();
             //show total score
             totalScoreLabel.text = totalScore.ToString();
-            //show inventory
-            ShowInventory();
             //pause game
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
@@ -79,13 +74,6 @@ namespace Game {
             settings.statLabel = Instantiate(even ? evenStat : oddStat, statHolder).GetComponent<StatLabel>();
             //score label
             settings.scoreLabel = Instantiate(even ? evenField : oddField, scoreHolder).GetComponentInChildren<TMP_Text>();
-        }
-
-        //=========== Inventory ============
-        private void ShowInventory()
-        {
-            inventoryUI.inventory = GameStateManager.instance.player.inventory as SlotInventory;
-            inventoryUI.GenerateVisuals();
         }
 
         //======== Handle Unpause ==========
