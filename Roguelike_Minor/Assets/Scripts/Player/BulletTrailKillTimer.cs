@@ -35,7 +35,7 @@ namespace Game.Player
         private IEnumerator KillTimerCo()
         {
             yield return new WaitForSeconds(killTime);
-            Debug.Log("Object destroyed: " + killTime);
+            //Debug.Log("Object destroyed: " + killTime);
             Destroy(gameObject);
 
         }

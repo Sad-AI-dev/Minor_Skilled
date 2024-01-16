@@ -1,6 +1,5 @@
 using Game.Core;
 using Game.Core.Data;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -19,15 +18,17 @@ namespace Game.Player.Soldier
             public bool buildingDownSpread = false;
             public bool isShooting = false;
             public Coroutine stopShootingCo;
-            public BehaviourPool<Projectile> bulletPool = new BehaviourPool<Projectile>();
+            //public BehaviourPool<SubEmitterSystem> impactPool = new BehaviourPool<SubEmitterSystem>();
             public LineRenderer lineRenderer;
             public float lineOpacity;
         }
 
         [Header("Bullet")]
-        public GameObject bullet;
-        public GameObject trail;
         public float bulletSpeed;
+
+        [Header("VFX")]
+        public GameObject trail;
+        public SubEmitterSystem impact;
 
         [Header("Aiming")]
         public LayerMask layermask;
@@ -54,13 +55,13 @@ namespace Game.Player.Soldier
                 buildingDownSpread = false,
                 isShooting = false,
                 stopShootingCo = null,
-                bulletPool = new BehaviourPool<Projectile>(),
+                //impactPool = new BehaviourPool<SubEmitterSystem>(),
                 lineRenderer = source.agent.GetComponent<LineRenderer>(),
                 lineOpacity = 255
             };
 
             PrimaryVars vars = source.vars as PrimaryVars;
-            vars.bulletPool.behaviourTemplate = bullet;
+            //vars.impactPool.behaviourTemplate = impact;
             controller = source.agent.GetComponent<PlayerController>();
             cam = controller.cam;
         }
@@ -68,7 +69,7 @@ namespace Game.Player.Soldier
         public override void Use(Ability source)
         {
             UnityEngine.Vector3 target = UnityEngine.Vector3.zero;
-            UnityEngine.Vector3 bulletDir;
+            //UnityEngine.Vector3 bulletDir;
             
 
             PrimaryVars vars = source.vars as PrimaryVars;
@@ -95,6 +96,10 @@ namespace Game.Player.Soldier
                 {
                     agent.health.Hurt(new HitEvent(source));
                 }
+
+                SubEmitterSystem impactVFX = Instantiate(impact, _hit.point, UnityEngine.Quaternion.identity);
+                impactVFX.transform.rotation = UnityEngine.Quaternion.LookRotation(_hit.normal);
+                impactVFX.Play();
             }
 
 /*            if(!vars.lineRenderer.enabled)
