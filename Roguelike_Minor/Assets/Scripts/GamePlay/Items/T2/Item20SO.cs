@@ -90,6 +90,8 @@ namespace Game {
             proj.targetPos = hitEvent.target.agent.transform.position + Vector3.up;
             //setup base position
             proj.transform.position = hitEvent.source.transform.position + Vector3.up;
+            //setup trail
+            proj.SetupTrail();
         }
 
         //========== Description ===========

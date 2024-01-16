@@ -128,12 +128,16 @@ namespace Game {
         private IEnumerator CooldownCo()
         {
             yield return new WaitForSeconds(coolDown);
-            if (holderVars.holder != null) { EndCoolDown(); } //make sure object still exists
+            if (holderVars.holder != null) 
+            { //make sure object still exists
+                Move(); //update position
+                yield return null;
+                EndCoolDown();
+            }
         }
 
         private void EndCoolDown()
         {
-            Move(); //correct Position
             SetState(State.Idle);
         }
 

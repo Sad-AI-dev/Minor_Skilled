@@ -11,6 +11,9 @@ namespace Game {
     [RequireComponent(typeof(Rigidbody))]
     public class SoulFragmentProjectile : MonoBehaviour
     {
+        [Header("Refs")]
+        [SerializeField] private TrailRenderer trail;
+
         //vars set by item 20
         [HideInInspector] public Item20SO settings; //take settings from here
         [HideInInspector] public Item owner;
@@ -107,6 +110,12 @@ namespace Game {
                 }
             }
             return true;
+        }
+
+        //===== Setup Trail ======
+        public void SetupTrail()
+        {
+            trail.Clear();
         }
     }
 }
