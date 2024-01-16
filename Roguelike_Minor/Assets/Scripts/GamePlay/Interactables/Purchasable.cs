@@ -50,6 +50,10 @@ namespace Game {
                     onPurchase?.Invoke(agent);
                 }
             }
+            else 
+            { //not enough money
+                EventBus<InteractFailEvent>.Invoke(new InteractFailEvent { failCause = InteractFailCause.money });
+            } 
         }
 
         protected virtual bool CanPurchase(Agent agent)

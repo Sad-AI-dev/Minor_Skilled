@@ -134,6 +134,8 @@ namespace Game {
                 UpdateRemovedRingData(vars);
                 RemoveProjectile(vars);
             }
+            //update vars
+            vars.holder = null;
         }
 
         private void UpdateRemovedRingData(Item18Vars vars)

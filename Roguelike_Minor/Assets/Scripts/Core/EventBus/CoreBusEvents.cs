@@ -38,6 +38,12 @@ namespace Game.Core {
         public ItemDataSO item;
     }
 
+    public enum InteractFailCause { money, inventory, noRerrols }
+    public class InteractFailEvent : Event
+    {
+        public InteractFailCause failCause;
+    }
+
     //===== Player Leave Bounds =====
     public class RespawnEvent : Event { }
  

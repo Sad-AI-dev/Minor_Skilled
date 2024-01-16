@@ -82,6 +82,7 @@ namespace Game {
                 StartCoroutine(GenerateShopContentCo());
                 rerolls--;
             }
+            else { EventBus<InteractFailEvent>.Invoke(new InteractFailEvent() { failCause = InteractFailCause.noRerrols }); }
         }
 
         //================= Reset Shop ====================
