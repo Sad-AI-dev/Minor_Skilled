@@ -39,11 +39,13 @@ namespace Game.Player {
         private void Awake()
         {
             EventBus<SceneLoadedEvent>.AddListener(OnSceneLoad);
+            EventBus<GamePauseEvent>.AddListener(HandlePauseGame);
         }
 
         private void OnDestroy()
         {
             EventBus<SceneLoadedEvent>.RemoveListener(OnSceneLoad);
+            EventBus<GamePauseEvent>.RemoveListener(HandlePauseGame);
         }
 
         private void OnSceneLoad(SceneLoadedEvent eventData)
@@ -72,10 +74,9 @@ namespace Game.Player {
         void Update()
         {
             PauseInput();
-
-            gamePaused = pauseMenu.paused;
-
             if (gamePaused) return;
+
+            //game inputs
             WalkInput();
             JumpInput();
             AbilitiesInput();
@@ -255,10 +256,15 @@ namespace Game.Player {
         //}
 
         //=========== Manage Game Paused ===================
+        private void HandlePauseGame(GamePauseEvent eventData)
+        {
+            PauseGame(eventData.paused);
+        }
+
         public void PauseGame(bool paused)
         {
             gamePaused = paused;
         }
     }
-    }
+}
 
