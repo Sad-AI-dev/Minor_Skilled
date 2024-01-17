@@ -28,7 +28,7 @@ namespace Game {
         private IEnumerator UpdateLabelCo()
         {
             yield return null; //wait a frame
-            label.text = baseText + " " + GameStateManager.instance.CurrentStage;
+            label.text = baseText + " " + GameStateManager.instance.currentStage;
         }
 
         //==== Handle Destroy ===

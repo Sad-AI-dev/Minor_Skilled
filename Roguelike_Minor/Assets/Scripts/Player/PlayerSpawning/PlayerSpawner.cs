@@ -18,8 +18,13 @@ namespace Game.Player {
             //choose destination
             List<Transform> points = CompileValidPoints();
             Transform destination = points[Random.Range(0, points.Count)];
-            //warp
-            player.transform.SetPositionAndRotation(destination.position, Quaternion.LookRotation(destination.forward));
+            //warp to destination
+            WarpToTransform(player, destination);
+        }
+
+        private void WarpToTransform(PlayerController player, Transform destination)
+        {
+            player.transform.SetPositionAndRotation(destination.position, destination.rotation);
             player.ResetVelocity();
             //reset cam
             player.GetComponent<CameraController>().ResetCamera(player.transform.rotation);
@@ -43,8 +48,7 @@ namespace Game.Player {
             PlayerController player = GameStateManager.instance.player.GetComponent<PlayerController>();
             Transform closestPoint = GetClosestPoint(player.transform.position);
             //set player
-            player.transform.SetPositionAndRotation(closestPoint.position, closestPoint.rotation);
-            player.ResetVelocity();
+            WarpToTransform(player, closestPoint);
         }
 
         private Transform GetClosestPoint(Vector3 playerPos)

@@ -10,6 +10,7 @@ namespace Game
         [Header("Sound Settings")]
         [SerializeField] private AK.Wwise.Event footstepSFX;
         [SerializeField] private AK.Wwise.Event servoSFX;
+        [SerializeField] private GameObject PlayerObj;
 
         void playFootstep(AnimationEvent animationEvent)
         {
@@ -18,7 +19,7 @@ namespace Game
                 //check ground
                 footstepManager.CheckGround();
                 //play sound
-                footstepSFX.Post(gameObject);
+                footstepSFX.Post(PlayerObj);
             }
         }
         
@@ -26,7 +27,7 @@ namespace Game
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
-                servoSFX.Post(gameObject);
+                servoSFX.Post(PlayerObj);
             }
         }
         

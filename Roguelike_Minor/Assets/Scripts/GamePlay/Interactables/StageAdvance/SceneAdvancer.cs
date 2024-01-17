@@ -13,9 +13,9 @@ namespace Game {
             GameStateManager.instance.AdvanceToNextPlanet();
         }
 
-        public void AdvanceToShop()
+        public void AdvanceToNextStage()
         {
-            GameStateManager.instance.AdvanceToShop();
+            GameStateManager.instance.AdvanceToNextStage();
         }
     }
 }

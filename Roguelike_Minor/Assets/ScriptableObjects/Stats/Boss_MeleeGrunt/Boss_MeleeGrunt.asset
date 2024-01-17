@@ -15,12 +15,19 @@ MonoBehaviour:
   baseStats:
     maxHealth: 100
     maxHealthMult: 1
+    regeneration: 0
     baseDamage: 20
     critChance: 1
     critMult: 2
     heldMoney: 0
     attackSpeed: 1
     coolDownMultiplier: 1
-    walkSpeed: 3
-    sprintSpeed: 6
+    walkSpeed: 10
+    sprintSpeed: 12
+    currentJumps: 0
+    totalJumps: 0
     luck: 0
+  scalingStats:
+    baseDamageScaling: 1
+    moneyScaling: 1
+    maxHealthScaling: 1

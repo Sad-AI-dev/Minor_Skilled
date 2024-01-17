@@ -44,13 +44,16 @@ namespace Game {
         [Header("Planet Advancement Settings")]
         [SerializeField] private List<ListWrapper<int>> planetSceneIndeces;
         [SerializeField] private int shopIndex;
+        [SerializeField] private int minShopDelay = 0;
+        [SerializeField] private int maxShopDelay = 3;
 
         //ref to advance object spawner
         [HideInInspector] public AdvanceObjectSpawner advanceObjectSpawner;
         [HideInInspector] public LootSpawner lootSpawner; //needed for some items
 
         //scene advancement vars
-        public int CurrentStage { get; private set; } = 1;
+        public int currentStage { get; private set; } = 1;
+        private int stagesTillShop;
 
         //paused state
         [HideInInspector] public bool scalingIsPaused;
@@ -61,6 +64,8 @@ namespace Game {
             //setup events
             EventBus<SceneLoadedEvent>.AddListener(HandleSceneLoaded);
             EventBus<ShopLoadedEvent>.AddListener(HandleShopLoad);
+            //initialize stages till shop
+            stagesTillShop = Random.Range(minShopDelay, maxShopDelay);
         }
 
         //========= Handle Scene Load ========
@@ -81,18 +86,32 @@ namespace Game {
         public void AdvanceToNextPlanet()
         {
             //advance stage
-            CurrentStage++;
+            currentStage++;
             sceneLoader.LoadScene(GetNextStageBuildIndex());
         }
         private int GetNextStageBuildIndex()
         {
-            int stageIndex = CurrentStage % planetSceneIndeces.Count;
-            return planetSceneIndeces[stageIndex][Random.Range(0, planetSceneIndeces[stageIndex].Count)];
+            int planetIndex = (currentStage - 1) % planetSceneIndeces.Count;
+            return planetSceneIndeces[planetIndex][Random.Range(0, planetSceneIndeces[planetIndex].Count)];
         }
 
-        public void AdvanceToShop()
+        public void AdvanceToNextStage()
+        {
+            if (stagesTillShop == 0)
+            {
+                AdvanceToShop();
+            }
+            else
+            {
+                AdvanceToNextPlanet();
+                stagesTillShop--;
+            }
+        }
+        private void AdvanceToShop()
         {
             sceneLoader.LoadScene(shopIndex);
+            //reset stages till shop
+            stagesTillShop = Random.Range(minShopDelay, maxShopDelay);
         }
 
         //========= Handle Destroy ==========

@@ -30,8 +30,12 @@ namespace Game.Enemy {
                 navAgent.isStopped = true;
                 return state;
             }
+            else
+            {
+                navAgent.isStopped = false;
+                navAgent.SetDestination(target.position);
+            }
 
-            navAgent.SetDestination(transform.position);
 
             return state;
         }
