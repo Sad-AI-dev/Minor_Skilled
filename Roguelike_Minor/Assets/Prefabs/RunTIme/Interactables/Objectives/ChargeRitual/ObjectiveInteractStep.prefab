@@ -55,8 +55,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 4.5
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Radius: 5
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!114 &186563092358558021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,14 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepUISettings:
     title: Find the Obelisk
-    description: 
-    useLargeBar: 0
-    useSmallBar: 1
-    type: 0
-    progressLabel: 
-    maxCount: 0
-    currentCount: 0
-    progressPercent: 0
+    progress: []
   state: 0
   objective:
     data: {fileID: 0}
@@ -154,10 +147,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1254108681668402413}
+  - {fileID: 9063862114886279680}
   m_Father: {fileID: 6027430854274347474}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &4633164580309123715
+--- !u!1001 &8276063566857183152
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -165,61 +158,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7151835675258708067}
     m_Modifications:
-    - target: {fileID: 675389760190626033, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
-      propertyPath: rotateSpeed
-      value: 0
+    - target: {fileID: 132982280885641856, guid: 911553810f15491438dcb00079ac1c6a, type: 3}
+      propertyPath: m_Name
+      value: ObeliskRitual
       objectReference: {fileID: 0}
-    - target: {fileID: 5848825238727122542, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
+    - target: {fileID: 1086270643101105584, guid: 911553810f15491438dcb00079ac1c6a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5848825238727122542, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
+    - target: {fileID: 1086270643101105584, guid: 911553810f15491438dcb00079ac1c6a, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5848825238727122542, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
+    - target: {fileID: 1086270643101105584, guid: 911553810f15491438dcb00079ac1c6a, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5848825238727122542, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
+    - target: {fileID: 1086270643101105584, guid: 911553810f15491438dcb00079ac1c6a, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5848825238727122542, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
+    - target: {fileID: 1086270643101105584, guid: 911553810f15491438dcb00079ac1c6a, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5848825238727122542, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
+    - target: {fileID: 1086270643101105584, guid: 911553810f15491438dcb00079ac1c6a, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5848825238727122542, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
+    - target: {fileID: 1086270643101105584, guid: 911553810f15491438dcb00079ac1c6a, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5848825238727122542, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
+    - target: {fileID: 1086270643101105584, guid: 911553810f15491438dcb00079ac1c6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5848825238727122542, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
+    - target: {fileID: 1086270643101105584, guid: 911553810f15491438dcb00079ac1c6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5848825238727122542, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
+    - target: {fileID: 1086270643101105584, guid: 911553810f15491438dcb00079ac1c6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7884486448818317052, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
-      propertyPath: m_Name
-      value: ObeliskMVP
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
---- !u!4 &1254108681668402413 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 911553810f15491438dcb00079ac1c6a, type: 3}
+--- !u!4 &9063862114886279680 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5848825238727122542, guid: 11ab38dd12a060f4ab3ea78660024a45, type: 3}
-  m_PrefabInstance: {fileID: 4633164580309123715}
+  m_CorrespondingSourceObject: {fileID: 1086270643101105584, guid: 911553810f15491438dcb00079ac1c6a, type: 3}
+  m_PrefabInstance: {fileID: 8276063566857183152}
   m_PrefabAsset: {fileID: 0}
