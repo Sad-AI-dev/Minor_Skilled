@@ -1508,7 +1508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &368907774
 Transform:
   m_ObjectHideFlags: 0
@@ -1542,8 +1542,8 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
+    m_Bits: 2147753911
+  m_UseGeometry: 1
   m_DefaultArea: 0
   m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
@@ -4976,7 +4976,7 @@ Transform:
   m_GameObject: {fileID: 1354336392}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.9, y: 18.45, z: 127.4}
+  m_LocalPosition: {x: 53.1, y: 0.2, z: 39.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8211,7 +8211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2145667900
 Transform:
   m_ObjectHideFlags: 0
@@ -8523,13 +8523,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_BigSquid
       objectReference: {fileID: 0}
-    - target: {fileID: 4876108351382799123, guid: dd84f848e5e1a254eaa2b8798223800c, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 2408350432041449503, guid: dd84f848e5e1a254eaa2b8798223800c, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4876108351382799123, guid: dd84f848e5e1a254eaa2b8798223800c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876108351382799123, guid: dd84f848e5e1a254eaa2b8798223800c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6754672039139340868, guid: dd84f848e5e1a254eaa2b8798223800c, type: 3}
       propertyPath: m_Radius
@@ -8566,7 +8570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6194332214707809972, guid: bf74c9c03566cef43b270ac9c29c0f80, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 67.74
       objectReference: {fileID: 0}
     - target: {fileID: 6194332214707809972, guid: bf74c9c03566cef43b270ac9c29c0f80, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8574,7 +8578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6194332214707809972, guid: bf74c9c03566cef43b270ac9c29c0f80, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 64.9
       objectReference: {fileID: 0}
     - target: {fileID: 6194332214707809972, guid: bf74c9c03566cef43b270ac9c29c0f80, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8582,15 +8586,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6194332214707809972, guid: bf74c9c03566cef43b270ac9c29c0f80, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6194332214707809972, guid: bf74c9c03566cef43b270ac9c29c0f80, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6194332214707809972, guid: bf74c9c03566cef43b270ac9c29c0f80, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6194332214707809972, guid: bf74c9c03566cef43b270ac9c29c0f80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8830,10 +8834,10 @@ SceneRoots:
   - {fileID: 234291322}
   - {fileID: 717451159}
   - {fileID: 702266202}
-  - {fileID: 2868982440227863373}
   - {fileID: 1695918693}
   - {fileID: 774091514}
   - {fileID: 1523426592}
   - {fileID: 853842054}
   - {fileID: 1354336398}
   - {fileID: 2360391217517599634}
+  - {fileID: 2868982440227863373}

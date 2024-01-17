@@ -35,6 +35,7 @@ namespace Game.Enemy
 
             base.Awake();
         }
+
         protected override void Start()
         {
             EarthQuakeRange = earthQuakeRange;
@@ -70,10 +71,6 @@ namespace Game.Enemy
             return root;
         }
 
-        private void FixedUpdate()
-        {
-
-        }
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
