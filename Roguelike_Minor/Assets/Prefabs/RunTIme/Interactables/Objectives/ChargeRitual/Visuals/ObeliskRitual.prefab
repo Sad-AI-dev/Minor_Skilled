@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1086270643101105584}
   - component: {fileID: 4753182597919674623}
   - component: {fileID: 4268462698345586335}
+  - component: {fileID: 4595988133086003704}
   m_Layer: 0
   m_Name: ObeliskRitual
   m_TagString: Untagged
@@ -84,6 +85,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4595988133086003704
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132982280885641856}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.02143, y: 11.714639, z: 1.12}
+  m_Center: {x: 0, y: 5.8573194, z: 0}
 --- !u!1 &1431305425946945071
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +117,6 @@ GameObject:
   - component: {fileID: 777312692261847287}
   - component: {fileID: 1020323073119104217}
   - component: {fileID: 2299036560703768225}
-  - component: {fileID: 9174036411496026709}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -112,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 1431305425946945071}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 8.574, z: -0.02}
+  m_LocalPosition: {x: 0, y: 8.574, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -168,24 +189,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &9174036411496026709
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1431305425946945071}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
