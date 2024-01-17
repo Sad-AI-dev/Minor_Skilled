@@ -27,11 +27,15 @@ namespace Game.Enemy {
             target = (Transform)GetData("Target");
 
             if (GetData("DistanceToTarget") == null) agent.StartCoroutine(DistanceToTargetCO(agent, transform, target));
+            distance = (float)GetData("DistanceToTarget");
 
-            //Check EQ
-            CheckRange(Boss_MeleeGruntTree.EarthQuakeRange, agent.abilities.primary);
-            CheckRange(Boss_MeleeGruntTree.ClapRange, agent.abilities.secondary);
-            CheckRange(Boss_MeleeGruntTree.GroundSlamRange, agent.abilities.special);
+            if (target != null)
+            {
+                //Check EQ
+                CheckRange(Boss_MeleeGruntTree.EarthQuakeRange, agent.abilities.primary);
+                CheckRange(Boss_MeleeGruntTree.ClapRange, agent.abilities.secondary);
+                CheckRange(Boss_MeleeGruntTree.GroundSlamRange, agent.abilities.special);
+            }
             
             return state;
         }

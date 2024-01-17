@@ -1,8 +1,9 @@
-using Game.Core.GameSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Game.Core;
+using Game.Core.GameSystems;
 
 namespace Game
 {
@@ -26,6 +27,7 @@ namespace Game
             Cursor.lockState = CursorLockMode.None;
             //notify
             onOpenPause?.Invoke();
+            EventBus<GamePauseEvent>.Invoke(new GamePauseEvent(true));
         }
 
         public void DeactivateMenu()
@@ -37,6 +39,7 @@ namespace Game
             Cursor.lockState = CursorLockMode.Locked;
             //notify
             onClosePause?.Invoke();
+            EventBus<GamePauseEvent>.Invoke(new GamePauseEvent(false));
         }
 
         public void ReturnToMenu()

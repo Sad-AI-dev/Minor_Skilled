@@ -23,7 +23,7 @@ namespace Game.Enemy {
                 TreePrototype tree = terrain.terrainData.treePrototypes[i];
 
                 //Get all instances matching the prefab index
-                TreeInstance[] instances = terrain.terrainData.treeInstances.Where(x => x.prototypeIndex == i).ToArray();
+                TreeInstance[] instances = terrain.terrainData.treeInstances;
 
                 for (int j = 0; j < instances.Length; j++)
                 {
@@ -44,8 +44,9 @@ namespace Game.Enemy {
                     Vector3 scale = new Vector3(1.5f, 5, 1.5f);
                     obj.transform.localScale = scale;
                     obj.transform.position = instances[j].position;
-                    obj.transform.parent = terrain.transform;
+                    obj.transform.parent = transform;
                     obj.isStatic = true;
+                    Debug.Log("Placing tree cols");
                 }
             }
         }

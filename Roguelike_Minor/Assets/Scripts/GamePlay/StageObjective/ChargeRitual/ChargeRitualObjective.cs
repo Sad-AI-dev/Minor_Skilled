@@ -22,8 +22,8 @@ namespace Game {
 
         [Header("Visuals")]
         [SerializeField] private Transform rangeIndicator;
-        [SerializeField] private AnimationCurve pillarSpeed;
-        [SerializeField] private float maxPillarSpeed = 300f;
+        [SerializeField] private AnimationCurve pulseCurve;
+        [SerializeField] private float maxPulseSpeed = 300f;
 
         [Header("UI Settings")]
         [SerializeField] private TMP_Text progressLabel;
@@ -43,7 +43,7 @@ namespace Game {
         private bool canDecharge;
 
         //external refs
-        private PickupMovement pillarMovement;
+        private OrbPulse orbPulser;
 
         //=============== Start Charge ==============
         private void Start()
@@ -60,7 +60,7 @@ namespace Game {
             ObjectiveStep lastStep = objective.steps[^2];
             transform.position = lastStep.transform.position;
             //setup pillar movement
-            pillarMovement = lastStep.GetComponentInChildren<PickupMovement>();
+            orbPulser = lastStep.GetComponentInChildren<OrbPulse>();
             //setup base state vars
             isCharging = true;
             progress = 0;
@@ -77,7 +77,7 @@ namespace Game {
             if (isCharging) { Charge(); }
             else if (canDecharge) { Decharge(); }
             else { return; } //objective is not active
-            UpdatePillarSpeed();
+            UpdatePulseSpeed();
             //update UI
             progress = Mathf.Clamp(progress, 0, 100f);
             UpdateUI();
@@ -104,10 +104,10 @@ namespace Game {
             progress -= dechargeSpeed * Time.deltaTime;
         }
 
-        //============ Pillar Visuals ===========
-        private void UpdatePillarSpeed()
+        //============ Orb Visuals ===========
+        private void UpdatePulseSpeed()
         {
-            pillarMovement.rotateSpeed = pillarSpeed.Evaluate(progress / 100f) * maxPillarSpeed;
+            orbPulser.pulseSpeed = pulseCurve.Evaluate(progress / 100f) * maxPulseSpeed;
         }
 
         //=============== UI =============
