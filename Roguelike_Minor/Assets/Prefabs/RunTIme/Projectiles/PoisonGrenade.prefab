@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 7236387855493414906}
   - component: {fileID: 4656607885349075287}
   - component: {fileID: 3779279123046360641}
+  - component: {fileID: -381237690192110838}
   m_Layer: 7
   m_Name: PoisonGrenade
   m_TagString: Untagged
@@ -220,3 +221,25 @@ MonoBehaviour:
   - idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 72b0ff17c2ff4e242b9975f643fbf8cc, type: 2}
+--- !u!114 &-381237690192110838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180419599746193269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525d550a1db3e3f4b87ae4a618494984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
