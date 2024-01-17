@@ -20,7 +20,7 @@ namespace Game {
         {
             itemPickup.item = item;
             itemPickup.GenerateVisuals();
-            SetDisplayMaterial(item.tier);
+            if (display) { SetDisplayMaterial(item.tier); }
             Initialize(); //recalc price
         }
 

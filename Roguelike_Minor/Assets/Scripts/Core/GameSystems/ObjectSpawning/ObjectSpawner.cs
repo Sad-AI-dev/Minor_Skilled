@@ -13,7 +13,9 @@ namespace Game.Core.GameSystems {
             if (spawnPoints == null || spawnPoints.Count == 0) {
                 spawnPoints = new List<Transform>();
                 foreach (Transform child in transform) {
-                    spawnPoints.Add(child);
+                    if (child.gameObject.activeSelf) { //only use active children
+                        spawnPoints.Add(child);
+                    }
                 }
             }
             randomizer = new EntropyRandom<Transform>(spawnPoints);
