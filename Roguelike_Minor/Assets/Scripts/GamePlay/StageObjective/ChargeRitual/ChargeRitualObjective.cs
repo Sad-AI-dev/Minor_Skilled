@@ -55,7 +55,7 @@ namespace Game {
         {
             //setup range vars
             GetComponent<SphereCollider>().radius = range;
-            rangeIndicator.localScale = Vector3.one * (range * 2);
+            rangeIndicator.localScale = Vector3.one * range;
             //set position
             ObjectiveStep lastStep = objective.steps[^2];
             transform.position = lastStep.transform.position;

@@ -173,6 +173,8 @@ MonoBehaviour:
   - {fileID: 1910139388}
   - {fileID: 1261530597}
   spawnDelay: 0.5
+  rerollOrb: {fileID: 1516924333}
+  orbForce: 200
   defaultReloads: 1
   slotPieceChance: 10
   slotPiece: {fileID: 11400000, guid: 3f5ddb3b68d4e06498deab74867dd87d, type: 2}
@@ -1195,12 +1197,44 @@ PrefabInstance:
       value: RerollInteractable
       objectReference: {fileID: 0}
     - target: {fileID: 7527055259186754011, guid: fa12a896e3fdb6b4884590d8c9f09812, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527055259186754011, guid: fa12a896e3fdb6b4884590d8c9f09812, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527055259186754011, guid: fa12a896e3fdb6b4884590d8c9f09812, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 23459979}
     - target: {fileID: 7527055259186754011, guid: fa12a896e3fdb6b4884590d8c9f09812, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1516924333}
+    - target: {fileID: 7527055259186754011, guid: fa12a896e3fdb6b4884590d8c9f09812, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527055259186754011, guid: fa12a896e3fdb6b4884590d8c9f09812, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Refresh
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527055259186754011, guid: fa12a896e3fdb6b4884590d8c9f09812, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: AddRandomForce
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527055259186754011, guid: fa12a896e3fdb6b4884590d8c9f09812, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: Game.LevitateOrb, Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527055259186754011, guid: fa12a896e3fdb6b4884590d8c9f09812, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_FloatArgument
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527055259186754011, guid: fa12a896e3fdb6b4884590d8c9f09812, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1096877788247266329, guid: fa12a896e3fdb6b4884590d8c9f09812, type: 3}
@@ -1410,6 +1444,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c5c85d00fb1fe9d46a0b0a8bc7abf997, type: 3}
   m_PrefabInstance: {fileID: 1489097307}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1516924333 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5275080088949705212, guid: 2f7caa9f0cb56f94d80163005eebc004, type: 3}
+  m_PrefabInstance: {fileID: 1014894714}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d31e557a3d01ca46a0675a3d9d6791f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1552476930
 PrefabInstance:
   m_ObjectHideFlags: 0

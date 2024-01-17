@@ -10,6 +10,9 @@ namespace Game {
         [Header("Visual Settings")]
         public Transform[] spawnPoints;
         [SerializeField] private float spawnDelay = 0.5f;
+        [Space(10f)]
+        [SerializeField] private LevitateOrb rerollOrb;
+        [SerializeField] private float orbForce = 200f;
 
         [Header("Balance Settings")]
         [SerializeField] private int defaultReloads = 1;
@@ -80,6 +83,7 @@ namespace Game {
             if (!isGenerating && rerolls > 0)
             {
                 StartCoroutine(GenerateShopContentCo());
+                if (rerollOrb) { rerollOrb.AddRandomForce(orbForce); }
                 rerolls--;
             }
             else { EventBus<InteractFailEvent>.Invoke(new InteractFailEvent() { failCause = InteractFailCause.noRerrols }); }
