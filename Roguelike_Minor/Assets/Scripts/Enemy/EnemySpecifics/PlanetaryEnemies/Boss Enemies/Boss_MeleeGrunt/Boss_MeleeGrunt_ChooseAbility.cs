@@ -33,6 +33,13 @@ namespace Game.Enemy
                         abilities.Add(ability.Key);
                     }
                 }
+                else
+                {
+                    if (abilities.Contains(ability.Key))
+                    {
+                        abilities.Remove(ability.Key);
+                    }
+                }
             }
 
             if (GetData("OnCooldown") == null || !(bool)GetData("OnCooldown"))

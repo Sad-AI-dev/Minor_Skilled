@@ -17,7 +17,10 @@ namespace Game.Enemy {
     {
         public override void InitializeVars(Ability source)
         {
-            
+            source.vars = new Boss_MeleeGrunt_PrimaryAttackVars()
+            {
+                Anim = source.agent.transform.GetComponent<Animator>()
+            };
         }
 
         public override void Use(Ability source)
@@ -27,5 +30,7 @@ namespace Game.Enemy {
             //Play animation
             vars.Anim.SetTrigger("Primary");
         }
+
+
     }
 }
