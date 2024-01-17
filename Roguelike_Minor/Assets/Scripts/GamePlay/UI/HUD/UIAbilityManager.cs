@@ -14,6 +14,7 @@ namespace Game {
         private class UIAbilityVars
         {
             public Image icon;
+            public Slider cooldownSlider;
             public TMP_Text cooldownLabel;
             public TMP_Text inputLabel;
             public TMP_Text usesLabel;
@@ -34,6 +35,7 @@ namespace Game {
             cooldownColor.a = oppacity;
             baseColor.a = 1;
         }
+
         private void Update()
         {
             HandleUI(primaryVars, uiManager.agent.abilities.primary);
@@ -53,14 +55,24 @@ namespace Game {
             //cooldown
             if (ability.isCoolingDown && ability.coolDownMode == Ability.CoolDownMode.coolDown)
             {
-                vars.icon.color = cooldownColor;
+                //update cooldown vars
                 vars.cooldownLabel.text = Mathf.CeilToInt(ability.coolDownTimer).ToString();
-                vars.cooldownLabel.gameObject.SetActive(true);
+                vars.cooldownSlider.value = 1f - (ability.coolDown - ability.coolDownTimer) / ability.coolDown;
+                //switch state
+                if (!vars.cooldownLabel.gameObject.activeSelf)
+                {
+                    vars.icon.color = cooldownColor;
+                    vars.cooldownLabel.gameObject.SetActive(true);
+                }
             }
             else
             {
-                vars.icon.color = baseColor;
-                vars.cooldownLabel.gameObject.SetActive(false);
+                if (vars.cooldownLabel.gameObject.activeSelf)
+                {
+                    vars.icon.color = baseColor;
+                    vars.cooldownSlider.value = 0f;
+                    vars.cooldownLabel.gameObject.SetActive(false);
+                }
             }
         }
     }
