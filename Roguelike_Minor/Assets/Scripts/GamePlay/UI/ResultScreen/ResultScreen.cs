@@ -34,9 +34,17 @@ namespace Game {
         [Header("Total Score Refs")]
         [SerializeField] private TMP_Text totalScoreLabel;
 
+        [Header("Inventory Refs")]
+        [SerializeField] private InventoryUI inventory;
+
         //vars
         [HideInInspector] public StatTracker statTracker;
         [HideInInspector] public int totalScore;
+
+        private void Awake()
+        {
+            inventory.inventory = GameStateManager.instance.player.inventory as SlotInventory;
+        }
 
         private void OnEnable()
         {
@@ -54,6 +62,8 @@ namespace Game {
         private void InitializeVars()
         {
             statTracker = GameStateManager.instance.statTracker;
+            //block inputs
+            EventBus<GamePauseEvent>.Invoke(new GamePauseEvent(true));
         }
 
         //=========== Generate Player Stats =============
