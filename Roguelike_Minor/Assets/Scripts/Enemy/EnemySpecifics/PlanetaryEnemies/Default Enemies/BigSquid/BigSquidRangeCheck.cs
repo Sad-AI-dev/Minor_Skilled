@@ -12,6 +12,7 @@ namespace Game.Enemy {
         float rotationSpeedTargeting;
         public BigSquidRangeCheck(Transform transform, float distanceToCheck, Agent agent, float rotationSpeedTargeting) : base(agent, distanceToCheck)
         {
+            this.transform = transform;
             this.agent = agent;
             this.rotationSpeedTargeting = rotationSpeedTargeting;
         }

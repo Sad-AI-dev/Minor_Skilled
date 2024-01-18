@@ -8,7 +8,10 @@ namespace Game.Player {
     {
         private void OnTriggerEnter(Collider other)
         {
-            EventBus<RespawnEvent>.Invoke(new RespawnEvent());
+            if (other.CompareTag("Player"))
+            {
+                EventBus<RespawnEvent>.Invoke(new RespawnEvent());
+            }
         }
     }
 }
