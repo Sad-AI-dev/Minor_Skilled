@@ -9,14 +9,17 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{AD427555-0055-9E44-8FD1-A85192E04EB7}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{0CDAAF36-F985-EE0E-8392-81169430B3FF}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
+				<Custom>
+					<Plugin Id="108433364" Name="Medium_Room1 (Custom)" LibName="Wwise Matrix Reverb" LibId="7536643"/>
+					<Plugin Id="752914693" Name="Matrix Reverb (Custom)" LibName="Wwise Matrix Reverb" LibId="7536643"/>
+				</Custom>
 				<ShareSets>
 					<Plugin Id="1904434771" Name="Medium_Room1" LibName="Wwise Matrix Reverb" LibId="7536643"/>
 					<Plugin Id="2662085913" Name="Large_Church1" LibName="Wwise Matrix Reverb" LibId="7536643"/>
-					<Plugin Id="3164629247" Name="Holy" LibName="Wwise RoomVerb" LibId="7733251"/>
 				</ShareSets>
 				<AudioDevices>
 					<Plugin Id="2317455096" Name="No_Output" LibName="No Output" LibId="11862023"/>
@@ -39,15 +42,22 @@
 			<AuxBusses>
 				<AuxBus Id="662287043" Name="Shop_verb">
 					<PluginRefs>
-						<ShareSets>
-							<PluginRef Id="1904434771"/>
-						</ShareSets>
+						<Custom>
+							<PluginRef Id="108433364"/>
+						</Custom>
+					</PluginRefs>
+				</AuxBus>
+				<AuxBus Id="1013582926" Name="Tunnel_shop_verb">
+					<PluginRefs>
+						<Custom>
+							<PluginRef Id="752914693"/>
+						</Custom>
 					</PluginRefs>
 				</AuxBus>
 				<AuxBus Id="1032091015" Name="Big_cave">
 					<PluginRefs>
 						<ShareSets>
-							<PluginRef Id="3164629247"/>
+							<PluginRef Id="1904434771"/>
 						</ShareSets>
 					</PluginRefs>
 				</AuxBus>
@@ -216,7 +226,7 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{2EFE8AED-A698-B263-4213-F528C266E195}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{A720C07A-0DF9-1C56-ED25-E571D7A03A10}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -318,7 +328,7 @@
 				</File>
 				<File Id="312052631" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 2.wav</ShortName>
-					<CachePath>SFX/1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 2_6043BE1E.wem</CachePath>
+					<CachePath>SFX/1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 2_3CF9F589.wem</CachePath>
 				</File>
 				<File Id="353592572" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ARMOR Body Drop Chain Leather Short 02.wav</ShortName>
@@ -338,7 +348,7 @@
 				</File>
 				<File Id="436462979" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 4.wav</ShortName>
-					<CachePath>SFX/1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 4_B8DE9FC6.wem</CachePath>
+					<CachePath>SFX/1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 4_E8FB90C1.wem</CachePath>
 				</File>
 				<File Id="476744445" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Grenade_throw.wav</ShortName>
@@ -346,7 +356,7 @@
 				</File>
 				<File Id="488647412" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 5.wav</ShortName>
-					<CachePath>SFX/1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 5_B0FCF9E4.wem</CachePath>
+					<CachePath>SFX/1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 5_981B8CB6.wem</CachePath>
 				</File>
 				<File Id="488684898" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Splat 3-551449__jjxmf__splats.wav</ShortName>
@@ -374,7 +384,7 @@
 				</File>
 				<File Id="603174004" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 6.wav</ShortName>
-					<CachePath>SFX/1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 6_0D56FB64.wem</CachePath>
+					<CachePath>SFX/1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 6_12D1948F.wem</CachePath>
 				</File>
 				<File Id="604688318" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Gore, Flesh, Drop, Impact, Hit, Short, Bloody, Wet 01 SND9893 1.wav</ShortName>
@@ -430,7 +440,7 @@
 				</File>
 				<File Id="812347358" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 3.wav</ShortName>
-					<CachePath>SFX/1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 3_F541E3A0.wem</CachePath>
+					<CachePath>SFX/1845 - Footsteps - Metal Stairs - Up - 110 fpm - Loop 3_7D9D7062.wem</CachePath>
 				</File>
 				<File Id="827923736" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close.wav</ShortName>
@@ -668,9 +678,6 @@
 					<MediaRefs>
 						<MediaRef Id="46361113"/>
 					</MediaRefs>
-					<AuxBusRefs>
-						<AuxBusRef Id="1032091015" Name="Big_cave"/>
-					</AuxBusRefs>
 				</Event>
 				<Event Id="1149417670" Name="Play_Special_fire" DurationType="OneShot" DurationMin="3.4250903" DurationMax="3.4250903">
 					<MediaRefs>
@@ -703,7 +710,11 @@
 						<MediaRef Id="710330148"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1647081223" Name="Stop_obelisk" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="1647081223" Name="Stop_obelisk" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0">
+					<ActionSetState>
+						<ActionSetStateEntry GroupId="4091656514" Id="172464216" Name="ObeliskDone"/>
+					</ActionSetState>
+				</Event>
 				<Event Id="2725535549" Name="Stop_Wind_ambience" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 			<GameParameters>
@@ -713,8 +724,18 @@
 				<GameParameter Id="2473969246" Name="Metal"/>
 				<GameParameter Id="4248645337" Name="Grass"/>
 			</GameParameters>
+			<StateGroups>
+				<StateGroup Id="4091656514" Name="GameState">
+					<States>
+						<State Id="172464216" Name="ObeliskDone"/>
+						<State Id="748895195" Name="None"/>
+						<State Id="2332076429" Name="ObeliskActivated"/>
+						<State Id="3585588595" Name="ObeliskInactive"/>
+					</States>
+				</StateGroup>
+			</StateGroups>
 		</SoundBank>
-		<SoundBank Id="3991942870" Type="User" Language="SFX" Hash="{FA8F5AEE-6FB7-3FD2-43EC-0CB02C5CB39D}">
+		<SoundBank Id="3991942870" Type="User" Language="SFX" Hash="{B2F76957-CF05-CCB8-0366-87D0F3E29F43}">
 			<ShortName>Music</ShortName>
 			<Path>Music.bnk</Path>
 			<Media>
@@ -860,6 +881,11 @@
 						</SwitchContainer>
 					</SwitchContainers>
 				</Event>
+				<Event Id="1241273495" Name="Stop_Main_Music" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0">
+					<ActionSetState>
+						<ActionSetStateEntry GroupId="4091656514" Id="172464216" Name="ObeliskDone"/>
+					</ActionSetState>
+				</Event>
 			</Events>
 			<StateGroups>
 				<StateGroup Id="4091656514" Name="GameState">
@@ -873,5 +899,5 @@
 			</StateGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{EB2BDEE7-ABCE-45A7-2409-C6FAD6F8B7D7}</FileHash>
+	<FileHash>{F23378C4-3836-0E36-7CB5-52EBF0A988B3}</FileHash>
 </SoundBanksInfo>
