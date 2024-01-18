@@ -67,6 +67,12 @@ namespace Game.Enemy {
                 {
                     rb.velocity = (knockbackDirection + (Vector3.up * upMultiplier)) * directionMultiplier;
                     agent.StartCoroutine(HandleFlyingKnockback());
+
+                    state = NodeState.RUNNING;
+                }
+                else
+                {
+                    state = NodeState.FAILURE;
                 }
             }
 

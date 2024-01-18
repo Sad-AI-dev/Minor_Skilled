@@ -114,10 +114,9 @@ namespace Game.Enemy {
             if (Physics.Raycast(new Vector3(visuals.transform.position.x, visuals.transform.position.y, visuals.transform.position.z),
                 theRay, out alignhHit, 2))
             {
-                Debug.Log(alignhHit.transform.name);
                 Quaternion targetRotation = Quaternion.FromToRotation(visuals.transform.up, alignhHit.normal) * visuals.transform.parent.rotation;
 
-                visuals.transform.rotation = Quaternion.Lerp(visuals.transform.rotation, targetRotation, Time.deltaTime / 0.15f);
+                visuals.transform.rotation = Quaternion.Lerp(visuals.transform.rotation, targetRotation, Time.deltaTime / 0.1f);
             }
         }
 

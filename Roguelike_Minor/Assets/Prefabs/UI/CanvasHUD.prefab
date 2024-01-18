@@ -6957,6 +6957,7 @@ GameObject:
   - component: {fileID: 6226129777667652844}
   - component: {fileID: 8702059138792692715}
   - component: {fileID: 7115000119781062588}
+  - component: {fileID: 1163146514815484335}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -7002,10 +7003,34 @@ MonoBehaviour:
   paused: 0
   onOpenPause:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1163146514815484335}
+        m_TargetAssemblyTypeName: Game.Core.GameSystems.AudioPlayer, Game.Core.GameSystems
+        m_MethodName: Play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onClosePause:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1163146514815484335}
+        m_TargetAssemblyTypeName: Game.Core.GameSystems.AudioPlayer, Game.Core.GameSystems
+        m_MethodName: Play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7115000119781062588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7023,6 +7048,25 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   allowLoadScene: 0
+--- !u!114 &1163146514815484335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5117372402647022422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86866b813429b9e4aa0d9e72eb5c091a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvents:
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8d7901d8414a1d742abdf30d1d9b7903, type: 2}
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 03687ffdac49f3840b9ee863b8005588, type: 2}
 --- !u!1 &5147442012586946644
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,6 +26,7 @@ namespace Game.Enemy {
             {
                 state = NodeState.RUNNING;
                 navAgent.speed = agent.stats.walkSpeed;
+                navAgent.isStopped = false;
                 navAgent.SetDestination(target.position);
             }
 
