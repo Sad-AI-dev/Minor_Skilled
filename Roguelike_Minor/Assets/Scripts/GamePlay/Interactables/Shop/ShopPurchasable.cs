@@ -7,6 +7,11 @@ using Game.Core.Data;
 namespace Game {
     public class ShopPurchasable : Purchasable
     {
+        [Header("Visual Settings")]
+        [SerializeField] private MeshRenderer display;
+        [SerializeField] private UnityDictionary<ItemTierSO, Material> mats;
+
+        [Header("Refs")]
         [SerializeField] private ItemPickup itemPickup;
         [SerializeField] private UnityDictionary<ItemTierSO, float> itemTierPriceMults;
 
@@ -15,6 +20,7 @@ namespace Game {
         {
             itemPickup.item = item;
             itemPickup.GenerateVisuals();
+            if (display) { SetDisplayMaterial(item.tier); }
             Initialize(); //recalc price
         }
 
@@ -35,6 +41,14 @@ namespace Game {
             //notify item was picked up
             if (result) { EventBus<PickupItemEvent>.Invoke(new PickupItemEvent() { item = itemPickup.item }); }
             return result;
+        }
+
+        //======== Display Material =========
+        private void SetDisplayMaterial(ItemTierSO tier)
+        {
+            Material[] displayMats = display.materials;
+            displayMats[2] = mats[tier]; 
+            display.materials = displayMats;
         }
     }
 }

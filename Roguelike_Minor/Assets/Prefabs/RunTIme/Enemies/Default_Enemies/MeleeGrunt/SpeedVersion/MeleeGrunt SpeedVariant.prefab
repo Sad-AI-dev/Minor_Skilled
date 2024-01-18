@@ -341,8 +341,38 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2352393984197392868, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3309848303409921083}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5666398297103683690, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1835597426407523402}
   m_SourcePrefab: {fileID: 100100000, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}
+--- !u!1 &3379680737519867047 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5666398297103683690, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}
+  m_PrefabInstance: {fileID: 6936702877278946509}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1835597426407523402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3379680737519867047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525d550a1db3e3f4b87ae4a618494984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!4 &4675157932969409833 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2352393984197392868, guid: d8372f1112a1cd448b5a2933bf6189f5, type: 3}

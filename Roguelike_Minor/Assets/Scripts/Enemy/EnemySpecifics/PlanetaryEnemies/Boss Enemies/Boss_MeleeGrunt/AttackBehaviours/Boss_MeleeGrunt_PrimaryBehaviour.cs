@@ -10,8 +10,9 @@ namespace Game.Enemy {
     {
         public Ability source;
         public Rigidbody rb;
-        public float speed = 5;
-
+        public float speed = 8;
+        public float increaseToSize;
+        float t;
         // Start is called before the first frame update
         void Start()
         {
@@ -21,7 +22,9 @@ namespace Game.Enemy {
         // Update is called once per frame
         void Update()
         {
+            t += Time.deltaTime;
             rb.MovePosition(transform.position + (transform.forward * speed * Time.deltaTime));
+            transform.localScale = new Vector3(Mathf.Lerp(2.5f, increaseToSize, t/2f), 1, 1);
         }
 
         IEnumerator DestroyAfterSeconds()

@@ -13,6 +13,8 @@ namespace Game {
         [SerializeField] private float baseMoveSpeed;
         [SerializeField] private float bonusMoveSpeed;
         [SerializeField] private float yOffset = 1f;
+        [Space(10f)]
+        [SerializeField] private float spinSpeed = 10f;
 
         [Header("Chase Settings")]
         [SerializeField] private SphereCollider detectSphere;
@@ -74,6 +76,14 @@ namespace Game {
                 case State.Chase: Chase(); break;
                 case State.Return: MoveToReturnPos(); break;
             }
+            //spin
+            Spin();
+        }
+
+        //===== Spin ====
+        private void Spin()
+        {
+            transform.Rotate(Vector3.up * (spinSpeed * Time.deltaTime));
         }
 
         //======= Move ======
@@ -128,12 +138,16 @@ namespace Game {
         private IEnumerator CooldownCo()
         {
             yield return new WaitForSeconds(coolDown);
-            if (gameObject) { EndCoolDown(); } //make sure object still exists
+            if (holderVars.holder != null) 
+            { //make sure object still exists
+                Move(); //update position
+                yield return null;
+                EndCoolDown();
+            }
         }
 
         private void EndCoolDown()
         {
-            Move(); //correct Position
             SetState(State.Idle);
         }
 

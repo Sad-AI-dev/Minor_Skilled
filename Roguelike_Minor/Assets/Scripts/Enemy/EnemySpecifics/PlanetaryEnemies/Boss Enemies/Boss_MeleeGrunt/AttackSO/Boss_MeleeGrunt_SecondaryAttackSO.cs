@@ -25,6 +25,7 @@ namespace Game.Enemy {
         public override void Use(Ability source)
         {
             Boss_MeleeGrunt_SecondaryAttackVars vars  = source.vars as Boss_MeleeGrunt_SecondaryAttackVars;
+            Debug.Log("Using secondary");
             source.agent.StartCoroutine(activate(vars));
         }
 

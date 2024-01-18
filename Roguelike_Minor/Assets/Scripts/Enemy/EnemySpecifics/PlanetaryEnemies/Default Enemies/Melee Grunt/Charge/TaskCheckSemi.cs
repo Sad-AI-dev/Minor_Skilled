@@ -59,7 +59,6 @@ namespace Game.Enemy {
         IEnumerator CheckForChargeCooldownCo()
         {
             chanceNumber = Random.Range(1, 101);
-            Debug.Log("Chance Charge: " + chanceNumber);
             yield return new WaitForSeconds(3);
             if (null == GetData("Charging") || !(bool)GetData("Charging"))
             {

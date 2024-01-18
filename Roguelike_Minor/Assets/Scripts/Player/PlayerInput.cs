@@ -32,14 +32,20 @@ namespace Game.Player {
 
         private float delayFOVChange = 0;
 
+        [Header("Inventory Events")]
+        [SerializeField] private UnityEvent openInventoryEvent;
+        [SerializeField] private UnityEvent closeInventoryEvent;
+
         private void Awake()
         {
             EventBus<SceneLoadedEvent>.AddListener(OnSceneLoad);
+            EventBus<GamePauseEvent>.AddListener(HandlePauseGame);
         }
 
         private void OnDestroy()
         {
             EventBus<SceneLoadedEvent>.RemoveListener(OnSceneLoad);
+            EventBus<GamePauseEvent>.RemoveListener(HandlePauseGame);
         }
 
         private void OnSceneLoad(SceneLoadedEvent eventData)
@@ -68,10 +74,9 @@ namespace Game.Player {
         void Update()
         {
             PauseInput();
-
-            gamePaused = pauseMenu.paused;
-
             if (gamePaused) return;
+
+            //game inputs
             WalkInput();
             JumpInput();
             AbilitiesInput();
@@ -179,6 +184,7 @@ namespace Game.Player {
                 inventory.gameObject.SetActive(true);
                 Cursor.lockState = CursorLockMode.Confined;
                 camController.LockCamera();
+                openInventoryEvent?.Invoke();
                 //disable interactor while inventory is open
                 interactor.enabled = false;
             }
@@ -187,6 +193,7 @@ namespace Game.Player {
                 inventory.gameObject.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 camController.UnlockCamera();
+                closeInventoryEvent?.Invoke();
                 //re-enable interactor
                 interactor.enabled = true;
             }
@@ -249,10 +256,15 @@ namespace Game.Player {
         //}
 
         //=========== Manage Game Paused ===================
+        private void HandlePauseGame(GamePauseEvent eventData)
+        {
+            PauseGame(eventData.paused);
+        }
+
         public void PauseGame(bool paused)
         {
             gamePaused = paused;
         }
     }
-    }
+}
 

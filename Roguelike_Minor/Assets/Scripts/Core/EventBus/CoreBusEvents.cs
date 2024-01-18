@@ -38,10 +38,25 @@ namespace Game.Core {
         public ItemDataSO item;
     }
 
+    public enum InteractFailCause { money, inventory, noRerrols }
+    public class InteractFailEvent : Event
+    {
+        public InteractFailCause failCause;
+    }
+
     //===== Player Leave Bounds =====
     public class RespawnEvent : Event { }
  
     //========== Game State =============
+    public class GamePauseEvent : Event 
+    {
+        public GamePauseEvent(bool state)
+        {
+            paused = state;
+        }
+        public bool paused;
+    }
+
     public class GameEndEvent : Event { }
 
 }
