@@ -17,11 +17,13 @@ namespace Game.Enemy {
         {
             if(GetData("Targeting") != null && (bool)GetData("Targeting"))
             {
+                Debug.Log("Targeting");
                 state = NodeState.RUNNING;
                 return state;
             }
 
             state = base.Evaluate();
+
 
             return state;
         }
