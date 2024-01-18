@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3287371535045237397}
   - component: {fileID: 2022256010065270865}
   - component: {fileID: 7002932733917414048}
-  - component: {fileID: 232362418315842035}
+  - component: {fileID: 6354908033856053371}
   m_Layer: 7
   m_Name: TestGrenade
   m_TagString: Untagged
@@ -83,9 +83,9 @@ MonoBehaviour:
     behaviourTemplate: {fileID: 5180419599746193269, guid: 95dc641df33fb0a4c81de9dbd96fec11, type: 3}
   poisonUpwardVelocity: 20
   poisonGravity: 0.5
-  poisonGrenadeAmount: 4
   minDistance: 2
   maxDistance: 8
+  poisonGrenadeAmount: 4
   gravity: 10
   upwardVelocity: 0
 --- !u!96 &3287371535045237397
@@ -249,7 +249,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &232362418315842035
+--- !u!114 &6354908033856053371
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -258,13 +258,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3127258870543087108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86866b813429b9e4aa0d9e72eb5c091a, type: 3}
+  m_Script: {fileID: 11500000, guid: 525d550a1db3e3f4b87ae4a618494984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioEvents:
-  - idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &7327287741176140361
 GameObject:
   m_ObjectHideFlags: 0
