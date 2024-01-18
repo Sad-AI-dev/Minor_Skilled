@@ -34,6 +34,7 @@ namespace Game.Enemy {
 
             if (target != null)
             {
+                Debug.Log("Target found");
                 //Check if we have a path
                 if (calculatePathCo == null)
                 {
@@ -43,6 +44,7 @@ namespace Game.Enemy {
                 //follow path
                 if (pathQueue.Count > 0)
                 {
+                    Debug.Log("Path found");
                     //Handle Direction
                     Vector3 dir = (pathQueue.Peek() - transform.position).normalized;
 

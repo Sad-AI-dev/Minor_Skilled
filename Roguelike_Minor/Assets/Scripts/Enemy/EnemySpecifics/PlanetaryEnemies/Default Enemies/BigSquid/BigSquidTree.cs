@@ -53,6 +53,7 @@ namespace Game.Enemy {
         {
             if (root != null && (root.GetData("TakingKnockback") == null || !(bool)root.GetData("TakingKnockback")))
             {
+                Debug.Log("Handeling moving and rotating");
                 if (root.GetData("MoveDirection") != null) rb.MovePosition(transform.position + (Vector3)root.GetData("MoveDirection") * Time.fixedDeltaTime);
                 if (root.GetData("MoveRotation") != null) rb.MoveRotation((Quaternion)root.GetData("MoveRotation"));
             }
