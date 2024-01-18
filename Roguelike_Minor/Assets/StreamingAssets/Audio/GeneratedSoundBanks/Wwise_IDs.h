@@ -19,6 +19,7 @@ namespace AK
         static const AkUniqueID PLAY_BIRDS = 3025897706U;
         static const AkUniqueID PLAY_CLICK_BUTTON = 1619866993U;
         static const AkUniqueID PLAY_DASH = 2211787386U;
+        static const AkUniqueID PLAY_ERROR_SOUND = 595278468U;
         static const AkUniqueID PLAY_FOOTSTEP = 1602358412U;
         static const AkUniqueID PLAY_FOOTSTEP_SERVO = 1408608858U;
         static const AkUniqueID PLAY_GRENADE = 2405798708U;
@@ -39,6 +40,7 @@ namespace AK
         static const AkUniqueID PLAY_START_OBELISK = 3577284316U;
         static const AkUniqueID PLAY_UNPAUSEGAME = 2865946037U;
         static const AkUniqueID PLAY_WIND_AMBIENCE = 3110216747U;
+        static const AkUniqueID STOP_MAIN_MUSIC = 1241273495U;
         static const AkUniqueID STOP_OBELISK = 1647081223U;
         static const AkUniqueID STOP_WIND_AMBIENCE = 2725535549U;
     } // namespace EVENTS
@@ -81,8 +83,12 @@ namespace AK
         static const AkUniqueID GRASS = 4248645337U;
         static const AkUniqueID GRAVEL = 2185786256U;
         static const AkUniqueID HEALTHPERCANTAGE = 3510318599U;
+        static const AkUniqueID MASTERVOLUME = 2918011349U;
+        static const AkUniqueID METAL = 2473969246U;
+        static const AkUniqueID MUSICVOLUME = 2346531308U;
         static const AkUniqueID OBELISK_PROGRESS = 1308554018U;
         static const AkUniqueID RUNNING_SPEED = 2309143834U;
+        static const AkUniqueID SFXVOLUME = 988953028U;
         static const AkUniqueID SS_AIR_FEAR = 1351367891U;
         static const AkUniqueID SS_AIR_FREEFALL = 3002758120U;
         static const AkUniqueID SS_AIR_FURY = 1029930033U;
@@ -120,9 +126,11 @@ namespace AK
 
     namespace AUX_BUSSES
     {
+        static const AkUniqueID ARCH_VERB = 1142954923U;
         static const AkUniqueID BIG_CAVE = 1032091015U;
         static const AkUniqueID DEFAULT_VERB = 3018232304U;
-        static const AkUniqueID VALLEY_VERB = 1063264192U;
+        static const AkUniqueID SHOP_VERB = 662287043U;
+        static const AkUniqueID TUNNEL_SHOP_VERB = 1013582926U;
     } // namespace AUX_BUSSES
 
     namespace AUDIO_DEVICES
