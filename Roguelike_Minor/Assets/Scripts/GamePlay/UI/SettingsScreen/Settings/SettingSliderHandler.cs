@@ -13,6 +13,8 @@ namespace Game {
         [Header("Define Range")]
         [SerializeField] private float minValue = 0f;
         [SerializeField] private float maxValue = 1f;
+        [Space(10f)]
+        [SerializeField] private int decimals = 2;
 
         [Header("Refs")]
         [SerializeField] private Slider slider;
@@ -31,7 +33,14 @@ namespace Game {
         public void SetValues(float value)
         {
             slider.value = value;
-            field.text = string.Format("{0:0.##}", value);
+            field.text = FormatText(value);
+        }
+
+        private string FormatText(float value)
+        {
+            float roundedValue = Mathf.Round(value * Mathf.Pow(10f, decimals));
+            roundedValue /= Mathf.Pow(10f, decimals);
+            return roundedValue.ToString();
         }
 
         //====== Handle Slider =======
@@ -41,7 +50,7 @@ namespace Game {
             value = Mathf.Clamp(value, minValue, maxValue);
             //apply value
             slider.value = value;
-            field.text = string.Format("{0:0.##}", value);
+            field.text = FormatText(value);
             onValueChanged?.Invoke(value);
         }
 

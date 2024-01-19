@@ -27,6 +27,12 @@ namespace Game.Core {
         public int loadedIndex;
     }
 
+    public class SceneUnloadedEvent : Event
+    {
+        public int unloadedIndex;
+        public string name;
+    }
+
     //===== Purchaseables =====
     public class PurchaseEvent : Event
     {

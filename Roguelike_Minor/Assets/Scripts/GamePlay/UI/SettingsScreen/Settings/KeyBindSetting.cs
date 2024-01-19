@@ -17,6 +17,7 @@ namespace Game {
 
         [Header("Refs")]
         [SerializeField] private TMP_Text bindLabel;
+        [SerializeField] private KeyBindLabelDisplaySO displaySettings;
 
         [Header("Visual Settings")]
         [SerializeField] private string listeningString = "> <";
@@ -48,8 +49,16 @@ namespace Game {
         //======= Manage Visuals ========
         private void UpdateVisuals()
         {
-            bindLabel.text = currentCode.ToString();
+            bindLabel.text = GetKeyBindText();
             bindLabel.color = isIncompatible ? incompatibleColor : defaultColor;
+        }
+        private string GetKeyBindText()
+        {
+            if (displaySettings.displayDataDict.ContainsKey(currentCode))
+            { //use replace string
+                return displaySettings.displayDataDict[currentCode].replaceString;
+            } //use default string
+            else { return currentCode.ToString(); }
         }
 
         //======== Listen For Input ============
@@ -58,6 +67,7 @@ namespace Game {
             if (!listening)
             {
                 listening = true;
+                SettingsScreen.isListening = true;
                 //setup visuals
                 bindLabel.text = listeningString;
                 bindLabel.color = listeningColor;
@@ -87,6 +97,7 @@ namespace Game {
                 }
             }
             listening = false;
+            SettingsScreen.isListening = false;
         }
 
         private void SetKeyCode(KeyCode code)
