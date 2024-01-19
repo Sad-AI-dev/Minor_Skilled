@@ -5448,18 +5448,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.Core.GameSystems.DontDestroyManager, Game.Core.GameSystems
-        m_MethodName: Destroy
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 7115000119781062588}
         m_TargetAssemblyTypeName: Game.Core.GameSystems.SceneLoader, Game.Core.GameSystems
         m_MethodName: FastLoadScene
@@ -5467,7 +5455,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -13709,6 +13697,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 43410078065110917}
     m_Modifications:
+    - target: {fileID: 209469545027729831, guid: ab1523192c6a4b24cbf65458828c5bbc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1034329482096879191, guid: ab1523192c6a4b24cbf65458828c5bbc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -13860,6 +13852,10 @@ PrefabInstance:
     - target: {fileID: 7513226117753079698, guid: ab1523192c6a4b24cbf65458828c5bbc, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -12.200012
+      objectReference: {fileID: 0}
+    - target: {fileID: 7784534177671595153, guid: ab1523192c6a4b24cbf65458828c5bbc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9058519787721302829, guid: ab1523192c6a4b24cbf65458828c5bbc, type: 3}
       propertyPath: m_AnchorMax.y

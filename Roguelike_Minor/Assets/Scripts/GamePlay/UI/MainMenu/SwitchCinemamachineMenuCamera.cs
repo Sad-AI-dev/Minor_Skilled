@@ -8,7 +8,7 @@ public class SwitchCinemamachineMenuCamera : MonoBehaviour
     private AfterAnimation afterAnimation;
     public GameObject LoadingCanvas;
     public GameObject SelectButtonPressed;
-    public GameObject CorporationCanvas;
+    public GameObject BlackFadeIn;
     public Animator LogoComingInScreen;
     public Animator animator;
     public Animator animationloading;
@@ -62,14 +62,14 @@ public class SwitchCinemamachineMenuCamera : MonoBehaviour
         LogoComingInScreen.enabled = true;
     }
 
-    // public void PlayCorporationVideo()
-    // {
-    //     CorporationCanvas.SetActive(true);
-    //     if (afterAnimation != null)
-    //     {
-    //         afterAnimation.PlayAnimation();
-    //     }
-    // }
+    public void BlackFadeInCamera()
+    {
+        BlackFadeIn.SetActive(true);
+        if (afterAnimation != null)
+        {
+            afterAnimation.PlayAnimation();
+        }
+    }
 
     // public void MenuAnimationDone(){
     //     Debug.Log("animation done");
@@ -87,8 +87,8 @@ public class SwitchCinemamachineMenuCamera : MonoBehaviour
         PlayLogoAnimation();
         
         //Comment PlayCorporationVideo(); later
-        //PlayCorporationVideo(); 
-        //Invoke("PlayCorporationVideo", 8.5f);
+        BlackFadeInCamera(); 
+        Invoke("FadeInAnimation", 8.5f);
     }
 }
 
