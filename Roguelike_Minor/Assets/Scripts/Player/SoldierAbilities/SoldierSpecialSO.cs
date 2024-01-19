@@ -53,7 +53,7 @@ namespace Game.Player.Soldier
             Explosion.DealDamage(targetAgents, source.agent, explosionDamage);
             Explosion.DealKnockback(targetAgents, knockbackForce, targetPos);
             GameObject projectile = Instantiate(explosion, targetPos, Quaternion.identity);
-            projectile.transform.localScale *= radius * 2;
+            projectile.transform.localScale *= radius * 0.8f;
         }
     }
 }
