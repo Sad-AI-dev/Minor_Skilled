@@ -1,5 +1,6 @@
 using Game.Core;
 using Game.Core.GameSystems;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,8 @@ namespace Game.Player.Soldier
         [SerializeField] private GameObject explosion;
         [SerializeField] private float radius;
         [SerializeField] private float knockbackForce;
-        [SerializeField] private int damage;
+        [SerializeField] private float explosionDamageMultiplier;
+        private float explosionDamage;
  
         private PlayerController controller;
         private Camera cam;
@@ -45,8 +47,10 @@ namespace Game.Player.Soldier
                 agent.health.Hurt(new HitEvent(source));
             }
 
+            explosionDamage = source.agent.stats.baseDamage * explosionDamageMultiplier;
+
             List<Agent> targetAgents = Explosion.FindAgentsInRange(targetPos, radius);
-            Explosion.DealDamage(targetAgents, source.agent, damage);
+            Explosion.DealDamage(targetAgents, source.agent, explosionDamage);
             Explosion.DealKnockback(targetAgents, knockbackForce, targetPos);
             GameObject projectile = Instantiate(explosion, targetPos, Quaternion.identity);
             projectile.transform.localScale *= radius * 2;
