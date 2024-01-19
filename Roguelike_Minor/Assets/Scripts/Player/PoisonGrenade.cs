@@ -11,6 +11,7 @@ namespace Game.Player
         [SerializeField] private GameObject poisonCloud;
         [SerializeField] private AudioPlayer AP;
 
+        public float damage;
         [HideInInspector] public float gravity;
 
         private void Awake()
@@ -27,8 +28,9 @@ namespace Game.Player
 
         protected override void CustomCollide(Collider other)
         {
-            GameObject poison = Instantiate(poisonCloud, transform.position, Quaternion.identity);
+            GameObject poison = Instantiate(poisonCloud, transform.position + new Vector3(0, 0.25f, 0), poisonCloud.transform.rotation);
             poison.GetComponent<DOTExplosion>().source = source;
+            poison.GetComponent<DOTExplosion>().damage = damage;
             AP.Play(0);
         }
 

@@ -15,7 +15,7 @@ namespace Game.Core.GameSystems
         [SerializeField] private bool onlyAffectGrounded;
 
         [Header("Damage")]
-        [SerializeField] private int damage;
+        [SerializeField] public float damage;
 
         [Header("Knockback")]
         [SerializeField] private int knockbackForce;

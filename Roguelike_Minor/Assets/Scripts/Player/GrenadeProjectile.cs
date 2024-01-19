@@ -15,7 +15,7 @@ namespace Game.Player
 
         [Header("Explosion")]
         [SerializeField] private float radius;
-        [SerializeField] private int explosionDamage;
+        public float explosionDamage;
 
         [Header("Poison Grenade")]
         [SerializeField] private BehaviourPool<Projectile> grenades = new BehaviourPool<Projectile>();
@@ -24,6 +24,7 @@ namespace Game.Player
         [SerializeField] private float minDistance;
         [SerializeField] private float maxDistance;
         public int poisonGrenadeAmount;
+        public float poisonGrenadeDamage;
 
         [HideInInspector] public float gravity;
         [HideInInspector] public float upwardVelocity;
@@ -69,7 +70,7 @@ namespace Game.Player
                 projectile.Initialize(ability);
 
                 PoisonGrenade pGrenade = projectile.GetComponent<PoisonGrenade>();
-
+                pGrenade.damage = poisonGrenadeDamage;
                 pGrenade.velocity = Vector3.zero;
 
                 maxAngle = (360 / poisonGrenadeAmount) * (i + 1);
