@@ -24,7 +24,6 @@ namespace Game.Player {
         [SerializeField] private int jumpBufferFrames;
         private Coroutine jumpBufferCoroutine;
 
-        private bool gamePaused = false;
         [HideInInspector] public bool shooting;
         
         public UnityEvent stopShooting;
@@ -74,7 +73,7 @@ namespace Game.Player {
         void Update()
         {
             PauseInput();
-            if (gamePaused) return;
+            if (pauseMenu.paused) return;
 
             //game inputs
             WalkInput();
@@ -207,21 +206,22 @@ namespace Game.Player {
 
         private void PauseInput()
         {
-            if (Input.GetKeyUp(KeyCode.Escape) && !gamePaused)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                gamePaused = true;
-                pauseMenu.ActivateMenu();
-
-                if (inventory.gameObject.activeSelf)
-                {
-                    inventory.gameObject.SetActive(false);
-                    camController.UnlockCamera();
+                if (pauseMenu.paused)
+                { //unpause
+                    pauseMenu.DeactivateMenu();
                 }
-            }
-            else if(Input.GetKeyUp(KeyCode.Escape) && gamePaused)
-            {
-                gamePaused = false;
-                pauseMenu.DeactivateMenu();
+                else
+                { //pause
+                    pauseMenu.ActivateMenu();
+
+                    if (inventory.gameObject.activeSelf)
+                    {
+                        inventory.gameObject.SetActive(false);
+                        camController.UnlockCamera();
+                    }
+                }
             }
         }
 
@@ -263,7 +263,7 @@ namespace Game.Player {
 
         public void PauseGame(bool paused)
         {
-            gamePaused = paused;
+            pauseMenu.paused = paused;
         }
     }
 }

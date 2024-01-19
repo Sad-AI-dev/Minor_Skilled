@@ -261,5 +261,11 @@ namespace Game {
         {
             SetState(State.Return);
         }
+
+        //======= Handle Destroy ======
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
+        }
     }
 }
