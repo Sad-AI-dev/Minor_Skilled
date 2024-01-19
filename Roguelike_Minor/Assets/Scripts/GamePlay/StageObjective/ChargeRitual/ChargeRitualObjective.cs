@@ -22,8 +22,6 @@ namespace Game {
 
         [Header("Visuals")]
         [SerializeField] private Transform rangeIndicator;
-        [SerializeField] private AnimationCurve pulseCurve;
-        [SerializeField] private float maxPulseSpeed = 300f;
 
         [Header("UI Settings")]
         [SerializeField] private TMP_Text progressLabel;
@@ -107,7 +105,7 @@ namespace Game {
         //============ Orb Visuals ===========
         private void UpdatePulseSpeed()
         {
-            orbPulser.pulseSpeed = pulseCurve.Evaluate(progress / 100f) * maxPulseSpeed;
+            orbPulser.progress = progress;
         }
 
         //=============== UI =============
