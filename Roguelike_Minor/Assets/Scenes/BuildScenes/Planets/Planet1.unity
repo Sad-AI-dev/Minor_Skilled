@@ -815,6 +815,8 @@ GameObject:
   - component: {fileID: 500012446}
   - component: {fileID: 500012445}
   - component: {fileID: 500012447}
+  - component: {fileID: 500012449}
+  - component: {fileID: 500012448}
   m_Layer: 0
   m_Name: == Audio ==
   m_TagString: Untagged
@@ -914,6 +916,46 @@ MonoBehaviour:
   unloadTriggerList: 958ca0ea
   bankNameInternal: 
   valueGuidInternal: 
+--- !u!114 &500012448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500012443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 139050fa5d7cc1e4f84f4062acabddde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  metalFootstepFix:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2f9d62c9b29c5834a8a80b3bc5652080, type: 2}
+--- !u!114 &500012449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500012443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3b5c7941dd22194cbf4acb4b6e45564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 82e8e65253e6b78479e3837bd4093b5d, type: 2}
+  valueIdInternal: 0
+  groupIdInternal: 0
+  valueGuidInternal: 
+  groupGuidInternal: 
 --- !u!1 &502154238
 GameObject:
   m_ObjectHideFlags: 0

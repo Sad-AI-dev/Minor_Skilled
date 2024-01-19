@@ -67,12 +67,16 @@ MonoBehaviour:
           prefab: {fileID: 828712640256720236, guid: c78cdb23a450e8f4ab62786287420081, type: 3}
           isFlying: 1
         chance: 1
-  - name: Boss Big Squid
+  - name: Big Bad Bosses
     contents:
       options:
       - option:
           prefab: {fileID: 3194772888341048763, guid: 5f303abe0f102044d98a4d55b00d0a5c, type: 3}
           isFlying: 1
+        chance: 1
+      - option:
+          prefab: {fileID: 4945467634312675552, guid: bf74c9c03566cef43b270ac9c29c0f80, type: 3}
+          isFlying: 0
         chance: 1
   - name: Rock Big Squid
     contents:
@@ -80,4 +84,4 @@ MonoBehaviour:
       - option:
           prefab: {fileID: 2408350432041449503, guid: dd84f848e5e1a254eaa2b8798223800c, type: 3}
           isFlying: 0
-        chance: 1
+        chance: 0.2
