@@ -1058,6 +1058,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShopV3
       objectReference: {fileID: 0}
+    - target: {fileID: 8442601801254881842, guid: 2f7caa9f0cb56f94d80163005eebc004, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8442601801254881842, guid: 2f7caa9f0cb56f94d80163005eebc004, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8442601801254881842, guid: 2f7caa9f0cb56f94d80163005eebc004, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1684768429}
+    - target: {fileID: 8442601801254881842, guid: 2f7caa9f0cb56f94d80163005eebc004, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8442601801254881842, guid: 2f7caa9f0cb56f94d80163005eebc004, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 8442601801254881842, guid: 2f7caa9f0cb56f94d80163005eebc004, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.Animator, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8442601801254881842, guid: 2f7caa9f0cb56f94d80163005eebc004, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: Converter_Button_Press
+      objectReference: {fileID: 0}
+    - target: {fileID: 8442601801254881842, guid: 2f7caa9f0cb56f94d80163005eebc004, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2253,6 +2285,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 321906709}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1684768429 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6793093932977184212, guid: 2f7caa9f0cb56f94d80163005eebc004, type: 3}
+  m_PrefabInstance: {fileID: 1014894714}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1715063829
 GameObject:
   m_ObjectHideFlags: 0
