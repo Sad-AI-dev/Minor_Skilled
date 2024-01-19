@@ -11,6 +11,7 @@ namespace Game {
         {
             public Item holder;
 
+            public GameObject vfx;
             public List<PlanetProjectile> projectiles;
             //ring data
             public int currentRingIndex;
@@ -34,6 +35,7 @@ namespace Game {
 
         [Header("Prefab Settings")]
         public GameObject planetPrefab;
+        public GameObject vfxPrefab;
 
         [Header("Ring Settings")]
         public float ringRadius = 3f;
@@ -66,6 +68,8 @@ namespace Game {
                 UpdateRingVars(vars);
                 SetupProjectile(vars);
             }
+            //vfx
+            if (item.stacks == 1) { vars.vfx = Instantiate(vfxPrefab, vars.holder.agent.transform); }
         }
 
         //damage vars
@@ -134,8 +138,14 @@ namespace Game {
                 UpdateRemovedRingData(vars);
                 RemoveProjectile(vars);
             }
-            //update vars
-            vars.holder = null;
+            //delete effect check
+            if (item.stacks == 0)
+            {
+                //destroy vfx
+                Destroy(vars.vfx);
+                //update vars
+                vars.holder = null;
+            }
         }
 
         private void UpdateRemovedRingData(Item18Vars vars)
