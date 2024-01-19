@@ -18,6 +18,15 @@ namespace Game
         [SerializeField] private UnityEvent onOpenPause;
         [SerializeField] private UnityEvent onClosePause;
 
+        private bool settingsIsOpen;
+
+        private void Start()
+        {
+            EventBus<SceneLoadedEvent>.AddListener(SceneLoaded);
+            EventBus<SceneUnloadedEvent>.AddListener(SceneUnloaded);
+        }
+
+        //=========== Manage Menu ==============
         public void ActivateMenu()
         {
             darkBackground.SetActive(true);
@@ -32,6 +41,8 @@ namespace Game
 
         public void DeactivateMenu()
         {
+            if (settingsIsOpen) { return; }
+
             darkBackground.SetActive(false);
             menu.SetActive(false);
             paused = false;
@@ -56,14 +67,27 @@ namespace Game
             Time.timeScale = 1f;
         }
 
-        public void Settings()
-        {
-
-        }
-
         public void ExitGame()
         {
             Application.Quit();
+        }
+
+        //======== Handle Load Settings ========
+        private void SceneLoaded(SceneLoadedEvent eventData)
+        {
+            if (eventData.loadedIndex == 5) { settingsIsOpen = true; }
+        }
+
+        private void SceneUnloaded(SceneUnloadedEvent eventData)
+        {
+            if (eventData.unloadedIndex == 5) { settingsIsOpen = false; }
+        }
+
+        //======== Handle Disable =========
+        private void OnDisable()
+        {
+            EventBus<SceneLoadedEvent>.RemoveListener(SceneLoaded);
+            EventBus<SceneUnloadedEvent>.RemoveListener(SceneUnloaded);
         }
     }
 }

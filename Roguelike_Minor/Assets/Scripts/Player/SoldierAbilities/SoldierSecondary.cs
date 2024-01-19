@@ -19,9 +19,11 @@ namespace Game.Player.Soldier
         private PlayerController controller;
         private GrenadeProjectile grenadeProjectile;
 
+
         [Header("Poison")]
         [SerializeField] int defaultPoisonOrbs = 4;
         [SerializeField] int upgradePoisonOrbs = 1;
+        [SerializeField] private float poisonDamageMultiplier;
 
         public class SecondaryVars : Ability.AbilityVars
         {
@@ -59,6 +61,8 @@ namespace Game.Player.Soldier
             grenadeProjectile.gravity = projectileGravity;
             grenadeProjectile.upwardVelocity = upwardVelocity;
             grenadeProjectile.poisonGrenadeAmount = (source.vars as SecondaryVars).totalPoisonOrbs;
+            grenadeProjectile.explosionDamage = source.abilityData.damageMultiplier * source.agent.stats.baseDamage;
+            grenadeProjectile.poisonGrenadeDamage = source.agent.stats.baseDamage * poisonDamageMultiplier;
         }
 
         public override void Upgrade(Ability source)

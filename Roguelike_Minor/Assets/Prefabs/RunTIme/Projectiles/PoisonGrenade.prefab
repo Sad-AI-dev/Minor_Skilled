@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 4656607885349075287}
   - component: {fileID: 3779279123046360641}
   - component: {fileID: -381237690192110838}
+  - component: {fileID: -1200198511553967705}
   m_Layer: 7
   m_Name: PoisonGrenade
   m_TagString: Untagged
@@ -154,7 +155,7 @@ MonoBehaviour:
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 0}
     coolDownTimer: 0
-  poisonCloud: {fileID: 1994042670244770660, guid: fc1635ef9ab4a8e45b12783db9b0179a, type: 3}
+  poisonCloud: {fileID: 3929975540130148228, guid: 7f953d25ac0fe3c4bbecc516827b970f, type: 3}
   AP: {fileID: 3779279123046360641}
   gravity: 0
 --- !u!54 &7236387855493414906
@@ -243,3 +244,15 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0, z: 0}
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!114 &-1200198511553967705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180419599746193269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a08684d5be87bed4f87593a4e42d9103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

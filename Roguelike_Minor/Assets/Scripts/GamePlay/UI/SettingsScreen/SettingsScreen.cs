@@ -15,6 +15,11 @@ namespace Game
 
         [Header("Tabs Refs")]
         [SerializeField] private GameObject[] tabContentHolders;
+        [Space(10f)]
+        [SerializeField] private Animator[] tabAnimators;
+        [Space(10f)]
+        [SerializeField] private TMP_Text tabTitle;
+        [SerializeField] private string[] tabTitles;
 
         [Header("Setting Details Refs")]
         [SerializeField] private TMP_Text descriptionTitleLabel;
@@ -29,6 +34,7 @@ namespace Game
         //vars
         private SettingsSaveLoad serializer;
         [HideInInspector] public bool dirty;
+        public static bool isListening;
 
         //tabs
         private int openTab;
@@ -47,7 +53,7 @@ namespace Game
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (!isListening && Input.GetKeyDown(KeyCode.Escape))
             {
                 CloseMenu();
             }
@@ -92,19 +98,39 @@ namespace Game
             CloseTab(openTab);
             //open new tab
             tabContentHolders[tabIndex].SetActive(true);
+            tabAnimators[tabIndex].Play("Selected");
             openTab = tabIndex;
+            //set title
+            tabTitle.text = tabTitles[tabIndex];
             //refresh scroll rect
             RefreshScrollRect();
         }
 
         private void CloseTab(int tabIndex)
         {
+            tabAnimators[tabIndex].Play("Normal");
             tabContentHolders[tabIndex].SetActive(false);
         }
 
         private void RefreshScrollRect()
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect);
+        }
+
+        //====== Manage Button Animations =======
+        public void PointerEnterTab(int tabIndex) 
+        {
+            if (tabIndex != openTab) { tabAnimators[tabIndex].Play("Highlighted"); }
+        }
+
+        public void PointerExitTab(int tabIndex)
+        {
+            if (tabIndex != openTab) { tabAnimators[tabIndex].Play("Normal"); }
+        }
+
+        public void PointerPressedTab(int tabIndex)
+        {
+            if (tabIndex != openTab) { tabAnimators[tabIndex].Play("Pressed"); }
         }
 
         //======== Manage Hover Setting ========

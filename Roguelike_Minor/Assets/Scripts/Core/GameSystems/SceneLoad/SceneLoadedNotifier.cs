@@ -7,6 +7,7 @@ namespace Game.Core.GameSystems {
         private void Awake()
         {
             SceneManager.sceneLoaded += InvokeSceneLoaded;
+            SceneManager.sceneUnloaded += InvokeSceneUnloaded;
         }
 
         private void InvokeSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -14,9 +15,18 @@ namespace Game.Core.GameSystems {
             EventBus<SceneLoadedEvent>.Invoke(new SceneLoadedEvent { loadedIndex = scene.buildIndex });
         }
 
+        private void InvokeSceneUnloaded(Scene scene)
+        {
+            EventBus<SceneUnloadedEvent>.Invoke(new SceneUnloadedEvent { 
+                unloadedIndex = scene.buildIndex, 
+                name = scene.name 
+            });
+        }
+
         private void OnDestroy()
         {
             SceneManager.sceneLoaded -= InvokeSceneLoaded;
+            SceneManager.sceneUnloaded -= InvokeSceneUnloaded;
         }
     }
 }
