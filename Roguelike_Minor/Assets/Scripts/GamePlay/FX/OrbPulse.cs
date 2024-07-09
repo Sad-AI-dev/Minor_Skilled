@@ -18,9 +18,11 @@ namespace Game {
         [HideInInspector] public float progress;
 
         private float speed;
+        private float time = 0f;
 
         private void Update()
         {
+            time += Time.deltaTime;
             speed = CalcCurrentSpeed();
             UpdateScale();
         }
@@ -32,8 +34,7 @@ namespace Game {
         }
         private float CalcCurrentScale()
         {
-            float timeVar = (Time.time * speed) % 1f;
-            return minScale + (scaleCurve.Evaluate(timeVar) * (maxScale - minScale));
+            return minScale + (scaleCurve.Evaluate(time % 1f) * (maxScale - minScale));
         }
 
         private float CalcCurrentSpeed()

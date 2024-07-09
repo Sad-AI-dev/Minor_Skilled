@@ -67,7 +67,7 @@ namespace Game.Core {
         }
 
         //=== Constructor for proc chain ===
-        public HitEvent(HitEvent baseEvent, Item procItem, float procCoef = -1f)
+        public HitEvent(HitEvent baseEvent, Item procItem, float procCoef = 1f)
         {
             source = baseEvent.source;
             hasAgentSource = true; //proc chain cannot happen without agent source

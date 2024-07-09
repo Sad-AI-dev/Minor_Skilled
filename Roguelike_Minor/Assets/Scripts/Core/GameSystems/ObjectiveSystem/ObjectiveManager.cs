@@ -40,12 +40,12 @@ namespace Game.Core.GameSystems {
         }
 
         //======= Handle State Change =========
-        public void OnStateChanged(Objective objective, ObjectiveStep step)
+        private void OnStateChanged(Objective objective, ObjectiveStep step)
         {
             onStateChanged?.Invoke(objective, step);
         }
 
-        public void OnObjectiveCompleted(Objective objective)
+        private void OnObjectiveCompleted(Objective objective)
         {
             onObjectiveCompleted?.Invoke(objective); //notify others of objective completion
             RemoveObjective(objective);
@@ -56,7 +56,7 @@ namespace Game.Core.GameSystems {
             }
         }
 
-        public bool AllObjectivesCompleted()
+        private bool AllObjectivesCompleted()
         {
             return objectives.Count == 0;
         }
