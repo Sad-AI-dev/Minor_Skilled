@@ -124,4 +124,11 @@ The game features plenty of additional features such as:
 <br/>
 
 ### Supporting Artist
-Deniz - 3D artist - [Portfolio](https://denizjanfisekci.artstation.com/)
+<!-- Deniz -->
+<a href="https://denizjanfisekci.artstation.com">
+	<img align="left" alt="Deniz Icon" width="80px" style="padding-right:10px;" src="https://avatars.githubusercontent.com/u/90323188"/>
+</a>
+
+**Deniz Jan Fisekci**  
+`3D Freelance Artist`  
+[Portfolio](https://denizjanfisekci.artstation.com/)
