@@ -1,34 +1,3 @@
-# Minor_Skilled
-
-NOTE: THIS PROJECT IS STILL IN DEVELOPMENT!
-
-INTRODUCTION  
-This game is being developed as part of the 6 month "minor skilled" course from Saxion University of Applied Sciences.
- The project is being developed by a team of 7 using Unity.
-
-THE TEAM  
-Arvid - Lead/system programmer - [Portfolio](https://github.com/Sad-AI-dev)  
-Niels - Gameplay/player programmer - [Portfolio](https://github.com/NielsdeGruijl)  
-Freek - AI programmer - [Portfolio](https://github.com/FreekPluim)  
-Emma - Lead/concept artist  - [Portfolio](https://www.artstation.com/thesoupwizard)  
-Diana - 3D artist  - [Portfolio](https://www.artstation.com/diana_cojocaru)  
-Mitchell - UI designer - [Portfolio](https://mthartwig.myportfolio.com/)  
-Wouter - Sound designer  - [Portfolio](https://www.linkedin.com/in/wouter-m-4a0778201/)  
-
-SUPPORTING ARTIST  
-Deniz - 3D artist - [Portfolio](https://denizjanfisekci.artstation.com/)  
-
-THE GAME  
-
-This game is a singleplayer action roguelike with the main goal of completing stage objectives to continue to the next stage.
- Killing enemies gives the player money which they can then use to open boxes scattered around the stage, these boxes drop one of over 30 items once opened.
- These items give the player a boost, these boosts range from a simple attack speed boost to applying status effects on hit to making enemies explode on death.
- After every stage the player will enter a "shop" where they get to buy items from a random selection.
- Enemy hit points, damage and spawnrate increases over time so in order to survive the player needs to be fast but also efficient in gathering items.
- The game will feature multiple stage objectives of which one will be randomly selected every stage.
-
-<!-- V2 read me -->
-
 <!-- Stellar Sprint Logo -->
 <a href="">
 	<img align="center" alt="Stellar Sprint Logo" width="60%" src="https://github.com/Sad-AI-dev/Minor_Skilled/blob/Develop/Roguelike_Minor/Assets/Art/2D/UI%20Elements/Main%20Menu/Menu%20Rework/Title.png"/>
@@ -41,8 +10,41 @@ This is the repository for the 6 month **Minor Skilled** course from Saxion Univ
 The project was developed by 7 students using Unity.
 
 <!-- Game Introduction goes here -->
-# Stellar Sprint
+# The Game
 Stellar sprint is a 3D action roguelike featuring a robot traveling from planet to planet, ever increasing in power.
+
+<a href="https://www.youtube.com/watch?v=uIsIf0xV9qs">
+	<img align="center" alt="Youtube Thumbnail" width="60%" src="/ReadMe/img/Thumbnail.png"/>
+</a>
+
+> click to watch gameplay footage
+
+The gameplay loop involves the player landing on a planet, completing objectives and advancing to the next planet.  
+These are some of the colorful environments the player can explore:
+
+<!-- Environment images -->
+<img align="left" alt="Environment Image 1" width="30%" style="padding-right:10px;" src="/ReadMe/img/Environment_1.png"/>
+<img align="left" alt="Environment Image 2" width="30%" style="padding-right:10px;" src="/ReadMe/img/Environment_2.png"/>
+<img align="left" alt="Environment Image Shop" width="30%" style="padding-right:10px;" src="/ReadMe/img/Environment_Shop.png"/>
+
+<br/><br/><br/><br/><br/><br/><br/>
+
+Along the way players will kill enemies to gain gold, which in turn can be used to purchace powerful upgrades.  
+Upgrades are found in 3 seperate tiers and have a wide variety of effects.  
+These are some of the upgrades that can be found:
+
+<!-- Item Images -->
+<img align="left" alt="Hat Item" width="30%" style="padding-right:10px;" src="/ReadMe/img/Hat_Item.PNG"/>
+<img align="left" alt="Fang Item" width="30%" style="padding-right:10px;" src="/ReadMe/img/Fang_Item.PNG"/>
+<img align="left" alt="Timmy Item" width="30%" style="padding-right:10px;" src="/ReadMe/img/Timmy_Item.PNG"/>
+
+<br/><br/><br/>
+
+The game features plenty of additional features such as:
+- Item Shop
+- Inventory System
+- Settings Menu, Including fully remappable controls
+- Stats & Result Screen
 
 # Meet the Team
 ### Artists
@@ -85,7 +87,7 @@ Stellar sprint is a 3D action roguelike featuring a robot traveling from planet 
 
 **Wouter Meermans**  
 `Sound designer`  
-[Portfolio](https://www.linkedin.com/in/wouter-m-4a0778201/)  
+[Portfolio](https://www.linkedin.com/in/wouter-m-4a0778201/)
 
 ### Programmers
 <!-- Arvid -->
@@ -117,20 +119,9 @@ Stellar sprint is a 3D action roguelike featuring a robot traveling from planet 
 
 **Freek Pluim**  
 `Enemy AI programmer`  
-[Portfolio](https://github.com/FreekPluim)  
+[Portfolio](https://github.com/FreekPluim)
 
 <br/>
 
 ### Supporting Artist
-Deniz - 3D artist - [Portfolio](https://denizjanfisekci.artstation.com/)  
-
-
-<!--
-THE PLAN
-[X] Project Introduction
-[ ] Game
-	[ ] Gameplay
-	[ ] some Items
-	[ ] Environment
-[X] Meet The Team
--->
+Deniz - 3D artist - [Portfolio](https://denizjanfisekci.artstation.com/)
